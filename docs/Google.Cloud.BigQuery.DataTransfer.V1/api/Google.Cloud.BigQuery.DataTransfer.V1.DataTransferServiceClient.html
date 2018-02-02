@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class DataTransferServiceClient
    | Google.Cloud.BigQuery.DataTransfer.V1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.28.2.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -155,7 +155,7 @@
   </table>
   <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_DefaultScopes_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The default DataTransferService scopes are:
-<ul><li>&quot;<a href="https://www.googleapis.com/auth/bigquery&amp;quot">https://www.googleapis.com/auth/bigquery&quot</a>;</li><li>&quot;<a href="https://www.googleapis.com/auth/cloud-platform&amp;quot">https://www.googleapis.com/auth/cloud-platform&quot</a>;</li><li>&quot;<a href="https://www.googleapis.com/auth/cloud-platform.read-only&amp;quot">https://www.googleapis.com/auth/cloud-platform.read-only&quot</a>;</li></ul></p>
+<ul><li>&quot;<a href="https://www.googleapis.com/auth/cloud-platform&amp;quot">https://www.googleapis.com/auth/cloud-platform&quot</a>;</li></ul></p>
 </div>
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GrpcClient_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GrpcClient*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GrpcClient" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GrpcClient">GrpcClient</h4>
@@ -750,10 +750,8 @@ TransferConfig response = dataTransferServiceClient.CreateTransferConfig(request
         <td><span class="parametername">parent</span></td>
         <td><p>The BigQuery project id where the transfer configuration should be created.
 Must be in the format /projects/{project_id}/locations/{location_id}
-or
-/projects/{project_id}/locations/-
-In case when &apos;-&apos; is specified as location_id, location is infered from
-the destination dataset region.</p>
+If specified location and location of the destination bigquery dataset
+do not match - the request will fail.</p>
 </td>
       </tr>
       <tr>
@@ -884,10 +882,8 @@ TransferConfig response = await dataTransferServiceClient.CreateTransferConfigAs
         <td><span class="parametername">parent</span></td>
         <td><p>The BigQuery project id where the transfer configuration should be created.
 Must be in the format /projects/{project_id}/locations/{location_id}
-or
-/projects/{project_id}/locations/-
-In case when &apos;-&apos; is specified as location_id, location is infered from
-the destination dataset region.</p>
+If specified location and location of the destination bigquery dataset
+do not match - the request will fail.</p>
 </td>
       </tr>
       <tr>
@@ -955,10 +951,8 @@ TransferConfig response = await dataTransferServiceClient.CreateTransferConfigAs
         <td><span class="parametername">parent</span></td>
         <td><p>The BigQuery project id where the transfer configuration should be created.
 Must be in the format /projects/{project_id}/locations/{location_id}
-or
-/projects/{project_id}/locations/-
-In case when &apos;-&apos; is specified as location_id, location is infered from
-the destination dataset region.</p>
+If specified location and location of the destination bigquery dataset
+do not match - the request will fail.</p>
 </td>
       </tr>
       <tr>
@@ -4060,7 +4054,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRuns_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRuns*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRuns_Google_Cloud_BigQuery_DataTransfer_V1_ScheduleTransferRunsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRuns(Google.Cloud.BigQuery.DataTransfer.V1.ScheduleTransferRunsRequest,Google.Api.Gax.Grpc.CallSettings)">ScheduleTransferRuns(ScheduleTransferRunsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [range_start_time, range_end_time].
+  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [start_time, end_time].
 For each date - or whatever granularity the data source supports - in the
 range, one transfer run is created.
 Note that runs are created per UTC time in the time range.</p>
@@ -4127,7 +4121,7 @@ ScheduleTransferRunsResponse response = dataTransferServiceClient.ScheduleTransf
   </div>
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRuns_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRuns*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRuns_Google_Cloud_BigQuery_DataTransfer_V1_TransferConfigNameOneof_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRuns(Google.Cloud.BigQuery.DataTransfer.V1.TransferConfigNameOneof,Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp,Google.Api.Gax.Grpc.CallSettings)">ScheduleTransferRuns(TransferConfigNameOneof, Timestamp, Timestamp, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [range_start_time, range_end_time].
+  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [start_time, end_time].
 For each date - or whatever granularity the data source supports - in the
 range, one transfer run is created.
 Note that runs are created per UTC time in the time range.</p>
@@ -4206,7 +4200,7 @@ ScheduleTransferRunsResponse response = dataTransferServiceClient.ScheduleTransf
   </div>
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_Google_Cloud_BigQuery_DataTransfer_V1_ScheduleTransferRunsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync(Google.Cloud.BigQuery.DataTransfer.V1.ScheduleTransferRunsRequest,Google.Api.Gax.Grpc.CallSettings)">ScheduleTransferRunsAsync(ScheduleTransferRunsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [range_start_time, range_end_time].
+  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [start_time, end_time].
 For each date - or whatever granularity the data source supports - in the
 range, one transfer run is created.
 Note that runs are created per UTC time in the time range.</p>
@@ -4273,7 +4267,7 @@ ScheduleTransferRunsResponse response = await dataTransferServiceClient.Schedule
   </div>
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_Google_Cloud_BigQuery_DataTransfer_V1_TransferConfigNameOneof_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync(Google.Cloud.BigQuery.DataTransfer.V1.TransferConfigNameOneof,Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp,Google.Api.Gax.Grpc.CallSettings)">ScheduleTransferRunsAsync(TransferConfigNameOneof, Timestamp, Timestamp, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [range_start_time, range_end_time].
+  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [start_time, end_time].
 For each date - or whatever granularity the data source supports - in the
 range, one transfer run is created.
 Note that runs are created per UTC time in the time range.</p>
@@ -4352,7 +4346,7 @@ ScheduleTransferRunsResponse response = await dataTransferServiceClient.Schedule
   </div>
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_Google_Cloud_BigQuery_DataTransfer_V1_TransferConfigNameOneof_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync(Google.Cloud.BigQuery.DataTransfer.V1.TransferConfigNameOneof,Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp,System.Threading.CancellationToken)">ScheduleTransferRunsAsync(TransferConfigNameOneof, Timestamp, Timestamp, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [range_start_time, range_end_time].
+  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [start_time, end_time].
 For each date - or whatever granularity the data source supports - in the
 range, one transfer run is created.
 Note that runs are created per UTC time in the time range.</p>
