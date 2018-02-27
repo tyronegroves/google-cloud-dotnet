@@ -244,9 +244,7 @@ associated with this <a class="xref" href="Google.Cloud.Spanner.Data.SpannerComm
         <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></td>
         <td><span class="parametername">transaction</span></td>
         <td><p>An optional <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>
-created through <see>
-<cref>SpannerConnection.BeginTransactionAsync</cref>
-</see></p>
+created through <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_BeginTransactionAsync_System_Threading_CancellationToken_">BeginTransactionAsync(CancellationToken)</a>. May be null.</p>
 </td>
       </tr>
       <tr>
@@ -254,6 +252,48 @@ created through <see>
         <td><span class="parametername">parameters</span></td>
         <td><p>An optional collection of <a class="xref" href="Google.Cloud.Spanner.Data.SpannerParameter.html">SpannerParameter</a>
 that is used in the command. May be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerCommand__ctor_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.#ctor*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerCommand__ctor_Google_Cloud_Spanner_Data_SpannerConnection_Google_Cloud_Spanner_Data_SpannerTransaction_Google_Cloud_Spanner_Data_CommandPartition_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.#ctor(Google.Cloud.Spanner.Data.SpannerConnection,Google.Cloud.Spanner.Data.SpannerTransaction,Google.Cloud.Spanner.Data.CommandPartition)">SpannerCommand(SpannerConnection, SpannerTransaction, CommandPartition)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpannerCommand(SpannerConnection connection, SpannerTransaction transaction, CommandPartition commandPartition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html">SpannerConnection</a></td>
+        <td><span class="parametername">connection</span></td>
+        <td><p>The <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_SpannerConnection">SpannerConnection</a> that is
+associated with this <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a>. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></td>
+        <td><span class="parametername">transaction</span></td>
+        <td><p>The <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>
+used when creating the <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a></td>
+        <td><span class="parametername">commandPartition</span></td>
+        <td><p>The partition which this command is restricted to.
+See <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TransactionId_">BeginReadOnlyTransaction(TransactionId)</a></p>
 </td>
       </tr>
     </tbody>
@@ -535,6 +575,32 @@ that expires immediately. This is normally used only for testing purposes.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerParameterCollection.html">SpannerParameterCollection</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerCommand_Partition_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.Partition*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_Partition" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.Partition">Partition</h4>
+  <div class="markdown level1 summary"><p>The optional partition which this command is restricted to.
+If set, the command runs only on the data associated with the given partition.
+Setting this property overrides any values in <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_CommandText">CommandText</a> and <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_Parameters">Parameters</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CommandPartition Partition { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1172,6 +1238,71 @@ will be thrown.
 If the conversion fails due to the contents returned (for example a string representing a
 boolean does not have either &apos;true&apos; or &apos;false&apos;) then a <span class="xref">System.FormatException</span> exception will be
 thrown as documented by the <span class="xref">System.Convert</span> class.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerCommand_GetReaderPartitionsAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.GetReaderPartitionsAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_GetReaderPartitionsAsync_System_Nullable_System_Int64__System_Nullable_System_Int64__System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.GetReaderPartitionsAsync(System.Nullable{System.Int64},System.Nullable{System.Int64},System.Threading.CancellationToken)">GetReaderPartitionsAsync(Nullable&lt;Int64&gt;, Nullable&lt;Int64&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a set of <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a> objects that are used to execute a query
+operation in parallel.  Each of the returned command partitions are used
+by <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_CreateCommandWithPartition_Google_Cloud_Spanner_Data_CommandPartition_Google_Cloud_Spanner_Data_SpannerTransaction_">CreateCommandWithPartition(CommandPartition, SpannerTransaction)</a> to create a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a>
+that returns a subset of data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;IReadOnlyList&lt;CommandPartition&gt;&gt; GetReaderPartitionsAsync(long ? partitionSizeBytes = default (long ? ), long ? maxPartitions = default (long ? ), CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><span class="parametername">partitionSizeBytes</span></td>
+        <td><p>The desired data size for each partition generated.  The default for this
+option is currently 1 GiB.  This is only a hint. The actual size of each
+partition may be smaller or larger than this size request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><span class="parametername">maxPartitions</span></td>
+        <td><p>The desired maximum number of partitions to return.  For example, this may
+be set to the number of workers available.  The default for this option
+is currently 10,000. The maximum value is currently 200,000.  This is only
+a hint.  The actual number of partitions returned may be smaller or larger than
+this maximum count request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>An optional token for canceling the call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Collections.Generic.IReadOnlyList</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a>&gt;&gt;</td>
+        <td><p>The list of partitions that can be used to create <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a>
+objects.</p>
 </td>
       </tr>
     </tbody>

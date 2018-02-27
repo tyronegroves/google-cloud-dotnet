@@ -598,6 +598,53 @@ and maintained.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbConnection.BeginDbTransaction(System.Data.IsolationLevel)</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TransactionId_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction(Google.Cloud.Spanner.Data.TransactionId)">BeginReadOnlyTransaction(TransactionId)</h4>
+  <div class="markdown level1 summary"><p>Begins a readonly transaction using the provided <a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a>.
+Read transactions are preferred if possible because they do not impose locks internally.
+Providing a transaction id will connect to an already created transaction which is useful
+for batch reads.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpannerTransaction BeginReadOnlyTransaction(TransactionId transactionId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a></td>
+        <td><span class="parametername">transactionId</span></td>
+        <td><p>Specifies the transactionId of an existing readonly transaction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></td>
+        <td><p>A <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a> attached to the existing transaction represented by
+<code data-dev-comment-type="paramref" class="paramref">transactionId</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransactionAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransactionAsync*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransactionAsync_Google_Cloud_Spanner_Data_TimestampBound_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransactionAsync(Google.Cloud.Spanner.Data.TimestampBound,System.Threading.CancellationToken)">BeginReadOnlyTransactionAsync(TimestampBound, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Begins a readonly transaction using the optionally provided <span class="xref">System.Threading.CancellationToken</span>
@@ -647,7 +694,8 @@ This method is thread safe.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>&gt;</td>
-        <td></td>
+        <td><p>The newly created <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -748,9 +796,7 @@ This method is thread safe.</p>
 await retryPolicy.ExecuteAsync(
     async () =&gt;
     {
-        using (var connection =
-            new SpannerConnection(
-                $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+        using (var connection = new SpannerConnection(connectionString))
         {
             await connection.OpenAsync();
 
@@ -767,7 +813,7 @@ await retryPolicy.ExecuteAsync(
 
                 // This executes a single transactions with alls row written at once during CommitAsync().
                 // If a transient fault occurs, this entire method is re-run.
-                for (var i = 0; i &lt; 5; i++)
+                for (int i = 0; i &lt; 5; i++)
                 {
                     cmd.Parameters[&quot;Key&quot;].Value = Guid.NewGuid().ToString(&quot;N&quot;);
                     cmd.Parameters[&quot;StringValue&quot;].Value = $&quot;StringValue{i}&quot;;
@@ -842,6 +888,57 @@ await retryPolicy.ExecuteAsync(
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbConnection.Close()</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateCommandWithPartition_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateCommandWithPartition*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateCommandWithPartition_Google_Cloud_Spanner_Data_CommandPartition_Google_Cloud_Spanner_Data_SpannerTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateCommandWithPartition(Google.Cloud.Spanner.Data.CommandPartition,Google.Cloud.Spanner.Data.SpannerTransaction)">CreateCommandWithPartition(CommandPartition, SpannerTransaction)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a> from a <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a>.
+The newly created command will execute on a subset of data defined by the <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html#Google_Cloud_Spanner_Data_CommandPartition_PartitionId">PartitionId</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpannerCommand CreateCommandWithPartition(CommandPartition partition, SpannerTransaction transaction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a></td>
+        <td><span class="parametername">partition</span></td>
+        <td><p>Information that represents a command to execute against a subset of data.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></td>
+        <td><span class="parametername">transaction</span></td>
+        <td><p>The <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a> used when
+creating the <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a>.  See <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TransactionId_">BeginReadOnlyTransaction(TransactionId)</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a></td>
+        <td><p>A configured <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDbCommand_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateDbCommand*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDbCommand" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateDbCommand">CreateDbCommand()</h4>
   <div class="markdown level1 summary"></div>
@@ -920,10 +1017,9 @@ the first statement.  Extra Ddl statements cannot be used to create additional d
   </table>
   <div>
   <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDdlCommand_System_String_System_String____snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">using (var connection =
-    new SpannerConnection($&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+  <div class="markdown level1"><pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
-    var createDbCmd = connection.CreateDdlCommand($&quot;CREATE DATABASE {_databaseName}&quot;);
+    var createDbCmd = connection.CreateDdlCommand($&quot;CREATE DATABASE {databaseName}&quot;);
     await createDbCmd.ExecuteNonQueryAsync();
 
     var createTableCmd = connection.CreateDdlCommand(
@@ -988,8 +1084,7 @@ This method is thread safe.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDeleteCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">using (var connection = new SpannerConnection(
-    $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+  <div class="markdown level1"><pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
     await connection.OpenAsync();
 
@@ -1085,9 +1180,7 @@ await retryPolicy.ExecuteAsync(
     {
         using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
-            using (var connection =
-                new SpannerConnection(
-                    $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+            using (var connection = new SpannerConnection(connectionString))
             {
                 await connection.OpenAsync();
 
@@ -1221,8 +1314,7 @@ that correspond to the parameters used in the SQL query. May be null.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateSelectCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">using (var connection = new SpannerConnection(
-    $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+  <div class="markdown level1"><pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
     await connection.OpenAsync();
 
@@ -1312,8 +1404,7 @@ May be null.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateUpdateCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">using (var connection = new SpannerConnection(
-    $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+  <div class="markdown level1"><pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
     await connection.OpenAsync();
 
@@ -1404,9 +1495,9 @@ May be null.</p>
   <div><span class="xref">System.Data.Common.DbConnection.EnlistTransaction(System.Transactions.Transaction)</span></div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_GetCredentials_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.GetCredentials*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_GetCredentials" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.GetCredentials">GetCredentials()</h4>
-  <div class="markdown level1 summary"><p>The credential used for the connection, if set.
-If credentials are not specified, then application default credentials are used instead.
-See gcloud documentation on how to set up application default credentials.</p>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="Grpc.Core.ChannelCredentials.html">ChannelCredentials</a> credential used to communicate with Spanner, if explicitly
+set. Otherwise, this method returns null, usually indicating that default application credentials should be used.
+See Google Cloud documentation for more information.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1440,9 +1531,8 @@ See gcloud documentation on how to set up application default credentials.</p>
   <div><span class="xref">System.Data.Common.DbConnection.Open()</span></div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_OpenAsReadOnly_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.OpenAsReadOnly*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_OpenAsReadOnly_Google_Cloud_Spanner_Data_TimestampBound_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.OpenAsReadOnly(Google.Cloud.Spanner.Data.TimestampBound)">OpenAsReadOnly(TimestampBound)</h4>
-  <div class="markdown level1 summary"><p>If this connection is being opened within a <span class="xref">System.Transactions.TransactionScope</span>, this forces
-the created Cloud Spanner transaction to be a read-only transaction with the given
-<a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a> settings.</p>
+  <div class="markdown level1 summary"><p>Call OpenAsReadOnly within a <span class="xref">System.Transactions.TransactionScope</span> to open the connection
+with a read-only transaction with the given <a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a> settings</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1462,8 +1552,35 @@ the created Cloud Spanner transaction to be a read-only transaction with the giv
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a></td>
         <td><span class="parametername">timestampBound</span></td>
-        <td><p>Specifies the timestamp or maximum staleness of a
-read operation. Must not be null.</p>
+        <td><p>Specifies the timestamp or maximum staleness of a read operation. May be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_OpenAsReadOnly_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.OpenAsReadOnly*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_OpenAsReadOnly_Google_Cloud_Spanner_Data_TransactionId_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.OpenAsReadOnly(Google.Cloud.Spanner.Data.TransactionId)">OpenAsReadOnly(TransactionId)</h4>
+  <div class="markdown level1 summary"><p>If this connection is being opened within a <span class="xref">System.Transactions.TransactionScope</span>, this
+will connect to an existing transaction identified by <code data-dev-comment-type="paramref" class="paramref">transactionId</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenAsReadOnly(TransactionId transactionId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a></td>
+        <td><span class="parametername">transactionId</span></td>
+        <td><p>The <a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a> representing an active readonly <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></p>
 </td>
       </tr>
     </tbody>
@@ -1492,8 +1609,7 @@ the created Cloud Spanner transaction to be a read-only transaction with the giv
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a></td>
         <td><span class="parametername">timestampBound</span></td>
-        <td><p>Specifies the timestamp or maximum staleness of a
-read operation. Must not be null.</p>
+        <td><p>Specifies the timestamp or maximum staleness of a read operation. May be null.</p>
 </td>
       </tr>
       <tr>

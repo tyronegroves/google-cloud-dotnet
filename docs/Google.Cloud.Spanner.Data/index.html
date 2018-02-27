@@ -89,10 +89,9 @@ of setting CommandText manually.</p>
 <p>Once you have created your Google Cloud Project and Spanner Instance using the web console,
 you can start using the ADO.NET provider to create and modify a Cloud Spanner database.</p>
 <h2 id="creating-a-database-and-table">Creating a Database and Table</h2>
-<pre><code class="lang-cs">using (var connection =
-    new SpannerConnection($&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+<pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
-    var createDbCmd = connection.CreateDdlCommand($&quot;CREATE DATABASE {_databaseName}&quot;);
+    var createDbCmd = connection.CreateDdlCommand($&quot;CREATE DATABASE {databaseName}&quot;);
     await createDbCmd.ExecuteNonQueryAsync();
 
     var createTableCmd = connection.CreateDdlCommand(
@@ -107,9 +106,7 @@ you can start using the ADO.NET provider to create and modify a Cloud Spanner da
 <p>Cloud Spanner supports a limited DataAdapter that provides basic CRUD operations on any table.
 Create a SpannerDataAdapter with the target table and its primary keys.  You may replace any
 commands provided by SpannerDataAdapter with your own custom commands.</p>
-<pre><code class="lang-cs">using (var connection =
-    new SpannerConnection(
-        $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+<pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
     var untypedDataSet = new DataSet();
 
@@ -127,8 +124,7 @@ commands provided by SpannerDataAdapter with your own custom commands.</p>
     adapter.Update(untypedDataSet.Tables[0]);
 }
 </code></pre><h2 id="inserting-data">Inserting Data</h2>
-<pre><code class="lang-cs">using (var connection = new SpannerConnection(
-    $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+<pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
     await connection.OpenAsync();
 
@@ -151,8 +147,7 @@ commands provided by SpannerDataAdapter with your own custom commands.</p>
     }
 }
 </code></pre><h2 id="reading-updating-and-deleting-data">Reading, Updating and Deleting Data</h2>
-<pre><code class="lang-cs">using (var connection = new SpannerConnection(
-    $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+<pre><code class="lang-cs">using (var connection = new SpannerConnection(connectionString))
 {
     await connection.OpenAsync();
 
@@ -205,9 +200,7 @@ strategy for the TransientFaultApplication Block.</p>
 await retryPolicy.ExecuteAsync(
     async () =&gt;
     {
-        using (var connection =
-            new SpannerConnection(
-                $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+        using (var connection = new SpannerConnection(connectionString))
         {
             await connection.OpenAsync();
 
@@ -224,7 +217,7 @@ await retryPolicy.ExecuteAsync(
 
                 // This executes a single transactions with alls row written at once during CommitAsync().
                 // If a transient fault occurs, this entire method is re-run.
-                for (var i = 0; i &lt; 5; i++)
+                for (int i = 0; i &lt; 5; i++)
                 {
                     cmd.Parameters[&quot;Key&quot;].Value = Guid.NewGuid().ToString(&quot;N&quot;);
                     cmd.Parameters[&quot;StringValue&quot;].Value = $&quot;StringValue{i}&quot;;
@@ -248,9 +241,7 @@ await retryPolicy.ExecuteAsync(
     {
         using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
-            using (var connection =
-                new SpannerConnection(
-                    $&quot;Data Source=projects/{_projectId}/instances/{_instanceName}/databases/{_databaseName}&quot;))
+            using (var connection = new SpannerConnection(connectionString))
             {
                 await connection.OpenAsync();
 

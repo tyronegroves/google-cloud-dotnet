@@ -189,6 +189,36 @@ that expires immediately. This is normally used only for testing purposes.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbTransaction.DbConnection</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerTransaction_DisposeBehavior_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.DisposeBehavior*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_DisposeBehavior" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.DisposeBehavior">DisposeBehavior</h4>
+  <div class="markdown level1 summary"><p>Specifies how resources are treated when <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html#Google_Cloud_Spanner_Data_SpannerTransaction_Dispose_System_Boolean_">Dispose(Boolean)</a> is called.
+The default behavior of <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_ReleaseToPool">ReleaseToPool</a> will cause transactional resources
+to be sent back into a shared pool for re-use.
+Shared transactions may only set this value to either <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_CloseResources">CloseResources</a> to close
+resources or <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_Detach">Detach</a> to detach from the resources.
+A shared transaction must have one process choose <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_CloseResources">CloseResources</a>
+to avoid leaks of transactional resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisposeBehavior DisposeBehavior { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html">DisposeBehavior</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_IsolationLevel_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.IsolationLevel*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_IsolationLevel" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.IsolationLevel">IsolationLevel</h4>
   <div class="markdown level1 summary"></div>
@@ -247,6 +277,32 @@ do not take locks.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerTransaction_Shared_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Shared*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_Shared" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Shared">Shared</h4>
+  <div class="markdown level1 summary"><p>Returns true if this transaction is being used by multiple <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html">SpannerConnection</a> objects.
+<a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_GetReaderPartitionsAsync_System_Nullable_System_Int64__System_Nullable_System_Int64__System_Threading_CancellationToken_">GetReaderPartitionsAsync(Nullable&lt;Int64&gt;, Nullable&lt;Int64&gt;, CancellationToken)</a> will automatically mark the transaction as shared
+because it is expected that you will be distributing the read among several tasks or processes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Shared { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_TimestampBound_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TimestampBound*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_TimestampBound" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TimestampBound">TimestampBound</h4>
   <div class="markdown level1 summary"><p>Tells Cloud Spanner how to choose a timestamp at which to read the data for read-only
@@ -272,6 +328,30 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerTransaction_TransactionId_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TransactionId*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_TransactionId" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TransactionId">TransactionId</h4>
+  <div class="markdown level1 summary"><p>Identifying information about this transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TransactionId TransactionId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a></td>
         <td></td>
       </tr>
     </tbody>
