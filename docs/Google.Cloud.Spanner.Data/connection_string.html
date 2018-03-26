@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Connection string options | Google.Cloud.Spanner.Data </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Connection string options | Google.Cloud.Spanner.Data ">
+    <meta name="generator" content="docfx 2.32.1.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="connection-string-options">Connection string options</h1>
+
+<p>Spanner connection strings support the following options:</p>
+<h1 id="data-source">Data Source</h1>
+<p>The project, instance and optionally database to use. The format is
+<code>projects/{project}/instances/{instance}/databases/{database}</code>, with
+the <code>databases/{database}</code> part being optional.</p>
+<p>Examples:</p>
+<ul>
+<li>Data Source=projects/my_project/instances/my_instance</li>
+<li>Data Source=projects/my_project/instances/my_instance/databases/my_database</li>
+</ul>
+<h1 id="credentialfile">CredentialFile</h1>
+<p>A path to a JSON service account credential file to use. If this is
+not specified, the application default credentials will be used.
+(These are provided automatically when running on Google Cloud
+Platform, or a JSON service account credential file can be specified
+with the <code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable.)</p>
+<p>Example:</p>
+<ul>
+<li>CredentialFile=/path/to/credentials.json</li>
+</ul>
+<h1 id="enablegetschematable">EnableGetSchemaTable</h1>
+<p>When set to true (and when targeting .NET 4.5 or .NET Standard 2.0;
+the method doesn&#39;t exist in .NET Standard 1.x),
+<a href="api/Google.Cloud.Spanner.Data.SpannerDataReader.html#Google_Cloud_Spanner_Data_SpannerDataReader_GetSchemaTable">SpannerDataReader.GetSchemaTable()</a>
+will return available schema information for the query in the form
+of a <code>DataTable</code>. See the method documentation for details of the columns
+returned.</p>
+<p>Example:</p>
+<ul>
+<li>EnableGetSchemaTable=true</li>
+</ul>
+<h1 id="useclrdefaultfornull">UseClrDefaultForNull</h1>
+<p>By default, null values returned by Spanner are handled in the
+following manner:</p>
+<p>&quot;Top-level&quot; fields are always converted to <code>DBNull.Value</code>. This
+means that calling <code>reader.GetString(0)</code> for example will throw an
+<code>InvalidCastException</code> if the value is null. This is compatible
+with other ADO.NET providers.</p>
+<p>Array and structure elements use the null value for the target type
+where possible (reference types and nullable value types), or throw
+an <code>InvalidCastException</code> if the target type is a non-nullable value
+type. For example, if an array field has values <code>[1, NULL, 2]</code> in Spanner,
+then requesting that field with <code>reader.GetFieldValue&lt;int[]&gt;(&quot;field&quot;)</code> will
+throw an exception, whereas <code>reader.GetFieldValue&lt;int?[]&gt;(&quot;field&quot;)</code>
+will return a nullable integer array where the second element is a
+null value.</p>
+<p>When <code>UseClrDefaultForNull</code> is set to true, null values returned by
+Spanner will be converted into the default CLR value for the
+requested type. This was the behavior for Google.Cloud.Spanner.Data
+v1.0.</p>
+<p>Example:</p>
+<ul>
+<li>UseClrDefaultForNull=true</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

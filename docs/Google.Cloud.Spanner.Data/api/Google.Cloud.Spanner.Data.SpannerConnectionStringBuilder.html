@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SpannerConnectionStringBuilder
    | Google.Cloud.Spanner.Data ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -333,6 +333,32 @@ will use Default Application Credentials.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_EnableGetSchemaTable_" data-uid="Google.Cloud.Spanner.Data.SpannerConnectionStringBuilder.EnableGetSchemaTable*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_EnableGetSchemaTable" data-uid="Google.Cloud.Spanner.Data.SpannerConnectionStringBuilder.EnableGetSchemaTable">EnableGetSchemaTable</h4>
+  <div class="markdown level1 summary"><p>Option to allow <a class="xref" href="Google.Cloud.Spanner.Data.SpannerDataReader.html">SpannerDataReader</a> to return a schema from <code>GetSchemaTable</code>, on supported platforms.
+Only partial information is available, and when this option is enabled, <code>DbDataAdapter</code> may be overly eager to
+use the information to create and manage datasets.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EnableGetSchemaTable { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_EndPoint_" data-uid="Google.Cloud.Spanner.Data.SpannerConnectionStringBuilder.EndPoint*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_EndPoint" data-uid="Google.Cloud.Spanner.Data.SpannerConnectionStringBuilder.EndPoint">EndPoint</h4>
   <div class="markdown level1 summary"><p>The <span class="xref">Google.Api.Gax.Grpc.ServiceEndpoint</span> to use to connect to Spanner. If not supplied in the
@@ -522,6 +548,52 @@ port will be used.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_UseClrDefaultForNull_" data-uid="Google.Cloud.Spanner.Data.SpannerConnectionStringBuilder.UseClrDefaultForNull*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_UseClrDefaultForNull" data-uid="Google.Cloud.Spanner.Data.SpannerConnectionStringBuilder.UseClrDefaultForNull">UseClrDefaultForNull</h4>
+  <div class="markdown level1 summary"><p>Option to change between the default handling of null database values (return <span class="xref">System.DBNull.Value</span>) or
+the non-standard handling (return the default value for whatever type is requested).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseClrDefaultForNull { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_UseClrDefaultForNull_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+If this is <code>false</code> (the default), requesting a value from a <a class="xref" href="Google.Cloud.Spanner.Data.SpannerDataReader.html">SpannerDataReader</a> that is null
+in the database will return <span class="xref">System.DBNull.Value</span>, which may cause an <span class="xref">System.InvalidCastException</span> if
+the requested type is not compatible with that value. For arrays and structs, the behavior is slightly different.
+A null value is used for an array or struct value where the target type permits such a value. Attempting to convert
+an array value that contains a null element into a .NET array type with a non-nullable element type will
+cause an <span class="xref">System.InvalidCastException</span> to be thrown. To avoid this, where array elements may be null for value types, 
+use an array with a nullable element type. This allows code to distinguish between a null element in the original
+data and a value of 0, false etc.
+</p>
+<p>
+If this is <code>true</code>, requesting a value from a <a class="xref" href="Google.Cloud.Spanner.Data.SpannerDataReader.html">SpannerDataReader</a> that is null in the
+database will return the default value of the requested type (e.g. 0 or a null reference). That conversion is also used for
+array elements. For example, converting a Spanner array consisting of 1, null, and 2 into an <code>Int32</code> array will result in
+an array containing 1, 0 and 2. This is the behavior from release 1.0 of this package.
+</p>
+<p>
+This property corresponds with the value of the &quot;UseClrDefaultForNull&quot; part of the connection string.
+</p>
+</div>
   <h3 id="methods">Methods
   </h3>
   <a id="Google_Cloud_Spanner_Data_SpannerConnectionStringBuilder_GetCredentials_" data-uid="Google.Cloud.Spanner.Data.SpannerConnectionStringBuilder.GetCredentials*"></a>
