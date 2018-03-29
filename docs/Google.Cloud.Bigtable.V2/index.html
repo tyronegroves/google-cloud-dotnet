@@ -77,10 +77,55 @@ download a service account JSON file then set the <code>GOOGLE_APPLICATION_CREDE
 The credentials will automatically be used to authenticate. See the <a href="https://cloud.google.com/docs/authentication/getting-started">Getting Started With
 Authentication</a> guide for more details.</p>
 <h1 id="getting-started">Getting started</h1>
-<p>(Further docs TBD.)</p>
+<p>Common operations are exposed via the
+<a href="api/Google.Cloud.Bigtable.V2.BigtableClient.html">BigtableClient</a>
+class.</p>
+<h1 id="client-life-cycle-management">Client life-cycle management</h1>
+<p>For the alpha version, each client will create its own set of underlying
+channels by default, so we advise you to reuse a single client object if
+possible. In later versions, we plan to have clients share default
+credentials by default, so it will be possible to create new clients cheaply
+as needed.</p>
 <h1 id="sample-code">Sample code</h1>
-<p>(Further docs TBD.)</p>
-</article>
+<pre><code class="lang-cs">BigtableClient client = BigtableClient.Create();
+TableName tableName = new TableName(projectId, instanceId, tableId);
+
+// Insert a row with some cells into the table
+await client.MutateRowAsync(
+    tableName,
+    &quot;user12345&quot;,
+    Mutations.SetCell(
+        familyName: &quot;Score&quot;,
+        columnQualifier: &quot;Level 1&quot;,
+        value: 456),
+    Mutations.SetCell(
+        familyName: &quot;metrics&quot;,
+        columnQualifier: &quot;Level 1 - total time&quot;,
+        value: 12000));
+
+// Read the row back from the table, but only the latest cell values
+// from the &#39;Score&#39; column family
+Row row = await client.ReadRowAsync(
+    tableName,
+    &quot;user12345&quot;,
+    filter: RowFilters.Chain(
+        RowFilters.FamilyNameExact(&quot;Score&quot;),
+        RowFilters.CellsPerColumnLimit(1)));
+
+foreach (Family family in row.Families)
+{
+    string familyName = family.Name;
+    Console.WriteLine($&quot;Family: {familyName}&quot;);
+
+    foreach (Column column in family.Columns)
+    {
+        BigtableByteString columnQualifier = column.Qualifier;
+        BigtableByteString cellValue = column.Cells[0].Value;
+        Console.WriteLine(
+            $&quot;\tColumn: {(string)columnQualifier}, Value: {(long)cellValue}&quot;);
+    }
+}
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
