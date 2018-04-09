@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BigQueryClient
    | Google.Cloud.BigQuery.V2 ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -127,6 +127,31 @@ the lifetime of the application. In this case, <code>Dispose</code> need not be 
 </div>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_BigQuery_V2_BigQueryClient_DefaultLocation_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.DefaultLocation*"></a>
+  <h4 id="Google_Cloud_BigQuery_V2_BigQueryClient_DefaultLocation" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.DefaultLocation">DefaultLocation</h4>
+  <div class="markdown level1 summary"><p>The default location to use for all operations where locations
+can be specified, such as dataset and job creation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual string DefaultLocation { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_BigQuery_V2_BigQueryClient_ProjectId_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.ProjectId*"></a>
   <h4 id="Google_Cloud_BigQuery_V2_BigQueryClient_ProjectId" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.ProjectId">ProjectId</h4>
   <div class="markdown level1 summary"><p>The ID of the project this client operates on. All operations that require a
@@ -5597,7 +5622,7 @@ the retrieved job.</p>
   <a id="Google_Cloud_BigQuery_V2_BigQueryClient_GetJobReference_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetJobReference*"></a>
   <h4 id="Google_Cloud_BigQuery_V2_BigQueryClient_GetJobReference_System_String_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetJobReference(System.String)">GetJobReference(String)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Apis.Bigquery.v2.Data.JobReference.html">JobReference</a> from the given job ID,
-using this client&apos;s project ID.</p>
+using this client&apos;s project ID and default location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5648,7 +5673,8 @@ Console.WriteLine(reference.ProjectId);
   </div>
   <a id="Google_Cloud_BigQuery_V2_BigQueryClient_GetJobReference_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetJobReference*"></a>
   <h4 id="Google_Cloud_BigQuery_V2_BigQueryClient_GetJobReference_System_String_System_String_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetJobReference(System.String,System.String)">GetJobReference(String, String)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Apis.Bigquery.v2.Data.JobReference.html">JobReference</a> from the given project ID and job ID.</p>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Apis.Bigquery.v2.Data.JobReference.html">JobReference</a> from the given project ID and job ID, using
+this client&apos;s default location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5703,6 +5729,61 @@ JobReference reference = client.GetJobReference(&quot;other-project&quot;, &quot
 Console.WriteLine(reference.ProjectId);
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_BigQuery_V2_BigQueryClient_GetJobReference_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetJobReference*"></a>
+  <h4 id="Google_Cloud_BigQuery_V2_BigQueryClient_GetJobReference_System_String_System_String_System_String_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetJobReference(System.String,System.String,System.String)">GetJobReference(String, String, String)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Apis.Bigquery.v2.Data.JobReference.html">JobReference</a> from the given project ID, job ID and location.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JobReference GetJobReference(string projectId, string jobId, string location)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">projectId</span></td>
+        <td><p>The project ID. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">jobId</span></td>
+        <td><p>The job ID. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">location</span></td>
+        <td><p>The location. May be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Apis.Bigquery.v2.Data.JobReference.html">JobReference</a></td>
+        <td><p>A <a class="xref" href="Google.Apis.Bigquery.v2.Data.JobReference.html">JobReference</a> representing the requested job.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_BigQuery_V2_BigQueryClient_GetOrCreateDataset_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetOrCreateDataset*"></a>
   <h4 id="Google_Cloud_BigQuery_V2_BigQueryClient_GetOrCreateDataset_Google_Apis_Bigquery_v2_Data_DatasetReference_Google_Cloud_BigQuery_V2_GetDatasetOptions_Google_Cloud_BigQuery_V2_CreateDatasetOptions_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.GetOrCreateDataset(Google.Apis.Bigquery.v2.Data.DatasetReference,Google.Cloud.BigQuery.V2.GetDatasetOptions,Google.Cloud.BigQuery.V2.CreateDatasetOptions)">GetOrCreateDataset(DatasetReference, GetDatasetOptions, CreateDatasetOptions)</h4>
   <div class="markdown level1 summary"><p>Attempts to fetch the specified dataset, creating it if it doesn&apos;t exist.</p>
@@ -15866,6 +15947,63 @@ it is expected that the table already exists, and its schema is loaded automatic
   <h5 id="Google_Cloud_BigQuery_V2_BigQueryClient_UploadJsonAsync_System_String_System_String_System_String_Google_Apis_Bigquery_v2_Data_TableSchema_System_IO_Stream_Google_Cloud_BigQuery_V2_UploadJsonOptions_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><p>See <a class="xref" href="Google.Cloud.BigQuery.V2.BigQueryClient.html#Google_Cloud_BigQuery_V2_BigQueryClient_UploadJsonAsync_System_String_System_String_Google_Apis_Bigquery_v2_Data_TableSchema_System_IO_Stream_Google_Cloud_BigQuery_V2_UploadJsonOptions_System_Threading_CancellationToken_">UploadJson</a> for an example using an alternative overload.</p>
 </div>
+  </div>
+  <a id="Google_Cloud_BigQuery_V2_BigQueryClient_WithDefaultLocation_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.WithDefaultLocation*"></a>
+  <h4 id="Google_Cloud_BigQuery_V2_BigQueryClient_WithDefaultLocation_System_String_" data-uid="Google.Cloud.BigQuery.V2.BigQueryClient.WithDefaultLocation(System.String)">WithDefaultLocation(String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new client which uses the specified location by default for all operations where locations
+can be specified, such as dataset and job creation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual BigQueryClient WithDefaultLocation(string defaultLocation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">defaultLocation</span></td>
+        <td><p>The location to use by default, for job creation etc.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.V2.BigQueryClient.html">BigQueryClient</a></td>
+        <td><p>A new client with the specified default location.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_BigQuery_V2_BigQueryClient_WithDefaultLocation_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Implementations should normally ensure that the object returned is of the same type as this client,
+in case users need implementation-specific features of that client.</p>
+</div>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_V2_BigQueryClient_WithDefaultLocation_System_String__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">BigQueryClient client = BigQueryClient.Create(projectId).WithDefaultLocation(Locations.Tokyo);
+
+// This dataset will be implicitly created in the Tokyo region. All jobs will also
+// be implicitly created in the Tokyo region.
+BigQueryDataset dataset = client.CreateDataset(datasetId);
+</code></pre></div>
   </div>
 </article>
           </div>
