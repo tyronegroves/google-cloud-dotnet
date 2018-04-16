@@ -8,7 +8,7 @@
     <title>Google.Cloud.Diagnostics.AspNetCore | Google.Cloud.Diagnostics.AspNetCore </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Diagnostics.AspNetCore | Google.Cloud.Diagnostics.AspNetCore ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -70,7 +70,7 @@ and Stackdriver Trace.</p>
 <p>Install the <code>Google.Cloud.Diagnostics.AspNetCore</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
 project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
-Please ensure you enable pre-release packages(for example, in the
+Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box).</p>
 <h1 id="authentication">Authentication</h1>
@@ -79,7 +79,21 @@ box).</p>
 download a service account JSON file then set the <code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable to refer to it.
 The credentials will automatically be used to authenticate. See the <a href="https://cloud.google.com/docs/authentication/getting-started">Getting Started With
 Authentication</a> guide for more details.</p>
+<h1 id="note">Note</h1>
+<p>The Google.Cloud.Diagnostics.AspNetCore package attempts to collect the filename and line number when
+entries are collected. However, to be able to collect this information PDBs must be included with
+the deployed code.</p>
 <h1 id="getting-started">Getting started</h1>
+<h2 id="initializing-google-diagnostics-aspnet-core-20">Initializing Google Diagnostics (ASP.NET Core 2.0+)</h2>
+<p>The preferred way to initialize Google Diagnostics services in ASP.NET Core 2.0 or higher
+is using the <code>UseGoogleDiagnostics</code> extentension method on <code>IWebHostBuilder</code>. This configures
+Logging, Tracing and Error Reporting middleware.</p>
+<pre><code class="lang-cs">string projectId = &quot;[Google Cloud Platform project ID]&quot;;
+var webHost = new WebHostBuilder()
+    .UseGoogleDiagnostics(projectId)
+    .UseStartup&lt;Startup&gt;()
+    .Build();
+</code></pre><p>You can still initialize the separate components using the extension methods below.</p>
 <h2 id="registering-error-reporting">Registering Error Reporting</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
@@ -99,6 +113,15 @@ public void Configure(IApplicationBuilder app)
 {
     // Use before handling any requests to ensure all unhandled exceptions are reported.
     app.UseGoogleExceptionLogging();
+
+    app.UseStaticFiles();
+
+    app.UseMvc(routes =&gt;
+    {
+        routes.MapRoute(
+            name: &quot;default&quot;,
+            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
 }
 </code></pre><h2 id="log-exceptions">Log Exceptions</h2>
 <pre><code class="lang-cs">/// &lt;summary&gt;
@@ -117,16 +140,18 @@ public void ReadFile(IExceptionLogger exceptionLogger)
     }
 }
 </code></pre><h2 id="initializing-logging">Initializing Logging</h2>
-<pre><code class="lang-cs">public void Configure(ILoggerFactory loggerFactory)
+<pre><code class="lang-cs">public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
 {
     string projectId = &quot;[Google Cloud Platform project ID]&quot;;
-    loggerFactory.AddGoogle(projectId);
+    loggerFactory.AddGoogle(app.ApplicationServices, projectId);
 }
-</code></pre><h2 id="initializing-logging-aspnetcore-20">Initializing Logging (AspNetCore 2.0)</h2>
+</code></pre><h2 id="initializing-logging-aspnet-core-20">Initializing Logging (ASP.NET Core 2.0+)</h2>
 <pre><code class="lang-cs">string projectId = &quot;[Google Cloud Platform project ID]&quot;;
 var webHost = new WebHostBuilder()
-    .ConfigureLogging((hostingContext, logging) =&gt;
-        logging.AddProvider(GoogleLoggerProvider.Create(projectId)))
+    .ConfigureServices(services =&gt;
+    {
+        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId));
+    })
     .UseStartup&lt;Startup&gt;()
     .Build();
 </code></pre><h2 id="log">Log</h2>
@@ -138,6 +163,8 @@ var webHost = new WebHostBuilder()
 </code></pre><h2 id="initializing-tracing">Initializing Tracing</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
+    // The line below is needed for trace ids to be added to logs.
+    services.AddSingleton&lt;IHttpContextAccessor, HttpContextAccessor&gt;();
     string projectId = &quot;[Google Cloud Platform project ID]&quot;;
     services.AddGoogleTrace(options =&gt;
     {
@@ -150,6 +177,15 @@ public void Configure(IApplicationBuilder app)
     // Use at the start of the request pipeline to ensure the entire
     // request is traced.
     app.UseGoogleTrace();
+
+    app.UseStaticFiles();
+
+    app.UseMvc(routes =&gt;
+    {
+        routes.MapRoute(
+            name: &quot;default&quot;,
+            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
 }
 </code></pre><h2 id="tracing-in-mvc-controllers">Tracing in MVC Controllers</h2>
 <p>To use the <code>IManagedTracer</code> in MVC controllers you can either inject the singleton instance of 
