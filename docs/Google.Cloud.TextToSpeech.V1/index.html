@@ -81,10 +81,36 @@ download a service account JSON file then set the <code>GOOGLE_APPLICATION_CREDE
 The credentials will automatically be used to authenticate. See the <a href="https://cloud.google.com/docs/authentication/getting-started">Getting Started With
 Authentication</a> guide for more details.</p>
 <h1 id="getting-started">Getting started</h1>
-<p>FIXME</p>
+<p>All operations are performed through <a href="api/Google.Cloud.TextToSpeech.V1.TextToSpeechClient.html">TextToSpeechClient</a>.</p>
 <p>Create a client instance by calling the static <code>Create</code> method, optionally
 specifying an end-point or channel and settings.</p>
-</article>
+<h1 id="sample-code">Sample code</h1>
+<pre><code class="lang-cs">TextToSpeechClient client = TextToSpeechClient.Create();
+// The input can be provided as text or SSML.
+SynthesisInput input = new SynthesisInput
+{
+    Text = &quot;This is a demonstration of the Google Cloud Text-to-Speech API&quot;
+};
+// You can specify a particular voice, or ask the server to pick based
+// on specified criteria.
+VoiceSelectionParams voiceSelection = new VoiceSelectionParams
+{
+    LanguageCode = &quot;en-US&quot;,
+    SsmlGender = SsmlVoiceGender.Female
+};
+// The audio configuration determines the output format and speaking rate.
+AudioConfig audioConfig = new AudioConfig
+{
+    AudioEncoding = AudioEncoding.Mp3
+};
+SynthesizeSpeechResponse response = client.SynthesizeSpeech(input, voiceSelection, audioConfig);
+using (Stream output = File.Create(&quot;sample.mp3&quot;))
+{
+    // response.AudioContent is a ByteString. This can easily be converted into
+    // a byte array or written to a stream.
+    response.AudioContent.WriteTo(output);
+}
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
