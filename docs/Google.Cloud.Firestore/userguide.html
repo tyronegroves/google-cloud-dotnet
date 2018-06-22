@@ -8,7 +8,7 @@
     <title>User guide | Google.Cloud.Firestore </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="User guide | Google.Cloud.Firestore ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -166,17 +166,17 @@ await document.DeleteAsync();
 <p>Once your data is in Firestore, you probably want to read it at some point.</p>
 <h3 id="fetching-a-document-snapshot">Fetching a document snapshot</h3>
 <p><code>DocumentReference</code> allows you to fetch a snapshot of a document:</p>
-<pre><code class="lang-cs">DocumentSnapshot snapshot = await document.SnapshotAsync();
+<pre><code class="lang-cs">DocumentSnapshot snapshot = await document.GetSnapshotAsync();
 // Even if there&#39;s no document in the server, we still get a snapshot
 // back - but it knows the document doesn&#39;t exist.
 Console.WriteLine(snapshot.Exists);
 
 // Individual fields can be checked and fetched
-Console.WriteLine(snapshot.Contains(&quot;Planet&quot;)); // False
-Console.WriteLine(snapshot.GetField&lt;string&gt;(&quot;Name&quot;)); // Los Angeles
+Console.WriteLine(snapshot.ContainsField(&quot;Planet&quot;)); // False
+Console.WriteLine(snapshot.GetValue&lt;string&gt;(&quot;Name&quot;)); // Los Angeles
 
 // Or you can deserialize to a dictionary or a model
-City fetchedCity = snapshot.Deserialize&lt;City&gt;();
+City fetchedCity = snapshot.ConvertTo&lt;City&gt;();
 Console.WriteLine(fetchedCity.Name); // Los Angeles
 </code></pre><h3 id="querying">Querying</h3>
 <p>You can also query collections, either directly to retrieve all the data from all the documents in the collection,
@@ -185,67 +185,36 @@ or with filtering, projections, ordering etc.</p>
 CollectionReference collection = db.Collection(&quot;cities&quot;);
 
 // A CollectionReference is a Query, so we can just fetch everything
-QuerySnapshot allCities = await collection.SnapshotAsync();
+QuerySnapshot allCities = await collection.GetSnapshotAsync();
 foreach (DocumentSnapshot document in allCities.Documents)
 {
     // Do anything you&#39;d normally do with a DocumentSnapshot
-    City city = document.Deserialize&lt;City&gt;();
+    City city = document.ConvertTo&lt;City&gt;();
     Console.WriteLine(city.Name);
 }
 
 // But we can apply filters, perform ordering etc too.
 Query bigCitiesQuery = collection
-    .Where(&quot;Population&quot;, QueryOperator.GreaterThan, 3000000)
+    .WhereGreaterThan(&quot;Population&quot;, 3000000)
     .OrderByDescending(&quot;Population&quot;);
 
-QuerySnapshot bigCities = await bigCitiesQuery.SnapshotAsync();
+QuerySnapshot bigCities = await bigCitiesQuery.GetSnapshotAsync();
 foreach (DocumentSnapshot document in bigCities.Documents)
 {
     // Do anything you&#39;d normally do with a DocumentSnapshot
-    City city = document.Deserialize&lt;City&gt;();
+    City city = document.ConvertTo&lt;City&gt;();
     Console.WriteLine($&quot;{city.Name}: {city.Population}&quot;);
 }
 </code></pre><h2 id="transactions">Transactions</h2>
 <p>Transactions accept a callback of user code, which is then passed a <code>Transaction</code> object
 to work with.</p>
-<p>Transactions always run asynchronously, but may be given a synchronous callback;
-as modification operations (<code>Create</code>, <code>Update</code> etc) are specified synchronously and batched locally,
-transactions often won&#39;t need any asynchronous code. However, the operations to fetch document or
-query snapshots within a transaction do require asynchrony.</p>
 <p>The callback can return optionally a value.</p>
 <p>The callback will be executed multiple times if the transaction needs to be retried due to conflicting
 modifications.</p>
 <p>In this section, we&#39;ll deal with a simple document that just has a single counter. We want to keep an up-to-date counter,
 and periodically (once per day, for example) we&#39;ll update another counter to match the current value. For more
 details of counters, see the <a href="https://firebase.google.com/docs/firestore/solutions/counters">main Firestore user guide</a>.</p>
-<h3 id="creating-multiple-documents-atomically">Creating multiple documents atomically</h3>
-<p>If we only have a single current counter and a single daily counter, we could </p>
-<pre><code class="lang-cs">FirestoreDb db = FirestoreDb.Create(projectId);
-CollectionReference collection = db.Collection(&quot;counters&quot;);
-DocumentReference currentCounter = collection.Document(&quot;current&quot;);
-DocumentReference dailyCounter = collection.Document(&quot;daily&quot;);
-
-await db.RunTransactionAsync(transaction =&gt;
-{
-    transaction.Create(currentCounter, new { Counter = 0 });
-    transaction.Create(dailyCounter, new { Counter = 0 });
-});
-</code></pre><h3 id="creating-multiple-documents-atomically-and-returning-a-value">Creating multiple documents atomically and returning a value</h3>
-<p>If we want to keep multiple counters, we might want to generate a &quot;probably unique&quot; ID using the current client time,
-and then use that as a prefix for both document names, returning the generated prefix from the transaction.</p>
-<p>(Note: I&#39;m not sure this is a good example.)</p>
-<pre><code class="lang-cs">FirestoreDb db = FirestoreDb.Create(projectId);
-CollectionReference collection = db.Collection(&quot;counters&quot;);
-
-string result = await db.RunTransactionAsync(transaction =&gt;
-{
-    string prefix = DateTime.UtcNow.ToString(&quot;yyyyMMddHHmmsssfffffff&quot;, CultureInfo.InvariantCulture);
-    transaction.Create(collection.Document(prefix + &quot;-current&quot;), new { Counter = 0 });
-    transaction.Create(collection.Document(prefix + &quot;-daily&quot;), new { Counter = 0 });
-    return prefix;
-});
-Console.WriteLine(result); // The prefix we generated
-</code></pre><h3 id="updating-the-daily-counter-from-the-current-one">Updating the daily counter from the current one</h3>
+<h3 id="updating-the-daily-counter-from-the-current-one">Updating the daily counter from the current one</h3>
 <p>Once a day, we want to atomically fetch the current counter, and update the daily one.</p>
 <pre><code class="lang-cs">FirestoreDb db = FirestoreDb.Create(projectId);
 CollectionReference collection = db.Collection(&quot;counters&quot;);
@@ -254,8 +223,8 @@ DocumentReference dailyCounter = collection.Document(&quot;daily&quot;);
 
 await db.RunTransactionAsync(async transaction =&gt;
 {
-    DocumentSnapshot currentSnapshot = await transaction.GetDocumentSnapshotAsync(currentCounter);
-    long counter = currentSnapshot.GetField&lt;long&gt;(&quot;Counter&quot;);
+    DocumentSnapshot currentSnapshot = await transaction.GetSnapshotAsync(currentCounter);
+    long counter = currentSnapshot.GetValue&lt;long&gt;(&quot;Counter&quot;);
     transaction.Set(dailyCounter, new { Counter = counter });
 });
 </code></pre><h3 id="updating-the-current-counter">Updating the current counter</h3>
@@ -267,8 +236,8 @@ DocumentReference currentCounter = collection.Document(&quot;current&quot;);
 
 long newValue = await db.RunTransactionAsync(async transaction =&gt;
 {
-    DocumentSnapshot currentSnapshot = await transaction.GetDocumentSnapshotAsync(currentCounter);
-    long counter = currentSnapshot.GetField&lt;long&gt;(&quot;Counter&quot;) + 1;
+    DocumentSnapshot currentSnapshot = await transaction.GetSnapshotAsync(currentCounter);
+    long counter = currentSnapshot.GetValue&lt;long&gt;(&quot;Counter&quot;) + 1;
     transaction.Set(currentCounter, new { Counter = counter });
     return counter;
 });

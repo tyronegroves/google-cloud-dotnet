@@ -8,7 +8,7 @@
     <title>Data model | Google.Cloud.Firestore </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Data model | Google.Cloud.Firestore ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -211,8 +211,8 @@ City city = new City
 DocumentReference document = await collection.AddAsync(city);
 
 // Fetch the data back from the server and deserialize it.
-DocumentSnapshot snapshot = await document.SnapshotAsync();
-City citySnapshot = snapshot.Deserialize&lt;City&gt;();
+DocumentSnapshot snapshot = await document.GetSnapshotAsync();
+City citySnapshot = snapshot.ConvertTo&lt;City&gt;();
 Console.WriteLine(citySnapshot.Name); // Los Angeles
 </code></pre><p>In order to deserialize a map as an attributed class, the class must have a public parameterless constructor. (The C# compiler provides
 one by default if no other constructors are specified.) The properties in the map must each have an attributed, public instance property with a public setter,
@@ -239,7 +239,7 @@ Dictionary&lt;string, object&gt; city = new Dictionary&lt;string, object&gt;
 DocumentReference document = await collection.AddAsync(city);
 
 // Fetch the data back from the server and deserialize it.
-DocumentSnapshot snapshot = await document.SnapshotAsync();
+DocumentSnapshot snapshot = await document.GetSnapshotAsync();
 Dictionary&lt;string, object&gt; cityData = snapshot.ToDictionary();
 Console.WriteLine(cityData[&quot;Name&quot;]); // Los Angeles
 </code></pre><h2 id="mapping-with-anonymous-types">Mapping with anonymous types</h2>
@@ -263,8 +263,8 @@ DocumentReference document = await collection.AddAsync(city);
 await document.SetAsync(new { Population = 3900005L }, SetOptions.MergeAll);
 
 // Fetch the latest document and print the population
-DocumentSnapshot snapshot = await document.SnapshotAsync();
-Console.WriteLine(snapshot.GetField&lt;long&gt;(&quot;Population&quot;)); // 3900005
+DocumentSnapshot snapshot = await document.GetSnapshotAsync();
+Console.WriteLine(snapshot.GetValue&lt;long&gt;(&quot;Population&quot;)); // 3900005
 </code></pre><h1 id="sentinel-values">Sentinel values</h1>
 <p>So far all the values we&#39;ve looked at have been known by the C# code. There are two <em>sentinel values</em> available which behave slightly differently.</p>
 <h2 id="server-side-timestamp">Server-side timestamp</h2>
@@ -281,14 +281,14 @@ public class HighScore
     [FirestoreProperty]
     public string Name { get; set; }
 
-    [FirestoreProperty(SentinelValue = SentinelValue.ServerTimestamp)]
+    [FirestoreProperty, ServerTimestamp]
     public Timestamp LastUpdated { get; set; }
 }
 </code></pre><p>For dictionaries and anonymous types, you can use <code>SentinelValue.ServerTimestamp</code> as the value itself. For example,
 to update just the <code>Score</code> and <code>Timestamp</code> fields of a <code>HighScore</code> document, you could use an anonymous type instead of
 the attributed model</p>
 <pre><code class="lang-cs">await document.SetAsync(
-    new { Score = 20, LastUpdated = SentinelValue.ServerTimestamp },
+    new { Score = 20, LastUpdated = FieldValue.ServerTimestamp },
     SetOptions.MergeAll);
 </code></pre><p>Note that each document automatically keeps track of when it was last updated anyway, but you may wish to be more fine-grained;
 if a document may change in several ways, you may want a timestamp for when a specific field was last modified.</p>

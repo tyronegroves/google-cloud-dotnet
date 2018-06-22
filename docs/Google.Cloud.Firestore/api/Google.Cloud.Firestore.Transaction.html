@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Transaction
    | Google.Cloud.Firestore ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -102,7 +102,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Firestore.dll</h6>
   <h5 id="Google_Cloud_Firestore_Transaction_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Transaction</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Transaction</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -222,15 +222,69 @@
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Firestore_Transaction_GetDocumentSnapshotAsync_" data-uid="Google.Cloud.Firestore.Transaction.GetDocumentSnapshotAsync*"></a>
-  <h4 id="Google_Cloud_Firestore_Transaction_GetDocumentSnapshotAsync_Google_Cloud_Firestore_DocumentReference_System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.Transaction.GetDocumentSnapshotAsync(Google.Cloud.Firestore.DocumentReference,System.Threading.CancellationToken)">GetDocumentSnapshotAsync(DocumentReference, CancellationToken)</h4>
+  <a id="Google_Cloud_Firestore_Transaction_GetAllSnapshotsAsync_" data-uid="Google.Cloud.Firestore.Transaction.GetAllSnapshotsAsync*"></a>
+  <h4 id="Google_Cloud_Firestore_Transaction_GetAllSnapshotsAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Firestore_DocumentReference__System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.Transaction.GetAllSnapshotsAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Firestore.DocumentReference},System.Threading.CancellationToken)">GetAllSnapshotsAsync(IEnumerable&lt;DocumentReference&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Fetch snapshots of all the documents specified by <code data-dev-comment-type="paramref" class="paramref">documentReferences</code>, with respect to this transaction.
+This method cannot be called after any write operations have been created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;IList&lt;DocumentSnapshot&gt;&gt; GetAllSnapshotsAsync(IEnumerable&lt;DocumentReference&gt; documentReferences, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Firestore.DocumentReference.html">DocumentReference</a>&gt;</td>
+        <td><span class="parametername">documentReferences</span></td>
+        <td><p>The document references to fetch. Must not be null, or contain null references.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A cancellation token to monitor for the asynchronous operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Google.Cloud.Firestore.DocumentSnapshot.html">DocumentSnapshot</a>&gt;&gt;</td>
+        <td><p>The document snapshots, in the same order as <code data-dev-comment-type="paramref" class="paramref">documentReferences</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Firestore_Transaction_GetAllSnapshotsAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Firestore_DocumentReference__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Any documents which are missing are represented in the returned list by a <a class="xref" href="Google.Cloud.Firestore.DocumentSnapshot.html">DocumentSnapshot</a>
+with <a class="xref" href="Google.Cloud.Firestore.DocumentSnapshot.html#Google_Cloud_Firestore_DocumentSnapshot_Exists">Exists</a> value of <code>false</code>.</p>
+</div>
+  <a id="Google_Cloud_Firestore_Transaction_GetSnapshotAsync_" data-uid="Google.Cloud.Firestore.Transaction.GetSnapshotAsync*"></a>
+  <h4 id="Google_Cloud_Firestore_Transaction_GetSnapshotAsync_Google_Cloud_Firestore_DocumentReference_System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.Transaction.GetSnapshotAsync(Google.Cloud.Firestore.DocumentReference,System.Threading.CancellationToken)">GetSnapshotAsync(DocumentReference, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Fetch a snapshot of the document specified by <code data-dev-comment-type="paramref" class="paramref">documentReference</code>, with respect to this transaction.
 This method cannot be called after any write operations have been created.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;DocumentSnapshot&gt; GetDocumentSnapshotAsync(DocumentReference documentReference, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;DocumentSnapshot&gt; GetSnapshotAsync(DocumentReference documentReference, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -272,15 +326,15 @@ This method cannot be called after any write operations have been created.</p>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Firestore_Transaction_GetQuerySnapshotAsync_" data-uid="Google.Cloud.Firestore.Transaction.GetQuerySnapshotAsync*"></a>
-  <h4 id="Google_Cloud_Firestore_Transaction_GetQuerySnapshotAsync_Google_Cloud_Firestore_Query_System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.Transaction.GetQuerySnapshotAsync(Google.Cloud.Firestore.Query,System.Threading.CancellationToken)">GetQuerySnapshotAsync(Query, CancellationToken)</h4>
+  <a id="Google_Cloud_Firestore_Transaction_GetSnapshotAsync_" data-uid="Google.Cloud.Firestore.Transaction.GetSnapshotAsync*"></a>
+  <h4 id="Google_Cloud_Firestore_Transaction_GetSnapshotAsync_Google_Cloud_Firestore_Query_System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.Transaction.GetSnapshotAsync(Google.Cloud.Firestore.Query,System.Threading.CancellationToken)">GetSnapshotAsync(Query, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Performs a query and returned a snapshot of the the results, with respect to this transaction.
 This method cannot be called after any write operations have been created.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;QuerySnapshot&gt; GetQuerySnapshotAsync(Query query, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;QuerySnapshot&gt; GetSnapshotAsync(Query query, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -362,13 +416,13 @@ This method cannot be called after any write operations have been created.</p>
     </tbody>
   </table>
   <a id="Google_Cloud_Firestore_Transaction_Update_" data-uid="Google.Cloud.Firestore.Transaction.Update*"></a>
-  <h4 id="Google_Cloud_Firestore_Transaction_Update_Google_Cloud_Firestore_DocumentReference_System_Collections_Generic_Dictionary_Google_Cloud_Firestore_FieldPath_System_Object__Google_Cloud_Firestore_Precondition_" data-uid="Google.Cloud.Firestore.Transaction.Update(Google.Cloud.Firestore.DocumentReference,System.Collections.Generic.Dictionary{Google.Cloud.Firestore.FieldPath,System.Object},Google.Cloud.Firestore.Precondition)">Update(DocumentReference, Dictionary&lt;FieldPath, Object&gt;, Precondition)</h4>
+  <h4 id="Google_Cloud_Firestore_Transaction_Update_Google_Cloud_Firestore_DocumentReference_System_Collections_Generic_IDictionary_Google_Cloud_Firestore_FieldPath_System_Object__Google_Cloud_Firestore_Precondition_" data-uid="Google.Cloud.Firestore.Transaction.Update(Google.Cloud.Firestore.DocumentReference,System.Collections.Generic.IDictionary{Google.Cloud.Firestore.FieldPath,System.Object},Google.Cloud.Firestore.Precondition)">Update(DocumentReference, IDictionary&lt;FieldPath, Object&gt;, Precondition)</h4>
   <div class="markdown level1 summary"><p>Adds an operation to update a document&apos;s data in this transaction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Update(DocumentReference documentReference, Dictionary&lt;FieldPath, object&gt; updates, Precondition precondition = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Update(DocumentReference documentReference, IDictionary&lt;FieldPath, object&gt; updates, Precondition precondition = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -387,9 +441,93 @@ This method cannot be called after any write operations have been created.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<a class="xref" href="Google.Cloud.Firestore.FieldPath.html">FieldPath</a>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<a class="xref" href="Google.Cloud.Firestore.FieldPath.html">FieldPath</a>, <span class="xref">System.Object</span>&gt;</td>
         <td><span class="parametername">updates</span></td>
         <td><p>The updates to perform on the document, keyed by the field path to update. Fields not present in this dictionary are not updated. Must not be null or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Firestore.Precondition.html">Precondition</a></td>
+        <td><span class="parametername">precondition</span></td>
+        <td><p>Optional precondition for updating the document. May be null, which is equivalent to <a class="xref" href="Google.Cloud.Firestore.Precondition.html#Google_Cloud_Firestore_Precondition_MustExist">MustExist</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Firestore_Transaction_Update_" data-uid="Google.Cloud.Firestore.Transaction.Update*"></a>
+  <h4 id="Google_Cloud_Firestore_Transaction_Update_Google_Cloud_Firestore_DocumentReference_System_Collections_Generic_IDictionary_System_String_System_Object__Google_Cloud_Firestore_Precondition_" data-uid="Google.Cloud.Firestore.Transaction.Update(Google.Cloud.Firestore.DocumentReference,System.Collections.Generic.IDictionary{System.String,System.Object},Google.Cloud.Firestore.Precondition)">Update(DocumentReference, IDictionary&lt;String, Object&gt;, Precondition)</h4>
+  <div class="markdown level1 summary"><p>Adds an operation to update a document&apos;s data in this transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update(DocumentReference documentReference, IDictionary&lt;string, object&gt; updates, Precondition precondition = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Firestore.DocumentReference.html">DocumentReference</a></td>
+        <td><span class="parametername">documentReference</span></td>
+        <td><p>A document reference indicating the path of the document to update. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">updates</span></td>
+        <td><p>The updates to perform on the document, keyed by the dot-separated field path to update. Fields not present in this dictionary are not updated. Must not be null or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Firestore.Precondition.html">Precondition</a></td>
+        <td><span class="parametername">precondition</span></td>
+        <td><p>Optional precondition for updating the document. May be null, which is equivalent to <a class="xref" href="Google.Cloud.Firestore.Precondition.html#Google_Cloud_Firestore_Precondition_MustExist">MustExist</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Firestore_Transaction_Update_" data-uid="Google.Cloud.Firestore.Transaction.Update*"></a>
+  <h4 id="Google_Cloud_Firestore_Transaction_Update_Google_Cloud_Firestore_DocumentReference_System_String_System_Object_Google_Cloud_Firestore_Precondition_" data-uid="Google.Cloud.Firestore.Transaction.Update(Google.Cloud.Firestore.DocumentReference,System.String,System.Object,Google.Cloud.Firestore.Precondition)">Update(DocumentReference, String, Object, Precondition)</h4>
+  <div class="markdown level1 summary"><p>Adds an operation to update a document&apos;s data in this transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update(DocumentReference documentReference, string field, object value, Precondition precondition = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Firestore.DocumentReference.html">DocumentReference</a></td>
+        <td><span class="parametername">documentReference</span></td>
+        <td><p>A document reference indicating the path of the document to update. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">field</span></td>
+        <td><p>The dot-separated name of the field to update. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The new value for the field. May be null.</p>
 </td>
       </tr>
       <tr>

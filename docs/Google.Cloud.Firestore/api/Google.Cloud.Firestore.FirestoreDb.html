@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class FirestoreDb
    | Google.Cloud.Firestore ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -336,31 +336,6 @@ the project will be automatically detected if possible.</p>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Firestore_FirestoreDb_CreateWriteBatch_" data-uid="Google.Cloud.Firestore.FirestoreDb.CreateWriteBatch*"></a>
-  <h4 id="Google_Cloud_Firestore_FirestoreDb_CreateWriteBatch" data-uid="Google.Cloud.Firestore.FirestoreDb.CreateWriteBatch">CreateWriteBatch()</h4>
-  <div class="markdown level1 summary"><p>Creates a write batch, which can be used to commit multiple mutations atomically.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WriteBatch CreateWriteBatch()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Firestore.WriteBatch.html">WriteBatch</a></td>
-        <td><p>A write batch for this database.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Google_Cloud_Firestore_FirestoreDb_Document_" data-uid="Google.Cloud.Firestore.FirestoreDb.Document*"></a>
   <h4 id="Google_Cloud_Firestore_FirestoreDb_Document_System_String_" data-uid="Google.Cloud.Firestore.FirestoreDb.Document(System.String)">Document(String)</h4>
   <div class="markdown level1 summary"><p>Creates a local <a class="xref" href="Google.Cloud.Firestore.DocumentReference.html">DocumentReference</a> for the given path, which must include
@@ -405,6 +380,59 @@ an even number of slash-separated identifiers. This does not perform any remote 
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Firestore_FirestoreDb_GetAllSnapshotsAsync_" data-uid="Google.Cloud.Firestore.FirestoreDb.GetAllSnapshotsAsync*"></a>
+  <h4 id="Google_Cloud_Firestore_FirestoreDb_GetAllSnapshotsAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Firestore_DocumentReference__System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.FirestoreDb.GetAllSnapshotsAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Firestore.DocumentReference},System.Threading.CancellationToken)">GetAllSnapshotsAsync(IEnumerable&lt;DocumentReference&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Fetches document snapshots from the server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;IList&lt;DocumentSnapshot&gt;&gt; GetAllSnapshotsAsync(IEnumerable&lt;DocumentReference&gt; documents, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Firestore.DocumentReference.html">DocumentReference</a>&gt;</td>
+        <td><span class="parametername">documents</span></td>
+        <td><p>The document references to fetch. Must not be null, or contain null references.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A cancellation token for the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Google.Cloud.Firestore.DocumentSnapshot.html">DocumentSnapshot</a>&gt;&gt;</td>
+        <td><p>The document snapshots, in the same order as <code data-dev-comment-type="paramref" class="paramref">documents</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Firestore_FirestoreDb_GetAllSnapshotsAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Firestore_DocumentReference__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Any documents which are missing are represented in the returned list by a <a class="xref" href="Google.Cloud.Firestore.DocumentSnapshot.html">DocumentSnapshot</a>
+with <a class="xref" href="Google.Cloud.Firestore.DocumentSnapshot.html#Google_Cloud_Firestore_DocumentSnapshot_Exists">Exists</a> value of <code>false</code>.</p>
+</div>
   <a id="Google_Cloud_Firestore_FirestoreDb_ListRootCollectionsAsync_" data-uid="Google.Cloud.Firestore.FirestoreDb.ListRootCollectionsAsync*"></a>
   <h4 id="Google_Cloud_Firestore_FirestoreDb_ListRootCollectionsAsync" data-uid="Google.Cloud.Firestore.FirestoreDb.ListRootCollectionsAsync">ListRootCollectionsAsync()</h4>
   <div class="markdown level1 summary"><p>Asynchronously retrieves the root collection IDs from the server.</p>
@@ -426,64 +454,6 @@ an even number of slash-separated identifiers. This does not perform any remote 
       <tr>
         <td><span class="xref">System.Collections.Generic.IAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Firestore.CollectionReference.html">CollectionReference</a>&gt;</td>
         <td><p>All the root collection references, in a lazily-iterated sequence.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Firestore_FirestoreDb_RunTransactionAsync_" data-uid="Google.Cloud.Firestore.FirestoreDb.RunTransactionAsync*"></a>
-  <h4 id="Google_Cloud_Firestore_FirestoreDb_RunTransactionAsync_System_Action_Google_Cloud_Firestore_Transaction__Google_Cloud_Firestore_TransactionOptions_System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.FirestoreDb.RunTransactionAsync(System.Action{Google.Cloud.Firestore.Transaction},Google.Cloud.Firestore.TransactionOptions,System.Threading.CancellationToken)">RunTransactionAsync(Action&lt;Transaction&gt;, TransactionOptions, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Runs a transaction asynchronously, with a synchronous callback that doesn&apos;t return a value.
-The specified callback is executed for a newly-created transaction. If committing the transaction
-fails, the whole operation is retried based on <a class="xref" href="Google.Cloud.Firestore.TransactionOptions.html#Google_Cloud_Firestore_TransactionOptions_MaxAttempts">MaxAttempts</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task RunTransactionAsync(Action&lt;Transaction&gt; callback, TransactionOptions options = null, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Google.Cloud.Firestore.Transaction.html">Transaction</a>&gt;</td>
-        <td><span class="parametername">callback</span></td>
-        <td><p>The callback to execute. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Firestore.TransactionOptions.html">TransactionOptions</a></td>
-        <td><span class="parametername">options</span></td>
-        <td><p>The options for the transaction. May be null, in which case default options will be used.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A cancellation token for the operation. This is exposed to the callback through <a class="xref" href="Google.Cloud.Firestore.Transaction.html#Google_Cloud_Firestore_Transaction_CancellationToken">CancellationToken</a>
-and applied to all RPCs to begin, rollback or commit the transaction.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A task which completes when the transaction has committed.</p>
 </td>
       </tr>
     </tbody>
@@ -542,80 +512,6 @@ and applied to all RPCs to begin, rollback or commit the transaction.</p>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
         <td><p>A task which completes when the transaction has committed.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Firestore_FirestoreDb_RunTransactionAsync_" data-uid="Google.Cloud.Firestore.FirestoreDb.RunTransactionAsync*"></a>
-  <h4 id="Google_Cloud_Firestore_FirestoreDb_RunTransactionAsync__1_System_Func_Google_Cloud_Firestore_Transaction___0__Google_Cloud_Firestore_TransactionOptions_System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.FirestoreDb.RunTransactionAsync``1(System.Func{Google.Cloud.Firestore.Transaction,``0},Google.Cloud.Firestore.TransactionOptions,System.Threading.CancellationToken)">RunTransactionAsync&lt;T&gt;(Func&lt;Transaction, T&gt;, TransactionOptions, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Runs a transaction asynchronously, with a synchronous callback that returns a value.
-The specified callback is executed for a newly-created transaction. If committing the transaction
-fails, the whole operation is retried based on <a class="xref" href="Google.Cloud.Firestore.TransactionOptions.html#Google_Cloud_Firestore_TransactionOptions_MaxAttempts">MaxAttempts</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;T&gt; RunTransactionAsync&lt;T&gt;(Func&lt;Transaction, T&gt; callback, TransactionOptions options = null, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Google.Cloud.Firestore.Transaction.html">Transaction</a>, T&gt;</td>
-        <td><span class="parametername">callback</span></td>
-        <td><p>The callback to execute. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Firestore.TransactionOptions.html">TransactionOptions</a></td>
-        <td><span class="parametername">options</span></td>
-        <td><p>The options for the transaction. May be null, in which case default options will be used.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A cancellation token for the operation. This is exposed to the callback through <a class="xref" href="Google.Cloud.Firestore.Transaction.html#Google_Cloud_Firestore_Transaction_CancellationToken">CancellationToken</a>
-and applied to all RPCs to begin, rollback or commit the transaction.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;T&gt;</td>
-        <td><p>A task which completes when the transaction has committed. The result of the task then contains the result of the callback.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td><p>The result type of the callback.</p>
 </td>
       </tr>
     </tbody>
@@ -690,6 +586,31 @@ and applied to all RPCs to begin, rollback or commit the transaction.</p>
       <tr>
         <td><span class="parametername">T</span></td>
         <td><p>The result type of the callback.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Firestore_FirestoreDb_StartBatch_" data-uid="Google.Cloud.Firestore.FirestoreDb.StartBatch*"></a>
+  <h4 id="Google_Cloud_Firestore_FirestoreDb_StartBatch" data-uid="Google.Cloud.Firestore.FirestoreDb.StartBatch">StartBatch()</h4>
+  <div class="markdown level1 summary"><p>Creates a write batch, which can be used to commit multiple mutations atomically.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WriteBatch StartBatch()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Firestore.WriteBatch.html">WriteBatch</a></td>
+        <td><p>A write batch for this database.</p>
 </td>
       </tr>
     </tbody>

@@ -8,7 +8,7 @@
     <title>Google.Cloud.Firestore | Google.Cloud.Firestore </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Firestore | Google.Cloud.Firestore ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -63,13 +63,17 @@
 <h1 id="googlecloudfirestore">Google.Cloud.Firestore</h1>
 
 <p><code>Google.Cloud.Firestore</code> is a.NET client library for the <a href="https://firebase.google.com/docs/firestore/">Firestore API</a>.</p>
+<p>Note:
+This documentation is for version <code>1.0.0-beta05</code> of the library.
+Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Firestore</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
 project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
-Please ensure you enable pre-release packages(for example, in the
+Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
-box).</p>
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>1.0.0-beta05</code>) of <code>Google.Cloud.Firestore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -90,12 +94,12 @@ DocumentReference document = await collection.AddAsync(new { Name = new { First 
 
 // A DocumentReference doesn&#39;t contain the data - it&#39;s just a path.
 // Let&#39;s fetch the current document.
-DocumentSnapshot snapshot = await document.SnapshotAsync();
+DocumentSnapshot snapshot = await document.GetSnapshotAsync();
 
 // We can access individual fields by dot-separated path
-Console.WriteLine(snapshot.GetField&lt;string&gt;(&quot;Name.First&quot;));
-Console.WriteLine(snapshot.GetField&lt;string&gt;(&quot;Name.Last&quot;));
-Console.WriteLine(snapshot.GetField&lt;int&gt;(&quot;Born&quot;));
+Console.WriteLine(snapshot.GetValue&lt;string&gt;(&quot;Name.First&quot;));
+Console.WriteLine(snapshot.GetValue&lt;string&gt;(&quot;Name.Last&quot;));
+Console.WriteLine(snapshot.GetValue&lt;int&gt;(&quot;Born&quot;));
 
 // Or deserialize the whole document into a dictionary
 Dictionary&lt;string, object&gt; data = snapshot.ToDictionary();
@@ -106,13 +110,13 @@ Console.WriteLine(name[&quot;Last&quot;]);
 // See the &quot;data model&quot; guide for more options for data handling.
 
 // Query the collection for all documents where doc.Born &lt; 1900.
-Query query = collection.Where(&quot;Born&quot;, QueryOperator.LessThan, 1900);
-QuerySnapshot querySnapshot = await query.SnapshotAsync();
+Query query = collection.WhereLessThan(&quot;Born&quot;, 1900);
+QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
 foreach (DocumentSnapshot queryResult in querySnapshot.Documents)
 {
-    string firstName = queryResult.GetField&lt;string&gt;(&quot;Name.First&quot;);
-    string lastName = queryResult.GetField&lt;string&gt;(&quot;Name.Last&quot;);
-    int born = queryResult.GetField&lt;int&gt;(&quot;Born&quot;);
+    string firstName = queryResult.GetValue&lt;string&gt;(&quot;Name.First&quot;);
+    string lastName = queryResult.GetValue&lt;string&gt;(&quot;Name.Last&quot;);
+    int born = queryResult.GetValue&lt;int&gt;(&quot;Born&quot;);
     Console.WriteLine($&quot;{firstName} {lastName}; born {born}&quot;);
 }
 </code></pre><p>See the <a href="userguide.html">user guide</a> for more samples.</p>
