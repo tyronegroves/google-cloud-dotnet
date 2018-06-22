@@ -187,7 +187,7 @@
   <h4 id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_PublisherServiceApiSettings_" data-uid="Google.Cloud.PubSub.V1.PublisherServiceApiClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.PubSub.V1.PublisherServiceApiSettings)">Create(ServiceEndpoint, PublisherServiceApiSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.PubSub.V1.PublisherServiceApiClient.html">PublisherServiceApiClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -234,6 +234,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_PublisherServiceApiSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+PublisherServiceApiClient client = PublisherServiceApiClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    PublisherServiceApiClient.DefaultEndpoint.Host, PublisherServiceApiClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+PublisherServiceApiClient client = PublisherServiceApiClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
   <a id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_Create_" data-uid="Google.Cloud.PubSub.V1.PublisherServiceApiClient.Create*"></a>
   <h4 id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_Create_Grpc_Core_Channel_Google_Cloud_PubSub_V1_PublisherServiceApiSettings_" data-uid="Google.Cloud.PubSub.V1.PublisherServiceApiClient.Create(Grpc.Core.Channel,Google.Cloud.PubSub.V1.PublisherServiceApiSettings)">Create(Channel, PublisherServiceApiSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.PubSub.V1.PublisherServiceApiClient.html">PublisherServiceApiClient</a> which uses the specified channel for remote operations.</p>
@@ -287,7 +309,7 @@ necessary.</p>
   <h4 id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_PublisherServiceApiSettings_" data-uid="Google.Cloud.PubSub.V1.PublisherServiceApiClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.PubSub.V1.PublisherServiceApiSettings)">CreateAsync(ServiceEndpoint, PublisherServiceApiSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.PubSub.V1.PublisherServiceApiClient.html">PublisherServiceApiClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,6 +356,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_PublisherServiceApiSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+PublisherServiceApiClient client = await PublisherServiceApiClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    PublisherServiceApiClient.DefaultEndpoint.Host, PublisherServiceApiClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+PublisherServiceApiClient client = PublisherServiceApiClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_CreateTopic_" data-uid="Google.Cloud.PubSub.V1.PublisherServiceApiClient.CreateTopic*"></a>
   <h4 id="Google_Cloud_PubSub_V1_PublisherServiceApiClient_CreateTopic_Google_Cloud_PubSub_V1_Topic_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.PublisherServiceApiClient.CreateTopic(Google.Cloud.PubSub.V1.Topic,Google.Api.Gax.Grpc.CallSettings)">CreateTopic(Topic, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates the given topic with the given name.</p>

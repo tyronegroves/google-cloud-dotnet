@@ -578,7 +578,7 @@ await subscriberServiceApiClient.AcknowledgeAsync(subscription, ackIds);
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_SubscriberServiceApiSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.PubSub.V1.SubscriberServiceApiSettings)">Create(ServiceEndpoint, SubscriberServiceApiSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.html">SubscriberServiceApiClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -625,6 +625,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_SubscriberServiceApiSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+SubscriberServiceApiClient client = SubscriberServiceApiClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    SubscriberServiceApiClient.DefaultEndpoint.Host, SubscriberServiceApiClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+SubscriberServiceApiClient client = SubscriberServiceApiClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_Create_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.Create*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_Create_Grpc_Core_Channel_Google_Cloud_PubSub_V1_SubscriberServiceApiSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.Create(Grpc.Core.Channel,Google.Cloud.PubSub.V1.SubscriberServiceApiSettings)">Create(Channel, SubscriberServiceApiSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.html">SubscriberServiceApiClient</a> which uses the specified channel for remote operations.</p>
@@ -678,7 +700,7 @@ necessary.</p>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_SubscriberServiceApiSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.PubSub.V1.SubscriberServiceApiSettings)">CreateAsync(ServiceEndpoint, SubscriberServiceApiSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.html">SubscriberServiceApiClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -725,6 +747,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_PubSub_V1_SubscriberServiceApiSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+SubscriberServiceApiClient client = await SubscriberServiceApiClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.PubSub.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    SubscriberServiceApiClient.DefaultEndpoint.Host, SubscriberServiceApiClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+SubscriberServiceApiClient client = SubscriberServiceApiClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshot_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshot*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshot_Google_Cloud_PubSub_V1_CreateSnapshotRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshot(Google.Cloud.PubSub.V1.CreateSnapshotRequest,Google.Api.Gax.Grpc.CallSettings)">CreateSnapshot(CreateSnapshotRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.
