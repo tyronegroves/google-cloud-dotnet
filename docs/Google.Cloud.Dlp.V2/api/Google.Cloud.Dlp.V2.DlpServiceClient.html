@@ -363,7 +363,7 @@ await dlpServiceClient.CancelDlpJobAsync(request);
   <h4 id="Google_Cloud_Dlp_V2_DlpServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dlp_V2_DlpServiceSettings_" data-uid="Google.Cloud.Dlp.V2.DlpServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Dlp.V2.DlpServiceSettings)">Create(ServiceEndpoint, DlpServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Dlp.V2.DlpServiceClient.html">DlpServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -410,6 +410,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Dlp_V2_DlpServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dlp_V2_DlpServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Dlp.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+DlpServiceClient client = DlpServiceClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Dlp.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    DlpServiceClient.DefaultEndpoint.Host, DlpServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+DlpServiceClient client = DlpServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
   <a id="Google_Cloud_Dlp_V2_DlpServiceClient_Create_" data-uid="Google.Cloud.Dlp.V2.DlpServiceClient.Create*"></a>
   <h4 id="Google_Cloud_Dlp_V2_DlpServiceClient_Create_Grpc_Core_Channel_Google_Cloud_Dlp_V2_DlpServiceSettings_" data-uid="Google.Cloud.Dlp.V2.DlpServiceClient.Create(Grpc.Core.Channel,Google.Cloud.Dlp.V2.DlpServiceSettings)">Create(Channel, DlpServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Dlp.V2.DlpServiceClient.html">DlpServiceClient</a> which uses the specified channel for remote operations.</p>
@@ -463,7 +485,7 @@ necessary.</p>
   <h4 id="Google_Cloud_Dlp_V2_DlpServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dlp_V2_DlpServiceSettings_" data-uid="Google.Cloud.Dlp.V2.DlpServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Dlp.V2.DlpServiceSettings)">CreateAsync(ServiceEndpoint, DlpServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Dlp.V2.DlpServiceClient.html">DlpServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -510,6 +532,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Dlp_V2_DlpServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dlp_V2_DlpServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Dlp.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+DlpServiceClient client = await DlpServiceClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Dlp.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    DlpServiceClient.DefaultEndpoint.Host, DlpServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+DlpServiceClient client = DlpServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_Dlp_V2_DlpServiceClient_CreateDeidentifyTemplate_" data-uid="Google.Cloud.Dlp.V2.DlpServiceClient.CreateDeidentifyTemplate*"></a>
   <h4 id="Google_Cloud_Dlp_V2_DlpServiceClient_CreateDeidentifyTemplate_Google_Cloud_Dlp_V2_CreateDeidentifyTemplateRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dlp.V2.DlpServiceClient.CreateDeidentifyTemplate(Google.Cloud.Dlp.V2.CreateDeidentifyTemplateRequest,Google.Api.Gax.Grpc.CallSettings)">CreateDeidentifyTemplate(CreateDeidentifyTemplateRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a DeidentifyTemplate for re-using frequently used configuration
