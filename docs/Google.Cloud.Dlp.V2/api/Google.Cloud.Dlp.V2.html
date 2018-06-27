@@ -78,7 +78,8 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.Action.html">Action</a></h4>
-      <section><p>A task to execute on the completion of a job.</p>
+      <section><p>A task to execute on the completion of a job.
+See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.google.com/dlp/docs/concepts-actions</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.Action.Types.html">Action.Types</a></h4>
       <section><p>Container for nested types declared in the Action message type.</p>
@@ -103,7 +104,7 @@ Compatible with: Inspect, Risk</p>
       <section><p>If set, the detailed findings will be persisted to the specified
 OutputStorageConfig. Only a single instance of this action can be
 specified.
-Compatible with: Inspect</p>
+Compatible with: Inspect, Risk</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.html">AnalyzeDataSourceRiskDetails</a></h4>
       <section><p>Result of a risk analysis operation request.</p>
@@ -119,6 +120,27 @@ Compatible with: Inspect</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.Types.CategoricalStatsResult.Types.CategoricalStatsHistogramBucket.html">AnalyzeDataSourceRiskDetails.Types.CategoricalStatsResult.Types.CategoricalStatsHistogramBucket</a></h4>
       <section></section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult.html">AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult</a></h4>
+      <section><p>Result of the δ-presence computation. Note that these results are an
+estimation, not exact values.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult.Types.html">AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult.Types</a></h4>
+      <section><p>Container for nested types declared in the DeltaPresenceEstimationResult message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult.Types.DeltaPresenceEstimationHistogramBucket.html">AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult.Types.DeltaPresenceEstimationHistogramBucket</a></h4>
+      <section><p>A DeltaPresenceEstimationHistogramBucket message with the following
+values:
+min_probability: 0.1
+max_probability: 0.2
+frequency: 42
+means that there are 42 records for which δ is in [0.1, 0.2). An
+important particular case is when min_probability = max_probability = 1:
+then, every individual who shares this quasi-identifier combination is in
+the dataset.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult.Types.DeltaPresenceEstimationQuasiIdValues.html">AnalyzeDataSourceRiskDetails.Types.DeltaPresenceEstimationResult.Types.DeltaPresenceEstimationQuasiIdValues</a></h4>
+      <section><p>A tuple of values for the quasi-identifier columns.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.Types.KAnonymityResult.html">AnalyzeDataSourceRiskDetails.Types.KAnonymityResult</a></h4>
       <section><p>Result of the k-anonymity computation.</p>
 </section>
@@ -191,7 +213,8 @@ This can be used on
 data of type: number, long, string, timestamp.
 If the bound <code>Value</code> type differs from the type of data being transformed, we
 will first attempt converting the type of the data to be transformed to match
-the type of the bound before comparing.</p>
+the type of the bound before comparing.
+See <a href="https://cloud.google.com/dlp/docs/concepts-bucketing">https://cloud.google.com/dlp/docs/concepts-bucketing</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.BucketingConfig.Types.html">BucketingConfig.Types</a></h4>
       <section><p>Container for nested types declared in the BucketingConfig message type.</p>
@@ -284,7 +307,7 @@ For a given crypto key and context, the same identifier will be
 replaced with the same surrogate.
 Identifiers must be at least two characters long.
 In the case that the identifier is the empty string, it will be skipped.
-See <a href="/dlp/docs/pseudonymization">Pseudonymization</a> for example usage.</p>
+See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.google.com/dlp/docs/pseudonymization</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CryptoReplaceFfxFpeConfig.Types.html">CryptoReplaceFfxFpeConfig.Types</a></h4>
       <section><p>Container for nested types declared in the CryptoReplaceFfxFpeConfig message type.</p>
@@ -297,7 +320,7 @@ sensitive information configurable to the data in question.</p>
       <section><p>Container for nested types declared in the CustomInfoType message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CustomInfoType.Types.DetectionRule.html">CustomInfoType.Types.DetectionRule</a></h4>
-      <section><p>Rule for modifying a custom info type to alter behavior under certain
+      <section><p>Rule for modifying a CustomInfoType to alter behavior under certain
 circumstances, depending on the specific details of the rule. Not supported
 for the <code>surrogate_type</code> custom info type.</p>
 </section>
@@ -305,7 +328,7 @@ for the <code>surrogate_type</code> custom info type.</p>
       <section><p>Container for nested types declared in the DetectionRule message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CustomInfoType.Types.DetectionRule.Types.HotwordRule.html">CustomInfoType.Types.DetectionRule.Types.HotwordRule</a></h4>
-      <section><p>Detection rule that adjusts the likelihood of findings within a certain
+      <section><p>The rule that adjusts the likelihood of findings within a certain
 proximity of hotwords.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CustomInfoType.Types.DetectionRule.Types.LikelihoodAdjustment.html">CustomInfoType.Types.DetectionRule.Types.LikelihoodAdjustment</a></h4>
@@ -351,7 +374,7 @@ such as
 These types of transformations are
 those that perform pseudonymization, thereby producing a &quot;surrogate&quot; as
 output. This should be used in conjunction with a field on the
-transformation such as <code>surrogate_info_type</code>. This custom info type does
+transformation such as <code>surrogate_info_type</code>. This CustomInfoType does
 not support the use of <code>detection_rules</code>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DatastoreKey.html">DatastoreKey</a></h4>
@@ -362,7 +385,8 @@ not support the use of <code>detection_rules</code>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DateShiftConfig.html">DateShiftConfig</a></h4>
       <section><p>Shifts dates by random number of days, with option to be consistent for the
-same context.</p>
+same context. See <a href="https://cloud.google.com/dlp/docs/concepts-date-shifting">https://cloud.google.com/dlp/docs/concepts-date-shifting</a>
+to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DateTime.html">DateTime</a></h4>
       <section><p>Message for a date time object.</p>
@@ -382,7 +406,8 @@ same context.</p>
       <section><p>Results of de-identifying a ContentItem.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DeidentifyTemplate.html">DeidentifyTemplate</a></h4>
-      <section><p>The DeidentifyTemplates contains instructions on how to deidentify content.</p>
+      <section><p>The DeidentifyTemplates contains instructions on how to deidentify content.
+See <a href="https://cloud.google.com/dlp/docs/concepts-templates">https://cloud.google.com/dlp/docs/concepts-templates</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DeidentifyTemplateNameOneof.html">DeidentifyTemplateNameOneof</a></h4>
       <section><p>Resource name which will contain one of a choice of resource names.</p>
@@ -415,6 +440,8 @@ privacy-sensitive data in user-supplied, unstructured data streams, like text
 blocks or images.
 The service also includes methods for sensitive data redaction and
 scheduling of data scans on Google Cloud Platform based data sets.</p>
+<p>To learn more about concepts and find how-to guides see
+<a href="https://cloud.google.com/dlp/docs/">https://cloud.google.com/dlp/docs/</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DlpService.DlpServiceBase.html">DlpService.DlpServiceBase</a></h4>
       <section><p>Base class for server-side implementations of DlpService</p>
@@ -467,6 +494,7 @@ all values that are within this bucket will be replaced with &quot;10-20&quot;.<
 <p>If the bound Value type differs from the type of data
 being transformed, we will first attempt converting the type of the data to
 be transformed to match the type of the bound before comparing.</p>
+<p>See <a href="https://cloud.google.com/dlp/docs/concepts-bucketing">https://cloud.google.com/dlp/docs/concepts-bucketing</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.GetDeidentifyTemplateRequest.html">GetDeidentifyTemplateRequest</a></h4>
       <section><p>Request message for GetDeidentifyTemplate.</p>
@@ -546,13 +574,15 @@ running DlpJob.</p>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.InspectTemplate.html">InspectTemplate</a></h4>
       <section><p>The inspectTemplate contains a configuration (set of types of sensitive data
 to be detected) to be used anywhere you otherwise would normally specify
-InspectConfig.</p>
+InspectConfig. See <a href="https://cloud.google.com/dlp/docs/concepts-templates">https://cloud.google.com/dlp/docs/concepts-templates</a>
+to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.InspectTemplateNameOneof.html">InspectTemplateNameOneof</a></h4>
       <section><p>Resource name which will contain one of a choice of resource names.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.JobTrigger.html">JobTrigger</a></h4>
-      <section><p>Contains a configuration to make dlp api calls on a repeating basis.</p>
+      <section><p>Contains a configuration to make dlp api calls on a repeating basis.
+See <a href="https://cloud.google.com/dlp/docs/concepts-job-triggers">https://cloud.google.com/dlp/docs/concepts-job-triggers</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.JobTrigger.Types.html">JobTrigger.Types</a></h4>
       <section><p>Container for nested types declared in the JobTrigger message type.</p>
@@ -648,6 +678,12 @@ project ID and namespace ID.</p>
       <section><p>Compute numerical stats over an individual column, including
 number of distinct values and value count distribution.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.PrivacyMetric.Types.DeltaPresenceEstimationConfig.html">PrivacyMetric.Types.DeltaPresenceEstimationConfig</a></h4>
+      <section><p>δ-presence metric, used to estimate how likely it is for an attacker to
+figure out that one given individual appears in a de-identified dataset.
+Similarly to the k-map metric, we cannot compute δ-presence exactly without
+knowing the attack dataset, so we use a statistical model instead.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.PrivacyMetric.Types.KAnonymityConfig.html">PrivacyMetric.Types.KAnonymityConfig</a></h4>
       <section><p>k-anonymity metric, used for analysis of reidentification risk.</p>
 </section>
@@ -696,6 +732,9 @@ min, max, and quantiles.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.ProjectJobTriggerName.html">ProjectJobTriggerName</a></h4>
       <section><p>Resource name for the &apos;project_job_trigger&apos; resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.QuasiId.html">QuasiId</a></h4>
+      <section><p>A column with a semantic tag attached.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.QuoteInfo.html">QuoteInfo</a></h4>
       <section><p>Message for infoType-dependent details parsed from quote.</p>
@@ -758,8 +797,8 @@ transforming PHONE_NUMBER, and input &apos;My phone number is 206-555-0123&apos;
 output would be &apos;My phone number is &apos;.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.RedactImageRequest.html">RedactImageRequest</a></h4>
-      <section><p>Request to search for potentially sensitive info in a list of items
-and replace it with a default or provided content.</p>
+      <section><p>Request to search for potentially sensitive info in an image and redact it
+by covering it with a colored rectangle.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.RedactImageRequest.Types.html">RedactImageRequest.Types</a></h4>
       <section><p>Container for nested types declared in the RedactImageRequest message type.</p>
@@ -783,10 +822,27 @@ and replace it with a default or provided content.</p>
       <section><p>Replace each matching finding with the name of the info_type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.RiskAnalysisJobConfig.html">RiskAnalysisJobConfig</a></h4>
-      <section><p>Configuration for a risk analysis job.</p>
+      <section><p>Configuration for a risk analysis job. See
+<a href="https://cloud.google.com/dlp/docs/concepts-risk-analysis">https://cloud.google.com/dlp/docs/concepts-risk-analysis</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.Schedule.html">Schedule</a></h4>
       <section><p>Schedule for triggeredJobs.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.StatisticalTable.html">StatisticalTable</a></h4>
+      <section><p>An auxiliary table containing statistical information on the relative
+frequency of different quasi-identifiers values. It has one or several
+quasi-identifiers columns, and one column that indicates the relative
+frequency of each quasi-identifier tuple.
+If a tuple is present in the data but not in the auxiliary table, the
+corresponding relative frequency is assumed to be zero (and thus, the
+tuple is highly reidentifiable).</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.StatisticalTable.Types.html">StatisticalTable.Types</a></h4>
+      <section><p>Container for nested types declared in the StatisticalTable message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.StatisticalTable.Types.QuasiIdentifierField.html">StatisticalTable.Types.QuasiIdentifierField</a></h4>
+      <section><p>A quasi-identifier column has a custom_tag, used to know which column
+in the data corresponds to which column in the statistical model.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.StorageConfig.html">StorageConfig</a></h4>
       <section><p>Shared message indicating Cloud storage type.</p>
@@ -799,7 +855,9 @@ and replace it with a default or provided content.</p>
 Currently only supported when inspecting Google Cloud Storage and BigQuery.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.Table.html">Table</a></h4>
-      <section><p>Structured content to inspect. Up to 50,000 <code>Value</code>s per request allowed.</p>
+      <section><p>Structured content to inspect. Up to 50,000 <code>Value</code>s per request allowed.
+See <a href="https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table">https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table</a> to
+learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.Table.Types.html">Table.Types</a></h4>
       <section><p>Container for nested types declared in the Table message type.</p>
@@ -980,6 +1038,9 @@ based on the number of elements they contain which imply a match.</p>
       <section><p>Enum of possible cases for the &quot;type&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.PrivacyMetric.Types.KMapEstimationConfig.Types.TaggedField.TagOneofCase.html">PrivacyMetric.Types.KMapEstimationConfig.Types.TaggedField.TagOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;tag&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.QuasiId.TagOneofCase.html">QuasiId.TagOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;tag&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.QuoteInfo.ParsedQuoteOneofCase.html">QuoteInfo.ParsedQuoteOneofCase</a></h4>
