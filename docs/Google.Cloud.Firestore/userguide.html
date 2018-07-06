@@ -243,7 +243,188 @@ long newValue = await db.RunTransactionAsync(async transaction =&gt;
 });
 // Use the value we&#39;ve just written in application code
 Console.WriteLine(newValue);
-</code></pre></article>
+</code></pre><h2 id="listening-for-changes">Listening for changes</h2>
+<p>Firestore allows you to listen for changes to either a single
+document or the results of a query. You provide a callback which is
+executed each time a change occurs.</p>
+<p>First we&#39;ll see an example of each, then go into details.</p>
+<h3 id="listening-for-changes-on-a-document">Listening for changes on a document</h3>
+<p>This example starts listening for changes on a document that doesn&#39;t
+exist yet, then creates the document, updates it, deletes it, and recreates it.
+Each of these changes is logged by the callback.
+After stopping the listening operation, the document is updated one
+final time - which doesn&#39;t produce any output.</p>
+<pre><code class="lang-cs">FirestoreDb db = FirestoreDb.Create(projectId);
+// Create a random document ID. The document doesn&#39;t exist yet.
+DocumentReference doc = db.Collection(collectionId).Document();            
+
+FirestoreChangeListener listener = doc.Listen(snapshot =&gt;
+{
+    Console.WriteLine($&quot;Callback received document snapshot&quot;);
+    Console.WriteLine($&quot;Document exists? {snapshot.Exists}&quot;);
+    if (snapshot.Exists)
+    {
+        Console.WriteLine($&quot;Value of &#39;value&#39; field: {snapshot.GetValue&lt;int?&gt;(&quot;value&quot;)}&quot;);
+    }
+    Console.WriteLine();
+});
+
+Console.WriteLine(&quot;Creating document&quot;);
+await doc.CreateAsync(new { value = 10 });
+await Task.Delay(1000);
+
+Console.WriteLine($&quot;Updating document&quot;);
+await doc.SetAsync(new { value = 20 });
+await Task.Delay(1000);
+
+Console.WriteLine($&quot;Deleting document&quot;);
+await doc.DeleteAsync();
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Creating document again&quot;);
+await doc.CreateAsync(new { value = 30 });
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Stopping the listener&quot;);
+await listener.StopAsync();
+
+Console.WriteLine($&quot;Updating document (no output expected)&quot;);
+await doc.SetAsync(new { value = 40 });
+await Task.Delay(1000);
+</code></pre><h3 id="listening-for-changes-in-a-query">Listening for changes in a query</h3>
+<p>This example listens for changes in a query of &quot;documents with a
+score greater than 5, in descending score order&quot;. Each document has
+two fields: &quot;Name&quot; and &quot;Score&quot;.</p>
+<p>When the listener is set up, the test makes the following data changes:</p>
+<ul>
+<li>Add a document for Sophie, with score 7</li>
+<li>Add a document for James, with score 10</li>
+<li>Update the score for Sophie to 11 (changing its order within the query)</li>
+<li>Update the score for Sophie to 12 (no change in order, but the document is updated)</li>
+<li>Update the score for James to 4 (no longer matches the query)</li>
+<li>Delete the document for Sophie</li>
+</ul>
+<pre><code class="lang-cs">FirestoreDb db = FirestoreDb.Create(projectId);
+CollectionReference collection = db.Collection(collectionId);
+Query query = collection.WhereGreaterThan(&quot;Score&quot;, 5).OrderByDescending(&quot;Score&quot;);
+
+FirestoreChangeListener listener = query.Listen(snapshot =&gt;
+{
+    Console.WriteLine($&quot;Callback received query snapshot&quot;);
+    Console.WriteLine($&quot;Count: {snapshot.Count}&quot;);
+    Console.WriteLine(&quot;Changes:&quot;);
+    foreach (DocumentChange change in snapshot.Changes)
+    {
+        DocumentSnapshot document = change.Document;
+        Console.WriteLine($&quot;{document.Reference.Id}: ChangeType={change.ChangeType}; OldIndex={change.OldIndex}; NewIndex={change.NewIndex})&quot;);
+        if (document.Exists)
+        {
+            string name = document.GetValue&lt;string&gt;(&quot;Name&quot;);
+            int score = document.GetValue&lt;int&gt;(&quot;Score&quot;);
+            Console.WriteLine($&quot;  Document data: Name={name}; Score={score}&quot;);
+        }
+    }
+    Console.WriteLine();
+});
+
+Console.WriteLine(&quot;Creating document for Sophie (Score = 7)&quot;);
+DocumentReference doc1Ref = await collection.AddAsync(new { Name = &quot;Sophie&quot;, Score = 7 });
+Console.WriteLine($&quot;Sophie document ID: {doc1Ref.Id}&quot;);
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Creating document for James (Score = 10)&quot;);
+DocumentReference doc2Ref = await collection.AddAsync(new { Name = &quot;James&quot;, Score = 10 });
+Console.WriteLine($&quot;James document ID: {doc2Ref.Id}&quot;);
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Modifying document for Sophie (set Score = 11, higher than score for James)&quot;);
+await doc1Ref.UpdateAsync(&quot;Score&quot;, 11);
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Modifying document for Sophie (set Score = 12, no change in position)&quot;);
+await doc1Ref.UpdateAsync(&quot;Score&quot;, 12);
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Modifying document for James (set Score = 4, below threshold for query)&quot;);
+await doc2Ref.UpdateAsync(&quot;Score&quot;, 4);
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Deleting document for Sophie&quot;);
+await doc1Ref.DeleteAsync();
+await Task.Delay(1000);
+
+Console.WriteLine(&quot;Stopping listener&quot;);
+await listener.StopAsync();
+</code></pre><h3 id="listener-threading">Listener threading</h3>
+<p>Each listener you start runs independently. It effectively loops
+through three steps:</p>
+<ul>
+<li>Wait for the server to provide changes</li>
+<li>Update its internal model</li>
+<li>Report any changes via the callback</li>
+</ul>
+<p>The listener waits for the callback to complete before continuing.
+The callbacks can be provided as either a synchronous action or an
+asynchronous function that returns a task. For asynchronous
+callbacks, the listener waits for the returned task to complete.
+This allows you to use async/await within a callback without
+worrying about the callback executing multiple times concurrently
+for a single listener.</p>
+<p>Each listener acts independently without any synchronization, so if
+you use the same callback for multiple listeners, the callback could
+be called multiple times concurrently, one for each listener.</p>
+<p>Although each listener &quot;logically&quot; operates in a single-threaded
+fashion, it uses asynchronous operations and so the actual thread
+used can change between callbacks. We strongly recommend against
+using thread-local storage; ideally, make no assumptions about the
+thread that will run your callback.</p>
+<h3 id="stopping-listeners">Stopping listeners</h3>
+<p>When you start listening for changes, the method returns a
+<code>FirestoreChangeListener</code>. This has two important members:</p>
+<ul>
+<li>The <code>ListenerTask</code> property returns a task representing the
+ongoing listen operation.</li>
+<li>The <code>StopAsync</code> method allows you to stop the listener. For
+convenience, this returns the same task as <code>ListenerTask</code>.</li>
+</ul>
+<p>The <code>StopAsync</code> method will allow any currently executing callback
+to complete before the listener shuts down. However, both the
+original <code>Listen</code> calls and the <code>StopAsync</code> methods accept an optional
+<code>CancellationToken</code>. If this cancellation token is cancelled, not
+only will the listener stop, but the cancellation token passed to
+any asynchronous callback will also be cancelled. This allows you to
+perform asynchronous operations within the callback but still be
+able to cancel the whole listener quickly.</p>
+<p>In the &quot;graceful&quot; shutdown case, nothing is cancelled: you call
+<code>StopAsync</code>, any current callback completes, and then the listener
+task completes. If this is all you need, you never need to provide a
+cancellation token to the methods to start or stop listening.
+The cancellation token functionality has been provided for two
+specific scenarios:</p>
+<ul>
+<li><p>The listen operation is being executed as part of another
+cancellable operation. In this case you&#39;d provide the cancellation
+token when you start listening.</p>
+</li>
+<li><p>The listen operation is long-running, but you need to shut it down
+as part of shutting down some larger system (such as a web
+server). Typically this shutdown procedure provides a cancellation
+token: if the graceful shutdown doesn&#39;t complete within a certain
+time, the cancellation token is cancelled. The signature of
+<code>StopAsync</code> allows you to integrate Firestore into this pattern
+easily.</p>
+</li>
+</ul>
+<p>The final status of the listener task will be:</p>
+<ul>
+<li><code>RanToCompletion</code> if shutdown completed gracefully.</li>
+<li><code>Faulted</code> if either the listener encountered a permanent error, or
+the callback threw an exception.</li>
+<li><code>Canceled</code> if shutdown was either caused by the &quot;start&quot; cancellation
+token being canceled, or if the &quot;stop&quot; cancellation token was
+canceled.</li>
+</ul>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
