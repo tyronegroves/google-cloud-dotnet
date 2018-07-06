@@ -1,0 +1,1251 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class CloudTasks.CloudTasksBase
+   | Google.Cloud.Tasks.V2Beta2 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class CloudTasks.CloudTasksBase
+   | Google.Cloud.Tasks.V2Beta2 ">
+    <meta name="generator" content="docfx 2.32.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase">
+  
+  
+  <h1 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase" class="text-break">Class CloudTasks.CloudTasksBase
+  </h1>
+  <div class="markdown level0 summary"><p>Base class for server-side implementations of CloudTasks</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">CloudTasks.CloudTasksBase</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Tasks.V2Beta2.html">Google.Cloud.Tasks.V2Beta2</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.Tasks.V2Beta2.dll</h6>
+  <h5 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class CloudTasksBase</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_AcknowledgeTask_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.AcknowledgeTask*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_AcknowledgeTask_Google_Cloud_Tasks_V2Beta2_AcknowledgeTaskRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.AcknowledgeTask(Google.Cloud.Tasks.V2Beta2.AcknowledgeTaskRequest,Grpc.Core.ServerCallContext)">AcknowledgeTask(AcknowledgeTaskRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Acknowledges a pull task.</p>
+<p>The worker, that is, the entity that
+[leased][google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks] this task must call this method
+to indicate that the work associated with the task has finished.</p>
+<p>The worker must acknowledge a task within the
+[lease_duration][google.cloud.tasks.v2beta2.LeaseTasksRequest.lease_duration] or the lease
+will expire and the task will become available to be leased
+again. After the task is acknowledged, it will not be returned
+by a later [LeaseTasks][google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks],
+[GetTask][google.cloud.tasks.v2beta2.CloudTasks.GetTask], or
+[ListTasks][google.cloud.tasks.v2beta2.CloudTasks.ListTasks].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; AcknowledgeTask(AcknowledgeTaskRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.AcknowledgeTaskRequest.html">AcknowledgeTaskRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_CancelLease_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.CancelLease*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_CancelLease_Google_Cloud_Tasks_V2Beta2_CancelLeaseRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.CancelLease(Google.Cloud.Tasks.V2Beta2.CancelLeaseRequest,Grpc.Core.ServerCallContext)">CancelLease(CancelLeaseRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Cancel a pull task&apos;s lease.</p>
+<p>The worker can use this method to cancel a task&apos;s lease by
+setting its [schedule_time][google.cloud.tasks.v2beta2.Task.schedule_time] to now. This will
+make the task available to be leased to the next caller of
+[LeaseTasks][google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Task&gt; CancelLease(CancelLeaseRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.CancelLeaseRequest.html">CancelLeaseRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Task.html">Task</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_CreateQueue_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.CreateQueue*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_CreateQueue_Google_Cloud_Tasks_V2Beta2_CreateQueueRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.CreateQueue(Google.Cloud.Tasks.V2Beta2.CreateQueueRequest,Grpc.Core.ServerCallContext)">CreateQueue(CreateQueueRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Creates a queue.</p>
+<p>Queues created with this method allow tasks to live for a maximum of 31
+days. After a task is 31 days old, the task will be deleted regardless of whether
+it was dispatched or not.</p>
+<p>WARNING: Using this method may have unintended side effects if you are
+using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
+Read
+<a href="/cloud-tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
+before using this method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Queue&gt; CreateQueue(CreateQueueRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.CreateQueueRequest.html">CreateQueueRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Queue.html">Queue</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_CreateTask_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.CreateTask*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_CreateTask_Google_Cloud_Tasks_V2Beta2_CreateTaskRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.CreateTask(Google.Cloud.Tasks.V2Beta2.CreateTaskRequest,Grpc.Core.ServerCallContext)">CreateTask(CreateTaskRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Creates a task and adds it to a queue.</p>
+<p>Tasks cannot be updated after creation; there is no UpdateTask command.</p>
+<ul>
+<li>For <a href="google.cloud.tasks.v2beta2.AppEngineHttpTarget">App Engine queues</a>,
+the maximum task size is 100KB.</li>
+<li>For <a href="google.cloud.tasks.v2beta2.PullTarget">pull queues</a>, this
+the maximum task size is 1MB.</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Task&gt; CreateTask(CreateTaskRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.CreateTaskRequest.html">CreateTaskRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Task.html">Task</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_DeleteQueue_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.DeleteQueue*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_DeleteQueue_Google_Cloud_Tasks_V2Beta2_DeleteQueueRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.DeleteQueue(Google.Cloud.Tasks.V2Beta2.DeleteQueueRequest,Grpc.Core.ServerCallContext)">DeleteQueue(DeleteQueueRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Deletes a queue.</p>
+<p>This command will delete the queue even if it has tasks in it.</p>
+<p>Note: If you delete a queue, a queue with the same name can&apos;t be created
+for 7 days.</p>
+<p>WARNING: Using this method may have unintended side effects if you are
+using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
+Read
+<a href="/cloud-tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
+before using this method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; DeleteQueue(DeleteQueueRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.DeleteQueueRequest.html">DeleteQueueRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_DeleteTask_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.DeleteTask*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_DeleteTask_Google_Cloud_Tasks_V2Beta2_DeleteTaskRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.DeleteTask(Google.Cloud.Tasks.V2Beta2.DeleteTaskRequest,Grpc.Core.ServerCallContext)">DeleteTask(DeleteTaskRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Deletes a task.</p>
+<p>A task can be deleted if it is scheduled or dispatched. A task
+cannot be deleted if it has completed successfully or permanently
+failed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; DeleteTask(DeleteTaskRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.DeleteTaskRequest.html">DeleteTaskRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_GetIamPolicy_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.GetIamPolicy*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_GetIamPolicy_Google_Cloud_Iam_V1_GetIamPolicyRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.GetIamPolicy(Google.Cloud.Iam.V1.GetIamPolicyRequest,Grpc.Core.ServerCallContext)">GetIamPolicy(GetIamPolicyRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Gets the access control policy for a [Queue][google.cloud.tasks.v2beta2.Queue].
+Returns an empty policy if the resource exists and does not have a policy
+set.</p>
+<p>Authorization requires the following <a href="/iam">Google IAM</a> permission on the
+specified resource parent:</p>
+<ul>
+<li><code>cloudtasks.queues.getIamPolicy</code></li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Policy&gt; GetIamPolicy(GetIamPolicyRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Iam.V1.GetIamPolicyRequest.html">GetIamPolicyRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Iam.V1.Policy.html">Policy</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_GetQueue_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.GetQueue*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_GetQueue_Google_Cloud_Tasks_V2Beta2_GetQueueRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.GetQueue(Google.Cloud.Tasks.V2Beta2.GetQueueRequest,Grpc.Core.ServerCallContext)">GetQueue(GetQueueRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Gets a queue.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Queue&gt; GetQueue(GetQueueRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.GetQueueRequest.html">GetQueueRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Queue.html">Queue</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_GetTask_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.GetTask*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_GetTask_Google_Cloud_Tasks_V2Beta2_GetTaskRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.GetTask(Google.Cloud.Tasks.V2Beta2.GetTaskRequest,Grpc.Core.ServerCallContext)">GetTask(GetTaskRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Gets a task.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Task&gt; GetTask(GetTaskRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.GetTaskRequest.html">GetTaskRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Task.html">Task</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_LeaseTasks_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.LeaseTasks*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_LeaseTasks_Google_Cloud_Tasks_V2Beta2_LeaseTasksRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.LeaseTasks(Google.Cloud.Tasks.V2Beta2.LeaseTasksRequest,Grpc.Core.ServerCallContext)">LeaseTasks(LeaseTasksRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Leases tasks from a pull queue for
+[lease_duration][google.cloud.tasks.v2beta2.LeaseTasksRequest.lease_duration].</p>
+<p>This method is invoked by the worker to obtain a lease. The
+worker must acknowledge the task via
+[AcknowledgeTask][google.cloud.tasks.v2beta2.CloudTasks.AcknowledgeTask] after they have
+performed the work associated with the task.</p>
+<p>The [payload][google.cloud.tasks.v2beta2.PullMessage.payload] is intended to store data that
+the worker needs to perform the work associated with the task. To
+return the payloads in the [response][google.cloud.tasks.v2beta2.LeaseTasksResponse], set
+[response_view][google.cloud.tasks.v2beta2.LeaseTasksRequest.response_view] to
+[FULL][google.cloud.tasks.v2beta2.Task.View.FULL].</p>
+<p>A maximum of 10 qps of [LeaseTasks][google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks]
+requests are allowed per
+queue. [RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]
+is returned when this limit is
+exceeded. [RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]
+is also returned when
+[max_tasks_dispatched_per_second][google.cloud.tasks.v2beta2.RateLimits.max_tasks_dispatched_per_second]
+is exceeded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LeaseTasksResponse&gt; LeaseTasks(LeaseTasksRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.LeaseTasksRequest.html">LeaseTasksRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.LeaseTasksResponse.html">LeaseTasksResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_ListQueues_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.ListQueues*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_ListQueues_Google_Cloud_Tasks_V2Beta2_ListQueuesRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.ListQueues(Google.Cloud.Tasks.V2Beta2.ListQueuesRequest,Grpc.Core.ServerCallContext)">ListQueues(ListQueuesRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists queues.</p>
+<p>Queues are returned in lexicographical order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListQueuesResponse&gt; ListQueues(ListQueuesRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.ListQueuesRequest.html">ListQueuesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.ListQueuesResponse.html">ListQueuesResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_ListTasks_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.ListTasks*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_ListTasks_Google_Cloud_Tasks_V2Beta2_ListTasksRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.ListTasks(Google.Cloud.Tasks.V2Beta2.ListTasksRequest,Grpc.Core.ServerCallContext)">ListTasks(ListTasksRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists the tasks in a queue.</p>
+<p>By default, only the [BASIC][google.cloud.tasks.v2beta2.Task.View.BASIC] view is retrieved
+due to performance considerations;
+[response_view][google.cloud.tasks.v2beta2.ListTasksRequest.response_view] controls the
+subset of information which is returned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListTasksResponse&gt; ListTasks(ListTasksRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.ListTasksRequest.html">ListTasksRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.ListTasksResponse.html">ListTasksResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_PauseQueue_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.PauseQueue*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_PauseQueue_Google_Cloud_Tasks_V2Beta2_PauseQueueRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.PauseQueue(Google.Cloud.Tasks.V2Beta2.PauseQueueRequest,Grpc.Core.ServerCallContext)">PauseQueue(PauseQueueRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Pauses the queue.</p>
+<p>If a queue is paused then the system will stop dispatching tasks
+until the queue is resumed via
+[ResumeQueue][google.cloud.tasks.v2beta2.CloudTasks.ResumeQueue]. Tasks can still be added
+when the queue is paused. A queue is paused if its
+[state][google.cloud.tasks.v2beta2.Queue.state] is [PAUSED][google.cloud.tasks.v2beta2.Queue.State.PAUSED].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Queue&gt; PauseQueue(PauseQueueRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.PauseQueueRequest.html">PauseQueueRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Queue.html">Queue</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_PurgeQueue_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.PurgeQueue*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_PurgeQueue_Google_Cloud_Tasks_V2Beta2_PurgeQueueRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.PurgeQueue(Google.Cloud.Tasks.V2Beta2.PurgeQueueRequest,Grpc.Core.ServerCallContext)">PurgeQueue(PurgeQueueRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Purges a queue by deleting all of its tasks.</p>
+<p>All tasks created before this method is called are permanently deleted.</p>
+<p>Purge operations can take up to one minute to take effect. Tasks
+might be dispatched before the purge takes effect. A purge is irreversible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Queue&gt; PurgeQueue(PurgeQueueRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.PurgeQueueRequest.html">PurgeQueueRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Queue.html">Queue</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_RenewLease_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.RenewLease*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_RenewLease_Google_Cloud_Tasks_V2Beta2_RenewLeaseRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.RenewLease(Google.Cloud.Tasks.V2Beta2.RenewLeaseRequest,Grpc.Core.ServerCallContext)">RenewLease(RenewLeaseRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Renew the current lease of a pull task.</p>
+<p>The worker can use this method to extend the lease by a new
+duration, starting from now. The new task lease will be
+returned in the task&apos;s [schedule_time][google.cloud.tasks.v2beta2.Task.schedule_time].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Task&gt; RenewLease(RenewLeaseRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.RenewLeaseRequest.html">RenewLeaseRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Task.html">Task</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_ResumeQueue_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.ResumeQueue*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_ResumeQueue_Google_Cloud_Tasks_V2Beta2_ResumeQueueRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.ResumeQueue(Google.Cloud.Tasks.V2Beta2.ResumeQueueRequest,Grpc.Core.ServerCallContext)">ResumeQueue(ResumeQueueRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Resume a queue.</p>
+<p>This method resumes a queue after it has been
+[PAUSED][google.cloud.tasks.v2beta2.Queue.State.PAUSED] or
+[DISABLED][google.cloud.tasks.v2beta2.Queue.State.DISABLED]. The state of a queue is stored
+in the queue&apos;s [state][google.cloud.tasks.v2beta2.Queue.state]; after calling this method it
+will be set to [RUNNING][google.cloud.tasks.v2beta2.Queue.State.RUNNING].</p>
+<p>WARNING: Resuming many high-QPS queues at the same time can
+lead to target overloading. If you are resuming high-QPS
+queues, follow the 500/50/5 pattern described in
+<a href="/cloud-tasks/pdfs/managing-cloud-tasks-scaling-risks-2017-06-05.pdf">Managing Cloud Tasks Scaling Risks</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Queue&gt; ResumeQueue(ResumeQueueRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.ResumeQueueRequest.html">ResumeQueueRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Queue.html">Queue</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_RunTask_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.RunTask*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_RunTask_Google_Cloud_Tasks_V2Beta2_RunTaskRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.RunTask(Google.Cloud.Tasks.V2Beta2.RunTaskRequest,Grpc.Core.ServerCallContext)">RunTask(RunTaskRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Forces a task to run now.</p>
+<p>When this method is called, Cloud Tasks will dispatch the task, even if
+the task is already running, the queue has reached its [RateLimits][google.cloud.tasks.v2beta2.RateLimits] or
+is [PAUSED][google.cloud.tasks.v2beta2.Queue.State.PAUSED].</p>
+<p>This command is meant to be used for manual debugging. For
+example, [RunTask][google.cloud.tasks.v2beta2.CloudTasks.RunTask] can be used to retry a failed
+task after a fix has been made or to manually force a task to be
+dispatched now.</p>
+<p>The dispatched task is returned. That is, the task that is returned
+contains the [status][google.cloud.tasks.v2beta2.Task.status] after the task is dispatched but
+before the task is received by its target.</p>
+<p>If Cloud Tasks receives a successful response from the task&apos;s
+target, then the task will be deleted; otherwise the task&apos;s
+[schedule_time][google.cloud.tasks.v2beta2.Task.schedule_time] will be reset to the time that
+[RunTask][google.cloud.tasks.v2beta2.CloudTasks.RunTask] was called plus the retry delay specified
+in the queue&apos;s [RetryConfig][google.cloud.tasks.v2beta2.RetryConfig].</p>
+<p>[RunTask][google.cloud.tasks.v2beta2.CloudTasks.RunTask] returns
+[NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a
+task that has already succeeded or permanently failed.</p>
+<p>[RunTask][google.cloud.tasks.v2beta2.CloudTasks.RunTask] cannot be called on a
+[pull task][google.cloud.tasks.v2beta2.PullMessage].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Task&gt; RunTask(RunTaskRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.RunTaskRequest.html">RunTaskRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Task.html">Task</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_SetIamPolicy_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.SetIamPolicy*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_SetIamPolicy_Google_Cloud_Iam_V1_SetIamPolicyRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.SetIamPolicy(Google.Cloud.Iam.V1.SetIamPolicyRequest,Grpc.Core.ServerCallContext)">SetIamPolicy(SetIamPolicyRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Sets the access control policy for a [Queue][google.cloud.tasks.v2beta2.Queue]. Replaces any existing
+policy.</p>
+<p>Note: The Cloud Console does not check queue-level IAM permissions yet.
+Project-level permissions are required to use the Cloud Console.</p>
+<p>Authorization requires the following <a href="/iam">Google IAM</a> permission on the
+specified resource parent:</p>
+<ul>
+<li><code>cloudtasks.queues.setIamPolicy</code></li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Policy&gt; SetIamPolicy(SetIamPolicyRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Iam.V1.SetIamPolicyRequest.html">SetIamPolicyRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Iam.V1.Policy.html">Policy</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_TestIamPermissions_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.TestIamPermissions*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_TestIamPermissions_Google_Cloud_Iam_V1_TestIamPermissionsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.TestIamPermissions(Google.Cloud.Iam.V1.TestIamPermissionsRequest,Grpc.Core.ServerCallContext)">TestIamPermissions(TestIamPermissionsRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Returns permissions that a caller has on a [Queue][google.cloud.tasks.v2beta2.Queue].
+If the resource does not exist, this will return an empty set of
+permissions, not a [NOT_FOUND][google.rpc.Code.NOT_FOUND] error.</p>
+<p>Note: This operation is designed to be used for building permission-aware
+UIs and command-line tools, not for authorization checking. This operation
+may &quot;fail open&quot; without warning.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TestIamPermissionsResponse&gt; TestIamPermissions(TestIamPermissionsRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Iam.V1.TestIamPermissionsRequest.html">TestIamPermissionsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Iam.V1.TestIamPermissionsResponse.html">TestIamPermissionsResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_UpdateQueue_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.UpdateQueue*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta2_CloudTasks_CloudTasksBase_UpdateQueue_Google_Cloud_Tasks_V2Beta2_UpdateQueueRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Tasks.V2Beta2.CloudTasks.CloudTasksBase.UpdateQueue(Google.Cloud.Tasks.V2Beta2.UpdateQueueRequest,Grpc.Core.ServerCallContext)">UpdateQueue(UpdateQueueRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Updates a queue.</p>
+<p>This method creates the queue if it does not exist and updates
+the queue if it does exist.</p>
+<p>Queues created with this method allow tasks to live for a maximum of 31
+days. After a task is 31 days old, the task will be deleted regardless of whether
+it was dispatched or not.</p>
+<p>WARNING: Using this method may have unintended side effects if you are
+using an App Engine <code>queue.yaml</code> or <code>queue.xml</code> file to manage your queues.
+Read
+<a href="/cloud-tasks/docs/queue-yaml">Overview of Queue Management and queue.yaml</a>
+before using this method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Queue&gt; UpdateQueue(UpdateQueueRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta2.UpdateQueueRequest.html">UpdateQueueRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">Grpc.Core.ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta2.Queue.html">Queue</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
