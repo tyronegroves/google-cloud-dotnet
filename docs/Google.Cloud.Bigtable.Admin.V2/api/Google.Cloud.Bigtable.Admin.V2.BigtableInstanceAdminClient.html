@@ -307,7 +307,7 @@
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminSettings)">Create(ServiceEndpoint, BigtableInstanceAdminSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.html">BigtableInstanceAdminClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -354,6 +354,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Bigtable.Admin.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+BigtableInstanceAdminClient client = BigtableInstanceAdminClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Bigtable.Admin.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    BigtableInstanceAdminClient.DefaultEndpoint.Host, BigtableInstanceAdminClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+BigtableInstanceAdminClient client = BigtableInstanceAdminClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_Create_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.Create*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_Create_Grpc_Core_Channel_Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.Create(Grpc.Core.Channel,Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminSettings)">Create(Channel, BigtableInstanceAdminSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.html">BigtableInstanceAdminClient</a> which uses the specified channel for remote operations.</p>
@@ -405,11 +427,7 @@ necessary.</p>
   </table>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfile_Google_Cloud_Bigtable_Admin_V2_CreateAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfile(Google.Cloud.Bigtable.Admin.V2.CreateAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">CreateAppProfile(CreateAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Creates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Creates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -473,11 +491,7 @@ AppProfile response = bigtableInstanceAdminClient.CreateAppProfile(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfile_Google_Cloud_Bigtable_Admin_V2_InstanceName_System_String_Google_Cloud_Bigtable_Admin_V2_AppProfile_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfile(Google.Cloud.Bigtable.Admin.V2.InstanceName,System.String,Google.Cloud.Bigtable.Admin.V2.AppProfile,Google.Api.Gax.Grpc.CallSettings)">CreateAppProfile(InstanceName, String, AppProfile, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Creates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Creates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -555,11 +569,7 @@ AppProfile response = bigtableInstanceAdminClient.CreateAppProfile(parent, appPr
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_CreateAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.CreateAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">CreateAppProfileAsync(CreateAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Creates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Creates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -623,11 +633,7 @@ AppProfile response = await bigtableInstanceAdminClient.CreateAppProfileAsync(re
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_CreateAppProfileRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.CreateAppProfileRequest,System.Threading.CancellationToken)">CreateAppProfileAsync(CreateAppProfileRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Creates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Creates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -691,11 +697,7 @@ AppProfile response = await bigtableInstanceAdminClient.CreateAppProfileAsync(re
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_InstanceName_System_String_Google_Cloud_Bigtable_Admin_V2_AppProfile_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.InstanceName,System.String,Google.Cloud.Bigtable.Admin.V2.AppProfile,Google.Api.Gax.Grpc.CallSettings)">CreateAppProfileAsync(InstanceName, String, AppProfile, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Creates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Creates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -773,11 +775,7 @@ AppProfile response = await bigtableInstanceAdminClient.CreateAppProfileAsync(pa
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_InstanceName_System_String_Google_Cloud_Bigtable_Admin_V2_AppProfile_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.InstanceName,System.String,Google.Cloud.Bigtable.Admin.V2.AppProfile,System.Threading.CancellationToken)">CreateAppProfileAsync(InstanceName, String, AppProfile, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Creates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Creates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -857,7 +855,7 @@ AppProfile response = await bigtableInstanceAdminClient.CreateAppProfileAsync(pa
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminSettings)">CreateAsync(ServiceEndpoint, BigtableInstanceAdminSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.html">BigtableInstanceAdminClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -904,6 +902,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Bigtable.Admin.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+BigtableInstanceAdminClient client = await BigtableInstanceAdminClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Bigtable.Admin.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    BigtableInstanceAdminClient.DefaultEndpoint.Host, BigtableInstanceAdminClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+BigtableInstanceAdminClient client = BigtableInstanceAdminClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateCluster_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateCluster*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateCluster_Google_Cloud_Bigtable_Admin_V2_CreateClusterRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateCluster(Google.Cloud.Bigtable.Admin.V2.CreateClusterRequest,Google.Api.Gax.Grpc.CallSettings)">CreateCluster(CreateClusterRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a cluster within an instance.</p>
@@ -1362,6 +1382,113 @@ if (retrievedResponse.IsCompleted)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstance*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstance(Google.Api.Gax.ResourceNames.ProjectName,System.String,Google.Cloud.Bigtable.Admin.V2.Instance,System.Collections.Generic.IDictionary{System.String,Google.Cloud.Bigtable.Admin.V2.Cluster},Google.Api.Gax.Grpc.CallSettings)">CreateInstance(ProjectName, String, Instance, IDictionary&lt;String, Cluster&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Create an instance within a project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, CreateInstanceMetadata&gt; CreateInstance(ProjectName parent, string instanceId, Instance instance, IDictionary&lt;string, Cluster&gt; clusters, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>The unique name of the project in which to create the new instance.
+Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instanceId</span></td>
+        <td><p>The ID to be used when referring to the new instance within its project,
+e.g., just <code>myinstance</code> rather than
+<code>projects/myproject/instances/myinstance</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>The instance to create.
+Fields marked <code>OutputOnly</code> must be left blank.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Cluster.html">Cluster</a>&gt;</td>
+        <td><span class="parametername">clusters</span></td>
+        <td><p>The clusters to be created within the instance, mapped by desired
+cluster ID, e.g., just <code>mycluster</code> rather than
+<code>projects/myproject/instances/myinstance/clusters/mycluster</code>.
+Fields marked <code>OutputOnly</code> must be left blank.
+Currently exactly one cluster must be specified.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableInstanceAdminClient bigtableInstanceAdminClient = BigtableInstanceAdminClient.Create();
+// Initialize request argument(s)
+ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+string instanceId = &quot;&quot;;
+Instance instance = new Instance();
+IDictionary&lt;string, Cluster&gt; clusters = new Dictionary&lt;string, Cluster&gt;();
+// Make the request
+Operation&lt;Instance, CreateInstanceMetadata&gt; response =
+    bigtableInstanceAdminClient.CreateInstance(parent, instanceId, instance, clusters);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, CreateInstanceMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, CreateInstanceMetadata&gt; retrievedResponse =
+    bigtableInstanceAdminClient.PollOnceCreateInstance(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstance*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_Google_Cloud_Bigtable_Admin_V2_CreateInstanceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstance(Google.Cloud.Bigtable.Admin.V2.CreateInstanceRequest,Google.Api.Gax.Grpc.CallSettings)">CreateInstance(CreateInstanceRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Create an instance within a project.</p>
 </div>
@@ -1445,14 +1572,14 @@ if (retrievedResponse.IsCompleted)
 }
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstance*"></a>
-  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstance(Google.Cloud.Bigtable.Admin.V2.ProjectName,System.String,Google.Cloud.Bigtable.Admin.V2.Instance,System.Collections.Generic.IDictionary{System.String,Google.Cloud.Bigtable.Admin.V2.Cluster},Google.Api.Gax.Grpc.CallSettings)">CreateInstance(ProjectName, String, Instance, IDictionary&lt;String, Cluster&gt;, CallSettings)</h4>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,Google.Cloud.Bigtable.Admin.V2.Instance,System.Collections.Generic.IDictionary{System.String,Google.Cloud.Bigtable.Admin.V2.Cluster},Google.Api.Gax.Grpc.CallSettings)">CreateInstanceAsync(ProjectName, String, Instance, IDictionary&lt;String, Cluster&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Create an instance within a project.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, CreateInstanceMetadata&gt; CreateInstance(ProjectName parent, string instanceId, Instance instance, IDictionary&lt;string, Cluster&gt; clusters, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, CreateInstanceMetadata&gt;&gt; CreateInstanceAsync(ProjectName parent, string instanceId, Instance instance, IDictionary&lt;string, Cluster&gt; clusters, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1465,7 +1592,7 @@ if (retrievedResponse.IsCompleted)
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ProjectName.html">ProjectName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>The unique name of the project in which to create the new instance.
 Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
@@ -1514,16 +1641,16 @@ Currently exactly one cluster must be specified.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;</td>
-        <td><p>The RPC response.</p>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstance_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-BigtableInstanceAdminClient bigtableInstanceAdminClient = BigtableInstanceAdminClient.Create();
+BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
 // Initialize request argument(s)
 ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
 string instanceId = &quot;&quot;;
@@ -1531,11 +1658,11 @@ Instance instance = new Instance();
 IDictionary&lt;string, Cluster&gt; clusters = new Dictionary&lt;string, Cluster&gt;();
 // Make the request
 Operation&lt;Instance, CreateInstanceMetadata&gt; response =
-    bigtableInstanceAdminClient.CreateInstance(parent, instanceId, instance, clusters);
+    await bigtableInstanceAdminClient.CreateInstanceAsync(parent, instanceId, instance, clusters);
 
 // Poll until the returned long-running operation is complete
 Operation&lt;Instance, CreateInstanceMetadata&gt; completedResponse =
-    response.PollUntilCompleted();
+    await response.PollUntilCompletedAsync();
 // Retrieve the operation result
 Instance result = completedResponse.Result;
 
@@ -1543,7 +1670,114 @@ Instance result = completedResponse.Result;
 string operationName = response.Name;
 // This name can be stored, then the long-running operation retrieved later by name
 Operation&lt;Instance, CreateInstanceMetadata&gt; retrievedResponse =
-    bigtableInstanceAdminClient.PollOnceCreateInstance(operationName);
+    await bigtableInstanceAdminClient.PollOnceCreateInstanceAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,Google.Cloud.Bigtable.Admin.V2.Instance,System.Collections.Generic.IDictionary{System.String,Google.Cloud.Bigtable.Admin.V2.Cluster},System.Threading.CancellationToken)">CreateInstanceAsync(ProjectName, String, Instance, IDictionary&lt;String, Cluster&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Create an instance within a project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, CreateInstanceMetadata&gt;&gt; CreateInstanceAsync(ProjectName parent, string instanceId, Instance instance, IDictionary&lt;string, Cluster&gt; clusters, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>The unique name of the project in which to create the new instance.
+Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instanceId</span></td>
+        <td><p>The ID to be used when referring to the new instance within its project,
+e.g., just <code>myinstance</code> rather than
+<code>projects/myproject/instances/myinstance</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>The instance to create.
+Fields marked <code>OutputOnly</code> must be left blank.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Cluster.html">Cluster</a>&gt;</td>
+        <td><span class="parametername">clusters</span></td>
+        <td><p>The clusters to be created within the instance, mapped by desired
+cluster ID, e.g., just <code>mycluster</code> rather than
+<code>projects/myproject/instances/myinstance/clusters/mycluster</code>.
+Fields marked <code>OutputOnly</code> must be left blank.
+Currently exactly one cluster must be specified.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
+// Initialize request argument(s)
+ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+string instanceId = &quot;&quot;;
+Instance instance = new Instance();
+IDictionary&lt;string, Cluster&gt; clusters = new Dictionary&lt;string, Cluster&gt;();
+// Make the request
+Operation&lt;Instance, CreateInstanceMetadata&gt; response =
+    await bigtableInstanceAdminClient.CreateInstanceAsync(parent, instanceId, instance, clusters);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, CreateInstanceMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, CreateInstanceMetadata&gt; retrievedResponse =
+    await bigtableInstanceAdminClient.PollOnceCreateInstanceAsync(operationName);
 // Check if the retrieved long-running operation has completed
 if (retrievedResponse.IsCompleted)
 {
@@ -1636,227 +1870,9 @@ if (retrievedResponse.IsCompleted)
 }
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync*"></a>
-  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync(Google.Cloud.Bigtable.Admin.V2.ProjectName,System.String,Google.Cloud.Bigtable.Admin.V2.Instance,System.Collections.Generic.IDictionary{System.String,Google.Cloud.Bigtable.Admin.V2.Cluster},Google.Api.Gax.Grpc.CallSettings)">CreateInstanceAsync(ProjectName, String, Instance, IDictionary&lt;String, Cluster&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Create an instance within a project.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, CreateInstanceMetadata&gt;&gt; CreateInstanceAsync(ProjectName parent, string instanceId, Instance instance, IDictionary&lt;string, Cluster&gt; clusters, CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>The unique name of the project in which to create the new instance.
-Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">instanceId</span></td>
-        <td><p>The ID to be used when referring to the new instance within its project,
-e.g., just <code>myinstance</code> rather than
-<code>projects/myproject/instances/myinstance</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a></td>
-        <td><span class="parametername">instance</span></td>
-        <td><p>The instance to create.
-Fields marked <code>OutputOnly</code> must be left blank.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Cluster.html">Cluster</a>&gt;</td>
-        <td><span class="parametername">clusters</span></td>
-        <td><p>The clusters to be created within the instance, mapped by desired
-cluster ID, e.g., just <code>mycluster</code> rather than
-<code>projects/myproject/instances/myinstance/clusters/mycluster</code>.
-Fields marked <code>OutputOnly</code> must be left blank.
-Currently exactly one cluster must be specified.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-string instanceId = &quot;&quot;;
-Instance instance = new Instance();
-IDictionary&lt;string, Cluster&gt; clusters = new Dictionary&lt;string, Cluster&gt;();
-// Make the request
-Operation&lt;Instance, CreateInstanceMetadata&gt; response =
-    await bigtableInstanceAdminClient.CreateInstanceAsync(parent, instanceId, instance, clusters);
-
-// Poll until the returned long-running operation is complete
-Operation&lt;Instance, CreateInstanceMetadata&gt; completedResponse =
-    await response.PollUntilCompletedAsync();
-// Retrieve the operation result
-Instance result = completedResponse.Result;
-
-// Or get the name of the operation
-string operationName = response.Name;
-// This name can be stored, then the long-running operation retrieved later by name
-Operation&lt;Instance, CreateInstanceMetadata&gt; retrievedResponse =
-    await bigtableInstanceAdminClient.PollOnceCreateInstanceAsync(operationName);
-// Check if the retrieved long-running operation has completed
-if (retrievedResponse.IsCompleted)
-{
-    // If it has completed, then access the result
-    Instance retrievedResult = retrievedResponse.Result;
-}
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync*"></a>
-  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.CreateInstanceAsync(Google.Cloud.Bigtable.Admin.V2.ProjectName,System.String,Google.Cloud.Bigtable.Admin.V2.Instance,System.Collections.Generic.IDictionary{System.String,Google.Cloud.Bigtable.Admin.V2.Cluster},System.Threading.CancellationToken)">CreateInstanceAsync(ProjectName, String, Instance, IDictionary&lt;String, Cluster&gt;, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Create an instance within a project.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, CreateInstanceMetadata&gt;&gt; CreateInstanceAsync(ProjectName parent, string instanceId, Instance instance, IDictionary&lt;string, Cluster&gt; clusters, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>The unique name of the project in which to create the new instance.
-Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">instanceId</span></td>
-        <td><p>The ID to be used when referring to the new instance within its project,
-e.g., just <code>myinstance</code> rather than
-<code>projects/myproject/instances/myinstance</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a></td>
-        <td><span class="parametername">instance</span></td>
-        <td><p>The instance to create.
-Fields marked <code>OutputOnly</code> must be left blank.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Cluster.html">Cluster</a>&gt;</td>
-        <td><span class="parametername">clusters</span></td>
-        <td><p>The clusters to be created within the instance, mapped by desired
-cluster ID, e.g., just <code>mycluster</code> rather than
-<code>projects/myproject/instances/myinstance/clusters/mycluster</code>.
-Fields marked <code>OutputOnly</code> must be left blank.
-Currently exactly one cluster must be specified.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_CreateInstanceAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_String_Google_Cloud_Bigtable_Admin_V2_Instance_System_Collections_Generic_IDictionary_System_String_Google_Cloud_Bigtable_Admin_V2_Cluster__System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-string instanceId = &quot;&quot;;
-Instance instance = new Instance();
-IDictionary&lt;string, Cluster&gt; clusters = new Dictionary&lt;string, Cluster&gt;();
-// Make the request
-Operation&lt;Instance, CreateInstanceMetadata&gt; response =
-    await bigtableInstanceAdminClient.CreateInstanceAsync(parent, instanceId, instance, clusters);
-
-// Poll until the returned long-running operation is complete
-Operation&lt;Instance, CreateInstanceMetadata&gt; completedResponse =
-    await response.PollUntilCompletedAsync();
-// Retrieve the operation result
-Instance result = completedResponse.Result;
-
-// Or get the name of the operation
-string operationName = response.Name;
-// This name can be stored, then the long-running operation retrieved later by name
-Operation&lt;Instance, CreateInstanceMetadata&gt; retrievedResponse =
-    await bigtableInstanceAdminClient.PollOnceCreateInstanceAsync(operationName);
-// Check if the retrieved long-running operation has completed
-if (retrievedResponse.IsCompleted)
-{
-    // If it has completed, then access the result
-    Instance retrievedResult = retrievedResponse.Result;
-}
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfile_Google_Cloud_Bigtable_Admin_V2_AppProfileName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfile(Google.Cloud.Bigtable.Admin.V2.AppProfileName,Google.Api.Gax.Grpc.CallSettings)">DeleteAppProfile(AppProfileName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Deletes an app profile from an instance.</p>
+  <div class="markdown level1 summary"><p>Deletes an app profile from an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1900,11 +1916,7 @@ bigtableInstanceAdminClient.DeleteAppProfile(name);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfile_Google_Cloud_Bigtable_Admin_V2_DeleteAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfile(Google.Cloud.Bigtable.Admin.V2.DeleteAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteAppProfile(DeleteAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Deletes an app profile from an instance.</p>
+  <div class="markdown level1 summary"><p>Deletes an app profile from an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1951,11 +1963,7 @@ bigtableInstanceAdminClient.DeleteAppProfile(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_AppProfileName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.AppProfileName,Google.Api.Gax.Grpc.CallSettings)">DeleteAppProfileAsync(AppProfileName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Deletes an app profile from an instance.</p>
+  <div class="markdown level1 summary"><p>Deletes an app profile from an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2015,11 +2023,7 @@ await bigtableInstanceAdminClient.DeleteAppProfileAsync(name);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_AppProfileName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.AppProfileName,System.Threading.CancellationToken)">DeleteAppProfileAsync(AppProfileName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Deletes an app profile from an instance.</p>
+  <div class="markdown level1 summary"><p>Deletes an app profile from an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2079,11 +2083,7 @@ await bigtableInstanceAdminClient.DeleteAppProfileAsync(name);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_DeleteAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.DeleteAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteAppProfileAsync(DeleteAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Deletes an app profile from an instance.</p>
+  <div class="markdown level1 summary"><p>Deletes an app profile from an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2146,11 +2146,7 @@ await bigtableInstanceAdminClient.DeleteAppProfileAsync(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_DeleteAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_DeleteAppProfileRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.DeleteAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.DeleteAppProfileRequest,System.Threading.CancellationToken)">DeleteAppProfileAsync(DeleteAppProfileRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Deletes an app profile from an instance.</p>
+  <div class="markdown level1 summary"><p>Deletes an app profile from an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2881,11 +2877,7 @@ await bigtableInstanceAdminClient.DeleteInstanceAsync(name);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfile_Google_Cloud_Bigtable_Admin_V2_AppProfileName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfile(Google.Cloud.Bigtable.Admin.V2.AppProfileName,Google.Api.Gax.Grpc.CallSettings)">GetAppProfile(AppProfileName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Gets information about an app profile.</p>
+  <div class="markdown level1 summary"><p>Gets information about an app profile.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2945,11 +2937,7 @@ AppProfile response = bigtableInstanceAdminClient.GetAppProfile(name);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfile_Google_Cloud_Bigtable_Admin_V2_GetAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfile(Google.Cloud.Bigtable.Admin.V2.GetAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">GetAppProfile(GetAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Gets information about an app profile.</p>
+  <div class="markdown level1 summary"><p>Gets information about an app profile.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3011,11 +2999,7 @@ AppProfile response = bigtableInstanceAdminClient.GetAppProfile(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_AppProfileName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.AppProfileName,Google.Api.Gax.Grpc.CallSettings)">GetAppProfileAsync(AppProfileName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Gets information about an app profile.</p>
+  <div class="markdown level1 summary"><p>Gets information about an app profile.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3075,11 +3059,7 @@ AppProfile response = await bigtableInstanceAdminClient.GetAppProfileAsync(name)
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_AppProfileName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.AppProfileName,System.Threading.CancellationToken)">GetAppProfileAsync(AppProfileName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Gets information about an app profile.</p>
+  <div class="markdown level1 summary"><p>Gets information about an app profile.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3139,11 +3119,7 @@ AppProfile response = await bigtableInstanceAdminClient.GetAppProfileAsync(name)
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_GetAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.GetAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">GetAppProfileAsync(GetAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Gets information about an app profile.</p>
+  <div class="markdown level1 summary"><p>Gets information about an app profile.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3205,11 +3181,7 @@ AppProfile response = await bigtableInstanceAdminClient.GetAppProfileAsync(reque
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_GetAppProfileRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.GetAppProfileRequest,System.Threading.CancellationToken)">GetAppProfileAsync(GetAppProfileRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Gets information about an app profile.</p>
+  <div class="markdown level1 summary"><p>Gets information about an app profile.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3637,12 +3609,7 @@ Cluster response = await bigtableInstanceAdminClient.GetClusterAsync(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicy_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicy*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicy_Google_Cloud_Iam_V1_GetIamPolicyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicy(Google.Cloud.Iam.V1.GetIamPolicyRequest,Google.Api.Gax.Grpc.CallSettings)">GetIamPolicy(GetIamPolicyRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Gets the access control policy for an instance resource. Returns an empty
+  <div class="markdown level1 summary"><p>Gets the access control policy for an instance resource. Returns an empty
 policy if an instance exists but does not have a policy set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3705,12 +3672,7 @@ Policy response = bigtableInstanceAdminClient.GetIamPolicy(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicy_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicy*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicy_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicy(System.String,Google.Api.Gax.Grpc.CallSettings)">GetIamPolicy(String, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Gets the access control policy for an instance resource. Returns an empty
+  <div class="markdown level1 summary"><p>Gets the access control policy for an instance resource. Returns an empty
 policy if an instance exists but does not have a policy set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3772,12 +3734,7 @@ Policy response = bigtableInstanceAdminClient.GetIamPolicy(formattedResource);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_Google_Cloud_Iam_V1_GetIamPolicyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync(Google.Cloud.Iam.V1.GetIamPolicyRequest,Google.Api.Gax.Grpc.CallSettings)">GetIamPolicyAsync(GetIamPolicyRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Gets the access control policy for an instance resource. Returns an empty
+  <div class="markdown level1 summary"><p>Gets the access control policy for an instance resource. Returns an empty
 policy if an instance exists but does not have a policy set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3840,12 +3797,7 @@ Policy response = await bigtableInstanceAdminClient.GetIamPolicyAsync(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_Google_Cloud_Iam_V1_GetIamPolicyRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync(Google.Cloud.Iam.V1.GetIamPolicyRequest,System.Threading.CancellationToken)">GetIamPolicyAsync(GetIamPolicyRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Gets the access control policy for an instance resource. Returns an empty
+  <div class="markdown level1 summary"><p>Gets the access control policy for an instance resource. Returns an empty
 policy if an instance exists but does not have a policy set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3908,12 +3860,7 @@ Policy response = await bigtableInstanceAdminClient.GetIamPolicyAsync(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetIamPolicyAsync(String, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Gets the access control policy for an instance resource. Returns an empty
+  <div class="markdown level1 summary"><p>Gets the access control policy for an instance resource. Returns an empty
 policy if an instance exists but does not have a policy set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3975,12 +3922,7 @@ Policy response = await bigtableInstanceAdminClient.GetIamPolicyAsync(formattedR
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_GetIamPolicyAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.GetIamPolicyAsync(System.String,System.Threading.CancellationToken)">GetIamPolicyAsync(String, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Gets the access control policy for an instance resource. Returns an empty
+  <div class="markdown level1 summary"><p>Gets the access control policy for an instance resource. Returns an empty
 policy if an instance exists but does not have a policy set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -4408,11 +4350,7 @@ Instance response = await bigtableInstanceAdminClient.GetInstanceAsync(name);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfiles_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfiles*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfiles_Google_Cloud_Bigtable_Admin_V2_InstanceName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfiles(Google.Cloud.Bigtable.Admin.V2.InstanceName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListAppProfiles(InstanceName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Lists information about app profiles in an instance.</p>
+  <div class="markdown level1 summary"><p>Lists information about app profiles in an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4518,11 +4456,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfiles_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfiles*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfiles_Google_Cloud_Bigtable_Admin_V2_ListAppProfilesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfiles(Google.Cloud.Bigtable.Admin.V2.ListAppProfilesRequest,Google.Api.Gax.Grpc.CallSettings)">ListAppProfiles(ListAppProfilesRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Lists information about app profiles in an instance.</p>
+  <div class="markdown level1 summary"><p>Lists information about app profiles in an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4615,11 +4549,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfilesAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfilesAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfilesAsync_Google_Cloud_Bigtable_Admin_V2_InstanceName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfilesAsync(Google.Cloud.Bigtable.Admin.V2.InstanceName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListAppProfilesAsync(InstanceName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Lists information about app profiles in an instance.</p>
+  <div class="markdown level1 summary"><p>Lists information about app profiles in an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4725,11 +4655,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfilesAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfilesAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListAppProfilesAsync_Google_Cloud_Bigtable_Admin_V2_ListAppProfilesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListAppProfilesAsync(Google.Cloud.Bigtable.Admin.V2.ListAppProfilesRequest,Google.Api.Gax.Grpc.CallSettings)">ListAppProfilesAsync(ListAppProfilesRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Lists information about app profiles in an instance.</p>
+  <div class="markdown level1 summary"><p>Lists information about app profiles in an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5193,6 +5119,66 @@ ListClustersResponse response = await bigtableInstanceAdminClient.ListClustersAs
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstances*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstances(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ListInstances(ProjectName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists information about instances in a project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ListInstancesResponse ListInstances(ProjectName parent, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>The unique name of the project for which a list of instances is requested.
+Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListInstancesResponse.html">ListInstancesResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableInstanceAdminClient bigtableInstanceAdminClient = BigtableInstanceAdminClient.Create();
+// Initialize request argument(s)
+ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+// Make the request
+ListInstancesResponse response = bigtableInstanceAdminClient.ListInstances(parent);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstances*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_Google_Cloud_Bigtable_Admin_V2_ListInstancesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstances(Google.Cloud.Bigtable.Admin.V2.ListInstancesRequest,Google.Api.Gax.Grpc.CallSettings)">ListInstances(ListInstancesRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists information about instances in a project.</p>
 </div>
@@ -5254,14 +5240,14 @@ ListInstancesRequest request = new ListInstancesRequest
 ListInstancesResponse response = bigtableInstanceAdminClient.ListInstances(request);
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstances*"></a>
-  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_Google_Cloud_Bigtable_Admin_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstances(Google.Cloud.Bigtable.Admin.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ListInstances(ProjectName, CallSettings)</h4>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ListInstancesAsync(ProjectName, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists information about instances in a project.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual ListInstancesResponse ListInstances(ProjectName parent, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListInstancesResponse&gt; ListInstancesAsync(ProjectName parent, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5274,7 +5260,7 @@ ListInstancesResponse response = bigtableInstanceAdminClient.ListInstances(reque
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ProjectName.html">ProjectName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>The unique name of the project for which a list of instances is requested.
 Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
@@ -5298,20 +5284,80 @@ Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListInstancesResponse.html">ListInstancesResponse</a></td>
-        <td><p>The RPC response.</p>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListInstancesResponse.html">ListInstancesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstances_Google_Cloud_Bigtable_Admin_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-BigtableInstanceAdminClient bigtableInstanceAdminClient = BigtableInstanceAdminClient.Create();
+BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
 // Initialize request argument(s)
 ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
 // Make the request
-ListInstancesResponse response = bigtableInstanceAdminClient.ListInstances(parent);
+ListInstancesResponse response = await bigtableInstanceAdminClient.ListInstancesAsync(parent);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync(Google.Api.Gax.ResourceNames.ProjectName,System.Threading.CancellationToken)">ListInstancesAsync(ProjectName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Lists information about instances in a project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListInstancesResponse&gt; ListInstancesAsync(ProjectName parent, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>The unique name of the project for which a list of instances is requested.
+Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListInstancesResponse.html">ListInstancesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
+// Initialize request argument(s)
+ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+// Make the request
+ListInstancesResponse response = await bigtableInstanceAdminClient.ListInstancesAsync(parent);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync*"></a>
@@ -5436,126 +5482,6 @@ ListInstancesRequest request = new ListInstancesRequest
 };
 // Make the request
 ListInstancesResponse response = await bigtableInstanceAdminClient.ListInstancesAsync(request);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync*"></a>
-  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync(Google.Cloud.Bigtable.Admin.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ListInstancesAsync(ProjectName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists information about instances in a project.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListInstancesResponse&gt; ListInstancesAsync(ProjectName parent, CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>The unique name of the project for which a list of instances is requested.
-Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListInstancesResponse.html">ListInstancesResponse</a>&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-// Make the request
-ListInstancesResponse response = await bigtableInstanceAdminClient.ListInstancesAsync(parent);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync*"></a>
-  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.ListInstancesAsync(Google.Cloud.Bigtable.Admin.V2.ProjectName,System.Threading.CancellationToken)">ListInstancesAsync(ProjectName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Lists information about instances in a project.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListInstancesResponse&gt; ListInstancesAsync(ProjectName parent, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>The unique name of the project for which a list of instances is requested.
-Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListInstancesResponse.html">ListInstancesResponse</a>&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_ListInstancesAsync_Google_Cloud_Bigtable_Admin_V2_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-BigtableInstanceAdminClient bigtableInstanceAdminClient = await BigtableInstanceAdminClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-// Make the request
-ListInstancesResponse response = await bigtableInstanceAdminClient.ListInstancesAsync(parent);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_PartialUpdateInstance_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.PartialUpdateInstance*"></a>
@@ -6472,12 +6398,7 @@ if (retrievedResponse.IsCompleted)
   </table>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicy_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicy*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicy_Google_Cloud_Iam_V1_SetIamPolicyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicy(Google.Cloud.Iam.V1.SetIamPolicyRequest,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicy(SetIamPolicyRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Sets the access control policy on an instance resource. Replaces any
+  <div class="markdown level1 summary"><p>Sets the access control policy on an instance resource. Replaces any
 existing policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -6541,12 +6462,7 @@ Policy response = bigtableInstanceAdminClient.SetIamPolicy(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicy_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicy*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicy_System_String_Google_Cloud_Iam_V1_Policy_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicy(System.String,Google.Cloud.Iam.V1.Policy,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicy(String, Policy, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Sets the access control policy on an instance resource. Replaces any
+  <div class="markdown level1 summary"><p>Sets the access control policy on an instance resource. Replaces any
 existing policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -6618,12 +6534,7 @@ Policy response = bigtableInstanceAdminClient.SetIamPolicy(formattedResource, po
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_Google_Cloud_Iam_V1_SetIamPolicyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync(Google.Cloud.Iam.V1.SetIamPolicyRequest,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicyAsync(SetIamPolicyRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Sets the access control policy on an instance resource. Replaces any
+  <div class="markdown level1 summary"><p>Sets the access control policy on an instance resource. Replaces any
 existing policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -6687,12 +6598,7 @@ Policy response = await bigtableInstanceAdminClient.SetIamPolicyAsync(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_Google_Cloud_Iam_V1_SetIamPolicyRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync(Google.Cloud.Iam.V1.SetIamPolicyRequest,System.Threading.CancellationToken)">SetIamPolicyAsync(SetIamPolicyRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Sets the access control policy on an instance resource. Replaces any
+  <div class="markdown level1 summary"><p>Sets the access control policy on an instance resource. Replaces any
 existing policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -6756,12 +6662,7 @@ Policy response = await bigtableInstanceAdminClient.SetIamPolicyAsync(request);
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_System_String_Google_Cloud_Iam_V1_Policy_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync(System.String,Google.Cloud.Iam.V1.Policy,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicyAsync(String, Policy, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Sets the access control policy on an instance resource. Replaces any
+  <div class="markdown level1 summary"><p>Sets the access control policy on an instance resource. Replaces any
 existing policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -6833,12 +6734,7 @@ Policy response = await bigtableInstanceAdminClient.SetIamPolicyAsync(formattedR
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_SetIamPolicyAsync_System_String_Google_Cloud_Iam_V1_Policy_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.SetIamPolicyAsync(System.String,Google.Cloud.Iam.V1.Policy,System.Threading.CancellationToken)">SetIamPolicyAsync(String, Policy, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Sets the access control policy on an instance resource. Replaces any
+  <div class="markdown level1 summary"><p>Sets the access control policy on an instance resource. Replaces any
 existing policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -6942,12 +6838,7 @@ in turn be shut down by another call to this method.</p>
 </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissions_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissions*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissions_Google_Cloud_Iam_V1_TestIamPermissionsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissions(Google.Cloud.Iam.V1.TestIamPermissionsRequest,Google.Api.Gax.Grpc.CallSettings)">TestIamPermissions(TestIamPermissionsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Returns permissions that the caller has on the specified instance resource.</p>
+  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified instance resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7010,12 +6901,7 @@ TestIamPermissionsResponse response = bigtableInstanceAdminClient.TestIamPermiss
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissions_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissions*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissions_System_String_System_Collections_Generic_IEnumerable_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissions(System.String,System.Collections.Generic.IEnumerable{System.String},Google.Api.Gax.Grpc.CallSettings)">TestIamPermissions(String, IEnumerable&lt;String&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Returns permissions that the caller has on the specified instance resource.</p>
+  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified instance resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7086,12 +6972,7 @@ TestIamPermissionsResponse response = bigtableInstanceAdminClient.TestIamPermiss
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_Google_Cloud_Iam_V1_TestIamPermissionsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync(Google.Cloud.Iam.V1.TestIamPermissionsRequest,Google.Api.Gax.Grpc.CallSettings)">TestIamPermissionsAsync(TestIamPermissionsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Returns permissions that the caller has on the specified instance resource.</p>
+  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified instance resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7154,12 +7035,7 @@ TestIamPermissionsResponse response = await bigtableInstanceAdminClient.TestIamP
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_Google_Cloud_Iam_V1_TestIamPermissionsRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync(Google.Cloud.Iam.V1.TestIamPermissionsRequest,System.Threading.CancellationToken)">TestIamPermissionsAsync(TestIamPermissionsRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Returns permissions that the caller has on the specified instance resource.</p>
+  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified instance resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7222,12 +7098,7 @@ TestIamPermissionsResponse response = await bigtableInstanceAdminClient.TestIamP
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_System_String_System_Collections_Generic_IEnumerable_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync(System.String,System.Collections.Generic.IEnumerable{System.String},Google.Api.Gax.Grpc.CallSettings)">TestIamPermissionsAsync(String, IEnumerable&lt;String&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Returns permissions that the caller has on the specified instance resource.</p>
+  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified instance resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7298,12 +7169,7 @@ TestIamPermissionsResponse response = await bigtableInstanceAdminClient.TestIamP
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_TestIamPermissionsAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.TestIamPermissionsAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">TestIamPermissionsAsync(String, IEnumerable&lt;String&gt;, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable instance level
-permissions. This feature is not currently available to most Cloud Bigtable
-customers. This feature might be changed in backward-incompatible ways and
-is not recommended for production use. It is not subject to any SLA or
-deprecation policy.</p>
-<p>Returns permissions that the caller has on the specified instance resource.</p>
+  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified instance resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7374,11 +7240,7 @@ TestIamPermissionsResponse response = await bigtableInstanceAdminClient.TestIamP
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfile_Google_Cloud_Bigtable_Admin_V2_AppProfile_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfile(Google.Cloud.Bigtable.Admin.V2.AppProfile,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateAppProfile(AppProfile, FieldMask, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Updates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Updates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7464,11 +7326,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfile_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfile*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfile_Google_Cloud_Bigtable_Admin_V2_UpdateAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfile(Google.Cloud.Bigtable.Admin.V2.UpdateAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateAppProfile(UpdateAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Updates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Updates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7550,11 +7408,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_AppProfile_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.AppProfile,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateAppProfileAsync(AppProfile, FieldMask, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Updates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Updates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7640,11 +7494,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_AppProfile_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.AppProfile,Google.Protobuf.WellKnownTypes.FieldMask,System.Threading.CancellationToken)">UpdateAppProfileAsync(AppProfile, FieldMask, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Updates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Updates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -7730,11 +7580,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfileAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfileAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableInstanceAdminClient_UpdateAppProfileAsync_Google_Cloud_Bigtable_Admin_V2_UpdateAppProfileRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableInstanceAdminClient.UpdateAppProfileAsync(Google.Cloud.Bigtable.Admin.V2.UpdateAppProfileRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateAppProfileAsync(UpdateAppProfileRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>This is a private alpha release of Cloud Bigtable replication. This feature
-is not currently available to most Cloud Bigtable customers. This feature
-might be changed in backward-incompatible ways and is not recommended for
-production use. It is not subject to any SLA or deprecation policy.</p>
-<p>Updates an app profile within an instance.</p>
+  <div class="markdown level1 summary"><p>Updates an app profile within an instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

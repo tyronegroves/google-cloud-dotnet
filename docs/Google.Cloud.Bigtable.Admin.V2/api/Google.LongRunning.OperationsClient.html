@@ -576,7 +576,7 @@ corresponding to <code>Code.CANCELLED</code>.</p>
   <h4 id="Google_LongRunning_OperationsClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_LongRunning_OperationsSettings_" data-uid="Google.LongRunning.OperationsClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.LongRunning.OperationsSettings)">Create(ServiceEndpoint, OperationsSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -623,6 +623,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_LongRunning_OperationsClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_LongRunning_OperationsSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.LongRunning;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+OperationsClient client = OperationsClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.LongRunning;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    OperationsClient.DefaultEndpoint.Host, OperationsClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+OperationsClient client = OperationsClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
   <a id="Google_LongRunning_OperationsClient_Create_" data-uid="Google.LongRunning.OperationsClient.Create*"></a>
   <h4 id="Google_LongRunning_OperationsClient_Create_Grpc_Core_Channel_Google_LongRunning_OperationsSettings_" data-uid="Google.LongRunning.OperationsClient.Create(Grpc.Core.Channel,Google.LongRunning.OperationsSettings)">Create(Channel, OperationsSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a> which uses the specified channel for remote operations.</p>
@@ -676,7 +698,7 @@ necessary.</p>
   <h4 id="Google_LongRunning_OperationsClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_LongRunning_OperationsSettings_" data-uid="Google.LongRunning.OperationsClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.LongRunning.OperationsSettings)">CreateAsync(ServiceEndpoint, OperationsSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -723,6 +745,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_LongRunning_OperationsClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_LongRunning_OperationsSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.LongRunning;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+OperationsClient client = await OperationsClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.LongRunning;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    OperationsClient.DefaultEndpoint.Host, OperationsClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+OperationsClient client = OperationsClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_LongRunning_OperationsClient_DeleteOperation_" data-uid="Google.LongRunning.OperationsClient.DeleteOperation*"></a>
   <h4 id="Google_LongRunning_OperationsClient_DeleteOperation_Google_LongRunning_DeleteOperationRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.LongRunning.OperationsClient.DeleteOperation(Google.LongRunning.DeleteOperationRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteOperation(DeleteOperationRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes a long-running operation. This method indicates that the client is
