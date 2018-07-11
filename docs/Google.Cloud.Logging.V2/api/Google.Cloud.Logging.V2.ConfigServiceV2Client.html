@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ConfigServiceV2Client
    | Google.Cloud.Logging.V2 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -187,7 +187,7 @@
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Logging_V2_ConfigServiceV2Settings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Logging.V2.ConfigServiceV2Settings)">Create(ServiceEndpoint, ConfigServiceV2Settings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Logging.V2.ConfigServiceV2Client.html">ConfigServiceV2Client</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -234,6 +234,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Logging_V2_ConfigServiceV2Settings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Logging.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+ConfigServiceV2Client client = ConfigServiceV2Client.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Logging.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    ConfigServiceV2Client.DefaultEndpoint.Host, ConfigServiceV2Client.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ConfigServiceV2Client client = ConfigServiceV2Client.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
   <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_Create_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.Create*"></a>
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_Create_Grpc_Core_Channel_Google_Cloud_Logging_V2_ConfigServiceV2Settings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.Create(Grpc.Core.Channel,Google.Cloud.Logging.V2.ConfigServiceV2Settings)">Create(Channel, ConfigServiceV2Settings)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Logging.V2.ConfigServiceV2Client.html">ConfigServiceV2Client</a> which uses the specified channel for remote operations.</p>
@@ -287,7 +309,7 @@ necessary.</p>
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Logging_V2_ConfigServiceV2Settings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Logging.V2.ConfigServiceV2Settings)">CreateAsync(ServiceEndpoint, ConfigServiceV2Settings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Logging.V2.ConfigServiceV2Client.html">ConfigServiceV2Client</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,6 +356,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Logging_V2_ConfigServiceV2Settings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Logging.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+ConfigServiceV2Client client = await ConfigServiceV2Client.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Logging.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    ConfigServiceV2Client.DefaultEndpoint.Host, ConfigServiceV2Client.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ConfigServiceV2Client client = ConfigServiceV2Client.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateExclusion_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateExclusion*"></a>
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateExclusion_Google_Cloud_Logging_V2_CreateExclusionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateExclusion(Google.Cloud.Logging.V2.CreateExclusionRequest,Google.Api.Gax.Grpc.CallSettings)">CreateExclusion(CreateExclusionRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new exclusion in a specified parent resource.
@@ -526,6 +570,71 @@ You can have up to 10 exclusions in a resource.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateExclusionAsync_Google_Cloud_Logging_V2_CreateExclusionRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+CreateExclusionRequest request = new CreateExclusionRequest
+{
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
+    Exclusion = new LogExclusion(),
+};
+// Make the request
+LogExclusion response = await configServiceV2Client.CreateExclusionAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateExclusionAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateExclusionAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateExclusionAsync_Google_Cloud_Logging_V2_CreateExclusionRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateExclusionAsync(Google.Cloud.Logging.V2.CreateExclusionRequest,System.Threading.CancellationToken)">CreateExclusionAsync(CreateExclusionRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a new exclusion in a specified parent resource.
+Only log entries belonging to that resource can be excluded.
+You can have up to 10 exclusions in a resource.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogExclusion&gt; CreateExclusionAsync(CreateExclusionRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.CreateExclusionRequest.html">CreateExclusionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogExclusion.html">LogExclusion</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateExclusionAsync_Google_Cloud_Logging_V2_CreateExclusionRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
 // Initialize request argument(s)
@@ -894,6 +1003,72 @@ LogSink response = await configServiceV2Client.CreateSinkAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateSinkAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateSinkAsync_Google_Cloud_Logging_V2_CreateSinkRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateSinkAsync(Google.Cloud.Logging.V2.CreateSinkRequest,System.Threading.CancellationToken)">CreateSinkAsync(CreateSinkRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a sink that exports specified log entries to a destination.  The
+export of newly-ingested log entries begins immediately, unless the sink&apos;s
+<code>writer_identity</code> is not permitted to write to the destination.  A sink can
+export log entries only from the resource owning the sink.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogSink&gt; CreateSinkAsync(CreateSinkRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.CreateSinkRequest.html">CreateSinkRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateSinkAsync_Google_Cloud_Logging_V2_CreateSinkRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+CreateSinkRequest request = new CreateSinkRequest
+{
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
+    Sink = new LogSink(),
+};
+// Make the request
+LogSink response = await configServiceV2Client.CreateSinkAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateSinkAsync*"></a>
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_CreateSinkAsync_Google_Cloud_Logging_V2_ParentNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.CreateSinkAsync(Google.Cloud.Logging.V2.ParentNameOneof,Google.Cloud.Logging.V2.LogSink,Google.Api.Gax.Grpc.CallSettings)">CreateSinkAsync(ParentNameOneof, LogSink, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a sink that exports specified log entries to a destination.  The
 export of newly-ingested log entries begins immediately, unless the sink&apos;s
@@ -1181,13 +1356,75 @@ configServiceV2Client.DeleteExclusion(name);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteExclusionAsync_Google_Cloud_Logging_V2_DeleteExclusionRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+DeleteExclusionRequest request = new DeleteExclusionRequest
+{
+    ExclusionNameOneof = ExclusionNameOneof.From(new ExclusionName(&quot;[PROJECT]&quot;, &quot;[EXCLUSION]&quot;)),
+};
+// Make the request
+await configServiceV2Client.DeleteExclusionAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteExclusionAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.DeleteExclusionAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteExclusionAsync_Google_Cloud_Logging_V2_DeleteExclusionRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.DeleteExclusionAsync(Google.Cloud.Logging.V2.DeleteExclusionRequest,System.Threading.CancellationToken)">DeleteExclusionAsync(DeleteExclusionRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes an exclusion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteExclusionAsync(DeleteExclusionRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.DeleteExclusionRequest.html">DeleteExclusionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteExclusionAsync_Google_Cloud_Logging_V2_DeleteExclusionRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
 // Initialize request argument(s)
@@ -1248,7 +1485,7 @@ await configServiceV2Client.DeleteExclusionAsync(request);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1312,7 +1549,7 @@ await configServiceV2Client.DeleteExclusionAsync(name);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1469,13 +1706,76 @@ service account is also deleted.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteSinkAsync_Google_Cloud_Logging_V2_DeleteSinkRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+DeleteSinkRequest request = new DeleteSinkRequest
+{
+    SinkNameAsSinkNameOneof = SinkNameOneof.From(new SinkName(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;)),
+};
+// Make the request
+await configServiceV2Client.DeleteSinkAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.DeleteSinkAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteSinkAsync_Google_Cloud_Logging_V2_DeleteSinkRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.DeleteSinkAsync(Google.Cloud.Logging.V2.DeleteSinkRequest,System.Threading.CancellationToken)">DeleteSinkAsync(DeleteSinkRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a sink. If the sink has a unique <code>writer_identity</code>, then that
+service account is also deleted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteSinkAsync(DeleteSinkRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.DeleteSinkRequest.html">DeleteSinkRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_DeleteSinkAsync_Google_Cloud_Logging_V2_DeleteSinkRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
 // Initialize request argument(s)
@@ -1538,7 +1838,7 @@ parent resource and the sink identifier:</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1604,7 +1904,7 @@ parent resource and the sink identifier:</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1935,6 +2235,68 @@ GetExclusionRequest request = new GetExclusionRequest
 LogExclusion response = await configServiceV2Client.GetExclusionAsync(request);
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetExclusionAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.GetExclusionAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetExclusionAsync_Google_Cloud_Logging_V2_GetExclusionRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.GetExclusionAsync(Google.Cloud.Logging.V2.GetExclusionRequest,System.Threading.CancellationToken)">GetExclusionAsync(GetExclusionRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets the description of an exclusion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogExclusion&gt; GetExclusionAsync(GetExclusionRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.GetExclusionRequest.html">GetExclusionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogExclusion.html">LogExclusion</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetExclusionAsync_Google_Cloud_Logging_V2_GetExclusionRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+GetExclusionRequest request = new GetExclusionRequest
+{
+    ExclusionNameOneof = ExclusionNameOneof.From(new ExclusionName(&quot;[PROJECT]&quot;, &quot;[EXCLUSION]&quot;)),
+};
+// Make the request
+LogExclusion response = await configServiceV2Client.GetExclusionAsync(request);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetSink_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.GetSink*"></a>
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetSink_Google_Cloud_Logging_V2_GetSinkRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.GetSink(Google.Cloud.Logging.V2.GetSinkRequest,Google.Api.Gax.Grpc.CallSettings)">GetSink(GetSinkRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Gets a sink.</p>
@@ -2112,6 +2474,68 @@ LogSink response = configServiceV2Client.GetSink(sinkName);
   </table>
   <div>
   <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetSinkAsync_Google_Cloud_Logging_V2_GetSinkRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+GetSinkRequest request = new GetSinkRequest
+{
+    SinkNameAsSinkNameOneof = SinkNameOneof.From(new SinkName(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;)),
+};
+// Make the request
+LogSink response = await configServiceV2Client.GetSinkAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.GetSinkAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetSinkAsync_Google_Cloud_Logging_V2_GetSinkRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.GetSinkAsync(Google.Cloud.Logging.V2.GetSinkRequest,System.Threading.CancellationToken)">GetSinkAsync(GetSinkRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a sink.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogSink&gt; GetSinkAsync(GetSinkRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.GetSinkRequest.html">GetSinkRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_GetSinkAsync_Google_Cloud_Logging_V2_GetSinkRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
 // Initialize request argument(s)
@@ -2351,7 +2775,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListExclusionsResponse, LogExclusion&gt; ListExclusions(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListExclusionsResponse, LogExclusion&gt; ListExclusions(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2552,7 +2976,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListExclusionsResponse, LogExclusion&gt; ListExclusionsAsync(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListExclusionsResponse, LogExclusion&gt; ListExclusionsAsync(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2753,7 +3177,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListSinksResponse, LogSink&gt; ListSinks(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListSinksResponse, LogSink&gt; ListSinks(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2954,7 +3378,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListSinksResponse, LogSink&gt; ListSinksAsync(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListSinksResponse, LogSink&gt; ListSinksAsync(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3467,6 +3891,70 @@ UpdateExclusionRequest request = new UpdateExclusionRequest
 LogExclusion response = await configServiceV2Client.UpdateExclusionAsync(request);
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateExclusionAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateExclusionAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateExclusionAsync_Google_Cloud_Logging_V2_UpdateExclusionRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateExclusionAsync(Google.Cloud.Logging.V2.UpdateExclusionRequest,System.Threading.CancellationToken)">UpdateExclusionAsync(UpdateExclusionRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Changes one or more properties of an existing exclusion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogExclusion&gt; UpdateExclusionAsync(UpdateExclusionRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.UpdateExclusionRequest.html">UpdateExclusionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogExclusion.html">LogExclusion</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateExclusionAsync_Google_Cloud_Logging_V2_UpdateExclusionRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+UpdateExclusionRequest request = new UpdateExclusionRequest
+{
+    ExclusionNameOneof = ExclusionNameOneof.From(new ExclusionName(&quot;[PROJECT]&quot;, &quot;[EXCLUSION]&quot;)),
+    Exclusion = new LogExclusion(),
+    UpdateMask = new FieldMask(),
+};
+// Make the request
+LogExclusion response = await configServiceV2Client.UpdateExclusionAsync(request);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSink_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSink*"></a>
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSink_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSink(Google.Cloud.Logging.V2.SinkNameOneof,Google.Cloud.Logging.V2.LogSink,Google.Api.Gax.Grpc.CallSettings)">UpdateSink(SinkNameOneof, LogSink, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates a sink.  This method replaces the following fields in the existing
@@ -3541,6 +4029,99 @@ SinkNameOneof sinkName = SinkNameOneof.From(new SinkName(&quot;[PROJECT]&quot;, 
 LogSink sink = new LogSink();
 // Make the request
 LogSink response = configServiceV2Client.UpdateSink(sinkName, sink);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSink_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSink*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSink_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSink(Google.Cloud.Logging.V2.SinkNameOneof,Google.Cloud.Logging.V2.LogSink,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateSink(SinkNameOneof, LogSink, FieldMask, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates a sink.  This method replaces the following fields in the existing
+sink with values from the new sink: <code>destination</code>, and <code>filter</code>.
+The updated sink might also have a new <code>writer_identity</code>; see the
+<code>unique_writer_identity</code> field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual LogSink UpdateSink(SinkNameOneof sinkName, LogSink sink, FieldMask updateMask, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.SinkNameOneof.html">SinkNameOneof</a></td>
+        <td><span class="parametername">sinkName</span></td>
+        <td><p>Required. The full resource name of the sink to update, including the
+parent resource and the sink identifier:</p>
+<p>&quot;projects/[PROJECT_ID]/sinks/[SINK_ID]&quot;
+&quot;organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]&quot;
+&quot;billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]&quot;
+&quot;folders/[FOLDER_ID]/sinks/[SINK_ID]&quot;</p>
+<p>Example: <code>&amp;quot;projects/my-project-id/sinks/my-sink-id&amp;quot;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a></td>
+        <td><span class="parametername">sink</span></td>
+        <td><p>Required. The updated sink, whose name is the same identifier that appears
+as part of <code>sink_name</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Optional. Field mask that specifies the fields in <code>sink</code> that need
+an update. A sink field will be overwritten if, and only if, it is
+in the update mask.  <code>name</code> and output only fields cannot be updated.</p>
+<p>An empty updateMask is temporarily treated as using the following mask
+for backwards compatibility purposes:
+destination,filter,includeChildren
+At some point in the future, behavior will be removed and specifying an
+empty updateMask will be an error.</p>
+<p>For a detailed <code>FieldMask</code> definition, see
+<a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask">https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask</a></p>
+<p>Example: <code>updateMask=filter</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSink_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = ConfigServiceV2Client.Create();
+// Initialize request argument(s)
+SinkNameOneof sinkName = SinkNameOneof.From(new SinkName(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;));
+LogSink sink = new LogSink();
+FieldMask updateMask = new FieldMask();
+// Make the request
+LogSink response = configServiceV2Client.UpdateSink(sinkName, sink, updateMask);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSink_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSink*"></a>
@@ -3686,6 +4267,192 @@ LogSink response = await configServiceV2Client.UpdateSinkAsync(sinkName, sink);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync(Google.Cloud.Logging.V2.SinkNameOneof,Google.Cloud.Logging.V2.LogSink,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateSinkAsync(SinkNameOneof, LogSink, FieldMask, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates a sink.  This method replaces the following fields in the existing
+sink with values from the new sink: <code>destination</code>, and <code>filter</code>.
+The updated sink might also have a new <code>writer_identity</code>; see the
+<code>unique_writer_identity</code> field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogSink&gt; UpdateSinkAsync(SinkNameOneof sinkName, LogSink sink, FieldMask updateMask, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.SinkNameOneof.html">SinkNameOneof</a></td>
+        <td><span class="parametername">sinkName</span></td>
+        <td><p>Required. The full resource name of the sink to update, including the
+parent resource and the sink identifier:</p>
+<p>&quot;projects/[PROJECT_ID]/sinks/[SINK_ID]&quot;
+&quot;organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]&quot;
+&quot;billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]&quot;
+&quot;folders/[FOLDER_ID]/sinks/[SINK_ID]&quot;</p>
+<p>Example: <code>&amp;quot;projects/my-project-id/sinks/my-sink-id&amp;quot;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a></td>
+        <td><span class="parametername">sink</span></td>
+        <td><p>Required. The updated sink, whose name is the same identifier that appears
+as part of <code>sink_name</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Optional. Field mask that specifies the fields in <code>sink</code> that need
+an update. A sink field will be overwritten if, and only if, it is
+in the update mask.  <code>name</code> and output only fields cannot be updated.</p>
+<p>An empty updateMask is temporarily treated as using the following mask
+for backwards compatibility purposes:
+destination,filter,includeChildren
+At some point in the future, behavior will be removed and specifying an
+empty updateMask will be an error.</p>
+<p>For a detailed <code>FieldMask</code> definition, see
+<a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask">https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask</a></p>
+<p>Example: <code>updateMask=filter</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+SinkNameOneof sinkName = SinkNameOneof.From(new SinkName(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;));
+LogSink sink = new LogSink();
+FieldMask updateMask = new FieldMask();
+// Make the request
+LogSink response = await configServiceV2Client.UpdateSinkAsync(sinkName, sink, updateMask);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync(Google.Cloud.Logging.V2.SinkNameOneof,Google.Cloud.Logging.V2.LogSink,Google.Protobuf.WellKnownTypes.FieldMask,System.Threading.CancellationToken)">UpdateSinkAsync(SinkNameOneof, LogSink, FieldMask, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates a sink.  This method replaces the following fields in the existing
+sink with values from the new sink: <code>destination</code>, and <code>filter</code>.
+The updated sink might also have a new <code>writer_identity</code>; see the
+<code>unique_writer_identity</code> field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogSink&gt; UpdateSinkAsync(SinkNameOneof sinkName, LogSink sink, FieldMask updateMask, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.SinkNameOneof.html">SinkNameOneof</a></td>
+        <td><span class="parametername">sinkName</span></td>
+        <td><p>Required. The full resource name of the sink to update, including the
+parent resource and the sink identifier:</p>
+<p>&quot;projects/[PROJECT_ID]/sinks/[SINK_ID]&quot;
+&quot;organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]&quot;
+&quot;billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]&quot;
+&quot;folders/[FOLDER_ID]/sinks/[SINK_ID]&quot;</p>
+<p>Example: <code>&amp;quot;projects/my-project-id/sinks/my-sink-id&amp;quot;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a></td>
+        <td><span class="parametername">sink</span></td>
+        <td><p>Required. The updated sink, whose name is the same identifier that appears
+as part of <code>sink_name</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Optional. Field mask that specifies the fields in <code>sink</code> that need
+an update. A sink field will be overwritten if, and only if, it is
+in the update mask.  <code>name</code> and output only fields cannot be updated.</p>
+<p>An empty updateMask is temporarily treated as using the following mask
+for backwards compatibility purposes:
+destination,filter,includeChildren
+At some point in the future, behavior will be removed and specifying an
+empty updateMask will be an error.</p>
+<p>For a detailed <code>FieldMask</code> definition, see
+<a href="https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask">https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask</a></p>
+<p>Example: <code>updateMask=filter</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+SinkNameOneof sinkName = SinkNameOneof.From(new SinkName(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;));
+LogSink sink = new LogSink();
+FieldMask updateMask = new FieldMask();
+// Make the request
+LogSink response = await configServiceV2Client.UpdateSinkAsync(sinkName, sink, updateMask);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync*"></a>
   <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_SinkNameOneof_Google_Cloud_Logging_V2_LogSink_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync(Google.Cloud.Logging.V2.SinkNameOneof,Google.Cloud.Logging.V2.LogSink,System.Threading.CancellationToken)">UpdateSinkAsync(SinkNameOneof, LogSink, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Updates a sink.  This method replaces the following fields in the existing
 sink with values from the new sink: <code>destination</code>, and <code>filter</code>.
@@ -3815,6 +4582,72 @@ The updated sink might also have a new <code>writer_identity</code>; see the
   </table>
   <div>
   <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_UpdateSinkRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
+// Initialize request argument(s)
+UpdateSinkRequest request = new UpdateSinkRequest
+{
+    SinkNameAsSinkNameOneof = SinkNameOneof.From(new SinkName(&quot;[PROJECT]&quot;, &quot;[SINK]&quot;)),
+    Sink = new LogSink(),
+};
+// Make the request
+LogSink response = await configServiceV2Client.UpdateSinkAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync*"></a>
+  <h4 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_UpdateSinkRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Logging.V2.ConfigServiceV2Client.UpdateSinkAsync(Google.Cloud.Logging.V2.UpdateSinkRequest,System.Threading.CancellationToken)">UpdateSinkAsync(UpdateSinkRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates a sink.  This method replaces the following fields in the existing
+sink with values from the new sink: <code>destination</code>, and <code>filter</code>.
+The updated sink might also have a new <code>writer_identity</code>; see the
+<code>unique_writer_identity</code> field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LogSink&gt; UpdateSinkAsync(UpdateSinkRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.UpdateSinkRequest.html">UpdateSinkRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Logging_V2_ConfigServiceV2Client_UpdateSinkAsync_Google_Cloud_Logging_V2_UpdateSinkRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ConfigServiceV2Client configServiceV2Client = await ConfigServiceV2Client.CreateAsync();
 // Initialize request argument(s)

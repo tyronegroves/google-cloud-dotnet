@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class LogEntry
    | Google.Cloud.Logging.V2 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -109,6 +109,41 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class LogEntry : IMessage&lt;LogEntry&gt;, IMessage, IEquatable&lt;LogEntry&gt;, IDeepCloneable&lt;LogEntry&gt;</code></pre>
   </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Google_Cloud_Logging_V2_LogEntry__ctor_" data-uid="Google.Cloud.Logging.V2.LogEntry.#ctor*"></a>
+  <h4 id="Google_Cloud_Logging_V2_LogEntry__ctor" data-uid="Google.Cloud.Logging.V2.LogEntry.#ctor">LogEntry()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LogEntry()</code></pre>
+  </div>
+  <a id="Google_Cloud_Logging_V2_LogEntry__ctor_" data-uid="Google.Cloud.Logging.V2.LogEntry.#ctor*"></a>
+  <h4 id="Google_Cloud_Logging_V2_LogEntry__ctor_Google_Cloud_Logging_V2_LogEntry_" data-uid="Google.Cloud.Logging.V2.LogEntry.#ctor(Google.Cloud.Logging.V2.LogEntry)">LogEntry(LogEntry)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LogEntry(LogEntry other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html">LogEntry</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <a id="Google_Cloud_Logging_V2_LogEntry_HttpRequest_" data-uid="Google.Cloud.Logging.V2.LogEntry.HttpRequest*"></a>
@@ -280,6 +315,32 @@ any results.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Logging_V2_LogEntry_Metadata_" data-uid="Google.Cloud.Logging.V2.LogEntry.Metadata*"></a>
+  <h4 id="Google_Cloud_Logging_V2_LogEntry_Metadata" data-uid="Google.Cloud.Logging.V2.LogEntry.Metadata">Metadata</h4>
+  <div class="markdown level1 summary"><p>Output only. Additional metadata about the monitored resource.
+Only <code>k8s_container</code>, <code>k8s_pod</code>, and <code>k8s_node</code> MonitoredResources have
+this field populated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MonitoredResourceMetadata Metadata { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.MonitoredResourceMetadata</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_Operation_" data-uid="Google.Cloud.Logging.V2.LogEntry.Operation*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_Operation" data-uid="Google.Cloud.Logging.V2.LogEntry.Operation">Operation</h4>
   <div class="markdown level1 summary"><p>Optional. Information about an operation associated with the log entry, if
@@ -380,7 +441,7 @@ entry payloads.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_Resource_" data-uid="Google.Cloud.Logging.V2.LogEntry.Resource*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_Resource" data-uid="Google.Cloud.Logging.V2.LogEntry.Resource">Resource</h4>
-  <div class="markdown level1 summary"><p>Required. The monitored resource associated with this log entry.
+  <div class="markdown level1 summary"><p>Required. The primary monitored resource associated with this log entry.
 Example: a log entry that reports a database error would be
 associated with the monitored resource designating the particular
 database that reported the error.</p>
@@ -457,11 +518,10 @@ if any.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_SpanId_" data-uid="Google.Cloud.Logging.V2.LogEntry.SpanId*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_SpanId" data-uid="Google.Cloud.Logging.V2.LogEntry.SpanId">SpanId</h4>
-  <div class="markdown level1 summary"><p>Optional. Id of the span within the trace associated with the log entry.
-e.g. &quot;0000000000000042&quot;
-For Stackdriver trace spans, this is the same format that the Stackdriver
-trace API uses.
-The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
+  <div class="markdown level1 summary"><p>Optional. The span ID within the trace associated with the log entry. For
+Stackdriver Trace spans, this is the same format that the Stackdriver Trace
+API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such
+as &lt;code&gt;&quot;000000000000004a&quot;&lt;/code&gt;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -512,11 +572,15 @@ The ID is a 16-character hexadecimal encoding of an 8-byte array.</p>
   <div class="markdown level1 summary"><p>Optional. The time the event described by the log entry occurred.
 This time is used to compute the log entry&apos;s age and to enforce
 the logs retention period. If this field is omitted in a new log
-entry, then Stackdriver Logging assigns it the current time.</p>
+entry, then Stackdriver Logging assigns it the current time.
+Timestamps have nanosecond accuracy, but trailing zeros in the fractional
+seconds might be omitted when the timestamp is displayed.</p>
 <p>Incoming log entries should have timestamps that are no more than
-the <a href="/logging/quota-policy">logs retention period</a> in the past,
-and no more than 24 hours in the future.
-See the <code>entries.write</code> API method for more information.</p>
+the <a href="/logging/quotas">logs retention period</a> in the past,
+and no more than 24 hours in the future. Log entries outside those time
+boundaries will not be available when calling <code>entries.list</code>, but
+those log entries can still be exported with
+<a href="/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
