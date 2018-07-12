@@ -8,7 +8,7 @@
     <title>Google.Cloud.Logging.Log4Net | Google.Cloud.Logging.Log4Net </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Logging.Log4Net | Google.Cloud.Logging.Log4Net ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -65,16 +65,17 @@
 <p><code>Google.Cloud.Logging.Log4Net</code> is a .NET client library to integrate  <a href="https://cloud.google.com/logging/">Google Stackdriver
 Logging</a> with
 <a href="https://logging.apache.org/log4net/">log4net</a>.</p>
+<p>Note:
+This documentation is for version <code>2.3.0-beta01</code> of the library.
+Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
-<p>Install the <code>Google.Cloud.Logging.Log4Net</code> package from NuGet. Add it to
-your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
 <p>Install the <code>Google.Cloud.Logging.Log4Net</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
 project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
-box).</p>
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>2.3.0-beta01</code>) of <code>Google.Cloud.Logging.Log4Net</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -116,7 +117,10 @@ Authentication</a> guide for more details.</p>
 ID, and <code>LOG_ID</code> with an identifier for your application.</p>
 <pre><code class="lang-cs">// Load log4net configuration from Web.config
 log4net.Config.XmlConfigurator.Configure(LogManager.GetRepository(GetType().GetTypeInfo().Assembly));
-</code></pre><p>If executing on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a> or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>, then the <code>&lt;projectId value=&quot;PROJECT_ID&quot; /&gt;</code> configuration setting can be omitted; it will be auto-detected from the platform at run-time.</p>
+</code></pre><p>If executing on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a>,
+<a href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine (GKE)</a>,
+or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>,
+then the <code>&lt;projectId value=&quot;PROJECT_ID&quot; /&gt;</code> configuration setting can be omitted; it will be auto-detected from the platform at run-time.</p>
 <h2 id="console-app">Console app</h2>
 <p>Create a <code>log4net</code> configuration file (<code>log4net.xml</code>):</p>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
@@ -151,7 +155,10 @@ log.Info(&quot;An exciting log entry!&quot;);
 bool flushCompleted = LogManager.Flush(10_000);
 // On .NET Core, the specific repository needs to be flushed:
 bool repositoryFlushCompleted = ((IFlushable)LogManager.GetRepository(GetType().GetTypeInfo().Assembly)).Flush(10_000);
-</code></pre><p>If executing on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a> or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>, then the <code>&lt;projectId value=&quot;PROJECT_ID&quot; /&gt;</code> configuration setting can be omitted; it will be auto-detected from the platform at run-time.</p>
+</code></pre><p>If executing on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a>,
+<a href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine (GKE)</a>,
+or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>,
+then the <code>&lt;projectId value=&quot;PROJECT_ID&quot; /&gt;</code> configuration setting can be omitted; it will be auto-detected from the platform at run-time.</p>
 </article>
           </div>
           
