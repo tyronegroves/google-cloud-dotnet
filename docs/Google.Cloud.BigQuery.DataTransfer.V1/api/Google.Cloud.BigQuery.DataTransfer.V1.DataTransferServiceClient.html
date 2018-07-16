@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class DataTransferServiceClient
    | Google.Cloud.BigQuery.DataTransfer.V1 ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -244,7 +244,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 CheckValidCredsRequest request = new CheckValidCredsRequest
 {
-    DataSourceNameOneof = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;)),
+    DataSourceNameOneof = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;)),
 };
 // Make the request
 CheckValidCredsResponse response = dataTransferServiceClient.CheckValidCreds(request);
@@ -310,7 +310,7 @@ create a transfer config.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-DataSourceNameOneof name = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;));
+DataSourceNameOneof name = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;));
 // Make the request
 CheckValidCredsResponse response = dataTransferServiceClient.CheckValidCreds(name);
 </code></pre></div>
@@ -376,7 +376,74 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 CheckValidCredsRequest request = new CheckValidCredsRequest
 {
-    DataSourceNameOneof = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;)),
+    DataSourceNameOneof = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;)),
+};
+// Make the request
+CheckValidCredsResponse response = await dataTransferServiceClient.CheckValidCredsAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CheckValidCredsAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.CheckValidCredsAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CheckValidCredsAsync_Google_Cloud_BigQuery_DataTransfer_V1_CheckValidCredsRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.CheckValidCredsAsync(Google.Cloud.BigQuery.DataTransfer.V1.CheckValidCredsRequest,System.Threading.CancellationToken)">CheckValidCredsAsync(CheckValidCredsRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns true if valid credentials exist for the given data source and
+requesting user.
+Some data sources doesn&apos;t support service account, so we need to talk to
+them on behalf of the end user. This API just checks whether we have OAuth
+token for the particular user, which is a pre-requisite before user can
+create a transfer config.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CheckValidCredsResponse&gt; CheckValidCredsAsync(CheckValidCredsRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.CheckValidCredsRequest.html">CheckValidCredsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.CheckValidCredsResponse.html">CheckValidCredsResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CheckValidCredsAsync_Google_Cloud_BigQuery_DataTransfer_V1_CheckValidCredsRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+CheckValidCredsRequest request = new CheckValidCredsRequest
+{
+    DataSourceNameOneof = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;)),
 };
 // Make the request
 CheckValidCredsResponse response = await dataTransferServiceClient.CheckValidCredsAsync(request);
@@ -442,7 +509,7 @@ create a transfer config.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-DataSourceNameOneof name = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;));
+DataSourceNameOneof name = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;));
 // Make the request
 CheckValidCredsResponse response = await dataTransferServiceClient.CheckValidCredsAsync(name);
 </code></pre></div>
@@ -507,7 +574,7 @@ create a transfer config.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-DataSourceNameOneof name = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;));
+DataSourceNameOneof name = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;));
 // Make the request
 CheckValidCredsResponse response = await dataTransferServiceClient.CheckValidCredsAsync(name);
 </code></pre></div>
@@ -516,7 +583,7 @@ CheckValidCredsResponse response = await dataTransferServiceClient.CheckValidCre
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceSettings)">Create(ServiceEndpoint, DataTransferServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.html">DataTransferServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -563,6 +630,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.BigQuery.DataTransfer.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+DataTransferServiceClient client = DataTransferServiceClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.BigQuery.DataTransfer.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    DataTransferServiceClient.DefaultEndpoint.Host, DataTransferServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+DataTransferServiceClient client = DataTransferServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_Create_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.Create*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_Create_Grpc_Core_Channel_Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.Create(Grpc.Core.Channel,Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceSettings)">Create(Channel, DataTransferServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.html">DataTransferServiceClient</a> which uses the specified channel for remote operations.</p>
@@ -616,7 +705,7 @@ necessary.</p>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceSettings)">CreateAsync(ServiceEndpoint, DataTransferServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.html">DataTransferServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -663,6 +752,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.BigQuery.DataTransfer.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+DataTransferServiceClient client = await DataTransferServiceClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.BigQuery.DataTransfer.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    DataTransferServiceClient.DefaultEndpoint.Host, DataTransferServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+DataTransferServiceClient client = DataTransferServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CreateTransferConfig_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.CreateTransferConfig*"></a>
   <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CreateTransferConfig_Google_Cloud_BigQuery_DataTransfer_V1_CreateTransferConfigRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.CreateTransferConfig(Google.Cloud.BigQuery.DataTransfer.V1.CreateTransferConfigRequest,Google.Api.Gax.Grpc.CallSettings)">CreateTransferConfig(CreateTransferConfigRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new data transfer configuration.</p>
@@ -719,7 +830,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 CreateTransferConfigRequest request = new CreateTransferConfigRequest
 {
-    ParentAsParentNameOneof = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)),
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
     TransferConfig = new TransferConfig(),
 };
 // Make the request
@@ -789,7 +900,7 @@ do not match - the request will fail.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-ParentNameOneof parent = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;));
+ParentNameOneof parent = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;));
 TransferConfig transferConfig = new TransferConfig();
 // Make the request
 TransferConfig response = dataTransferServiceClient.CreateTransferConfig(parent, transferConfig);
@@ -851,7 +962,70 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 CreateTransferConfigRequest request = new CreateTransferConfigRequest
 {
-    ParentAsParentNameOneof = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)),
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
+    TransferConfig = new TransferConfig(),
+};
+// Make the request
+TransferConfig response = await dataTransferServiceClient.CreateTransferConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CreateTransferConfigAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.CreateTransferConfigAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CreateTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_CreateTransferConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.CreateTransferConfigAsync(Google.Cloud.BigQuery.DataTransfer.V1.CreateTransferConfigRequest,System.Threading.CancellationToken)">CreateTransferConfigAsync(CreateTransferConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a new data transfer configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TransferConfig&gt; CreateTransferConfigAsync(CreateTransferConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.CreateTransferConfigRequest.html">CreateTransferConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.TransferConfig.html">TransferConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_CreateTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_CreateTransferConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+CreateTransferConfigRequest request = new CreateTransferConfigRequest
+{
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
     TransferConfig = new TransferConfig(),
 };
 // Make the request
@@ -921,7 +1095,7 @@ do not match - the request will fail.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-ParentNameOneof parent = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;));
+ParentNameOneof parent = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;));
 TransferConfig transferConfig = new TransferConfig();
 // Make the request
 TransferConfig response = await dataTransferServiceClient.CreateTransferConfigAsync(parent, transferConfig);
@@ -990,7 +1164,7 @@ do not match - the request will fail.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-ParentNameOneof parent = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;));
+ParentNameOneof parent = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;));
 TransferConfig transferConfig = new TransferConfig();
 // Make the request
 TransferConfig response = await dataTransferServiceClient.CreateTransferConfigAsync(parent, transferConfig);
@@ -1037,7 +1211,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 DeleteTransferConfigRequest request = new DeleteTransferConfigRequest
 {
-    TransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    TransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
 };
 // Make the request
 dataTransferServiceClient.DeleteTransferConfig(request);
@@ -1083,7 +1257,7 @@ including any associated transfer runs and logs.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-TransferConfigNameOneof name = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof name = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 dataTransferServiceClient.DeleteTransferConfig(name);
 </code></pre></div>
@@ -1133,7 +1307,7 @@ including any associated transfer runs and logs.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1145,7 +1319,70 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 DeleteTransferConfigRequest request = new DeleteTransferConfigRequest
 {
-    TransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    TransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+};
+// Make the request
+await dataTransferServiceClient.DeleteTransferConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_DeleteTransferConfigAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.DeleteTransferConfigAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_DeleteTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_DeleteTransferConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.DeleteTransferConfigAsync(Google.Cloud.BigQuery.DataTransfer.V1.DeleteTransferConfigRequest,System.Threading.CancellationToken)">DeleteTransferConfigAsync(DeleteTransferConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a data transfer configuration,
+including any associated transfer runs and logs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteTransferConfigAsync(DeleteTransferConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DeleteTransferConfigRequest.html">DeleteTransferConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_DeleteTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_DeleteTransferConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+DeleteTransferConfigRequest request = new DeleteTransferConfigRequest
+{
+    TransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
 };
 // Make the request
 await dataTransferServiceClient.DeleteTransferConfigAsync(request);
@@ -1197,7 +1434,7 @@ including any associated transfer runs and logs.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1207,7 +1444,7 @@ including any associated transfer runs and logs.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-TransferConfigNameOneof name = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof name = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 await dataTransferServiceClient.DeleteTransferConfigAsync(name);
 </code></pre></div>
@@ -1258,7 +1495,7 @@ including any associated transfer runs and logs.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1268,7 +1505,7 @@ including any associated transfer runs and logs.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-TransferConfigNameOneof name = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof name = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 await dataTransferServiceClient.DeleteTransferConfigAsync(name);
 </code></pre></div>
@@ -1313,7 +1550,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 DeleteTransferRunRequest request = new DeleteTransferRunRequest
 {
-    RunNameOneof = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+    RunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
 };
 // Make the request
 dataTransferServiceClient.DeleteTransferRun(request);
@@ -1358,7 +1595,7 @@ dataTransferServiceClient.DeleteTransferRun(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-RunNameOneof name = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof name = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 dataTransferServiceClient.DeleteTransferRun(name);
 </code></pre></div>
@@ -1407,7 +1644,7 @@ dataTransferServiceClient.DeleteTransferRun(name);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1419,7 +1656,69 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 DeleteTransferRunRequest request = new DeleteTransferRunRequest
 {
-    RunNameOneof = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+    RunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+};
+// Make the request
+await dataTransferServiceClient.DeleteTransferRunAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_DeleteTransferRunAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.DeleteTransferRunAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_DeleteTransferRunAsync_Google_Cloud_BigQuery_DataTransfer_V1_DeleteTransferRunRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.DeleteTransferRunAsync(Google.Cloud.BigQuery.DataTransfer.V1.DeleteTransferRunRequest,System.Threading.CancellationToken)">DeleteTransferRunAsync(DeleteTransferRunRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes the specified transfer run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteTransferRunAsync(DeleteTransferRunRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DeleteTransferRunRequest.html">DeleteTransferRunRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_DeleteTransferRunAsync_Google_Cloud_BigQuery_DataTransfer_V1_DeleteTransferRunRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+DeleteTransferRunRequest request = new DeleteTransferRunRequest
+{
+    RunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
 };
 // Make the request
 await dataTransferServiceClient.DeleteTransferRunAsync(request);
@@ -1470,7 +1769,7 @@ await dataTransferServiceClient.DeleteTransferRunAsync(request);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1480,7 +1779,7 @@ await dataTransferServiceClient.DeleteTransferRunAsync(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-RunNameOneof name = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof name = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 await dataTransferServiceClient.DeleteTransferRunAsync(name);
 </code></pre></div>
@@ -1530,7 +1829,7 @@ await dataTransferServiceClient.DeleteTransferRunAsync(name);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1540,7 +1839,7 @@ await dataTransferServiceClient.DeleteTransferRunAsync(name);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-RunNameOneof name = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof name = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 await dataTransferServiceClient.DeleteTransferRunAsync(name);
 </code></pre></div>
@@ -1601,7 +1900,7 @@ which can be used for UI rendering.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-DataSourceNameOneof name = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;));
+DataSourceNameOneof name = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;));
 // Make the request
 DataSource response = dataTransferServiceClient.GetDataSource(name);
 </code></pre></div>
@@ -1663,7 +1962,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 GetDataSourceRequest request = new GetDataSourceRequest
 {
-    DataSourceNameOneof = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;)),
+    DataSourceNameOneof = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;)),
 };
 // Make the request
 DataSource response = dataTransferServiceClient.GetDataSource(request);
@@ -1725,7 +2024,7 @@ which can be used for UI rendering.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-DataSourceNameOneof name = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;));
+DataSourceNameOneof name = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;));
 // Make the request
 DataSource response = await dataTransferServiceClient.GetDataSourceAsync(name);
 </code></pre></div>
@@ -1786,7 +2085,7 @@ which can be used for UI rendering.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-DataSourceNameOneof name = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;));
+DataSourceNameOneof name = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;));
 // Make the request
 DataSource response = await dataTransferServiceClient.GetDataSourceAsync(name);
 </code></pre></div>
@@ -1848,7 +2147,70 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 GetDataSourceRequest request = new GetDataSourceRequest
 {
-    DataSourceNameOneof = DataSourceNameOneof.From(new LocationDataSourceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[DATA_SOURCE]&quot;)),
+    DataSourceNameOneof = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;)),
+};
+// Make the request
+DataSource response = await dataTransferServiceClient.GetDataSourceAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetDataSourceAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GetDataSourceAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetDataSourceAsync_Google_Cloud_BigQuery_DataTransfer_V1_GetDataSourceRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GetDataSourceAsync(Google.Cloud.BigQuery.DataTransfer.V1.GetDataSourceRequest,System.Threading.CancellationToken)">GetDataSourceAsync(GetDataSourceRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Retrieves a supported data source and returns its settings,
+which can be used for UI rendering.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DataSource&gt; GetDataSourceAsync(GetDataSourceRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.GetDataSourceRequest.html">GetDataSourceRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DataSource.html">DataSource</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetDataSourceAsync_Google_Cloud_BigQuery_DataTransfer_V1_GetDataSourceRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetDataSourceRequest request = new GetDataSourceRequest
+{
+    DataSourceNameOneof = DataSourceNameOneof.From(new ProjectDataSourceName(&quot;[PROJECT]&quot;, &quot;[DATA_SOURCE]&quot;)),
 };
 // Make the request
 DataSource response = await dataTransferServiceClient.GetDataSourceAsync(request);
@@ -1910,7 +2272,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 GetTransferConfigRequest request = new GetTransferConfigRequest
 {
-    TransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    TransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
 };
 // Make the request
 TransferConfig response = dataTransferServiceClient.GetTransferConfig(request);
@@ -1971,7 +2333,7 @@ TransferConfig response = dataTransferServiceClient.GetTransferConfig(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-TransferConfigNameOneof name = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof name = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 TransferConfig response = dataTransferServiceClient.GetTransferConfig(name);
 </code></pre></div>
@@ -2032,7 +2394,69 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 GetTransferConfigRequest request = new GetTransferConfigRequest
 {
-    TransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    TransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+};
+// Make the request
+TransferConfig response = await dataTransferServiceClient.GetTransferConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetTransferConfigAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GetTransferConfigAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_GetTransferConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GetTransferConfigAsync(Google.Cloud.BigQuery.DataTransfer.V1.GetTransferConfigRequest,System.Threading.CancellationToken)">GetTransferConfigAsync(GetTransferConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns information about a data transfer config.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TransferConfig&gt; GetTransferConfigAsync(GetTransferConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.GetTransferConfigRequest.html">GetTransferConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.TransferConfig.html">TransferConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_GetTransferConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetTransferConfigRequest request = new GetTransferConfigRequest
+{
+    TransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
 };
 // Make the request
 TransferConfig response = await dataTransferServiceClient.GetTransferConfigAsync(request);
@@ -2093,7 +2517,7 @@ TransferConfig response = await dataTransferServiceClient.GetTransferConfigAsync
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-TransferConfigNameOneof name = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof name = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 TransferConfig response = await dataTransferServiceClient.GetTransferConfigAsync(name);
 </code></pre></div>
@@ -2153,7 +2577,7 @@ TransferConfig response = await dataTransferServiceClient.GetTransferConfigAsync
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-TransferConfigNameOneof name = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof name = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 TransferConfig response = await dataTransferServiceClient.GetTransferConfigAsync(name);
 </code></pre></div>
@@ -2214,7 +2638,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 GetTransferRunRequest request = new GetTransferRunRequest
 {
-    RunNameOneof = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+    RunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
 };
 // Make the request
 TransferRun response = dataTransferServiceClient.GetTransferRun(request);
@@ -2275,7 +2699,7 @@ TransferRun response = dataTransferServiceClient.GetTransferRun(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-RunNameOneof name = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof name = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 TransferRun response = dataTransferServiceClient.GetTransferRun(name);
 </code></pre></div>
@@ -2336,7 +2760,69 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 GetTransferRunRequest request = new GetTransferRunRequest
 {
-    RunNameOneof = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+    RunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+};
+// Make the request
+TransferRun response = await dataTransferServiceClient.GetTransferRunAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetTransferRunAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GetTransferRunAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetTransferRunAsync_Google_Cloud_BigQuery_DataTransfer_V1_GetTransferRunRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.GetTransferRunAsync(Google.Cloud.BigQuery.DataTransfer.V1.GetTransferRunRequest,System.Threading.CancellationToken)">GetTransferRunAsync(GetTransferRunRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns information about the particular transfer run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TransferRun&gt; GetTransferRunAsync(GetTransferRunRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.GetTransferRunRequest.html">GetTransferRunRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.TransferRun.html">TransferRun</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_GetTransferRunAsync_Google_Cloud_BigQuery_DataTransfer_V1_GetTransferRunRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetTransferRunRequest request = new GetTransferRunRequest
+{
+    RunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
 };
 // Make the request
 TransferRun response = await dataTransferServiceClient.GetTransferRunAsync(request);
@@ -2397,7 +2883,7 @@ TransferRun response = await dataTransferServiceClient.GetTransferRunAsync(reque
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-RunNameOneof name = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof name = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 TransferRun response = await dataTransferServiceClient.GetTransferRunAsync(name);
 </code></pre></div>
@@ -2457,7 +2943,7 @@ TransferRun response = await dataTransferServiceClient.GetTransferRunAsync(name)
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-RunNameOneof name = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof name = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 TransferRun response = await dataTransferServiceClient.GetTransferRunAsync(name);
 </code></pre></div>
@@ -2519,7 +3005,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 ListDataSourcesRequest request = new ListDataSourcesRequest
 {
-    ParentAsParentNameOneof = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)),
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
 };
 // Make the request
 PagedEnumerable&lt;ListDataSourcesResponse, DataSource&gt; response =
@@ -2564,7 +3050,7 @@ which can be used for UI rendering.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListDataSourcesResponse, DataSource&gt; ListDataSources(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListDataSourcesResponse, DataSource&gt; ListDataSources(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2626,7 +3112,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-ParentNameOneof parent = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;));
+ParentNameOneof parent = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;));
 // Make the request
 PagedEnumerable&lt;ListDataSourcesResponse, DataSource&gt; response =
     dataTransferServiceClient.ListDataSources(parent);
@@ -2719,7 +3205,7 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 ListDataSourcesRequest request = new ListDataSourcesRequest
 {
-    ParentAsParentNameOneof = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)),
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListDataSourcesResponse, DataSource&gt; response =
@@ -2764,7 +3250,7 @@ which can be used for UI rendering.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListDataSourcesResponse, DataSource&gt; ListDataSourcesAsync(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListDataSourcesResponse, DataSource&gt; ListDataSourcesAsync(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2826,7 +3312,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-ParentNameOneof parent = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;));
+ParentNameOneof parent = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;));
 // Make the request
 PagedAsyncEnumerable&lt;ListDataSourcesResponse, DataSource&gt; response =
     dataTransferServiceClient.ListDataSourcesAsync(parent);
@@ -2918,7 +3404,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 ListTransferConfigsRequest request = new ListTransferConfigsRequest
 {
-    ParentAsParentNameOneof = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)),
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
 };
 // Make the request
 PagedEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; response =
@@ -2962,7 +3448,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; ListTransferConfigs(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; ListTransferConfigs(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3024,7 +3510,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-ParentNameOneof parent = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;));
+ParentNameOneof parent = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;));
 // Make the request
 PagedEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; response =
     dataTransferServiceClient.ListTransferConfigs(parent);
@@ -3116,7 +3602,7 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 ListTransferConfigsRequest request = new ListTransferConfigsRequest
 {
-    ParentAsParentNameOneof = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;)),
+    ParentAsParentNameOneof = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;)),
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; response =
@@ -3160,7 +3646,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; ListTransferConfigsAsync(ParentNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; ListTransferConfigsAsync(ParentNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3222,7 +3708,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-ParentNameOneof parent = ParentNameOneof.From(new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;));
+ParentNameOneof parent = ParentNameOneof.From(new ProjectName(&quot;[PROJECT]&quot;));
 // Make the request
 PagedAsyncEnumerable&lt;ListTransferConfigsResponse, TransferConfig&gt; response =
     dataTransferServiceClient.ListTransferConfigsAsync(parent);
@@ -3314,7 +3800,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 ListTransferLogsRequest request = new ListTransferLogsRequest
 {
-    ParentAsRunNameOneof = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+    ParentAsRunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
 };
 // Make the request
 PagedEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; response =
@@ -3358,7 +3844,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; ListTransferLogs(RunNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; ListTransferLogs(RunNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3420,7 +3906,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-RunNameOneof parent = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof parent = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 PagedEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; response =
     dataTransferServiceClient.ListTransferLogs(parent);
@@ -3512,7 +3998,7 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 ListTransferLogsRequest request = new ListTransferLogsRequest
 {
-    ParentAsRunNameOneof = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
+    ParentAsRunNameOneof = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;)),
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; response =
@@ -3556,7 +4042,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; ListTransferLogsAsync(RunNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; ListTransferLogsAsync(RunNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3618,7 +4104,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-RunNameOneof parent = RunNameOneof.From(new LocationRunName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
+RunNameOneof parent = RunNameOneof.From(new ProjectRunName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;, &quot;[RUN]&quot;));
 // Make the request
 PagedAsyncEnumerable&lt;ListTransferLogsResponse, TransferMessage&gt; response =
     dataTransferServiceClient.ListTransferLogsAsync(parent);
@@ -3710,7 +4196,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 ListTransferRunsRequest request = new ListTransferRunsRequest
 {
-    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
 };
 // Make the request
 PagedEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; response =
@@ -3754,7 +4240,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; ListTransferRuns(TransferConfigNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; ListTransferRuns(TransferConfigNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3817,7 +4303,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-TransferConfigNameOneof parent = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof parent = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 PagedEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; response =
     dataTransferServiceClient.ListTransferRuns(parent);
@@ -3909,7 +4395,7 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 ListTransferRunsRequest request = new ListTransferRunsRequest
 {
-    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; response =
@@ -3953,7 +4439,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; ListTransferRunsAsync(TransferConfigNameOneof parent, string pageToken = null, int ? pageSize = default (int ? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; ListTransferRunsAsync(TransferConfigNameOneof parent, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4016,7 +4502,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-TransferConfigNameOneof parent = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof parent = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 // Make the request
 PagedAsyncEnumerable&lt;ListTransferRunsResponse, TransferRun&gt; response =
     dataTransferServiceClient.ListTransferRunsAsync(parent);
@@ -4111,7 +4597,7 @@ DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.
 // Initialize request argument(s)
 ScheduleTransferRunsRequest request = new ScheduleTransferRunsRequest
 {
-    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
     StartTime = new Timestamp(),
     EndTime = new Timestamp(),
 };
@@ -4191,7 +4677,7 @@ Note that runs are created per UTC time in the time range.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = DataTransferServiceClient.Create();
 // Initialize request argument(s)
-TransferConfigNameOneof parent = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof parent = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 Timestamp startTime = new Timestamp();
 Timestamp endTime = new Timestamp();
 // Make the request
@@ -4257,7 +4743,74 @@ DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceC
 // Initialize request argument(s)
 ScheduleTransferRunsRequest request = new ScheduleTransferRunsRequest
 {
-    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
+    StartTime = new Timestamp(),
+    EndTime = new Timestamp(),
+};
+// Make the request
+ScheduleTransferRunsResponse response = await dataTransferServiceClient.ScheduleTransferRunsAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_Google_Cloud_BigQuery_DataTransfer_V1_ScheduleTransferRunsRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.ScheduleTransferRunsAsync(Google.Cloud.BigQuery.DataTransfer.V1.ScheduleTransferRunsRequest,System.Threading.CancellationToken)">ScheduleTransferRunsAsync(ScheduleTransferRunsRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates transfer runs for a time range [start_time, end_time].
+For each date - or whatever granularity the data source supports - in the
+range, one transfer run is created.
+Note that runs are created per UTC time in the time range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ScheduleTransferRunsResponse&gt; ScheduleTransferRunsAsync(ScheduleTransferRunsRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.ScheduleTransferRunsRequest.html">ScheduleTransferRunsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.ScheduleTransferRunsResponse.html">ScheduleTransferRunsResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_ScheduleTransferRunsAsync_Google_Cloud_BigQuery_DataTransfer_V1_ScheduleTransferRunsRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+ScheduleTransferRunsRequest request = new ScheduleTransferRunsRequest
+{
+    ParentAsTransferConfigNameOneof = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;)),
     StartTime = new Timestamp(),
     EndTime = new Timestamp(),
 };
@@ -4337,7 +4890,7 @@ Note that runs are created per UTC time in the time range.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-TransferConfigNameOneof parent = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof parent = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 Timestamp startTime = new Timestamp();
 Timestamp endTime = new Timestamp();
 // Make the request
@@ -4416,7 +4969,7 @@ Note that runs are created per UTC time in the time range.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
-TransferConfigNameOneof parent = TransferConfigNameOneof.From(new LocationTransferConfigName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
+TransferConfigNameOneof parent = TransferConfigNameOneof.From(new ProjectTransferConfigName(&quot;[PROJECT]&quot;, &quot;[TRANSFER_CONFIG]&quot;));
 Timestamp startTime = new Timestamp();
 Timestamp endTime = new Timestamp();
 // Make the request
@@ -4772,6 +5325,70 @@ All fields must be set, even if they are not updated.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_UpdateTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_UpdateTransferConfigRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
+// Initialize request argument(s)
+UpdateTransferConfigRequest request = new UpdateTransferConfigRequest
+{
+    TransferConfig = new TransferConfig(),
+    UpdateMask = new FieldMask(),
+};
+// Make the request
+TransferConfig response = await dataTransferServiceClient.UpdateTransferConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_UpdateTransferConfigAsync_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.UpdateTransferConfigAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_UpdateTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_UpdateTransferConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataTransferServiceClient.UpdateTransferConfigAsync(Google.Cloud.BigQuery.DataTransfer.V1.UpdateTransferConfigRequest,System.Threading.CancellationToken)">UpdateTransferConfigAsync(UpdateTransferConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates a data transfer configuration.
+All fields must be set, even if they are not updated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TransferConfig&gt; UpdateTransferConfigAsync(UpdateTransferConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.UpdateTransferConfigRequest.html">UpdateTransferConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.TransferConfig.html">TransferConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataTransferServiceClient_UpdateTransferConfigAsync_Google_Cloud_BigQuery_DataTransfer_V1_UpdateTransferConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 DataTransferServiceClient dataTransferServiceClient = await DataTransferServiceClient.CreateAsync();
 // Initialize request argument(s)
