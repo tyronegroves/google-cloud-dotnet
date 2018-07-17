@@ -771,15 +771,21 @@ await channel.ShutdownAsync();</code></pre>
 
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshot_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshot*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshot_Google_Cloud_PubSub_V1_CreateSnapshotRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshot(Google.Cloud.PubSub.V1.CreateSnapshotRequest,Google.Api.Gax.Grpc.CallSettings)">CreateSnapshot(CreateSnapshotRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.
+  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
 If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
-If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
-<p>If the name is not provided in the request, the server will assign a random
+If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.
+If the backlog in the subscription is too old -- and the resulting snapshot
+would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
+See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
+the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
-to the
-<a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
-The generated name is populated in the returned Snapshot object.
-Note that for REST API requests, you must specify a name in the request.</p>
+to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
+The generated
+name is populated in the returned Snapshot object. Note that for REST API
+requests, you must specify a name in the request.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -842,15 +848,21 @@ Snapshot response = subscriberServiceApiClient.CreateSnapshot(request);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshot_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshot*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshot_Google_Cloud_PubSub_V1_SnapshotName_Google_Cloud_PubSub_V1_SubscriptionName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshot(Google.Cloud.PubSub.V1.SnapshotName,Google.Cloud.PubSub.V1.SubscriptionName,Google.Api.Gax.Grpc.CallSettings)">CreateSnapshot(SnapshotName, SubscriptionName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.
+  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
 If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
-If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
-<p>If the name is not provided in the request, the server will assign a random
+If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.
+If the backlog in the subscription is too old -- and the resulting snapshot
+would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
+See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
+the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
-to the
-<a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
-The generated name is populated in the returned Snapshot object.
-Note that for REST API requests, you must specify a name in the request.</p>
+to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
+The generated
+name is populated in the returned Snapshot object. Note that for REST API
+requests, you must specify a name in the request.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -883,11 +895,11 @@ Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
         <td><p>The subscription whose backlog the snapshot retains.
 Specifically, the created snapshot is guaranteed to retain:
 (a) The existing backlog on the subscription. More precisely, this is
-defined as the messages in the subscription&apos;s backlog that are
-unacknowledged upon the successful completion of the
-<code>CreateSnapshot</code> request; as well as:
+ defined as the messages in the subscription&apos;s backlog that are
+ unacknowledged upon the successful completion of the
+ <code>CreateSnapshot</code> request; as well as:
 (b) Any messages published to the subscription&apos;s topic following the
-successful completion of the CreateSnapshot request.
+ successful completion of the CreateSnapshot request.
 Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </td>
       </tr>
@@ -928,15 +940,21 @@ Snapshot response = subscriberServiceApiClient.CreateSnapshot(name, subscription
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_Google_Cloud_PubSub_V1_CreateSnapshotRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync(Google.Cloud.PubSub.V1.CreateSnapshotRequest,Google.Api.Gax.Grpc.CallSettings)">CreateSnapshotAsync(CreateSnapshotRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.
+  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
 If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
-If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
-<p>If the name is not provided in the request, the server will assign a random
+If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.
+If the backlog in the subscription is too old -- and the resulting snapshot
+would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
+See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
+the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
-to the
-<a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
-The generated name is populated in the returned Snapshot object.
-Note that for REST API requests, you must specify a name in the request.</p>
+to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
+The generated
+name is populated in the returned Snapshot object. Note that for REST API
+requests, you must specify a name in the request.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -999,15 +1017,21 @@ Snapshot response = await subscriberServiceApiClient.CreateSnapshotAsync(request
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_Google_Cloud_PubSub_V1_CreateSnapshotRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync(Google.Cloud.PubSub.V1.CreateSnapshotRequest,System.Threading.CancellationToken)">CreateSnapshotAsync(CreateSnapshotRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.
+  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
 If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
-If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
-<p>If the name is not provided in the request, the server will assign a random
+If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.
+If the backlog in the subscription is too old -- and the resulting snapshot
+would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
+See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
+the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
-to the
-<a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
-The generated name is populated in the returned Snapshot object.
-Note that for REST API requests, you must specify a name in the request.</p>
+to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
+The generated
+name is populated in the returned Snapshot object. Note that for REST API
+requests, you must specify a name in the request.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1070,15 +1094,21 @@ Snapshot response = await subscriberServiceApiClient.CreateSnapshotAsync(request
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_Google_Cloud_PubSub_V1_SnapshotName_Google_Cloud_PubSub_V1_SubscriptionName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync(Google.Cloud.PubSub.V1.SnapshotName,Google.Cloud.PubSub.V1.SubscriptionName,Google.Api.Gax.Grpc.CallSettings)">CreateSnapshotAsync(SnapshotName, SubscriptionName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.
+  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
 If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
-If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
-<p>If the name is not provided in the request, the server will assign a random
+If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.
+If the backlog in the subscription is too old -- and the resulting snapshot
+would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
+See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
+the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
-to the
-<a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
-The generated name is populated in the returned Snapshot object.
-Note that for REST API requests, you must specify a name in the request.</p>
+to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
+The generated
+name is populated in the returned Snapshot object. Note that for REST API
+requests, you must specify a name in the request.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1111,11 +1141,11 @@ Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
         <td><p>The subscription whose backlog the snapshot retains.
 Specifically, the created snapshot is guaranteed to retain:
 (a) The existing backlog on the subscription. More precisely, this is
-defined as the messages in the subscription&apos;s backlog that are
-unacknowledged upon the successful completion of the
-<code>CreateSnapshot</code> request; as well as:
+ defined as the messages in the subscription&apos;s backlog that are
+ unacknowledged upon the successful completion of the
+ <code>CreateSnapshot</code> request; as well as:
 (b) Any messages published to the subscription&apos;s topic following the
-successful completion of the CreateSnapshot request.
+ successful completion of the CreateSnapshot request.
 Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </td>
       </tr>
@@ -1156,15 +1186,21 @@ Snapshot response = await subscriberServiceApiClient.CreateSnapshotAsync(name, s
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSnapshotAsync_Google_Cloud_PubSub_V1_SnapshotName_Google_Cloud_PubSub_V1_SubscriptionName_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSnapshotAsync(Google.Cloud.PubSub.V1.SnapshotName,Google.Cloud.PubSub.V1.SubscriptionName,System.Threading.CancellationToken)">CreateSnapshotAsync(SnapshotName, SubscriptionName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.
+  <div class="markdown level1 summary"><p>Creates a snapshot from the requested subscription.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
 If the snapshot already exists, returns <code>ALREADY_EXISTS</code>.
-If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
-<p>If the name is not provided in the request, the server will assign a random
+If the requested subscription doesn&apos;t exist, returns <code>NOT_FOUND</code>.
+If the backlog in the subscription is too old -- and the resulting snapshot
+would expire in less than 1 hour -- then <code>FAILED_PRECONDITION</code> is returned.
+See also the <code>Snapshot.expire_time</code> field. If the name is not provided in
+the request, the server will assign a random
 name for this snapshot on the same project as the subscription, conforming
-to the
-<a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
-The generated name is populated in the returned Snapshot object.
-Note that for REST API requests, you must specify a name in the request.</p>
+to the <a href="https://cloud.google.com/pubsub/docs/overview#names">resource name format</a>.
+The generated
+name is populated in the returned Snapshot object. Note that for REST API
+requests, you must specify a name in the request.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1197,11 +1233,11 @@ Format is <code>projects/{project}/snapshots/{snap}</code>.</p>
         <td><p>The subscription whose backlog the snapshot retains.
 Specifically, the created snapshot is guaranteed to retain:
 (a) The existing backlog on the subscription. More precisely, this is
-defined as the messages in the subscription&apos;s backlog that are
-unacknowledged upon the successful completion of the
-<code>CreateSnapshot</code> request; as well as:
+ defined as the messages in the subscription&apos;s backlog that are
+ unacknowledged upon the successful completion of the
+ <code>CreateSnapshot</code> request; as well as:
 (b) Any messages published to the subscription&apos;s topic following the
-successful completion of the CreateSnapshot request.
+ successful completion of the CreateSnapshot request.
 Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 </td>
       </tr>
@@ -1242,7 +1278,8 @@ Snapshot response = await subscriberServiceApiClient.CreateSnapshotAsync(name, s
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscription_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscription*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscription_Google_Cloud_PubSub_V1_Subscription_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscription(Google.Cloud.PubSub.V1.Subscription,Google.Api.Gax.Grpc.CallSettings)">CreateSubscription(Subscription, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a subscription to a given topic.
+  <div class="markdown level1 summary"><p>Creates a subscription to a given topic. See the
+&lt;a href=&quot;/pubsub/docs/admin#resource_names&quot;&gt; resource name rules&lt;/a&gt;.
 If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
 If the corresponding topic doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
 <p>If the name is not provided in the request, the server will assign a random
@@ -1313,7 +1350,8 @@ Subscription response = subscriberServiceApiClient.CreateSubscription(request);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscription_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscription*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscription_Google_Cloud_PubSub_V1_SubscriptionName_Google_Cloud_PubSub_V1_TopicName_Google_Cloud_PubSub_V1_PushConfig_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscription(Google.Cloud.PubSub.V1.SubscriptionName,Google.Cloud.PubSub.V1.TopicName,Google.Cloud.PubSub.V1.PushConfig,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">CreateSubscription(SubscriptionName, TopicName, PushConfig, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a subscription to a given topic.
+  <div class="markdown level1 summary"><p>Creates a subscription to a given topic. See the
+&lt;a href=&quot;/pubsub/docs/admin#resource_names&quot;&gt; resource name rules&lt;/a&gt;.
 If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
 If the corresponding topic doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
 <p>If the name is not provided in the request, the server will assign a random
@@ -1377,7 +1415,8 @@ again during that time (on a best-effort basis).</p>
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
 <code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
-pull.
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -1424,7 +1463,8 @@ Console.WriteLine($&quot;Created {subscription.Name} subscribed to {subscription
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_Google_Cloud_PubSub_V1_Subscription_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync(Google.Cloud.PubSub.V1.Subscription,Google.Api.Gax.Grpc.CallSettings)">CreateSubscriptionAsync(Subscription, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a subscription to a given topic.
+  <div class="markdown level1 summary"><p>Creates a subscription to a given topic. See the
+&lt;a href=&quot;/pubsub/docs/admin#resource_names&quot;&gt; resource name rules&lt;/a&gt;.
 If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
 If the corresponding topic doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
 <p>If the name is not provided in the request, the server will assign a random
@@ -1495,7 +1535,8 @@ Subscription response = await subscriberServiceApiClient.CreateSubscriptionAsync
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_Google_Cloud_PubSub_V1_Subscription_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync(Google.Cloud.PubSub.V1.Subscription,System.Threading.CancellationToken)">CreateSubscriptionAsync(Subscription, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a subscription to a given topic.
+  <div class="markdown level1 summary"><p>Creates a subscription to a given topic. See the
+&lt;a href=&quot;/pubsub/docs/admin#resource_names&quot;&gt; resource name rules&lt;/a&gt;.
 If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
 If the corresponding topic doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
 <p>If the name is not provided in the request, the server will assign a random
@@ -1566,7 +1607,8 @@ Subscription response = await subscriberServiceApiClient.CreateSubscriptionAsync
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_Google_Cloud_PubSub_V1_SubscriptionName_Google_Cloud_PubSub_V1_TopicName_Google_Cloud_PubSub_V1_PushConfig_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync(Google.Cloud.PubSub.V1.SubscriptionName,Google.Cloud.PubSub.V1.TopicName,Google.Cloud.PubSub.V1.PushConfig,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">CreateSubscriptionAsync(SubscriptionName, TopicName, PushConfig, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a subscription to a given topic.
+  <div class="markdown level1 summary"><p>Creates a subscription to a given topic. See the
+&lt;a href=&quot;/pubsub/docs/admin#resource_names&quot;&gt; resource name rules&lt;/a&gt;.
 If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
 If the corresponding topic doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
 <p>If the name is not provided in the request, the server will assign a random
@@ -1630,7 +1672,8 @@ again during that time (on a best-effort basis).</p>
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
 <code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
-pull.
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -1677,7 +1720,8 @@ Console.WriteLine($&quot;Created {subscription.Name} subscribed to {subscription
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_CreateSubscriptionAsync_Google_Cloud_PubSub_V1_SubscriptionName_Google_Cloud_PubSub_V1_TopicName_Google_Cloud_PubSub_V1_PushConfig_System_Nullable_System_Int32__System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.CreateSubscriptionAsync(Google.Cloud.PubSub.V1.SubscriptionName,Google.Cloud.PubSub.V1.TopicName,Google.Cloud.PubSub.V1.PushConfig,System.Nullable{System.Int32},System.Threading.CancellationToken)">CreateSubscriptionAsync(SubscriptionName, TopicName, PushConfig, Nullable&lt;Int32&gt;, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a subscription to a given topic.
+  <div class="markdown level1 summary"><p>Creates a subscription to a given topic. See the
+&lt;a href=&quot;/pubsub/docs/admin#resource_names&quot;&gt; resource name rules&lt;/a&gt;.
 If the subscription already exists, returns <code>ALREADY_EXISTS</code>.
 If the corresponding topic doesn&apos;t exist, returns <code>NOT_FOUND</code>.</p>
 <p>If the name is not provided in the request, the server will assign a random
@@ -1741,7 +1785,8 @@ again during that time (on a best-effort basis).</p>
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
 <code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
-pull.
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -1788,7 +1833,11 @@ Console.WriteLine($&quot;Created {subscription.Name} subscribed to {subscription
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshot_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshot*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshot_Google_Cloud_PubSub_V1_DeleteSnapshotRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshot(Google.Cloud.PubSub.V1.DeleteSnapshotRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteSnapshot(DeleteSnapshotRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Removes an existing snapshot. All messages retained in the snapshot
+  <div class="markdown level1 summary"><p>Removes an existing snapshot. &lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+When the snapshot is deleted, all messages retained in the snapshot
 are immediately dropped. After a snapshot is deleted, a new one may be
 created with the same name, but the new one has no association with the old
 snapshot or its subscription, unless the same subscription is specified.</p>
@@ -1837,7 +1886,11 @@ subscriberServiceApiClient.DeleteSnapshot(request);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshot_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshot*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshot_Google_Cloud_PubSub_V1_SnapshotName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshot(Google.Cloud.PubSub.V1.SnapshotName,Google.Api.Gax.Grpc.CallSettings)">DeleteSnapshot(SnapshotName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Removes an existing snapshot. All messages retained in the snapshot
+  <div class="markdown level1 summary"><p>Removes an existing snapshot. &lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+When the snapshot is deleted, all messages retained in the snapshot
 are immediately dropped. After a snapshot is deleted, a new one may be
 created with the same name, but the new one has no association with the old
 snapshot or its subscription, unless the same subscription is specified.</p>
@@ -1884,7 +1937,11 @@ subscriberServiceApiClient.DeleteSnapshot(snapshot);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_Google_Cloud_PubSub_V1_DeleteSnapshotRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync(Google.Cloud.PubSub.V1.DeleteSnapshotRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteSnapshotAsync(DeleteSnapshotRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Removes an existing snapshot. All messages retained in the snapshot
+  <div class="markdown level1 summary"><p>Removes an existing snapshot. &lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+When the snapshot is deleted, all messages retained in the snapshot
 are immediately dropped. After a snapshot is deleted, a new one may be
 created with the same name, but the new one has no association with the old
 snapshot or its subscription, unless the same subscription is specified.</p>
@@ -1949,7 +2006,11 @@ await subscriberServiceApiClient.DeleteSnapshotAsync(request);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_Google_Cloud_PubSub_V1_DeleteSnapshotRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync(Google.Cloud.PubSub.V1.DeleteSnapshotRequest,System.Threading.CancellationToken)">DeleteSnapshotAsync(DeleteSnapshotRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Removes an existing snapshot. All messages retained in the snapshot
+  <div class="markdown level1 summary"><p>Removes an existing snapshot. &lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+When the snapshot is deleted, all messages retained in the snapshot
 are immediately dropped. After a snapshot is deleted, a new one may be
 created with the same name, but the new one has no association with the old
 snapshot or its subscription, unless the same subscription is specified.</p>
@@ -2014,7 +2075,11 @@ await subscriberServiceApiClient.DeleteSnapshotAsync(request);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_Google_Cloud_PubSub_V1_SnapshotName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync(Google.Cloud.PubSub.V1.SnapshotName,Google.Api.Gax.Grpc.CallSettings)">DeleteSnapshotAsync(SnapshotName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Removes an existing snapshot. All messages retained in the snapshot
+  <div class="markdown level1 summary"><p>Removes an existing snapshot. &lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+When the snapshot is deleted, all messages retained in the snapshot
 are immediately dropped. After a snapshot is deleted, a new one may be
 created with the same name, but the new one has no association with the old
 snapshot or its subscription, unless the same subscription is specified.</p>
@@ -2077,7 +2142,11 @@ await subscriberServiceApiClient.DeleteSnapshotAsync(snapshot);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_DeleteSnapshotAsync_Google_Cloud_PubSub_V1_SnapshotName_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.DeleteSnapshotAsync(Google.Cloud.PubSub.V1.SnapshotName,System.Threading.CancellationToken)">DeleteSnapshotAsync(SnapshotName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Removes an existing snapshot. All messages retained in the snapshot
+  <div class="markdown level1 summary"><p>Removes an existing snapshot. &lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+When the snapshot is deleted, all messages retained in the snapshot
 are immediately dropped. After a snapshot is deleted, a new one may be
 created with the same name, but the new one has no association with the old
 snapshot or its subscription, unless the same subscription is specified.</p>
@@ -3245,7 +3314,10 @@ Subscription response = await subscriberServiceApiClient.GetSubscriptionAsync(su
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshots_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshots*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshots_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshots(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListSnapshots(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the existing snapshots.</p>
+  <div class="markdown level1 summary"><p>Lists the existing snapshots.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3350,7 +3422,10 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshots_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshots*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshots_Google_Cloud_PubSub_V1_ListSnapshotsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshots(Google.Cloud.PubSub.V1.ListSnapshotsRequest,Google.Api.Gax.Grpc.CallSettings)">ListSnapshots(ListSnapshotsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the existing snapshots.</p>
+  <div class="markdown level1 summary"><p>Lists the existing snapshots.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3443,7 +3518,10 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshotsAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshotsAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshotsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshotsAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListSnapshotsAsync(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the existing snapshots.</p>
+  <div class="markdown level1 summary"><p>Lists the existing snapshots.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3548,7 +3626,10 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshotsAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshotsAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_ListSnapshotsAsync_Google_Cloud_PubSub_V1_ListSnapshotsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.ListSnapshotsAsync(Google.Cloud.PubSub.V1.ListSnapshotsRequest,Google.Api.Gax.Grpc.CallSettings)">ListSnapshotsAsync(ListSnapshotsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the existing snapshots.</p>
+  <div class="markdown level1 summary"><p>Lists the existing snapshots.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4488,7 +4569,7 @@ Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 <p>An empty <code>pushConfig</code> indicates that the Pub/Sub system should
 stop pushing messages from the given subscription and allow
 messages to be pulled and acknowledged - effectively pausing
-the subscription if <code>Pull</code> is not called.</p>
+the subscription if <code>Pull</code> or <code>StreamingPull</code> is not called.</p>
 </td>
       </tr>
       <tr>
@@ -4681,7 +4762,7 @@ Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 <p>An empty <code>pushConfig</code> indicates that the Pub/Sub system should
 stop pushing messages from the given subscription and allow
 messages to be pulled and acknowledged - effectively pausing
-the subscription if <code>Pull</code> is not called.</p>
+the subscription if <code>Pull</code> or <code>StreamingPull</code> is not called.</p>
 </td>
       </tr>
       <tr>
@@ -4756,7 +4837,7 @@ Format is <code>projects/{project}/subscriptions/{sub}</code>.</p>
 <p>An empty <code>pushConfig</code> indicates that the Pub/Sub system should
 stop pushing messages from the given subscription and allow
 messages to be pulled and acknowledged - effectively pausing
-the subscription if <code>Pull</code> is not called.</p>
+the subscription if <code>Pull</code> or <code>StreamingPull</code> is not called.</p>
 </td>
       </tr>
       <tr>
@@ -5274,7 +5355,10 @@ await client.AcknowledgeAsync(subscriptionName, ackIds);
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_Seek_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.Seek*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_Seek_Google_Cloud_PubSub_V1_SeekRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.Seek(Google.Cloud.PubSub.V1.SeekRequest,Google.Api.Gax.Grpc.CallSettings)">Seek(SeekRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Seeks an existing subscription to a point in time or to a given snapshot,
-whichever is provided in the request.</p>
+whichever is provided in the request.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5337,7 +5421,10 @@ SeekResponse response = subscriberServiceApiClient.Seek(request);
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_SeekAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.SeekAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_SeekAsync_Google_Cloud_PubSub_V1_SeekRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.SeekAsync(Google.Cloud.PubSub.V1.SeekRequest,Google.Api.Gax.Grpc.CallSettings)">SeekAsync(SeekRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Seeks an existing subscription to a point in time or to a given snapshot,
-whichever is provided in the request.</p>
+whichever is provided in the request.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5400,7 +5487,10 @@ SeekResponse response = await subscriberServiceApiClient.SeekAsync(request);
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_SeekAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.SeekAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_SeekAsync_Google_Cloud_PubSub_V1_SeekRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.SeekAsync(Google.Cloud.PubSub.V1.SeekRequest,System.Threading.CancellationToken)">SeekAsync(SeekRequest, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Seeks an existing subscription to a point in time or to a given snapshot,
-whichever is provided in the request.</p>
+whichever is provided in the request.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5902,17 +5992,13 @@ in turn be shut down by another call to this method.</p>
 </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_StreamingPull_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.StreamingPull*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_StreamingPull_Google_Api_Gax_Grpc_CallSettings_Google_Api_Gax_Grpc_BidirectionalStreamingSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.StreamingPull(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.BidirectionalStreamingSettings)">StreamingPull(CallSettings, BidirectionalStreamingSettings)</h4>
-  <div class="markdown level1 summary"><p>(EXPERIMENTAL) StreamingPull is an experimental feature. This RPC will
-respond with UNIMPLEMENTED errors unless you have been invited to test
-this feature. Contact cloud-pubsub@google.com with any questions.</p>
-<p>Establishes a stream with the server, which sends messages down to the
+  <div class="markdown level1 summary"><p>Establishes a stream with the server, which sends messages down to the
 client. The client streams acknowledgements and ack deadline modifications
 back to the server. The server will close the stream and return the status
-on any error. The server may close the stream with status <code>OK</code> to reassign
-server-side resources, in which case, the client should re-establish the
-stream. <code>UNAVAILABLE</code> may also be returned in the case of a transient error
-(e.g., a server restart). These should also be retried by the client. Flow
-control can be achieved by configuring the underlying RPC channel.</p>
+on any error. The server may close the stream with status <code>UNAVAILABLE</code> to
+reassign server-side resources, in which case, the client should
+re-establish the stream. Flow control can be achieved by configuring the
+underlying RPC channel.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -6428,12 +6514,11 @@ TestIamPermissionsResponse response = await subscriberServiceApiClient.TestIamPe
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSnapshot_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSnapshot*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSnapshot_Google_Cloud_PubSub_V1_UpdateSnapshotRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSnapshot(Google.Cloud.PubSub.V1.UpdateSnapshotRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateSnapshot(UpdateSnapshotRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates an existing snapshot. Note that certain properties of a snapshot
-are not modifiable.
-NOTE:  The style guide requires body: &quot;snapshot&quot; instead of body: &quot;*&quot;.
-Keeping the latter for internal consistency in V1, however it should be
-corrected in V2.  See
-<a href="https://cloud.google.com/apis/design/standard_methods#update">https://cloud.google.com/apis/design/standard_methods#update</a> for details.</p>
+  <div class="markdown level1 summary"><p>Updates an existing snapshot.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+Note that certain properties of a snapshot are not modifiable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -6507,12 +6592,11 @@ Snapshot response = subscriberServiceApiClient.UpdateSnapshot(request);
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSnapshotAsync_Google_Cloud_PubSub_V1_UpdateSnapshotRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSnapshotAsync(Google.Cloud.PubSub.V1.UpdateSnapshotRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateSnapshotAsync(UpdateSnapshotRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates an existing snapshot. Note that certain properties of a snapshot
-are not modifiable.
-NOTE:  The style guide requires body: &quot;snapshot&quot; instead of body: &quot;*&quot;.
-Keeping the latter for internal consistency in V1, however it should be
-corrected in V2.  See
-<a href="https://cloud.google.com/apis/design/standard_methods#update">https://cloud.google.com/apis/design/standard_methods#update</a> for details.</p>
+  <div class="markdown level1 summary"><p>Updates an existing snapshot.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+Note that certain properties of a snapshot are not modifiable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -6586,12 +6670,11 @@ Snapshot response = await subscriberServiceApiClient.UpdateSnapshotAsync(request
   </div>
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSnapshotAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSnapshotAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSnapshotAsync_Google_Cloud_PubSub_V1_UpdateSnapshotRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSnapshotAsync(Google.Cloud.PubSub.V1.UpdateSnapshotRequest,System.Threading.CancellationToken)">UpdateSnapshotAsync(UpdateSnapshotRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Updates an existing snapshot. Note that certain properties of a snapshot
-are not modifiable.
-NOTE:  The style guide requires body: &quot;snapshot&quot; instead of body: &quot;*&quot;.
-Keeping the latter for internal consistency in V1, however it should be
-corrected in V2.  See
-<a href="https://cloud.google.com/apis/design/standard_methods#update">https://cloud.google.com/apis/design/standard_methods#update</a> for details.</p>
+  <div class="markdown level1 summary"><p>Updates an existing snapshot.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.
+Note that certain properties of a snapshot are not modifiable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -6666,11 +6749,7 @@ Snapshot response = await subscriberServiceApiClient.UpdateSnapshotAsync(request
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSubscription_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSubscription*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSubscription_Google_Cloud_PubSub_V1_UpdateSubscriptionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSubscription(Google.Cloud.PubSub.V1.UpdateSubscriptionRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateSubscription(UpdateSubscriptionRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates an existing subscription. Note that certain properties of a
-subscription, such as its topic, are not modifiable.
-NOTE:  The style guide requires body: &quot;subscription&quot; instead of body: &quot;*&quot;.
-Keeping the latter for internal consistency in V1, however it should be
-corrected in V2.  See
-<a href="https://cloud.google.com/apis/design/standard_methods#update">https://cloud.google.com/apis/design/standard_methods#update</a> for details.</p>
+subscription, such as its topic, are not modifiable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -6742,11 +6821,7 @@ Subscription response = subscriberServiceApiClient.UpdateSubscription(request);
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSubscriptionAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSubscriptionAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSubscriptionAsync_Google_Cloud_PubSub_V1_UpdateSubscriptionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSubscriptionAsync(Google.Cloud.PubSub.V1.UpdateSubscriptionRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateSubscriptionAsync(UpdateSubscriptionRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates an existing subscription. Note that certain properties of a
-subscription, such as its topic, are not modifiable.
-NOTE:  The style guide requires body: &quot;subscription&quot; instead of body: &quot;*&quot;.
-Keeping the latter for internal consistency in V1, however it should be
-corrected in V2.  See
-<a href="https://cloud.google.com/apis/design/standard_methods#update">https://cloud.google.com/apis/design/standard_methods#update</a> for details.</p>
+subscription, such as its topic, are not modifiable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -6818,11 +6893,7 @@ Subscription response = await subscriberServiceApiClient.UpdateSubscriptionAsync
   <a id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSubscriptionAsync_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSubscriptionAsync*"></a>
   <h4 id="Google_Cloud_PubSub_V1_SubscriberServiceApiClient_UpdateSubscriptionAsync_Google_Cloud_PubSub_V1_UpdateSubscriptionRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.PubSub.V1.SubscriberServiceApiClient.UpdateSubscriptionAsync(Google.Cloud.PubSub.V1.UpdateSubscriptionRequest,System.Threading.CancellationToken)">UpdateSubscriptionAsync(UpdateSubscriptionRequest, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Updates an existing subscription. Note that certain properties of a
-subscription, such as its topic, are not modifiable.
-NOTE:  The style guide requires body: &quot;subscription&quot; instead of body: &quot;*&quot;.
-Keeping the latter for internal consistency in V1, however it should be
-corrected in V2.  See
-<a href="https://cloud.google.com/apis/design/standard_methods#update">https://cloud.google.com/apis/design/standard_methods#update</a> for details.</p>
+subscription, such as its topic, are not modifiable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

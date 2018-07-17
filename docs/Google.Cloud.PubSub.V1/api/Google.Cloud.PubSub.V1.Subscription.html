@@ -156,7 +156,8 @@ again during that time (on a best-effort basis).</p>
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
 <code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
-pull.
+non-streaming pull or send the <code>ack_id</code> in a
+<code>StreamingModifyAckDeadlineRequest</code> if using streaming pull.
 The minimum custom deadline you can specify is 10 seconds.
 The maximum custom deadline you can specify is 600 seconds (10 minutes).
 If this parameter is 0, a default value of 10 seconds is used.</p>
@@ -216,7 +217,10 @@ from the moment a message is published.
 If <code>retain_acked_messages</code> is true, then this also configures the retention
 of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
-minutes.</p>
+minutes.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -298,7 +302,10 @@ will pull and ack messages using API methods.</p>
   <div class="markdown level1 summary"><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&apos;s backlog, even if they are
 acknowledged, until they fall out of the <code>message_retention_duration</code>
-window.</p>
+window.&lt;br&gt;&lt;br&gt;
+&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+changed in backward-incompatible ways and is not recommended for production
+use. It is not subject to any SLA or deprecation policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
