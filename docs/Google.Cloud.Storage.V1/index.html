@@ -64,13 +64,17 @@
 
 <p><code>Google.Cloud.Storage.V1</code> is a.NET client library for the <a href="https://cloud.google.com/storage/">Google Cloud Storage API</a>.
 It wraps the <code>Google.Apis.Storage.v1</code> generated library, providing a higher-level API to make it easier to use.</p>
+<p>Note:
+This documentation is for version <code>2.2.0-beta02</code> of the library.
+Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Storage.V1</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
 project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
-box).</p>
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>2.2.0-beta02</code>) of <code>Google.Cloud.Storage.V1</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -157,6 +161,90 @@ using (FileStream stream = File.OpenRead(source))
 }
 
 HttpResponseMessage response = await httpClient.PutAsync(url, content);
+</code></pre><h3 id="signing-urls-without-a-service-account-credential-file">Signing URLs without a service account credential file</h3>
+<p>If you need to sign URLs but don&#39;t have a full service account
+credential file (with private keys) available, you can create a
+<code>UrlSigner.IBlobSigner</code> implementation to perform the signing part.
+The most common implementation of this is likely to be to use the
+IAM service to perform the signing, with the
+<a href="https://www.nuget.org/packages/Google.Apis.Iam.v1/">Google.Apis.Iam.v1</a>
+package. Here&#39;s a sample implementation:</p>
+<pre><code class="lang-cs">internal sealed class IamServiceBlobSigner : UrlSigner.IBlobSigner
+{
+    private readonly IamService _iamService;
+    public string Id { get; }
+
+    internal IamServiceBlobSigner(IamService service, string id)
+    {
+        _iamService = service;
+        Id = id;
+    }
+
+    public string CreateSignature(byte[] data) =&gt;
+        CreateRequest(data).Execute().Signature;
+
+    public async Task&lt;string&gt; CreateSignatureAsync(byte[] data, CancellationToken cancellationToken)
+    {
+        ProjectsResource.ServiceAccountsResource.SignBlobRequest request = CreateRequest(data);
+        SignBlobResponse response = await request.ExecuteAsync(cancellationToken).ConfigureAwait(false);
+        return response.Signature;
+    }
+
+    private ProjectsResource.ServiceAccountsResource.SignBlobRequest CreateRequest(byte[] data)
+    {
+        SignBlobRequest body = new SignBlobRequest { BytesToSign = Convert.ToBase64String(data) };
+        string account = $&quot;projects/-/serviceAccounts/{Id}&quot;;
+        ProjectsResource.ServiceAccountsResource.SignBlobRequest request =
+            _iamService.Projects.ServiceAccounts.SignBlob(body, account);
+        return request;
+    }
+}
+</code></pre><p>(We may make this available in its own package at some point in the
+future.)</p>
+<p>To make use of this, the account making the request needs the
+<code>iam.serviceAccounts.signBlob</code> permission, which is usually granted
+via the &quot;Service Account Token Creator&quot; role.</p>
+<p>Here&#39;s an example showing how you could use this to sign a
+URL on behalf of the default Compute Engine credential on an
+instance. (This example will only work when running on Google Cloud
+Platform, as it relies on information from the metadata server.) If
+you want to use a different service account, you could include the
+account ID as part of your application configuration.</p>
+<pre><code class="lang-cs">// First obtain the email address of the default service account for this instance from the metadata server.
+HttpRequestMessage serviceAccountRequest = new HttpRequestMessage
+{
+    // Note: you could use 169.254.169.254 as the address to avoid a DNS lookup.
+    RequestUri = new Uri(&quot;http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email&quot;),
+    Headers = { { &quot;Metadata-Flavor&quot;, &quot;Google&quot; } }
+};
+HttpResponseMessage serviceAccountResponse = await httpClient.SendAsync(serviceAccountRequest).ConfigureAwait(false);
+serviceAccountResponse.EnsureSuccessStatusCode();
+string serviceAccountId = await serviceAccountResponse.Content.ReadAsStringAsync();
+
+// Create an IAM service client object using the default application credentials.
+GoogleCredential iamCredential = await GoogleCredential.GetApplicationDefaultAsync();
+iamCredential = iamCredential.CreateScoped(IamService.Scope.CloudPlatform);
+IamService iamService = new IamService(new BaseClientService.Initializer
+{
+    HttpClientInitializer = iamCredential
+});
+
+// Create a URL signer that will use the IAM service for signing. This signer is thread-safe,
+// and would typically occur as a dependency, e.g. in an ASP.NET Core controller, where the
+// same instance can be reused for each request.
+IamServiceBlobSigner blobSigner = new IamServiceBlobSigner(iamService, serviceAccountId);
+UrlSigner urlSigner = UrlSigner.FromBlobSigner(blobSigner);
+
+// Use the URL signer to sign a request for the test object for the next hour.
+string url = await urlSigner.SignAsync(
+    bucketName,
+    objectName,
+    TimeSpan.FromHours(1),
+    HttpMethod.Get);
+
+// Prove we can fetch the content of the test object with a simple unauthenticated GET request.
+HttpResponseMessage response = await httpClient.GetAsync(url);
+string content = await response.Content.ReadAsStringAsync();
 </code></pre><h2 id="upload-uris">Upload URIs</h2>
 <p>In some cases, it may not make sense for client applications to have permissions
 to begin an upload for an object, but an authenticated service may choose to grant

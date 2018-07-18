@@ -140,6 +140,53 @@ well or signature validation will fail.</p>
 </div>
   <h3 id="methods">Methods
   </h3>
+  <a id="Google_Cloud_Storage_V1_UrlSigner_FromBlobSigner_" data-uid="Google.Cloud.Storage.V1.UrlSigner.FromBlobSigner*"></a>
+  <h4 id="Google_Cloud_Storage_V1_UrlSigner_FromBlobSigner_Google_Cloud_Storage_V1_UrlSigner_IBlobSigner_" data-uid="Google.Cloud.Storage.V1.UrlSigner.FromBlobSigner(Google.Cloud.Storage.V1.UrlSigner.IBlobSigner)">FromBlobSigner(UrlSigner.IBlobSigner)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> instance for a custom blob signer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UrlSigner FromBlobSigner(UrlSigner.IBlobSigner signer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a></td>
+        <td><span class="parametername">signer</span></td>
+        <td><p>The blob signer to use. Must not be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a></td>
+        <td><p>A new <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> using the specified blob signer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Storage_V1_UrlSigner_FromBlobSigner_Google_Cloud_Storage_V1_UrlSigner_IBlobSigner__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is typically used when a service account credential file isn&apos;t available, either
+for testing or to use the IAM service&apos;s blob signing capabilities.</p>
+</div>
   <a id="Google_Cloud_Storage_V1_UrlSigner_FromServiceAccountCredential_" data-uid="Google.Cloud.Storage.V1.UrlSigner.FromServiceAccountCredential*"></a>
   <h4 id="Google_Cloud_Storage_V1_UrlSigner_FromServiceAccountCredential_Google_Apis_Auth_OAuth2_ServiceAccountCredential_" data-uid="Google.Cloud.Storage.V1.UrlSigner.FromServiceAccountCredential(Google.Apis.Auth.OAuth2.ServiceAccountCredential)">FromServiceAccountCredential(ServiceAccountCredential)</h4>
   <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> instance for a service account.</p>
@@ -378,6 +425,12 @@ May be null.</p>
   </table>
   <h5 id="Google_Cloud_Storage_V1_UrlSigner_Sign_System_String_System_String_System_Nullable_System_DateTimeOffset__System_Net_Http_HttpMethod_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String____remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
 When either of the headers collections are specified, there are certain headers which will be included in the
 signed URL&apos;s signature, and therefore must be included in requests made with the created URL. These are the
 Content-MD5 and Content-Type content headers as well as any content or request header with a name starting
@@ -474,6 +527,12 @@ case the signed URL never expires.</p>
   </table>
   <h5 id="Google_Cloud_Storage_V1_UrlSigner_Sign_System_String_System_String_System_Nullable_System_DateTimeOffset__System_Net_Http_HttpRequestMessage__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
 When the <code data-dev-comment-type="paramref" class="paramref">request</code> is specified, some of its headers will be included in the signed URL&apos;s
 signature, and therefore must be included in requests made with the created URL. These are the Content-MD5 and
 Content-Type content headers as well as any content or request header with a name starting with &quot;x-goog-&quot;.
@@ -582,6 +641,12 @@ May be null.</p>
   </table>
   <h5 id="Google_Cloud_Storage_V1_UrlSigner_Sign_System_String_System_String_System_TimeSpan_System_Net_Http_HttpMethod_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String____remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
 When either of the headers collections are specified, there are certain headers which will be included in the
 signed URL&apos;s signature, and therefore must be included in requests made with the created URL. These are the
 Content-MD5 and Content-Type content headers as well as any content or request header with a name starting
@@ -687,6 +752,12 @@ will refer to the bucket instead of an object.</p>
   </table>
   <h5 id="Google_Cloud_Storage_V1_UrlSigner_Sign_System_String_System_String_System_TimeSpan_System_Net_Http_HttpRequestMessage__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
 When the <code data-dev-comment-type="paramref" class="paramref">request</code> is specified, some of its headers will be included in the signed URL&apos;s
 signature, and therefore must be included in requests made with the created URL. These are the Content-MD5 and
 Content-Type content headers as well as any content or request header with a name starting with &quot;x-goog-&quot;.
@@ -716,6 +787,446 @@ See <a href="https://cloud.google.com/storage/docs/access-control/signed-urls">h
   <div class="markdown level1"><p>See <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html#Google_Cloud_Storage_V1_UrlSigner_Sign_System_String_System_String_System_TimeSpan_System_Net_Http_HttpMethod_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___">Sign</a> for an example using an alternative overload.</p>
 </div>
   </div>
+  <a id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync*"></a>
+  <h4 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_Nullable_System_DateTimeOffset__System_Net_Http_HttpMethod_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Threading_CancellationToken_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync(System.String,System.String,System.Nullable{System.DateTimeOffset},System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Threading.CancellationToken)">SignAsync(String, String, Nullable&lt;DateTimeOffset&gt;, HttpMethod, Dictionary&lt;String, IEnumerable&lt;String&gt;&gt;, Dictionary&lt;String, IEnumerable&lt;String&gt;&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates a signed URL which can be used to provide limited access to specific buckets and objects to anyone
+in possession of the URL, regardless of whether they have a Google account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SignAsync(string bucket, string objectName, DateTimeOffset? expiration, HttpMethod requestMethod = null, Dictionary&lt;string, IEnumerable&lt;string&gt;&gt; requestHeaders = null, Dictionary&lt;string, IEnumerable&lt;string&gt;&gt; contentHeaders = null, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">bucket</span></td>
+        <td><p>The name of the bucket. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">objectName</span></td>
+        <td><p>The name of the object within the bucket. May be null, in which case the signed URL
+will refer to the bucket instead of an object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTimeOffset</span>&gt;</td>
+        <td><span class="parametername">expiration</span></td>
+        <td><p>The point in time after which the signed URL will be invalid. May be null, in which
+case the signed URL never expires.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Net.Http.HttpMethod</span></td>
+        <td><span class="parametername">requestMethod</span></td>
+        <td><p>The HTTP request method for which the signed URL is allowed to be used. May be null,
+in which case GET will be used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
+        <td><span class="parametername">requestHeaders</span></td>
+        <td><p>The headers which will be included with the request. May be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
+        <td><span class="parametername">contentHeaders</span></td>
+        <td><p>The headers for the content which will be included with the request.
+May be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The token to monitor for cancellation requests.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A task representing the asynchronous operation, with a result returning the
+signed URL which can be used to provide access to a bucket or object for a limited amount of time.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_Nullable_System_DateTimeOffset__System_Net_Http_HttpMethod_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
+When either of the headers collections are specified, there are certain headers which will be included in the
+signed URL&apos;s signature, and therefore must be included in requests made with the created URL. These are the
+Content-MD5 and Content-Type content headers as well as any content or request header with a name starting
+with &quot;x-goog-&quot;.
+</p>
+<p>
+If the headers collections are null or empty, no headers are included in the signed URL&apos;s signature, so any
+requests made with the created URL must not contain Content-MD5, Content-Type, or any header starting with &quot;x-goog-&quot;.
+</p>
+<p>
+Note that if the entity is encrypted with customer-supplied encryption keys (see
+<a href="https://cloud.google.com/storage/docs/encryption">https://cloud.google.com/storage/docs/encryption</a> for more information), the <strong>x-goog-encryption-algorithm</strong>,
+<strong>x-goog-encryption-key</strong>, and <strong>x-goog-encryption-key-sha256</strong> headers will be required when making the
+request. However, only the x-goog-encryption-algorithm header is included in the signature for the signed URL.
+So the <code data-dev-comment-type="paramref" class="paramref">requestHeaders</code> specified only need to have the x-goog-encryption-algorithm header.
+The other headers can be included, but will be ignored.
+</p>
+<p>
+Note that when GET is specified as the <code data-dev-comment-type="paramref" class="paramref">requestMethod</code> (or it is null, in which case GET is
+used), both GET and HEAD requests can be made with the created signed URL.
+</p>
+<p>
+See <a href="https://cloud.google.com/storage/docs/access-control/signed-urls">https://cloud.google.com/storage/docs/access-control/signed-urls</a> for more information on signed URLs.
+</p>
+</div>
+  <a id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync*"></a>
+  <h4 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_Nullable_System_DateTimeOffset__System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync(System.String,System.String,System.Nullable{System.DateTimeOffset},System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">SignAsync(String, String, Nullable&lt;DateTimeOffset&gt;, HttpRequestMessage, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates a signed URL which can be used to provide limited access to specific buckets and objects to anyone
+in possession of the URL, regardless of whether they have a Google account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SignAsync(string bucket, string objectName, DateTimeOffset? expiration, HttpRequestMessage request, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">bucket</span></td>
+        <td><p>The name of the bucket. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">objectName</span></td>
+        <td><p>The name of the object within the bucket. May be null, in which case the signed URL
+will refer to the bucket instead of an object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTimeOffset</span>&gt;</td>
+        <td><span class="parametername">expiration</span></td>
+        <td><p>The point in time after which the signed URL will be invalid. May be null, in which
+case the signed URL never expires.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Net.Http.HttpRequestMessage</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>A sample request for which the signed URL might be used. May be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The token to monitor for cancellation requests.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A task representing the asynchronous operation, with a result returning the
+signed URL which can be used to provide access to a bucket or object for a limited amount of time.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_Nullable_System_DateTimeOffset__System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
+When the <code data-dev-comment-type="paramref" class="paramref">request</code> is specified, some of its headers will be included in the signed URL&apos;s
+signature, and therefore must be included in requests made with the created URL. These are the Content-MD5 and
+Content-Type content headers as well as any content or request header with a name starting with &quot;x-goog-&quot;.
+</p>
+<p>
+If <code data-dev-comment-type="paramref" class="paramref">request</code> is null, no headers are included in the signed URL&apos;s signature, so any requests
+made with the created URL must not contain Content-MD5, Content-Type, or any header starting with &quot;x-goog-&quot;.
+</p>
+<p>
+Note that if the entity is encrypted with customer-supplied encryption keys (see
+<a href="https://cloud.google.com/storage/docs/encryption">https://cloud.google.com/storage/docs/encryption</a> for more information), the <strong>x-goog-encryption-algorithm</strong>,
+<strong>x-goog-encryption-key</strong>, and <strong>x-goog-encryption-key-sha256</strong> headers will be required when making the
+request. However, only the x-goog-encryption-algorithm header is included in the signature for the signed URL.
+So the sample <code data-dev-comment-type="paramref" class="paramref">request</code> specified only needs to have the x-goog-encryption-algorithm request
+header. The other headers can be included, but will be ignored.
+</p>
+<p>
+Note that when GET is specified as the <code data-dev-comment-type="paramref" class="paramref">request</code>, both GET and HEAD requests can be made with
+the created signed URL.
+</p>
+<p>
+See <a href="https://cloud.google.com/storage/docs/access-control/signed-urls">https://cloud.google.com/storage/docs/access-control/signed-urls</a> for more information on signed URLs.
+</p>
+</div>
+  <a id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync*"></a>
+  <h4 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_TimeSpan_System_Net_Http_HttpMethod_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Threading_CancellationToken_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync(System.String,System.String,System.TimeSpan,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Threading.CancellationToken)">SignAsync(String, String, TimeSpan, HttpMethod, Dictionary&lt;String, IEnumerable&lt;String&gt;&gt;, Dictionary&lt;String, IEnumerable&lt;String&gt;&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates a signed URL which can be used to provide limited access to specific buckets and objects to anyone
+in possession of the URL, regardless of whether they have a Google account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SignAsync(string bucket, string objectName, TimeSpan duration, HttpMethod requestMethod = null, Dictionary&lt;string, IEnumerable&lt;string&gt;&gt; requestHeaders = null, Dictionary&lt;string, IEnumerable&lt;string&gt;&gt; contentHeaders = null, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">bucket</span></td>
+        <td><p>The name of the bucket. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">objectName</span></td>
+        <td><p>The name of the object within the bucket. May be null, in which case the signed URL
+will refer to the bucket instead of an object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>The length of time for which the signed URL should remain usable.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Net.Http.HttpMethod</span></td>
+        <td><span class="parametername">requestMethod</span></td>
+        <td><p>The HTTP request method for which the signed URL is allowed to be used. May be null,
+in which case GET will be used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
+        <td><span class="parametername">requestHeaders</span></td>
+        <td><p>The headers which will be included with the request. May be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
+        <td><span class="parametername">contentHeaders</span></td>
+        <td><p>The headers for the content which will be included with the request.
+May be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The token to monitor for cancellation requests.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A task representing the asynchronous operation, with a result returning the
+signed URL which can be used to provide access to a bucket or object for a limited amount of time.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_TimeSpan_System_Net_Http_HttpMethod_System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Collections_Generic_Dictionary_System_String_System_Collections_Generic_IEnumerable_System_String___System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
+When either of the headers collections are specified, there are certain headers which will be included in the
+signed URL&apos;s signature, and therefore must be included in requests made with the created URL. These are the
+Content-MD5 and Content-Type content headers as well as any content or request header with a name starting
+with &quot;x-goog-&quot;.
+</p>
+<p>
+If the headers collections are null or empty, no headers are included in the signed URL&apos;s signature, so any
+requests made with the created URL must not contain Content-MD5, Content-Type, or any header starting with &quot;x-goog-&quot;.
+</p>
+<p>
+Note that if the entity is encrypted with customer-supplied encryption keys (see
+<a href="https://cloud.google.com/storage/docs/encryption">https://cloud.google.com/storage/docs/encryption</a> for more information), the <strong>x-goog-encryption-algorithm</strong>,
+<strong>x-goog-encryption-key</strong>, and <strong>x-goog-encryption-key-sha256</strong> headers will be required when making the
+request. However, only the x-goog-encryption-algorithm header is included in the signature for the signed URL.
+So the <code data-dev-comment-type="paramref" class="paramref">requestHeaders</code> specified only need to have the x-goog-encryption-algorithm header.
+The other headers can be included, but will be ignored.
+</p>
+<p>
+Note that when GET is specified as the <code data-dev-comment-type="paramref" class="paramref">requestMethod</code> (or it is null, in which case GET is
+used), both GET and HEAD requests can be made with the created signed URL.
+</p>
+<p>
+See <a href="https://cloud.google.com/storage/docs/access-control/signed-urls">https://cloud.google.com/storage/docs/access-control/signed-urls</a> for more information on signed URLs.
+</p>
+</div>
+  <a id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync*"></a>
+  <h4 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_TimeSpan_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync(System.String,System.String,System.TimeSpan,System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">SignAsync(String, String, TimeSpan, HttpRequestMessage, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates a signed URL which can be used to provide limited access to specific buckets and objects to anyone
+in possession of the URL, regardless of whether they have a Google account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SignAsync(string bucket, string objectName, TimeSpan duration, HttpRequestMessage request, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">bucket</span></td>
+        <td><p>The name of the bucket. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">objectName</span></td>
+        <td><p>The name of the object within the bucket. May be null, in which case the signed URL
+will refer to the bucket instead of an object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>The length of time for which the signed URL should remain usable.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Net.Http.HttpRequestMessage</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>A sample request for which the signed URL might be used. May be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The token to monitor for cancellation requests.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A task representing the asynchronous operation, with a result returning the
+signed URL which can be used to provide access to a bucket or object for a limited amount of time.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_System_String_System_String_System_TimeSpan_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
+When the <code data-dev-comment-type="paramref" class="paramref">request</code> is specified, some of its headers will be included in the signed URL&apos;s
+signature, and therefore must be included in requests made with the created URL. These are the Content-MD5 and
+Content-Type content headers as well as any content or request header with a name starting with &quot;x-goog-&quot;.
+</p>
+<p>
+If <code data-dev-comment-type="paramref" class="paramref">request</code> is null, no headers are included in the signed URL&apos;s signature, so any requests
+made with the created URL must not contain Content-MD5, Content-Type, or any header starting with &quot;x-goog-&quot;.
+</p>
+<p>
+Note that if the entity is encrypted with customer-supplied encryption keys (see
+<a href="https://cloud.google.com/storage/docs/encryption">https://cloud.google.com/storage/docs/encryption</a> for more information), the <strong>x-goog-encryption-algorithm</strong>,
+<strong>x-goog-encryption-key</strong>, and <strong>x-goog-encryption-key-sha256</strong> headers will be required when making the
+request. However, only the x-goog-encryption-algorithm header is included in the signature for the signed URL.
+So the sample <code data-dev-comment-type="paramref" class="paramref">request</code> specified only needs to have the x-goog-encryption-algorithm request
+header. The other headers can be included, but will be ignored.
+</p>
+<p>
+Note that when GET is specified as the <code data-dev-comment-type="paramref" class="paramref">request</code>, both GET and HEAD requests can be made with
+the created signed URL.
+</p>
+<p>
+See <a href="https://cloud.google.com/storage/docs/access-control/signed-urls">https://cloud.google.com/storage/docs/access-control/signed-urls</a> for more information on signed URLs.
+</p>
+</div>
 </article>
           </div>
           
