@@ -289,13 +289,40 @@ public override IList&lt;TargetPropertyWithContext&gt; ContextProperties { get; 
   <div><span class="xref">NLog.Targets.TargetWithContext.ContextProperties</span></div>
   <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_CredentialFile_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.CredentialFile*"></a>
   <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_CredentialFile" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.CredentialFile">CredentialFile</h4>
-  <div class="markdown level1 summary"><p>The file path of a service account JSON file to use for authenitication.
-Not necessary if running on GCE, GAE or GKE, or if the GOOGLE_APPLICATION_CREDENTIALS environment variable has been set.</p>
+  <div class="markdown level1 summary"><p>The file path of a service account JSON file to use for authentication.
+Not necessary if running on GCE, GAE or GKE, or if the GOOGLE_APPLICATION_CREDENTIALS environment variable has been set.
+Must not be set if <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_CredentialJson">CredentialJson</a> is set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public Layout CredentialFile { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NLog.Layouts.Layout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_CredentialJson_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.CredentialJson*"></a>
+  <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_CredentialJson" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.CredentialJson">CredentialJson</h4>
+  <div class="markdown level1 summary"><p>JSON credential for authentication.
+Not necessary if running on GCE or GAE or if the GOOGLE_APPLICATION_CREDENTIALS environment variable has been set.
+Must not be set if <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_CredentialFile">CredentialFile</a> is set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Layout CredentialJson { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -333,6 +360,85 @@ so ResourceType will default to &quot;global&quot; if not manually set. </p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverter_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.JsonConverter*"></a>
+  <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverter" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.JsonConverter">JsonConverter</h4>
+  <div class="markdown level1 summary"><p>When <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SendJsonPayload">SendJsonPayload</a> is <code>true</code>, a custom JSON serialization method may be programatically specified here.
+Must not be set if <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterTypeName">JsonConverterTypeName</a> and <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterMethodName">JsonConverterMethodName</a> are set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;object, Value&gt; JsonConverter { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Object</span>, <a class="xref" href="Google.Protobuf.WellKnownTypes.Value.html">Value</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterMethodName_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.JsonConverterMethodName*"></a>
+  <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterMethodName" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.JsonConverterMethodName">JsonConverterMethodName</h4>
+  <div class="markdown level1 summary"><p>When <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SendJsonPayload">SendJsonPayload</a> is <code>true</code>, a custom JSON serialization method may be specified by
+type-name and method-name. Specify the type-name in <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterTypeName">JsonConverterTypeName</a>, and the method-name here.
+The instance or static method must have the signature <code>Value MyMethod(object obj)</code> or <code>JToken MyMethod(object o)</code>.
+Must not be set if <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverter">JsonConverter</a> is set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string JsonConverterMethodName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterTypeName_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.JsonConverterTypeName*"></a>
+  <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterTypeName" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.JsonConverterTypeName">JsonConverterTypeName</h4>
+  <div class="markdown level1 summary"><p>When <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SendJsonPayload">SendJsonPayload</a> is <code>true</code>, a custom JSON serialization method may be specified by
+type-name and method-name. Specify the type-name here, and the method-name in <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterMethodName">JsonConverterMethodName</a>.
+The instance or static method must have the signature <code>Value MyMethod(object obj)</code> or <code>JToken MyMethod(object o)</code>.
+Must not be set if <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverter">JsonConverter</a> is set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string JsonConverterTypeName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -454,7 +560,9 @@ is not performed, and this ResourceType defaults to &quot;global&quot; if not se
 </div>
   <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SendJsonPayload_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.SendJsonPayload*"></a>
   <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SendJsonPayload" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.SendJsonPayload">SendJsonPayload</h4>
-  <div class="markdown level1 summary"><p>Fills <a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html#Google_Cloud_Logging_V2_LogEntry_JsonPayload">JsonPayload</a> instead of <a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html#Google_Cloud_Logging_V2_LogEntry_TextPayload">TextPayload</a> </p>
+  <div class="markdown level1 summary"><p>Fills <a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html#Google_Cloud_Logging_V2_LogEntry_JsonPayload">JsonPayload</a> instead of <a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html#Google_Cloud_Logging_V2_LogEntry_TextPayload">TextPayload</a>.
+JSON serialization can be customed using <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterTypeName">JsonConverterTypeName</a> and <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverterMethodName">JsonConverterMethodName</a>,
+or <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_JsonConverter">JsonConverter</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
