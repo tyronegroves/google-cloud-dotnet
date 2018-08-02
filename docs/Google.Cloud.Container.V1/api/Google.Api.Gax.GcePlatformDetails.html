@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class GcePlatformDetails
    | Google.Cloud.Container.V1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -132,25 +132,30 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">metadataJson</span></td>
-        <td><p>The full JSON string retrieved from the metadata server.</p>
+        <td><p>The full JSON string retrieved from the metadata server. Must not be <code>null</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">projectId</span></td>
-        <td><p>The project ID.</p>
+        <td><p>The project ID. Must not be <code>null</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">instanceId</span></td>
-        <td><p>The instance ID.</p>
+        <td><p>The instance ID. Must not be <code>null</code>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">zoneName</span></td>
-        <td><p>The zone name.</p>
+        <td><p>The zone name. Must not be <code>null</code>.
+If this value is in the format <pre><code>projects/&lt;project-number>/zones/&lt;zone-name></code></pre>
+then <a class="xref" href="Google.Api.Gax.GcePlatformDetails.html#Google_Api_Gax_GcePlatformDetails_Location">Location</a> will return the <pre><code>&lt;zone-name></code></pre> part of this value.
+If not, <a class="xref" href="Google.Api.Gax.GcePlatformDetails.html#Google_Api_Gax_GcePlatformDetails_Location">Location</a> will throw <span class="xref">System.InvalidOperationException</span>.
+If this value has been retrived from Google Compute Engine, the it&apos;s format will be the one
+described above.</p>
 </td>
       </tr>
     </tbody>
@@ -165,6 +170,34 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public string InstanceId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Api_Gax_GcePlatformDetails_Location_" data-uid="Google.Api.Gax.GcePlatformDetails.Location*"></a>
+  <h4 id="Google_Api_Gax_GcePlatformDetails_Location" data-uid="Google.Api.Gax.GcePlatformDetails.Location">Location</h4>
+  <div class="markdown level1 summary"><p>The zone name where this GCE instance is running.
+If <a class="xref" href="Google.Api.Gax.GcePlatformDetails.html#Google_Api_Gax_GcePlatformDetails_ZoneName">ZoneName</a> is in the format <pre><code>projects/&lt;project-number>/zones/&lt;zone-name></code></pre>
+this value will be the <pre><code>&lt;zone-name></code></pre> part in <a class="xref" href="Google.Api.Gax.GcePlatformDetails.html#Google_Api_Gax_GcePlatformDetails_ZoneName">ZoneName</a>.
+If <a class="xref" href="Google.Api.Gax.GcePlatformDetails.html#Google_Api_Gax_GcePlatformDetails_ZoneName">ZoneName</a> is in a different format then this getting the value of this property will
+throw <span class="xref">System.InvalidOperationException</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Location { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -231,7 +264,9 @@
   </table>
   <a id="Google_Api_Gax_GcePlatformDetails_ZoneName_" data-uid="Google.Api.Gax.GcePlatformDetails.ZoneName*"></a>
   <h4 id="Google_Api_Gax_GcePlatformDetails_ZoneName" data-uid="Google.Api.Gax.GcePlatformDetails.ZoneName">ZoneName</h4>
-  <div class="markdown level1 summary"><p>The zone name where this GCE instance is running.</p>
+  <div class="markdown level1 summary"><p>The zone where this GCE instance is running.
+This will be in the format <pre><code>projects/&lt;project-number>/zones/&lt;zone-name></code></pre>
+id the value has been retrieved from Google Compute Engine.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -303,7 +338,8 @@ This metadata is normally retrieved from the GCE metadata server.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">metadataJson</span></td>
-        <td><p>JSON metadata, normally retrieved from the GCE metadata server.</p>
+        <td><p>JSON metadata, normally retrieved from the GCE metadata server.
+Must not be <code>null</code>.</p>
 </td>
       </tr>
     </tbody>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Google.Api
    | Google.Cloud.Datastore.V1 ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -143,63 +143,42 @@ authorization check will be done.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Billing.html">Billing</a></h4>
       <section><p>Billing related configuration of the service.</p>
-<p>The following example shows how to configure metrics for billing:</p>
-<p>metrics:</p>
+<p>The following example shows how to configure monitored resources and metrics
+for billing:</p>
+<p>monitored_resources:</p>
 <ul>
-<li>name: library.googleapis.com/read_calls
-metric_kind: DELTA
-value_type: INT64</li>
-<li>name: library.googleapis.com/write_calls
+<li>type: library.googleapis.com/branch
+labels:<ul>
+<li>key: /city
+description: The city where the library branch is located in.</li>
+<li>key: /name
+description: The name of the branch.
+metrics:</li>
+</ul>
+</li>
+<li>name: library.googleapis.com/book/borrowed_count
 metric_kind: DELTA
 value_type: INT64
 billing:
+consumer_destinations:<ul>
+<li>monitored_resource: library.googleapis.com/branch
 metrics:<ul>
-<li>library.googleapis.com/read_calls</li>
-<li>library.googleapis.com/write_calls</li>
+<li>library.googleapis.com/book/borrowed_count</li>
 </ul>
 </li>
 </ul>
-<p>The next example shows how to enable billing status check and customize the
-check behavior. It makes sure billing status check is included in the <code>Check</code>
-method of <a href="https://cloud.google.com/service-control/">Service Control API</a>.
-In the example, &quot;google.storage.Get&quot; method can be served when the billing
-status is either <code>current</code> or <code>delinquent</code>, while &quot;google.storage.Write&quot;
-method can only be served when the billing status is <code>current</code>:</p>
-<p>billing:
- rules:</p>
-<ul>
-<li>selector: google.storage.Get
-allowed_statuses:<ul>
-<li>current</li>
-<li>delinquent</li>
-</ul>
 </li>
-<li>selector: google.storage.Write
-allowed_statuses: current</li>
 </ul>
-<p>Mostly services should only allow <code>current</code> status when serving requests.
-In addition, services can choose to allow both <code>current</code> and <code>delinquent</code>
-statuses when serving read-only requests to resources. If there&apos;s no
-matching selector for operation, no billing status check will be performed.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.Billing.Types.html">Billing.Types</a></h4>
+      <section><p>Container for nested types declared in the Billing message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.Billing.Types.BillingDestination.html">Billing.Types.BillingDestination</a></h4>
+      <section><p>Configuration of a specific billing destination (Currently only support
+bill against consumer project).</p>
 </section>
       <h4><a class="xref" href="Google.Api.BillingReflection.html">BillingReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/billing.proto</p>
-</section>
-      <h4><a class="xref" href="Google.Api.BillingStatusRule.html">BillingStatusRule</a></h4>
-      <section><p>Defines the billing status requirements for operations.</p>
-<p>When used with
-<a href="https://cloud.google.com/service-control/">Service Control API</a>, the
-following statuses are supported:</p>
-<ul>
-<li><strong>current</strong>: the associated billing account is up to date and capable of
-        paying for resource usages.</li>
-<li><strong>delinquent</strong>: the associated billing account has a correctable problem,
-           such as late payment.</li>
-</ul>
-<p>Mostly services should only allow <code>current</code> status when serving requests.
-In addition, services can choose to allow both <code>current</code> and <code>delinquent</code>
-statuses when serving read-only requests to resources. If the list of
-allowed_statuses is empty, it means no billing requirement.</p>
 </section>
       <h4><a class="xref" href="Google.Api.ConfigChange.html">ConfigChange</a></h4>
       <section><p>Output generated from semantically comparing two versions of a service
@@ -367,11 +346,8 @@ notation can be used:
 To override the display text used for the link, this can be used:
 &lt;pre&gt;&lt;code&gt;&amp;#91;display text]&amp;#91;fully.qualified.proto.name]&lt;/code&gt;&lt;/pre&gt;
 Text can be excluded from doc using the following notation:
-&lt;pre&gt;&lt;code&gt;&amp;#40;-- internal comment --&amp;#41;&lt;/code&gt;&lt;/pre&gt;
-Comments can be made conditional using a visibility label. The below
-text will be only rendered if the <code>BETA</code> label is available:
-&lt;pre&gt;&lt;code&gt;&amp;#40;--BETA: comment for BETA users --&amp;#41;&lt;/code&gt;&lt;/pre&gt;
-A few directives are available in documentation. Note that
+&lt;pre&gt;&lt;code&gt;&amp;#40;-- internal comment --&amp;#41;&lt;/code&gt;&lt;/pre&gt;</p>
+<p>A few directives are available in documentation. Note that
 directives must appear on a single line to be properly
 identified. The <code>include</code> directive includes a markdown file from
 an external source:
@@ -418,7 +394,7 @@ only be used by whitelisted users.</p>
       <section><p>Holder for reflection information generated from google/api/experimental/experimental.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.Http.html">Http</a></h4>
-      <section><p>Defines the HTTP configuration for a service. It contains a list of
+      <section><p>Defines the HTTP configuration for an API service. It contains a list of
 [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
 to one or more HTTP REST API methods.</p>
 </section>
@@ -460,11 +436,11 @@ handled, all other features will continue to work unchanged.</p>
 </section>
       <h4><a class="xref" href="Google.Api.HttpRule.html">HttpRule</a></h4>
       <section><p><code>HttpRule</code> defines the mapping of an RPC method to one or more HTTP
-REST APIs.  The mapping determines what portions of the request
-message are populated from the path, query parameters, or body of
-the HTTP request.  The mapping is typically specified as an
-<code>google.api.http</code> annotation, see &quot;google/api/annotations.proto&quot;
-for details.</p>
+REST API methods. The mapping specifies how different portions of the RPC
+request message are mapped to URL path, URL query parameters, and
+HTTP request body. The mapping is typically specified as an
+<code>google.api.http</code> annotation on the RPC method,
+see &quot;google/api/annotations.proto&quot; for details.</p>
 <p>The mapping consists of a field specifying the path template and
 method kind.  The path template can refer to fields in the request
 message, as in the example below which describes a REST GET
@@ -514,7 +490,12 @@ repeated and must have a primitive (non-message) type.</p>
 <p>Any fields in the request message which are not bound by the path
 pattern automatically become (optional) HTTP query
 parameters. Assume the following definition of the request message:</p>
-<p>message GetMessageRequest {
+<p>service Messaging {
+ rpc GetMessage(GetMessageRequest) returns (Message) {
+   option (google.api.http).get = &quot;/v1/messages/{message_id}&quot;;
+ }
+}
+message GetMessageRequest {
  message SubMessage {
    string subfield = 1;
  }
@@ -650,7 +631,7 @@ mappings:</p>
 to the request message are as follows:</p>
 <ol>
 <li>The <code>body</code> field specifies either <code>*</code> or a field path, or is
-omitted. If omitted, it assumes there is no HTTP body.</li>
+omitted. If omitted, it indicates there is no HTTP request body.</li>
 <li>Leaf fields (recursive expansion of nested messages in the
 request) can be classified into three types:
 (a) Matched in the URL template.
@@ -667,23 +648,29 @@ Segment  = &quot;<em>&quot; | &quot;</em>*&quot; | LITERAL | Variable ;
 Variable = &quot;{&quot; FieldPath [ &quot;=&quot; Segments ] &quot;}&quot; ;
 FieldPath = IDENT { &quot;.&quot; IDENT } ;
 Verb     = &quot;:&quot; LITERAL ;</p>
-<p>The syntax <code>*</code> matches a single path segment. It follows the semantics of
-<a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.2 Simple String
-Expansion.</p>
-<p>The syntax <code>**</code> matches zero or more path segments. It follows the semantics
-of <a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.3 Reserved
-Expansion. NOTE: it must be the last segment in the path except the Verb.</p>
-<p>The syntax <code>LITERAL</code> matches literal text in the URL path.</p>
-<p>The syntax <code>Variable</code> matches the entire path as specified by its template;
-this nested template must not contain further variables. If a variable
+<p>The syntax <code>*</code> matches a single path segment. The syntax <code>**</code> matches zero
+or more path segments, which must be the last part of the path except the
+<code>Verb</code>. The syntax <code>LITERAL</code> matches literal text in the path.</p>
+<p>The syntax <code>Variable</code> matches part of the URL path as specified by its
+template. A variable template must not contain other variables. If a variable
 matches a single path segment, its template may be omitted, e.g. <code>{var}</code>
 is equivalent to <code>{var=*}</code>.</p>
+<p>If a variable contains exactly one path segment, such as <code>&amp;quot;{var}&amp;quot;</code> or
+<code>&amp;quot;{var=*}&amp;quot;</code>, when such a variable is expanded into a URL path, all characters
+except <code>[-_.~0-9a-zA-Z]</code> are percent-encoded. Such variables show up in the
+Discovery Document as <code>{var}</code>.</p>
+<p>If a variable contains one or more path segments, such as <code>&amp;quot;{var=foo/*}&amp;quot;</code>
+or <code>&amp;quot;{var=**}&amp;quot;</code>, when such a variable is expanded into a URL path, all
+characters except <code>[-_.~/0-9a-zA-Z]</code> are percent-encoded. Such variables
+show up in the Discovery Document as <code>{+var}</code>.</p>
+<p>NOTE: While the single segment variable matches the semantics of
+<a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.2
+Simple String Expansion, the multi segment variable <strong>does not</strong> match
+RFC 6570 Reserved Expansion. The reason is that the Reserved Expansion
+does not expand special characters like <code>?</code> and <code>#</code>, which would lead
+to invalid URLs.</p>
 <p>NOTE: the field paths in variables and in the <code>body</code> must not refer to
 repeated fields or map fields.</p>
-<p>Use CustomHttpPattern to specify any HTTP method that is not included in the
-<code>pattern</code> field, such as HEAD, or &quot;*&quot; to leave the HTTP method unspecified for
-a given URL path rule. The wild-card rule is useful for services that provide
-content to Web (HTML) clients.</p>
 </section>
       <h4><a class="xref" href="Google.Api.LabelDescriptor.html">LabelDescriptor</a></h4>
       <section><p>A description of a label.</p>
@@ -805,6 +792,14 @@ descriptor for Google Compute Engine VM instances has a type of
 <p>Different APIs can support different monitored resource types. APIs generally
 provide a <code>list</code> method that returns the monitored resource descriptors used
 by the API.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.MonitoredResourceMetadata.html">MonitoredResourceMetadata</a></h4>
+      <section><p>Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
+[MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
+uniquely identify a monitored resource instance. There is some other useful
+auxiliary metadata. Google Stackdriver Monitoring &amp; Logging uses an ingestion
+pipeline to extract metadata for cloud resources of all types , and stores
+the metadata in this message.</p>
 </section>
       <h4><a class="xref" href="Google.Api.MonitoredResourceReflection.html">MonitoredResourceReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/monitored_resource.proto</p>

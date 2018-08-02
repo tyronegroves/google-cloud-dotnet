@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Google.Protobuf.WellKnownTypes
    | Google.Cloud.Container.V1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -397,6 +397,10 @@ following message:</p>
 }</p>
 <p>Note that oneof type names (&quot;test_oneof&quot; in this case) cannot be used in
 paths.</p>
+<h2 id="field-mask-verification">Field Mask Verification</h2>
+<p>The implementation of any API method which has a FieldMask type field in the
+request should verify the included field paths, and return an
+<code>INVALID_ARGUMENT</code> error if any path is duplicated or unmappable.</p>
 </section>
       <h4><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMaskReflection.html">FieldMaskReflection</a></h4>
       <section><p>Holder for reflection information generated from google/protobuf/field_mask.proto</p>
@@ -574,7 +578,9 @@ where {year} is always expressed using four digits while {month}, {day},
 {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
 seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
 are optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone
-is required, though only UTC (as indicated by &quot;Z&quot;) is presently supported.</p>
+is required. A proto3 JSON serializer should always use UTC (as indicated by
+&quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be
+able to accept both UTC and other timezones (as indicated by an offset).</p>
 <p>For example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past
 01:30 UTC on January 15, 2017.</p>
 <p>In JavaScript, one can convert a Date object to this format using the
@@ -582,8 +588,7 @@ standard [toISOString()](<a href="https://developer.mozilla.org/en-US/docs/Web/J
 method. In Python, a standard <code>datetime.datetime</code> object can be converted
 to this format using <a href="https://docs.python.org/2/library/time.html#time.strftime"><code>strftime</code></a>
 with the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one
-can use the Joda Time&apos;s <a href="http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()"><code>ISODateTimeFormat.dateTime()</code></a>
-to obtain a formatter capable of generating timestamps in this format.</p>
+can use the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--"><code>ISODateTimeFormat.dateTime()</code></a> to obtain a formatter capable of generating timestamps in this format.</p>
 </section>
       <h4><a class="xref" href="Google.Protobuf.WellKnownTypes.TimestampReflection.html">TimestampReflection</a></h4>
       <section><p>Holder for reflection information generated from google/protobuf/timestamp.proto</p>
