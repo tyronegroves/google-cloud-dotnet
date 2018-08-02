@@ -116,12 +116,12 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ValidateAsync
     path: Src/Support/Google.Apis.Auth/GoogleJsonWebSignature.cs
-    startLine: 127
+    startLine: 154
   assemblies:
   - Google.Apis.Auth
   namespace: Google.Apis.Auth
   summary: "\nValidates a Google-issued Json Web Token (JWT).\nWill throw a <xref href=\"Google.Apis.Auth.InvalidJwtException\" data-throw-if-not-resolved=\"false\"></xref> if the specified JWT fails any validation check.\n"
-  remarks: "\n<p>Follows the procedure to\n<a href=\"https://developers.google.com/identity/protocols/OpenIDConnect#validatinganidtoken\">validate a JWT ID token</a>.\n</p>\n<p>Google certificates are cached, and refreshed once per hour. This can be overridden by setting\n<xref href=\"Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.ForceGoogleCertRefresh\" data-throw-if-not-resolved=\"false\"></xref> to true.</p>\n"
+  remarks: "\n<p>Follows the procedure to\n<a href=\"https://developers.google.com/identity/protocols/OpenIDConnect#validatinganidtoken\">validate a JWT ID token</a>.\n</p>\n<p>\nIssued-at validation and expiry validation is performed using the clock on this local client,\nso local clock inaccuracies can lead to incorrect validation results.\nUse <xref href=\"Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.IssuedAtClockTolerance\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.ExpirationTimeClockTolerance\" data-throw-if-not-resolved=\"false\"></xref>\nto allow for local clock inaccuracy\n<code>IssuedAtClockTolerance</code> defaults to 30 seconds; it is very unlikely a JWT will be issued that isn&apos;t already valid.\n<code>ExpirationTimeClockTolerance</code> defaults to zero seconds; in some use-cases it may be useful to set this to a negative\nvalue to help ensure that passing local validation means it will pass server validation.\nRegardless of whether local validation passed, code must always correctly handle an invalid JWT error\nfrom the server.\n</p>\n<p>Google certificates are cached, and refreshed once per hour. This can be overridden by setting\n<xref href=\"Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.ForceGoogleCertRefresh\" data-throw-if-not-resolved=\"false\"></xref> to true.</p>\n"
   example: []
   syntax:
     content: public static Task<GoogleJsonWebSignature.Payload> ValidateAsync(string jwt, GoogleJsonWebSignature.ValidationSettings validationSettings)
@@ -568,6 +568,10 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
+- uid: Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.IssuedAtClockTolerance
+  commentId: P:Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.IssuedAtClockTolerance
+- uid: Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.ExpirationTimeClockTolerance
+  commentId: P:Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.ExpirationTimeClockTolerance
 - uid: Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.ForceGoogleCertRefresh
   commentId: P:Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings.ForceGoogleCertRefresh
 - uid: Google.Apis.Auth.GoogleJsonWebSignature.ValidationSettings

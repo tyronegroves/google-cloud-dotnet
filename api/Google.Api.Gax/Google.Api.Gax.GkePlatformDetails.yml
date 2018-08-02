@@ -6,13 +6,20 @@ items:
   parent: Google.Api.Gax
   children:
   - Google.Api.Gax.GkePlatformDetails.#ctor(System.String,System.String,System.String,System.String,System.String)
+  - Google.Api.Gax.GkePlatformDetails.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)
   - Google.Api.Gax.GkePlatformDetails.ClusterName
+  - Google.Api.Gax.GkePlatformDetails.ContainerName
   - Google.Api.Gax.GkePlatformDetails.HostName
+  - Google.Api.Gax.GkePlatformDetails.InstanceId
   - Google.Api.Gax.GkePlatformDetails.Location
   - Google.Api.Gax.GkePlatformDetails.MetadataJson
+  - Google.Api.Gax.GkePlatformDetails.NamespaceId
+  - Google.Api.Gax.GkePlatformDetails.PodId
   - Google.Api.Gax.GkePlatformDetails.ProjectId
   - Google.Api.Gax.GkePlatformDetails.ToString
   - Google.Api.Gax.GkePlatformDetails.TryLoad(System.String)
+  - Google.Api.Gax.GkePlatformDetails.TryLoad(System.String,Google.Api.Gax.GkePlatformDetails.KubernetesData)
+  - Google.Api.Gax.GkePlatformDetails.Zone
   langs:
   - csharp
   - vb
@@ -27,7 +34,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GkePlatformDetails
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 167
+    startLine: 199
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -71,14 +78,17 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: TryLoad
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 178
+    startLine: 321
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
   summary: "\nBuilds a <xref href=\"Google.Api.Gax.GkePlatformDetails\" data-throw-if-not-resolved=\"false\"></xref> from the given metadata.\nThis metadata is normally retrieved from the GCE metadata server.\n"
   example: []
   syntax:
-    content: public static GkePlatformDetails TryLoad(string metadataJson)
+    content: >-
+      [Obsolete("Use TryLoad(string, KubernetesData) instead.")]
+
+      public static GkePlatformDetails TryLoad(string metadataJson)
     parameters:
     - id: metadataJson
       type: System.String
@@ -89,7 +99,69 @@ items:
         A populated <xref href="Google.Api.Gax.GkePlatformDetails" data-throw-if-not-resolved="false"></xref> if the metadata represents and GKE instance;
 
         <code>null</code> otherwise.
-    content.vb: Public Shared Function TryLoad(metadataJson As String) As GkePlatformDetails
+    content.vb: >-
+      <Obsolete("Use TryLoad(string, KubernetesData) instead.")>
+
+      Public Shared Function TryLoad(metadataJson As String) As GkePlatformDetails
+  overload: Google.Api.Gax.GkePlatformDetails.TryLoad*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use TryLoad(string, KubernetesData) instead.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Api.Gax.GkePlatformDetails.TryLoad(System.String,Google.Api.Gax.GkePlatformDetails.KubernetesData)
+  commentId: M:Google.Api.Gax.GkePlatformDetails.TryLoad(System.String,Google.Api.Gax.GkePlatformDetails.KubernetesData)
+  id: TryLoad(System.String,Google.Api.Gax.GkePlatformDetails.KubernetesData)
+  parent: Google.Api.Gax.GkePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: TryLoad(String, GkePlatformDetails.KubernetesData)
+  nameWithType: GkePlatformDetails.TryLoad(String, GkePlatformDetails.KubernetesData)
+  fullName: Google.Api.Gax.GkePlatformDetails.TryLoad(System.String, Google.Api.Gax.GkePlatformDetails.KubernetesData)
+  type: Method
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: TryLoad
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 336
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nBuilds a <xref href=\"Google.Api.Gax.GkePlatformDetails\" data-throw-if-not-resolved=\"false\"></xref> from the given metadata and kubernetes data.\nThe metadata is normally retrieved from the GCE metadata server.\nThe kubernetes data is normally retrieved using the kubernetes API.\n"
+  example: []
+  syntax:
+    content: public static GkePlatformDetails TryLoad(string metadataJson, GkePlatformDetails.KubernetesData kubernetesData)
+    parameters:
+    - id: metadataJson
+      type: System.String
+      description: >-
+        JSON metadata, normally retrieved from the GCE metadata server.
+
+        Must not be <code>null</code>.
+    - id: kubernetesData
+      type: Google.Api.Gax.GkePlatformDetails.KubernetesData
+      description: >-
+        Kubernetes data, normally retrieved using the kubernetes API.
+
+        Must not be <code>null</code>.
+    return:
+      type: Google.Api.Gax.GkePlatformDetails
+      description: >-
+        A populated <xref href="Google.Api.Gax.GkePlatformDetails" data-throw-if-not-resolved="false"></xref> if the metadata represents and GKE instance;
+
+        <code>null</code> otherwise.
+    content.vb: Public Shared Function TryLoad(metadataJson As String, kubernetesData As GkePlatformDetails.KubernetesData) As GkePlatformDetails
   overload: Google.Api.Gax.GkePlatformDetails.TryLoad*
   modifiers.csharp:
   - public
@@ -115,31 +187,106 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 212
+    startLine: 402
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
   summary: "\nConstruct details of Google Container (Kubernetes) Engine\n"
   example: []
   syntax:
-    content: public GkePlatformDetails(string metadataJson, string projectId, string clusterName, string location, string hostName)
+    content: >-
+      [Obsolete("Only partially fills instance with data; use alternative constructor.")]
+
+      public GkePlatformDetails(string metadataJson, string projectId, string clusterName, string location, string hostName)
     parameters:
     - id: metadataJson
       type: System.String
-      description: The full JSON string retrieved from the metadata server.
+      description: The full JSON string retrieved from the metadata server. Must not be <code>null</code>.
     - id: projectId
       type: System.String
-      description: The project ID.
+      description: The project ID. Must not be <code>null</code>.
     - id: clusterName
       type: System.String
-      description: The cluster name.
+      description: The cluster name. Must not be <code>null</code>.
     - id: location
       type: System.String
-      description: The location.
+      description: The location. Must not be <code>null</code>.
     - id: hostName
       type: System.String
-      description: The instance host name.
-    content.vb: Public Sub New(metadataJson As String, projectId As String, clusterName As String, location As String, hostName As String)
+      description: The instance host name. Must not be <code>null</code>.
+    content.vb: >-
+      <Obsolete("Only partially fills instance with data; use alternative constructor.")>
+
+      Public Sub New(metadataJson As String, projectId As String, clusterName As String, location As String, hostName As String)
+  overload: Google.Api.Gax.GkePlatformDetails.#ctor*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Only partially fills instance with data; use alternative constructor.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Google.Api.Gax.GkePlatformDetails.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)
+  commentId: M:Google.Api.Gax.GkePlatformDetails.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)
+  id: '#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)'
+  parent: Google.Api.Gax.GkePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: GkePlatformDetails(String, String, String, String, String, String, String, String, String, String)
+  nameWithType: GkePlatformDetails.GkePlatformDetails(String, String, String, String, String, String, String, String, String, String)
+  fullName: Google.Api.Gax.GkePlatformDetails.GkePlatformDetails(System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: .ctor
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 421
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nConstruct details of Google Container (Kubernetes) Engine\n"
+  example: []
+  syntax:
+    content: public GkePlatformDetails(string metadataJson, string projectId, string clusterName, string location, string hostName, string instanceId, string zone, string namespaceId, string podId, string containerName)
+    parameters:
+    - id: metadataJson
+      type: System.String
+      description: The full JSON string retrieved from the metadata server. Must not be <code>null</code>.
+    - id: projectId
+      type: System.String
+      description: The project ID. Must not be <code>null</code>.
+    - id: clusterName
+      type: System.String
+      description: The cluster name. Must not be <code>null</code>.
+    - id: location
+      type: System.String
+      description: The location. Must not be <code>null</code>.
+    - id: hostName
+      type: System.String
+      description: The instance host name. Must not be <code>null</code>.
+    - id: instanceId
+      type: System.String
+      description: The GCE instance ID. Must not be <code>null</code>.
+    - id: zone
+      type: System.String
+      description: The zone. Must not be <code>null</code>.
+    - id: namespaceId
+      type: System.String
+      description: The kubernetes namespace ID. Must not be <code>null</code>.
+    - id: podId
+      type: System.String
+      description: The kubernetes pod ID. Must not be <code>null</code>.
+    - id: containerName
+      type: System.String
+      description: The container name. Must not be <code>null</code>.
+    content.vb: Public Sub New(metadataJson As String, projectId As String, clusterName As String, location As String, hostName As String, instanceId As String, zone As String, namespaceId As String, podId As String, containerName As String)
   overload: Google.Api.Gax.GkePlatformDetails.#ctor*
   modifiers.csharp:
   - public
@@ -163,7 +310,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MetadataJson
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 224
+    startLine: 439
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -200,7 +347,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ProjectId
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 229
+    startLine: 444
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -237,7 +384,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ClusterName
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 234
+    startLine: 449
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -274,11 +421,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Location
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 239
+    startLine: 456
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
-  summary: "\nThe cluster location, which is visible in the Google Cloud Platform Console.\n"
+  summary: "\nThe cluster location, which is visible in the Google Cloud Platform Console.\nThis is equivalent to the value of the <pre><code>&lt;zone-name></code></pre> part in\n<xref href=\"Google.Api.Gax.GkePlatformDetails.Zone\" data-throw-if-not-resolved=\"false\"></xref>\n"
   example: []
   syntax:
     content: public string Location { get; }
@@ -311,7 +458,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: HostName
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 244
+    startLine: 461
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -324,6 +471,191 @@ items:
       type: System.String
     content.vb: Public ReadOnly Property HostName As String
   overload: Google.Api.Gax.GkePlatformDetails.HostName*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.GkePlatformDetails.InstanceId
+  commentId: P:Google.Api.Gax.GkePlatformDetails.InstanceId
+  id: InstanceId
+  parent: Google.Api.Gax.GkePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: InstanceId
+  nameWithType: GkePlatformDetails.InstanceId
+  fullName: Google.Api.Gax.GkePlatformDetails.InstanceId
+  type: Property
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: InstanceId
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 466
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nThe GCE instance this container is running in.\n"
+  example: []
+  syntax:
+    content: public string InstanceId { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property InstanceId As String
+  overload: Google.Api.Gax.GkePlatformDetails.InstanceId*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.GkePlatformDetails.Zone
+  commentId: P:Google.Api.Gax.GkePlatformDetails.Zone
+  id: Zone
+  parent: Google.Api.Gax.GkePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: Zone
+  nameWithType: GkePlatformDetails.Zone
+  fullName: Google.Api.Gax.GkePlatformDetails.Zone
+  type: Property
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: Zone
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 472
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nThe GCE zone in which the instance is running.\nThis is in the format <pre><code>projects/&lt;project-number>/zones/&lt;zone-name></code></pre>.\n"
+  example: []
+  syntax:
+    content: public string Zone { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Zone As String
+  overload: Google.Api.Gax.GkePlatformDetails.Zone*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.GkePlatformDetails.NamespaceId
+  commentId: P:Google.Api.Gax.GkePlatformDetails.NamespaceId
+  id: NamespaceId
+  parent: Google.Api.Gax.GkePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: NamespaceId
+  nameWithType: GkePlatformDetails.NamespaceId
+  fullName: Google.Api.Gax.GkePlatformDetails.NamespaceId
+  type: Property
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: NamespaceId
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 477
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nThe cluster namespace the container is running in.\n"
+  example: []
+  syntax:
+    content: public string NamespaceId { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NamespaceId As String
+  overload: Google.Api.Gax.GkePlatformDetails.NamespaceId*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.GkePlatformDetails.PodId
+  commentId: P:Google.Api.Gax.GkePlatformDetails.PodId
+  id: PodId
+  parent: Google.Api.Gax.GkePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: PodId
+  nameWithType: GkePlatformDetails.PodId
+  fullName: Google.Api.Gax.GkePlatformDetails.PodId
+  type: Property
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: PodId
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 482
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nThe pos the container is running in.\n"
+  example: []
+  syntax:
+    content: public string PodId { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property PodId As String
+  overload: Google.Api.Gax.GkePlatformDetails.PodId*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.GkePlatformDetails.ContainerName
+  commentId: P:Google.Api.Gax.GkePlatformDetails.ContainerName
+  id: ContainerName
+  parent: Google.Api.Gax.GkePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: ContainerName
+  nameWithType: GkePlatformDetails.ContainerName
+  fullName: Google.Api.Gax.GkePlatformDetails.ContainerName
+  type: Property
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: ContainerName
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 487
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nThe name of the container.\n"
+  example: []
+  syntax:
+    content: public string ContainerName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property ContainerName As String
+  overload: Google.Api.Gax.GkePlatformDetails.ContainerName*
   modifiers.csharp:
   - public
   - get
@@ -348,7 +680,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 247
+    startLine: 490
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -654,6 +986,13 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: Google.Api.Gax.GkePlatformDetails.KubernetesData
+  commentId: T:Google.Api.Gax.GkePlatformDetails.KubernetesData
+  parent: Google.Api.Gax
+  isExternal: false
+  name: GkePlatformDetails.KubernetesData
+  nameWithType: GkePlatformDetails.KubernetesData
+  fullName: Google.Api.Gax.GkePlatformDetails.KubernetesData
 - uid: Google.Api.Gax.GkePlatformDetails.#ctor*
   commentId: Overload:Google.Api.Gax.GkePlatformDetails.#ctor
   isExternal: false
@@ -678,6 +1017,8 @@ references:
   name: ClusterName
   nameWithType: GkePlatformDetails.ClusterName
   fullName: Google.Api.Gax.GkePlatformDetails.ClusterName
+- uid: Google.Api.Gax.GkePlatformDetails.Zone
+  commentId: P:Google.Api.Gax.GkePlatformDetails.Zone
 - uid: Google.Api.Gax.GkePlatformDetails.Location*
   commentId: Overload:Google.Api.Gax.GkePlatformDetails.Location
   isExternal: false
@@ -690,6 +1031,36 @@ references:
   name: HostName
   nameWithType: GkePlatformDetails.HostName
   fullName: Google.Api.Gax.GkePlatformDetails.HostName
+- uid: Google.Api.Gax.GkePlatformDetails.InstanceId*
+  commentId: Overload:Google.Api.Gax.GkePlatformDetails.InstanceId
+  isExternal: false
+  name: InstanceId
+  nameWithType: GkePlatformDetails.InstanceId
+  fullName: Google.Api.Gax.GkePlatformDetails.InstanceId
+- uid: Google.Api.Gax.GkePlatformDetails.Zone*
+  commentId: Overload:Google.Api.Gax.GkePlatformDetails.Zone
+  isExternal: false
+  name: Zone
+  nameWithType: GkePlatformDetails.Zone
+  fullName: Google.Api.Gax.GkePlatformDetails.Zone
+- uid: Google.Api.Gax.GkePlatformDetails.NamespaceId*
+  commentId: Overload:Google.Api.Gax.GkePlatformDetails.NamespaceId
+  isExternal: false
+  name: NamespaceId
+  nameWithType: GkePlatformDetails.NamespaceId
+  fullName: Google.Api.Gax.GkePlatformDetails.NamespaceId
+- uid: Google.Api.Gax.GkePlatformDetails.PodId*
+  commentId: Overload:Google.Api.Gax.GkePlatformDetails.PodId
+  isExternal: false
+  name: PodId
+  nameWithType: GkePlatformDetails.PodId
+  fullName: Google.Api.Gax.GkePlatformDetails.PodId
+- uid: Google.Api.Gax.GkePlatformDetails.ContainerName*
+  commentId: Overload:Google.Api.Gax.GkePlatformDetails.ContainerName
+  isExternal: false
+  name: ContainerName
+  nameWithType: GkePlatformDetails.ContainerName
+  fullName: Google.Api.Gax.GkePlatformDetails.ContainerName
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object

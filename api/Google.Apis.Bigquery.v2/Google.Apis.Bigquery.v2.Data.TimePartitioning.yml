@@ -8,6 +8,7 @@ items:
   - Google.Apis.Bigquery.v2.Data.TimePartitioning.ETag
   - Google.Apis.Bigquery.v2.Data.TimePartitioning.ExpirationMs
   - Google.Apis.Bigquery.v2.Data.TimePartitioning.Field
+  - Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter
   - Google.Apis.Bigquery.v2.Data.TimePartitioning.Type
   langs:
   - csharp
@@ -23,7 +24,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TimePartitioning
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4479
+    startLine: 4737
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -68,17 +69,20 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExpirationMs
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4482
+    startLine: 4741
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: '[Optional] Number of milliseconds for which to keep the storage for a partition.'
+  summary: >-
+    [Optional] Number of milliseconds for which to keep the storage for partitions in the table. The
+
+    storage in a partition will have an expiration time of its partition time plus this value.
   example: []
   syntax:
     content: >-
       [JsonProperty("expirationMs")]
 
-      public virtual long ? ExpirationMs { get; set; }
+      public virtual long? ExpirationMs { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -119,16 +123,18 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Field
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4488
+    startLine: 4748
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Experimental] [Optional] If not set, the table is partitioned by pseudo column &apos;_PARTITIONTIME&apos;;
+    [Experimental] [Optional] If not set, the table is partitioned by pseudo column, referenced via
 
-    if set, the table is partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its
+    either &apos;_PARTITIONTIME&apos; as TIMESTAMP type, or &apos;_PARTITIONDATE&apos; as DATE type. If field is specified, the
 
-    mode must be NULLABLE or REQUIRED.
+    table is instead partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode
+
+    must be NULLABLE or REQUIRED.
   example: []
   syntax:
     content: >-
@@ -157,6 +163,60 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter
+  commentId: P:Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter
+  id: RequirePartitionFilter
+  parent: Google.Apis.Bigquery.v2.Data.TimePartitioning
+  langs:
+  - csharp
+  - vb
+  name: RequirePartitionFilter
+  nameWithType: TimePartitioning.RequirePartitionFilter
+  fullName: Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: RequirePartitionFilter
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 4753
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Experimental] [Optional] If set to true, queries over this table require a partition filter that
+
+    can be used for partition elimination to be specified.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("requirePartitionFilter")]
+
+      public virtual bool? RequirePartitionFilter { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: >-
+      <JsonProperty("requirePartitionFilter")>
+
+      Public Overridable Property RequirePartitionFilter As Boolean?
+  overload: Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: requirePartitionFilter
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.TimePartitioning.Type
   commentId: P:Google.Apis.Bigquery.v2.Data.TimePartitioning.Type
   id: Type
@@ -175,7 +235,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Type
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4492
+    startLine: 4757
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -226,7 +286,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ETag
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4496
+    startLine: 4761
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -663,6 +723,56 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter
+  isExternal: false
+  name: RequirePartitionFilter
+  nameWithType: TimePartitioning.RequirePartitionFilter
+  fullName: Google.Apis.Bigquery.v2.Data.TimePartitioning.RequirePartitionFilter
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Boolean>
+  nameWithType: Nullable<Boolean>
+  fullName: System.Nullable<System.Boolean>
+  nameWithType.vb: Nullable(Of Boolean)
+  fullName.vb: System.Nullable(Of System.Boolean)
+  name.vb: Nullable(Of Boolean)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.TimePartitioning.Type*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.TimePartitioning.Type
   isExternal: false

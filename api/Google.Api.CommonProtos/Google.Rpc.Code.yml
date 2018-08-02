@@ -36,7 +36,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Code
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 57
+    startLine: 59
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -69,7 +69,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Ok
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 63
+    startLine: 65
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -116,7 +116,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Cancelled
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 69
+    startLine: 71
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -163,7 +163,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Unknown
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 79
+    startLine: 81
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -210,7 +210,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: InvalidArgument
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 88
+    startLine: 90
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -257,7 +257,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: DeadlineExceeded
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 98
+    startLine: 100
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -304,11 +304,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: NotFound
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 107
+    startLine: 112
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
-  summary: "\nSome requested entity (e.g., file or directory) was not found.\nFor privacy reasons, this code *may* be returned when the client\ndoes not have the access rights to the entity, though such usage is\ndiscouraged.\n\nHTTP Mapping: 404 Not Found\n"
+  summary: "\nSome requested entity (e.g., file or directory) was not found.\n\nNote to server developers: if a request is denied for an entire class\nof users, such as gradual feature rollout or undocumented whitelist,\n`NOT_FOUND` may be used. If a request is denied for some users within\na class of users, such as user-based access control, `PERMISSION_DENIED`\nmust be used.\n\nHTTP Mapping: 404 Not Found\n"
   example: []
   syntax:
     content: >-
@@ -351,7 +351,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AlreadyExists
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 114
+    startLine: 119
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -398,11 +398,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PermissionDenied
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 125
+    startLine: 132
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
-  summary: "\nThe caller does not have permission to execute the specified\noperation. `PERMISSION_DENIED` must not be used for rejections\ncaused by exhausting some resource (use `RESOURCE_EXHAUSTED`\ninstead for those errors). `PERMISSION_DENIED` must not be\nused if the caller can not be identified (use `UNAUTHENTICATED`\ninstead for those errors).\n\nHTTP Mapping: 403 Forbidden\n"
+  summary: "\nThe caller does not have permission to execute the specified\noperation. `PERMISSION_DENIED` must not be used for rejections\ncaused by exhausting some resource (use `RESOURCE_EXHAUSTED`\ninstead for those errors). `PERMISSION_DENIED` must not be\nused if the caller can not be identified (use `UNAUTHENTICATED`\ninstead for those errors). This error code does not imply the\nrequest is valid or the requested entity exists or satisfies\nother pre-conditions.\n\nHTTP Mapping: 403 Forbidden\n"
   example: []
   syntax:
     content: >-
@@ -445,7 +445,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Unauthenticated
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 132
+    startLine: 139
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -492,7 +492,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ResourceExhausted
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 139
+    startLine: 146
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -539,11 +539,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FailedPrecondition
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 159
+    startLine: 167
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
-  summary: "\nThe operation was rejected because the system is not in a state\nrequired for the operation&apos;s execution.  For example, the directory\nto be deleted is non-empty, an rmdir operation is applied to\na non-directory, etc.\n\nService implementors can use the following guidelines to decide\nbetween `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`:\n(a) Use `UNAVAILABLE` if the client can retry just the failing call.\n(b) Use `ABORTED` if the client should retry at a higher level\n(e.g., restarting a read-modify-write sequence).\n(c) Use `FAILED_PRECONDITION` if the client should not retry until\nthe system state has been explicitly fixed.  E.g., if an &quot;rmdir&quot;\nfails because the directory is non-empty, `FAILED_PRECONDITION`\nshould be returned since the client should not retry unless\nthe files are deleted from the directory.\n\nHTTP Mapping: 400 Bad Request\n"
+  summary: "\nThe operation was rejected because the system is not in a state\nrequired for the operation&apos;s execution.  For example, the directory\nto be deleted is non-empty, an rmdir operation is applied to\na non-directory, etc.\n\nService implementors can use the following guidelines to decide\nbetween `FAILED_PRECONDITION`, `ABORTED`, and `UNAVAILABLE`:\n(a) Use `UNAVAILABLE` if the client can retry just the failing call.\n(b) Use `ABORTED` if the client should retry at a higher level\n(e.g., when a client-specified test-and-set fails, indicating the\nclient should restart a read-modify-write sequence).\n(c) Use `FAILED_PRECONDITION` if the client should not retry until\nthe system state has been explicitly fixed.  E.g., if an &quot;rmdir&quot;\nfails because the directory is non-empty, `FAILED_PRECONDITION`\nshould be returned since the client should not retry unless\nthe files are deleted from the directory.\n\nHTTP Mapping: 400 Bad Request\n"
   example: []
   syntax:
     content: >-
@@ -586,7 +586,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Aborted
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 169
+    startLine: 177
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -633,7 +633,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: OutOfRange
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 189
+    startLine: 197
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -680,7 +680,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Unimplemented
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 196
+    startLine: 204
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -727,7 +727,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Internal
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 204
+    startLine: 212
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -774,7 +774,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Unavailable
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 215
+    startLine: 223
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc
@@ -821,7 +821,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: DataLoss
     path: src/Google.Api.CommonProtos/Rpc/Code.cs
-    startLine: 221
+    startLine: 229
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Rpc

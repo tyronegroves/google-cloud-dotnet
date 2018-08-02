@@ -8,6 +8,7 @@ items:
   - Google.Api.Gax.VersionHeaderBuilder.AppendAssemblyVersion(System.String,System.Type)
   - Google.Api.Gax.VersionHeaderBuilder.AppendDotNetEnvironment
   - Google.Api.Gax.VersionHeaderBuilder.AppendVersion(System.String,System.String)
+  - Google.Api.Gax.VersionHeaderBuilder.Clone
   - Google.Api.Gax.VersionHeaderBuilder.HeaderName
   - Google.Api.Gax.VersionHeaderBuilder.ToString
   langs:
@@ -28,7 +29,7 @@ items:
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
-  summary: "\nHelps build version strings for the x-goog-api-client header.\nThe value is a space-separated list of name/value pairs, where the value\nshould be a semantic version string.\n"
+  summary: "\nHelps build version strings for the x-goog-api-client header.\nThe value is a space-separated list of name/value pairs, where the value\nshould be a semantic version string. Names must be unique.\n"
   example: []
   syntax:
     content: public sealed class VersionHeaderBuilder
@@ -103,7 +104,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AppendVersion
     path: src/Google.Api.Gax/VersionHeaderBuilder.cs
-    startLine: 30
+    startLine: 33
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -114,8 +115,10 @@ items:
     parameters:
     - id: name
       type: System.String
+      description: The name. Must not be null or empty, or contain a space or a slash.
     - id: version
       type: System.String
+      description: The version. Must not be null, or contain a space or a slash.
     return:
       type: Google.Api.Gax.VersionHeaderBuilder
     content.vb: Public Function AppendVersion(name As String, version As String) As VersionHeaderBuilder
@@ -142,7 +145,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AppendAssemblyVersion
     path: src/Google.Api.Gax/VersionHeaderBuilder.cs
-    startLine: 42
+    startLine: 50
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -181,7 +184,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AppendDotNetEnvironment
     path: src/Google.Api.Gax/VersionHeaderBuilder.cs
-    startLine: 48
+    startLine: 56
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -215,7 +218,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
     path: src/Google.Api.Gax/VersionHeaderBuilder.cs
-    startLine: 80
+    startLine: 88
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -233,6 +236,41 @@ items:
   modifiers.vb:
   - Public
   - Overrides
+- uid: Google.Api.Gax.VersionHeaderBuilder.Clone
+  commentId: M:Google.Api.Gax.VersionHeaderBuilder.Clone
+  id: Clone
+  parent: Google.Api.Gax.VersionHeaderBuilder
+  langs:
+  - csharp
+  - vb
+  name: Clone()
+  nameWithType: VersionHeaderBuilder.Clone()
+  fullName: Google.Api.Gax.VersionHeaderBuilder.Clone()
+  type: Method
+  source:
+    remote:
+      path: src/Google.Api.Gax/VersionHeaderBuilder.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: Clone
+    path: src/Google.Api.Gax/VersionHeaderBuilder.cs
+    startLine: 94
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nClones this VersionHeaderBuilder, creating an independent copy with the same names/values.\n"
+  example: []
+  syntax:
+    content: public VersionHeaderBuilder Clone()
+    return:
+      type: Google.Api.Gax.VersionHeaderBuilder
+      description: A clone of this builder.
+    content.vb: Public Function Clone As VersionHeaderBuilder
+  overload: Google.Api.Gax.VersionHeaderBuilder.Clone*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 references:
 - uid: Google.Api.Gax
   commentId: N:Google.Api.Gax
@@ -577,3 +615,9 @@ references:
   name: ToString
   nameWithType: VersionHeaderBuilder.ToString
   fullName: Google.Api.Gax.VersionHeaderBuilder.ToString
+- uid: Google.Api.Gax.VersionHeaderBuilder.Clone*
+  commentId: Overload:Google.Api.Gax.VersionHeaderBuilder.Clone
+  isExternal: false
+  name: Clone
+  nameWithType: VersionHeaderBuilder.Clone
+  fullName: Google.Api.Gax.VersionHeaderBuilder.Clone

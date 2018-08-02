@@ -7,9 +7,11 @@ items:
   children:
   - Grpc.Core.GrpcEnvironment.KillServersAsync
   - Grpc.Core.GrpcEnvironment.Logger
+  - Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams(System.Int32,System.Int32)
   - Grpc.Core.GrpcEnvironment.SetCompletionQueueCount(System.Int32)
   - Grpc.Core.GrpcEnvironment.SetHandlerInlining(System.Boolean)
   - Grpc.Core.GrpcEnvironment.SetLogger(Grpc.Core.Logging.ILogger)
+  - Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams(System.Int32,System.Int32)
   - Grpc.Core.GrpcEnvironment.SetThreadPoolSize(System.Int32)
   - Grpc.Core.GrpcEnvironment.ShutdownChannelsAsync
   - Grpc.Core.GrpcEnvironment.ShuttingDown
@@ -23,7 +25,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: GrpcEnvironment
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
@@ -66,11 +68,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: ShutdownChannelsAsync
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 142
+    startLine: 152
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -102,11 +104,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: KillServersAsync
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 155
+    startLine: 165
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -138,11 +140,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: Logger
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 169
+    startLine: 179
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -178,11 +180,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: SetLogger
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 180
+    startLine: 190
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -215,15 +217,15 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: SetThreadPoolSize
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 193
+    startLine: 203
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
-  summary: "\nSets the number of threads in the gRPC thread pool that polls for internal RPC events.\nCan be only invoke before the <code>GrpcEnviroment</code> is started and cannot be changed afterwards.\nSetting thread pool size is an advanced setting and you should only use it if you know what you are doing.\nMost users should rely on the default value provided by gRPC library.\nNote: this method is part of an experimental API that can change or be removed without any prior notice.\n"
+  summary: "\nSets the number of threads in the gRPC thread pool that polls for internal RPC events.\nCan be only invoked before the <code>GrpcEnviroment</code> is started and cannot be changed afterwards.\nSetting thread pool size is an advanced setting and you should only use it if you know what you are doing.\nMost users should rely on the default value provided by gRPC library.\nNote: this method is part of an experimental API that can change or be removed without any prior notice.\n"
   example: []
   syntax:
     content: public static void SetThreadPoolSize(int threadCount)
@@ -252,15 +254,15 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: SetCompletionQueueCount
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 210
+    startLine: 220
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
-  summary: "\nSets the number of completion queues in the  gRPC thread pool that polls for internal RPC events.\nCan be only invoke before the <code>GrpcEnviroment</code> is started and cannot be changed afterwards.\nSetting the number of completions queues is an advanced setting and you should only use it if you know what you are doing.\nMost users should rely on the default value provided by gRPC library.\nNote: this method is part of an experimental API that can change or be removed without any prior notice.\n"
+  summary: "\nSets the number of completion queues in the  gRPC thread pool that polls for internal RPC events.\nCan be only invoked before the <code>GrpcEnviroment</code> is started and cannot be changed afterwards.\nSetting the number of completions queues is an advanced setting and you should only use it if you know what you are doing.\nMost users should rely on the default value provided by gRPC library.\nNote: this method is part of an experimental API that can change or be removed without any prior notice.\n"
   example: []
   syntax:
     content: public static void SetCompletionQueueCount(int completionQueueCount)
@@ -289,11 +291,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: SetHandlerInlining
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 230
+    startLine: 240
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -306,6 +308,84 @@ items:
       type: System.Boolean
     content.vb: Public Shared Sub SetHandlerInlining(inlineHandlers As Boolean)
   overload: Grpc.Core.GrpcEnvironment.SetHandlerInlining*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams(System.Int32,System.Int32)
+  commentId: M:Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams(System.Int32,System.Int32)
+  id: SetBatchContextPoolParams(System.Int32,System.Int32)
+  parent: Grpc.Core.GrpcEnvironment
+  langs:
+  - csharp
+  - vb
+  name: SetBatchContextPoolParams(Int32, Int32)
+  nameWithType: GrpcEnvironment.SetBatchContextPoolParams(Int32, Int32)
+  fullName: Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams(System.Int32, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/GrpcEnvironment.cs
+      branch: v1.13.x
+      repo: https://github.com/grpc/grpc
+    id: SetBatchContextPoolParams
+    path: src/csharp/Grpc.Core/GrpcEnvironment.cs
+    startLine: 257
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nSets the parameters for a pool that caches batch context instances. Reusing batch context instances\ninstead of creating a new one for every C core operation helps reducing the GC pressure.\nCan be only invoked before the <code>GrpcEnviroment</code> is started and cannot be changed afterwards.\nThis is an advanced setting and you should only use it if you know what you are doing.\nMost users should rely on the default value provided by gRPC library.\nNote: this method is part of an experimental API that can change or be removed without any prior notice.\n"
+  example: []
+  syntax:
+    content: public static void SetBatchContextPoolParams(int sharedCapacity, int threadLocalCapacity)
+    parameters:
+    - id: sharedCapacity
+      type: System.Int32
+    - id: threadLocalCapacity
+      type: System.Int32
+    content.vb: Public Shared Sub SetBatchContextPoolParams(sharedCapacity As Integer, threadLocalCapacity As Integer)
+  overload: Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams(System.Int32,System.Int32)
+  commentId: M:Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams(System.Int32,System.Int32)
+  id: SetRequestCallContextPoolParams(System.Int32,System.Int32)
+  parent: Grpc.Core.GrpcEnvironment
+  langs:
+  - csharp
+  - vb
+  name: SetRequestCallContextPoolParams(Int32, Int32)
+  nameWithType: GrpcEnvironment.SetRequestCallContextPoolParams(Int32, Int32)
+  fullName: Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams(System.Int32, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/GrpcEnvironment.cs
+      branch: v1.13.x
+      repo: https://github.com/grpc/grpc
+    id: SetRequestCallContextPoolParams
+    path: src/csharp/Grpc.Core/GrpcEnvironment.cs
+    startLine: 277
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nSets the parameters for a pool that caches request call context instances. Reusing request call context instances\ninstead of creating a new one for every requested call in C core helps reducing the GC pressure.\nCan be only invoked before the <code>GrpcEnviroment</code> is started and cannot be changed afterwards.\nThis is an advanced setting and you should only use it if you know what you are doing.\nMost users should rely on the default value provided by gRPC library.\nNote: this method is part of an experimental API that can change or be removed without any prior notice.\n"
+  example: []
+  syntax:
+    content: public static void SetRequestCallContextPoolParams(int sharedCapacity, int threadLocalCapacity)
+    parameters:
+    - id: sharedCapacity
+      type: System.Int32
+    - id: threadLocalCapacity
+      type: System.Int32
+    content.vb: Public Shared Sub SetRequestCallContextPoolParams(sharedCapacity As Integer, threadLocalCapacity As Integer)
+  overload: Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams*
   modifiers.csharp:
   - public
   - static
@@ -326,11 +406,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-      branch: v1.6.x
+      branch: v1.13.x
       repo: https://github.com/grpc/grpc
     id: ShuttingDown
     path: src/csharp/Grpc.Core/GrpcEnvironment.cs
-    startLine: 243
+    startLine: 293
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -728,6 +808,18 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams*
+  commentId: Overload:Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams
+  isExternal: false
+  name: SetBatchContextPoolParams
+  nameWithType: GrpcEnvironment.SetBatchContextPoolParams
+  fullName: Grpc.Core.GrpcEnvironment.SetBatchContextPoolParams
+- uid: Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams*
+  commentId: Overload:Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams
+  isExternal: false
+  name: SetRequestCallContextPoolParams
+  nameWithType: GrpcEnvironment.SetRequestCallContextPoolParams
+  fullName: Grpc.Core.GrpcEnvironment.SetRequestCallContextPoolParams
 - uid: System.EventHandler
   commentId: T:System.EventHandler
   parent: System

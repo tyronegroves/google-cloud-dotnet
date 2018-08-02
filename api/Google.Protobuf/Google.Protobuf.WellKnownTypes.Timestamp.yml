@@ -41,7 +41,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Timestamp
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -49,7 +49,7 @@ items:
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
-  summary: "\nA Timestamp represents a point in time independent of any time zone\nor calendar, represented as seconds and fractions of seconds at\nnanosecond resolution in UTC Epoch time. It is encoded using the\nProleptic Gregorian Calendar which extends the Gregorian calendar\nbackwards to year one. It is encoded assuming all minutes are 60\nseconds long, i.e. leap seconds are &quot;smeared&quot; so that no leap second\ntable is needed for interpretation. Range is from\n0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.\nBy restricting to that range, we ensure that we can convert to\nand from  RFC 3339 date strings.\nSee [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).\n\n# Examples\n\nExample 1: Compute Timestamp from POSIX `time()`.\n\nTimestamp timestamp;\ntimestamp.set_seconds(time(NULL));\ntimestamp.set_nanos(0);\n\nExample 2: Compute Timestamp from POSIX `gettimeofday()`.\n\nstruct timeval tv;\ngettimeofday(&amp;tv, NULL);\n\nTimestamp timestamp;\ntimestamp.set_seconds(tv.tv_sec);\ntimestamp.set_nanos(tv.tv_usec * 1000);\n\nExample 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\nFILETIME ft;\nGetSystemTimeAsFileTime(&amp;ft);\nUINT64 ticks = (((UINT64)ft.dwHighDateTime) &lt;&lt; 32) | ft.dwLowDateTime;\n\n// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\nTimestamp timestamp;\ntimestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\ntimestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\nExample 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\nlong millis = System.currentTimeMillis();\n\nTimestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n   .setNanos((int) ((millis % 1000) * 1000000)).build();\n\nExample 5: Compute Timestamp from current time in Python.\n\ntimestamp = Timestamp()\ntimestamp.GetCurrentTime()\n\n# JSON Mapping\n\nIn JSON format, the Timestamp type is encoded as a string in the\n[RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\nformat is &quot;{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z&quot;\nwhere {year} is always expressed using four digits while {month}, {day},\n{hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\nseconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\nare optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone\nis required, though only UTC (as indicated by &quot;Z&quot;) is presently supported.\n\nFor example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past\n01:30 UTC on January 15, 2017.\n\nIn JavaScript, one can convert a Date object to this format using the\nstandard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString]\nmethod. In Python, a standard `datetime.datetime` object can be converted\nto this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime)\nwith the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one\ncan use the Joda Time&apos;s [`ISODateTimeFormat.dateTime()`](\nhttp://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime())\nto obtain a formatter capable of generating timestamps in this format.\n"
+  summary: "\nA Timestamp represents a point in time independent of any time zone\nor calendar, represented as seconds and fractions of seconds at\nnanosecond resolution in UTC Epoch time. It is encoded using the\nProleptic Gregorian Calendar which extends the Gregorian calendar\nbackwards to year one. It is encoded assuming all minutes are 60\nseconds long, i.e. leap seconds are &quot;smeared&quot; so that no leap second\ntable is needed for interpretation. Range is from\n0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.\nBy restricting to that range, we ensure that we can convert to\nand from  RFC 3339 date strings.\nSee [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).\n\n# Examples\n\nExample 1: Compute Timestamp from POSIX `time()`.\n\nTimestamp timestamp;\ntimestamp.set_seconds(time(NULL));\ntimestamp.set_nanos(0);\n\nExample 2: Compute Timestamp from POSIX `gettimeofday()`.\n\nstruct timeval tv;\ngettimeofday(&amp;tv, NULL);\n\nTimestamp timestamp;\ntimestamp.set_seconds(tv.tv_sec);\ntimestamp.set_nanos(tv.tv_usec * 1000);\n\nExample 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\nFILETIME ft;\nGetSystemTimeAsFileTime(&amp;ft);\nUINT64 ticks = (((UINT64)ft.dwHighDateTime) &lt;&lt; 32) | ft.dwLowDateTime;\n\n// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\nTimestamp timestamp;\ntimestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\ntimestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\nExample 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\nlong millis = System.currentTimeMillis();\n\nTimestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n   .setNanos((int) ((millis % 1000) * 1000000)).build();\n\nExample 5: Compute Timestamp from current time in Python.\n\ntimestamp = Timestamp()\ntimestamp.GetCurrentTime()\n\n# JSON Mapping\n\nIn JSON format, the Timestamp type is encoded as a string in the\n[RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\nformat is &quot;{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z&quot;\nwhere {year} is always expressed using four digits while {month}, {day},\n{hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\nseconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\nare optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone\nis required. A proto3 JSON serializer should always use UTC (as indicated by\n&quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be\nable to accept both UTC and other timezones (as indicated by an offset).\n\nFor example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past\n01:30 UTC on January 15, 2017.\n\nIn JavaScript, one can convert a Date object to this format using the\nstandard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString]\nmethod. In Python, a standard `datetime.datetime` object can be converted\nto this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime)\nwith the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one\ncan use the Joda Time&apos;s [`ISODateTimeFormat.dateTime()`](\nhttp://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--\n) to obtain a formatter capable of generating timestamps in this format.\n"
   example: []
   syntax:
     content: 'public sealed class Timestamp : IMessage<Timestamp>, IEquatable<Timestamp>, IDeepCloneable<Timestamp>, ICustomDiagnosticMessage, IMessage'
@@ -71,6 +71,7 @@ items:
   - System.Object.MemberwiseClone
   extensionMethods:
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.MergeFrom(System.Byte[])
+  - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.MergeFrom(System.Byte[],System.Int32,System.Int32)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.ByteString)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.MergeFrom(System.IO.Stream)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.MergeDelimitedFrom(System.IO.Stream)
@@ -100,11 +101,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Parser
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 119
+    startLine: 124
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -137,11 +138,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 122
+    startLine: 127
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -175,11 +176,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 127
+    startLine: 132
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -213,11 +214,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 132
+    startLine: 137
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -243,11 +244,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 139
+    startLine: 144
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -276,11 +277,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Clone
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 145
+    startLine: 151
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -310,11 +311,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: SecondsFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 151
+    startLine: 157
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -345,11 +346,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Seconds
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 158
+    startLine: 164
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -382,11 +383,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: NanosFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 167
+    startLine: 173
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -417,11 +418,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Nanos
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 175
+    startLine: 181
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -454,11 +455,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 183
+    startLine: 189
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -492,11 +493,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 188
+    startLine: 194
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -529,11 +530,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: GetHashCode
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 201
+    startLine: 207
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -564,11 +565,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: ToString
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 209
+    startLine: 218
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -599,11 +600,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: WriteTo
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 214
+    startLine: 223
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -634,11 +635,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: CalculateSize
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 226
+    startLine: 238
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -668,11 +669,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 238
+    startLine: 253
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -703,11 +704,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 251
+    startLine: 267
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -738,7 +739,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: op_Subtraction
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -782,7 +783,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: op_Addition
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -826,7 +827,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: op_Subtraction
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -870,7 +871,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: ToDateTime
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -913,7 +914,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: ToDateTimeOffset
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -956,7 +957,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: FromDateTime
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -1001,7 +1002,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: FromDateTimeOffset
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -1048,7 +1049,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.4.x
+      branch: 3.6.x
       repo: https://github.com/google/protobuf
     id: ToDiagnosticString
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -1443,6 +1444,86 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.MergeFrom(System.Byte[],System.Int32,System.Int32)
+  commentId: M:Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,System.Byte[],System.Int32,System.Int32)
+  parent: Google.Protobuf.MessageExtensions
+  definition: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,System.Byte[],System.Int32,System.Int32)
+  name: MergeFrom(Byte[], Int32, Int32)
+  nameWithType: MessageExtensions.MergeFrom(Byte[], Int32, Int32)
+  fullName: Google.Protobuf.MessageExtensions.MergeFrom(System.Byte[], System.Int32, System.Int32)
+  nameWithType.vb: MessageExtensions.MergeFrom(Byte(), Int32, Int32)
+  fullName.vb: Google.Protobuf.MessageExtensions.MergeFrom(System.Byte(), System.Int32, System.Int32)
+  name.vb: MergeFrom(Byte(), Int32, Int32)
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.MergeFrom(System.Byte[],System.Int32,System.Int32)
+    name: MergeFrom
+    nameWithType: MessageExtensions.MergeFrom
+    fullName: Google.Protobuf.MessageExtensions.MergeFrom
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.MergeFrom(System.Byte[],System.Int32,System.Int32)
+    name: MergeFrom
+    nameWithType: MessageExtensions.MergeFrom
+    fullName: Google.Protobuf.MessageExtensions.MergeFrom
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -1890,6 +1971,99 @@ references:
   name: MessageExtensions
   nameWithType: MessageExtensions
   fullName: Google.Protobuf.MessageExtensions
+- uid: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,System.Byte[],System.Int32,System.Int32)
+  commentId: M:Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,System.Byte[],System.Int32,System.Int32)
+  isExternal: true
+  name: MergeFrom(IMessage, Byte[], Int32, Int32)
+  nameWithType: MessageExtensions.MergeFrom(IMessage, Byte[], Int32, Int32)
+  fullName: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage, System.Byte[], System.Int32, System.Int32)
+  nameWithType.vb: MessageExtensions.MergeFrom(IMessage, Byte(), Int32, Int32)
+  fullName.vb: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage, System.Byte(), System.Int32, System.Int32)
+  name.vb: MergeFrom(IMessage, Byte(), Int32, Int32)
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,System.Byte[],System.Int32,System.Int32)
+    name: MergeFrom
+    nameWithType: MessageExtensions.MergeFrom
+    fullName: Google.Protobuf.MessageExtensions.MergeFrom
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,System.Byte[],System.Int32,System.Int32)
+    name: MergeFrom
+    nameWithType: MessageExtensions.MergeFrom
+    fullName: Google.Protobuf.MessageExtensions.MergeFrom
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
   commentId: M:Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
   isExternal: false
@@ -2268,6 +2442,7 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageParser`1
   commentId: T:Google.Protobuf.MessageParser`1
+  parent: Google.Protobuf
   isExternal: false
   name: MessageParser<T>
   nameWithType: MessageParser<T>

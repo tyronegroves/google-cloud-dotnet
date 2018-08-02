@@ -10,6 +10,7 @@ items:
   - Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.ApprovalPrompt
   - Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.IncludeGrantedScopes
   - Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.LoginHint
+  - Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt
   - Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.UserDefinedQueryParams
   langs:
   - csharp
@@ -112,6 +113,57 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt
+  commentId: P:Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt
+  id: Prompt
+  parent: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl
+  langs:
+  - csharp
+  - vb
+  name: Prompt
+  nameWithType: GoogleAuthorizationCodeRequestUrl.Prompt
+  fullName: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt
+  type: Property
+  source:
+    remote:
+      path: Src/Support/Google.Apis.Auth/OAuth2/Requests/GoogleAuthorizationCodeRequestUrl.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: Prompt
+    path: Src/Support/Google.Apis.Auth/OAuth2/Requests/GoogleAuthorizationCodeRequestUrl.cs
+    startLine: 41
+  assemblies:
+  - Google.Apis.Auth
+  namespace: Google.Apis.Auth.OAuth2.Requests
+  summary: "\nGets of sets prompt for consent behaviour.\nValue can be <code>null</code>, <code>&quot;none&quot;</code>, <code>&quot;consent&quot;</code>, or <code>&quot;select_account&quot;</code>.\nSee <a href=\"https://developers.google.com/identity/protocols/OpenIDConnect#prompt\">OpenIDConnect documentation</a>\nfor details.\n"
+  example: []
+  syntax:
+    content: >-
+      [RequestParameter("prompt", RequestParameterType.Query)]
+
+      public string Prompt { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <RequestParameter("prompt", RequestParameterType.Query)>
+
+      Public Property Prompt As String
+  overload: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt*
+  attributes:
+  - type: Google.Apis.Util.RequestParameterAttribute
+    ctor: Google.Apis.Util.RequestParameterAttribute.#ctor(System.String,Google.Apis.Util.RequestParameterType)
+    arguments:
+    - type: System.String
+      value: prompt
+    - type: Google.Apis.Util.RequestParameterType
+      value: 1
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.ApprovalPrompt
   commentId: P:Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.ApprovalPrompt
   id: ApprovalPrompt
@@ -130,7 +182,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ApprovalPrompt
     path: Src/Support/Google.Apis.Auth/OAuth2/Requests/GoogleAuthorizationCodeRequestUrl.cs
-    startLine: 39
+    startLine: 48
   assemblies:
   - Google.Apis.Auth
   namespace: Google.Apis.Auth.OAuth2.Requests
@@ -140,12 +192,16 @@ items:
     content: >-
       [RequestParameter("approval_prompt", RequestParameterType.Query)]
 
+      [Obsolete("Unused for Google OpenID; use the 'Prompt' property instead.")]
+
       public string ApprovalPrompt { get; set; }
     parameters: []
     return:
       type: System.String
     content.vb: >-
       <RequestParameter("approval_prompt", RequestParameterType.Query)>
+
+      <Obsolete("Unused for Google OpenID; use the 'Prompt' property instead.")>
 
       Public Property ApprovalPrompt As String
   overload: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.ApprovalPrompt*
@@ -157,6 +213,11 @@ items:
       value: approval_prompt
     - type: Google.Apis.Util.RequestParameterType
       value: 1
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Unused for Google OpenID; use the 'Prompt' property instead.
   modifiers.csharp:
   - public
   - get
@@ -181,7 +242,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: LoginHint
     path: Src/Support/Google.Apis.Auth/OAuth2/Requests/GoogleAuthorizationCodeRequestUrl.cs
-    startLine: 48
+    startLine: 58
   assemblies:
   - Google.Apis.Auth
   namespace: Google.Apis.Auth.OAuth2.Requests
@@ -232,7 +293,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IncludeGrantedScopes
     path: Src/Support/Google.Apis.Auth/OAuth2/Requests/GoogleAuthorizationCodeRequestUrl.cs
-    startLine: 58
+    startLine: 68
   assemblies:
   - Google.Apis.Auth
   namespace: Google.Apis.Auth.OAuth2.Requests
@@ -284,7 +345,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: UserDefinedQueryParams
     path: Src/Support/Google.Apis.Auth/OAuth2/Requests/GoogleAuthorizationCodeRequestUrl.cs
-    startLine: 70
+    startLine: 80
   assemblies:
   - Google.Apis.Auth
   namespace: Google.Apis.Auth.OAuth2.Requests
@@ -336,7 +397,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: .ctor
     path: Src/Support/Google.Apis.Auth/OAuth2/Requests/GoogleAuthorizationCodeRequestUrl.cs
-    startLine: 78
+    startLine: 88
   assemblies:
   - Google.Apis.Auth
   namespace: Google.Apis.Auth.OAuth2.Requests
@@ -750,6 +811,12 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt*
+  commentId: Overload:Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt
+  isExternal: false
+  name: Prompt
+  nameWithType: GoogleAuthorizationCodeRequestUrl.Prompt
+  fullName: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.Prompt
 - uid: Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.ApprovalPrompt*
   commentId: Overload:Google.Apis.Auth.OAuth2.Requests.GoogleAuthorizationCodeRequestUrl.ApprovalPrompt
   isExternal: false

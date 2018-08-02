@@ -9,12 +9,6 @@ items:
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DestinationBucket
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DestinationObject
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DestinationPredefinedAcl
-  - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download(System.IO.Stream)
-  - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream)
-  - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)
-  - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)
-  - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)
-  - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus(System.IO.Stream)
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.GetBody
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.HttpMethod
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.IfGenerationMatch
@@ -26,7 +20,6 @@ items:
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.IfSourceMetagenerationMatch
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.IfSourceMetagenerationNotMatch
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.InitParameters
-  - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MethodName
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Projection
   - Google.Apis.Storage.v1.ObjectsResource.CopyRequest.RestPath
@@ -48,7 +41,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: CopyRequest
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4094
+    startLine: 4128
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -81,6 +74,9 @@ items:
   - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.ExecuteAsync(System.Threading.CancellationToken)
   - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.ExecuteAsStreamAsync
   - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.ExecuteAsStreamAsync(System.Threading.CancellationToken)
+  - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
   - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.CreateRequest(System.Nullable{System.Boolean})
   - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.GenerateRequestUri
   - Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.GetDefaultETagAction(System.String)
@@ -119,7 +115,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: .ctor
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4097
+    startLine: 4131
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -164,7 +160,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SourceBucket
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4111
+    startLine: 4144
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -217,7 +213,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SourceObject
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4116
+    startLine: 4149
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -273,7 +269,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DestinationBucket
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4122
+    startLine: 4155
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -331,7 +327,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DestinationObject
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4127
+    startLine: 4160
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -387,7 +383,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DestinationPredefinedAcl
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4131
+    startLine: 4164
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -440,7 +436,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfGenerationMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4161
+    startLine: 4194
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -455,7 +451,7 @@ items:
     content: >-
       [RequestParameter("ifGenerationMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfGenerationMatch { get; set; }
+      public virtual long? IfGenerationMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -498,7 +494,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfGenerationNotMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4167
+    startLine: 4200
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -513,7 +509,7 @@ items:
     content: >-
       [RequestParameter("ifGenerationNotMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfGenerationNotMatch { get; set; }
+      public virtual long? IfGenerationNotMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -556,7 +552,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfMetagenerationMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4172
+    startLine: 4205
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -569,7 +565,7 @@ items:
     content: >-
       [RequestParameter("ifMetagenerationMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfMetagenerationMatch { get; set; }
+      public virtual long? IfMetagenerationMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -612,7 +608,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfMetagenerationNotMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4177
+    startLine: 4210
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -625,7 +621,7 @@ items:
     content: >-
       [RequestParameter("ifMetagenerationNotMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfMetagenerationNotMatch { get; set; }
+      public virtual long? IfMetagenerationNotMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -668,7 +664,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfSourceGenerationMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4182
+    startLine: 4215
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -681,7 +677,7 @@ items:
     content: >-
       [RequestParameter("ifSourceGenerationMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfSourceGenerationMatch { get; set; }
+      public virtual long? IfSourceGenerationMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -724,7 +720,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfSourceGenerationNotMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4187
+    startLine: 4220
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -737,7 +733,7 @@ items:
     content: >-
       [RequestParameter("ifSourceGenerationNotMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfSourceGenerationNotMatch { get; set; }
+      public virtual long? IfSourceGenerationNotMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -780,7 +776,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfSourceMetagenerationMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4192
+    startLine: 4225
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -793,7 +789,7 @@ items:
     content: >-
       [RequestParameter("ifSourceMetagenerationMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfSourceMetagenerationMatch { get; set; }
+      public virtual long? IfSourceMetagenerationMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -836,7 +832,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IfSourceMetagenerationNotMatch
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4197
+    startLine: 4230
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -849,7 +845,7 @@ items:
     content: >-
       [RequestParameter("ifSourceMetagenerationNotMatch", RequestParameterType.Query)]
 
-      public virtual long ? IfSourceMetagenerationNotMatch { get; set; }
+      public virtual long? IfSourceMetagenerationNotMatch { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -892,7 +888,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Projection
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4202
+    startLine: 4235
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -948,7 +944,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SourceGeneration
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4219
+    startLine: 4252
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -961,7 +957,7 @@ items:
     content: >-
       [RequestParameter("sourceGeneration", RequestParameterType.Query)]
 
-      public virtual long ? SourceGeneration { get; set; }
+      public virtual long? SourceGeneration { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -1004,11 +1000,11 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: UserProject
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4223
+    startLine: 4256
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
-  summary: The project to be billed for this request, for Requester Pays buckets.
+  summary: The project to be billed for this request. Required for Requester Pays buckets.
   example: []
   syntax:
     content: >-
@@ -1057,7 +1053,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: GetBody
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4231
+    startLine: 4264
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -1094,7 +1090,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: MethodName
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4234
+    startLine: 4267
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -1134,7 +1130,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: HttpMethod
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4240
+    startLine: 4273
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -1174,7 +1170,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: RestPath
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4246
+    startLine: 4279
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -1214,7 +1210,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: InitParameters
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4252
+    startLine: 4285
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1
@@ -1231,284 +1227,6 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader
-  commentId: P:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader
-  id: MediaDownloader
-  parent: Google.Apis.Storage.v1.ObjectsResource.CopyRequest
-  langs:
-  - csharp
-  - vb
-  name: MediaDownloader
-  nameWithType: ObjectsResource.CopyRequest.MediaDownloader
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader
-  type: Property
-  source:
-    remote:
-      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: MediaDownloader
-    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4403
-  assemblies:
-  - Google.Apis.Storage.v1
-  namespace: Google.Apis.Storage.v1
-  summary: Gets the media downloader.
-  example: []
-  syntax:
-    content: public IMediaDownloader MediaDownloader { get; }
-    parameters: []
-    return:
-      type: Google.Apis.Download.IMediaDownloader
-    content.vb: Public ReadOnly Property MediaDownloader As IMediaDownloader
-  overload: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download(System.IO.Stream)
-  commentId: M:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download(System.IO.Stream)
-  id: Download(System.IO.Stream)
-  parent: Google.Apis.Storage.v1.ObjectsResource.CopyRequest
-  langs:
-  - csharp
-  - vb
-  name: Download(Stream)
-  nameWithType: ObjectsResource.CopyRequest.Download(Stream)
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download(System.IO.Stream)
-  type: Method
-  source:
-    remote:
-      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: Download
-    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4409
-  assemblies:
-  - Google.Apis.Storage.v1
-  namespace: Google.Apis.Storage.v1
-  summary: "\n<p>Synchronously download the media into the given stream.</p>\n<p>Warning: This method hides download errors; use <xref href=\"Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus(System.IO.Stream)\" data-throw-if-not-resolved=\"false\"></xref> instead.</p>\n"
-  example: []
-  syntax:
-    content: public virtual void Download(Stream stream)
-    parameters:
-    - id: stream
-      type: System.IO.Stream
-    content.vb: Public Overridable Sub Download(stream As Stream)
-  overload: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download*
-  modifiers.csharp:
-  - public
-  - virtual
-  modifiers.vb:
-  - Public
-  - Overridable
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus(System.IO.Stream)
-  commentId: M:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus(System.IO.Stream)
-  id: DownloadWithStatus(System.IO.Stream)
-  parent: Google.Apis.Storage.v1.ObjectsResource.CopyRequest
-  langs:
-  - csharp
-  - vb
-  name: DownloadWithStatus(Stream)
-  nameWithType: ObjectsResource.CopyRequest.DownloadWithStatus(Stream)
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus(System.IO.Stream)
-  type: Method
-  source:
-    remote:
-      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: DownloadWithStatus
-    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4416
-  assemblies:
-  - Google.Apis.Storage.v1
-  namespace: Google.Apis.Storage.v1
-  summary: Synchronously download the media into the given stream.
-  example: []
-  syntax:
-    content: public virtual IDownloadProgress DownloadWithStatus(Stream stream)
-    parameters:
-    - id: stream
-      type: System.IO.Stream
-    return:
-      type: Google.Apis.Download.IDownloadProgress
-      description: The final status of the download; including whether the download succeeded or failed.
-    content.vb: Public Overridable Function DownloadWithStatus(stream As Stream) As IDownloadProgress
-  overload: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus*
-  modifiers.csharp:
-  - public
-  - virtual
-  modifiers.vb:
-  - Public
-  - Overridable
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream)
-  commentId: M:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream)
-  id: DownloadAsync(System.IO.Stream)
-  parent: Google.Apis.Storage.v1.ObjectsResource.CopyRequest
-  langs:
-  - csharp
-  - vb
-  name: DownloadAsync(Stream)
-  nameWithType: ObjectsResource.CopyRequest.DownloadAsync(Stream)
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream)
-  type: Method
-  source:
-    remote:
-      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: DownloadAsync
-    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4422
-  assemblies:
-  - Google.Apis.Storage.v1
-  namespace: Google.Apis.Storage.v1
-  summary: Asynchronously download the media into the given stream.
-  example: []
-  syntax:
-    content: public virtual Task<IDownloadProgress> DownloadAsync(Stream stream)
-    parameters:
-    - id: stream
-      type: System.IO.Stream
-    return:
-      type: System.Threading.Tasks.Task{Google.Apis.Download.IDownloadProgress}
-    content.vb: Public Overridable Function DownloadAsync(stream As Stream) As Task(Of IDownloadProgress)
-  overload: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync*
-  modifiers.csharp:
-  - public
-  - virtual
-  modifiers.vb:
-  - Public
-  - Overridable
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)
-  commentId: M:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)
-  id: DownloadAsync(System.IO.Stream,System.Threading.CancellationToken)
-  parent: Google.Apis.Storage.v1.ObjectsResource.CopyRequest
-  langs:
-  - csharp
-  - vb
-  name: DownloadAsync(Stream, CancellationToken)
-  nameWithType: ObjectsResource.CopyRequest.DownloadAsync(Stream, CancellationToken)
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync(System.IO.Stream, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: DownloadAsync
-    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4428
-  assemblies:
-  - Google.Apis.Storage.v1
-  namespace: Google.Apis.Storage.v1
-  summary: Asynchronously download the media into the given stream.
-  example: []
-  syntax:
-    content: public virtual Task<IDownloadProgress> DownloadAsync(Stream stream, CancellationToken cancellationToken)
-    parameters:
-    - id: stream
-      type: System.IO.Stream
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-    return:
-      type: System.Threading.Tasks.Task{Google.Apis.Download.IDownloadProgress}
-    content.vb: Public Overridable Function DownloadAsync(stream As Stream, cancellationToken As CancellationToken) As Task(Of IDownloadProgress)
-  overload: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync*
-  modifiers.csharp:
-  - public
-  - virtual
-  modifiers.vb:
-  - Public
-  - Overridable
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)
-  commentId: M:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)
-  id: DownloadRange(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue)
-  parent: Google.Apis.Storage.v1.ObjectsResource.CopyRequest
-  langs:
-  - csharp
-  - vb
-  name: DownloadRange(Stream, RangeHeaderValue)
-  nameWithType: ObjectsResource.CopyRequest.DownloadRange(Stream, RangeHeaderValue)
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange(System.IO.Stream, System.Net.Http.Headers.RangeHeaderValue)
-  type: Method
-  source:
-    remote:
-      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: DownloadRange
-    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4436
-  assemblies:
-  - Google.Apis.Storage.v1
-  namespace: Google.Apis.Storage.v1
-  summary: Synchronously download a range of the media into the given stream.
-  example: []
-  syntax:
-    content: public virtual IDownloadProgress DownloadRange(Stream stream, RangeHeaderValue range)
-    parameters:
-    - id: stream
-      type: System.IO.Stream
-    - id: range
-      type: System.Net.Http.Headers.RangeHeaderValue
-    return:
-      type: Google.Apis.Download.IDownloadProgress
-    content.vb: Public Overridable Function DownloadRange(stream As Stream, range As RangeHeaderValue) As IDownloadProgress
-  overload: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange*
-  modifiers.csharp:
-  - public
-  - virtual
-  modifiers.vb:
-  - Public
-  - Overridable
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)
-  commentId: M:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)
-  id: DownloadRangeAsync(System.IO.Stream,System.Net.Http.Headers.RangeHeaderValue,System.Threading.CancellationToken)
-  parent: Google.Apis.Storage.v1.ObjectsResource.CopyRequest
-  langs:
-  - csharp
-  - vb
-  name: DownloadRangeAsync(Stream, RangeHeaderValue, CancellationToken)
-  nameWithType: ObjectsResource.CopyRequest.DownloadRangeAsync(Stream, RangeHeaderValue, CancellationToken)
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync(System.IO.Stream, System.Net.Http.Headers.RangeHeaderValue, System.Threading.CancellationToken)
-  type: Method
-  source:
-    remote:
-      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: DownloadRangeAsync
-    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 4444
-  assemblies:
-  - Google.Apis.Storage.v1
-  namespace: Google.Apis.Storage.v1
-  summary: Asynchronously download a range of the media into the given stream.
-  example: []
-  syntax:
-    content: public virtual Task<IDownloadProgress> DownloadRangeAsync(Stream stream, RangeHeaderValue range, CancellationToken cancellationToken = default (CancellationToken))
-    parameters:
-    - id: stream
-      type: System.IO.Stream
-    - id: range
-      type: System.Net.Http.Headers.RangeHeaderValue
-    - id: cancellationToken
-      type: System.Threading.CancellationToken
-    return:
-      type: System.Threading.Tasks.Task{Google.Apis.Download.IDownloadProgress}
-    content.vb: Public Overridable Function DownloadRangeAsync(stream As Stream, range As RangeHeaderValue, cancellationToken As CancellationToken = Nothing) As Task(Of IDownloadProgress)
-  overload: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync*
-  modifiers.csharp:
-  - public
-  - virtual
-  modifiers.vb:
-  - Public
-  - Overridable
 references:
 - uid: Google.Apis.Storage.v1
   commentId: N:Google.Apis.Storage.v1
@@ -1931,6 +1649,135 @@ references:
     name: CancellationToken
     nameWithType: CancellationToken
     fullName: System.Threading.CancellationToken
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  parent: Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}
+  definition: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  name: AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  nameWithType: ClientServiceRequest<Object>.AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  fullName: Google.Apis.Requests.ClientServiceRequest<Google.Apis.Storage.v1.Data.Object>.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  nameWithType.vb: ClientServiceRequest(Of Object).AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of Google.Apis.Storage.v1.Data.Object).AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+    name: AddUnsuccessfulResponseHandler
+    nameWithType: ClientServiceRequest<Object>.AddUnsuccessfulResponseHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest<Google.Apis.Storage.v1.Data.Object>.AddUnsuccessfulResponseHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    name: IHttpUnsuccessfulResponseHandler
+    nameWithType: IHttpUnsuccessfulResponseHandler
+    fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+    name: AddUnsuccessfulResponseHandler
+    nameWithType: ClientServiceRequest(Of Object).AddUnsuccessfulResponseHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest(Of Google.Apis.Storage.v1.Data.Object).AddUnsuccessfulResponseHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    name: IHttpUnsuccessfulResponseHandler
+    nameWithType: IHttpUnsuccessfulResponseHandler
+    fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  parent: Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}
+  definition: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  name: AddExceptionHandler(IHttpExceptionHandler)
+  nameWithType: ClientServiceRequest<Object>.AddExceptionHandler(IHttpExceptionHandler)
+  fullName: Google.Apis.Requests.ClientServiceRequest<Google.Apis.Storage.v1.Data.Object>.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  nameWithType.vb: ClientServiceRequest(Of Object).AddExceptionHandler(IHttpExceptionHandler)
+  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of Google.Apis.Storage.v1.Data.Object).AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+    name: AddExceptionHandler
+    nameWithType: ClientServiceRequest<Object>.AddExceptionHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest<Google.Apis.Storage.v1.Data.Object>.AddExceptionHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExceptionHandler
+    name: IHttpExceptionHandler
+    nameWithType: IHttpExceptionHandler
+    fullName: Google.Apis.Http.IHttpExceptionHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+    name: AddExceptionHandler
+    nameWithType: ClientServiceRequest(Of Object).AddExceptionHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest(Of Google.Apis.Storage.v1.Data.Object).AddExceptionHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExceptionHandler
+    name: IHttpExceptionHandler
+    nameWithType: IHttpExceptionHandler
+    fullName: Google.Apis.Http.IHttpExceptionHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  parent: Google.Apis.Requests.ClientServiceRequest{Google.Apis.Storage.v1.Data.Object}
+  definition: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  name: AddExecuteInterceptor(IHttpExecuteInterceptor)
+  nameWithType: ClientServiceRequest<Object>.AddExecuteInterceptor(IHttpExecuteInterceptor)
+  fullName: Google.Apis.Requests.ClientServiceRequest<Google.Apis.Storage.v1.Data.Object>.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  nameWithType.vb: ClientServiceRequest(Of Object).AddExecuteInterceptor(IHttpExecuteInterceptor)
+  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of Google.Apis.Storage.v1.Data.Object).AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+    name: AddExecuteInterceptor
+    nameWithType: ClientServiceRequest<Object>.AddExecuteInterceptor
+    fullName: Google.Apis.Requests.ClientServiceRequest<Google.Apis.Storage.v1.Data.Object>.AddExecuteInterceptor
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExecuteInterceptor
+    name: IHttpExecuteInterceptor
+    nameWithType: IHttpExecuteInterceptor
+    fullName: Google.Apis.Http.IHttpExecuteInterceptor
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+    name: AddExecuteInterceptor
+    nameWithType: ClientServiceRequest(Of Object).AddExecuteInterceptor
+    fullName: Google.Apis.Requests.ClientServiceRequest(Of Google.Apis.Storage.v1.Data.Object).AddExecuteInterceptor
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExecuteInterceptor
+    name: IHttpExecuteInterceptor
+    nameWithType: IHttpExecuteInterceptor
+    fullName: Google.Apis.Http.IHttpExecuteInterceptor
     isExternal: true
   - name: )
     nameWithType: )
@@ -2787,6 +2634,132 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  isExternal: true
+  name: AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  nameWithType: ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  nameWithType.vb: ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+    name: AddUnsuccessfulResponseHandler
+    nameWithType: ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    name: IHttpUnsuccessfulResponseHandler
+    nameWithType: IHttpUnsuccessfulResponseHandler
+    fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+    name: AddUnsuccessfulResponseHandler
+    nameWithType: ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    name: IHttpUnsuccessfulResponseHandler
+    nameWithType: IHttpUnsuccessfulResponseHandler
+    fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  isExternal: true
+  name: AddExceptionHandler(IHttpExceptionHandler)
+  nameWithType: ClientServiceRequest<TResponse>.AddExceptionHandler(IHttpExceptionHandler)
+  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  nameWithType.vb: ClientServiceRequest(Of TResponse).AddExceptionHandler(IHttpExceptionHandler)
+  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+    name: AddExceptionHandler
+    nameWithType: ClientServiceRequest<TResponse>.AddExceptionHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExceptionHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExceptionHandler
+    name: IHttpExceptionHandler
+    nameWithType: IHttpExceptionHandler
+    fullName: Google.Apis.Http.IHttpExceptionHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+    name: AddExceptionHandler
+    nameWithType: ClientServiceRequest(Of TResponse).AddExceptionHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExceptionHandler
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExceptionHandler
+    name: IHttpExceptionHandler
+    nameWithType: IHttpExceptionHandler
+    fullName: Google.Apis.Http.IHttpExceptionHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  isExternal: true
+  name: AddExecuteInterceptor(IHttpExecuteInterceptor)
+  nameWithType: ClientServiceRequest<TResponse>.AddExecuteInterceptor(IHttpExecuteInterceptor)
+  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  nameWithType.vb: ClientServiceRequest(Of TResponse).AddExecuteInterceptor(IHttpExecuteInterceptor)
+  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+    name: AddExecuteInterceptor
+    nameWithType: ClientServiceRequest<TResponse>.AddExecuteInterceptor
+    fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExecuteInterceptor
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExecuteInterceptor
+    name: IHttpExecuteInterceptor
+    nameWithType: IHttpExecuteInterceptor
+    fullName: Google.Apis.Http.IHttpExecuteInterceptor
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+    name: AddExecuteInterceptor
+    nameWithType: ClientServiceRequest(Of TResponse).AddExecuteInterceptor
+    fullName: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExecuteInterceptor
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExecuteInterceptor
+    name: IHttpExecuteInterceptor
+    nameWithType: IHttpExecuteInterceptor
+    fullName: Google.Apis.Http.IHttpExecuteInterceptor
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Apis.Requests.ClientServiceRequest`1.CreateRequest(System.Nullable{System.Boolean})
   commentId: M:Google.Apis.Requests.ClientServiceRequest`1.CreateRequest(System.Nullable{System.Boolean})
   isExternal: true
@@ -3467,189 +3440,3 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader*
-  commentId: Overload:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader
-  isExternal: false
-  name: MediaDownloader
-  nameWithType: ObjectsResource.CopyRequest.MediaDownloader
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.MediaDownloader
-- uid: Google.Apis.Download.IMediaDownloader
-  commentId: T:Google.Apis.Download.IMediaDownloader
-  parent: Google.Apis.Download
-  isExternal: true
-  name: IMediaDownloader
-  nameWithType: IMediaDownloader
-  fullName: Google.Apis.Download.IMediaDownloader
-- uid: Google.Apis.Download
-  commentId: N:Google.Apis.Download
-  isExternal: false
-  name: Google.Apis.Download
-  nameWithType: Google.Apis.Download
-  fullName: Google.Apis.Download
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus(System.IO.Stream)
-  commentId: M:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus(System.IO.Stream)
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download*
-  commentId: Overload:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download
-  isExternal: false
-  name: Download
-  nameWithType: ObjectsResource.CopyRequest.Download
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.Download
-- uid: System.IO.Stream
-  commentId: T:System.IO.Stream
-  parent: System.IO
-  isExternal: true
-  name: Stream
-  nameWithType: Stream
-  fullName: System.IO.Stream
-- uid: System.IO
-  commentId: N:System.IO
-  isExternal: false
-  name: System.IO
-  nameWithType: System.IO
-  fullName: System.IO
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus*
-  commentId: Overload:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus
-  isExternal: false
-  name: DownloadWithStatus
-  nameWithType: ObjectsResource.CopyRequest.DownloadWithStatus
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadWithStatus
-- uid: Google.Apis.Download.IDownloadProgress
-  commentId: T:Google.Apis.Download.IDownloadProgress
-  parent: Google.Apis.Download
-  isExternal: true
-  name: IDownloadProgress
-  nameWithType: IDownloadProgress
-  fullName: Google.Apis.Download.IDownloadProgress
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync*
-  commentId: Overload:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync
-  isExternal: false
-  name: DownloadAsync
-  nameWithType: ObjectsResource.CopyRequest.DownloadAsync
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadAsync
-- uid: System.Threading.Tasks.Task{Google.Apis.Download.IDownloadProgress}
-  commentId: T:System.Threading.Tasks.Task{Google.Apis.Download.IDownloadProgress}
-  parent: System.Threading.Tasks
-  definition: System.Threading.Tasks.Task`1
-  name: Task<IDownloadProgress>
-  nameWithType: Task<IDownloadProgress>
-  fullName: System.Threading.Tasks.Task<Google.Apis.Download.IDownloadProgress>
-  nameWithType.vb: Task(Of IDownloadProgress)
-  fullName.vb: System.Threading.Tasks.Task(Of Google.Apis.Download.IDownloadProgress)
-  name.vb: Task(Of IDownloadProgress)
-  spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Google.Apis.Download.IDownloadProgress
-    name: IDownloadProgress
-    nameWithType: IDownloadProgress
-    fullName: Google.Apis.Download.IDownloadProgress
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Google.Apis.Download.IDownloadProgress
-    name: IDownloadProgress
-    nameWithType: IDownloadProgress
-    fullName: Google.Apis.Download.IDownloadProgress
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Threading.Tasks.Task`1
-  commentId: T:System.Threading.Tasks.Task`1
-  isExternal: true
-  name: Task<TResult>
-  nameWithType: Task<TResult>
-  fullName: System.Threading.Tasks.Task<TResult>
-  nameWithType.vb: Task(Of TResult)
-  fullName.vb: System.Threading.Tasks.Task(Of TResult)
-  name.vb: Task(Of TResult)
-  spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Threading.Tasks.Task`1
-    name: Task
-    nameWithType: Task
-    fullName: System.Threading.Tasks.Task
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Threading.Tasks
-  commentId: N:System.Threading.Tasks
-  isExternal: false
-  name: System.Threading.Tasks
-  nameWithType: System.Threading.Tasks
-  fullName: System.Threading.Tasks
-- uid: System.Threading.CancellationToken
-  commentId: T:System.Threading.CancellationToken
-  parent: System.Threading
-  isExternal: true
-  name: CancellationToken
-  nameWithType: CancellationToken
-  fullName: System.Threading.CancellationToken
-- uid: System.Threading
-  commentId: N:System.Threading
-  isExternal: false
-  name: System.Threading
-  nameWithType: System.Threading
-  fullName: System.Threading
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange*
-  commentId: Overload:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange
-  isExternal: false
-  name: DownloadRange
-  nameWithType: ObjectsResource.CopyRequest.DownloadRange
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRange
-- uid: System.Net.Http.Headers.RangeHeaderValue
-  commentId: T:System.Net.Http.Headers.RangeHeaderValue
-  parent: System.Net.Http.Headers
-  isExternal: true
-  name: RangeHeaderValue
-  nameWithType: RangeHeaderValue
-  fullName: System.Net.Http.Headers.RangeHeaderValue
-- uid: System.Net.Http.Headers
-  commentId: N:System.Net.Http.Headers
-  isExternal: false
-  name: System.Net.Http.Headers
-  nameWithType: System.Net.Http.Headers
-  fullName: System.Net.Http.Headers
-- uid: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync*
-  commentId: Overload:Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync
-  isExternal: false
-  name: DownloadRangeAsync
-  nameWithType: ObjectsResource.CopyRequest.DownloadRangeAsync
-  fullName: Google.Apis.Storage.v1.ObjectsResource.CopyRequest.DownloadRangeAsync

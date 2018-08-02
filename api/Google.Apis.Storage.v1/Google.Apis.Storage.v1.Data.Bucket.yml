@@ -8,6 +8,7 @@ items:
   - Google.Apis.Storage.v1.Data.Bucket.Acl
   - Google.Apis.Storage.v1.Data.Bucket.Billing
   - Google.Apis.Storage.v1.Data.Bucket.Cors
+  - Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold
   - Google.Apis.Storage.v1.Data.Bucket.DefaultObjectAcl
   - Google.Apis.Storage.v1.Data.Bucket.Encryption
   - Google.Apis.Storage.v1.Data.Bucket.ETag
@@ -21,6 +22,7 @@ items:
   - Google.Apis.Storage.v1.Data.Bucket.Name
   - Google.Apis.Storage.v1.Data.Bucket.Owner
   - Google.Apis.Storage.v1.Data.Bucket.ProjectNumber
+  - Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy
   - Google.Apis.Storage.v1.Data.Bucket.SelfLink
   - Google.Apis.Storage.v1.Data.Bucket.StorageClass
   - Google.Apis.Storage.v1.Data.Bucket.TimeCreated
@@ -43,7 +45,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Bucket
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7030
+    startLine: 6931
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -90,7 +92,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Acl
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7033
+    startLine: 6934
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -141,7 +143,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Billing
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7037
+    startLine: 6938
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -192,7 +194,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Cors
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7041
+    startLine: 6942
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -225,6 +227,74 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold
+  commentId: P:Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold
+  id: DefaultEventBasedHold
+  parent: Google.Apis.Storage.v1.Data.Bucket
+  langs:
+  - csharp
+  - vb
+  name: DefaultEventBasedHold
+  nameWithType: Bucket.DefaultEventBasedHold
+  fullName: Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: DefaultEventBasedHold
+    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
+    startLine: 6954
+  assemblies:
+  - Google.Apis.Storage.v1
+  namespace: Google.Apis.Storage.v1.Data
+  summary: >-
+    The default value for event-based hold on newly created objects in this bucket. Event-based hold is
+
+    a way to retain objects indefinitely until an event occurs, signified by the hold&apos;s release. After being
+
+    released, such objects will be subject to bucket-level retention (if any). One sample use case of this flag
+
+    is for banks to hold loan documents for at least 3 years after loan is paid in full. Here, bucket-level
+
+    retention is 3 years and the event is loan being paid in full. In this example, these objects will be held
+
+    intact for any number of years until the event has occurred (event-based hold on the object is released) and
+
+    then 3 more years after that. That means retention duration of the objects begins from the moment event-
+
+    based hold transitioned from true to false. Objects under event-based hold cannot be deleted, overwritten or
+
+    archived until the hold is removed.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("defaultEventBasedHold")]
+
+      public virtual bool? DefaultEventBasedHold { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: >-
+      <JsonProperty("defaultEventBasedHold")>
+
+      Public Overridable Property DefaultEventBasedHold As Boolean?
+  overload: Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: defaultEventBasedHold
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Storage.v1.Data.Bucket.DefaultObjectAcl
   commentId: P:Google.Apis.Storage.v1.Data.Bucket.DefaultObjectAcl
   id: DefaultObjectAcl
@@ -243,7 +313,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DefaultObjectAcl
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7045
+    startLine: 6958
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -294,14 +364,11 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Encryption
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7050
+    startLine: 6962
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
-  summary: >-
-    Encryption configuration used by default for newly inserted objects, when no encryption config is
-
-    specified.
+  summary: Encryption configuration for a bucket.
   example: []
   syntax:
     content: >-
@@ -348,7 +415,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ETag
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7054
+    startLine: 6966
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -401,11 +468,11 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Id
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7058
+    startLine: 6970
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
-  summary: The ID of the bucket. For buckets, the id and name properities are the same.
+  summary: The ID of the bucket. For buckets, the id and name properties are the same.
   example: []
   syntax:
     content: >-
@@ -452,7 +519,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Kind
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7062
+    startLine: 6974
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -503,7 +570,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Labels
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7066
+    startLine: 6978
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -554,7 +621,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Lifecycle
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7070
+    startLine: 6982
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -605,7 +672,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Location
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7075
+    startLine: 6987
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -659,7 +726,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Logging
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7080
+    startLine: 6992
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -713,7 +780,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Metageneration
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7084
+    startLine: 6996
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -723,7 +790,7 @@ items:
     content: >-
       [JsonProperty("metageneration")]
 
-      public virtual long ? Metageneration { get; set; }
+      public virtual long? Metageneration { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Int64}
@@ -764,7 +831,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Name
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7088
+    startLine: 7000
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -815,7 +882,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Owner
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7092
+    startLine: 7004
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -866,7 +933,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ProjectNumber
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7096
+    startLine: 7008
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -876,7 +943,7 @@ items:
     content: >-
       [JsonProperty("projectNumber")]
 
-      public virtual ulong ? ProjectNumber { get; set; }
+      public virtual ulong? ProjectNumber { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.UInt64}
@@ -891,6 +958,68 @@ items:
     arguments:
     - type: System.String
       value: projectNumber
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy
+  commentId: P:Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy
+  id: RetentionPolicy
+  parent: Google.Apis.Storage.v1.Data.Bucket
+  langs:
+  - csharp
+  - vb
+  name: RetentionPolicy
+  nameWithType: Bucket.RetentionPolicy
+  fullName: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: RetentionPolicy
+    path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
+    startLine: 7017
+  assemblies:
+  - Google.Apis.Storage.v1
+  namespace: Google.Apis.Storage.v1.Data
+  summary: >-
+    The bucket&apos;s retention policy. The retention policy enforces a minimum retention time for all
+
+    objects contained in the bucket, based on their creation time. Any attempt to overwrite or delete objects
+
+    younger than the retention period will result in a PERMISSION_DENIED error. An unlocked retention policy can
+
+    be modified or removed from the bucket via a storage.buckets.update operation. A locked retention policy
+
+    cannot be removed or shortened in duration for the lifetime of the bucket. Attempting to remove or decrease
+
+    period of a locked retention policy will result in a PERMISSION_DENIED error.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("retentionPolicy")]
+
+      public virtual Bucket.RetentionPolicyData RetentionPolicy { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicyData
+    content.vb: >-
+      <JsonProperty("retentionPolicy")>
+
+      Public Overridable Property RetentionPolicy As Bucket.RetentionPolicyData
+  overload: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: retentionPolicy
   modifiers.csharp:
   - public
   - virtual
@@ -917,7 +1046,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SelfLink
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7100
+    startLine: 7021
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -968,7 +1097,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: StorageClass
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7108
+    startLine: 7029
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -1028,7 +1157,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TimeCreatedRaw
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7112
+    startLine: 7033
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -1079,7 +1208,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TimeCreated
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7116
+    startLine: 7037
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -1128,7 +1257,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: UpdatedRaw
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7130
+    startLine: 7051
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -1179,7 +1308,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Updated
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7134
+    startLine: 7055
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -1228,7 +1357,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Versioning
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7148
+    startLine: 7069
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -1279,7 +1408,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Website
     path: Src/Generated/Google.Apis.Storage.v1/Google.Apis.Storage.v1.cs
-    startLine: 7153
+    startLine: 7074
   assemblies:
   - Google.Apis.Storage.v1
   namespace: Google.Apis.Storage.v1.Data
@@ -1781,6 +1910,95 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold*
+  commentId: Overload:Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold
+  isExternal: false
+  name: DefaultEventBasedHold
+  nameWithType: Bucket.DefaultEventBasedHold
+  fullName: Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Boolean>
+  nameWithType: Nullable<Boolean>
+  fullName: System.Nullable<System.Boolean>
+  nameWithType.vb: Nullable(Of Boolean)
+  fullName.vb: System.Nullable(Of System.Boolean)
+  name.vb: Nullable(Of Boolean)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Apis.Storage.v1.Data.Bucket.DefaultObjectAcl*
   commentId: Overload:Google.Apis.Storage.v1.Data.Bucket.DefaultObjectAcl
   isExternal: false
@@ -2073,45 +2291,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Nullable`1
-  commentId: T:System.Nullable`1
-  isExternal: true
-  name: Nullable<T>
-  nameWithType: Nullable<T>
-  fullName: System.Nullable<T>
-  nameWithType.vb: Nullable(Of T)
-  fullName.vb: System.Nullable(Of T)
-  name.vb: Nullable(Of T)
-  spec.csharp:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Google.Apis.Storage.v1.Data.Bucket.Name*
   commentId: Overload:Google.Apis.Storage.v1.Data.Bucket.Name
   isExternal: false
@@ -2181,6 +2360,19 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy*
+  commentId: Overload:Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy
+  isExternal: false
+  name: RetentionPolicy
+  nameWithType: Bucket.RetentionPolicy
+  fullName: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy
+- uid: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicyData
+  commentId: T:Google.Apis.Storage.v1.Data.Bucket.RetentionPolicyData
+  parent: Google.Apis.Storage.v1.Data
+  isExternal: false
+  name: Bucket.RetentionPolicyData
+  nameWithType: Bucket.RetentionPolicyData
+  fullName: Google.Apis.Storage.v1.Data.Bucket.RetentionPolicyData
 - uid: Google.Apis.Storage.v1.Data.Bucket.SelfLink*
   commentId: Overload:Google.Apis.Storage.v1.Data.Bucket.SelfLink
   isExternal: false

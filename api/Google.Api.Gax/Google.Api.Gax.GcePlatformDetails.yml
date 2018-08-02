@@ -7,6 +7,7 @@ items:
   children:
   - Google.Api.Gax.GcePlatformDetails.#ctor(System.String,System.String,System.String,System.String)
   - Google.Api.Gax.GcePlatformDetails.InstanceId
+  - Google.Api.Gax.GcePlatformDetails.Location
   - Google.Api.Gax.GcePlatformDetails.MetadataJson
   - Google.Api.Gax.GcePlatformDetails.ProjectId
   - Google.Api.Gax.GcePlatformDetails.ToString
@@ -26,7 +27,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GcePlatformDetails
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 47
+    startLine: 50
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -70,7 +71,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: TryLoad
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 56
+    startLine: 60
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -81,7 +82,10 @@ items:
     parameters:
     - id: metadataJson
       type: System.String
-      description: JSON metadata, normally retrieved from the GCE metadata server.
+      description: >-
+        JSON metadata, normally retrieved from the GCE metadata server.
+
+        Must not be <code>null</code>.
     return:
       type: Google.Api.Gax.GcePlatformDetails
       description: >-
@@ -114,7 +118,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 84
+    startLine: 94
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -125,16 +129,27 @@ items:
     parameters:
     - id: metadataJson
       type: System.String
-      description: The full JSON string retrieved from the metadata server.
+      description: The full JSON string retrieved from the metadata server. Must not be <code>null</code>.
     - id: projectId
       type: System.String
-      description: The project ID.
+      description: The project ID. Must not be <code>null</code>.
     - id: instanceId
       type: System.String
-      description: The instance ID.
+      description: The instance ID. Must not be <code>null</code>.
     - id: zoneName
       type: System.String
-      description: The zone name.
+      description: >-
+        The zone name. Must not be <code>null</code>.
+
+        If this value is in the format <pre><code>projects/&lt;project-number>/zones/&lt;zone-name></code></pre>
+
+        then <xref href="Google.Api.Gax.GcePlatformDetails.Location" data-throw-if-not-resolved="false"></xref> will return the <pre><code>&lt;zone-name></code></pre> part of this value.
+
+        If not, <xref href="Google.Api.Gax.GcePlatformDetails.Location" data-throw-if-not-resolved="false"></xref> will throw <xref href="System.InvalidOperationException" data-throw-if-not-resolved="false"></xref>.
+
+        If this value has been retrived from Google Compute Engine, the it&apos;s format will be the one
+
+        described above.
     content.vb: Public Sub New(metadataJson As String, projectId As String, instanceId As String, zoneName As String)
   overload: Google.Api.Gax.GcePlatformDetails.#ctor*
   modifiers.csharp:
@@ -159,7 +174,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MetadataJson
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 95
+    startLine: 105
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -196,7 +211,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ProjectId
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 100
+    startLine: 110
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -233,7 +248,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: InstanceId
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 105
+    startLine: 115
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -270,11 +285,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ZoneName
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 110
+    startLine: 122
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
-  summary: "\nThe zone name where this GCE instance is running.\n"
+  summary: "\nThe zone where this GCE instance is running.\nThis will be in the format <pre><code>projects/&lt;project-number>/zones/&lt;zone-name></code></pre>\nid the value has been retrieved from Google Compute Engine.\n"
   example: []
   syntax:
     content: public string ZoneName { get; }
@@ -283,6 +298,43 @@ items:
       type: System.String
     content.vb: Public ReadOnly Property ZoneName As String
   overload: Google.Api.Gax.GcePlatformDetails.ZoneName*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.GcePlatformDetails.Location
+  commentId: P:Google.Api.Gax.GcePlatformDetails.Location
+  id: Location
+  parent: Google.Api.Gax.GcePlatformDetails
+  langs:
+  - csharp
+  - vb
+  name: Location
+  nameWithType: GcePlatformDetails.Location
+  fullName: Google.Api.Gax.GcePlatformDetails.Location
+  type: Property
+  source:
+    remote:
+      path: src/Google.Api.Gax/Platform.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: Location
+    path: src/Google.Api.Gax/Platform.cs
+    startLine: 131
+  assemblies:
+  - Google.Api.Gax
+  namespace: Google.Api.Gax
+  summary: "\nThe zone name where this GCE instance is running.\nIf <xref href=\"Google.Api.Gax.GcePlatformDetails.ZoneName\" data-throw-if-not-resolved=\"false\"></xref> is in the format <pre><code>projects/&lt;project-number>/zones/&lt;zone-name></code></pre>\nthis value will be the <pre><code>&lt;zone-name></code></pre> part in <xref href=\"Google.Api.Gax.GcePlatformDetails.ZoneName\" data-throw-if-not-resolved=\"false\"></xref>.\nIf <xref href=\"Google.Api.Gax.GcePlatformDetails.ZoneName\" data-throw-if-not-resolved=\"false\"></xref> is in a different format then this getting the value of this property will\nthrow <xref href=\"System.InvalidOperationException\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public string Location { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Location As String
+  overload: Google.Api.Gax.GcePlatformDetails.Location*
   modifiers.csharp:
   - public
   - get
@@ -307,7 +359,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
     path: src/Google.Api.Gax/Platform.cs
-    startLine: 113
+    startLine: 145
   assemblies:
   - Google.Api.Gax
   namespace: Google.Api.Gax
@@ -613,6 +665,10 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: Google.Api.Gax.GcePlatformDetails.Location
+  commentId: P:Google.Api.Gax.GcePlatformDetails.Location
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
 - uid: Google.Api.Gax.GcePlatformDetails.#ctor*
   commentId: Overload:Google.Api.Gax.GcePlatformDetails.#ctor
   isExternal: false
@@ -643,6 +699,14 @@ references:
   name: ZoneName
   nameWithType: GcePlatformDetails.ZoneName
   fullName: Google.Api.Gax.GcePlatformDetails.ZoneName
+- uid: Google.Api.Gax.GcePlatformDetails.ZoneName
+  commentId: P:Google.Api.Gax.GcePlatformDetails.ZoneName
+- uid: Google.Api.Gax.GcePlatformDetails.Location*
+  commentId: Overload:Google.Api.Gax.GcePlatformDetails.Location
+  isExternal: false
+  name: Location
+  nameWithType: GcePlatformDetails.Location
+  fullName: Google.Api.Gax.GcePlatformDetails.Location
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object

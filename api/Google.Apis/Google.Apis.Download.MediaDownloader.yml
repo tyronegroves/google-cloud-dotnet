@@ -17,6 +17,7 @@ items:
   - Google.Apis.Download.MediaDownloader.OnResponseReceived(System.Net.Http.HttpResponseMessage)
   - Google.Apis.Download.MediaDownloader.ProgressChanged
   - Google.Apis.Download.MediaDownloader.Range
+  - Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider
   langs:
   - csharp
   - vb
@@ -31,7 +32,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: MediaDownloader
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 33
+    startLine: 34
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -78,7 +79,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: MaximumChunkSize
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 48
+    startLine: 49
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -113,7 +114,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ChunkSize
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 57
+    startLine: 58
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -152,7 +153,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Range
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 74
+    startLine: 75
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -165,6 +166,43 @@ items:
       type: System.Net.Http.Headers.RangeHeaderValue
     content.vb: Public Property Range As RangeHeaderValue
   overload: Google.Apis.Download.MediaDownloader.Range*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider
+  commentId: P:Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider
+  id: ResponseStreamInterceptorProvider
+  parent: Google.Apis.Download.MediaDownloader
+  langs:
+  - csharp
+  - vb
+  name: ResponseStreamInterceptorProvider
+  nameWithType: MediaDownloader.ResponseStreamInterceptorProvider
+  fullName: Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider
+  type: Property
+  source:
+    remote:
+      path: Src/Support/Google.Apis/Download/MediaDownloader.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: ResponseStreamInterceptorProvider
+    path: Src/Support/Google.Apis/Download/MediaDownloader.cs
+    startLine: 82
+  assemblies:
+  - Google.Apis
+  namespace: Google.Apis.Download
+  summary: "\nA provider for response stream interceptors. Each time a response is produced, the provider\nis called, and can return <code>null</code> if interception is not required, or an interceptor for\nthat response. The provider itself should not read the response&apos;s content stream, but can check headers.\n"
+  example: []
+  syntax:
+    content: public Func<HttpResponseMessage, StreamInterceptor> ResponseStreamInterceptorProvider { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.Net.Http.HttpResponseMessage,Google.Apis.Http.StreamInterceptor}
+    content.vb: Public Property ResponseStreamInterceptorProvider As Func(Of HttpResponseMessage, StreamInterceptor)
+  overload: Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider*
   modifiers.csharp:
   - public
   - get
@@ -189,7 +227,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: .ctor
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 124
+    startLine: 132
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -224,7 +262,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ModifyRequest
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 132
+    startLine: 140
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -261,7 +299,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ProgressChanged
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 137
+    startLine: 145
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -296,7 +334,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Download
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 142
+    startLine: 150
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -337,7 +375,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DownloadAsync
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 148
+    startLine: 156
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -378,7 +416,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DownloadAsync
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 154
+    startLine: 162
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -422,7 +460,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: OnResponseReceived
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 341
+    startLine: 353
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -461,7 +499,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: OnDataReceived
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 352
+    startLine: 364
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -505,7 +543,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: OnDownloadCompleted
     path: Src/Support/Google.Apis/Download/MediaDownloader.cs
-    startLine: 361
+    startLine: 373
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Download
@@ -868,6 +906,121 @@ references:
   name: System.Net.Http.Headers
   nameWithType: System.Net.Http.Headers
   fullName: System.Net.Http.Headers
+- uid: Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider*
+  commentId: Overload:Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider
+  isExternal: false
+  name: ResponseStreamInterceptorProvider
+  nameWithType: MediaDownloader.ResponseStreamInterceptorProvider
+  fullName: Google.Apis.Download.MediaDownloader.ResponseStreamInterceptorProvider
+- uid: System.Func{System.Net.Http.HttpResponseMessage,Google.Apis.Http.StreamInterceptor}
+  commentId: T:System.Func{System.Net.Http.HttpResponseMessage,Google.Apis.Http.StreamInterceptor}
+  parent: System
+  definition: System.Func`2
+  name: Func<HttpResponseMessage, StreamInterceptor>
+  nameWithType: Func<HttpResponseMessage, StreamInterceptor>
+  fullName: System.Func<System.Net.Http.HttpResponseMessage, Google.Apis.Http.StreamInterceptor>
+  nameWithType.vb: Func(Of HttpResponseMessage, StreamInterceptor)
+  fullName.vb: System.Func(Of System.Net.Http.HttpResponseMessage, Google.Apis.Http.StreamInterceptor)
+  name.vb: Func(Of HttpResponseMessage, StreamInterceptor)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Google.Apis.Http.StreamInterceptor
+    name: StreamInterceptor
+    nameWithType: StreamInterceptor
+    fullName: Google.Apis.Http.StreamInterceptor
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Net.Http.HttpResponseMessage
+    name: HttpResponseMessage
+    nameWithType: HttpResponseMessage
+    fullName: System.Net.Http.HttpResponseMessage
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Google.Apis.Http.StreamInterceptor
+    name: StreamInterceptor
+    nameWithType: StreamInterceptor
+    fullName: Google.Apis.Http.StreamInterceptor
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Apis.Download.MediaDownloader.#ctor*
   commentId: Overload:Google.Apis.Download.MediaDownloader.#ctor
   isExternal: false

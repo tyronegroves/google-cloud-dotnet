@@ -9,6 +9,8 @@ items:
   - Google.Api.Billing.#ctor(Google.Api.Billing)
   - Google.Api.Billing.CalculateSize
   - Google.Api.Billing.Clone
+  - Google.Api.Billing.ConsumerDestinations
+  - Google.Api.Billing.ConsumerDestinationsFieldNumber
   - Google.Api.Billing.Descriptor
   - Google.Api.Billing.Equals(Google.Api.Billing)
   - Google.Api.Billing.Equals(System.Object)
@@ -16,11 +18,7 @@ items:
   - Google.Api.Billing.Google#Protobuf#IMessage#Descriptor
   - Google.Api.Billing.MergeFrom(Google.Api.Billing)
   - Google.Api.Billing.MergeFrom(Google.Protobuf.CodedInputStream)
-  - Google.Api.Billing.Metrics
-  - Google.Api.Billing.MetricsFieldNumber
   - Google.Api.Billing.Parser
-  - Google.Api.Billing.Rules
-  - Google.Api.Billing.RulesFieldNumber
   - Google.Api.Billing.ToString
   - Google.Api.Billing.WriteTo(Google.Protobuf.CodedOutputStream)
   langs:
@@ -37,11 +35,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Billing
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 88
+    startLine: 75
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nBilling related configuration of the service.\n\nThe following example shows how to configure metrics for billing:\n\nmetrics:\n- name: library.googleapis.com/read_calls\n metric_kind: DELTA\n value_type: INT64\n- name: library.googleapis.com/write_calls\n metric_kind: DELTA\n value_type: INT64\nbilling:\n metrics:\n - library.googleapis.com/read_calls\n - library.googleapis.com/write_calls\n\nThe next example shows how to enable billing status check and customize the\ncheck behavior. It makes sure billing status check is included in the `Check`\nmethod of [Service Control API](https://cloud.google.com/service-control/).\nIn the example, &quot;google.storage.Get&quot; method can be served when the billing\nstatus is either `current` or `delinquent`, while &quot;google.storage.Write&quot;\nmethod can only be served when the billing status is `current`:\n\nbilling:\n rules:\n - selector: google.storage.Get\n   allowed_statuses:\n   - current\n   - delinquent\n - selector: google.storage.Write\n   allowed_statuses: current\n\nMostly services should only allow `current` status when serving requests.\nIn addition, services can choose to allow both `current` and `delinquent`\nstatuses when serving read-only requests to resources. If there&apos;s no\nmatching selector for operation, no billing status check will be performed.\n"
+  summary: "\nBilling related configuration of the service.\n\nThe following example shows how to configure monitored resources and metrics\nfor billing:\n\nmonitored_resources:\n- type: library.googleapis.com/branch\n labels:\n - key: /city\n   description: The city where the library branch is located in.\n - key: /name\n   description: The name of the branch.\nmetrics:\n- name: library.googleapis.com/book/borrowed_count\n metric_kind: DELTA\n value_type: INT64\nbilling:\n consumer_destinations:\n - monitored_resource: library.googleapis.com/branch\n   metrics:\n   - library.googleapis.com/book/borrowed_count\n"
   example: []
   syntax:
     content: 'public sealed class Billing : IMessage<Billing>, IMessage, IEquatable<Billing>, IDeepCloneable<Billing>'
@@ -86,7 +84,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Parser
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 90
+    startLine: 78
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -123,7 +121,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Descriptor
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 93
+    startLine: 81
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -161,7 +159,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 98
+    startLine: 86
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -199,7 +197,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 103
+    startLine: 91
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -229,7 +227,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 110
+    startLine: 98
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -262,7 +260,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Clone
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 116
+    startLine: 104
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -278,144 +276,72 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Google.Api.Billing.MetricsFieldNumber
-  commentId: F:Google.Api.Billing.MetricsFieldNumber
-  id: MetricsFieldNumber
+- uid: Google.Api.Billing.ConsumerDestinationsFieldNumber
+  commentId: F:Google.Api.Billing.ConsumerDestinationsFieldNumber
+  id: ConsumerDestinationsFieldNumber
   parent: Google.Api.Billing
   langs:
   - csharp
   - vb
-  name: MetricsFieldNumber
-  nameWithType: Billing.MetricsFieldNumber
-  fullName: Google.Api.Billing.MetricsFieldNumber
+  name: ConsumerDestinationsFieldNumber
+  nameWithType: Billing.ConsumerDestinationsFieldNumber
+  fullName: Google.Api.Billing.ConsumerDestinationsFieldNumber
   type: Field
   source:
     remote:
       path: src/Google.Api.CommonProtos/Api/Billing.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: MetricsFieldNumber
+    id: ConsumerDestinationsFieldNumber
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 122
+    startLine: 110
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: Field number for the &quot;metrics&quot; field.
+  summary: Field number for the &quot;consumer_destinations&quot; field.
   example: []
   syntax:
-    content: public const int MetricsFieldNumber = 1
+    content: public const int ConsumerDestinationsFieldNumber = 8
     return:
       type: System.Int32
-    content.vb: Public Const MetricsFieldNumber As Integer = 1
+    content.vb: Public Const ConsumerDestinationsFieldNumber As Integer = 8
   modifiers.csharp:
   - public
   - const
   modifiers.vb:
   - Public
   - Const
-- uid: Google.Api.Billing.Metrics
-  commentId: P:Google.Api.Billing.Metrics
-  id: Metrics
+- uid: Google.Api.Billing.ConsumerDestinations
+  commentId: P:Google.Api.Billing.ConsumerDestinations
+  id: ConsumerDestinations
   parent: Google.Api.Billing
   langs:
   - csharp
   - vb
-  name: Metrics
-  nameWithType: Billing.Metrics
-  fullName: Google.Api.Billing.Metrics
+  name: ConsumerDestinations
+  nameWithType: Billing.ConsumerDestinations
+  fullName: Google.Api.Billing.ConsumerDestinations
   type: Property
   source:
     remote:
       path: src/Google.Api.CommonProtos/Api/Billing.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: Metrics
+    id: ConsumerDestinations
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 130
+    startLine: 120
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nNames of the metrics to report to billing. Each name must\nbe defined in [Service.metrics][google.api.Service.metrics] section.\n"
+  summary: "\nBilling configurations for sending metrics to the consumer project.\nThere can be multiple consumer destinations per service, each one must have\na different monitored resource type. A metric can be used in at most\none consumer destination.\n"
   example: []
   syntax:
-    content: public RepeatedField<string> Metrics { get; }
+    content: public RepeatedField<Billing.Types.BillingDestination> ConsumerDestinations { get; }
     parameters: []
     return:
-      type: Google.Protobuf.Collections.RepeatedField{System.String}
-    content.vb: Public ReadOnly Property Metrics As RepeatedField(Of String)
-  overload: Google.Api.Billing.Metrics*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Google.Api.Billing.RulesFieldNumber
-  commentId: F:Google.Api.Billing.RulesFieldNumber
-  id: RulesFieldNumber
-  parent: Google.Api.Billing
-  langs:
-  - csharp
-  - vb
-  name: RulesFieldNumber
-  nameWithType: Billing.RulesFieldNumber
-  fullName: Google.Api.Billing.RulesFieldNumber
-  type: Field
-  source:
-    remote:
-      path: src/Google.Api.CommonProtos/Api/Billing.cs
-      branch: master
-      repo: https://github.com/googleapis/gax-dotnet
-    id: RulesFieldNumber
-    path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 136
-  assemblies:
-  - Google.Api.CommonProtos
-  namespace: Google.Api
-  summary: Field number for the &quot;rules&quot; field.
-  example: []
-  syntax:
-    content: public const int RulesFieldNumber = 5
-    return:
-      type: System.Int32
-    content.vb: Public Const RulesFieldNumber As Integer = 5
-  modifiers.csharp:
-  - public
-  - const
-  modifiers.vb:
-  - Public
-  - Const
-- uid: Google.Api.Billing.Rules
-  commentId: P:Google.Api.Billing.Rules
-  id: Rules
-  parent: Google.Api.Billing
-  langs:
-  - csharp
-  - vb
-  name: Rules
-  nameWithType: Billing.Rules
-  fullName: Google.Api.Billing.Rules
-  type: Property
-  source:
-    remote:
-      path: src/Google.Api.CommonProtos/Api/Billing.cs
-      branch: master
-      repo: https://github.com/googleapis/gax-dotnet
-    id: Rules
-    path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 143
-  assemblies:
-  - Google.Api.CommonProtos
-  namespace: Google.Api
-  summary: "\nA list of billing status rules for configuring billing status check.\n"
-  example: []
-  syntax:
-    content: public RepeatedField<BillingStatusRule> Rules { get; }
-    parameters: []
-    return:
-      type: Google.Protobuf.Collections.RepeatedField{Google.Api.BillingStatusRule}
-    content.vb: Public ReadOnly Property Rules As RepeatedField(Of BillingStatusRule)
-  overload: Google.Api.Billing.Rules*
+      type: Google.Protobuf.Collections.RepeatedField{Google.Api.Billing.Types.BillingDestination}
+    content.vb: Public ReadOnly Property ConsumerDestinations As RepeatedField(Of Billing.Types.BillingDestination)
+  overload: Google.Api.Billing.ConsumerDestinations*
   modifiers.csharp:
   - public
   - get
@@ -440,7 +366,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 148
+    startLine: 125
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -478,7 +404,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 153
+    startLine: 130
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -515,7 +441,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetHashCode
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 166
+    startLine: 142
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -550,7 +476,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 174
+    startLine: 152
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -585,7 +511,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: WriteTo
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 179
+    startLine: 157
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -620,7 +546,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CalculateSize
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 185
+    startLine: 165
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -654,7 +580,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 193
+    startLine: 175
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -689,7 +615,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: src/Google.Api.CommonProtos/Api/Billing.cs
-    startLine: 202
+    startLine: 184
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1371,22 +1297,22 @@ references:
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
-- uid: Google.Api.Billing.Metrics*
-  commentId: Overload:Google.Api.Billing.Metrics
+- uid: Google.Api.Billing.ConsumerDestinations*
+  commentId: Overload:Google.Api.Billing.ConsumerDestinations
   isExternal: false
-  name: Metrics
-  nameWithType: Billing.Metrics
-  fullName: Google.Api.Billing.Metrics
-- uid: Google.Protobuf.Collections.RepeatedField{System.String}
-  commentId: T:Google.Protobuf.Collections.RepeatedField{System.String}
+  name: ConsumerDestinations
+  nameWithType: Billing.ConsumerDestinations
+  fullName: Google.Api.Billing.ConsumerDestinations
+- uid: Google.Protobuf.Collections.RepeatedField{Google.Api.Billing.Types.BillingDestination}
+  commentId: T:Google.Protobuf.Collections.RepeatedField{Google.Api.Billing.Types.BillingDestination}
   parent: Google.Protobuf.Collections
   definition: Google.Protobuf.Collections.RepeatedField`1
-  name: RepeatedField<String>
-  nameWithType: RepeatedField<String>
-  fullName: Google.Protobuf.Collections.RepeatedField<System.String>
-  nameWithType.vb: RepeatedField(Of String)
-  fullName.vb: Google.Protobuf.Collections.RepeatedField(Of System.String)
-  name.vb: RepeatedField(Of String)
+  name: RepeatedField<Billing.Types.BillingDestination>
+  nameWithType: RepeatedField<Billing.Types.BillingDestination>
+  fullName: Google.Protobuf.Collections.RepeatedField<Google.Api.Billing.Types.BillingDestination>
+  nameWithType.vb: RepeatedField(Of Billing.Types.BillingDestination)
+  fullName.vb: Google.Protobuf.Collections.RepeatedField(Of Google.Api.Billing.Types.BillingDestination)
+  name.vb: RepeatedField(Of Billing.Types.BillingDestination)
   spec.csharp:
   - uid: Google.Protobuf.Collections.RepeatedField`1
     name: RepeatedField
@@ -1396,11 +1322,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
+  - uid: Google.Api.Billing.Types.BillingDestination
+    name: Billing.Types.BillingDestination
+    nameWithType: Billing.Types.BillingDestination
+    fullName: Google.Api.Billing.Types.BillingDestination
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1413,11 +1338,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
+  - uid: Google.Api.Billing.Types.BillingDestination
+    name: Billing.Types.BillingDestination
+    nameWithType: Billing.Types.BillingDestination
+    fullName: Google.Api.Billing.Types.BillingDestination
   - name: )
     nameWithType: )
     fullName: )
@@ -1466,54 +1390,6 @@ references:
   name: Google.Protobuf.Collections
   nameWithType: Google.Protobuf.Collections
   fullName: Google.Protobuf.Collections
-- uid: Google.Api.Billing.Rules*
-  commentId: Overload:Google.Api.Billing.Rules
-  isExternal: false
-  name: Rules
-  nameWithType: Billing.Rules
-  fullName: Google.Api.Billing.Rules
-- uid: Google.Protobuf.Collections.RepeatedField{Google.Api.BillingStatusRule}
-  commentId: T:Google.Protobuf.Collections.RepeatedField{Google.Api.BillingStatusRule}
-  parent: Google.Protobuf.Collections
-  definition: Google.Protobuf.Collections.RepeatedField`1
-  name: RepeatedField<BillingStatusRule>
-  nameWithType: RepeatedField<BillingStatusRule>
-  fullName: Google.Protobuf.Collections.RepeatedField<Google.Api.BillingStatusRule>
-  nameWithType.vb: RepeatedField(Of BillingStatusRule)
-  fullName.vb: Google.Protobuf.Collections.RepeatedField(Of Google.Api.BillingStatusRule)
-  name.vb: RepeatedField(Of BillingStatusRule)
-  spec.csharp:
-  - uid: Google.Protobuf.Collections.RepeatedField`1
-    name: RepeatedField
-    nameWithType: RepeatedField
-    fullName: Google.Protobuf.Collections.RepeatedField
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Google.Api.BillingStatusRule
-    name: BillingStatusRule
-    nameWithType: BillingStatusRule
-    fullName: Google.Api.BillingStatusRule
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Google.Protobuf.Collections.RepeatedField`1
-    name: RepeatedField
-    nameWithType: RepeatedField
-    fullName: Google.Protobuf.Collections.RepeatedField
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Google.Api.BillingStatusRule
-    name: BillingStatusRule
-    nameWithType: BillingStatusRule
-    fullName: Google.Api.BillingStatusRule
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object

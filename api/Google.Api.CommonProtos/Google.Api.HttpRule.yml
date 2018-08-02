@@ -53,11 +53,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: HttpRule
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 374
+    startLine: 436
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\n`HttpRule` defines the mapping of an RPC method to one or more HTTP\nREST APIs.  The mapping determines what portions of the request\nmessage are populated from the path, query parameters, or body of\nthe HTTP request.  The mapping is typically specified as an\n`google.api.http` annotation, see &quot;google/api/annotations.proto&quot;\nfor details.\n\nThe mapping consists of a field specifying the path template and\nmethod kind.  The path template can refer to fields in the request\nmessage, as in the example below which describes a REST GET\noperation on a resource collection of messages:\n\nservice Messaging {\n rpc GetMessage(GetMessageRequest) returns (Message) {\n   option (google.api.http).get = &quot;/v1/messages/{message_id}/{sub.subfield}&quot;;\n }\n}\nmessage GetMessageRequest {\n message SubMessage {\n   string subfield = 1;\n }\n string message_id = 1; // mapped to the URL\n SubMessage sub = 2;    // `sub.subfield` is url-mapped\n}\nmessage Message {\n string text = 1; // content of the resource\n}\n\nThe same http annotation can alternatively be expressed inside the\n`GRPC API Configuration` YAML file.\n\nhttp:\n rules:\n   - selector: &lt;proto_package_name>.Messaging.GetMessage\n     get: /v1/messages/{message_id}/{sub.subfield}\n\nThis definition enables an automatic, bidrectional mapping of HTTP\nJSON to RPC. Example:\n\nHTTP | RPC\n-----|-----\n`GET /v1/messages/123456/foo`  | `GetMessage(message_id: &quot;123456&quot; sub: SubMessage(subfield: &quot;foo&quot;))`\n\nIn general, not only fields but also field paths can be referenced\nfrom a path pattern. Fields mapped to the path pattern cannot be\nrepeated and must have a primitive (non-message) type.\n\nAny fields in the request message which are not bound by the path\npattern automatically become (optional) HTTP query\nparameters. Assume the following definition of the request message:\n\nmessage GetMessageRequest {\n message SubMessage {\n   string subfield = 1;\n }\n string message_id = 1; // mapped to the URL\n int64 revision = 2;    // becomes a parameter\n SubMessage sub = 3;    // `sub.subfield` becomes a parameter\n}\n\nThis enables a HTTP JSON to RPC mapping as below:\n\nHTTP | RPC\n-----|-----\n`GET /v1/messages/123456?revision=2&amp;sub.subfield=foo` | `GetMessage(message_id: &quot;123456&quot; revision: 2 sub: SubMessage(subfield: &quot;foo&quot;))`\n\nNote that fields which are mapped to HTTP parameters must have a\nprimitive type or a repeated primitive type. Message types are not\nallowed. In the case of a repeated type, the parameter can be\nrepeated in the URL, as in `...?param=A&amp;param=B`.\n\nFor HTTP method kinds which allow a request body, the `body` field\nspecifies the mapping. Consider a REST update method on the\nmessage resource collection:\n\nservice Messaging {\n rpc UpdateMessage(UpdateMessageRequest) returns (Message) {\n   option (google.api.http) = {\n     put: &quot;/v1/messages/{message_id}&quot;\n     body: &quot;message&quot;\n   };\n }\n}\nmessage UpdateMessageRequest {\n string message_id = 1; // mapped to the URL\n Message message = 2;   // mapped to the body\n}\n\nThe following HTTP JSON to RPC mapping is enabled, where the\nrepresentation of the JSON in the request body is determined by\nprotos JSON encoding:\n\nHTTP | RPC\n-----|-----\n`PUT /v1/messages/123456 { &quot;text&quot;: &quot;Hi!&quot; }` | `UpdateMessage(message_id: &quot;123456&quot; message { text: &quot;Hi!&quot; })`\n\nThe special name `*` can be used in the body mapping to define that\nevery field not bound by the path template should be mapped to the\nrequest body.  This enables the following alternative definition of\nthe update method:\n\nservice Messaging {\n rpc UpdateMessage(Message) returns (Message) {\n   option (google.api.http) = {\n     put: &quot;/v1/messages/{message_id}&quot;\n     body: &quot;*&quot;\n   };\n }\n}\nmessage Message {\n string message_id = 1;\n string text = 2;\n}\n\nThe following HTTP JSON to RPC mapping is enabled:\n\nHTTP | RPC\n-----|-----\n`PUT /v1/messages/123456 { &quot;text&quot;: &quot;Hi!&quot; }` | `UpdateMessage(message_id: &quot;123456&quot; text: &quot;Hi!&quot;)`\n\nNote that when using `*` in the body mapping, it is not possible to\nhave HTTP parameters, as all fields not bound by the path end in\nthe body. This makes this option more rarely used in practice of\ndefining REST APIs. The common usage of `*` is in custom methods\nwhich don&apos;t use the URL at all for transferring data.\n\nIt is possible to define multiple HTTP methods for one RPC by using\nthe `additional_bindings` option. Example:\n\nservice Messaging {\n rpc GetMessage(GetMessageRequest) returns (Message) {\n   option (google.api.http) = {\n     get: &quot;/v1/messages/{message_id}&quot;\n     additional_bindings {\n       get: &quot;/v1/users/{user_id}/messages/{message_id}&quot;\n     }\n   };\n }\n}\nmessage GetMessageRequest {\n string message_id = 1;\n string user_id = 2;\n}\n\nThis enables the following two alternative HTTP JSON to RPC\nmappings:\n\nHTTP | RPC\n-----|-----\n`GET /v1/messages/123456` | `GetMessage(message_id: &quot;123456&quot;)`\n`GET /v1/users/me/messages/123456` | `GetMessage(user_id: &quot;me&quot; message_id: &quot;123456&quot;)`\n\n# Rules for HTTP mapping\n\nThe rules for mapping HTTP path, query parameters, and body fields\nto the request message are as follows:\n\n1. The `body` field specifies either `*` or a field path, or is\nomitted. If omitted, it assumes there is no HTTP body.\n2. Leaf fields (recursive expansion of nested messages in the\nrequest) can be classified into three types:\n(a) Matched in the URL template.\n(b) Covered by body (if body is `*`, everything except (a) fields;\n   else everything under the body field)\n(c) All other fields.\n3. URL query parameters found in the HTTP request are mapped to (c) fields.\n4. Any body sent with an HTTP request can contain only (b) fields.\n\nThe syntax of the path template is as follows:\n\nTemplate = &quot;/&quot; Segments [ Verb ] ;\nSegments = Segment { &quot;/&quot; Segment } ;\nSegment  = &quot;*&quot; | &quot;**&quot; | LITERAL | Variable ;\nVariable = &quot;{&quot; FieldPath [ &quot;=&quot; Segments ] &quot;}&quot; ;\nFieldPath = IDENT { &quot;.&quot; IDENT } ;\nVerb     = &quot;:&quot; LITERAL ;\n\nThe syntax `*` matches a single path segment. It follows the semantics of\n[RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple String\nExpansion.\n\nThe syntax `**` matches zero or more path segments. It follows the semantics\nof [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.3 Reserved\nExpansion. NOTE: it must be the last segment in the path except the Verb.\n\nThe syntax `LITERAL` matches literal text in the URL path.\n\nThe syntax `Variable` matches the entire path as specified by its template;\nthis nested template must not contain further variables. If a variable\nmatches a single path segment, its template may be omitted, e.g. `{var}`\nis equivalent to `{var=*}`.\n\nNOTE: the field paths in variables and in the `body` must not refer to\nrepeated fields or map fields.\n\nUse CustomHttpPattern to specify any HTTP method that is not included in the\n`pattern` field, such as HEAD, or &quot;*&quot; to leave the HTTP method unspecified for\na given URL path rule. The wild-card rule is useful for services that provide\ncontent to Web (HTML) clients.\n"
+  summary: "\n`HttpRule` defines the mapping of an RPC method to one or more HTTP\nREST API methods. The mapping specifies how different portions of the RPC\nrequest message are mapped to URL path, URL query parameters, and\nHTTP request body. The mapping is typically specified as an\n`google.api.http` annotation on the RPC method,\nsee &quot;google/api/annotations.proto&quot; for details.\n\nThe mapping consists of a field specifying the path template and\nmethod kind.  The path template can refer to fields in the request\nmessage, as in the example below which describes a REST GET\noperation on a resource collection of messages:\n\nservice Messaging {\n rpc GetMessage(GetMessageRequest) returns (Message) {\n   option (google.api.http).get = &quot;/v1/messages/{message_id}/{sub.subfield}&quot;;\n }\n}\nmessage GetMessageRequest {\n message SubMessage {\n   string subfield = 1;\n }\n string message_id = 1; // mapped to the URL\n SubMessage sub = 2;    // `sub.subfield` is url-mapped\n}\nmessage Message {\n string text = 1; // content of the resource\n}\n\nThe same http annotation can alternatively be expressed inside the\n`GRPC API Configuration` YAML file.\n\nhttp:\n rules:\n   - selector: &lt;proto_package_name>.Messaging.GetMessage\n     get: /v1/messages/{message_id}/{sub.subfield}\n\nThis definition enables an automatic, bidrectional mapping of HTTP\nJSON to RPC. Example:\n\nHTTP | RPC\n-----|-----\n`GET /v1/messages/123456/foo`  | `GetMessage(message_id: &quot;123456&quot; sub: SubMessage(subfield: &quot;foo&quot;))`\n\nIn general, not only fields but also field paths can be referenced\nfrom a path pattern. Fields mapped to the path pattern cannot be\nrepeated and must have a primitive (non-message) type.\n\nAny fields in the request message which are not bound by the path\npattern automatically become (optional) HTTP query\nparameters. Assume the following definition of the request message:\n\nservice Messaging {\n rpc GetMessage(GetMessageRequest) returns (Message) {\n   option (google.api.http).get = &quot;/v1/messages/{message_id}&quot;;\n }\n}\nmessage GetMessageRequest {\n message SubMessage {\n   string subfield = 1;\n }\n string message_id = 1; // mapped to the URL\n int64 revision = 2;    // becomes a parameter\n SubMessage sub = 3;    // `sub.subfield` becomes a parameter\n}\n\nThis enables a HTTP JSON to RPC mapping as below:\n\nHTTP | RPC\n-----|-----\n`GET /v1/messages/123456?revision=2&amp;sub.subfield=foo` | `GetMessage(message_id: &quot;123456&quot; revision: 2 sub: SubMessage(subfield: &quot;foo&quot;))`\n\nNote that fields which are mapped to HTTP parameters must have a\nprimitive type or a repeated primitive type. Message types are not\nallowed. In the case of a repeated type, the parameter can be\nrepeated in the URL, as in `...?param=A&amp;param=B`.\n\nFor HTTP method kinds which allow a request body, the `body` field\nspecifies the mapping. Consider a REST update method on the\nmessage resource collection:\n\nservice Messaging {\n rpc UpdateMessage(UpdateMessageRequest) returns (Message) {\n   option (google.api.http) = {\n     put: &quot;/v1/messages/{message_id}&quot;\n     body: &quot;message&quot;\n   };\n }\n}\nmessage UpdateMessageRequest {\n string message_id = 1; // mapped to the URL\n Message message = 2;   // mapped to the body\n}\n\nThe following HTTP JSON to RPC mapping is enabled, where the\nrepresentation of the JSON in the request body is determined by\nprotos JSON encoding:\n\nHTTP | RPC\n-----|-----\n`PUT /v1/messages/123456 { &quot;text&quot;: &quot;Hi!&quot; }` | `UpdateMessage(message_id: &quot;123456&quot; message { text: &quot;Hi!&quot; })`\n\nThe special name `*` can be used in the body mapping to define that\nevery field not bound by the path template should be mapped to the\nrequest body.  This enables the following alternative definition of\nthe update method:\n\nservice Messaging {\n rpc UpdateMessage(Message) returns (Message) {\n   option (google.api.http) = {\n     put: &quot;/v1/messages/{message_id}&quot;\n     body: &quot;*&quot;\n   };\n }\n}\nmessage Message {\n string message_id = 1;\n string text = 2;\n}\n\nThe following HTTP JSON to RPC mapping is enabled:\n\nHTTP | RPC\n-----|-----\n`PUT /v1/messages/123456 { &quot;text&quot;: &quot;Hi!&quot; }` | `UpdateMessage(message_id: &quot;123456&quot; text: &quot;Hi!&quot;)`\n\nNote that when using `*` in the body mapping, it is not possible to\nhave HTTP parameters, as all fields not bound by the path end in\nthe body. This makes this option more rarely used in practice of\ndefining REST APIs. The common usage of `*` is in custom methods\nwhich don&apos;t use the URL at all for transferring data.\n\nIt is possible to define multiple HTTP methods for one RPC by using\nthe `additional_bindings` option. Example:\n\nservice Messaging {\n rpc GetMessage(GetMessageRequest) returns (Message) {\n   option (google.api.http) = {\n     get: &quot;/v1/messages/{message_id}&quot;\n     additional_bindings {\n       get: &quot;/v1/users/{user_id}/messages/{message_id}&quot;\n     }\n   };\n }\n}\nmessage GetMessageRequest {\n string message_id = 1;\n string user_id = 2;\n}\n\nThis enables the following two alternative HTTP JSON to RPC\nmappings:\n\nHTTP | RPC\n-----|-----\n`GET /v1/messages/123456` | `GetMessage(message_id: &quot;123456&quot;)`\n`GET /v1/users/me/messages/123456` | `GetMessage(user_id: &quot;me&quot; message_id: &quot;123456&quot;)`\n\n# Rules for HTTP mapping\n\nThe rules for mapping HTTP path, query parameters, and body fields\nto the request message are as follows:\n\n1. The `body` field specifies either `*` or a field path, or is\nomitted. If omitted, it indicates there is no HTTP request body.\n2. Leaf fields (recursive expansion of nested messages in the\nrequest) can be classified into three types:\n(a) Matched in the URL template.\n(b) Covered by body (if body is `*`, everything except (a) fields;\n   else everything under the body field)\n(c) All other fields.\n3. URL query parameters found in the HTTP request are mapped to (c) fields.\n4. Any body sent with an HTTP request can contain only (b) fields.\n\nThe syntax of the path template is as follows:\n\nTemplate = &quot;/&quot; Segments [ Verb ] ;\nSegments = Segment { &quot;/&quot; Segment } ;\nSegment  = &quot;*&quot; | &quot;**&quot; | LITERAL | Variable ;\nVariable = &quot;{&quot; FieldPath [ &quot;=&quot; Segments ] &quot;}&quot; ;\nFieldPath = IDENT { &quot;.&quot; IDENT } ;\nVerb     = &quot;:&quot; LITERAL ;\n\nThe syntax `*` matches a single path segment. The syntax `**` matches zero\nor more path segments, which must be the last part of the path except the\n`Verb`. The syntax `LITERAL` matches literal text in the path.\n\nThe syntax `Variable` matches part of the URL path as specified by its\ntemplate. A variable template must not contain other variables. If a variable\nmatches a single path segment, its template may be omitted, e.g. `{var}`\nis equivalent to `{var=*}`.\n\nIf a variable contains exactly one path segment, such as `&quot;{var}&quot;` or\n`&quot;{var=*}&quot;`, when such a variable is expanded into a URL path, all characters\nexcept `[-_.~0-9a-zA-Z]` are percent-encoded. Such variables show up in the\nDiscovery Document as `{var}`.\n\nIf a variable contains one or more path segments, such as `&quot;{var=foo/*}&quot;`\nor `&quot;{var=**}&quot;`, when such a variable is expanded into a URL path, all\ncharacters except `[-_.~/0-9a-zA-Z]` are percent-encoded. Such variables\nshow up in the Discovery Document as `{+var}`.\n\nNOTE: While the single segment variable matches the semantics of\n[RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2\nSimple String Expansion, the multi segment variable **does not** match\nRFC 6570 Reserved Expansion. The reason is that the Reserved Expansion\ndoes not expand special characters like `?` and `#`, which would lead\nto invalid URLs.\n\nNOTE: the field paths in variables and in the `body` must not refer to\nrepeated fields or map fields.\n"
   example: []
   syntax:
     content: 'public sealed class HttpRule : IMessage<HttpRule>, IMessage, IEquatable<HttpRule>, IDeepCloneable<HttpRule>'
@@ -102,7 +102,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Parser
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 376
+    startLine: 439
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -139,7 +139,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Descriptor
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 379
+    startLine: 442
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -177,7 +177,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 384
+    startLine: 447
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -215,7 +215,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 389
+    startLine: 452
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -245,7 +245,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 396
+    startLine: 459
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -278,7 +278,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Clone
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 424
+    startLine: 488
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -312,7 +312,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: SelectorFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 430
+    startLine: 494
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -347,7 +347,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Selector
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 437
+    startLine: 501
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -384,7 +384,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 446
+    startLine: 510
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -419,7 +419,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Get
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 450
+    startLine: 514
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -456,7 +456,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PutFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 460
+    startLine: 524
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -491,7 +491,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Put
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 464
+    startLine: 528
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -528,7 +528,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PostFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 474
+    startLine: 538
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -563,7 +563,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Post
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 478
+    startLine: 542
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -600,7 +600,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: DeleteFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 488
+    startLine: 552
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -635,7 +635,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Delete
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 492
+    startLine: 556
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -672,7 +672,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PatchFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 502
+    startLine: 566
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -707,7 +707,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Patch
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 506
+    startLine: 570
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -744,7 +744,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CustomFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 516
+    startLine: 580
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -779,11 +779,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Custom
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 520
+    startLine: 587
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nCustom pattern is used for defining custom verbs.\n"
+  summary: "\nThe custom pattern is used for specifying an HTTP method that is not\nincluded in the `pattern` field, such as HEAD, or &quot;*&quot; to leave the\nHTTP method unspecified for this rule. The wild-card rule is useful\nfor services that provide content to Web (HTML) clients.\n"
   example: []
   syntax:
     content: public CustomHttpPattern Custom { get; set; }
@@ -816,7 +816,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: BodyFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 530
+    startLine: 597
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -851,7 +851,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Body
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 538
+    startLine: 605
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -888,7 +888,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AdditionalBindingsFieldNumber
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 547
+    startLine: 614
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -923,7 +923,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AdditionalBindings
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 556
+    startLine: 623
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -960,7 +960,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PatternCase
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 573
+    startLine: 640
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -995,7 +995,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ClearPattern
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 578
+    startLine: 645
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1025,7 +1025,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 584
+    startLine: 651
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1063,7 +1063,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 589
+    startLine: 656
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1100,7 +1100,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetHashCode
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 610
+    startLine: 677
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1135,7 +1135,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 626
+    startLine: 696
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1170,7 +1170,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: WriteTo
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 631
+    startLine: 701
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1205,7 +1205,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CalculateSize
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 668
+    startLine: 741
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1239,7 +1239,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 699
+    startLine: 775
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1274,7 +1274,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: src/Google.Api.CommonProtos/Api/Http.cs
-    startLine: 734
+    startLine: 814
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
