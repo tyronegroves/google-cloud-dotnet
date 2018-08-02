@@ -187,7 +187,7 @@
   <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_MetricServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Monitoring.V3.MetricServiceSettings)">Create(ServiceEndpoint, MetricServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -208,6 +208,77 @@ necessary.</p>
         <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
         <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceSettings.html">MetricServiceSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>Optional <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceSettings.html">MetricServiceSettings</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a></td>
+        <td><p>The created <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_MetricServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+MetricServiceClient client = MetricServiceClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    MetricServiceClient.DefaultEndpoint.Host, MetricServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+MetricServiceClient client = MetricServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_Create_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.Create*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Monitoring_V3_MetricServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Monitoring.V3.MetricServiceSettings)">Create(CallInvoker, MetricServiceSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a> which uses the specified call invoker for remote operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MetricServiceClient Create(CallInvoker callInvoker, MetricServiceSettings settings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
+        <td><span class="parametername">callInvoker</span></td>
+        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
 </td>
       </tr>
       <tr>
@@ -287,7 +358,7 @@ necessary.</p>
   <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_MetricServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Monitoring.V3.MetricServiceSettings)">CreateAsync(ServiceEndpoint, MetricServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,6 +405,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_MetricServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+MetricServiceClient client = await MetricServiceClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    MetricServiceClient.DefaultEndpoint.Host, MetricServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+MetricServiceClient client = MetricServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateMetricDescriptor_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.CreateMetricDescriptor*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateMetricDescriptor_Google_Cloud_Monitoring_V3_CreateMetricDescriptorRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.CreateMetricDescriptor(Google.Cloud.Monitoring.V3.CreateMetricDescriptorRequest,Google.Api.Gax.Grpc.CallSettings)">CreateMetricDescriptor(CreateMetricDescriptorRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new metric descriptor.
@@ -522,6 +615,71 @@ User-created metric descriptors define
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateMetricDescriptorAsync_Google_Cloud_Monitoring_V3_CreateMetricDescriptorRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
+// Initialize request argument(s)
+CreateMetricDescriptorRequest request = new CreateMetricDescriptorRequest
+{
+    ProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    MetricDescriptor = new MetricDescriptor(),
+};
+// Make the request
+MetricDescriptor response = await metricServiceClient.CreateMetricDescriptorAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateMetricDescriptorAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.CreateMetricDescriptorAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateMetricDescriptorAsync_Google_Cloud_Monitoring_V3_CreateMetricDescriptorRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.CreateMetricDescriptorAsync(Google.Cloud.Monitoring.V3.CreateMetricDescriptorRequest,System.Threading.CancellationToken)">CreateMetricDescriptorAsync(CreateMetricDescriptorRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a new metric descriptor.
+User-created metric descriptors define
+<a href="/monitoring/custom-metrics">custom metrics</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;MetricDescriptor&gt; CreateMetricDescriptorAsync(CreateMetricDescriptorRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.CreateMetricDescriptorRequest.html">CreateMetricDescriptorRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Api.MetricDescriptor.html">MetricDescriptor</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateMetricDescriptorAsync_Google_Cloud_Monitoring_V3_CreateMetricDescriptorRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -829,13 +987,79 @@ included in the error response.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateTimeSeriesAsync_Google_Cloud_Monitoring_V3_CreateTimeSeriesRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
+// Initialize request argument(s)
+CreateTimeSeriesRequest request = new CreateTimeSeriesRequest
+{
+    ProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    TimeSeries = { },
+};
+// Make the request
+await metricServiceClient.CreateTimeSeriesAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateTimeSeriesAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.CreateTimeSeriesAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateTimeSeriesAsync_Google_Cloud_Monitoring_V3_CreateTimeSeriesRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.CreateTimeSeriesAsync(Google.Cloud.Monitoring.V3.CreateTimeSeriesRequest,System.Threading.CancellationToken)">CreateTimeSeriesAsync(CreateTimeSeriesRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates or adds data to one or more time series.
+The response is empty if all time series in the request were written.
+If any time series could not be written, a corresponding failure message is
+included in the error response.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task CreateTimeSeriesAsync(CreateTimeSeriesRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.CreateTimeSeriesRequest.html">CreateTimeSeriesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_CreateTimeSeriesAsync_Google_Cloud_Monitoring_V3_CreateTimeSeriesRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -906,7 +1130,7 @@ all label values for the metric and the monitored resource.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -980,7 +1204,7 @@ all label values for the metric and the monitored resource.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1135,13 +1359,76 @@ metricServiceClient.DeleteMetricDescriptor(name);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_DeleteMetricDescriptorAsync_Google_Cloud_Monitoring_V3_DeleteMetricDescriptorRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
+// Initialize request argument(s)
+DeleteMetricDescriptorRequest request = new DeleteMetricDescriptorRequest
+{
+    MetricDescriptorName = new MetricDescriptorName(&quot;[PROJECT]&quot;, &quot;[METRIC_DESCRIPTOR]&quot;),
+};
+// Make the request
+await metricServiceClient.DeleteMetricDescriptorAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_DeleteMetricDescriptorAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.DeleteMetricDescriptorAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_DeleteMetricDescriptorAsync_Google_Cloud_Monitoring_V3_DeleteMetricDescriptorRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.DeleteMetricDescriptorAsync(Google.Cloud.Monitoring.V3.DeleteMetricDescriptorRequest,System.Threading.CancellationToken)">DeleteMetricDescriptorAsync(DeleteMetricDescriptorRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a metric descriptor. Only user-created
+<a href="/monitoring/custom-metrics">custom metrics</a> can be deleted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteMetricDescriptorAsync(DeleteMetricDescriptorRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.DeleteMetricDescriptorRequest.html">DeleteMetricDescriptorRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_DeleteMetricDescriptorAsync_Google_Cloud_Monitoring_V3_DeleteMetricDescriptorRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -1201,7 +1488,7 @@ An example of <code>{metric_id}</code> is:
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1264,7 +1551,7 @@ An example of <code>{metric_id}</code> is:
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1454,6 +1741,68 @@ MetricDescriptor response = metricServiceClient.GetMetricDescriptor(name);
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMetricDescriptorAsync_Google_Cloud_Monitoring_V3_GetMetricDescriptorRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetMetricDescriptorRequest request = new GetMetricDescriptorRequest
+{
+    MetricDescriptorName = new MetricDescriptorName(&quot;[PROJECT]&quot;, &quot;[METRIC_DESCRIPTOR]&quot;),
+};
+// Make the request
+MetricDescriptor response = await metricServiceClient.GetMetricDescriptorAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMetricDescriptorAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.GetMetricDescriptorAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMetricDescriptorAsync_Google_Cloud_Monitoring_V3_GetMetricDescriptorRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.GetMetricDescriptorAsync(Google.Cloud.Monitoring.V3.GetMetricDescriptorRequest,System.Threading.CancellationToken)">GetMetricDescriptorAsync(GetMetricDescriptorRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a single metric descriptor. This method does not require a Stackdriver account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;MetricDescriptor&gt; GetMetricDescriptorAsync(GetMetricDescriptorRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.GetMetricDescriptorRequest.html">GetMetricDescriptorRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Api.MetricDescriptor.html">MetricDescriptor</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMetricDescriptorAsync_Google_Cloud_Monitoring_V3_GetMetricDescriptorRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -1764,6 +2113,68 @@ MonitoredResourceDescriptor response = metricServiceClient.GetMonitoredResourceD
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMonitoredResourceDescriptorAsync_Google_Cloud_Monitoring_V3_GetMonitoredResourceDescriptorRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetMonitoredResourceDescriptorRequest request = new GetMonitoredResourceDescriptorRequest
+{
+    MonitoredResourceDescriptorName = new MonitoredResourceDescriptorName(&quot;[PROJECT]&quot;, &quot;[MONITORED_RESOURCE_DESCRIPTOR]&quot;),
+};
+// Make the request
+MonitoredResourceDescriptor response = await metricServiceClient.GetMonitoredResourceDescriptorAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMonitoredResourceDescriptorAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.GetMonitoredResourceDescriptorAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMonitoredResourceDescriptorAsync_Google_Cloud_Monitoring_V3_GetMonitoredResourceDescriptorRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.GetMonitoredResourceDescriptorAsync(Google.Cloud.Monitoring.V3.GetMonitoredResourceDescriptorRequest,System.Threading.CancellationToken)">GetMonitoredResourceDescriptorAsync(GetMonitoredResourceDescriptorRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a single monitored resource descriptor. This method does not require a Stackdriver account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;MonitoredResourceDescriptor&gt; GetMonitoredResourceDescriptorAsync(GetMonitoredResourceDescriptorRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.GetMonitoredResourceDescriptorRequest.html">GetMonitoredResourceDescriptorRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Api.MonitoredResourceDescriptor.html">MonitoredResourceDescriptor</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_GetMonitoredResourceDescriptorAsync_Google_Cloud_Monitoring_V3_GetMonitoredResourceDescriptorRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
 // Initialize request argument(s)

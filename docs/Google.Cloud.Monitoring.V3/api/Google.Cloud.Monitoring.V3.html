@@ -249,7 +249,7 @@ group and its ancestors.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupService.html">GroupService</a></h4>
       <section><p>The Group API lets you inspect and manage your
-<a href="google.monitoring.v3.Group">groups</a>.</p>
+<a href="#google.monitoring.v3.Group">groups</a>.</p>
 <p>A group is a named filter that is used to identify
 a collection of monitored resources. Groups are typically used to
 mirror the physical and/or logical topology of the environment.
@@ -274,6 +274,9 @@ from the infrastructure.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupServiceSettings.html">GroupServiceSettings</a></h4>
       <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.GroupServiceClient.html">GroupServiceClient</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.InternalChecker.html">InternalChecker</a></h4>
+      <section><p>Nimbus InternalCheckers.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ListAlertPoliciesRequest.html">ListAlertPoliciesRequest</a></h4>
       <section><p>The protocol for the <code>ListAlertPolicies</code> request.</p>
@@ -303,7 +306,7 @@ from the infrastructure.</p>
       <section><p>The <code>ListMonitoredResourceDescriptors</code> request.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ListMonitoredResourceDescriptorsResponse.html">ListMonitoredResourceDescriptorsResponse</a></h4>
-      <section><p>The <code>ListMonitoredResourcDescriptors</code> response.</p>
+      <section><p>The <code>ListMonitoredResourceDescriptors</code> response.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ListNotificationChannelDescriptorsRequest.html">ListNotificationChannelDescriptorsRequest</a></h4>
       <section><p>The <code>ListNotificationChannelDescriptors</code> request.</p>
@@ -415,6 +418,12 @@ controls how messages related to incidents are sent.</p>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.SendNotificationChannelVerificationCodeRequest.html">SendNotificationChannelVerificationCodeRequest</a></h4>
       <section><p>The <code>SendNotificationChannelVerificationCode</code> request.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.SpanContext.html">SpanContext</a></h4>
+      <section><p>The context of a span, attached to google.api.Distribution.Exemplars
+in google.api.Distribution values during aggregation.</p>
+<p>It contains the name of a span with format:
+projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.TimeInterval.html">TimeInterval</a></h4>
       <section><p>A time interval extending just after a start time through an end time.
 If the start time is the same as the end time, then the interval
@@ -463,9 +472,6 @@ and more complex matching.</p>
       <section><p>A type of authentication to perform against the specified resource or URL
 that uses username and password.
 Currently, only Basic authentication is supported in Uptime Monitoring.</p>
-</section>
-      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.InternalChecker.html">UptimeCheckConfig.Types.InternalChecker</a></h4>
-      <section><p>Nimbus InternalCheckers.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.ResourceGroup.html">UptimeCheckConfig.Types.ResourceGroup</a></h4>
       <section><p>The resource submessage for group checks. It can be used instead of a
@@ -533,8 +539,10 @@ right.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupResourceType.html">GroupResourceType</a></h4>
       <section><p>The supported resource types that can be used as values of
-group_resource.resource_type. gae_app and uptime_url are not allowed
-because group checks on App Engine modules and URLs are not allowed.</p>
+<code>group_resource.resource_type</code>.
+<code>INSTANCE</code> includes <code>gce_instance</code> and <code>aws_ec2_instance</code> resource types.
+The resource types <code>gae_app</code> and <code>uptime_url</code> are not valid here because
+group checks on App Engine modules and URLs are not allowed.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ListGroupsRequest.FilterOneofCase.html">ListGroupsRequest.FilterOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;filter&quot; oneof.</p>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class HttpRule
    | Google.Cloud.ErrorReporting.V1Beta1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -74,11 +74,11 @@
   <h1 id="Google_Api_HttpRule" data-uid="Google.Api.HttpRule" class="text-break">Class HttpRule
   </h1>
   <div class="markdown level0 summary"><p><code>HttpRule</code> defines the mapping of an RPC method to one or more HTTP
-REST APIs.  The mapping determines what portions of the request
-message are populated from the path, query parameters, or body of
-the HTTP request.  The mapping is typically specified as an
-<code>google.api.http</code> annotation, see &quot;google/api/annotations.proto&quot;
-for details.</p>
+REST API methods. The mapping specifies how different portions of the RPC
+request message are mapped to URL path, URL query parameters, and
+HTTP request body. The mapping is typically specified as an
+<code>google.api.http</code> annotation on the RPC method,
+see &quot;google/api/annotations.proto&quot; for details.</p>
 <p>The mapping consists of a field specifying the path template and
 method kind.  The path template can refer to fields in the request
 message, as in the example below which describes a REST GET
@@ -128,7 +128,12 @@ repeated and must have a primitive (non-message) type.</p>
 <p>Any fields in the request message which are not bound by the path
 pattern automatically become (optional) HTTP query
 parameters. Assume the following definition of the request message:</p>
-<p>message GetMessageRequest {
+<p>service Messaging {
+ rpc GetMessage(GetMessageRequest) returns (Message) {
+   option (google.api.http).get = &quot;/v1/messages/{message_id}&quot;;
+ }
+}
+message GetMessageRequest {
  message SubMessage {
    string subfield = 1;
  }
@@ -264,7 +269,7 @@ mappings:</p>
 to the request message are as follows:</p>
 <ol>
 <li>The <code>body</code> field specifies either <code>*</code> or a field path, or is
-omitted. If omitted, it assumes there is no HTTP body.</li>
+omitted. If omitted, it indicates there is no HTTP request body.</li>
 <li>Leaf fields (recursive expansion of nested messages in the
 request) can be classified into three types:
 (a) Matched in the URL template.
@@ -281,23 +286,29 @@ Segment  = &quot;<em>&quot; | &quot;</em>*&quot; | LITERAL | Variable ;
 Variable = &quot;{&quot; FieldPath [ &quot;=&quot; Segments ] &quot;}&quot; ;
 FieldPath = IDENT { &quot;.&quot; IDENT } ;
 Verb     = &quot;:&quot; LITERAL ;</p>
-<p>The syntax <code>*</code> matches a single path segment. It follows the semantics of
-<a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.2 Simple String
-Expansion.</p>
-<p>The syntax <code>**</code> matches zero or more path segments. It follows the semantics
-of <a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.3 Reserved
-Expansion. NOTE: it must be the last segment in the path except the Verb.</p>
-<p>The syntax <code>LITERAL</code> matches literal text in the URL path.</p>
-<p>The syntax <code>Variable</code> matches the entire path as specified by its template;
-this nested template must not contain further variables. If a variable
+<p>The syntax <code>*</code> matches a single path segment. The syntax <code>**</code> matches zero
+or more path segments, which must be the last part of the path except the
+<code>Verb</code>. The syntax <code>LITERAL</code> matches literal text in the path.</p>
+<p>The syntax <code>Variable</code> matches part of the URL path as specified by its
+template. A variable template must not contain other variables. If a variable
 matches a single path segment, its template may be omitted, e.g. <code>{var}</code>
 is equivalent to <code>{var=*}</code>.</p>
+<p>If a variable contains exactly one path segment, such as <code>&amp;quot;{var}&amp;quot;</code> or
+<code>&amp;quot;{var=*}&amp;quot;</code>, when such a variable is expanded into a URL path, all characters
+except <code>[-_.~0-9a-zA-Z]</code> are percent-encoded. Such variables show up in the
+Discovery Document as <code>{var}</code>.</p>
+<p>If a variable contains one or more path segments, such as <code>&amp;quot;{var=foo/*}&amp;quot;</code>
+or <code>&amp;quot;{var=**}&amp;quot;</code>, when such a variable is expanded into a URL path, all
+characters except <code>[-_.~/0-9a-zA-Z]</code> are percent-encoded. Such variables
+show up in the Discovery Document as <code>{+var}</code>.</p>
+<p>NOTE: While the single segment variable matches the semantics of
+<a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.2
+Simple String Expansion, the multi segment variable <strong>does not</strong> match
+RFC 6570 Reserved Expansion. The reason is that the Reserved Expansion
+does not expand special characters like <code>?</code> and <code>#</code>, which would lead
+to invalid URLs.</p>
 <p>NOTE: the field paths in variables and in the <code>body</code> must not refer to
 repeated fields or map fields.</p>
-<p>Use CustomHttpPattern to specify any HTTP method that is not included in the
-<code>pattern</code> field, such as HEAD, or &quot;*&quot; to leave the HTTP method unspecified for
-a given URL path rule. The wild-card rule is useful for services that provide
-content to Web (HTML) clients.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -634,7 +645,10 @@ present at the top-level of request message type.</p>
   </table>
   <a id="Google_Api_HttpRule_Custom_" data-uid="Google.Api.HttpRule.Custom*"></a>
   <h4 id="Google_Api_HttpRule_Custom" data-uid="Google.Api.HttpRule.Custom">Custom</h4>
-  <div class="markdown level1 summary"><p>Custom pattern is used for defining custom verbs.</p>
+  <div class="markdown level1 summary"><p>The custom pattern is used for specifying an HTTP method that is not
+included in the <code>pattern</code> field, such as HEAD, or &quot;*&quot; to leave the
+HTTP method unspecified for this rule. The wild-card rule is useful
+for services that provide content to Web (HTML) clients.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

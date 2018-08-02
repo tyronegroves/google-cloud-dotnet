@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MetricDescriptor
    | Google.Cloud.OsLogin.V1 ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -384,7 +384,9 @@ existing data unusable.</p>
   <a id="Google_Api_MetricDescriptor_DisplayName_" data-uid="Google.Api.MetricDescriptor.DisplayName*"></a>
   <h4 id="Google_Api_MetricDescriptor_DisplayName" data-uid="Google.Api.MetricDescriptor.DisplayName">DisplayName</h4>
   <div class="markdown level1 summary"><p>A concise name for the metric, which can be displayed in user interfaces.
-Use sentence case without an ending period, for example &quot;Request count&quot;.</p>
+Use sentence case without an ending period, for example &quot;Request count&quot;.
+This field is optional but it is recommended to be set for any metrics
+associated with user-visible concepts, such as Quota.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -462,13 +464,7 @@ Some combinations of <code>metric_kind</code> and <code>value_type</code> might 
   </table>
   <a id="Google_Api_MetricDescriptor_Name_" data-uid="Google.Api.MetricDescriptor.Name*"></a>
   <h4 id="Google_Api_MetricDescriptor_Name" data-uid="Google.Api.MetricDescriptor.Name">Name</h4>
-  <div class="markdown level1 summary"><p>The resource name of the metric descriptor. Depending on the
-implementation, the name typically includes: (1) the parent resource name
-that defines the scope of the metric type or of its data; and (2) the
-metric&apos;s URL-encoded type, which also appears in the <code>type</code> field of this
-descriptor. For example, following is the resource name of a custom
-metric within the GCP project <code>my-project-id</code>:</p>
-<p>&quot;projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount&quot;</p>
+  <div class="markdown level1 summary"><p>The resource name of the metric descriptor.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -581,7 +577,6 @@ Measure</a> standard:</p>
 <li><code>Ti</code>    tebi    (2**40)</li>
 </ul>
 <p><strong>Grammar</strong></p>
-<p>The grammar includes the dimensionless unit <code>1</code>, such as <code>1/s</code>.</p>
 <p>The grammar also includes these connectors:</p>
 <ul>
 <li><code>/</code>    division (as an infix operator, e.g. <code>1/s</code>).</li>
@@ -589,7 +584,7 @@ Measure</a> standard:</p>
 </ul>
 <p>The grammar for a unit is as follows:</p>
 <p>Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;</p>
-<p>Component = [ PREFIX ] UNIT [ Annotation ]
+<p>Component = ( [ PREFIX ] UNIT | &quot;%&quot; ) [ Annotation ]
          | Annotation
          | &quot;1&quot;
          ;</p>
@@ -601,6 +596,9 @@ equivalent to <code>1</code> if it is used alone. For examples,
 <code>{requests}/s == 1/s</code>, <code>By{transmitted}/s == By/s</code>.</li>
 <li><code>NAME</code> is a sequence of non-blank printable ASCII characters not
 containing &apos;{&apos; or &apos;}&apos;.</li>
+<li><code>1</code> represents dimensionless value 1, such as in <code>1/s</code>.</li>
+<li><code>%</code> represents dimensionless value 1/100, and annotates values giving
+a percentage.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>

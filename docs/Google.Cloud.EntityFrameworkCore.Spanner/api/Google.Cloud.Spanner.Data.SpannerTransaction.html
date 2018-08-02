@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SpannerTransaction
    | Google.Cloud.EntityFrameworkCore.Spanner ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -189,6 +189,36 @@ that expires immediately. This is normally used only for testing purposes.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbTransaction.DbConnection</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerTransaction_DisposeBehavior_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.DisposeBehavior*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_DisposeBehavior" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.DisposeBehavior">DisposeBehavior</h4>
+  <div class="markdown level1 summary"><p>Specifies how resources are treated when <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html#Google_Cloud_Spanner_Data_SpannerTransaction_Dispose_System_Boolean_">Dispose(Boolean)</a> is called.
+The default behavior of <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_ReleaseToPool">ReleaseToPool</a> will cause transactional resources
+to be sent back into a shared pool for re-use.
+Shared transactions may only set this value to either <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_CloseResources">CloseResources</a> to close
+resources or <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_Detach">Detach</a> to detach from the resources.
+A shared transaction must have one process choose <a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html#Google_Cloud_Spanner_Data_DisposeBehavior_CloseResources">CloseResources</a>
+to avoid leaks of transactional resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisposeBehavior DisposeBehavior { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.DisposeBehavior.html">DisposeBehavior</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_IsolationLevel_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.IsolationLevel*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_IsolationLevel" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.IsolationLevel">IsolationLevel</h4>
   <div class="markdown level1 summary"></div>
@@ -247,6 +277,32 @@ do not take locks.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerTransaction_Shared_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Shared*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_Shared" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Shared">Shared</h4>
+  <div class="markdown level1 summary"><p>Returns true if this transaction is being used by multiple <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html">SpannerConnection</a> objects.
+<a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_GetReaderPartitionsAsync_System_Nullable_System_Int64__System_Nullable_System_Int64__System_Threading_CancellationToken_">GetReaderPartitionsAsync(Nullable&lt;Int64&gt;, Nullable&lt;Int64&gt;, CancellationToken)</a> will automatically mark the transaction as shared
+because it is expected that you will be distributing the read among several tasks or processes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Shared { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_TimestampBound_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TimestampBound*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_TimestampBound" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TimestampBound">TimestampBound</h4>
   <div class="markdown level1 summary"><p>Tells Cloud Spanner how to choose a timestamp at which to read the data for read-only
@@ -276,6 +332,30 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerTransaction_TransactionId_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TransactionId*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_TransactionId" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TransactionId">TransactionId</h4>
+  <div class="markdown level1 summary"><p>Identifying information about this transaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TransactionId TransactionId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_Commit_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Commit*"></a>
@@ -288,15 +368,60 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbTransaction.Commit()</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerTransaction_Commit_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Commit*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_Commit_System_Nullable_System_DateTime___" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Commit(System.Nullable{System.DateTime}@)">Commit(out Nullable&lt;DateTime&gt;)</h4>
+  <div class="markdown level1 summary"><p>Commits the database transaction synchronously, returning the database timestamp for the commit via <code data-dev-comment-type="paramref" class="paramref">timestamp</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Commit(out DateTime? timestamp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTime</span>&gt;</td>
+        <td><span class="parametername">timestamp</span></td>
+        <td><p>Returns the UTC timestamp when the data was written to the database.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_CommitAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.CommitAsync*"></a>
-  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_CommitAsync" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.CommitAsync">CommitAsync()</h4>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_CommitAsync_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.CommitAsync(System.Threading.CancellationToken)">CommitAsync(CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Commits the database transaction asynchronously.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;DateTime? &gt; CommitAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;DateTime? &gt; CommitAsync(CancellationToken cancellationToken = default (CancellationToken))</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A cancellation token used for this task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -351,14 +476,32 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbTransaction.Rollback()</span></div>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_RollbackAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.RollbackAsync*"></a>
-  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_RollbackAsync" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.RollbackAsync">RollbackAsync()</h4>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_RollbackAsync_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.RollbackAsync(System.Threading.CancellationToken)">RollbackAsync(CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Rolls back a transaction asynchronously.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task RollbackAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">public Task RollbackAsync(CancellationToken cancellationToken = default (CancellationToken))</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A cancellation token used for this task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>

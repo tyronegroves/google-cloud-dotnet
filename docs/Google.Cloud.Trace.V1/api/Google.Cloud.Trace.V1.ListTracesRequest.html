@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ListTracesRequest
    | Google.Cloud.Trace.V1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -111,11 +111,46 @@ unless specified.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class ListTracesRequest : IMessage&lt;ListTracesRequest&gt;, IMessage, IEquatable&lt;ListTracesRequest&gt;, IDeepCloneable&lt;ListTracesRequest&gt;, IPageRequest</code></pre>
   </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Google_Cloud_Trace_V1_ListTracesRequest__ctor_" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.#ctor*"></a>
+  <h4 id="Google_Cloud_Trace_V1_ListTracesRequest__ctor" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.#ctor">ListTracesRequest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ListTracesRequest()</code></pre>
+  </div>
+  <a id="Google_Cloud_Trace_V1_ListTracesRequest__ctor_" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.#ctor*"></a>
+  <h4 id="Google_Cloud_Trace_V1_ListTracesRequest__ctor_Google_Cloud_Trace_V1_ListTracesRequest_" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.#ctor(Google.Cloud.Trace.V1.ListTracesRequest)">ListTracesRequest(ListTracesRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ListTracesRequest(ListTracesRequest other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Trace.V1.ListTracesRequest.html">ListTracesRequest</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <a id="Google_Cloud_Trace_V1_ListTracesRequest_EndTime_" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.EndTime*"></a>
   <h4 id="Google_Cloud_Trace_V1_ListTracesRequest_EndTime" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.EndTime">EndTime</h4>
-  <div class="markdown level1 summary"><p>Start of the time interval (inclusive) during which the trace data was
+  <div class="markdown level1 summary"><p>End of the time interval (inclusive) during which the trace data was
 collected from the application.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -140,7 +175,36 @@ collected from the application.</p>
   </table>
   <a id="Google_Cloud_Trace_V1_ListTracesRequest_Filter_" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.Filter*"></a>
   <h4 id="Google_Cloud_Trace_V1_ListTracesRequest_Filter" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.Filter">Filter</h4>
-  <div class="markdown level1 summary"><p>An optional filter for the request.</p>
+  <div class="markdown level1 summary"><p>An optional filter against labels for the request.</p>
+<p>By default, searches use prefix matching. To specify exact match, prepend
+a plus symbol (<code>+</code>) to the search term.
+Multiple terms are ANDed. Syntax:</p>
+<ul>
+<li><code>root:NAME_PREFIX</code> or <code>NAME_PREFIX</code>: Return traces where any root
+span starts with <code>NAME_PREFIX</code>.</li>
+<li><code>+root:NAME</code> or <code>+NAME</code>: Return traces where any root span&apos;s name is
+exactly <code>NAME</code>.</li>
+<li><code>span:NAME_PREFIX</code>: Return traces where any span starts with
+<code>NAME_PREFIX</code>.</li>
+<li><code>+span:NAME</code>: Return traces where any span&apos;s name is exactly
+<code>NAME</code>.</li>
+<li><code>latency:DURATION</code>: Return traces whose overall latency is
+greater or equal to than <code>DURATION</code>. Accepted units are nanoseconds
+(<code>ns</code>), milliseconds (<code>ms</code>), and seconds (<code>s</code>). Default is <code>ms</code>. For
+example, <code>latency:24ms</code> returns traces whose overall latency
+is greater than or equal to 24 milliseconds.</li>
+<li><code>label:LABEL_KEY</code>: Return all traces containing the specified
+label key (exact match, case-sensitive) regardless of the key:value
+pair&apos;s value (including empty values).</li>
+<li><code>LABEL_KEY:VALUE_PREFIX</code>: Return all traces containing the specified
+label key (exact match, case-sensitive) whose value starts with
+<code>VALUE_PREFIX</code>. Both a key and a value must be specified.</li>
+<li><code>+LABEL_KEY:VALUE</code>: Return all traces containing a key:value pair
+exactly matching the specified text. Both a key and a value must be
+specified.</li>
+<li><code>method:VALUE</code>: Equivalent to <code>/http/method:VALUE</code>.</li>
+<li><code>url:VALUE</code>: Equivalent to <code>/http/url:VALUE</code>.</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -278,7 +342,7 @@ value of the <code>next_page_token</code> field from a previous request. Optiona
   </table>
   <a id="Google_Cloud_Trace_V1_ListTracesRequest_StartTime_" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.StartTime*"></a>
   <h4 id="Google_Cloud_Trace_V1_ListTracesRequest_StartTime" data-uid="Google.Cloud.Trace.V1.ListTracesRequest.StartTime">StartTime</h4>
-  <div class="markdown level1 summary"><p>End of the time interval (inclusive) during which the trace data was
+  <div class="markdown level1 summary"><p>Start of the time interval (inclusive) during which the trace data was
 collected from the application.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

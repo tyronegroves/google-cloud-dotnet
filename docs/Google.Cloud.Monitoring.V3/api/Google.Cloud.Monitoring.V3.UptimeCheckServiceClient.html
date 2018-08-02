@@ -187,7 +187,7 @@
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_UptimeCheckServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Monitoring.V3.UptimeCheckServiceSettings)">Create(ServiceEndpoint, UptimeCheckServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -208,6 +208,77 @@ necessary.</p>
         <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
         <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceSettings.html">UptimeCheckServiceSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>Optional <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceSettings.html">UptimeCheckServiceSettings</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a></td>
+        <td><p>The created <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_UptimeCheckServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+UptimeCheckServiceClient client = UptimeCheckServiceClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    UptimeCheckServiceClient.DefaultEndpoint.Host, UptimeCheckServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+UptimeCheckServiceClient client = UptimeCheckServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
+  <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_Create_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.Create*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Monitoring_V3_UptimeCheckServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Monitoring.V3.UptimeCheckServiceSettings)">Create(CallInvoker, UptimeCheckServiceSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a> which uses the specified call invoker for remote operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static UptimeCheckServiceClient Create(CallInvoker callInvoker, UptimeCheckServiceSettings settings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
+        <td><span class="parametername">callInvoker</span></td>
+        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
 </td>
       </tr>
       <tr>
@@ -287,7 +358,7 @@ necessary.</p>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_UptimeCheckServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Monitoring.V3.UptimeCheckServiceSettings)">CreateAsync(ServiceEndpoint, UptimeCheckServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,6 +405,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_UptimeCheckServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+UptimeCheckServiceClient client = await UptimeCheckServiceClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    UptimeCheckServiceClient.DefaultEndpoint.Host, UptimeCheckServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+UptimeCheckServiceClient client = UptimeCheckServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateUptimeCheckConfig_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.CreateUptimeCheckConfig*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateUptimeCheckConfig_Google_Cloud_Monitoring_V3_CreateUptimeCheckConfigRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.CreateUptimeCheckConfig(Google.Cloud.Monitoring.V3.CreateUptimeCheckConfigRequest,Google.Api.Gax.Grpc.CallSettings)">CreateUptimeCheckConfig(CreateUptimeCheckConfigRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new uptime check configuration.</p>
@@ -419,8 +512,8 @@ UptimeCheckConfig response = uptimeCheckServiceClient.CreateUptimeCheckConfig(re
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
-        <td><p>The project in which to create the uptime check. The format is:</p>
-<p><code>projects/[PROJECT_ID]</code>.</p>
+        <td><p>The project in which to create the uptime check. The format
+is <code>projects/[PROJECT_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -528,6 +621,69 @@ UptimeCheckConfig response = await uptimeCheckServiceClient.CreateUptimeCheckCon
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateUptimeCheckConfigAsync_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.CreateUptimeCheckConfigAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_CreateUptimeCheckConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.CreateUptimeCheckConfigAsync(Google.Cloud.Monitoring.V3.CreateUptimeCheckConfigRequest,System.Threading.CancellationToken)">CreateUptimeCheckConfigAsync(CreateUptimeCheckConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a new uptime check configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UptimeCheckConfig&gt; CreateUptimeCheckConfigAsync(CreateUptimeCheckConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.CreateUptimeCheckConfigRequest.html">CreateUptimeCheckConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.html">UptimeCheckConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_CreateUptimeCheckConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+UptimeCheckServiceClient uptimeCheckServiceClient = await UptimeCheckServiceClient.CreateAsync();
+// Initialize request argument(s)
+CreateUptimeCheckConfigRequest request = new CreateUptimeCheckConfigRequest
+{
+    Parent = new ProjectName(&quot;[PROJECT]&quot;).ToString(),
+    UptimeCheckConfig = new UptimeCheckConfig(),
+};
+// Make the request
+UptimeCheckConfig response = await uptimeCheckServiceClient.CreateUptimeCheckConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateUptimeCheckConfigAsync_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.CreateUptimeCheckConfigAsync*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_CreateUptimeCheckConfigAsync_System_String_Google_Cloud_Monitoring_V3_UptimeCheckConfig_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.CreateUptimeCheckConfigAsync(System.String,Google.Cloud.Monitoring.V3.UptimeCheckConfig,Google.Api.Gax.Grpc.CallSettings)">CreateUptimeCheckConfigAsync(String, UptimeCheckConfig, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new uptime check configuration.</p>
 </div>
@@ -549,8 +705,8 @@ UptimeCheckConfig response = await uptimeCheckServiceClient.CreateUptimeCheckCon
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
-        <td><p>The project in which to create the uptime check. The format is:</p>
-<p><code>projects/[PROJECT_ID]</code>.</p>
+        <td><p>The project in which to create the uptime check. The format
+is <code>projects/[PROJECT_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -616,8 +772,8 @@ UptimeCheckConfig response = await uptimeCheckServiceClient.CreateUptimeCheckCon
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
-        <td><p>The project in which to create the uptime check. The format is:</p>
-<p><code>projects/[PROJECT_ID]</code>.</p>
+        <td><p>The project in which to create the uptime check. The format
+is <code>projects/[PROJECT_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -733,8 +889,8 @@ other dependent configs that would be rendered invalid by the deletion.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The uptime check configuration to delete. The format is</p>
-<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
+        <td><p>The uptime check configuration to delete. The format
+is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -801,13 +957,77 @@ other dependent configs that would be rendered invalid by the deletion.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_DeleteUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_DeleteUptimeCheckConfigRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+UptimeCheckServiceClient uptimeCheckServiceClient = await UptimeCheckServiceClient.CreateAsync();
+// Initialize request argument(s)
+DeleteUptimeCheckConfigRequest request = new DeleteUptimeCheckConfigRequest
+{
+    Name = new UptimeCheckConfigName(&quot;[PROJECT]&quot;, &quot;[UPTIME_CHECK_CONFIG]&quot;).ToString(),
+};
+// Make the request
+await uptimeCheckServiceClient.DeleteUptimeCheckConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_DeleteUptimeCheckConfigAsync_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.DeleteUptimeCheckConfigAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_DeleteUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_DeleteUptimeCheckConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.DeleteUptimeCheckConfigAsync(Google.Cloud.Monitoring.V3.DeleteUptimeCheckConfigRequest,System.Threading.CancellationToken)">DeleteUptimeCheckConfigAsync(DeleteUptimeCheckConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes an uptime check configuration. Note that this method will fail
+if the uptime check configuration is referenced by an alert policy or
+other dependent configs that would be rendered invalid by the deletion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteUptimeCheckConfigAsync(DeleteUptimeCheckConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.DeleteUptimeCheckConfigRequest.html">DeleteUptimeCheckConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_DeleteUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_DeleteUptimeCheckConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 UptimeCheckServiceClient uptimeCheckServiceClient = await UptimeCheckServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -843,8 +1063,8 @@ other dependent configs that would be rendered invalid by the deletion.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The uptime check configuration to delete. The format is</p>
-<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
+        <td><p>The uptime check configuration to delete. The format
+is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -866,7 +1086,7 @@ other dependent configs that would be rendered invalid by the deletion.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -905,8 +1125,8 @@ other dependent configs that would be rendered invalid by the deletion.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The uptime check configuration to delete. The format is</p>
-<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
+        <td><p>The uptime check configuration to delete. The format
+is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -928,7 +1148,7 @@ other dependent configs that would be rendered invalid by the deletion.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1027,8 +1247,8 @@ UptimeCheckConfig response = uptimeCheckServiceClient.GetUptimeCheckConfig(reque
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The uptime check configuration to retrieve. The format is</p>
-<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
+        <td><p>The uptime check configuration to retrieve. The format
+is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -1128,6 +1348,68 @@ UptimeCheckConfig response = await uptimeCheckServiceClient.GetUptimeCheckConfig
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_GetUptimeCheckConfigAsync_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.GetUptimeCheckConfigAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_GetUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_GetUptimeCheckConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.GetUptimeCheckConfigAsync(Google.Cloud.Monitoring.V3.GetUptimeCheckConfigRequest,System.Threading.CancellationToken)">GetUptimeCheckConfigAsync(GetUptimeCheckConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a single uptime check configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UptimeCheckConfig&gt; GetUptimeCheckConfigAsync(GetUptimeCheckConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.GetUptimeCheckConfigRequest.html">GetUptimeCheckConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.html">UptimeCheckConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_GetUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_GetUptimeCheckConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+UptimeCheckServiceClient uptimeCheckServiceClient = await UptimeCheckServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetUptimeCheckConfigRequest request = new GetUptimeCheckConfigRequest
+{
+    Name = new UptimeCheckConfigName(&quot;[PROJECT]&quot;, &quot;[UPTIME_CHECK_CONFIG]&quot;).ToString(),
+};
+// Make the request
+UptimeCheckConfig response = await uptimeCheckServiceClient.GetUptimeCheckConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_GetUptimeCheckConfigAsync_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.GetUptimeCheckConfigAsync*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_GetUptimeCheckConfigAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.GetUptimeCheckConfigAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetUptimeCheckConfigAsync(String, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Gets a single uptime check configuration.</p>
 </div>
@@ -1149,8 +1431,8 @@ UptimeCheckConfig response = await uptimeCheckServiceClient.GetUptimeCheckConfig
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The uptime check configuration to retrieve. The format is</p>
-<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
+        <td><p>The uptime check configuration to retrieve. The format
+is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -1209,8 +1491,8 @@ UptimeCheckConfig response = await uptimeCheckServiceClient.GetUptimeCheckConfig
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The uptime check configuration to retrieve. The format is</p>
-<p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
+        <td><p>The uptime check configuration to retrieve. The format
+is <code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -1364,8 +1646,8 @@ leaving out any invalid configurations.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
-        <td><p>The project whose uptime check configurations are listed. The format is</p>
-<p><code>projects/[PROJECT_ID]</code>.</p>
+        <td><p>The project whose uptime check configurations are listed. The format
+is <code>projects/[PROJECT_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -1564,8 +1846,8 @@ leaving out any invalid configurations.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
-        <td><p>The project whose uptime check configurations are listed. The format is</p>
-<p><code>projects/[PROJECT_ID]</code>.</p>
+        <td><p>The project whose uptime check configurations are listed. The format
+is <code>projects/[PROJECT_ID]</code>.</p>
 </td>
       </tr>
       <tr>
@@ -1952,10 +2234,13 @@ Returns the updated configuration.</p>
         <td><p>Required. If an <code>&amp;quot;updateMask&amp;quot;</code> has been specified, this field gives
 the values for the set of fields mentioned in the <code>&amp;quot;updateMask&amp;quot;</code>. If an
 <code>&amp;quot;updateMask&amp;quot;</code> has not been given, this uptime check configuration replaces
-the current configuration. If a field is mentioned in <code>&amp;quot;updateMask</code>&quot; but
+the current configuration. If a field is mentioned in <code>&amp;quot;updateMask&amp;quot;</code> but
 the corresonding field is omitted in this partial uptime check
 configuration, it has the effect of deleting/clearing the field from the
 configuration on the server.</p>
+<p>The following fields can be updated: <code>display_name</code>,
+<code>http_check</code>, <code>tcp_check</code>, <code>timeout</code>, <code>content_matchers</code>, and
+<code>selected_regions</code>.</p>
 </td>
       </tr>
       <tr>
@@ -2058,6 +2343,71 @@ UptimeCheckConfig response = await uptimeCheckServiceClient.UpdateUptimeCheckCon
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_UpdateUptimeCheckConfigAsync_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.UpdateUptimeCheckConfigAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_UpdateUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_UpdateUptimeCheckConfigRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.UpdateUptimeCheckConfigAsync(Google.Cloud.Monitoring.V3.UpdateUptimeCheckConfigRequest,System.Threading.CancellationToken)">UpdateUptimeCheckConfigAsync(UpdateUptimeCheckConfigRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates an uptime check configuration. You can either replace the entire
+configuration with a new one or replace only certain fields in the current
+configuration by specifying the fields to be updated via <code>&amp;quot;updateMask&amp;quot;</code>.
+Returns the updated configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UptimeCheckConfig&gt; UpdateUptimeCheckConfigAsync(UpdateUptimeCheckConfigRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.UpdateUptimeCheckConfigRequest.html">UpdateUptimeCheckConfigRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.html">UptimeCheckConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_UpdateUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_UpdateUptimeCheckConfigRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+UptimeCheckServiceClient uptimeCheckServiceClient = await UptimeCheckServiceClient.CreateAsync();
+// Initialize request argument(s)
+UpdateUptimeCheckConfigRequest request = new UpdateUptimeCheckConfigRequest
+{
+    UptimeCheckConfig = new UptimeCheckConfig(),
+};
+// Make the request
+UptimeCheckConfig response = await uptimeCheckServiceClient.UpdateUptimeCheckConfigAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_UpdateUptimeCheckConfigAsync_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.UpdateUptimeCheckConfigAsync*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckServiceClient_UpdateUptimeCheckConfigAsync_Google_Cloud_Monitoring_V3_UptimeCheckConfig_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.UpdateUptimeCheckConfigAsync(Google.Cloud.Monitoring.V3.UptimeCheckConfig,Google.Api.Gax.Grpc.CallSettings)">UpdateUptimeCheckConfigAsync(UptimeCheckConfig, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates an uptime check configuration. You can either replace the entire
 configuration with a new one or replace only certain fields in the current
@@ -2085,10 +2435,13 @@ Returns the updated configuration.</p>
         <td><p>Required. If an <code>&amp;quot;updateMask&amp;quot;</code> has been specified, this field gives
 the values for the set of fields mentioned in the <code>&amp;quot;updateMask&amp;quot;</code>. If an
 <code>&amp;quot;updateMask&amp;quot;</code> has not been given, this uptime check configuration replaces
-the current configuration. If a field is mentioned in <code>&amp;quot;updateMask</code>&quot; but
+the current configuration. If a field is mentioned in <code>&amp;quot;updateMask&amp;quot;</code> but
 the corresonding field is omitted in this partial uptime check
 configuration, it has the effect of deleting/clearing the field from the
 configuration on the server.</p>
+<p>The following fields can be updated: <code>display_name</code>,
+<code>http_check</code>, <code>tcp_check</code>, <code>timeout</code>, <code>content_matchers</code>, and
+<code>selected_regions</code>.</p>
 </td>
       </tr>
       <tr>
@@ -2153,10 +2506,13 @@ Returns the updated configuration.</p>
         <td><p>Required. If an <code>&amp;quot;updateMask&amp;quot;</code> has been specified, this field gives
 the values for the set of fields mentioned in the <code>&amp;quot;updateMask&amp;quot;</code>. If an
 <code>&amp;quot;updateMask&amp;quot;</code> has not been given, this uptime check configuration replaces
-the current configuration. If a field is mentioned in <code>&amp;quot;updateMask</code>&quot; but
+the current configuration. If a field is mentioned in <code>&amp;quot;updateMask&amp;quot;</code> but
 the corresonding field is omitted in this partial uptime check
 configuration, it has the effect of deleting/clearing the field from the
 configuration on the server.</p>
+<p>The following fields can be updated: <code>display_name</code>,
+<code>http_check</code>, <code>tcp_check</code>, <code>timeout</code>, <code>content_matchers</code>, and
+<code>selected_regions</code>.</p>
 </td>
       </tr>
       <tr>

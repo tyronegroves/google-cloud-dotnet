@@ -100,6 +100,9 @@
       <a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_Create_Grpc_Core_Channel_Google_Cloud_Spanner_V1_SpannerSettings_">SpannerClient.Create(Channel, SpannerSettings)</a>
     </div>
     <div>
+      <a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Spanner_V1_SpannerSettings_">SpannerClient.Create(CallInvoker, SpannerSettings)</a>
+    </div>
+    <div>
       <a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ShutdownDefaultChannelsAsync">SpannerClient.ShutdownDefaultChannelsAsync()</a>
     </div>
     <div>
@@ -848,7 +851,7 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ExecuteSqlAsync_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.ExecuteSqlAsync(ExecuteSqlRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSqlStream_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSqlStream*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSqlStream_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSqlStream(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Google.Api.Gax.Grpc.CallSettings)">ExecuteSqlStream(ExecuteSqlRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Executes an SQL Query on Spanner returning the results as a set of partialresult streams.</p>
+  <div class="markdown level1 summary"><p>Executes an SQL Query on Spanner returning the results as a set of partial result streams.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -868,12 +871,14 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteSqlRequest.html">ExecuteSqlRequest</a></td>
         <td><span class="parametername">request</span></td>
-        <td></td>
+        <td><p>The query to execute. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
-        <td></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -888,7 +893,8 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
     <tbody>
       <tr>
         <td><a class="xref" href="Grpc.Core.AsyncServerStreamingCall-1.html">AsyncServerStreamingCall</a>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.PartialResultSet.html">PartialResultSet</a>&gt;</td>
-        <td></td>
+        <td><p>The stream of partial results.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1057,7 +1063,7 @@ alive.</p>
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_GetSessionAsync_Google_Cloud_Spanner_V1_GetSessionRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.GetSessionAsync(GetSessionRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_GetSqlStreamReader_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.GetSqlStreamReader*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_GetSqlStreamReader_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Cloud_Spanner_V1_Session_System_Int32_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.GetSqlStreamReader(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Google.Cloud.Spanner.V1.Session,System.Int32)">GetSqlStreamReader(ExecuteSqlRequest, Session, Int32)</h4>
-  <div class="markdown level1 summary"><p>Executes an SQL Query on Spanner returning the results as a set of partialresult streams.</p>
+  <div class="markdown level1 summary"><p>Executes an SQL Query on Spanner returning the results as a set of partial result streams.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1077,17 +1083,21 @@ alive.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteSqlRequest.html">ExecuteSqlRequest</a></td>
         <td><span class="parametername">request</span></td>
-        <td></td>
+        <td><p>The query to execute. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Session.html">Session</a></td>
         <td><span class="parametername">session</span></td>
-        <td></td>
+        <td><p>The session to use for the query. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">timeoutSeconds</span></td>
-        <td></td>
+        <td><p>The number of seconds to allow the query to execute for. A value of 0
+means &quot;immediate timeout&quot; or &quot;no timeout&quot; depending on <a class="xref" href="Google.Cloud.Spanner.V1.SpannerSettings.html#Google_Cloud_Spanner_V1_SpannerSettings_AllowImmediateTimeouts">AllowImmediateTimeouts</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1102,7 +1112,8 @@ alive.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.ReliableStreamReader.html">ReliableStreamReader</a></td>
-        <td></td>
+        <td><p>A stream reader for the results.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1717,10 +1728,6 @@ the result set can exceed 100 MiB, and no column value can exceed
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_StreamingRead_Google_Cloud_Spanner_V1_ReadRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.StreamingRead(ReadRequest, CallSettings)</a></div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Google.Cloud.Spanner.V1.TransactionPool.html#Google_Cloud_Spanner_V1_TransactionPool_BeginPooledTransactionAsync_Google_Cloud_Spanner_V1_SpannerClient_Google_Cloud_Spanner_V1_Session_Google_Cloud_Spanner_V1_TransactionOptions_">TransactionPool.BeginPooledTransactionAsync(SpannerClient, Session, TransactionOptions)</a>
-  </div>
 </article>
           </div>
           

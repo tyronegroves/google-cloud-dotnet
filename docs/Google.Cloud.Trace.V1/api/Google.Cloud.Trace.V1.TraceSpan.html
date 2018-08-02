@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TraceSpan
    | Google.Cloud.Trace.V1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -113,6 +113,41 @@ between spans in a trace.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class TraceSpan : IMessage&lt;TraceSpan&gt;, IMessage, IEquatable&lt;TraceSpan&gt;, IDeepCloneable&lt;TraceSpan&gt;</code></pre>
   </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Google_Cloud_Trace_V1_TraceSpan__ctor_" data-uid="Google.Cloud.Trace.V1.TraceSpan.#ctor*"></a>
+  <h4 id="Google_Cloud_Trace_V1_TraceSpan__ctor" data-uid="Google.Cloud.Trace.V1.TraceSpan.#ctor">TraceSpan()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TraceSpan()</code></pre>
+  </div>
+  <a id="Google_Cloud_Trace_V1_TraceSpan__ctor_" data-uid="Google.Cloud.Trace.V1.TraceSpan.#ctor*"></a>
+  <h4 id="Google_Cloud_Trace_V1_TraceSpan__ctor_Google_Cloud_Trace_V1_TraceSpan_" data-uid="Google.Cloud.Trace.V1.TraceSpan.#ctor(Google.Cloud.Trace.V1.TraceSpan)">TraceSpan(TraceSpan)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TraceSpan(TraceSpan other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Trace.V1.TraceSpan.html">TraceSpan</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <a id="Google_Cloud_Trace_V1_TraceSpan_EndTime_" data-uid="Google.Cloud.Trace.V1.TraceSpan.EndTime*"></a>
@@ -167,7 +202,41 @@ and <code>RPC_SERVER</code> to identify queueing latency associated with the spa
   </table>
   <a id="Google_Cloud_Trace_V1_TraceSpan_Labels_" data-uid="Google.Cloud.Trace.V1.TraceSpan.Labels*"></a>
   <h4 id="Google_Cloud_Trace_V1_TraceSpan_Labels" data-uid="Google.Cloud.Trace.V1.TraceSpan.Labels">Labels</h4>
-  <div class="markdown level1 summary"><p>Collection of labels associated with the span.</p>
+  <div class="markdown level1 summary"><p>Collection of labels associated with the span. Label keys must be less than
+128 bytes. Label values must be less than 16 kilobytes (10MB for
+<code>/stacktrace</code> values).</p>
+<p>Some predefined label keys exist, or you may create your own. When creating
+your own, we recommend the following formats:</p>
+<ul>
+<li><code>/category/product/key</code> for agents of well-known products (e.g.
+<code>/db/mongodb/read_size</code>).</li>
+<li><code>short_host/path/key</code> for domain-specific keys (e.g.
+<code>foo.com/myproduct/bar</code>)</li>
+</ul>
+<p>Predefined labels include:</p>
+<ul>
+<li><code>/agent</code></li>
+<li><code>/component</code></li>
+<li><code>/error/message</code></li>
+<li><code>/error/name</code></li>
+<li><code>/http/client_city</code></li>
+<li><code>/http/client_country</code></li>
+<li><code>/http/client_protocol</code></li>
+<li><code>/http/client_region</code></li>
+<li><code>/http/host</code></li>
+<li><code>/http/method</code></li>
+<li><code>/http/path</code></li>
+<li><code>/http/redirected_url</code></li>
+<li><code>/http/request/size</code></li>
+<li><code>/http/response/size</code></li>
+<li><code>/http/route</code></li>
+<li><code>/http/status_code</code></li>
+<li><code>/http/url</code></li>
+<li><code>/http/user_agent</code></li>
+<li><code>/pid</code></li>
+<li><code>/stacktrace</code></li>
+<li><code>/tid</code></li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -191,8 +260,9 @@ and <code>RPC_SERVER</code> to identify queueing latency associated with the spa
   </table>
   <a id="Google_Cloud_Trace_V1_TraceSpan_Name_" data-uid="Google.Cloud.Trace.V1.TraceSpan.Name*"></a>
   <h4 id="Google_Cloud_Trace_V1_TraceSpan_Name" data-uid="Google.Cloud.Trace.V1.TraceSpan.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Name of the trace. The trace name is sanitized and displayed in the
-Stackdriver Trace tool in the Google Developers Console.
+  <div class="markdown level1 summary"><p>Name of the span. Must be less than 128 bytes. The span name is sanitized
+and displayed in the Stackdriver Trace tool in the
+{% dynamic print site_values.console_name %}.
 The name may be a method name or some other per-call site name.
 For the same executable and the same call point, a best practice is
 to use a consistent name, which makes it easier to correlate

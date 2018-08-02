@@ -283,7 +283,7 @@
   <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dialogflow_V2_AgentsSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Dialogflow.V2.AgentsSettings)">Create(ServiceEndpoint, AgentsSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsClient.html">AgentsClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -304,6 +304,77 @@ necessary.</p>
         <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
         <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsSettings.html">AgentsSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>Optional <a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsSettings.html">AgentsSettings</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsClient.html">AgentsClient</a></td>
+        <td><p>The created <a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsClient.html">AgentsClient</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dialogflow_V2_AgentsSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Dialogflow.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+AgentsClient client = AgentsClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Dialogflow.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    AgentsClient.DefaultEndpoint.Host, AgentsClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+AgentsClient client = AgentsClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
+  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_Create_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.Create*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Dialogflow_V2_AgentsSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Dialogflow.V2.AgentsSettings)">Create(CallInvoker, AgentsSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsClient.html">AgentsClient</a> which uses the specified call invoker for remote operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static AgentsClient Create(CallInvoker callInvoker, AgentsSettings settings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
+        <td><span class="parametername">callInvoker</span></td>
+        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
 </td>
       </tr>
       <tr>
@@ -383,7 +454,7 @@ necessary.</p>
   <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dialogflow_V2_AgentsSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Dialogflow.V2.AgentsSettings)">CreateAsync(ServiceEndpoint, AgentsSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsClient.html">AgentsClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -430,6 +501,109 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Dialogflow_V2_AgentsSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Dialogflow.V2;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+AgentsClient client = await AgentsClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Dialogflow.V2;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    AgentsClient.DefaultEndpoint.Host, AgentsClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+AgentsClient client = AgentsClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
+  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgent*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgent(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ExportAgent(ProjectName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Exports the specified agent to a ZIP file.</p>
+<p>Operation &lt;response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse],
+      metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;ExportAgentResponse, Struct&gt; ExportAgent(ProjectName parent, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The project that the agent to export is associated with.
+Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ExportAgentResponse.html">ExportAgentResponse</a>, <a class="xref" href="Google.Protobuf.WellKnownTypes.Struct.html">Struct</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = AgentsClient.Create();
+// Initialize request argument(s)
+ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+// Make the request
+Operation&lt;ExportAgentResponse, Struct&gt; response =
+    agentsClient.ExportAgent(parent);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;ExportAgentResponse, Struct&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+ExportAgentResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;ExportAgentResponse, Struct&gt; retrievedResponse =
+    agentsClient.PollOnceExportAgent(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    ExportAgentResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgent*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_Google_Cloud_Dialogflow_V2_ExportAgentRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgent(Google.Cloud.Dialogflow.V2.ExportAgentRequest,Google.Api.Gax.Grpc.CallSettings)">ExportAgent(ExportAgentRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Exports the specified agent to a ZIP file.</p>
@@ -513,8 +687,8 @@ if (retrievedResponse.IsCompleted)
 }
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgent*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgent(Google.Cloud.Dialogflow.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ExportAgent(ProjectName, CallSettings)</h4>
+  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ExportAgentAsync(ProjectName, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Exports the specified agent to a ZIP file.</p>
 <p>Operation &lt;response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse],
       metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
@@ -522,7 +696,7 @@ if (retrievedResponse.IsCompleted)
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Operation&lt;ExportAgentResponse, Struct&gt; ExportAgent(ProjectName parent, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;ExportAgentResponse, Struct&gt;&gt; ExportAgentAsync(ProjectName parent, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -535,7 +709,7 @@ if (retrievedResponse.IsCompleted)
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project that the agent to export is associated with.
 Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
@@ -559,25 +733,25 @@ Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ExportAgentResponse.html">ExportAgentResponse</a>, <a class="xref" href="Google.Protobuf.WellKnownTypes.Struct.html">Struct</a>&gt;</td>
-        <td><p>The RPC response.</p>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ExportAgentResponse.html">ExportAgentResponse</a>, <a class="xref" href="Google.Protobuf.WellKnownTypes.Struct.html">Struct</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgent_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-AgentsClient agentsClient = AgentsClient.Create();
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
 // Initialize request argument(s)
 ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
 // Make the request
 Operation&lt;ExportAgentResponse, Struct&gt; response =
-    agentsClient.ExportAgent(parent);
+    await agentsClient.ExportAgentAsync(parent);
 
 // Poll until the returned long-running operation is complete
 Operation&lt;ExportAgentResponse, Struct&gt; completedResponse =
-    response.PollUntilCompleted();
+    await response.PollUntilCompletedAsync();
 // Retrieve the operation result
 ExportAgentResponse result = completedResponse.Result;
 
@@ -585,7 +759,88 @@ ExportAgentResponse result = completedResponse.Result;
 string operationName = response.Name;
 // This name can be stored, then the long-running operation retrieved later by name
 Operation&lt;ExportAgentResponse, Struct&gt; retrievedResponse =
-    agentsClient.PollOnceExportAgent(operationName);
+    await agentsClient.PollOnceExportAgentAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    ExportAgentResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync(Google.Api.Gax.ResourceNames.ProjectName,System.Threading.CancellationToken)">ExportAgentAsync(ProjectName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Exports the specified agent to a ZIP file.</p>
+<p>Operation &lt;response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse],
+      metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;ExportAgentResponse, Struct&gt;&gt; ExportAgentAsync(ProjectName parent, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The project that the agent to export is associated with.
+Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ExportAgentResponse.html">ExportAgentResponse</a>, <a class="xref" href="Google.Protobuf.WellKnownTypes.Struct.html">Struct</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+// Make the request
+Operation&lt;ExportAgentResponse, Struct&gt; response =
+    await agentsClient.ExportAgentAsync(parent);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;ExportAgentResponse, Struct&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+ExportAgentResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;ExportAgentResponse, Struct&gt; retrievedResponse =
+    await agentsClient.PollOnceExportAgentAsync(operationName);
 // Check if the retrieved long-running operation has completed
 if (retrievedResponse.IsCompleted)
 {
@@ -677,16 +932,14 @@ if (retrievedResponse.IsCompleted)
 }
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync(Google.Cloud.Dialogflow.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">ExportAgentAsync(ProjectName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Exports the specified agent to a ZIP file.</p>
-<p>Operation &lt;response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse],
-      metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
+  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgent*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgent_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgent(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">GetAgent(ProjectName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified agent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;ExportAgentResponse, Struct&gt;&gt; ExportAgentAsync(ProjectName parent, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Agent GetAgent(ProjectName parent, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -699,9 +952,9 @@ if (retrievedResponse.IsCompleted)
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
-        <td><p>Required. The project that the agent to export is associated with.
+        <td><p>Required. The project that the agent to fetch is associated with.
 Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
 </td>
       </tr>
@@ -723,120 +976,20 @@ Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ExportAgentResponse.html">ExportAgentResponse</a>, <a class="xref" href="Google.Protobuf.WellKnownTypes.Struct.html">Struct</a>&gt;&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.Agent.html">Agent</a></td>
+        <td><p>The RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgent_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-AgentsClient agentsClient = await AgentsClient.CreateAsync();
+AgentsClient agentsClient = AgentsClient.Create();
 // Initialize request argument(s)
 ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
 // Make the request
-Operation&lt;ExportAgentResponse, Struct&gt; response =
-    await agentsClient.ExportAgentAsync(parent);
-
-// Poll until the returned long-running operation is complete
-Operation&lt;ExportAgentResponse, Struct&gt; completedResponse =
-    await response.PollUntilCompletedAsync();
-// Retrieve the operation result
-ExportAgentResponse result = completedResponse.Result;
-
-// Or get the name of the operation
-string operationName = response.Name;
-// This name can be stored, then the long-running operation retrieved later by name
-Operation&lt;ExportAgentResponse, Struct&gt; retrievedResponse =
-    await agentsClient.PollOnceExportAgentAsync(operationName);
-// Check if the retrieved long-running operation has completed
-if (retrievedResponse.IsCompleted)
-{
-    // If it has completed, then access the result
-    ExportAgentResponse retrievedResult = retrievedResponse.Result;
-}
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ExportAgentAsync(Google.Cloud.Dialogflow.V2.ProjectName,System.Threading.CancellationToken)">ExportAgentAsync(ProjectName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Exports the specified agent to a ZIP file.</p>
-<p>Operation &lt;response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse],
-      metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;ExportAgentResponse, Struct&gt;&gt; ExportAgentAsync(ProjectName parent, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required. The project that the agent to export is associated with.
-Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ExportAgentResponse.html">ExportAgentResponse</a>, <a class="xref" href="Google.Protobuf.WellKnownTypes.Struct.html">Struct</a>&gt;&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_ExportAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-AgentsClient agentsClient = await AgentsClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-// Make the request
-Operation&lt;ExportAgentResponse, Struct&gt; response =
-    await agentsClient.ExportAgentAsync(parent);
-
-// Poll until the returned long-running operation is complete
-Operation&lt;ExportAgentResponse, Struct&gt; completedResponse =
-    await response.PollUntilCompletedAsync();
-// Retrieve the operation result
-ExportAgentResponse result = completedResponse.Result;
-
-// Or get the name of the operation
-string operationName = response.Name;
-// This name can be stored, then the long-running operation retrieved later by name
-Operation&lt;ExportAgentResponse, Struct&gt; retrievedResponse =
-    await agentsClient.PollOnceExportAgentAsync(operationName);
-// Check if the retrieved long-running operation has completed
-if (retrievedResponse.IsCompleted)
-{
-    // If it has completed, then access the result
-    ExportAgentResponse retrievedResult = retrievedResponse.Result;
-}
+Agent response = agentsClient.GetAgent(parent);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgent*"></a>
@@ -901,14 +1054,14 @@ GetAgentRequest request = new GetAgentRequest
 Agent response = agentsClient.GetAgent(request);
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgent*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgent_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgent(Google.Cloud.Dialogflow.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">GetAgent(ProjectName, CallSettings)</h4>
+  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">GetAgentAsync(ProjectName, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Retrieves the specified agent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Agent GetAgent(ProjectName parent, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Agent&gt; GetAgentAsync(ProjectName parent, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -921,7 +1074,7 @@ Agent response = agentsClient.GetAgent(request);
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project that the agent to fetch is associated with.
 Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
@@ -945,20 +1098,80 @@ Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.Agent.html">Agent</a></td>
-        <td><p>The RPC response.</p>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.Agent.html">Agent</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgent_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-AgentsClient agentsClient = AgentsClient.Create();
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
 // Initialize request argument(s)
 ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
 // Make the request
-Agent response = agentsClient.GetAgent(parent);
+Agent response = await agentsClient.GetAgentAsync(parent);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync(Google.Api.Gax.ResourceNames.ProjectName,System.Threading.CancellationToken)">GetAgentAsync(ProjectName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified agent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Agent&gt; GetAgentAsync(ProjectName parent, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The project that the agent to fetch is associated with.
+Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.Agent.html">Agent</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+// Make the request
+Agent response = await agentsClient.GetAgentAsync(parent);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync*"></a>
@@ -1083,126 +1296,6 @@ GetAgentRequest request = new GetAgentRequest
 };
 // Make the request
 Agent response = await agentsClient.GetAgentAsync(request);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync(Google.Cloud.Dialogflow.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">GetAgentAsync(ProjectName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Retrieves the specified agent.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Agent&gt; GetAgentAsync(ProjectName parent, CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required. The project that the agent to fetch is associated with.
-Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.Agent.html">Agent</a>&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-AgentsClient agentsClient = await AgentsClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-// Make the request
-Agent response = await agentsClient.GetAgentAsync(parent);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.GetAgentAsync(Google.Cloud.Dialogflow.V2.ProjectName,System.Threading.CancellationToken)">GetAgentAsync(ProjectName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Retrieves the specified agent.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Agent&gt; GetAgentAsync(ProjectName parent, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required. The project that the agent to fetch is associated with.
-Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.Agent.html">Agent</a>&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_GetAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-AgentsClient agentsClient = await AgentsClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-// Make the request
-Agent response = await agentsClient.GetAgentAsync(parent);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_ImportAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.ImportAgent*"></a>
@@ -1932,7 +2025,7 @@ if (retrievedResponse.IsCompleted)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgents_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.SearchAgents*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgents_Google_Cloud_Dialogflow_V2_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.SearchAgents(Google.Cloud.Dialogflow.V2.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">SearchAgents(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgents_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.SearchAgents(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">SearchAgents(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns the list of agents.</p>
 <p>Since there is at most one conversational agent per project, this method is
 useful primarily for listing all agents across projects the caller has
@@ -1956,7 +2049,7 @@ Sub-Collections</a>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project to list agents from.
 Format: <code>projects/&amp;lt;Project ID or &amp;apos;-&amp;apos;&gt;</code>.</p>
@@ -2001,7 +2094,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgents_Google_Cloud_Dialogflow_V2_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgents_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AgentsClient agentsClient = AgentsClient.Create();
 // Initialize request argument(s)
@@ -2140,7 +2233,7 @@ string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgentsAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.SearchAgentsAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgentsAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.SearchAgentsAsync(Google.Cloud.Dialogflow.V2.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">SearchAgentsAsync(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgentsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.SearchAgentsAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">SearchAgentsAsync(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns the list of agents.</p>
 <p>Since there is at most one conversational agent per project, this method is
 useful primarily for listing all agents across projects the caller has
@@ -2164,7 +2257,7 @@ Sub-Collections</a>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project to list agents from.
 Format: <code>projects/&amp;lt;Project ID or &amp;apos;-&amp;apos;&gt;</code>.</p>
@@ -2209,7 +2302,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgentsAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_SearchAgentsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AgentsClient agentsClient = await AgentsClient.CreateAsync();
 // Initialize request argument(s)
@@ -2380,7 +2473,7 @@ and <a class="xref" href="Google.Cloud.Dialogflow.V2.AgentsClient.html#Google_Cl
 in turn be shut down by another call to this method.</p>
 </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgent_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgent*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgent_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgent(Google.Cloud.Dialogflow.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">TrainAgent(ProjectName, CallSettings)</h4>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgent_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgent(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">TrainAgent(ProjectName, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Trains the specified agent.</p>
 <p>Operation &lt;response: [google.protobuf.Empty][google.protobuf.Empty],
       metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
@@ -2401,7 +2494,7 @@ in turn be shut down by another call to this method.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project that the agent to train is associated with.
 Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
@@ -2432,7 +2525,7 @@ Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgent_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgent_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AgentsClient agentsClient = AgentsClient.Create();
 // Initialize request argument(s)
@@ -2540,7 +2633,7 @@ if (retrievedResponse.IsCompleted)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgentAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgentAsync(Google.Cloud.Dialogflow.V2.ProjectName,Google.Api.Gax.Grpc.CallSettings)">TrainAgentAsync(ProjectName, CallSettings)</h4>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgentAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Api.Gax.Grpc.CallSettings)">TrainAgentAsync(ProjectName, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Trains the specified agent.</p>
 <p>Operation &lt;response: [google.protobuf.Empty][google.protobuf.Empty],
       metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
@@ -2561,7 +2654,7 @@ if (retrievedResponse.IsCompleted)
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project that the agent to train is associated with.
 Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
@@ -2592,7 +2685,7 @@ Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AgentsClient agentsClient = await AgentsClient.CreateAsync();
 // Initialize request argument(s)
@@ -2619,7 +2712,7 @@ if (retrievedResponse.IsCompleted)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgentAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgentAsync(Google.Cloud.Dialogflow.V2.ProjectName,System.Threading.CancellationToken)">TrainAgentAsync(ProjectName, CancellationToken)</h4>
+  <h4 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.AgentsClient.TrainAgentAsync(Google.Api.Gax.ResourceNames.ProjectName,System.Threading.CancellationToken)">TrainAgentAsync(ProjectName, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Trains the specified agent.</p>
 <p>Operation &lt;response: [google.protobuf.Empty][google.protobuf.Empty],
       metadata: [google.protobuf.Struct][google.protobuf.Struct]&gt;</p>
@@ -2640,7 +2733,7 @@ if (retrievedResponse.IsCompleted)
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project that the agent to train is associated with.
 Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
@@ -2671,7 +2764,7 @@ Format: <code>projects/&amp;lt;Project ID&gt;</code>.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Cloud_Dialogflow_V2_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Dialogflow_V2_AgentsClient_TrainAgentAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AgentsClient agentsClient = await AgentsClient.CreateAsync();
 // Initialize request argument(s)

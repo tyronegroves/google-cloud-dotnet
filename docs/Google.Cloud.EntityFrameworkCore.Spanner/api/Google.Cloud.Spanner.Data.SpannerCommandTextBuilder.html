@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SpannerCommandTextBuilder
    | Google.Cloud.EntityFrameworkCore.Spanner ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -74,7 +74,7 @@
   <h1 id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder" class="text-break">Class SpannerCommandTextBuilder
   </h1>
   <div class="markdown level0 summary"><p>Builds the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_CommandText">CommandText</a> string for executing a query or operation
-on a Spanner database.</p>
+on a Spanner database. Instances are constructed with static factory methods.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -100,63 +100,6 @@ on a Spanner database.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class SpannerCommandTextBuilder</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  <a id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder__ctor_" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.#ctor*"></a>
-  <h4 id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder__ctor_System_String_" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.#ctor(System.String)">SpannerCommandTextBuilder(String)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new SpannerCommandTextBuilder with the given command text.
-The given text will be analyzed to choose the proper <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SpannerCommandTextBuilder(string commandText)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">commandText</span></td>
-        <td><p>The command text intended for <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_CommandText">CommandText</a>
-If the intended <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a> is Select, then this string should be
-a SQL Query. If the intended <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a> is Ddl, then this string should be
-the Ddl statement (eg &apos;CREATE TABLE MYTABLE...&apos;)
-If the intended <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a> is Update, Delete,
-InsertOrUpdate, or Insert, then the text should be &apos;[spannercommandtype] [tablename]&apos;
-such as &apos;INSERT MYTABLE&apos;.  Must not be null.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.ArgumentNullException</span></td>
-        <td><p>Thrown when <code data-dev-comment-type="paramref" class="paramref">commandText</code> is null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.InvalidOperationException</span></td>
-        <td><p>Thrown when <code data-dev-comment-type="paramref" class="paramref">commandText</code> is not formatted correctly.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   <a id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_CommandText_" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.CommandText*"></a>
@@ -190,7 +133,7 @@ such as &apos;INSERT MYTABLE&apos;.  Must not be null.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string[] ExtraStatements { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; ExtraStatements { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -202,7 +145,7 @@ such as &apos;INSERT MYTABLE&apos;.  Must not be null.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span>[]</td>
+        <td><span class="xref">System.Collections.Generic.IReadOnlyList</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -233,8 +176,8 @@ such as &apos;INSERT MYTABLE&apos;.  Must not be null.</p>
   </table>
   <a id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_TargetTable_" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.TargetTable*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_TargetTable" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.TargetTable">TargetTable</h4>
-  <div class="markdown level1 summary"><p>Gets the target Spanner database table if the command is Update, Delete, InsertOrUpdate,
-or Insert</p>
+  <div class="markdown level1 summary"><p>Returns the target Spanner database table if the command is Update, Delete, InsertOrUpdate,
+or Insert, or null otherwise.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -466,7 +409,7 @@ for querying rows via a SQL query.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">sqlQuery</span></td>
-        <td><p>The full SQL query. Must not be null.</p>
+        <td><p>The full SQL query. Must not be null or empty.</p>
 </td>
       </tr>
     </tbody>
@@ -533,7 +476,8 @@ for updating rows.</p>
   </table>
   <a id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_FromCommandText_" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.FromCommandText*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_FromCommandText_System_String_" data-uid="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.FromCommandText(System.String)">FromCommandText(String)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html">SpannerCommandTextBuilder</a> instance by parsing existing command text.</p>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html">SpannerCommandTextBuilder</a> instance by parsing existing command text.
+The given text will be analyzed to choose the proper <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -553,7 +497,7 @@ for updating rows.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">commandText</span></td>
-        <td><p>The full command text containing a query, ddl statement or insert/update/delete
+        <td><p>The full command text containing a query, DDL statement or insert/update/delete
 operation.  The given text will be parsed and validated. Must not be null.</p>
 </td>
       </tr>
@@ -572,6 +516,30 @@ operation.  The given text will be parsed and validated. Must not be null.</p>
         <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html">SpannerCommandTextBuilder</a></td>
         <td><p>A <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html">SpannerCommandTextBuilder</a> whose <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a> is determined
 from parsing <code data-dev-comment-type="paramref" class="paramref">commandText</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_FromCommandText_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the intended <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a> is Select, then <code data-dev-comment-type="paramref" class="paramref">commandText</code> should be
+a SQL Query. If the intended <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a> is Ddl, then this string should be
+the DDL statement (eg &apos;CREATE TABLE MYTABLE...&apos;)
+If the intended <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommandTextBuilder.html#Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_SpannerCommandType">SpannerCommandType</a> is Update, Delete,
+InsertOrUpdate, or Insert, then the text should be &apos;[spanner command type] [table name]&apos;
+such as &apos;INSERT MYTABLE&apos;.  Must not be null or empty.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p><code data-dev-comment-type="paramref" class="paramref">commandText</code> is not formatted correctly.</p>
 </td>
       </tr>
     </tbody>

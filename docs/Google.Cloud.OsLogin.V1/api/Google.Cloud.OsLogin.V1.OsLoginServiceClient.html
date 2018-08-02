@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class OsLoginServiceClient
    | Google.Cloud.OsLogin.V1 ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -187,7 +187,7 @@
   <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_OsLogin_V1_OsLoginServiceSettings_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.OsLogin.V1.OsLoginServiceSettings)">Create(ServiceEndpoint, OsLoginServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.OsLogin.V1.OsLoginServiceClient.html">OsLoginServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -208,6 +208,77 @@ necessary.</p>
         <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
         <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.OsLoginServiceSettings.html">OsLoginServiceSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>Optional <a class="xref" href="Google.Cloud.OsLogin.V1.OsLoginServiceSettings.html">OsLoginServiceSettings</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.OsLoginServiceClient.html">OsLoginServiceClient</a></td>
+        <td><p>The created <a class="xref" href="Google.Cloud.OsLogin.V1.OsLoginServiceClient.html">OsLoginServiceClient</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_OsLogin_V1_OsLoginServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.OsLogin.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+OsLoginServiceClient client = OsLoginServiceClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.OsLogin.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    OsLoginServiceClient.DefaultEndpoint.Host, OsLoginServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+OsLoginServiceClient client = OsLoginServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
+  <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_Create_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.Create*"></a>
+  <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_OsLogin_V1_OsLoginServiceSettings_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.OsLogin.V1.OsLoginServiceSettings)">Create(CallInvoker, OsLoginServiceSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.OsLogin.V1.OsLoginServiceClient.html">OsLoginServiceClient</a> which uses the specified call invoker for remote operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OsLoginServiceClient Create(CallInvoker callInvoker, OsLoginServiceSettings settings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
+        <td><span class="parametername">callInvoker</span></td>
+        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
 </td>
       </tr>
       <tr>
@@ -287,7 +358,7 @@ necessary.</p>
   <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_OsLogin_V1_OsLoginServiceSettings_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.OsLogin.V1.OsLoginServiceSettings)">CreateAsync(ServiceEndpoint, OsLoginServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.OsLogin.V1.OsLoginServiceClient.html">OsLoginServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,6 +405,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_OsLogin_V1_OsLoginServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.OsLogin.V1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+OsLoginServiceClient client = await OsLoginServiceClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.OsLogin.V1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    OsLoginServiceClient.DefaultEndpoint.Host, OsLoginServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+OsLoginServiceClient client = OsLoginServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeletePosixAccount_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.DeletePosixAccount*"></a>
   <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeletePosixAccount_Google_Cloud_OsLogin_V1_DeletePosixAccountRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.DeletePosixAccount(Google.Cloud.OsLogin.V1.DeletePosixAccountRequest,Google.Api.Gax.Grpc.CallSettings)">DeletePosixAccount(DeletePosixAccountRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes a POSIX account.</p>
@@ -469,13 +562,75 @@ osLoginServiceClient.DeletePosixAccount(name);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeletePosixAccountAsync_Google_Cloud_OsLogin_V1_DeletePosixAccountRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
+// Initialize request argument(s)
+DeletePosixAccountRequest request = new DeletePosixAccountRequest
+{
+    ProjectName = new ProjectName(&quot;[USER]&quot;, &quot;[PROJECT]&quot;),
+};
+// Make the request
+await osLoginServiceClient.DeletePosixAccountAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeletePosixAccountAsync_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.DeletePosixAccountAsync*"></a>
+  <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeletePosixAccountAsync_Google_Cloud_OsLogin_V1_DeletePosixAccountRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.DeletePosixAccountAsync(Google.Cloud.OsLogin.V1.DeletePosixAccountRequest,System.Threading.CancellationToken)">DeletePosixAccountAsync(DeletePosixAccountRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a POSIX account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeletePosixAccountAsync(DeletePosixAccountRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.DeletePosixAccountRequest.html">DeletePosixAccountRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeletePosixAccountAsync_Google_Cloud_OsLogin_V1_DeletePosixAccountRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -533,7 +688,7 @@ account is in format <code>users/{user}/projects/{project}</code>.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -594,7 +749,7 @@ account is in format <code>users/{user}/projects/{project}</code>.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -744,13 +899,75 @@ osLoginServiceClient.DeleteSshPublicKey(name);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeleteSshPublicKeyAsync_Google_Cloud_OsLogin_V1_DeleteSshPublicKeyRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
+// Initialize request argument(s)
+DeleteSshPublicKeyRequest request = new DeleteSshPublicKeyRequest
+{
+    FingerprintName = new FingerprintName(&quot;[USER]&quot;, &quot;[FINGERPRINT]&quot;),
+};
+// Make the request
+await osLoginServiceClient.DeleteSshPublicKeyAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeleteSshPublicKeyAsync_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.DeleteSshPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeleteSshPublicKeyAsync_Google_Cloud_OsLogin_V1_DeleteSshPublicKeyRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.DeleteSshPublicKeyAsync(Google.Cloud.OsLogin.V1.DeleteSshPublicKeyRequest,System.Threading.CancellationToken)">DeleteSshPublicKeyAsync(DeleteSshPublicKeyRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes an SSH public key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteSshPublicKeyAsync(DeleteSshPublicKeyRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.DeleteSshPublicKeyRequest.html">DeleteSshPublicKeyRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_DeleteSshPublicKeyAsync_Google_Cloud_OsLogin_V1_DeleteSshPublicKeyRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -808,7 +1025,7 @@ their SHA-256 fingerprint. The fingerprint of the public key is in format
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -869,7 +1086,7 @@ their SHA-256 fingerprint. The fingerprint of the public key is in format
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1059,6 +1276,69 @@ on Google Compute Engine.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_GetLoginProfileAsync_Google_Cloud_OsLogin_V1_GetLoginProfileRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetLoginProfileRequest request = new GetLoginProfileRequest
+{
+    UserName = new UserName(&quot;[USER]&quot;),
+};
+// Make the request
+LoginProfile response = await osLoginServiceClient.GetLoginProfileAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_GetLoginProfileAsync_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.GetLoginProfileAsync*"></a>
+  <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_GetLoginProfileAsync_Google_Cloud_OsLogin_V1_GetLoginProfileRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.GetLoginProfileAsync(Google.Cloud.OsLogin.V1.GetLoginProfileRequest,System.Threading.CancellationToken)">GetLoginProfileAsync(GetLoginProfileRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the profile information used for logging in to a virtual machine
+on Google Compute Engine.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;LoginProfile&gt; GetLoginProfileAsync(GetLoginProfileRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.GetLoginProfileRequest.html">GetLoginProfileRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.OsLogin.V1.LoginProfile.html">LoginProfile</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_GetLoginProfileAsync_Google_Cloud_OsLogin_V1_GetLoginProfileRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -1497,6 +1777,68 @@ GetSshPublicKeyRequest request = new GetSshPublicKeyRequest
 SshPublicKey response = await osLoginServiceClient.GetSshPublicKeyAsync(request);
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_GetSshPublicKeyAsync_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.GetSshPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_GetSshPublicKeyAsync_Google_Cloud_OsLogin_V1_GetSshPublicKeyRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.GetSshPublicKeyAsync(Google.Cloud.OsLogin.V1.GetSshPublicKeyRequest,System.Threading.CancellationToken)">GetSshPublicKeyAsync(GetSshPublicKeyRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Retrieves an SSH public key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SshPublicKey&gt; GetSshPublicKeyAsync(GetSshPublicKeyRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.GetSshPublicKeyRequest.html">GetSshPublicKeyRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.OsLogin.Common.SshPublicKey.html">SshPublicKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_GetSshPublicKeyAsync_Google_Cloud_OsLogin_V1_GetSshPublicKeyRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetSshPublicKeyRequest request = new GetSshPublicKeyRequest
+{
+    FingerprintName = new FingerprintName(&quot;[USER]&quot;, &quot;[FINGERPRINT]&quot;),
+};
+// Make the request
+SshPublicKey response = await osLoginServiceClient.GetSshPublicKeyAsync(request);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_ImportSshPublicKey_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.ImportSshPublicKey*"></a>
   <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_ImportSshPublicKey_Google_Cloud_OsLogin_V1_ImportSshPublicKeyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.ImportSshPublicKey(Google.Cloud.OsLogin.V1.ImportSshPublicKeyRequest,Google.Api.Gax.Grpc.CallSettings)">ImportSshPublicKey(ImportSshPublicKeyRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Adds an SSH public key and returns the profile information. Default POSIX
@@ -1758,6 +2100,71 @@ login profile.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_ImportSshPublicKeyAsync_Google_Cloud_OsLogin_V1_ImportSshPublicKeyRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
+// Initialize request argument(s)
+ImportSshPublicKeyRequest request = new ImportSshPublicKeyRequest
+{
+    ParentAsUserName = new UserName(&quot;[USER]&quot;),
+    SshPublicKey = new SshPublicKey(),
+};
+// Make the request
+ImportSshPublicKeyResponse response = await osLoginServiceClient.ImportSshPublicKeyAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_ImportSshPublicKeyAsync_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.ImportSshPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_ImportSshPublicKeyAsync_Google_Cloud_OsLogin_V1_ImportSshPublicKeyRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.ImportSshPublicKeyAsync(Google.Cloud.OsLogin.V1.ImportSshPublicKeyRequest,System.Threading.CancellationToken)">ImportSshPublicKeyAsync(ImportSshPublicKeyRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Adds an SSH public key and returns the profile information. Default POSIX
+account information is set when no username and UID exist as part of the
+login profile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ImportSshPublicKeyResponse&gt; ImportSshPublicKeyAsync(ImportSshPublicKeyRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.ImportSshPublicKeyRequest.html">ImportSshPublicKeyRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.OsLogin.V1.ImportSshPublicKeyResponse.html">ImportSshPublicKeyResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_ImportSshPublicKeyAsync_Google_Cloud_OsLogin_V1_ImportSshPublicKeyRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -2639,6 +3046,70 @@ supports patch semantics.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_UpdateSshPublicKeyAsync_Google_Cloud_OsLogin_V1_UpdateSshPublicKeyRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
+// Initialize request argument(s)
+UpdateSshPublicKeyRequest request = new UpdateSshPublicKeyRequest
+{
+    FingerprintName = new FingerprintName(&quot;[USER]&quot;, &quot;[FINGERPRINT]&quot;),
+    SshPublicKey = new SshPublicKey(),
+};
+// Make the request
+SshPublicKey response = await osLoginServiceClient.UpdateSshPublicKeyAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_UpdateSshPublicKeyAsync_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.UpdateSshPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_UpdateSshPublicKeyAsync_Google_Cloud_OsLogin_V1_UpdateSshPublicKeyRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.OsLogin.V1.OsLoginServiceClient.UpdateSshPublicKeyAsync(Google.Cloud.OsLogin.V1.UpdateSshPublicKeyRequest,System.Threading.CancellationToken)">UpdateSshPublicKeyAsync(UpdateSshPublicKeyRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates an SSH public key and returns the profile information. This method
+supports patch semantics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SshPublicKey&gt; UpdateSshPublicKeyAsync(UpdateSshPublicKeyRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.OsLogin.V1.UpdateSshPublicKeyRequest.html">UpdateSshPublicKeyRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.OsLogin.Common.SshPublicKey.html">SshPublicKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_OsLogin_V1_OsLoginServiceClient_UpdateSshPublicKeyAsync_Google_Cloud_OsLogin_V1_UpdateSshPublicKeyRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 OsLoginServiceClient osLoginServiceClient = await OsLoginServiceClient.CreateAsync();
 // Initialize request argument(s)

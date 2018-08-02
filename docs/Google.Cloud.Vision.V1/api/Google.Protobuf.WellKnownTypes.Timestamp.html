@@ -119,7 +119,9 @@ where {year} is always expressed using four digits while {month}, {day},
 {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional
 seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
 are optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone
-is required, though only UTC (as indicated by &quot;Z&quot;) is presently supported.</p>
+is required. A proto3 JSON serializer should always use UTC (as indicated by
+&quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be
+able to accept both UTC and other timezones (as indicated by an offset).</p>
 <p>For example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past
 01:30 UTC on January 15, 2017.</p>
 <p>In JavaScript, one can convert a Date object to this format using the
@@ -127,8 +129,7 @@ standard [toISOString()](<a href="https://developer.mozilla.org/en-US/docs/Web/J
 method. In Python, a standard <code>datetime.datetime</code> object can be converted
 to this format using <a href="https://docs.python.org/2/library/time.html#time.strftime"><code>strftime</code></a>
 with the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one
-can use the Joda Time&apos;s <a href="http://joda-time.sourceforge.net/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime()"><code>ISODateTimeFormat.dateTime()</code></a>
-to obtain a formatter capable of generating timestamps in this format.</p>
+can use the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--"><code>ISODateTimeFormat.dateTime()</code></a> to obtain a formatter capable of generating timestamps in this format.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -1031,6 +1032,9 @@ values.</p>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="Google.Protobuf.MessageExtensions.html#Google_Protobuf_MessageExtensions_MergeFrom_Google_Protobuf_IMessage_System_Byte___">MessageExtensions.MergeFrom(IMessage, Byte[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Google.Protobuf.MessageExtensions.html#Google_Protobuf_MessageExtensions_MergeFrom_Google_Protobuf_IMessage_System_Byte___System_Int32_System_Int32_">MessageExtensions.MergeFrom(IMessage, Byte[], Int32, Int32)</a>
   </div>
   <div>
       <a class="xref" href="Google.Protobuf.MessageExtensions.html#Google_Protobuf_MessageExtensions_MergeFrom_Google_Protobuf_IMessage_Google_Protobuf_ByteString_">MessageExtensions.MergeFrom(IMessage, ByteString)</a>

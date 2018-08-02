@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Billing
    | Google.Cloud.Trace.V2 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -74,44 +74,32 @@
   <h1 id="Google_Api_Billing" data-uid="Google.Api.Billing" class="text-break">Class Billing
   </h1>
   <div class="markdown level0 summary"><p>Billing related configuration of the service.</p>
-<p>The following example shows how to configure metrics for billing:</p>
-<p>metrics:</p>
+<p>The following example shows how to configure monitored resources and metrics
+for billing:</p>
+<p>monitored_resources:</p>
 <ul>
-<li>name: library.googleapis.com/read_calls
-metric_kind: DELTA
-value_type: INT64</li>
-<li>name: library.googleapis.com/write_calls
+<li>type: library.googleapis.com/branch
+labels:<ul>
+<li>key: /city
+description: The city where the library branch is located in.</li>
+<li>key: /name
+description: The name of the branch.
+metrics:</li>
+</ul>
+</li>
+<li>name: library.googleapis.com/book/borrowed_count
 metric_kind: DELTA
 value_type: INT64
 billing:
+consumer_destinations:<ul>
+<li>monitored_resource: library.googleapis.com/branch
 metrics:<ul>
-<li>library.googleapis.com/read_calls</li>
-<li>library.googleapis.com/write_calls</li>
+<li>library.googleapis.com/book/borrowed_count</li>
 </ul>
 </li>
 </ul>
-<p>The next example shows how to enable billing status check and customize the
-check behavior. It makes sure billing status check is included in the <code>Check</code>
-method of <a href="https://cloud.google.com/service-control/">Service Control API</a>.
-In the example, &quot;google.storage.Get&quot; method can be served when the billing
-status is either <code>current</code> or <code>delinquent</code>, while &quot;google.storage.Write&quot;
-method can only be served when the billing status is <code>current</code>:</p>
-<p>billing:
- rules:</p>
-<ul>
-<li>selector: google.storage.Get
-allowed_statuses:<ul>
-<li>current</li>
-<li>delinquent</li>
-</ul>
 </li>
-<li>selector: google.storage.Write
-allowed_statuses: current</li>
 </ul>
-<p>Mostly services should only allow <code>current</code> status when serving requests.
-In addition, services can choose to allow both <code>current</code> and <code>delinquent</code>
-statuses when serving read-only requests to resources. If there&apos;s no
-matching selector for operation, no billing status check will be performed.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -184,36 +172,13 @@ matching selector for operation, no billing status check will be performed.</p>
   </table>
   <h3 id="fields">Fields
   </h3>
-  <h4 id="Google_Api_Billing_MetricsFieldNumber" data-uid="Google.Api.Billing.MetricsFieldNumber">MetricsFieldNumber</h4>
-  <div class="markdown level1 summary"><p>Field number for the &quot;metrics&quot; field.</p>
+  <h4 id="Google_Api_Billing_ConsumerDestinationsFieldNumber" data-uid="Google.Api.Billing.ConsumerDestinationsFieldNumber">ConsumerDestinationsFieldNumber</h4>
+  <div class="markdown level1 summary"><p>Field number for the &quot;consumer_destinations&quot; field.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int MetricsFieldNumber = 1</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h4 id="Google_Api_Billing_RulesFieldNumber" data-uid="Google.Api.Billing.RulesFieldNumber">RulesFieldNumber</h4>
-  <div class="markdown level1 summary"><p>Field number for the &quot;rules&quot; field.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const int RulesFieldNumber = 5</code></pre>
+    <pre><code class="lang-csharp hljs">public const int ConsumerDestinationsFieldNumber = 8</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -232,6 +197,33 @@ matching selector for operation, no billing status check will be performed.</p>
   </table>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Api_Billing_ConsumerDestinations_" data-uid="Google.Api.Billing.ConsumerDestinations*"></a>
+  <h4 id="Google_Api_Billing_ConsumerDestinations" data-uid="Google.Api.Billing.ConsumerDestinations">ConsumerDestinations</h4>
+  <div class="markdown level1 summary"><p>Billing configurations for sending metrics to the consumer project.
+There can be multiple consumer destinations per service, each one must have
+a different monitored resource type. A metric can be used in at most
+one consumer destination.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;Billing.Types.BillingDestination&gt; ConsumerDestinations { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Api.Billing.Types.BillingDestination.html">Billing.Types.BillingDestination</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Api_Billing_Descriptor_" data-uid="Google.Api.Billing.Descriptor*"></a>
   <h4 id="Google_Api_Billing_Descriptor" data-uid="Google.Api.Billing.Descriptor">Descriptor</h4>
   <div class="markdown level1 summary"></div>
@@ -255,31 +247,6 @@ matching selector for operation, no billing status check will be performed.</p>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Api_Billing_Metrics_" data-uid="Google.Api.Billing.Metrics*"></a>
-  <h4 id="Google_Api_Billing_Metrics" data-uid="Google.Api.Billing.Metrics">Metrics</h4>
-  <div class="markdown level1 summary"><p>Names of the metrics to report to billing. Each name must
-be defined in [Service.metrics][google.api.Service.metrics] section.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;string&gt; Metrics { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Google_Api_Billing_Parser_" data-uid="Google.Api.Billing.Parser*"></a>
   <h4 id="Google_Api_Billing_Parser" data-uid="Google.Api.Billing.Parser">Parser</h4>
   <div class="markdown level1 summary"></div>
@@ -299,30 +266,6 @@ be defined in [Service.metrics][google.api.Service.metrics] section.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.MessageParser-1.html">MessageParser</a>&lt;<a class="xref" href="Google.Api.Billing.html">Billing</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Api_Billing_Rules_" data-uid="Google.Api.Billing.Rules*"></a>
-  <h4 id="Google_Api_Billing_Rules" data-uid="Google.Api.Billing.Rules">Rules</h4>
-  <div class="markdown level1 summary"><p>A list of billing status rules for configuring billing status check.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;BillingStatusRule&gt; Rules { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Api.BillingStatusRule.html">BillingStatusRule</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

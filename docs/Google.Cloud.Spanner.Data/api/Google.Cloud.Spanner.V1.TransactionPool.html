@@ -116,7 +116,7 @@ to Spanner over the network.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;Transaction&gt; BeginPooledTransactionAsync(this SpannerClient client, Session session, TransactionOptions options)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;Transaction&gt; BeginPooledTransactionAsync(SpannerClient client, Session session, TransactionOptions options)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -131,17 +131,20 @@ to Spanner over the network.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html">SpannerClient</a></td>
         <td><span class="parametername">client</span></td>
-        <td></td>
+        <td><p>The client to use for the transaction. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Session.html">Session</a></td>
         <td><span class="parametername">session</span></td>
-        <td></td>
+        <td><p>The session to use for the transaction. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.TransactionOptions.html">TransactionOptions</a></td>
         <td><span class="parametername">options</span></td>
-        <td></td>
+        <td><p>The options for the transaction.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -156,18 +159,19 @@ to Spanner over the network.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.Transaction.html">Transaction</a>&gt;</td>
-        <td></td>
+        <td><p>A task which, when completed, will result in a suitable transaction for the given parameters.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_TransactionPool_CommitAsync_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.CommitAsync*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_TransactionPool_CommitAsync_Google_Cloud_Spanner_V1_Transaction_Google_Cloud_Spanner_V1_Session_System_Collections_Generic_IEnumerable_Google_Cloud_Spanner_V1_Mutation__System_Int32_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.CommitAsync(Google.Cloud.Spanner.V1.Transaction,Google.Cloud.Spanner.V1.Session,System.Collections.Generic.IEnumerable{Google.Cloud.Spanner.V1.Mutation},System.Int32)">CommitAsync(Transaction, Session, IEnumerable&lt;Mutation&gt;, Int32)</h4>
+  <h4 id="Google_Cloud_Spanner_V1_TransactionPool_CommitAsync_Google_Cloud_Spanner_V1_Transaction_Google_Cloud_Spanner_V1_Session_System_Collections_Generic_IEnumerable_Google_Cloud_Spanner_V1_Mutation__System_Int32_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.CommitAsync(Google.Cloud.Spanner.V1.Transaction,Google.Cloud.Spanner.V1.Session,System.Collections.Generic.IEnumerable{Google.Cloud.Spanner.V1.Mutation},System.Int32,System.Threading.CancellationToken)">CommitAsync(Transaction, Session, IEnumerable&lt;Mutation&gt;, Int32, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Commits a transaction and internally marks the transaction as used.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;CommitResponse&gt; CommitAsync(this Transaction transaction, Session session, IEnumerable&lt;Mutation&gt; mutations, int timeoutSeconds)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;CommitResponse&gt; CommitAsync(Transaction transaction, Session session, IEnumerable&lt;Mutation&gt; mutations, int timeoutSeconds, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -182,22 +186,33 @@ to Spanner over the network.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Transaction.html">Transaction</a></td>
         <td><span class="parametername">transaction</span></td>
-        <td></td>
+        <td><p>The transaction to commit. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Session.html">Session</a></td>
         <td><span class="parametername">session</span></td>
-        <td></td>
+        <td><p>The session associated with the transaction. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.Mutation.html">Mutation</a>&gt;</td>
         <td><span class="parametername">mutations</span></td>
-        <td></td>
+        <td><p>The mutations to commit. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">timeoutSeconds</span></td>
-        <td></td>
+        <td><p>The number of seconds to allow the operation to execute for. A value of 0
+means &quot;immediate timeout&quot; or &quot;no timeout&quot; depending on <a class="xref" href="Google.Cloud.Spanner.V1.SpannerSettings.html#Google_Cloud_Spanner_V1_SpannerSettings_AllowImmediateTimeouts">AllowImmediateTimeouts</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A cancellation token for the operation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -212,18 +227,19 @@ to Spanner over the network.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.CommitResponse.html">CommitResponse</a>&gt;</td>
-        <td></td>
+        <td><p>A task which, when completed, will contain the commit response.</p>
+</td>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Spanner_V1_TransactionPool_RemoveFromTransactionPoolAsync_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.RemoveFromTransactionPoolAsync*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_TransactionPool_RemoveFromTransactionPoolAsync_Google_Cloud_Spanner_V1_Session_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.RemoveFromTransactionPoolAsync(Google.Cloud.Spanner.V1.Session)">RemoveFromTransactionPoolAsync(Session)</h4>
+  <a id="Google_Cloud_Spanner_V1_TransactionPool_RemoveSessionAsync_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.RemoveSessionAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_TransactionPool_RemoveSessionAsync_Google_Cloud_Spanner_V1_Session_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.RemoveSessionAsync(Google.Cloud.Spanner.V1.Session)">RemoveSessionAsync(Session)</h4>
   <div class="markdown level1 summary"><p>When a session is deleted or no longer used, this will remove it from the transaction pool.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task RemoveFromTransactionPoolAsync(this Session session)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task RemoveSessionAsync(Session session)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -238,7 +254,8 @@ to Spanner over the network.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Session.html">Session</a></td>
         <td><span class="parametername">session</span></td>
-        <td></td>
+        <td><p>The session to remove from the pool. Must not be null.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -258,13 +275,13 @@ to Spanner over the network.</p>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_TransactionPool_RollbackAsync_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.RollbackAsync*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_TransactionPool_RollbackAsync_Google_Cloud_Spanner_V1_Transaction_Google_Cloud_Spanner_V1_Session_System_Int32_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.RollbackAsync(Google.Cloud.Spanner.V1.Transaction,Google.Cloud.Spanner.V1.Session,System.Int32)">RollbackAsync(Transaction, Session, Int32)</h4>
+  <h4 id="Google_Cloud_Spanner_V1_TransactionPool_RollbackAsync_Google_Cloud_Spanner_V1_Transaction_Google_Cloud_Spanner_V1_Session_System_Int32_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.V1.TransactionPool.RollbackAsync(Google.Cloud.Spanner.V1.Transaction,Google.Cloud.Spanner.V1.Session,System.Int32,System.Threading.CancellationToken)">RollbackAsync(Transaction, Session, Int32, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Rolls back a transaction and internally marks the transaction as used.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;bool&gt; RollbackAsync(this Transaction transaction, Session session, int timeoutSeconds)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;bool&gt; RollbackAsync(Transaction transaction, Session session, int timeoutSeconds, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -279,17 +296,27 @@ to Spanner over the network.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Transaction.html">Transaction</a></td>
         <td><span class="parametername">transaction</span></td>
-        <td></td>
+        <td><p>The transaction to commit. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Session.html">Session</a></td>
         <td><span class="parametername">session</span></td>
-        <td></td>
+        <td><p>The session associated with the transaction. Must not be null.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">timeoutSeconds</span></td>
-        <td></td>
+        <td><p>The number of seconds to allow the operation to execute for. A value of 0
+means &quot;immediate timeout&quot; or &quot;no timeout&quot; depending on <a class="xref" href="Google.Cloud.Spanner.V1.SpannerSettings.html#Google_Cloud_Spanner_V1_SpannerSettings_AllowImmediateTimeouts">AllowImmediateTimeouts</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A cancellation token for the operation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -304,7 +331,8 @@ to Spanner over the network.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td></td>
+        <td><p>A task representing the asynchronous operation.</p>
+</td>
       </tr>
     </tbody>
   </table>

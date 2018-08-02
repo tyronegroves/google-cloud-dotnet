@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Enum Code
    | Google.Cloud.ErrorReporting.V1Beta1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -144,7 +144,8 @@ a non-directory, etc.</p>
 between <code>FAILED_PRECONDITION</code>, <code>ABORTED</code>, and <code>UNAVAILABLE</code>:
 (a) Use <code>UNAVAILABLE</code> if the client can retry just the failing call.
 (b) Use <code>ABORTED</code> if the client should retry at a higher level
-(e.g., restarting a read-modify-write sequence).
+(e.g., when a client-specified test-and-set fails, indicating the
+client should restart a read-modify-write sequence).
 (c) Use <code>FAILED_PRECONDITION</code> if the client should not retry until
 the system state has been explicitly fixed.  E.g., if an &quot;rmdir&quot;
 fails because the directory is non-empty, <code>FAILED_PRECONDITION</code>
@@ -172,10 +173,12 @@ that are problematic regardless of the state of the system
       </tr>
       <tr>
         <td id="Google_Rpc_Code_NotFound">NotFound</td>
-        <td><p>Some requested entity (e.g., file or directory) was not found.
-For privacy reasons, this code <em>may</em> be returned when the client
-does not have the access rights to the entity, though such usage is
-discouraged.</p>
+        <td><p>Some requested entity (e.g., file or directory) was not found.</p>
+<p>Note to server developers: if a request is denied for an entire class
+of users, such as gradual feature rollout or undocumented whitelist,
+<code>NOT_FOUND</code> may be used. If a request is denied for some users within
+a class of users, such as user-based access control, <code>PERMISSION_DENIED</code>
+must be used.</p>
 <p>HTTP Mapping: 404 Not Found</p>
 </td>
       </tr>
@@ -210,7 +213,9 @@ operation. <code>PERMISSION_DENIED</code> must not be used for rejections
 caused by exhausting some resource (use <code>RESOURCE_EXHAUSTED</code>
 instead for those errors). <code>PERMISSION_DENIED</code> must not be
 used if the caller can not be identified (use <code>UNAUTHENTICATED</code>
-instead for those errors).</p>
+instead for those errors). This error code does not imply the
+request is valid or the requested entity exists or satisfies
+other pre-conditions.</p>
 <p>HTTP Mapping: 403 Forbidden</p>
 </td>
       </tr>

@@ -187,7 +187,7 @@
   <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_NotificationChannelServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Monitoring.V3.NotificationChannelServiceSettings)">Create(ServiceEndpoint, NotificationChannelServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -208,6 +208,77 @@ necessary.</p>
         <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
         <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceSettings.html">NotificationChannelServiceSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>Optional <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceSettings.html">NotificationChannelServiceSettings</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a></td>
+        <td><p>The created <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_NotificationChannelServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+NotificationChannelServiceClient client = NotificationChannelServiceClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    NotificationChannelServiceClient.DefaultEndpoint.Host, NotificationChannelServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+NotificationChannelServiceClient client = NotificationChannelServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
+  <a id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_Create_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.Create*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Monitoring_V3_NotificationChannelServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Monitoring.V3.NotificationChannelServiceSettings)">Create(CallInvoker, NotificationChannelServiceSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a> which uses the specified call invoker for remote operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static NotificationChannelServiceClient Create(CallInvoker callInvoker, NotificationChannelServiceSettings settings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
+        <td><span class="parametername">callInvoker</span></td>
+        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
 </td>
       </tr>
       <tr>
@@ -287,7 +358,7 @@ necessary.</p>
   <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_NotificationChannelServiceSettings_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Monitoring.V3.NotificationChannelServiceSettings)">CreateAsync(ServiceEndpoint, NotificationChannelServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,6 +405,28 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_NotificationChannelServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+NotificationChannelServiceClient client = await NotificationChannelServiceClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.Monitoring.V3;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    NotificationChannelServiceClient.DefaultEndpoint.Host, NotificationChannelServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+NotificationChannelServiceClient client = NotificationChannelServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateNotificationChannel_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.CreateNotificationChannel*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateNotificationChannel_Google_Cloud_Monitoring_V3_CreateNotificationChannelRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.CreateNotificationChannel(Google.Cloud.Monitoring.V3.CreateNotificationChannelRequest,Google.Api.Gax.Grpc.CallSettings)">CreateNotificationChannel(CreateNotificationChannelRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new notification channel, representing a single notification
@@ -522,6 +615,70 @@ endpoint such as an email address, SMS number, or pagerduty service.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateNotificationChannelAsync_Google_Cloud_Monitoring_V3_CreateNotificationChannelRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
+// Initialize request argument(s)
+CreateNotificationChannelRequest request = new CreateNotificationChannelRequest
+{
+    ProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    NotificationChannel = new NotificationChannel(),
+};
+// Make the request
+NotificationChannel response = await notificationChannelServiceClient.CreateNotificationChannelAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateNotificationChannelAsync_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.CreateNotificationChannelAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateNotificationChannelAsync_Google_Cloud_Monitoring_V3_CreateNotificationChannelRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.CreateNotificationChannelAsync(Google.Cloud.Monitoring.V3.CreateNotificationChannelRequest,System.Threading.CancellationToken)">CreateNotificationChannelAsync(CreateNotificationChannelRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a new notification channel, representing a single notification
+endpoint such as an email address, SMS number, or pagerduty service.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;NotificationChannel&gt; CreateNotificationChannelAsync(CreateNotificationChannelRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.CreateNotificationChannelRequest.html">CreateNotificationChannelRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannel.html">NotificationChannel</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_CreateNotificationChannelAsync_Google_Cloud_Monitoring_V3_CreateNotificationChannelRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -822,13 +979,75 @@ notificationChannelServiceClient.DeleteNotificationChannel(name, force);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_DeleteNotificationChannelAsync_Google_Cloud_Monitoring_V3_DeleteNotificationChannelRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
+// Initialize request argument(s)
+DeleteNotificationChannelRequest request = new DeleteNotificationChannelRequest
+{
+    NotificationChannelName = new NotificationChannelName(&quot;[PROJECT]&quot;, &quot;[NOTIFICATION_CHANNEL]&quot;),
+};
+// Make the request
+await notificationChannelServiceClient.DeleteNotificationChannelAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_DeleteNotificationChannelAsync_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.DeleteNotificationChannelAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_DeleteNotificationChannelAsync_Google_Cloud_Monitoring_V3_DeleteNotificationChannelRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.DeleteNotificationChannelAsync(Google.Cloud.Monitoring.V3.DeleteNotificationChannelRequest,System.Threading.CancellationToken)">DeleteNotificationChannelAsync(DeleteNotificationChannelRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a notification channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteNotificationChannelAsync(DeleteNotificationChannelRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.DeleteNotificationChannelRequest.html">DeleteNotificationChannelRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_DeleteNotificationChannelAsync_Google_Cloud_Monitoring_V3_DeleteNotificationChannelRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -894,7 +1113,7 @@ alerting policy will fail to be deleted in a delete operation.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -964,7 +1183,7 @@ alerting policy will fail to be deleted in a delete operation.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>A Task that completes when the RPC has completed.</p>
 </td>
       </tr>
     </tbody>
@@ -1165,6 +1384,72 @@ that was supplied in the call to the create method.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelAsync_Google_Cloud_Monitoring_V3_GetNotificationChannelRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetNotificationChannelRequest request = new GetNotificationChannelRequest
+{
+    NotificationChannelName = new NotificationChannelName(&quot;[PROJECT]&quot;, &quot;[NOTIFICATION_CHANNEL]&quot;),
+};
+// Make the request
+NotificationChannel response = await notificationChannelServiceClient.GetNotificationChannelAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelAsync_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.GetNotificationChannelAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelAsync_Google_Cloud_Monitoring_V3_GetNotificationChannelRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.GetNotificationChannelAsync(Google.Cloud.Monitoring.V3.GetNotificationChannelRequest,System.Threading.CancellationToken)">GetNotificationChannelAsync(GetNotificationChannelRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a single notification channel. The channel includes the relevant
+configuration details with which the channel was created. However, the
+response may truncate or omit passwords, API keys, or other private key
+matter and thus the response may not be 100% identical to the information
+that was supplied in the call to the create method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;NotificationChannel&gt; GetNotificationChannelAsync(GetNotificationChannelRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.GetNotificationChannelRequest.html">GetNotificationChannelRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannel.html">NotificationChannel</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelAsync_Google_Cloud_Monitoring_V3_GetNotificationChannelRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -1480,6 +1765,69 @@ are expected / permitted for a notification channel of the given type.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelDescriptorAsync_Google_Cloud_Monitoring_V3_GetNotificationChannelDescriptorRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetNotificationChannelDescriptorRequest request = new GetNotificationChannelDescriptorRequest
+{
+    NotificationChannelDescriptorName = new NotificationChannelDescriptorName(&quot;[PROJECT]&quot;, &quot;[CHANNEL_DESCRIPTOR]&quot;),
+};
+// Make the request
+NotificationChannelDescriptor response = await notificationChannelServiceClient.GetNotificationChannelDescriptorAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelDescriptorAsync_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.GetNotificationChannelDescriptorAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelDescriptorAsync_Google_Cloud_Monitoring_V3_GetNotificationChannelDescriptorRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.GetNotificationChannelDescriptorAsync(Google.Cloud.Monitoring.V3.GetNotificationChannelDescriptorRequest,System.Threading.CancellationToken)">GetNotificationChannelDescriptorAsync(GetNotificationChannelDescriptorRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a single channel descriptor. The descriptor indicates which fields
+are expected / permitted for a notification channel of the given type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;NotificationChannelDescriptor&gt; GetNotificationChannelDescriptorAsync(GetNotificationChannelDescriptorRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.GetNotificationChannelDescriptorRequest.html">GetNotificationChannelDescriptorRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelDescriptor.html">NotificationChannelDescriptor</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_GetNotificationChannelDescriptorAsync_Google_Cloud_Monitoring_V3_GetNotificationChannelDescriptorRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -2644,6 +2992,69 @@ remain unchanged.</p>
   </table>
   <div>
   <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_UpdateNotificationChannelAsync_Google_Cloud_Monitoring_V3_UpdateNotificationChannelRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
+// Initialize request argument(s)
+UpdateNotificationChannelRequest request = new UpdateNotificationChannelRequest
+{
+    NotificationChannel = new NotificationChannel(),
+};
+// Make the request
+NotificationChannel response = await notificationChannelServiceClient.UpdateNotificationChannelAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_UpdateNotificationChannelAsync_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.UpdateNotificationChannelAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_UpdateNotificationChannelAsync_Google_Cloud_Monitoring_V3_UpdateNotificationChannelRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.UpdateNotificationChannelAsync(Google.Cloud.Monitoring.V3.UpdateNotificationChannelRequest,System.Threading.CancellationToken)">UpdateNotificationChannelAsync(UpdateNotificationChannelRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates a notification channel. Fields not specified in the field mask
+remain unchanged.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;NotificationChannel&gt; UpdateNotificationChannelAsync(UpdateNotificationChannelRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.UpdateNotificationChannelRequest.html">UpdateNotificationChannelRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannel.html">NotificationChannel</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_NotificationChannelServiceClient_UpdateNotificationChannelAsync_Google_Cloud_Monitoring_V3_UpdateNotificationChannelRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 NotificationChannelServiceClient notificationChannelServiceClient = await NotificationChannelServiceClient.CreateAsync();
 // Initialize request argument(s)

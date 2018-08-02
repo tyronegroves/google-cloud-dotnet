@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ReportErrorsServiceClient
    | Google.Cloud.ErrorReporting.V1Beta1 ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.32.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -187,7 +187,7 @@
   <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceSettings_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceSettings)">Create(ServiceEndpoint, ReportErrorsServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.html">ReportErrorsServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -208,6 +208,77 @@ necessary.</p>
         <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
         <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceSettings.html">ReportErrorsServiceSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>Optional <a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceSettings.html">ReportErrorsServiceSettings</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.html">ReportErrorsServiceClient</a></td>
+        <td><p>The created <a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.html">ReportErrorsServiceClient</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.ErrorReporting.V1Beta1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+ReportErrorsServiceClient client = ReportErrorsServiceClient.Create();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.ErrorReporting.V1Beta1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    ReportErrorsServiceClient.DefaultEndpoint.Host, ReportErrorsServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ReportErrorsServiceClient client = ReportErrorsServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+channel.ShutdownAsync().Wait();</code></pre>
+
+  <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_Create_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.Create*"></a>
+  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceSettings_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceSettings)">Create(CallInvoker, ReportErrorsServiceSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.html">ReportErrorsServiceClient</a> which uses the specified call invoker for remote operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ReportErrorsServiceClient Create(CallInvoker callInvoker, ReportErrorsServiceSettings settings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
+        <td><span class="parametername">callInvoker</span></td>
+        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
 </td>
       </tr>
       <tr>
@@ -287,7 +358,7 @@ necessary.</p>
   <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceSettings_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceSettings)">CreateAsync(ServiceEndpoint, ReportErrorsServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.html">ReportErrorsServiceClient</a>, applying defaults for all unspecified settings,
 and creating a channel connecting to the given endpoint with application default credentials where
-necessary.</p>
+necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,8 +405,30 @@ necessary.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceSettings__examples">Examples</h5>
+  <p>This sample shows how to create a client using default credentials:</p>
+<pre><code>using Google.Cloud.ErrorReporting.V1Beta1;
+...
+// When running on Google Cloud Platform this will use the project Compute Credential.
+// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
+// credential file to use that credential.
+ReportErrorsServiceClient client = await ReportErrorsServiceClient.CreateAsync();</code></pre>
+<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
+<pre><code>using Google.Cloud.ErrorReporting.V1Beta1;
+using Google.Apis.Auth.OAuth2;
+using Grpc.Auth;
+using Grpc.Core;
+...
+GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
+Channel channel = new Channel(
+    ReportErrorsServiceClient.DefaultEndpoint.Host, ReportErrorsServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ReportErrorsServiceClient client = ReportErrorsServiceClient.Create(channel);
+...
+// Shutdown the channel when it is no longer required.
+await channel.ShutdownAsync();</code></pre>
+
   <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEvent_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEvent*"></a>
-  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEvent_Google_Cloud_ErrorReporting_V1Beta1_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEvent(Google.Cloud.ErrorReporting.V1Beta1.ProjectName,Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent,Google.Api.Gax.Grpc.CallSettings)">ReportErrorEvent(ProjectName, ReportedErrorEvent, CallSettings)</h4>
+  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEvent_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEvent(Google.Api.Gax.ResourceNames.ProjectName,Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent,Google.Api.Gax.Grpc.CallSettings)">ReportErrorEvent(ProjectName, ReportedErrorEvent, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Report an individual error event.</p>
 <p>This endpoint accepts &lt;strong&gt;either&lt;/strong&gt; an OAuth token,
 &lt;strong&gt;or&lt;/strong&gt; an
@@ -360,7 +453,7 @@ a <code>key</code> parameter. For example:
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">projectName</span></td>
         <td><p>[Required] The resource name of the Google Cloud Platform project. Written
 as <code>projects/</code> plus the
@@ -399,7 +492,7 @@ Example: <code>projects/my-project-123</code>.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEvent_Google_Cloud_ErrorReporting_V1Beta1_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEvent_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">ReportErrorsServiceClient client = ReportErrorsServiceClient.Create();
 ProjectName projectName = new ProjectName(projectId);
 ReportedErrorEvent error = new ReportedErrorEvent
@@ -498,7 +591,7 @@ ReportErrorEventResponse response = reportErrorsServiceClient.ReportErrorEvent(r
 </code></pre></div>
   </div>
   <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync*"></a>
-  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Cloud_ErrorReporting_V1Beta1_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync(Google.Cloud.ErrorReporting.V1Beta1.ProjectName,Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent,Google.Api.Gax.Grpc.CallSettings)">ReportErrorEventAsync(ProjectName, ReportedErrorEvent, CallSettings)</h4>
+  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent,Google.Api.Gax.Grpc.CallSettings)">ReportErrorEventAsync(ProjectName, ReportedErrorEvent, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Report an individual error event.</p>
 <p>This endpoint accepts &lt;strong&gt;either&lt;/strong&gt; an OAuth token,
 &lt;strong&gt;or&lt;/strong&gt; an
@@ -523,7 +616,7 @@ a <code>key</code> parameter. For example:
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">projectName</span></td>
         <td><p>[Required] The resource name of the Google Cloud Platform project. Written
 as <code>projects/</code> plus the
@@ -562,7 +655,7 @@ Example: <code>projects/my-project-123</code>.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Cloud_ErrorReporting_V1Beta1_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ReportErrorsServiceClient reportErrorsServiceClient = await ReportErrorsServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -573,7 +666,7 @@ ReportErrorEventResponse response = await reportErrorsServiceClient.ReportErrorE
 </code></pre></div>
   </div>
   <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync*"></a>
-  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Cloud_ErrorReporting_V1Beta1_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_System_Threading_CancellationToken_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync(Google.Cloud.ErrorReporting.V1Beta1.ProjectName,Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent,System.Threading.CancellationToken)">ReportErrorEventAsync(ProjectName, ReportedErrorEvent, CancellationToken)</h4>
+  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_System_Threading_CancellationToken_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent,System.Threading.CancellationToken)">ReportErrorEventAsync(ProjectName, ReportedErrorEvent, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Report an individual error event.</p>
 <p>This endpoint accepts &lt;strong&gt;either&lt;/strong&gt; an OAuth token,
 &lt;strong&gt;or&lt;/strong&gt; an
@@ -598,7 +691,7 @@ a <code>key</code> parameter. For example:
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">projectName</span></td>
         <td><p>[Required] The resource name of the Google Cloud Platform project. Written
 as <code>projects/</code> plus the
@@ -637,7 +730,7 @@ Example: <code>projects/my-project-123</code>.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Cloud_ErrorReporting_V1Beta1_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ReportErrorsServiceClient reportErrorsServiceClient = await ReportErrorsServiceClient.CreateAsync();
 // Initialize request argument(s)
@@ -704,6 +797,75 @@ a <code>key</code> parameter. For example:
   </table>
   <div>
   <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorEventRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ReportErrorsServiceClient reportErrorsServiceClient = await ReportErrorsServiceClient.CreateAsync();
+// Initialize request argument(s)
+ReportErrorEventRequest request = new ReportErrorEventRequest
+{
+    ProjectNameAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    Event = new ReportedErrorEvent(),
+};
+// Make the request
+ReportErrorEventResponse response = await reportErrorsServiceClient.ReportErrorEventAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync*"></a>
+  <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorEventRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorsServiceClient.ReportErrorEventAsync(Google.Cloud.ErrorReporting.V1Beta1.ReportErrorEventRequest,System.Threading.CancellationToken)">ReportErrorEventAsync(ReportErrorEventRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Report an individual error event.</p>
+<p>This endpoint accepts &lt;strong&gt;either&lt;/strong&gt; an OAuth token,
+&lt;strong&gt;or&lt;/strong&gt; an
+&lt;a href=&quot;<a href="https://support.google.com/cloud/answer/6158862&quot;&gt;API">https://support.google.com/cloud/answer/6158862&quot;>API</a> key&lt;/a&gt;
+for authentication. To use an API key, append it to the URL as the value of
+a <code>key</code> parameter. For example:
+&lt;pre&gt;POST <a href="https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456&lt;/pre&gt;">https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456&lt;/pre></a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ReportErrorEventResponse&gt; ReportErrorEventAsync(ReportErrorEventRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorEventRequest.html">ReportErrorEventRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportErrorEventResponse.html">ReportErrorEventResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_ErrorReporting_V1Beta1_ReportErrorsServiceClient_ReportErrorEventAsync_Google_Cloud_ErrorReporting_V1Beta1_ReportErrorEventRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ReportErrorsServiceClient reportErrorsServiceClient = await ReportErrorsServiceClient.CreateAsync();
 // Initialize request argument(s)
