@@ -8,7 +8,7 @@
     <title>Google.Cloud.Dialogflow.V2 | Google.Cloud.Dialogflow.V2 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Dialogflow.V2 | Google.Cloud.Dialogflow.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.38.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -92,6 +92,59 @@ Authentication</a> guide for more details.</p>
 </ul>
 <p>Create a client instance by calling the static <code>Create</code> method, optionally
 specifying an end-point or channel and settings.</p>
+<h1 id="implementing-a-web-hook">Implementing a web hook</h1>
+<p>You don&#39;t <em>need</em> this package in order to implement a webhook as a
+<a href="https://dialogflow.com/docs/fulfillment">Dialogflow fulfillment</a>.
+You can accept a JSON request dynamically and respond to it with
+JSON, for example using <code>JObject</code> from Json.NET.</p>
+<p>This package allows you to work with a more statically-typed view of
+the request and response using the Protocol Buffers representation
+of <code>WebhookRequest</code> and <code>WebhookResponse</code>, however. In order to do
+this, you <strong>must</strong> use the JSON parser and formatted provided for
+Protocol Buffers. You will run into problems if you use Json.NET or
+similar general-purpose JSON libraries, as they don&#39;t know the
+details of Protocol Buffer JSON representations.</p>
+<p>Additionally, it&#39;s worth configuring the Protocol Buffer JSON parser
+to ignore unknown fields. This means your webhook won&#39;t break if
+additional fields are added to <code>WebhookRequest</code> in the future.</p>
+<p>Here&#39;s a template for a Dialogflow webhook implemented in ASP.NET
+Core.</p>
+<pre><code class="lang-cs">public class DialogflowController : ControllerBase
+{
+    // A Protobuf JSON parser configured to ignore unknown fields. This makes
+    // the action robust against new fields being introduced by Dialogflow.
+    private static readonly JsonParser jsonParser =
+        new JsonParser(JsonParser.Settings.Default.WithIgnoreUnknownFields(true));
+
+    public ContentResult DialogAction()
+    {
+        // Parse the body of the request using the Protobuf JSON parser,
+        // *not* Json.NET.
+        WebhookRequest request;
+        using (var reader = new StreamReader(Request.Body))
+        {
+            request = jsonParser.Parse&lt;WebhookRequest&gt;(reader);
+        }
+
+        // Note: you should authenticate the request here.
+
+        // Populate the response
+        WebhookResponse response = new WebhookResponse
+        {
+            // ...
+        };
+
+        // Ask Protobuf to format the JSON to return.
+        // Again, we don&#39;t want to use Json.NET - it doesn&#39;t know how to handle Struct
+        // values etc.
+        string responseJson = response.ToString();
+        return Content(responseJson, &quot;application/json&quot;);
+    }
+}
+</code></pre><p>Please refer to the <a href="https://dialogflow.com/docs/fulfillment">fulfillment
+documentation</a> for more
+details around authentication, and the schema of requests and
+responses.</p>
 </article>
           </div>
           
