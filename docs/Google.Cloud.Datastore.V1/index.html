@@ -8,7 +8,7 @@
     <title>Google.Cloud.Datastore.V1 | Google.Cloud.Datastore.V1 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Datastore.V1 | Google.Cloud.Datastore.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.38.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -91,8 +91,54 @@ structured query results.</p>
 <p>Several custom conversions, additional constructors,
 factory methods (particularly on <a href="api/Google.Cloud.Datastore.V1.Filter.html">Filter</a>
 are provided to simplify working with the protobuf messages.</p>
+<h1 id="using-the-datastore-emulator">Using the Datastore Emulator</h1>
+<p>This package does not automatically connect to an emulator via
+environment variables. However, it is reasonably simple do so. If
+you wish to automatically connect to an emulator, simply include the
+following method in your code, and call that instead of
+<code>DatastoreDb.Create</code>.</p>
+<pre><code class="lang-cs">private const string EmulatorHostVariable = &quot;DATASTORE_EMULATOR_HOST&quot;;
+private const string ProjectIdVariable = &quot;DATASTORE_PROJECT_ID&quot;;
+
+/// &lt;summary&gt;
+/// Creates a &lt;see cref=&quot;DatastoreDb&quot;/&gt;, using environment variables to support
+/// the Datastore Emulator if they have been set.
+/// &lt;/summary&gt;
+/// &lt;remarks&gt;
+/// &lt;para&gt;
+/// If the DATASTORE_EMULATOR_HOST environment variable is set and not empty,
+/// this method will use the value to connect to the emulator. Otherwise, the default
+/// endpoint (and credentials) will be used.
+/// &lt;/para&gt;
+/// &lt;para&gt;
+/// If the DATASTORE_PROJECT_ID environment variable is set and not empty, this
+/// overrides the value of &lt;paramref name=&quot;projectId&quot;/&gt;.
+/// &lt;/para&gt;
+/// &lt;/remarks&gt;
+/// &lt;param name=&quot;projectId&quot;&gt;The project ID to use, unless overridden by DATASTORE_PROJECT_ID&lt;/param&gt;
+/// &lt;param name=&quot;namespaceId&quot;&gt;The namespace ID to use in operations requiring a partition.&lt;/param&gt;
+/// &lt;returns&gt;A &lt;see cref=&quot;DatastoreDb&quot;/&gt; connected to either an emulator or production servers.&lt;/returns&gt;
+public static DatastoreDb CreateDatastoreDb(string projectId, string namespaceId = &quot;&quot;)
+{
+    string emulatorHost = Environment.GetEnvironmentVariable(EmulatorHostVariable);
+    string projectIdOverride = Environment.GetEnvironmentVariable(ProjectIdVariable);
+    if (!string.IsNullOrEmpty(projectIdOverride))
+    {
+        projectId = projectIdOverride;
+    }
+    DatastoreClient client = string.IsNullOrEmpty(emulatorHost)
+        ? DatastoreClient.Create()
+        : DatastoreClient.Create(new Channel(emulatorHost, ChannelCredentials.Insecure));
+    return DatastoreDb.Create(projectId, namespaceId, client);
+}
+</code></pre><p>Note that if you use this technique for automated testing with large
+amounts of data, you may wish to write an alternative method that
+<em>only</em> connects to the emulator and fails if the emulator has not
+been configured. That avoids accidentally connecting to the
+production Datastore service and potentially incurring large bills
+due to forgetting to set an environment variable.</p>
 <h1 id="sample-code">Sample code</h1>
-<p>Inserting data:</p>
+<h2 id="inserting-data">Inserting data</h2>
 <pre><code class="lang-cs">DatastoreDb db = DatastoreDb.Create(projectId, namespaceId);
 
 KeyFactory keyFactory = db.CreateKeyFactory(&quot;message&quot;);
@@ -112,7 +158,7 @@ using (DatastoreTransaction transaction = db.BeginTransaction())
     // The key is also propagated to the entity
     Console.WriteLine($&quot;Entity key: {entity.Key}&quot;);
 }
-</code></pre><p>Querying data:</p>
+</code></pre><h2 id="querying-data">Querying data</h2>
 <pre><code class="lang-cs">DatastoreDb db = DatastoreDb.Create(projectId, namespaceId);
 
 // Print the messages created in the last 5 minutes, most recent first
