@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Bucket
    | Google.Cloud.Storage.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.38.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -192,6 +192,39 @@ public virtual IList&lt;Bucket.CorsData&gt; Cors { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Apis_Storage_v1_Data_Bucket_DefaultEventBasedHold_" data-uid="Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold*"></a>
+  <h4 id="Google_Apis_Storage_v1_Data_Bucket_DefaultEventBasedHold" data-uid="Google.Apis.Storage.v1.Data.Bucket.DefaultEventBasedHold">DefaultEventBasedHold</h4>
+  <div class="markdown level1 summary"><p>The default value for event-based hold on newly created objects in this bucket. Event-based hold is
+a way to retain objects indefinitely until an event occurs, signified by the hold&apos;s release. After being
+released, such objects will be subject to bucket-level retention (if any). One sample use case of this flag
+is for banks to hold loan documents for at least 3 years after loan is paid in full. Here, bucket-level
+retention is 3 years and the event is loan being paid in full. In this example, these objects will be held
+intact for any number of years until the event has occurred (event-based hold on the object is released) and
+then 3 more years after that. That means retention duration of the objects begins from the moment event-
+based hold transitioned from true to false. Objects under event-based hold cannot be deleted, overwritten or
+archived until the hold is removed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;defaultEventBasedHold&quot;)]
+public virtual bool? DefaultEventBasedHold { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Apis_Storage_v1_Data_Bucket_DefaultObjectAcl_" data-uid="Google.Apis.Storage.v1.Data.Bucket.DefaultObjectAcl*"></a>
   <h4 id="Google_Apis_Storage_v1_Data_Bucket_DefaultObjectAcl" data-uid="Google.Apis.Storage.v1.Data.Bucket.DefaultObjectAcl">DefaultObjectAcl</h4>
   <div class="markdown level1 summary"><p>Default access controls to apply to new objects when no ACL is provided.</p>
@@ -219,8 +252,7 @@ public virtual IList&lt;ObjectAccessControl&gt; DefaultObjectAcl { get; set; }</
   </table>
   <a id="Google_Apis_Storage_v1_Data_Bucket_Encryption_" data-uid="Google.Apis.Storage.v1.Data.Bucket.Encryption*"></a>
   <h4 id="Google_Apis_Storage_v1_Data_Bucket_Encryption" data-uid="Google.Apis.Storage.v1.Data.Bucket.Encryption">Encryption</h4>
-  <div class="markdown level1 summary"><p>Encryption configuration used by default for newly inserted objects, when no encryption config is
-specified.</p>
+  <div class="markdown level1 summary"><p>Encryption configuration for a bucket.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -272,7 +304,7 @@ public virtual string ETag { get; set; }</code></pre>
       <div><span class="xref">Google.Apis.Requests.IDirectResponseSchema.ETag</span></div>
   <a id="Google_Apis_Storage_v1_Data_Bucket_Id_" data-uid="Google.Apis.Storage.v1.Data.Bucket.Id*"></a>
   <h4 id="Google_Apis_Storage_v1_Data_Bucket_Id" data-uid="Google.Apis.Storage.v1.Data.Bucket.Id">Id</h4>
-  <div class="markdown level1 summary"><p>The ID of the bucket. For buckets, the id and name properities are the same.</p>
+  <div class="markdown level1 summary"><p>The ID of the bucket. For buckets, the id and name properties are the same.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -430,7 +462,7 @@ public virtual Bucket.LoggingData Logging { get; set; }</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[JsonProperty(&quot;metageneration&quot;)]
-public virtual long ? Metageneration { get; set; }</code></pre>
+public virtual long? Metageneration { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -505,7 +537,7 @@ public virtual Bucket.OwnerData Owner { get; set; }</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[JsonProperty(&quot;projectNumber&quot;)]
-public virtual ulong ? ProjectNumber { get; set; }</code></pre>
+public virtual ulong? ProjectNumber { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -518,6 +550,36 @@ public virtual ulong ? ProjectNumber { get; set; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.UInt64</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Apis_Storage_v1_Data_Bucket_RetentionPolicy_" data-uid="Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy*"></a>
+  <h4 id="Google_Apis_Storage_v1_Data_Bucket_RetentionPolicy" data-uid="Google.Apis.Storage.v1.Data.Bucket.RetentionPolicy">RetentionPolicy</h4>
+  <div class="markdown level1 summary"><p>The bucket&apos;s retention policy. The retention policy enforces a minimum retention time for all
+objects contained in the bucket, based on their creation time. Any attempt to overwrite or delete objects
+younger than the retention period will result in a PERMISSION_DENIED error. An unlocked retention policy can
+be modified or removed from the bucket via a storage.buckets.update operation. A locked retention policy
+cannot be removed or shortened in duration for the lifetime of the bucket. Attempting to remove or decrease
+period of a locked retention policy will result in a PERMISSION_DENIED error.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;retentionPolicy&quot;)]
+public virtual Bucket.RetentionPolicyData RetentionPolicy { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Apis.Storage.v1.Data.Bucket.RetentionPolicyData.html">Bucket.RetentionPolicyData</a></td>
         <td></td>
       </tr>
     </tbody>
