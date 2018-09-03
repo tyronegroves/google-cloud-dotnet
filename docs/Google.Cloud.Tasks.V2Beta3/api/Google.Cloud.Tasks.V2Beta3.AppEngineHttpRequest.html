@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AppEngineHttpRequest
+   | Google.Cloud.Tasks.V2Beta3 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AppEngineHttpRequest
+   | Google.Cloud.Tasks.V2Beta3 ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest">
+  
+  
+  <h1 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest" class="text-break">Class AppEngineHttpRequest
+  </h1>
+  <div class="markdown level0 summary"><p>App Engine HTTP request.</p>
+<p>The message defines the HTTP request that is sent to an App Engine app when
+the task is dispatched.</p>
+<p>This proto can only be used for tasks in a queue which has
+[app_engine_http_queue][google.cloud.tasks.v2beta3.Queue.app_engine_http_queue] set.</p>
+<p>Using [AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest] requires
+<a href="https://cloud.google.com/appengine/docs/admin-api/access-control"><code>appengine.applications.get</code></a>
+Google IAM permission for the project
+and the following scope:</p>
+<p><code>https://www.googleapis.com/auth/cloud-platform</code></p>
+<p>The task will be delivered to the App Engine app which belongs to the same
+project as the queue. For more information, see
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are Routed</a>
+and how routing is affected by
+<a href="https://cloud.google.com/appengine/docs/python/config/dispatchref">dispatch files</a>.</p>
+<p>The [AppEngineRouting][google.cloud.tasks.v2beta3.AppEngineRouting] used to construct the URL that the task is
+delivered to can be set at the queue-level or task-level:</p>
+<ul>
+<li>If set,
+[app_engine_routing_override][google.cloud.tasks.v2beta3.AppEngineHttpQueue.app_engine_routing_override]
+is used for all tasks in the queue, no matter what the setting
+is for the
+[task-level app_engine_routing][google.cloud.tasks.v2beta3.AppEngineHttpRequest.app_engine_routing].</li>
+</ul>
+<p>The <code>url</code> that the task will be sent to is:</p>
+<ul>
+<li><code>url =</code> [host][google.cloud.tasks.v2beta3.AppEngineRouting.host] <code>+</code>
+[relative_uri][google.cloud.tasks.v2beta3.AppEngineHttpRequest.relative_uri]</li>
+</ul>
+<p>The task attempt has succeeded if the app&apos;s request handler returns
+an HTTP response code in the range [<code>200</code> - <code>299</code>]. <code>503</code> is
+considered an App Engine system error instead of an application
+error. Requests returning error <code>503</code> will be retried regardless of
+retry configuration and not counted against retry counts.
+Any other response code or a failure to receive a response before the
+deadline is a failed attempt.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">AppEngineHttpRequest</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.html">AppEngineHttpRequest</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.html">AppEngineHttpRequest</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.html">AppEngineHttpRequest</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Tasks.V2Beta3.html">Google.Cloud.Tasks.V2Beta3</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.Tasks.V2Beta3.dll</h6>
+  <h5 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class AppEngineHttpRequest : IMessage&lt;AppEngineHttpRequest&gt;, IMessage, IEquatable&lt;AppEngineHttpRequest&gt;, IDeepCloneable&lt;AppEngineHttpRequest&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest__ctor_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.#ctor*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest__ctor" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.#ctor">AppEngineHttpRequest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AppEngineHttpRequest()</code></pre>
+  </div>
+  <a id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest__ctor_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.#ctor*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest__ctor_Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.#ctor(Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest)">AppEngineHttpRequest(AppEngineHttpRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AppEngineHttpRequest(AppEngineHttpRequest other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.html">AppEngineHttpRequest</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <a id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_AppEngineRouting_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.AppEngineRouting*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_AppEngineRouting" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.AppEngineRouting">AppEngineRouting</h4>
+  <div class="markdown level1 summary"><p>Task-level setting for App Engine routing.</p>
+<p>If set,
+[app_engine_routing_override][google.cloud.tasks.v2beta3.AppEngineHttpQueue.app_engine_routing_override]
+is used for all tasks in the queue, no matter what the setting is for the
+[task-level app_engine_routing][google.cloud.tasks.v2beta3.AppEngineHttpRequest.app_engine_routing].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AppEngineRouting AppEngineRouting { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineRouting.html">AppEngineRouting</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_Body_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.Body*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_Body" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.Body">Body</h4>
+  <div class="markdown level1 summary"><p>HTTP request body.</p>
+<p>A request body is allowed only if the HTTP method is POST or PUT. It is
+an error to set a body on a task with an incompatible [HttpMethod][google.cloud.tasks.v2beta3.HttpMethod].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteString Body { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.ByteString.html">ByteString</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_Headers_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.Headers*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_Headers" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.Headers">Headers</h4>
+  <div class="markdown level1 summary"><p>HTTP request headers.</p>
+<p>This map contains the header field names and values.
+Headers can be set when the
+[task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].
+Repeated headers are not supported but a header value can contain commas.</p>
+<p>Cloud Tasks sets some headers to default values:</p>
+<ul>
+<li><code>User-Agent</code>: By default, this header is
+<code>&amp;quot;AppEngine-Google; (+http://code.google.com/appengine)&amp;quot;</code>.
+This header can be modified, but Cloud Tasks will append
+<code>&amp;quot;AppEngine-Google; (+http://code.google.com/appengine)&amp;quot;</code> to the
+modified <code>User-Agent</code>.</li>
+</ul>
+<p>If the task has a [body][google.cloud.tasks.v2beta3.AppEngineHttpRequest.body], Cloud
+Tasks sets the following headers:</p>
+<ul>
+<li><code>Content-Type</code>: By default, the <code>Content-Type</code> header is set to
+<code>&amp;quot;application/octet-stream&amp;quot;</code>. The default can be overridden by explicitly
+setting <code>Content-Type</code> to a particular media type when the
+[task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].
+For example, <code>Content-Type</code> can be set to <code>&amp;quot;application/json&amp;quot;</code>.</li>
+<li><code>Content-Length</code>: This is computed by Cloud Tasks. This value is
+output only.   It cannot be changed.</li>
+</ul>
+<p>The headers below cannot be set or overridden:</p>
+<ul>
+<li><code>Host</code></li>
+<li><code>X-Google-*</code></li>
+<li><code>X-AppEngine-*</code></li>
+</ul>
+<p>In addition, Cloud Tasks sets some headers when the task is dispatched,
+such as headers containing information about the task; see
+<a href="https://cloud.google.com/appengine/docs/python/taskqueue/push/creating-handlers#reading_request_headers">request headers</a>.
+These headers are set only when the task is dispatched, so they are not
+visible when the task is returned in a Cloud Tasks response.</p>
+<p>Although there is no specific limit for the maximum number of headers or
+the size, there is a limit on the maximum size of the [Task][google.cloud.tasks.v2beta3.Task]. For more
+information, see the [CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask] documentation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapField&lt;string, string&gt; Headers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.MapField-2.html">MapField</a>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_HttpMethod_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.HttpMethod*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_HttpMethod" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.HttpMethod">HttpMethod</h4>
+  <div class="markdown level1 summary"><p>The HTTP method to use for the request. The default is POST.</p>
+<p>The app&apos;s request handler for the task&apos;s target URL must be able to handle
+HTTP requests with this http_method, otherwise the task attempt will fail
+with error code 405 (Method Not Allowed). See
+<a href="https://cloud.google.com/appengine/docs/java/taskqueue/push/creating-handlers#writing_a_push_task_request_handler">Writing a push task request handler</a>
+and the documentation for the request handlers in the language your app is
+written in e.g.
+<a href="https://cloud.google.com/appengine/docs/python/tools/webapp/requesthandlerclass">Python Request Handler</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMethod HttpMethod { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.HttpMethod.html">HttpMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_RelativeUri_" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.RelativeUri*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_AppEngineHttpRequest_RelativeUri" data-uid="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.RelativeUri">RelativeUri</h4>
+  <div class="markdown level1 summary"><p>The relative URI.</p>
+<p>The relative URI must begin with &quot;/&quot; and must be a valid HTTP relative URI.
+It can contain a path and query string arguments.
+If the relative URI is empty, then the root path &quot;/&quot; will be used.
+No spaces are allowed, and the maximum length allowed is 2083 characters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string RelativeUri { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

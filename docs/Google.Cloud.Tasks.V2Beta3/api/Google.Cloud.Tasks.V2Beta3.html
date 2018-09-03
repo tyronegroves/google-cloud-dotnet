@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace Google.Cloud.Tasks.V2Beta3
+   | Google.Cloud.Tasks.V2Beta3 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace Google.Cloud.Tasks.V2Beta3
+   | Google.Cloud.Tasks.V2Beta3 ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.Tasks.V2Beta3">
+  
+  <h1 id="Google_Cloud_Tasks_V2Beta3" data-uid="Google.Cloud.Tasks.V2Beta3" class="text-break">Namespace Google.Cloud.Tasks.V2Beta3
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineHttpQueue.html">AppEngineHttpQueue</a></h4>
+      <section><p>App Engine HTTP queue.</p>
+<p>The task will be delivered to the App Engine application hostname
+specified by its [AppEngineHttpQueue][google.cloud.tasks.v2beta3.AppEngineHttpQueue] and [AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest].
+The documentation for [AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest] explains how the
+task&apos;s host URL is constructed.</p>
+<p>Using [AppEngineHttpQueue][google.cloud.tasks.v2beta3.AppEngineHttpQueue] requires
+<a href="https://cloud.google.com/appengine/docs/admin-api/access-control"><code>appengine.applications.get</code></a>
+Google IAM permission for the project
+and the following scope:</p>
+<p><code>https://www.googleapis.com/auth/cloud-platform</code></p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineHttpRequest.html">AppEngineHttpRequest</a></h4>
+      <section><p>App Engine HTTP request.</p>
+<p>The message defines the HTTP request that is sent to an App Engine app when
+the task is dispatched.</p>
+<p>This proto can only be used for tasks in a queue which has
+[app_engine_http_queue][google.cloud.tasks.v2beta3.Queue.app_engine_http_queue] set.</p>
+<p>Using [AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest] requires
+<a href="https://cloud.google.com/appengine/docs/admin-api/access-control"><code>appengine.applications.get</code></a>
+Google IAM permission for the project
+and the following scope:</p>
+<p><code>https://www.googleapis.com/auth/cloud-platform</code></p>
+<p>The task will be delivered to the App Engine app which belongs to the same
+project as the queue. For more information, see
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">How Requests are Routed</a>
+and how routing is affected by
+<a href="https://cloud.google.com/appengine/docs/python/config/dispatchref">dispatch files</a>.</p>
+<p>The [AppEngineRouting][google.cloud.tasks.v2beta3.AppEngineRouting] used to construct the URL that the task is
+delivered to can be set at the queue-level or task-level:</p>
+<ul>
+<li>If set,
+[app_engine_routing_override][google.cloud.tasks.v2beta3.AppEngineHttpQueue.app_engine_routing_override]
+is used for all tasks in the queue, no matter what the setting
+is for the
+[task-level app_engine_routing][google.cloud.tasks.v2beta3.AppEngineHttpRequest.app_engine_routing].</li>
+</ul>
+<p>The <code>url</code> that the task will be sent to is:</p>
+<ul>
+<li><code>url =</code> [host][google.cloud.tasks.v2beta3.AppEngineRouting.host] <code>+</code>
+[relative_uri][google.cloud.tasks.v2beta3.AppEngineHttpRequest.relative_uri]</li>
+</ul>
+<p>The task attempt has succeeded if the app&apos;s request handler returns
+an HTTP response code in the range [<code>200</code> - <code>299</code>]. <code>503</code> is
+considered an App Engine system error instead of an application
+error. Requests returning error <code>503</code> will be retried regardless of
+retry configuration and not counted against retry counts.
+Any other response code or a failure to receive a response before the
+deadline is a failed attempt.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.AppEngineRouting.html">AppEngineRouting</a></h4>
+      <section><p>App Engine Routing.</p>
+<p>Specifies the target URI. Since this target type dispatches tasks to secure
+app handlers, unsecure app handlers, and URIs restricted with
+<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login: admin</code></a>
+the protocol (for example, HTTP or HTTPS) cannot be explictly specified.
+Task dispatches do not follow redirects and cannot target URI paths
+restricted with
+<a href="https://cloud.google.com/appengine/docs/standard/python/config/appref"><code>login: required</code></a>
+because tasks are not run as any user.</p>
+<p>For more information about services, versions, and instances see
+<a href="https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine">An Overview of App Engine</a>,
+<a href="https://cloud.google.com/appengine/docs/python/microservices-on-app-engine">Microservices Architecture on Google App Engine</a>,
+<a href="https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed">App Engine Standard request routing</a>,
+and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request routing</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Attempt.html">Attempt</a></h4>
+      <section><p>The status of a task attempt.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasks.html">CloudTasks</a></h4>
+      <section><p>Cloud Tasks allows developers to manage the execution of background
+work in their applications.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasks.CloudTasksBase.html">CloudTasks.CloudTasksBase</a></h4>
+      <section><p>Base class for server-side implementations of CloudTasks</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasks.CloudTasksClient.html">CloudTasks.CloudTasksClient</a></h4>
+      <section><p>Client for CloudTasks</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasksClient.html">CloudTasksClient</a></h4>
+      <section><p>CloudTasks client wrapper, for convenient use.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasksClientImpl.html">CloudTasksClientImpl</a></h4>
+      <section><p>CloudTasks client wrapper implementation, for convenient use.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasksSettings.html">CloudTasksSettings</a></h4>
+      <section><p>Settings for a <a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasksClient.html">CloudTasksClient</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CreateQueueRequest.html">CreateQueueRequest</a></h4>
+      <section><p>Request message for [CreateQueue][google.cloud.tasks.v2beta3.CloudTasks.CreateQueue].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CreateTaskRequest.html">CreateTaskRequest</a></h4>
+      <section><p>Request message for [CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.DeleteQueueRequest.html">DeleteQueueRequest</a></h4>
+      <section><p>Request message for [DeleteQueue][google.cloud.tasks.v2beta3.CloudTasks.DeleteQueue].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.DeleteTaskRequest.html">DeleteTaskRequest</a></h4>
+      <section><p>Request message for deleting a task using
+[DeleteTask][google.cloud.tasks.v2beta3.CloudTasks.DeleteTask].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.GetQueueRequest.html">GetQueueRequest</a></h4>
+      <section><p>Request message for [GetQueue][google.cloud.tasks.v2beta3.CloudTasks.GetQueue].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.GetTaskRequest.html">GetTaskRequest</a></h4>
+      <section><p>Request message for getting a task using [GetTask][google.cloud.tasks.v2beta3.CloudTasks.GetTask].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.ListQueuesRequest.html">ListQueuesRequest</a></h4>
+      <section><p>Request message for [ListQueues][google.cloud.tasks.v2beta3.CloudTasks.ListQueues].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.ListQueuesResponse.html">ListQueuesResponse</a></h4>
+      <section><p>Response message for [ListQueues][google.cloud.tasks.v2beta3.CloudTasks.ListQueues].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.ListTasksRequest.html">ListTasksRequest</a></h4>
+      <section><p>Request message for listing tasks using [ListTasks][google.cloud.tasks.v2beta3.CloudTasks.ListTasks].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.ListTasksResponse.html">ListTasksResponse</a></h4>
+      <section><p>Response message for listing tasks using [ListTasks][google.cloud.tasks.v2beta3.CloudTasks.ListTasks].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.LocationName.html">LocationName</a></h4>
+      <section><p>Resource name for the &apos;location&apos; resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.PauseQueueRequest.html">PauseQueueRequest</a></h4>
+      <section><p>Request message for [PauseQueue][google.cloud.tasks.v2beta3.CloudTasks.PauseQueue].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.PurgeQueueRequest.html">PurgeQueueRequest</a></h4>
+      <section><p>Request message for [PurgeQueue][google.cloud.tasks.v2beta3.CloudTasks.PurgeQueue].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Queue.html">Queue</a></h4>
+      <section><p>A queue is a container of related tasks. Queues are configured to manage
+how those tasks are dispatched. Configurable properties include rate limits,
+retry options, queue types, and others.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Queue.Types.html">Queue.Types</a></h4>
+      <section><p>Container for nested types declared in the Queue message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.QueueName.html">QueueName</a></h4>
+      <section><p>Resource name for the &apos;queue&apos; resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.RateLimits.html">RateLimits</a></h4>
+      <section><p>Rate limits.</p>
+<p>This message determines the maximum rate that tasks can be dispatched by a
+queue, regardless of whether the dispatch is a first task attempt or a retry.</p>
+<p>Note: The debugging command, [RunTask][google.cloud.tasks.v2beta3.CloudTasks.RunTask], will run a task
+even if the queue has reached its [RateLimits][google.cloud.tasks.v2beta3.RateLimits].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.ResumeQueueRequest.html">ResumeQueueRequest</a></h4>
+      <section><p>Request message for [ResumeQueue][google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.RetryConfig.html">RetryConfig</a></h4>
+      <section><p>Retry config.</p>
+<p>These settings determine when a failed task attempt is retried.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.RunTaskRequest.html">RunTaskRequest</a></h4>
+      <section><p>Request message for forcing a task to run now using
+[RunTask][google.cloud.tasks.v2beta3.CloudTasks.RunTask].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Task.html">Task</a></h4>
+      <section><p>A unit of scheduled work.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Task.Types.html">Task.Types</a></h4>
+      <section><p>Container for nested types declared in the Task message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.TaskName.html">TaskName</a></h4>
+      <section><p>Resource name for the &apos;task&apos; resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.UpdateQueueRequest.html">UpdateQueueRequest</a></h4>
+      <section><p>Request message for [UpdateQueue][google.cloud.tasks.v2beta3.CloudTasks.UpdateQueue].</p>
+</section>
+    <h3 id="enums">Enums
+  </h3>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.HttpMethod.html">HttpMethod</a></h4>
+      <section><p>The HTTP method used to execute the task.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Queue.QueueTypeOneofCase.html">Queue.QueueTypeOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;queue_type&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Queue.Types.State.html">Queue.Types.State</a></h4>
+      <section><p>State of the queue.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Task.PayloadTypeOneofCase.html">Task.PayloadTypeOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;payload_type&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Task.Types.View.html">Task.Types.View</a></h4>
+      <section><p>The view specifies a subset of [Task][google.cloud.tasks.v2beta3.Task] data.</p>
+<p>When a task is returned in a response, not all
+information is retrieved by default because some data, such as
+payloads, might be desirable to return only when needed because
+of its large size or because of the sensitivity of data that it
+contains.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
