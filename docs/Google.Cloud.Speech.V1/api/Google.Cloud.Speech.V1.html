@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Google.Cloud.Speech.V1
    | Google.Cloud.Speech.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -297,7 +297,7 @@ service.</p>
       <section><p>Contains audio data in the encoding specified in the <code>RecognitionConfig</code>.
 Either <code>content</code> or <code>uri</code> must be supplied. Supplying both or neither
 returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. See
-<a href="https://cloud.google.com/speech/limits#content">audio limits</a>.</p>
+<a href="/speech-to-text/quotas#content">content limits</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Speech.V1.RecognitionConfig.html">RecognitionConfig</a></h4>
       <section><p>Provides information to the recognizer that specifies how to process the
@@ -417,9 +417,7 @@ one or more (repeated) <code>results</code>.</p>
       <section><p>Container for nested types declared in the StreamingRecognizeResponse message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Speech.V1.WordInfo.html">WordInfo</a></h4>
-      <section><p>Word-specific information for recognized words. Word information is only
-included in the response when certain request parameters are set, such
-as <code>enable_word_time_offsets</code>.</p>
+      <section><p>Word-specific information for recognized words.</p>
 </section>
     <h3 id="enums">Enums
   </h3>
@@ -427,15 +425,23 @@ as <code>enable_word_time_offsets</code>.</p>
       <section><p>Enum of possible cases for the &quot;audio_source&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Speech.V1.RecognitionConfig.Types.AudioEncoding.html">RecognitionConfig.Types.AudioEncoding</a></h4>
-      <section><p>Audio encoding of the data sent in the audio message. All encodings support
-only 1 channel (mono) audio. Only <code>FLAC</code> and <code>WAV</code> include a header that
-describes the bytes of audio that follow the header. The other encodings
-are raw audio bytes with no header.</p>
+      <section><p>The encoding of the audio data sent in the request.</p>
+<p>All encodings support only 1 channel (mono) audio.</p>
 <p>For best results, the audio source should be captured and transmitted using
-a lossless encoding (<code>FLAC</code> or <code>LINEAR16</code>). Recognition accuracy may be
-reduced if lossy codecs, which include the other codecs listed in
-this section, are used to capture or transmit the audio, particularly if
-background noise is present.</p>
+a lossless encoding (<code>FLAC</code> or <code>LINEAR16</code>). The accuracy of the speech
+recognition can be reduced if lossy codecs are used to capture or transmit
+audio, particularly if background noise is present. Lossy codecs include
+<code>MULAW</code>, <code>AMR</code>, <code>AMR_WB</code>, <code>OGG_OPUS</code>, and <code>SPEEX_WITH_HEADER_BYTE</code>.</p>
+<p>The <code>FLAC</code> and <code>WAV</code> audio file formats include a header that describes the
+included audio content. You can request recognition for <code>WAV</code> files that
+contain either <code>LINEAR16</code> or <code>MULAW</code> encoded audio.
+If you send <code>FLAC</code> or <code>WAV</code> audio file format in
+your request, you do not need to specify an <code>AudioEncoding</code>; the audio
+encoding format is determined from the file header. If you specify
+an <code>AudioEncoding</code> when you send  send <code>FLAC</code> or <code>WAV</code> audio, the
+encoding configuration must match the encoding described in the audio
+header; otherwise the request returns an
+[google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error code.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Speech.V1.StreamingRecognizeRequest.StreamingRequestOneofCase.html">StreamingRecognizeRequest.StreamingRequestOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;streaming_request&quot; oneof.</p>
