@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class CryptoKey
    | Google.Cloud.Kms.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -258,6 +258,9 @@ represent the actual key material used in cryptographic operations.</p>
 [CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion] and
 [UpdateCryptoKeyPrimaryVersion][google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersion]
 do not affect [next_rotation_time][google.cloud.kms.v1.CryptoKey.next_rotation_time].</p>
+<p>Keys with [purpose][google.cloud.kms.v1.CryptoKey.purpose]
+[ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT] support
+automatic rotation. For other keys, this field must be omitted.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -286,6 +289,9 @@ by [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt] when this [Crypto
 in [EncryptRequest.name][google.cloud.kms.v1.EncryptRequest.name].</p>
 <p>The [CryptoKey][google.cloud.kms.v1.CryptoKey]&apos;s primary version can be updated via
 [UpdateCryptoKeyPrimaryVersion][google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersion].</p>
+<p>All keys with [purpose][google.cloud.kms.v1.CryptoKey.purpose]
+[ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT] have a
+primary. For other keys, this field will be omitted.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -309,8 +315,7 @@ in [EncryptRequest.name][google.cloud.kms.v1.EncryptRequest.name].</p>
   </table>
   <a id="Google_Cloud_Kms_V1_CryptoKey_Purpose_" data-uid="Google.Cloud.Kms.V1.CryptoKey.Purpose*"></a>
   <h4 id="Google_Cloud_Kms_V1_CryptoKey_Purpose" data-uid="Google.Cloud.Kms.V1.CryptoKey.Purpose">Purpose</h4>
-  <div class="markdown level1 summary"><p>The immutable purpose of this [CryptoKey][google.cloud.kms.v1.CryptoKey]. Currently, the only acceptable
-purpose is [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].</p>
+  <div class="markdown level1 summary"><p>The immutable purpose of this [CryptoKey][google.cloud.kms.v1.CryptoKey].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -337,6 +342,9 @@ purpose is [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCR
   <div class="markdown level1 summary"><p>[next_rotation_time][google.cloud.kms.v1.CryptoKey.next_rotation_time] will be advanced by this period when the service
 automatically rotates a key. Must be at least one day.</p>
 <p>If [rotation_period][google.cloud.kms.v1.CryptoKey.rotation_period] is set, [next_rotation_time][google.cloud.kms.v1.CryptoKey.next_rotation_time] must also be set.</p>
+<p>Keys with [purpose][google.cloud.kms.v1.CryptoKey.purpose]
+[ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT] support
+automatic rotation. For other keys, this field must be omitted.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -377,6 +385,33 @@ automatically rotates a key. Must be at least one day.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.RotationScheduleOneofCase.html">CryptoKey.RotationScheduleOneofCase</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_CryptoKey_VersionTemplate_" data-uid="Google.Cloud.Kms.V1.CryptoKey.VersionTemplate*"></a>
+  <h4 id="Google_Cloud_Kms_V1_CryptoKey_VersionTemplate" data-uid="Google.Cloud.Kms.V1.CryptoKey.VersionTemplate">VersionTemplate</h4>
+  <div class="markdown level1 summary"><p>A template describing settings for new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] instances.
+The properties of new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] instances created by either
+[CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion] or
+auto-rotation are controlled by this template.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CryptoKeyVersionTemplate VersionTemplate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersionTemplate.html">CryptoKeyVersionTemplate</a></td>
         <td></td>
       </tr>
     </tbody>

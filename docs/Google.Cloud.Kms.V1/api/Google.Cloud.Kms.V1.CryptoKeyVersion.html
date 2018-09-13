@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class CryptoKeyVersion
    | Google.Cloud.Kms.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -75,13 +75,12 @@
   </h1>
   <div class="markdown level0 summary"><p>A [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] represents an individual cryptographic key, and the
 associated key material.</p>
-<p>It can be used for cryptographic operations either directly, or via its
-parent [CryptoKey][google.cloud.kms.v1.CryptoKey], in which case the server will choose the appropriate
-version for the operation.</p>
+<p>An [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED] version can be
+used for cryptographic operations.</p>
 <p>For security reasons, the raw cryptographic key material represented by a
 [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] can never be viewed or exported. It can only be used to
-encrypt or decrypt data when an authorized user or application invokes Cloud
-KMS.</p>
+encrypt, decrypt, or sign data when an authorized user or application invokes
+Cloud KMS.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -154,6 +153,58 @@ KMS.</p>
   </table>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Kms_V1_CryptoKeyVersion_Algorithm_" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.Algorithm*"></a>
+  <h4 id="Google_Cloud_Kms_V1_CryptoKeyVersion_Algorithm" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.Algorithm">Algorithm</h4>
+  <div class="markdown level1 summary"><p>Output only. The [CryptoKeyVersionAlgorithm][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm] that this
+[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] supports.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CryptoKeyVersion.Types.CryptoKeyVersionAlgorithm Algorithm { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.Types.CryptoKeyVersionAlgorithm.html">CryptoKeyVersion.Types.CryptoKeyVersionAlgorithm</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_CryptoKeyVersion_Attestation_" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.Attestation*"></a>
+  <h4 id="Google_Cloud_Kms_V1_CryptoKeyVersion_Attestation" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.Attestation">Attestation</h4>
+  <div class="markdown level1 summary"><p>Output only. Statement that was generated and signed by the HSM at key
+creation time. Use this statement to verify attributes of the key as stored
+on the HSM, independently of Google. Only provided for key versions with
+[protection_level][google.cloud.kms.v1.CryptoKeyVersion.protection_level] [HSM][google.cloud.kms.v1.ProtectionLevel.HSM].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KeyOperationAttestation Attestation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.KeyOperationAttestation.html">KeyOperationAttestation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Kms_V1_CryptoKeyVersion_CreateTime_" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.CreateTime*"></a>
   <h4 id="Google_Cloud_Kms_V1_CryptoKeyVersion_CreateTime" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.CreateTime">CreateTime</h4>
   <div class="markdown level1 summary"><p>Output only. The time at which this [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] was created.</p>
@@ -254,6 +305,31 @@ for destruction. Only present if [state][google.cloud.kms.v1.CryptoKeyVersion.st
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Kms_V1_CryptoKeyVersion_GenerateTime_" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.GenerateTime*"></a>
+  <h4 id="Google_Cloud_Kms_V1_CryptoKeyVersion_GenerateTime" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.GenerateTime">GenerateTime</h4>
+  <div class="markdown level1 summary"><p>Output only. The time this [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]&apos;s key material was
+generated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp GenerateTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Kms_V1_CryptoKeyVersion_Name_" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.Name*"></a>
   <h4 id="Google_Cloud_Kms_V1_CryptoKeyVersion_Name" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.Name">Name</h4>
   <div class="markdown level1 summary"><p>Output only. The resource name for this [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in the format
@@ -275,6 +351,31 @@ for destruction. Only present if [state][google.cloud.kms.v1.CryptoKeyVersion.st
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_CryptoKeyVersion_ProtectionLevel_" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.ProtectionLevel*"></a>
+  <h4 id="Google_Cloud_Kms_V1_CryptoKeyVersion_ProtectionLevel" data-uid="Google.Cloud.Kms.V1.CryptoKeyVersion.ProtectionLevel">ProtectionLevel</h4>
+  <div class="markdown level1 summary"><p>Output only. The [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] describing how crypto operations are
+performed with this [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProtectionLevel ProtectionLevel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ProtectionLevel.html">ProtectionLevel</a></td>
         <td></td>
       </tr>
     </tbody>
