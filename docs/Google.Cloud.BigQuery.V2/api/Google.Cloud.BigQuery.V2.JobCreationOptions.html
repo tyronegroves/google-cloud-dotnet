@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class JobCreationOptions
    | Google.Cloud.BigQuery.V2 ">
-    <meta name="generator" content="docfx 2.38.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -249,14 +249,13 @@ BigQueryJob anotherLabeledJob = client.CreateExtractJob(
 
 // Find jobs marked with a certain label.
 KeyValuePair&lt;string, string&gt; labelToBeFound = labels.First();
-List&lt;BigQueryJob&gt; jobs = client
-    .ListJobs(new ListJobsOptions
-    {
         // Specify full projection to make sure that
         // label information, if it exists, is returned for listed jobs.
-        Projection = ProjectionEnum.Full
-    })
+ListJobsOptions options = new ListJobsOptions { Projection = ProjectionEnum.Full };
+List &lt;BigQueryJob&gt; jobs = client
+    .ListJobs(options)
     .Where(job =&gt; job.Resource.Configuration.Labels?.Contains(labelToBeFound) ?? false)
+    .Take(2)
     .ToList();
 foreach (BigQueryJob job in jobs)
 {
