@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BigtableServiceApiSettings
    | Google.Cloud.Bigtable.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -128,6 +128,31 @@
   </div>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_AppProfileId_" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.AppProfileId*"></a>
+  <h4 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_AppProfileId" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.AppProfileId">AppProfileId</h4>
+  <div class="markdown level1 summary"><p>This value specifies routing for replication. If not specified, the
+&quot;default&quot; application profile will be used by the server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AppProfileId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_CheckAndMutateRowSettings_" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.CheckAndMutateRowSettings*"></a>
   <h4 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_CheckAndMutateRowSettings" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.CheckAndMutateRowSettings">CheckAndMutateRowSettings</h4>
   <div class="markdown level1 summary"><p><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a> for synchronous and asynchronous calls to
@@ -189,6 +214,77 @@ for &quot;Idempotent&quot; <a class="xref" href="Google.Cloud.Bigtable.V2.Bigtab
   <div class="markdown level1 remarks"><p>The eligible RPC <a class="xref" href="Grpc.Core.StatusCode.html">StatusCode</a>s for retry for &quot;Idempotent&quot; RPC methods are:
 <ul><li><a class="xref" href="Grpc.Core.StatusCode.html#Grpc_Core_StatusCode_DeadlineExceeded">DeadlineExceeded</a></li><li><a class="xref" href="Grpc.Core.StatusCode.html#Grpc_Core_StatusCode_Unavailable">Unavailable</a></li></ul></p>
 </div>
+  <a id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_MaxChannels_" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.MaxChannels*"></a>
+  <h4 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_MaxChannels" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.MaxChannels">MaxChannels</h4>
+  <div class="markdown level1 summary"><p>The maximum number of channels than will be open concurrently to the Bigtable endpoint.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint MaxChannels { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_MaxChannels_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Note that channels are managed and shared amongst <a class="xref" href="Google.Cloud.Bigtable.V2.BigtableClient.html">BigtableClient</a> instances using the same
+endpoint and channel options and which use the default credentials. So this property will have no bearing
+across clients using different options. To create a custom grouping of channels to be managed, create a
+<span class="xref">Grpc.Gcp.GcpCallInvoker</span> manually and use the
+<a class="xref" href="Google.Cloud.Bigtable.V2.BigtableClient.html#Google_Cloud_Bigtable_V2_BigtableClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_">Create(CallInvoker, BigtableServiceApiSettings)</a>
+overload taking a <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> to create clients from it.
+</p>
+</div>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_MaxChannels_snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// client1 and client3 will share the same GcpCallInvoker, since they both
+// use the same default settings. This means they will use the same shared
+// set of gRPC channels to the Bigtable service.
+// client2 and client4 will share a different GcpCallInvoker, since they both
+// use the same custom MaxChannels/PreferredMaxStreamsPerChannel settings.
+BigtableServiceApiSettings settings1 = BigtableServiceApiSettings.GetDefault();
+BigtableClient client1 = BigtableClient.Create(settings: settings1);
+
+BigtableServiceApiSettings settings2 = new BigtableServiceApiSettings
+{
+    MaxChannels = 10,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client2 = BigtableClient.Create(settings: settings2);
+
+BigtableServiceApiSettings settings3 = BigtableServiceApiSettings.GetDefault();
+BigtableClient client3 = BigtableClient.Create(settings: settings3);
+
+BigtableServiceApiSettings settings4 = new BigtableServiceApiSettings
+{
+    MaxChannels = 10,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client4 = BigtableClient.Create(settings: settings4);
+
+// client5 will not share a GcpCallInvoker with any of the other clients, since
+// its MaxChannels/PreferredMaxStreamsPerChannel settings differ from the others.
+BigtableServiceApiSettings settings5 = new BigtableServiceApiSettings
+{
+    MaxChannels = 15,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client5 = BigtableClient.Create(settings: settings5);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_MutateRowSettings_" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.MutateRowSettings*"></a>
   <h4 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_MutateRowSettings" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.MutateRowSettings">MutateRowSettings</h4>
   <div class="markdown level1 summary"><p><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a> for synchronous and asynchronous calls to
@@ -312,6 +408,78 @@ for &quot;NonIdempotent&quot; <a class="xref" href="Google.Cloud.Bigtable.V2.Big
   <h5 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_NonIdempotentRetryFilter_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>There are no RPC <a class="xref" href="Grpc.Core.StatusCode.html">StatusCode</a>s eligible for retry for &quot;NonIdempotent&quot; RPC methods.</p>
 </div>
+  <a id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_PreferredMaxStreamsPerChannel_" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.PreferredMaxStreamsPerChannel*"></a>
+  <h4 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_PreferredMaxStreamsPerChannel" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.PreferredMaxStreamsPerChannel">PreferredMaxStreamsPerChannel</h4>
+  <div class="markdown level1 summary"><p>The number of streams open concurrently in a channel which will trigger a new channel to be opened, as
+long as fewer than <a class="xref" href="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.html#Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_MaxChannels">MaxChannels</a> are currently open.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint PreferredMaxStreamsPerChannel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_PreferredMaxStreamsPerChannel_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Note that channels are managed and shared amongst <a class="xref" href="Google.Cloud.Bigtable.V2.BigtableClient.html">BigtableClient</a> instances using the same
+endpoint and channel options and which use the default credentials. So this property will have no bearing
+across clients using different options. To create a custom grouping of channels to be managed, create a
+<span class="xref">Grpc.Gcp.GcpCallInvoker</span> manually and use the
+<a class="xref" href="Google.Cloud.Bigtable.V2.BigtableClient.html#Google_Cloud_Bigtable_V2_BigtableClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_">Create(CallInvoker, BigtableServiceApiSettings)</a>
+overload taking a <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> to create clients from it.
+</p>
+</div>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_PreferredMaxStreamsPerChannel_snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// client1 and client3 will share the same GcpCallInvoker, since they both
+// use the same default settings. This means they will use the same shared
+// set of gRPC channels to the Bigtable service.
+// client2 and client4 will share a different GcpCallInvoker, since they both
+// use the same custom MaxChannels/PreferredMaxStreamsPerChannel settings.
+BigtableServiceApiSettings settings1 = BigtableServiceApiSettings.GetDefault();
+BigtableClient client1 = BigtableClient.Create(settings: settings1);
+
+BigtableServiceApiSettings settings2 = new BigtableServiceApiSettings
+{
+    MaxChannels = 10,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client2 = BigtableClient.Create(settings: settings2);
+
+BigtableServiceApiSettings settings3 = BigtableServiceApiSettings.GetDefault();
+BigtableClient client3 = BigtableClient.Create(settings: settings3);
+
+BigtableServiceApiSettings settings4 = new BigtableServiceApiSettings
+{
+    MaxChannels = 10,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client4 = BigtableClient.Create(settings: settings4);
+
+// client5 will not share a GcpCallInvoker with any of the other clients, since
+// its MaxChannels/PreferredMaxStreamsPerChannel settings differ from the others.
+BigtableServiceApiSettings settings5 = new BigtableServiceApiSettings
+{
+    MaxChannels = 15,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client5 = BigtableClient.Create(settings: settings5);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_ReadModifyWriteRowSettings_" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.ReadModifyWriteRowSettings*"></a>
   <h4 id="Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_ReadModifyWriteRowSettings" data-uid="Google.Cloud.Bigtable.V2.BigtableServiceApiSettings.ReadModifyWriteRowSettings">ReadModifyWriteRowSettings</h4>
   <div class="markdown level1 summary"><p><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a> for synchronous and asynchronous calls to
@@ -601,6 +769,10 @@ Retry will be attempted on the following response status codes on individual mut
   <div class="markdown level1 remarks"><p>The &quot;Streaming&quot; timeout backoff for <a class="xref" href="Google.Cloud.Bigtable.V2.BigtableServiceApiClient.html">BigtableServiceApiClient</a> RPC methods is defined as:
 <ul><li>Initial timeout: 20000 milliseconds</li><li>Timeout multiplier: 1.0</li><li>Maximum timeout: 20000 milliseconds</li></ul></p>
 </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Google.Cloud.Bigtable.V2.BigtableServiceApiSettingsExtensions.html#Google_Cloud_Bigtable_V2_BigtableServiceApiSettingsExtensions_CreateChannelOptions_Google_Cloud_Bigtable_V2_BigtableServiceApiSettings_">BigtableServiceApiSettingsExtensions.CreateChannelOptions(BigtableServiceApiSettings)</a>
+  </div>
 </article>
           </div>
           

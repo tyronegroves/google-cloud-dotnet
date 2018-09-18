@@ -8,7 +8,7 @@
     <title>Google.Cloud.Bigtable.V2 | Google.Cloud.Bigtable.V2 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Bigtable.V2 | Google.Cloud.Bigtable.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.Bigtable.V2</code> is a.NET client library for the <a href="https://cloud.google.com/bigtable/">Google Bigtable API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.0.0-beta02</code> of the library.
+This documentation is for version <code>1.0.0-beta03</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Bigtable.V2</code> package from NuGet. Add it to
@@ -73,7 +73,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>1.0.0-beta02</code>) of <code>Google.Cloud.Bigtable.V2</code>.</p>
+pre-release version (<code>1.0.0-beta03</code>) of <code>Google.Cloud.Bigtable.V2</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -84,12 +84,6 @@ Authentication</a> guide for more details.</p>
 <p>Common operations are exposed via the
 <a href="api/Google.Cloud.Bigtable.V2.BigtableClient.html">BigtableClient</a>
 class.</p>
-<h1 id="client-life-cycle-management">Client life-cycle management</h1>
-<p>For the alpha version, each client will create its own set of underlying
-channels by default, so we advise you to reuse a single client object if
-possible. In later versions, we plan to have clients share default
-credentials by default, so it will be possible to create new clients cheaply
-as needed.</p>
 <h1 id="sample-code">Sample code</h1>
 <pre><code class="lang-cs">BigtableClient client = BigtableClient.Create();
 TableName tableName = new TableName(projectId, instanceId, tableId);
@@ -129,6 +123,85 @@ foreach (Family family in row.Families)
             $&quot;\tColumn: {(string)columnQualifier}, Value: {(long)cellValue}&quot;);
     }
 }
+</code></pre><h1 id="client-life-cycle-management">Client life-cycle management</h1>
+<p>By default, clients share an internally managed Grpc.Gcp.GcpCallInvoker to
+establish gRPC channels with the Bigtable service using default credentials.
+This class allows for multiple channels to be used concurrently and
+load-balances requests and streams among them. BigtableClient instances are
+intended to be ephermal and will reuse an existing GcpCallInvoker instance
+behind the scenes where possible.</p>
+<p>Note that this reuse is dependent upon the settings which control the usage of
+the GcpCallInvoker instance being identical. Accidentally using different settings
+when creating different clients could result in unintended performance degredation
+as setting up a new GcpCallInvoker is expensive compared to creating a new
+BigtableClient.</p>
+<pre><code class="lang-cs">// client1 and client3 will share the same GcpCallInvoker, since they both
+// use the same default settings. This means they will use the same shared
+// set of gRPC channels to the Bigtable service.
+// client2 and client4 will share a different GcpCallInvoker, since they both
+// use the same custom MaxChannels/PreferredMaxStreamsPerChannel settings.
+BigtableServiceApiSettings settings1 = BigtableServiceApiSettings.GetDefault();
+BigtableClient client1 = BigtableClient.Create(settings: settings1);
+
+BigtableServiceApiSettings settings2 = new BigtableServiceApiSettings
+{
+    MaxChannels = 10,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client2 = BigtableClient.Create(settings: settings2);
+
+BigtableServiceApiSettings settings3 = BigtableServiceApiSettings.GetDefault();
+BigtableClient client3 = BigtableClient.Create(settings: settings3);
+
+BigtableServiceApiSettings settings4 = new BigtableServiceApiSettings
+{
+    MaxChannels = 10,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client4 = BigtableClient.Create(settings: settings4);
+
+// client5 will not share a GcpCallInvoker with any of the other clients, since
+// its MaxChannels/PreferredMaxStreamsPerChannel settings differ from the others.
+BigtableServiceApiSettings settings5 = new BigtableServiceApiSettings
+{
+    MaxChannels = 15,
+    PreferredMaxStreamsPerChannel = 4
+};
+BigtableClient client5 = BigtableClient.Create(settings: settings5);
+</code></pre><h1 id="non-default-credentials">Non-default credentials</h1>
+<p>If you would like to create clients which share a GcpCallInvoker but do not
+use the default credentials, this can easily be done by manually creating a
+GcpCallInvoker and using Bigtable&#39;s default endpoint and settings.</p>
+<pre><code class="lang-cs">// Create a client from a custom credentials and a GcpCallInvoker that has
+// non-default gRPC stream/channel options.
+// Note: the GcpCallInvoker should be long-lived while the BigtableClient
+// instances can be ephemeral and each use the same call invoker.
+BigtableServiceApiSettings settings = new BigtableServiceApiSettings
+{
+    MaxChannels = 10,
+    PreferredMaxStreamsPerChannel = 4
+};
+string endpoint = BigtableServiceApiClient.DefaultEndpoint.ToString();
+GcpCallInvoker callInvoker = new GcpCallInvoker(endpoint, credentials, settings.CreateChannelOptions());
+
+// These will share the same set of channels to the Bigtable service.
+BigtableClient client1 = BigtableClient.Create(callInvoker, settings);
+// ...
+BigtableClient client2 = BigtableClient.Create(callInvoker, settings);
+// ...
+
+await callInvoker.ShutdownAsync();
+
+// Alternatively, to just create a GcpCallInvoker will standard settings, but using non-default
+// credentials, use null or BigtableServiceApiSettings.GetDefault() for the settings.
+// Note that CreateChannelOptions() is an extension method which allows the receiver to be null,
+// and will just act as if the default settings were specified.
+settings = null;
+callInvoker = new GcpCallInvoker(endpoint, credentials, settings.CreateChannelOptions());
+BigtableClient client3 = BigtableClient.Create(callInvoker, settings);
+// ...
+
+await callInvoker.ShutdownAsync();
 </code></pre></article>
           </div>
           
