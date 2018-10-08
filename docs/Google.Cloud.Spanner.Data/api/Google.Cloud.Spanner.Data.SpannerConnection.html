@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SpannerConnection
    | Google.Cloud.Spanner.Data ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -596,11 +596,88 @@ and maintained.</p>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbConnection.BeginDbTransaction(System.Data.IsolationLevel)</span></div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction">BeginReadOnlyTransaction()</h4>
+  <div class="markdown level1 summary"><p>Begins a readonly transaction.
+Read transactions are preferred if possible because they do not impose locks internally.
+ReadOnly transactions run with strong consistency and return the latest copy of data.
+This method is thread safe.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpannerTransaction BeginReadOnlyTransaction()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></td>
+        <td><p>The newly created <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TimestampBound_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction(Google.Cloud.Spanner.Data.TimestampBound)">BeginReadOnlyTransaction(TimestampBound)</h4>
+  <div class="markdown level1 summary"><p>Begins a readonly transaction using the provided <a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a> to control the read timestamp
+and/or staleness of data.
+Read transactions are preferred if possible because they do not impose locks internally.
+ReadOnly transactions run with strong consistency and return the latest copy of data.
+This method is thread safe.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpannerTransaction BeginReadOnlyTransaction(TimestampBound targetReadTimestamp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a></td>
+        <td><span class="parametername">targetReadTimestamp</span></td>
+        <td><p>Specifies the timestamp or allowed staleness of data. Must not be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></td>
+        <td><p>The newly created <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TransactionId_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.BeginReadOnlyTransaction(Google.Cloud.Spanner.Data.TransactionId)">BeginReadOnlyTransaction(TransactionId)</h4>
-  <div class="markdown level1 summary"><p>Begins a readonly transaction using the provided <a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a>.
+  <div class="markdown level1 summary"><p>Begins a readonly transaction using the provided <a class="xref" href="Google.Cloud.Spanner.Data.TransactionId.html">TransactionId</a> to refer to an existing server-side transaction.
 Read transactions are preferred if possible because they do not impose locks internally.
 Providing a transaction id will connect to an already created transaction which is useful
-for batch reads.</p>
+for batch reads. This method differs from <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction">BeginReadOnlyTransaction()</a>
+and <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TimestampBound_">BeginReadOnlyTransaction(TimestampBound)</a> as it
+uses an existing transaction rather than creating a new server-side transaction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -654,7 +731,7 @@ This method is thread safe.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;SpannerTransaction&gt; BeginReadOnlyTransactionAsync(TimestampBound targetReadTimestamp, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;SpannerTransaction&gt; BeginReadOnlyTransactionAsync(TimestampBound targetReadTimestamp, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -706,7 +783,7 @@ This method is thread safe.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;SpannerTransaction&gt; BeginReadOnlyTransactionAsync(CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;SpannerTransaction&gt; BeginReadOnlyTransactionAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -737,7 +814,7 @@ This method is thread safe.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>&gt;</td>
-        <td><p>a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></p>
+        <td><p>The newly created <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -775,7 +852,7 @@ This method is thread safe.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;SpannerTransaction&gt; BeginTransactionAsync(CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;SpannerTransaction&gt; BeginTransactionAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -941,7 +1018,7 @@ The newly created command will execute on a subset of data defined by the <a cla
         <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a></td>
         <td><span class="parametername">transaction</span></td>
         <td><p>The <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a> used when
-creating the <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a>. See <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TransactionId_">BeginReadOnlyTransaction(TransactionId)</a>.</p>
+creating the <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a>.  See <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_BeginReadOnlyTransaction_Google_Cloud_Spanner_Data_TransactionId_">BeginReadOnlyTransaction(TransactionId)</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -1124,24 +1201,74 @@ This method is thread safe.</p>
 
     // Update the Int64Value of keys[0]
     // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[0]},
-        {&quot;Int64Value&quot;, SpannerDbType.Int64, 0L}
-        });
+    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);            
     await updateCmd.ExecuteNonQueryAsync();
 
     // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[1]}
-        });
+    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
     await deleteCmd.ExecuteNonQueryAsync();
 }
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDmlCommand_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateDmlCommand*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDmlCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateDmlCommand(System.String,Google.Cloud.Spanner.Data.SpannerParameterCollection)">CreateDmlCommand(String, SpannerParameterCollection)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a> to execute a general DML (UPDATE, INSERT, DELETE) statement.
+This method is thread safe.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpannerCommand CreateDmlCommand(string dmlStatement, SpannerParameterCollection dmlParameters = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dmlStatement</span></td>
+        <td><p>The DML statement (eg &apos;DELETE FROM MYTABLE WHERE ...&apos;).  Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerParameterCollection.html">SpannerParameterCollection</a></td>
+        <td><span class="parametername">dmlParameters</span></td>
+        <td><p>Optionally supplied set of <a class="xref" href="Google.Cloud.Spanner.Data.SpannerParameter.html">SpannerParameter</a>
+that correspond to the parameters used in the SQL query. May be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a></td>
+        <td><p>A configured <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDmlCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>To insert, update, delete or &quot;insert or update&quot; a single row, the operation-specific methods
+(<a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_CreateUpdateCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection_">CreateUpdateCommand(String, SpannerParameterCollection)</a> etc) are preferred as they are more efficient.
+This method is more appropriate for general-purpose DML which can perform modifications based on query results.</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateInsertCommand_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateInsertCommand*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateInsertCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateInsertCommand(System.String,Google.Cloud.Spanner.Data.SpannerParameterCollection)">CreateInsertCommand(String, SpannerParameterCollection)</h4>
   <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a> to insert rows into a Spanner database table.
@@ -1355,20 +1482,14 @@ that correspond to the parameters used in the SQL query. May be null.</p>
 
     // Update the Int64Value of keys[0]
     // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[0]},
-        {&quot;Int64Value&quot;, SpannerDbType.Int64, 0L}
-        });
+    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);            
     await updateCmd.ExecuteNonQueryAsync();
 
     // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[1]}
-        });
+    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
     await deleteCmd.ExecuteNonQueryAsync();
 }
 </code></pre></div>
@@ -1445,20 +1566,14 @@ May be null.</p>
 
     // Update the Int64Value of keys[0]
     // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[0]},
-        {&quot;Int64Value&quot;, SpannerDbType.Int64, 0L}
-        });
+    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);            
     await updateCmd.ExecuteNonQueryAsync();
 
     // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[1]}
-        });
+    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
     await deleteCmd.ExecuteNonQueryAsync();
 }
 </code></pre></div>
@@ -1618,7 +1733,7 @@ the created Cloud Spanner transaction to be a read-only transaction with the giv
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task OpenAsReadOnlyAsync(TimestampBound timestampBound = null, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task OpenAsReadOnlyAsync(TimestampBound timestampBound = null, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

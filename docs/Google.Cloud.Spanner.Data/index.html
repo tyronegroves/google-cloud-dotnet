@@ -8,7 +8,7 @@
     <title>Google.Cloud.Spanner.Data | Google.Cloud.Spanner.Data </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Spanner.Data | Google.Cloud.Spanner.Data ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.Spanner.Data</code> is the ADO.NET provider for Cloud Spanner. It is the recommended
 package for regular Cloud Spanner database access from .NET.</p>
 <p>Note:
-This documentation is for version <code>2.0.0-beta03</code> of the library.
+This documentation is for version <code>2.0.0-beta04</code> of the library.
 Some samples may not work with other versions.</p>
 <p>The <a href="../Google.Cloud.Spanner.Admin.Instance.V1/">Google.Cloud.Spanner.Admin.Instance.V1</a> package
 should be used for Cloud Spanner instance administration, such as creating or deleting instances.</p>
@@ -76,7 +76,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>2.0.0-beta03</code>) of <code>Google.Cloud.Spanner.Data</code>.</p>
+pre-release version (<code>2.0.0-beta04</code>) of <code>Google.Cloud.Spanner.Data</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -127,7 +127,52 @@ commands provided by SpannerDataAdapter with your own custom commands.</p>
 
     adapter.Update(untypedDataSet.Tables[0]);
 }
-</code></pre><h2 id="inserting-data">Inserting Data</h2>
+</code></pre><h2 id="modifying-data">Modifying data</h2>
+<p>Cloud Spanner supports two approaches to modifying data: DML, and direct row modifications.</p>
+<h3 id="dml">DML</h3>
+<p>DML is capable of affecting multiple rows with a single command. For example, you could delete all
+rows matching a query, or update rows to set the value of one column equal to another one.</p>
+<p>DML can be executed in standard mode using <code>ExecuteNonQuery</code> or <code>ExecuteNonQueryAsync</code>:</p>
+<pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    await connection.OpenAsync();
+
+    SpannerCommand cmd = connection.CreateDmlCommand(
+        &quot;UPDATE TestTable SET StringValue=&#39;Updated&#39; WHERE Int64Value=@value&quot;);
+    cmd.Parameters.Add(&quot;value&quot;, SpannerDbType.Int64, 10);
+    int rowsAffected = await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine($&quot;{rowsAffected} rows updated...&quot;);
+}
+</code></pre><p>If you execute DML within a transaction, queries are able to observe the changes already made by DML statements,
+and later DML statements can use the values created or updated by earlier ones.</p>
+<p>Some DML statements can be executed in a <em>partitioned</em> manner, enabling an efficient
+update of large data sets. <code>ExecutePartitionedUpdate</code> or <code>ExecutePartitionedUpdateAsync</code>:</p>
+<pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    await connection.OpenAsync();
+
+    SpannerCommand cmd = connection.CreateDmlCommand(
+        &quot;UPDATE TestTable SET TestTable.StringValue=&#39;Updated in partitions&#39; WHERE TestTable.Int64Value=@value&quot;);
+    cmd.Parameters.Add(&quot;value&quot;, SpannerDbType.Int64, 9);
+    long rowsAffected = await cmd.ExecutePartitionedUpdateAsync();
+    Console.WriteLine($&quot;{rowsAffected} rows updated...&quot;);
+}
+</code></pre><p>Partitioned DML updates cannot be performed within another transaction, and have &quot;at least once&quot; semantics:
+the update can be applied more than once to a row in some cases, and so is best used with idempotent updates.</p>
+<p>Not all DML statements can be partitioned. Please read the Cloud Spanner user documentation for details on
+the restrictions.</p>
+<h3 id="direct-row-modifications">Direct row modifications</h3>
+<p>The following operations are supported for direct row modification:</p>
+<ul>
+<li>Insert</li>
+<li>Update</li>
+<li>Delete</li>
+<li>Insert or update (also known as &quot;upsert&quot;)</li>
+</ul>
+<p>Create a command from the <code>SpannerConnection</code>, providing the table name to the appropriate method
+(<code>CreateInsertCommand</code> and the like), then use the command parameters to specify values for columns.
+The command can be reused to perform the same kind of operation for multiple rows.</p>
+<p>This sample inserts two rows, then reads them again:</p>
 <pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
 {
     await connection.OpenAsync();
@@ -147,7 +192,8 @@ commands provided by SpannerDataAdapter with your own custom commands.</p>
         Console.WriteLine($&quot;{rowsAffected} rows written...&quot;);
     }
 }
-</code></pre><h2 id="reading-updating-and-deleting-data">Reading, Updating and Deleting Data</h2>
+</code></pre><p>This sample reads three keys using a <code>SELECT</code> command, updates a row using an <code>UPDATE</code> command, then
+deletes a row using a <code>DELETE</code> command:</p>
 <pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
 {
     await connection.OpenAsync();
@@ -165,23 +211,19 @@ commands provided by SpannerDataAdapter with your own custom commands.</p>
 
     // Update the Int64Value of keys[0]
     // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[0]},
-        {&quot;Int64Value&quot;, SpannerDbType.Int64, 0L}
-        });
+    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);            
     await updateCmd.ExecuteNonQueryAsync();
 
     // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(
-        &quot;TestTable&quot;, new SpannerParameterCollection
-        {
-        {&quot;Key&quot;, SpannerDbType.String, keys[1]}
-        });
+    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
     await deleteCmd.ExecuteNonQueryAsync();
 }
-</code></pre><h2 id="transactions-and-fault-handling">Transactions and Fault Handling</h2>
+</code></pre><p>When direct row modifications are performed in a transaction, they are only applied when the transaction is committed.
+Queries within the transaction will not observe any changes.</p>
+<h2 id="transactions-and-fault-handling">Transactions and Fault Handling</h2>
 <p>Cloud Spanner is fully ACID compliant.</p>
 <p>Retries should be implemented at the transaction level (as opposed to individual call level)
 because there is a chance in high stress situations that a Cloud Spanner session (transaction)

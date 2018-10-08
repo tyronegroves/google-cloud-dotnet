@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SpannerCommand
    | Google.Cloud.Spanner.Data ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -901,6 +901,90 @@ Setting this property overrides any values in <a class="xref" href="Google.Cloud
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbCommand.ExecuteNonQueryAsync(System.Threading.CancellationToken)</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerCommand_ExecutePartitionedUpdate_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecutePartitionedUpdate*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecutePartitionedUpdate" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecutePartitionedUpdate">ExecutePartitionedUpdate()</h4>
+  <div class="markdown level1 summary"><p>Executes this command as a partitioned update. The command must be a generalized DML command;
+<a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_CreateDmlCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection_">CreateDmlCommand(String, SpannerParameterCollection)</a> for details.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long ExecutePartitionedUpdate()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><p>A lower bound for the number of rows affected.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecutePartitionedUpdate_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The command is executed in parallel across multiple partitions, and automatically committed as it executes.
+This operation is not atomic: if it is cancelled part way through, the data that has already been updated will
+remain updated. Additionally, it is performed &quot;at least once&quot; in each partition; if the statement is non-idempotent
+(for example, incrementing a column) then the update may be performed more than once on a given row. 
+This command must not be part of any other transaction.</p>
+</div>
+  <a id="Google_Cloud_Spanner_Data_SpannerCommand_ExecutePartitionedUpdateAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecutePartitionedUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecutePartitionedUpdateAsync_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecutePartitionedUpdateAsync(System.Threading.CancellationToken)">ExecutePartitionedUpdateAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Executes this command as a partitioned update. The command must be a generalized DML command;
+<a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html#Google_Cloud_Spanner_Data_SpannerConnection_CreateDmlCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection_">CreateDmlCommand(String, SpannerParameterCollection)</a> for details.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;long&gt; ExecutePartitionedUpdateAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>An optional token for canceling the call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><p>A task whose result is a lower bound for the number of rows affected.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecutePartitionedUpdateAsync_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The command is executed in parallel across multiple partitions, and automatically committed as it executes.
+This operation is not atomic: if it is cancelled part way through, the data that has already been updated will
+remain updated. Additionally, it is performed &quot;at least once&quot; in each partition; if the statement is non-idempotent
+(for example, incrementing a column) then the update may be performed more than once on a given row. 
+This command must not be part of any other transaction.</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand_ExecuteReaderAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecuteReaderAsync*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecuteReaderAsync" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecuteReaderAsync">ExecuteReaderAsync()</h4>
   <div class="markdown level1 summary"><p>Sends the command to Cloud Spanner and builds a <a class="xref" href="Google.Cloud.Spanner.Data.SpannerDataReader.html">SpannerDataReader</a>.</p>
@@ -934,7 +1018,7 @@ This method is thread safe.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;DbDataReader&gt; ExecuteReaderAsync(TimestampBound singleUseReadSettings, CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;DbDataReader&gt; ExecuteReaderAsync(TimestampBound singleUseReadSettings, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -969,7 +1053,7 @@ This method is thread safe.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Data.Common.DbDataReader</span>&gt;</td>
-        <td><p>a <a class="xref" href="Google.Cloud.Spanner.Data.SpannerDataReader.html">SpannerDataReader</a>.</p>
+        <td><p>A <a class="xref" href="Google.Cloud.Spanner.Data.SpannerDataReader.html">SpannerDataReader</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -1185,7 +1269,7 @@ This method is thread safe.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;T&gt; ExecuteScalarAsync&lt;T&gt;(CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;T&gt; ExecuteScalarAsync&lt;T&gt;(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1252,7 +1336,7 @@ that returns a subset of data.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;IReadOnlyList&lt;CommandPartition&gt;&gt; GetReaderPartitionsAsync(long? partitionSizeBytes = default (long? ), long? maxPartitions = default (long? ), CancellationToken cancellationToken = default (CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;IReadOnlyList&lt;CommandPartition&gt;&gt; GetReaderPartitionsAsync(long? partitionSizeBytes = default(long? ), long? maxPartitions = default(long? ), CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

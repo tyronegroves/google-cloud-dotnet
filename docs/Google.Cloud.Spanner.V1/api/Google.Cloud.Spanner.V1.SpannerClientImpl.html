@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SpannerClientImpl
    | Google.Cloud.Spanner.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -733,11 +733,11 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_DeleteSessionAsync_Google_Cloud_Spanner_V1_DeleteSessionRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.DeleteSessionAsync(DeleteSessionRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSql_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSql*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSql_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSql(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Google.Api.Gax.Grpc.CallSettings)">ExecuteSql(ExecuteSqlRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Executes an SQL query, returning all rows in a single reply. This
+  <div class="markdown level1 summary"><p>Executes an SQL statement, returning all results in a single reply. This
 method cannot be used to return a result set larger than 10 MiB;
 if the query yields more data than that, the query fails with
 a <code>FAILED_PRECONDITION</code> error.</p>
-<p>Queries inside read-write transactions might return <code>ABORTED</code>. If
+<p>Operations inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
 the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
 <p>Larger result sets can be fetched in streaming fashion by calling
@@ -792,11 +792,11 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ExecuteSql_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.ExecuteSql(ExecuteSqlRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSqlAsync_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSqlAsync*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSqlAsync_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSqlAsync(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Google.Api.Gax.Grpc.CallSettings)">ExecuteSqlAsync(ExecuteSqlRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Executes an SQL query, returning all rows in a single reply. This
+  <div class="markdown level1 summary"><p>Executes an SQL statement, returning all results in a single reply. This
 method cannot be used to return a result set larger than 10 MiB;
 if the query yields more data than that, the query fails with
 a <code>FAILED_PRECONDITION</code> error.</p>
-<p>Queries inside read-write transactions might return <code>ABORTED</code>. If
+<p>Operations inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
 the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
 <p>Larger result sets can be fetched in streaming fashion by calling
@@ -1228,9 +1228,11 @@ operation in parallel.  Each of the returned partition tokens can be used
 by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to specify a subset
 of the query result to read.  The same session and read-only transaction
 must be used by the PartitionQueryRequest used to create the
-partition tokens and the ExecuteSqlRequests that use the partition tokens.
-Partition tokens become invalid when the session used to create them
-is deleted or begins a new transaction.</p>
+partition tokens and the ExecuteSqlRequests that use the partition tokens.</p>
+<p>Partition tokens become invalid when the session used to create them
+is deleted, is idle for too long, begins a new transaction, or becomes too
+old.  When any of these happen, it is not possible to resume the query, and
+the whole operation must be restarted from the beginning.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1286,9 +1288,11 @@ operation in parallel.  Each of the returned partition tokens can be used
 by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to specify a subset
 of the query result to read.  The same session and read-only transaction
 must be used by the PartitionQueryRequest used to create the
-partition tokens and the ExecuteSqlRequests that use the partition tokens.
-Partition tokens become invalid when the session used to create them
-is deleted or begins a new transaction.</p>
+partition tokens and the ExecuteSqlRequests that use the partition tokens.</p>
+<p>Partition tokens become invalid when the session used to create them
+is deleted, is idle for too long, begins a new transaction, or becomes too
+old.  When any of these happen, it is not possible to resume the query, and
+the whole operation must be restarted from the beginning.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1344,9 +1348,13 @@ operation in parallel.  Each of the returned partition tokens can be used
 by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a subset of the read
 result to read.  The same session and read-only transaction must be used by
 the PartitionReadRequest used to create the partition tokens and the
-ReadRequests that use the partition tokens.
-Partition tokens become invalid when the session used to create them
-is deleted or begins a new transaction.</p>
+ReadRequests that use the partition tokens.  There are no ordering
+guarantees on rows returned among the returned partition tokens, or even
+within each individual StreamingRead call issued with a partition_token.</p>
+<p>Partition tokens become invalid when the session used to create them
+is deleted, is idle for too long, begins a new transaction, or becomes too
+old.  When any of these happen, it is not possible to resume the read, and
+the whole operation must be restarted from the beginning.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1402,9 +1410,13 @@ operation in parallel.  Each of the returned partition tokens can be used
 by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a subset of the read
 result to read.  The same session and read-only transaction must be used by
 the PartitionReadRequest used to create the partition tokens and the
-ReadRequests that use the partition tokens.
-Partition tokens become invalid when the session used to create them
-is deleted or begins a new transaction.</p>
+ReadRequests that use the partition tokens.  There are no ordering
+guarantees on rows returned among the returned partition tokens, or even
+within each individual StreamingRead call issued with a partition_token.</p>
+<p>Partition tokens become invalid when the session used to create them
+is deleted, is idle for too long, begins a new transaction, or becomes too
+old.  When any of these happen, it is not possible to resume the read, and
+the whole operation must be restarted from the beginning.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
