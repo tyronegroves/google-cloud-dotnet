@@ -8,7 +8,7 @@
     <title>Google.Cloud.VideoIntelligence.V1 | Google.Cloud.VideoIntelligence.V1 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.VideoIntelligence.V1 | Google.Cloud.VideoIntelligence.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.VideoIntelligence.V1</code> is a.NET client library for the <a href="https://cloud.google.com/video-intelligence">Google Cloud Video Intelligence API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.1.0-beta01</code> of the library.
+This documentation is for version <code>1.1.0-beta02</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.VideoIntelligence.V1</code> package from NuGet. Add it to
@@ -73,7 +73,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>1.1.0-beta01</code>) of <code>Google.Cloud.VideoIntelligence.V1</code>.</p>
+pre-release version (<code>1.1.0-beta02</code>) of <code>Google.Cloud.VideoIntelligence.V1</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -103,6 +103,34 @@ foreach (LabelAnnotation label in result.ShotLabelAnnotations)
     foreach (LabelSegment segment in label.Segments)
     {
         Console.WriteLine($&quot;  {segment.Segment.StartTimeOffset}-{segment.Segment.EndTimeOffset}: {segment.Confidence}&quot;);
+    }
+}
+</code></pre><h2 id="transcribe-speech-from-a-video">Transcribe speech from a video</h2>
+<pre><code class="lang-cs">VideoIntelligenceServiceClient client = VideoIntelligenceServiceClient.Create();
+AnnotateVideoRequest request = new AnnotateVideoRequest
+{
+    InputUri = &quot;gs://bucket-name-123/google-next-17-videointelligence-short.mp4&quot;,
+    Features = { Feature.SpeechTranscription },
+    VideoContext = new VideoContext
+    {
+        SpeechTranscriptionConfig = new SpeechTranscriptionConfig
+        {
+            LanguageCode = &quot;en-US&quot;,
+            EnableAutomaticPunctuation = true
+        }
+    }
+};
+Operation&lt;AnnotateVideoResponse, AnnotateVideoProgress&gt; operation = client.AnnotateVideo(request);
+Operation&lt;AnnotateVideoResponse, AnnotateVideoProgress&gt; resultOperation = operation.PollUntilCompleted();
+
+VideoAnnotationResults result = resultOperation.Result.AnnotationResults[0];
+foreach (SpeechTranscription transcription in result.SpeechTranscriptions)
+{
+    Console.WriteLine($&quot;Language code: {transcription.LanguageCode}&quot;);
+    Console.WriteLine(&quot;Alternatives:&quot;);
+    foreach (SpeechRecognitionAlternative alternative in transcription.Alternatives)
+    {
+        Console.WriteLine($&quot;({alternative.Confidence}) {alternative.Transcript}&quot;);
     }
 }
 </code></pre></article>
