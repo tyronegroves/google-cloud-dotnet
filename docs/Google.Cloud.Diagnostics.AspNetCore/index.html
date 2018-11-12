@@ -8,7 +8,7 @@
     <title>Google.Cloud.Diagnostics.AspNetCore | Google.Cloud.Diagnostics.AspNetCore </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Diagnostics.AspNetCore | Google.Cloud.Diagnostics.AspNetCore ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -66,13 +66,17 @@
 It allows for simple integration of Stackdriver into ASP.NET applications with minimal code changes.</p>
 <p><code>Google.Cloud.Diagnostics.AspNetCore</code> currently supports Stackdriver Error Reporting, Stackdriver Logging
 and Stackdriver Trace.</p>
+<p>Note:
+This documentation is for version <code>3.0.0-beta07</code> of the library.
+Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Diagnostics.AspNetCore</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
 project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
-box).</p>
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>3.0.0-beta07</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -85,28 +89,44 @@ entries are collected. However, to be able to collect this information PDBs must
 the deployed code.</p>
 <h1 id="getting-started">Getting started</h1>
 <h2 id="initializing-google-diagnostics-aspnet-core-20">Initializing Google Diagnostics (ASP.NET Core 2.0+)</h2>
-<p>The preferred way to initialize Google Diagnostics services in ASP.NET Core 2.0 or higher
+<p>The easiest way to initialize Google Diagnostics services in ASP.NET Core 2.0 or higher
 is using the <code>UseGoogleDiagnostics</code> extentension method on <code>IWebHostBuilder</code>. This configures
 Logging, Tracing and Error Reporting middleware.</p>
-<pre><code class="lang-cs">string projectId = &quot;[Google Cloud Platform project ID]&quot;;
-var webHost = new WebHostBuilder()
-    .UseGoogleDiagnostics(projectId)
-    .UseStartup&lt;Startup&gt;()
-    .Build();
-</code></pre><p>You can still initialize the separate components using the extension methods below.</p>
+<p>If your application is runnng on GAE you don&#39;t need to provide a value for <code>ProjectID</code>, <code>Service</code>
+and <code>Version</code> since they can be automatically obtained by the <code>UseGoogleDiagnostics</code> method. The
+values used will be the ones associated with the running application.</p>
+<p>If your application is running on GKE or GCE you don&#39;t need to provide a value for <code>ProjectID</code>
+since it can be automatically determined by the <code>UseGoogleDiagnostics</code> method. It will be the
+<code>ProjectID</code> of the Google Cloud Project where the application is running. You do need to
+provide values for <code>Service</code> and <code>Version</code>, with which to identify the running application.</p>
+<p>If your application is running outside of GCP, including when it runs locally, then you&#39;ll need to
+provide the <code>ProjectID</code> of the Google Cloud Project in which to store the diagnostic information
+as well as the <code>Service</code> and <code>Version</code> with which to identify your application.</p>
+<pre><code class="lang-cs">var webHostBuilder = new WebHostBuilder()
+    // Replace ProjectId with your Google Cloud Project ID.
+    // Replace Service with a name or identifier for the service.
+    // Replace Version with a version for the service.
+    .UseGoogleDiagnostics(ProjectId, Service, Version)
+    .UseStartup&lt;Startup&gt;();
+</code></pre><p>You can still initialize the separate components using the extension methods below. This can be useful
+if you only need to use some of the components or, for instance, if you need to access the <code>Configuration</code>
+property on the <code>Startup</code> class to obtain values for <code>ProjectID</code>, <code>Service</code> or <code>Version</code>.</p>
 <h2 id="registering-error-reporting">Registering Error Reporting</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
-    string projectId = &quot;[Google Cloud Platform project ID]&quot;;
-    string serviceName = &quot;[Name of service]&quot;;
-    string version = &quot;[Version of service]&quot;;
-
     services.AddGoogleExceptionLogging(options =&gt;
     {
-        options.ProjectId = projectId;
-        options.ServiceName = serviceName;
-        options.Version = version;
+        // Replace ProjectId with your Google Cloud Project ID.
+        options.ProjectId = ProjectId;
+        // Replace Service with a name or identifier for the service.
+        options.ServiceName = Service;
+        // Replace Version with a version for the service.
+        options.Version = Version;
     });
+
+    // ...any other services your application requires.
+
+    services.AddMvc();
 }
 
 public void Configure(IApplicationBuilder app)
@@ -114,7 +134,7 @@ public void Configure(IApplicationBuilder app)
     // Use before handling any requests to ensure all unhandled exceptions are reported.
     app.UseGoogleExceptionLogging();
 
-    app.UseStaticFiles();
+    // ...any other configuration your application requires.
 
     app.UseMvc(routes =&gt;
     {
@@ -125,60 +145,86 @@ public void Configure(IApplicationBuilder app)
 }
 </code></pre><h2 id="log-exceptions">Log Exceptions</h2>
 <pre><code class="lang-cs">/// &lt;summary&gt;
-/// The &lt;see cref=&quot;IExceptionLogger&quot;/&gt; is populated by dependency injection.
+/// This method catches an exception thrown by another method and explicitly
+/// logs that exception.
+/// The &lt;see cref=&quot;IExceptionLogger&quot;/&gt; is populated by dependency injection 
+/// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
 /// &lt;/summary&gt;
-public void ReadFile(IExceptionLogger exceptionLogger)
+public void CatchesAndLogsException(string id, [FromServices]IExceptionLogger exceptionLogger)
 {
     try
     {
-        string scores = File.ReadAllText(@&quot;C:\Scores.txt&quot;);
-        Console.WriteLine(scores);
+        // This method call throws an exception.
+        ThrowsException(id);
     }
-    catch (IOException e)
+    catch (Exception e)
     {
         exceptionLogger.Log(e);
     }
 }
 </code></pre><h2 id="initializing-logging">Initializing Logging</h2>
-<pre><code class="lang-cs">public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+<pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
-    string projectId = &quot;[Google Cloud Platform project ID]&quot;;
-    loggerFactory.AddGoogle(app.ApplicationServices, projectId);
+    services.AddMvc();
+}
+
+public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+{
+    // Replace ProjectId with your Google Cloud Project ID.
+    loggerFactory.AddGoogle(app.ApplicationServices, ProjectId);
+
+    // ...any other configuration your application requires.
+
+    app.UseMvc(routes =&gt;
+    {
+        routes.MapRoute(
+            name: &quot;default&quot;,
+            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
 }
 </code></pre><h2 id="initializing-logging-aspnet-core-20">Initializing Logging (ASP.NET Core 2.0+)</h2>
-<pre><code class="lang-cs">string projectId = &quot;[Google Cloud Platform project ID]&quot;;
-var webHost = new WebHostBuilder()
+<pre><code class="lang-cs">builder = new WebHostBuilder()
     .ConfigureServices(services =&gt;
     {
-        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId));
+        // Replace ProjectId with your Google Cloud Project ID.
+        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, ProjectId));
     })
-    .UseStartup&lt;Startup&gt;()
-    .Build();
+    .UseStartup&lt;Startup&gt;();
 </code></pre><h2 id="log">Log</h2>
-<pre><code class="lang-cs">public void LogMessage(ILoggerFactory loggerFactory)
+<pre><code class="lang-cs">public class LoggingSamplesController : Controller
 {
-    var logger = loggerFactory.CreateLogger(&quot;[My Logger Name]&quot;);
-    logger.LogInformation(&quot;This is a log message.&quot;);
+    /// &lt;summary&gt;
+    /// This method logs an Information level message.
+    /// The &lt;see cref=&quot;ILogger&quot;/&gt; is populated by dependency injection
+    /// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
+    /// &lt;/summary&gt;
+    public void LogInformation(string id, [FromServices]ILogger&lt;LoggingSamplesController&gt; logger)
+    {
+        // Log whatever message you want to log.
+        logger.LogInformation(id);
+    }
 }
 </code></pre><h2 id="initializing-tracing">Initializing Tracing</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
     // The line below is needed for trace ids to be added to logs.
     services.AddSingleton&lt;IHttpContextAccessor, HttpContextAccessor&gt;();
-    string projectId = &quot;[Google Cloud Platform project ID]&quot;;
+
+    // Replace ProjectId with your Google Cloud Project ID.
     services.AddGoogleTrace(options =&gt;
     {
-        options.ProjectId = projectId;
+        options.ProjectId = ProjectId;
     });
+
+    services.AddMvc();
 }
 
 public void Configure(IApplicationBuilder app)
 {
-    // Use at the start of the request pipeline to ensure the entire
-    // request is traced.
+    // Use at the start of the request pipeline to ensure the entire request is traced.
     app.UseGoogleTrace();
 
-    app.UseStaticFiles();
+    // ...any other configuration your application requires.
 
     app.UseMvc(routes =&gt;
     {
@@ -189,71 +235,146 @@ public void Configure(IApplicationBuilder app)
 }
 </code></pre><h2 id="tracing-in-mvc-controllers">Tracing in MVC Controllers</h2>
 <p>To use the <code>IManagedTracer</code> in MVC controllers you can either inject the singleton instance of 
-<code>IManagedTracer</code> into the controller&#39;s constructor (see <code>SampleConstructorController</code>) or you
+<code>IManagedTracer</code> into the controller&#39;s constructor (see <code>TraceSamplesConstructorController</code>) or you
 can in inject the <code>IManagedTracer</code> into the action method using the <code>[FromServices]</code> attribute
-(see <code>SampleMethodController</code>).</p>
-<pre><code class="lang-cs">public class SampleConstructorController : Controller
+(see <code>TraceSamplesMethodController</code>).</p>
+<pre><code class="lang-cs">public class TraceSamplesConstructorController : Controller
 {
     private readonly IManagedTracer _tracer;
 
-    public SampleConstructorController(IManagedTracer tracer)
+    /// &lt;summary&gt;
+    /// The &lt;see cref=&quot;IManagedTracer&quot;/&gt; is populated by dependency injection.
+    /// &lt;/summary&gt;
+    public TraceSamplesConstructorController(IManagedTracer tracer)
     {
         _tracer = tracer;
     }
 
-    public ActionResult Hello()
+    public void TraceHelloWorld(string id)
     {
-        using (_tracer.StartSpan(nameof(Hello)))
+        // Change the name of the span to what makese sense in your context.
+        using (_tracer.StartSpan(id))
         {
-            ViewData[&quot;text&quot;] = &quot;Hello, World!&quot;;
-            return View();
+            // The code whose execution is to be included in the span goes here.
+            ViewData[&quot;Message&quot;] = &quot;Hello World.&quot;;
         }
     }
 }
-</code></pre><pre><code class="lang-cs">public class SampleMethodController : Controller
+</code></pre><pre><code class="lang-cs">public class TraceSamplesMethodController : Controller
 {
-    public ActionResult Hello([FromServices] IManagedTracer tracer)
+    /// &lt;summary&gt;
+    /// Manually trace a set of operations.
+    /// The &lt;see cref=&quot;IManagedTracer&quot;/&gt; is populated by dependency injection
+    /// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
+    /// &lt;/summary&gt;
+    public void TraceHelloWorld(string id, [FromServices] IManagedTracer tracer)
     {
-        using (tracer.StartSpan(nameof(Hello)))
+        // Change the name of the span to what makese sense in your context.
+        using (tracer.StartSpan(id))
         {
-            ViewData[&quot;text&quot;] = &quot;Hello, World!&quot;;
-            return View();
+            // The code whose execution is to be included in the span goes here.
+            ViewData[&quot;Message&quot;] = &quot;Hello World.&quot;;
         }
     }
 }
 </code></pre><h2 id="manual-tracing">Manual Tracing</h2>
 <pre><code class="lang-cs">/// &lt;summary&gt;
-/// The &lt;see cref=&quot;IManagedTracer&quot;/&gt; is populated by dependency injection.
+/// Manually trace a set of operations.
+/// The &lt;see cref=&quot;IManagedTracer&quot;/&gt; is populated by dependency injection
+/// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
 /// &lt;/summary&gt;
-public void TraceHelloWorld(IManagedTracer tracer)
+public void TraceHelloWorld(string id, [FromServices] IManagedTracer tracer)
 {
-    // Manually trace a specific operation.
-    using (tracer.StartSpan(nameof(TraceHelloWorld)))
+    // Change the name of the span to what makese sense in your context.
+    using (tracer.StartSpan(id))
     {
-        Console.Out.WriteLine(&quot;Hello, World!&quot;);
+        // The code whose execution is to be included in the span goes here.
+        ViewData[&quot;Message&quot;] = &quot;Hello World.&quot;;
     }
 }
 </code></pre><pre><code class="lang-cs">/// &lt;summary&gt;
-/// The &lt;see cref=&quot;IManagedTracer&quot;/&gt; is populated by dependency injection.
+/// Manually trace a specific Action or Func&lt;T&gt;.
+/// The &lt;see cref=&quot;IManagedTracer&quot;/&gt; is populated by dependency injection
+/// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
 /// &lt;/summary&gt;
-public void TraceHelloWorldRunIn(IManagedTracer tracer)
+public void TraceHelloWorldRunIn(string id, [FromServices]IManagedTracer tracer)
 {
-    // Manually trace a specific Action or Func&lt;T&gt;.
     tracer.RunInSpan(
-        () =&gt; Console.Out.WriteLine(&quot;Hello, World!&quot;),
-        nameof(TraceHelloWorldRunIn));
+        // The Action or Func&lt;T&gt; to be traced.
+        () =&gt;
+        {
+            // The code whose execution is to be included in the span goes here.
+            ViewData[&quot;Message&quot;] = &quot;Hello World.&quot;;
+        },
+        // The name of the span.
+        id);
 }
-</code></pre><h2 id="trace-outgoing-http-requests">Trace Outgoing HTTP Requests</h2>
+</code></pre><h2 id="trace-outgoing-http-requests-all-platforms">Trace Outgoing HTTP Requests (all platforms)</h2>
 <pre><code class="lang-cs">/// &lt;summary&gt;
-/// The &lt;see cref=&quot;TraceHeaderPropagatingHandler&quot;/&gt; is populated by dependency injection.
+/// Add a handler to trace outgoing requests and to propagate the trace header.
+/// The &lt;see cref=&quot;TraceHeaderPropagatingHandler&quot;/&gt; is populated by dependency injection
+/// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
 /// &lt;/summary&gt;
-public async Task&lt;HttpResponseMessage&gt; TraceOutgoing(TraceHeaderPropagatingHandler traceHeaderHandler)
+public async Task&lt;HttpResponseMessage&gt; TraceOutgoing([FromServices] TraceHeaderPropagatingHandler traceHeaderHandler)
 {
-    // Add a handler to trace outgoing requests and to propagate the trace header.
     using (var httpClient = new HttpClient(traceHeaderHandler))
     {
+        // Any code that makes outgoing requests.
         return await httpClient.GetAsync(&quot;https://weather.com/&quot;);
     }
+}
+</code></pre><h2 id="trace-outgoing-http-requests-recommended-for-aspnet-core-20-upwards">Trace Outgoing HTTP Requests (recommended for ASP.NET Core 2.0 upwards)</h2>
+<p>The <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-2.1">recommended way of creating HttpClient</a> in ASP.NET Core 2.0 and upwards is to use the 
+<code>System.Net.Http.IHttpClientFactory</code> defined in the Microsoft.Extensions.Http package.
+The following example demonstrates how to register and use an HttpClient using Google Trace so that it traces
+outgoing requests.</p>
+<h3 id="configuration">Configuration</h3>
+<pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
+{
+    // The line below is needed for trace ids to be added to logs.
+    services.AddSingleton&lt;IHttpContextAccessor, HttpContextAccessor&gt;();
+
+    // Replace ProjectId with your Google Cloud Project ID.
+    services.AddGoogleTrace(options =&gt;
+    {
+        options.ProjectId = ProjectId;
+    });
+
+    // Register an HttpClient for outgoing requests.
+    services.AddHttpClient(&quot;tracesOutgoing&quot;)
+        // The next call guarantees that trace information is propagated for outgoing
+        // requests that are already being traced.
+        .AddOutgoingGoogleTraceHandler();
+
+    services.AddMvc();
+}
+
+public void Configure(IApplicationBuilder app)
+{
+    // Use at the start of the request pipeline to ensure the entire request is traced.
+    app.UseGoogleTrace();
+
+    // ...any other configuration your application requires.
+
+    app.UseMvc(routes =&gt;
+    {
+        routes.MapRoute(
+            name: &quot;default&quot;,
+            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
+}
+</code></pre><h3 id="usage">Usage</h3>
+<pre><code class="lang-cs">/// &lt;summary&gt;
+/// Use the &lt;see cref=&quot;IHttpClientFactory&quot;/&gt; to create an HttpClient that will guarantee
+/// the tracing of outgoing requests.
+/// The &lt;see cref=&quot;IHttpClientFactory&quot;/&gt; is populated by dependency injection
+/// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
+/// &lt;/summary&gt;
+public async Task&lt;HttpResponseMessage&gt; TraceOutgoingClientFactory([FromServices] IHttpClientFactory clientFactory)
+{
+    var httpClient = clientFactory.CreateClient(&quot;tracesOutgoing&quot;);
+    // Any code that makes outgoing requests.
+    return await httpClient.GetAsync(&quot;https://weather.com/&quot;);
 }
 </code></pre></article>
           </div>
