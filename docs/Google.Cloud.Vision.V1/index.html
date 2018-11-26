@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.Vision.V1</code> is a.NET client library for the <a href="https://cloud.google.com/vision">Google Cloud Vision API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.3.0-beta03</code> of the library.
+This documentation is for version <code>1.3.0-beta04</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Vision.V1</code> package from NuGet. Add it to
@@ -73,7 +73,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>1.3.0-beta03</code>) of <code>Google.Cloud.Vision.V1</code>.</p>
+pre-release version (<code>1.3.0-beta04</code>) of <code>Google.Cloud.Vision.V1</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -81,7 +81,11 @@ download a service account JSON file then set the <code>GOOGLE_APPLICATION_CREDE
 The credentials will automatically be used to authenticate. See the <a href="https://cloud.google.com/docs/authentication/getting-started">Getting Started With
 Authentication</a> guide for more details.</p>
 <h1 id="getting-started">Getting started</h1>
-<p>All operations are performed through <a href="api/Google.Cloud.Vision.V1.ImageAnnotatorClient.html">ImageAnnotatorClient</a>.</p>
+<p>All operations are performed through the following client classes:</p>
+<ul>
+<li><a href="api/Google.Cloud.Vision.V1.ImageAnnotatorClient.html">ImageAnnotatorClient</a></li>
+<li><a href="api/Google.Cloud.Vision.V1.ProductSearchClient.html">ProductSearchClient</a></li>
+</ul>
 <p>Create a client instance by calling the static <code>Create</code> method, optionally
 specifying an end-point or channel and settings.</p>
 <p>The &quot;core&quot; method <a href="api/Google.Cloud.Vision.V1.ImageAnnotatorClient.html#Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateImages_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateImageRequest__Google_Api_Gax_Grpc_CallSettings_">BatchAnnotateImages</a>
@@ -277,6 +281,36 @@ foreach (EntityAnnotation logo in response.Responses[1].LogoAnnotations)
 foreach (Status error in response.Responses.Select(r =&gt; r.Error))
 {
     Console.WriteLine($&quot;Error detected: error&quot;);
+}
+</code></pre><h2 id="product-search">Product search</h2>
+<p>After creating and populating a product set, the products can be
+detected within images.</p>
+<pre><code class="lang-cs">ProductSetName productSetName = new ProductSetName(projectId, locationId, productSetId);
+ImageAnnotatorClient client = ImageAnnotatorClient.Create();
+ProductSearchParams searchParams = new ProductSearchParams
+{
+    ProductCategories = { &quot;apparel&quot; },
+    ProductSetAsProductSetName = productSetName,
+};
+ProductSearchResults results = client.DetectSimilarProducts(image, searchParams);
+foreach (var result in results.Results)
+{
+    Console.WriteLine($&quot;{result.Product.DisplayName}: {result.Score}&quot;);
+}
+</code></pre><p>A filter can be applied to the search, to match only products with
+specific labels.</p>
+<pre><code class="lang-cs">ProductSetName productSetName = new ProductSetName(projectId, locationId, productSetId);
+ImageAnnotatorClient client = ImageAnnotatorClient.Create();
+ProductSearchParams searchParams = new ProductSearchParams
+{
+    ProductCategories = { &quot;apparel&quot; },
+    ProductSetAsProductSetName = productSetName,
+    Filter = &quot;style=womens&quot;
+};
+ProductSearchResults results = client.DetectSimilarProducts(image, searchParams);
+foreach (var result in results.Results)
+{
+    Console.WriteLine($&quot;{result.Product.DisplayName}: {result.Score}&quot;);
 }
 </code></pre><h2 id="error-handling">Error handling</h2>
 <p>All the methods which annotate a single image (and therefore have a single response) throw
