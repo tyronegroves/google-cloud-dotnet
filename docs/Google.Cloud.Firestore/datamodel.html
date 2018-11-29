@@ -135,7 +135,7 @@ type that a value will be deserialized as, when no other information is availabl
     </tr>
     <tr>
       <td>Integer</td>
-      <td>Any integer type (<code>byte</code>, <code>short</code>, <code>ushort</code>, <code>int</code>, <code>long</code> etc)</td>
+      <td>Any integer type (<code>byte</code>, <code>short</code>, <code>ushort</code>, <code>int</code>, <code>long</code> etc) or enum type</td>
       <td><code>long</code></td>
       <td>Signed 64-bit integer. When deserializing from server data, if the value is outside the range of the target type,
         <code>OverflowException</code> is thrown. Similarly, an <code>OverflowException</code> will
@@ -265,7 +265,171 @@ await document.SetAsync(new { Population = 3900005L }, SetOptions.MergeAll);
 // Fetch the latest document and print the population
 DocumentSnapshot snapshot = await document.GetSnapshotAsync();
 Console.WriteLine(snapshot.GetValue&lt;long&gt;(&quot;Population&quot;)); // 3900005
-</code></pre><h1 id="sentinel-values">Sentinel values</h1>
+</code></pre><h2 id="custom-converters">Custom converters</h2>
+<p>If the built-in conversions aren&#39;t flexible enough for your needs,
+you can create a custom converter implementing
+<code>IFirestoreConverter&lt;T&gt;</code>:</p>
+<pre><code class="lang-csharp">public interface IFirestoreConverter&lt;T&gt;
+{
+    object ToFirestore(T value);
+    T FromFirestore(object value);
+}
+</code></pre><p>The <code>ToFirestore</code> method should convert the <code>T</code> value into a
+suitable format to be stored. This can use any of the conversions
+described above. For example, if the method returns an <code>int</code>, the
+value will be stored as a 64-bit integer in the same way as an <code>int</code>
+property in an attributed type, or an <code>int</code> value within a dictionary.</p>
+<p>The <code>FromFirestore</code> method receives the deserialized value using the
+default mapping, as shown in the earlier table.</p>
+<h3 id="applying-a-converter-to-a-type">Applying a converter to a type</h3>
+<p>Once you&#39;ve created a converter, you can either apply it to a type
+or an individual attributed property. In each case, the
+<code>ConverterType</code> property is specified in the attribute.</p>
+<p>For example, suppose you wish to create several ID classes or
+structs, each containing a string of the underlying ID. This is a
+technique sometimes used to effectively make type-safe identifiers.
+You could create a converter for each class, and apply the
+<code>[FirestoreData]</code> attribute to each class, specifying the
+corresponding converter. This would allow each ID to be stored as
+just the string, rather than as a map containing a single element with
+a string value. The following example demonstrates this with a
+<code>PlayerId</code> class. If another attributed class (e.g. a <code>Game</code>) had a
+<code>PlayerId</code> property, the converter would be used automatically.</p>
+<pre><code class="lang-cs">/// &lt;summary&gt;
+/// A domain representation of a player ID. This can be used in other attributed
+/// classes, and the PlayerIdConverter methods will be called for any PlayerId
+/// properties with the FirestoreProperty attribute.
+/// &lt;/summary&gt;
+[FirestoreData(ConverterType = typeof(PlayerIdConverter))]
+public class PlayerId
+{
+    public string Id { get; }
+
+    public PlayerId(string id)
+    {
+        Id = id;
+    }
+}
+
+public class PlayerIdConverter : IFirestoreConverter&lt;PlayerId&gt;
+{
+    // A PlayerId should be represented in storage as just the string value.
+    public object ToFirestore(PlayerId value) =&gt; value.Id;
+
+    public PlayerId FromFirestore(object value)
+    {
+        switch (value)
+        {
+            // This is the expected path: 
+            case string id:
+                return new PlayerId(id);
+            // The converter will never be called with a null value from Google.Cloud.Firestore,
+            // but throw an appropriate exception anyway.
+            case null:
+                throw new ArgumentNullException(nameof(value));
+            // The converter may be called with unexpected data if (say) there&#39;s a document stored
+            // with a field of the wrong type.
+            default:
+                throw new ArgumentException($&quot;Invalid type to convert to PlayerId: {value.GetType()}&quot;);
+        }
+    }
+}
+</code></pre><h3 id="applying-a-converter-to-a-property">Applying a converter to a property</h3>
+<p>Sometimes you may want to perform custom conversions for types that
+you can&#39;t apply attributes to, or you may want different conversions
+in different situations. In that case, you can implement the
+converter in the same way, but apply it selectively using the
+<code>ConverterType</code> property on the <code>[FirestoreProperty]</code> attribute
+instead.</p>
+<p>As an example, you may want to use the .NET <code>Guid</code> struct within
+your data model. You could store each <code>Guid</code> property as a string,
+using the following sample code.</p>
+<pre><code class="lang-cs">[FirestoreData]
+public class PlayerWithGuidId
+{
+    [FirestoreProperty(ConverterType = typeof(GuidConverter))]
+    public Guid Id { get; set; }
+
+    [FirestoreProperty]
+    public DateTime LastPlayed { get; set; }
+
+    [FirestoreProperty]
+    public int HighScore { get; set; }
+}
+
+public class GuidConverter : IFirestoreConverter&lt;Guid&gt;
+{
+    public object ToFirestore(Guid value) =&gt; value.ToString(&quot;N&quot;);
+
+    public Guid FromFirestore(object value)
+    {
+        switch (value)
+        {
+            case string guid: return Guid.ParseExact(guid, &quot;N&quot;);
+            case null: throw new ArgumentNullException(nameof(value));
+            default: throw new ArgumentException($&quot;Unexpected data: {value.GetType()}&quot;);
+        }
+    }
+}
+</code></pre><h3 id="document-converters">Document converters</h3>
+<p>If you wish a .NET type to be stored as a complete document after
+custom conversion, the converter must return a value which would be
+serialized as a map. This could be a dictionary, an anonymous type,
+or even a separate attributed type. When deserializing, the
+converter will receive an <code>IDictionary&lt;string, object&gt;</code> which it
+should use to extract the original data.</p>
+<pre><code class="lang-cs">[FirestoreData(ConverterType = typeof(CustomCityConverter))]
+public class CustomCity
+{
+    // Note: no [FirestoreProperty] attributes. The converter
+    // is doing all the work.
+    public string Name { get; }
+    public string Country { get; }
+    public long Population { get; }
+
+    public CustomCity(string name, string country, long population)
+    {
+        Name = name;
+        Country = country;
+        Population = population;
+    }
+}
+
+public class CustomCityConverter : IFirestoreConverter&lt;CustomCity&gt;
+{
+    // An anonymous type is a convenient way of serializing a map value.
+    // You could create a Dictionary&lt;string, object&gt; instead; they&#39;re stored the
+    // same way.
+    public object ToFirestore(CustomCity value) =&gt;
+        new { value.Name, value.Country, value.Population };
+
+    public CustomCity FromFirestore(object value)
+    {
+        if (value is IDictionary&lt;string, object&gt; map)
+        {
+            // Any exceptions thrown here will be propagated directly. You may wish to be more
+            // careful, if you need to control the exact exception thrown used when the
+            // data is incomplete or has the wrong type.
+            return new CustomCity((string) map[&quot;Name&quot;], (string) map[&quot;Country&quot;], (long) map[&quot;Population&quot;]);
+        }
+        throw new ArgumentException($&quot;Unexpected data: {value.GetType()}&quot;);
+    }
+}
+</code></pre><h3 id="null-values-and-custom-converters">Null values and custom converters</h3>
+<p>Note that the conversion methods never receive null references, nor should
+they return null values. While it would be possible to deserialize
+null values to non-null .NET values, the conversion used in
+serialization is usually determined based on the actual type of the
+value being serialized. The approach used for null values ensures
+consistency.</p>
+<p>As a side-effect of this decision, it is advisable for the type
+argument of <code>IFirestoreConverter</code> to be a class or a non-nullable
+value type. For example, implement <code>IFirestoreConverter&lt;Guid&gt;</code>
+rather than <code>IFirestoreConverter&lt;Guid?&gt;</code>. If a converter is supplied
+for a non-nullable value type, the converter will automatically be
+used for the corresponding nullable value type too, with null values
+being handled transparently.</p>
+<h1 id="sentinel-values">Sentinel values</h1>
 <p>So far all the values we&#39;ve looked at have been known by the C# code. There are two <em>sentinel values</em> available which behave slightly differently.</p>
 <h2 id="server-side-timestamp">Server-side timestamp</h2>
 <p>When you update a document using the server-side timestamp sentinel value, the actual timestamp that&#39;s recorded is the commit time
