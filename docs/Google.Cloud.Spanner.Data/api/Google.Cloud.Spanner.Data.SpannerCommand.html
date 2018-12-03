@@ -200,7 +200,7 @@ to execute a DDL statement.</p>
   </h3>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand__ctor_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.#ctor*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand__ctor" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.#ctor">SpannerCommand()</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a>.</p>
+  <div class="markdown level1 summary"><p>Initializes a new instance of <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a>, using a default command timeout.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -256,6 +256,9 @@ that is used in the command. May be null.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerCommand__ctor_Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_Google_Cloud_Spanner_Data_SpannerConnection_Google_Cloud_Spanner_Data_SpannerTransaction_Google_Cloud_Spanner_Data_SpannerParameterCollection__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The initial command timeout is taken from the options associated with <code data-dev-comment-type="paramref" class="paramref">connection</code>.</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand__ctor_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.#ctor*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand__ctor_Google_Cloud_Spanner_Data_SpannerConnection_Google_Cloud_Spanner_Data_SpannerTransaction_Google_Cloud_Spanner_Data_CommandPartition_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.#ctor(Google.Cloud.Spanner.Data.SpannerConnection,Google.Cloud.Spanner.Data.SpannerTransaction,Google.Cloud.Spanner.Data.CommandPartition)">SpannerCommand(SpannerConnection, SpannerTransaction, CommandPartition)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a>.</p>
@@ -379,10 +382,7 @@ that is used in the command. May be null.</p>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand_CommandTimeout_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.CommandTimeout*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_CommandTimeout" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.CommandTimeout">CommandTimeout</h4>
   <div class="markdown level1 summary"><p>Gets or sets the wait time before terminating the attempt to execute a command and generating an error.
-Defaults to <a class="xref" href="Google.Cloud.Spanner.Data.SpannerOptions.html#Google_Cloud_Spanner_Data_SpannerOptions_Timeout">Timeout</a> which is 60 seconds.
-A value of &apos;0&apos; normally indicates that no timeout should be used (it waits an infinite amount of time).
-However, if you specify AllowImmediateTimeouts=true in the connection string, &apos;0&apos; will cause a timeout
-that expires immediately. This is normally used only for testing purposes.</p>
+Defaults to the timeout from the connection string.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -406,6 +406,11 @@ that expires immediately. This is normally used only for testing purposes.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbCommand.CommandTimeout</span></div>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerCommand_CommandTimeout_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A value of &apos;0&apos; normally indicates that no timeout should be used (it waits an infinite amount of time).
+However, if you specify AllowImmediateTimeouts=true in the connection string, &apos;0&apos; will cause a timeout
+that expires immediately. This is normally used only for testing purposes.</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand_CommandType_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.CommandType*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_CommandType" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.CommandType">CommandType</h4>
   <div class="markdown level1 summary"></div>
@@ -531,30 +536,6 @@ that expires immediately. This is normally used only for testing purposes.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbCommand.DesignTimeVisible</span></div>
-  <a id="Google_Cloud_Spanner_Data_SpannerCommand_Logger_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.Logger*"></a>
-  <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_Logger" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.Logger">Logger</h4>
-  <div class="markdown level1 summary"><p>This property is for internal use only.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Logger Logger { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html">Logger</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand_Parameters_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.Parameters*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_Parameters" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.Parameters">Parameters</h4>
   <div class="markdown level1 summary"><p>The parameters of the SQL statement or command.</p>
@@ -1012,8 +993,7 @@ This command must not be part of any other transaction.</p>
   </table>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand_ExecuteReaderAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecuteReaderAsync*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecuteReaderAsync_Google_Cloud_Spanner_Data_TimestampBound_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecuteReaderAsync(Google.Cloud.Spanner.Data.TimestampBound,System.Threading.CancellationToken)">ExecuteReaderAsync(TimestampBound, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Executes the command against the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_SpannerConnection">SpannerConnection</a>.
-This method is thread safe.</p>
+  <div class="markdown level1 summary"><p>Executes the command against the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html#Google_Cloud_Spanner_Data_SpannerCommand_SpannerConnection">SpannerConnection</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1033,12 +1013,14 @@ This method is thread safe.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.Data.TimestampBound.html">TimestampBound</a></td>
         <td><span class="parametername">singleUseReadSettings</span></td>
-        <td></td>
+        <td><p>The settings to use for the implicit single-use read-only transaction.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Threading.CancellationToken</span></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A cancellation token for the operation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1058,6 +1040,9 @@ This method is thread safe.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecuteReaderAsync_Google_Cloud_Spanner_Data_TimestampBound_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is thread safe.</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerCommand_ExecuteReaderAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecuteReaderAsync*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerCommand_ExecuteReaderAsync_System_Data_CommandBehavior_" data-uid="Google.Cloud.Spanner.Data.SpannerCommand.ExecuteReaderAsync(System.Data.CommandBehavior)">ExecuteReaderAsync(CommandBehavior)</h4>
   <div class="markdown level1 summary"><p>Sends the command to Cloud Spanner and builds a <a class="xref" href="Google.Cloud.Spanner.Data.SpannerDataReader.html">SpannerDataReader</a>.</p>

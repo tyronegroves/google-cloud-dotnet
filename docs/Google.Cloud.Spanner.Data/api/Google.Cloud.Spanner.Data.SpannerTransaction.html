@@ -139,8 +139,7 @@ tables in a database.</p>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_CommitTimeout" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.CommitTimeout">CommitTimeout</h4>
   <div class="markdown level1 summary"><p>Gets or sets the wait time before terminating the attempt to <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html#Google_Cloud_Spanner_Data_SpannerTransaction_Commit">Commit()</a> 
 or <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html#Google_Cloud_Spanner_Data_SpannerTransaction_Rollback">Rollback()</a> and generating an error.
-Defaults to <a class="xref" href="Google.Cloud.Spanner.Data.SpannerOptions.html#Google_Cloud_Spanner_Data_SpannerOptions_Timeout">Timeout</a> which is 60 seconds.
-A value of &apos;0&apos; normally indicates that no timeout should be used (it waits an infinite amount of time).
+Defaults to the timeout from the connection string. A value of &apos;0&apos; normally indicates that no timeout should be used (it waits an infinite amount of time).
 However, if you specify AllowImmediateTimeouts=true in the connection string, &apos;0&apos; will cause a timeout
 that expires immediately. This is normally used only for testing purposes.</p>
 </div>
@@ -246,16 +245,7 @@ to avoid leaks of transactional resources.</p>
   <div><span class="xref">System.Data.Common.DbTransaction.IsolationLevel</span></div>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_Mode_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Mode*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_Mode" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Mode">Mode</h4>
-  <div class="markdown level1 summary"><p>Indicates the <a class="xref" href="Google.Cloud.Spanner.Data.TransactionMode.html">TransactionMode</a> for the transaction.
-Cloud Spanner supports two transaction modes:
-Locking read-write transactions are the only transaction type that support writing
-data into Cloud Spanner. These transactions rely on pessimistic locking and, if
-necessary, two-phase commit. Locking read-write transactions may abort, requiring
-the application to retry.
-Read-only transactions provide guaranteed consistency across several reads,
-but do not allow writes. Read-only transactions can be configured to read at
-timestamps in the past. Read-only transactions do not need to be committed and
-do not take locks.</p>
+  <div class="markdown level1 summary"><p>Indicates the <a class="xref" href="Google.Cloud.Spanner.Data.TransactionMode.html">TransactionMode</a> for the transaction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -277,6 +267,22 @@ do not take locks.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerTransaction_Mode_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Cloud Spanner supports two transaction modes:
+<ul><li>
+Locking read-write transactions are the only transaction type that support writing
+data into Cloud Spanner. These transactions rely on pessimistic locking and, if
+necessary, two-phase commit. Locking read-write transactions may abort, requiring
+the application to retry.
+</li><li>
+Read-only transactions provide guaranteed consistency across several reads,
+but do not allow writes. Read-only transactions can be configured to read at
+timestamps in the past. Read-only transactions do not need to be committed and
+do not take locks.
+</li></ul>
+</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_Shared_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Shared*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_Shared" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Shared">Shared</h4>
   <div class="markdown level1 summary"><p>Returns true if this transaction is being used by multiple <a class="xref" href="Google.Cloud.Spanner.Data.SpannerConnection.html">SpannerConnection</a> objects.
@@ -306,11 +312,7 @@ because it is expected that you will be distributing the read among several task
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_TimestampBound_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TimestampBound*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_TimestampBound" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TimestampBound">TimestampBound</h4>
   <div class="markdown level1 summary"><p>Tells Cloud Spanner how to choose a timestamp at which to read the data for read-only
-transactions.
-The types of timestamp bounds are:
-Strong (the default): read the latest data.
-Bounded staleness: read a version of the data that&apos;s no staler than a bound.
-Exact staleness: read the version of the data at an exact timestamp.</p>
+transactions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -332,6 +334,12 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerTransaction_TimestampBound_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+The types of timestamp bounds are:
+<ul><li>Strong (the default): read the latest data.</li><li>Bounded staleness: read a version of the data that&apos;s no staler than a bound.</li><li>Exact staleness: read the version of the data at an exact timestamp.</li></ul>
+</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_TransactionId_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TransactionId*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_TransactionId" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.TransactionId">TransactionId</h4>
   <div class="markdown level1 summary"><p>Identifying information about this transaction.</p>
@@ -369,13 +377,13 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbTransaction.Commit()</span></div>
   <a id="Google_Cloud_Spanner_Data_SpannerTransaction_Commit_" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Commit*"></a>
-  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_Commit_System_Nullable_System_DateTime___" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Commit(System.Nullable{System.DateTime}@)">Commit(out Nullable&lt;DateTime&gt;)</h4>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerTransaction_Commit_System_DateTime__" data-uid="Google.Cloud.Spanner.Data.SpannerTransaction.Commit(System.DateTime@)">Commit(out DateTime)</h4>
   <div class="markdown level1 summary"><p>Commits the database transaction synchronously, returning the database timestamp for the commit via <code data-dev-comment-type="paramref" class="paramref">timestamp</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Commit(out DateTime? timestamp)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Commit(out DateTime timestamp)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -388,7 +396,7 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTime</span>&gt;</td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">timestamp</span></td>
         <td><p>Returns the UTC timestamp when the data was written to the database.</p>
 </td>
@@ -402,7 +410,7 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;DateTime? &gt; CommitAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;DateTime&gt; CommitAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -432,7 +440,7 @@ Exact staleness: read the version of the data at an exact timestamp.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTime</span>&gt;&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.DateTime</span>&gt;</td>
         <td><p>Returns the UTC timestamp when the data was written to the database.</p>
 </td>
       </tr>

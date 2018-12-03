@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Logging | Google.Cloud.Spanner.Data </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Logging | Google.Cloud.Spanner.Data ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="logging">Logging</h1>
+
+<p>The Spanner client libraries contain a relatively rudimentary
+logging mechanism for diagnostic purposes. It is not intended for
+general application use, and most applications will never need to
+take any of the steps shown on this page. This page is primarily
+intended to make it easier for Google Cloud Platform support
+engineers to help you configure your application to add logging if
+you encounter an issue.</p>
+<p>The exact log entries generated are subject to change, and
+applications should not rely on particular messages.</p>
+<p>Both the <code>Logger</code> and <code>LogLevel</code> types decribed below are in the
+<code>Google.Cloud.Spanner.V1.Internal.Logging</code> namespace.</p>
+<h2 id="log-levels">Log levels</h2>
+<p>The <code>Logger.LogLevel</code> property determines which log events are
+actually recorded. By default, this is <code>LogLevel.None</code>, so there is
+no output.</p>
+<p>If you&#39;re happy using the default logger implementation described
+below, and just need to change the log level, you can write code
+like this:</p>
+<pre><code class="lang-csharp">// Adjust for the desired log level
+Logger.DefaultLogger.LogLevel = LogLevel.Info;
+</code></pre><p>This can be performed at any time, and the default logger will start
+using the given log level.</p>
+<h2 id="the-default-logger-implementation">The default logger implementation</h2>
+<p>The default logger implementation writes to one of two places based
+on the DLL being targeted:</p>
+<ul>
+<li>In the .NET Standard 1.5 DLL, it writes to <code>Console.Error</code></li>
+<li>In the .NET Standard 2.0 and .NET Framework 4.5 DLLs, it calls
+<a href="https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation?view=netframework-4.7.2"><code>Trace.TraceInformation</code></a>,
+regardless of the log level of the event.</li>
+</ul>
+<p>The exact DLL being used will depend on multiple factors in your
+application&#39;s build. As a general rule, if you&#39;re using .NET Core
+2.0 or above, or any version of the .NET Framework, you&#39;ll probably
+be using a DLL that uses <code>Trace.TraceInformation</code>.</p>
+<h2 id="writing-a-custom-logger">Writing a custom logger</h2>
+<p>If you need the log output in some different form, you can create
+your own class deriving from <code>Logger</code>. You need to implement two
+methods:</p>
+<pre><code class="lang-csharp">- `LogPerformanceEntries` to log performance information. If you
+  aren&#39;t performing performance tests, you can use an empty
+  implementation.
+- `LogImpl` to log a single message with an optional exception. This
+  is only called by `Logger` if the log level equals or exceeds the
+  `LogLevel` of the logger, so the implementation can simply write
+  the message/exception where it needs to.
+
+Once you have implemented a logger, you&#39;ll need to configure the
+Spanner library to use it. If you&#39;re using the default
+`SessionPoolManager`, this is simply a matter of calling:
+
+```csharp
+// Replace with whatever your implementation is called, or
+// however it is instantiated.
+Logger logger = new MyCustomLogger();
+Logger.SetDefaultLogger(logger);
+</code></pre><p>This must be performed before <em>any</em> other Spanner operations, as
+otherwise the default <code>SessionPoolManager</code> will be created with the
+original default logger implementation.</p>
+<p>If you are creating a new <code>SessionPoolManager</code> instance, simply pass
+the logger to the <code>SessionPoolManager.Create</code> method:</p>
+<pre><code class="lang-csharp">SessionPoolOptions options = new SessionPoolOptions
+{
+    // Custom options here
+};
+// Replace with whatever your implementation is called, or
+// however it is instantiated.
+Logger logger = new MyCustomLogger();
+
+SessionPoolManager poolManager = SessionPoolManager.Create(options, logger);
+</code></pre></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

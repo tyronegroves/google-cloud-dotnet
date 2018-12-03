@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Logger
    | Google.Cloud.EntityFrameworkCore.Spanner ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -73,14 +73,14 @@
   
   <h1 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger" class="text-break">Class Logger
   </h1>
-  <div class="markdown level0 summary"><p>This is an internal class and is not intended to be used by external code.</p>
+  <div class="markdown level0 summary"><p>Base class for Spanner diagnostic loggers.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Logger</span></div>
-      <div class="level2"><a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.DefaultLogger.html">DefaultLogger</a></div>
+      <div class="level2"><a class="xref" href="Microsoft.EntityFrameworkCore.Diagnostics.SpannerLogBridge-1.html">SpannerLogBridge&lt;TLoggerCategory&gt;</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -103,11 +103,16 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public abstract class Logger</code></pre>
   </div>
+  <h5 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This is an internal class intended for diagnostic purposes,
+and should not be used by general application code. Please read the user guide
+page on logging for more details.</p>
+</div>
   <h3 id="properties">Properties
   </h3>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_DefaultLogger_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.DefaultLogger*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_DefaultLogger" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.DefaultLogger">DefaultLogger</h4>
-  <div class="markdown level1 summary"><p>This is an internal property and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Retrieves the default logger.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -131,7 +136,8 @@
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_EnableSensitiveDataLogging_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.EnableSensitiveDataLogging*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_EnableSensitiveDataLogging" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.EnableSensitiveDataLogging">EnableSensitiveDataLogging</h4>
-  <div class="markdown level1 summary"><p>This is an internal property and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Whether or not potentially sensitive information (such as SQL queries) is recorded. This
+affects the behavior of the <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_SensitiveInfo_System_Func_System_String__">SensitiveInfo(Func&lt;String&gt;)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -155,7 +161,11 @@
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogLevel*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogLevel">LogLevel</h4>
-  <div class="markdown level1 summary"><p>This is an internal property and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>The level of logging this logger should perform. For example, if this is set to
+<a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Info">Info</a> then messages for <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Debug">Debug</a> will
+be ignored, but messages for <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Info">Info</a>, <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Warn">Warn</a>
+and <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Error">Error</a> will be logged. This property defaults to
+<a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_None">None</a>, so no messages are logged.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -179,7 +189,10 @@
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceTraces_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceTraces*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceTraces" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceTraces">LogPerformanceTraces</h4>
-  <div class="markdown level1 summary"><p>This is an internal property and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Whether or not performance logging is enabled. This affects the
+<a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_System_String_System_Double_">LogPerformanceCounter(String, Double)</a> methods, as well as
+<a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceData">LogPerformanceData()</a>. This defaults to false, and should only be set
+to true for the purposes of benchmarks and diagnosing performance issues.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -201,64 +214,16 @@
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_PerformanceTraceLogInterval_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.PerformanceTraceLogInterval*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_PerformanceTraceLogInterval" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.PerformanceTraceLogInterval">PerformanceTraceLogInterval</h4>
-  <div class="markdown level1 summary"><p>This is an internal property and is not intended to be used by external code.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TimeSpan PerformanceTraceLogInterval { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.TimeSpan</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_ResetPerformanceTracesEachInterval_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.ResetPerformanceTracesEachInterval*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_ResetPerformanceTracesEachInterval" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.ResetPerformanceTracesEachInterval">ResetPerformanceTracesEachInterval</h4>
-  <div class="markdown level1 summary"><p>This is an internal property and is not intended to be used by external code.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ResetPerformanceTracesEachInterval { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
   </h3>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Debug_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Debug*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Debug_System_Func_System_String__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Debug(System.Func{System.String})">Debug(Func&lt;String&gt;)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Debug">Debug</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Debug(Func&lt;string&gt; messageFunc)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Debug(Func&lt;string&gt; messageFunc)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -273,18 +238,48 @@
       <tr>
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">messageFunc</span></td>
-        <td></td>
+        <td><p>A function that provides the message to log. This function is only called
+after checking <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>, in order to avoid unnecessary formatting. This may be null
+and may return null, but in either of these cases, the call is a no-op.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Debug_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Debug*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Debug_System_String_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Debug(System.String)">Debug(String)</h4>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Debug">Debug</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Debug(string message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The message to log. May be null, in which case this method is a no-op.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Error_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Error*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Error_System_Func_System_String__System_Exception_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Error(System.Func{System.String},System.Exception)">Error(Func&lt;String&gt;, Exception)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Error">Error</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Error(Func&lt;string&gt; messageFunc, Exception exception = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Error(Func&lt;string&gt; messageFunc, Exception exception = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -299,23 +294,60 @@
       <tr>
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">messageFunc</span></td>
-        <td></td>
+        <td><p>A function that provides the message to log. This function is only called
+after checking <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>, in order to avoid unnecessary formatting. This may be null
+and may return null, but in either of these cases, the call is a no-op.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Exception</span></td>
         <td><span class="parametername">exception</span></td>
-        <td></td>
+        <td><p>The exception to log, if the logged event was caused by an exception. This may be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Error_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Error*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Error_System_String_System_Exception_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Error(System.String,System.Exception)">Error(String, Exception)</h4>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Error">Error</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Error(string message, Exception exception = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The message to log. May be null, in which case this method is a no-op.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">exception</span></td>
+        <td><p>The exception to log, if the logged event was caused by an exception. This may be null.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Info_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Info*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Info_System_Func_System_String__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Info(System.Func{System.String})">Info(Func&lt;String&gt;)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Info">Info</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Info(Func&lt;string&gt; messageFunc)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Info(Func&lt;string&gt; messageFunc)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -330,13 +362,230 @@
       <tr>
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">messageFunc</span></td>
-        <td></td>
+        <td><p>A function that provides the message to log. This function is only called
+after checking <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>, in order to avoid unnecessary formatting. This may be null
+and may return null, but in either of these cases, the call is a no-op.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Info_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Info*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Info_System_String_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Info(System.String)">Info(String)</h4>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Info">Info</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Info(string message)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The message to log. May be null, in which case this method is a no-op.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Log_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Log*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Log_Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_System_Func_System_String__System_Exception_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Log(Google.Cloud.Spanner.V1.Internal.Logging.LogLevel,System.Func{System.String},System.Exception)">Log(LogLevel, Func&lt;String&gt;, Exception)</h4>
+  <div class="markdown level1 summary"><p>Logs the result of calling the given message provider function if the specified level equals or exceeds <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Log(LogLevel level, Func&lt;string&gt; messageFunc, Exception exception)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html">LogLevel</a></td>
+        <td><span class="parametername">level</span></td>
+        <td><p>The log level of the message to log.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">messageFunc</span></td>
+        <td><p>A function that provides the message to log. This function is only called
+if <code data-dev-comment-type="paramref" class="paramref">level</code> equals or exceeds <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>, in order to avoid unnecessary formatting. This may be null
+and may return null, but in either of these cases, the call is a no-op.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">exception</span></td>
+        <td><p>The exception to log, if the logged event was caused by an exception. This may be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Log_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Log*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Log_Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_System_String_System_Exception_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Log(Google.Cloud.Spanner.V1.Internal.Logging.LogLevel,System.String,System.Exception)">Log(LogLevel, String, Exception)</h4>
+  <div class="markdown level1 summary"><p>Logs the given message if the specified level equals or exceeds <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Log(LogLevel level, string message, Exception exception)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html">LogLevel</a></td>
+        <td><span class="parametername">level</span></td>
+        <td><p>The log level of the message to log.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The message to log. This may be null, in which case this call is a no-op.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">exception</span></td>
+        <td><p>The exception to log, if the logged event was caused by an exception. This may be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogImpl_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogImpl*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogImpl_Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_System_String_System_Exception_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogImpl(Google.Cloud.Spanner.V1.Internal.Logging.LogLevel,System.String,System.Exception)">LogImpl(LogLevel, String, Exception)</h4>
+  <div class="markdown level1 summary"><p>Core method to implement logging in derived classes. This method is only called
+if the given log level exceeds <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>, so implementations do not
+need to perform that check again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void LogImpl(LogLevel level, string message, Exception exception)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html">LogLevel</a></td>
+        <td><span class="parametername">level</span></td>
+        <td><p>The log level of the message to log.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">message</span></td>
+        <td><p>The message to log. This is never null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">exception</span></td>
+        <td><p>The exception to log, if the logged event was caused by an exception. This may be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounter*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_System_String_System_Double_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounter(System.String,System.Double)">LogPerformanceCounter(String, Double)</h4>
+  <div class="markdown level1 summary"><p>Logs a performance counter value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LogPerformanceCounter(string name, double value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the performance counter to log. May be null, in which case this call is a no-op.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The latest value of the performance counter.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounter*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_System_String_System_Func_System_Double_System_Double__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounter(System.String,System.Func{System.Double,System.Double})">LogPerformanceCounter(String, Func&lt;Double, Double&gt;)</h4>
+  <div class="markdown level1 summary"><p>Logs a computed performance counter value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LogPerformanceCounter(string name, Func&lt;double, double&gt; valueFunc)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The name of the performance counter to log. May be null, in which case this call is a no-op.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Double</span>, <span class="xref">System.Double</span>&gt;</td>
+        <td><span class="parametername">valueFunc</span></td>
+        <td><p>A function to compute the latest value of the performance counter based on the current value. May be null, in which case this call is a no-op.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounter*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_System_String_System_Func_System_Double__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounter(System.String,System.Func{System.Double})">LogPerformanceCounter(String, Func&lt;Double&gt;)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Logs a computed performance counter value.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -356,63 +605,35 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>The name of the performance counter to log. May be null, in which case this call is a no-op.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Double</span>&gt;</td>
         <td><span class="parametername">valueFunc</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounterFn_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounterFn*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounterFn_System_String_System_Func_System_Double_System_Double__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceCounterFn(System.String,System.Func{System.Double,System.Double})">LogPerformanceCounterFn(String, Func&lt;Double, Double&gt;)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LogPerformanceCounterFn(string name, Func&lt;double, double&gt; valueFunc)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">name</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Double</span>, <span class="xref">System.Double</span>&gt;</td>
-        <td><span class="parametername">valueFunc</span></td>
-        <td></td>
+        <td><p>A function to compute the latest value of the performance counter. May be null, in which case this call is a no-op.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceData_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceData*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceData" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceData">LogPerformanceData()</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Logs any recorded performance data, if <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceTraces">LogPerformanceTraces</a> is enabled.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void LogPerformanceData()</code></pre>
   </div>
-  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceMessage_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceMessage*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceMessage_System_String_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceMessage(System.String)">LogPerformanceMessage(String)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceEntries_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceEntries*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceEntries_System_Collections_Generic_IEnumerable_System_String__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.LogPerformanceEntries(System.Collections.Generic.IEnumerable{System.String})">LogPerformanceEntries(IEnumerable&lt;String&gt;)</h4>
+  <div class="markdown level1 summary"><p>This method is called by <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceData">LogPerformanceData()</a> when <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceTraces">LogPerformanceTraces</a>
+is enabled, and should be implemented in derived classes to record performance data.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void LogPerformanceMessage(string message)</code></pre>
+    <pre><code class="lang-csharp hljs">protected abstract void LogPerformanceEntries(IEnumerable&lt;string&gt; entries)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -425,20 +646,31 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">message</span></td>
-        <td></td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">entries</span></td>
+        <td><p>The entries to log. This is never null, and never empty.</p>
+</td>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Sensitive_Info_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Sensitive_Info*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Sensitive_Info_System_Func_System_String__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Sensitive_Info(System.Func{System.String})">Sensitive_Info(Func&lt;String&gt;)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_ResetPerformanceData_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.ResetPerformanceData*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_ResetPerformanceData" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.ResetPerformanceData">ResetPerformanceData()</h4>
+  <div class="markdown level1 summary"><p>Resets all performance data previously recorded by the <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogPerformanceCounter_System_String_System_Double_">LogPerformanceCounter(String, Double)</a> methods.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Sensitive_Info(Func&lt;string&gt; messageFunc)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ResetPerformanceData()</code></pre>
+  </div>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_SensitiveInfo_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.SensitiveInfo*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_SensitiveInfo_System_Func_System_String__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.SensitiveInfo(System.Func{System.String})">SensitiveInfo(Func&lt;String&gt;)</h4>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Info">Info</a>, but only if <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_EnableSensitiveDataLogging">EnableSensitiveDataLogging</a>
+is enabled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SensitiveInfo(Func&lt;string&gt; messageFunc)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -453,13 +685,17 @@
       <tr>
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">messageFunc</span></td>
-        <td></td>
+        <td><p>A function that provides the message to log. This function is only called
+after checking <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>, in order to avoid unnecessary formatting. This may be null
+and may return null, but in either of these cases, the call is a no-op.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_SetDefaultLogger_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.SetDefaultLogger*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_SetDefaultLogger_Google_Cloud_Spanner_V1_Internal_Logging_Logger_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.SetDefaultLogger(Google.Cloud.Spanner.V1.Internal.Logging.Logger)">SetDefaultLogger(Logger)</h4>
-  <div class="markdown level1 summary"><p>This is an internal property and is not intended to be used by external code.</p>
+  <div class="markdown level1 summary"><p>Sets the default logger to be returned by future calls to <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_DefaultLogger">DefaultLogger</a>.
+(Any loggers retrieved by that property before are not affected by this method.)</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -479,18 +715,19 @@
       <tr>
         <td><a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html">Logger</a></td>
         <td><span class="parametername">instance</span></td>
-        <td></td>
+        <td><p>The new default logger. Must not be null.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Warn_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Warn*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Warn_System_Func_System_String__" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Warn(System.Func{System.String})">Warn(Func&lt;String&gt;)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Warn_System_Func_System_String__System_Exception_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Warn(System.Func{System.String},System.Exception)">Warn(Func&lt;String&gt;, Exception)</h4>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Warn">Warn</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void Warn(Func&lt;string&gt; messageFunc)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Warn(Func&lt;string&gt; messageFunc, Exception exception = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -505,18 +742,27 @@
       <tr>
         <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">messageFunc</span></td>
-        <td></td>
+        <td><p>A function that provides the message to log. This function is only called
+after checking <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.Logger.html#Google_Cloud_Spanner_V1_Internal_Logging_Logger_LogLevel">LogLevel</a>, in order to avoid unnecessary formatting. This may be null
+and may return null, but in either of these cases, the call is a no-op.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">exception</span></td>
+        <td><p>The exception to log, if the logged event was caused by an exception. This may be null.</p>
+</td>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_WriteLine_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.WriteLine*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_WriteLine_System_String_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.WriteLine(System.String)">WriteLine(String)</h4>
-  <div class="markdown level1 summary"><p>This is an internal method and is not intended to be used by external code.</p>
+  <a id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Warn_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Warn*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Internal_Logging_Logger_Warn_System_String_System_Exception_" data-uid="Google.Cloud.Spanner.V1.Internal.Logging.Logger.Warn(System.String,System.Exception)">Warn(String, Exception)</h4>
+  <div class="markdown level1 summary"><p>Logs a message at a level of <a class="xref" href="Google.Cloud.Spanner.V1.Internal.Logging.LogLevel.html#Google_Cloud_Spanner_V1_Internal_Logging_LogLevel_Warn">Warn</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected abstract void WriteLine(string message)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Warn(string message, Exception exception = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -531,7 +777,14 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">message</span></td>
-        <td></td>
+        <td><p>The message to log. May be null, in which case this method is a no-op.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><span class="parametername">exception</span></td>
+        <td><p>The exception to log, if the logged event was caused by an exception. This may be null.</p>
+</td>
       </tr>
     </tbody>
   </table>

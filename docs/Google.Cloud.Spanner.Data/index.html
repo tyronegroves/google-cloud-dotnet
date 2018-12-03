@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.Spanner.Data</code> is the ADO.NET provider for Cloud Spanner. It is the recommended
 package for regular Cloud Spanner database access from .NET.</p>
 <p>Note:
-This documentation is for version <code>2.0.0-beta04</code> of the library.
+This documentation is for version <code>2.0.0-beta05</code> of the library.
 Some samples may not work with other versions.</p>
 <p>The <a href="../Google.Cloud.Spanner.Admin.Instance.V1/">Google.Cloud.Spanner.Admin.Instance.V1</a> package
 should be used for Cloud Spanner instance administration, such as creating or deleting instances.</p>
@@ -76,7 +76,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>2.0.0-beta04</code>) of <code>Google.Cloud.Spanner.Data</code>.</p>
+pre-release version (<code>2.0.0-beta05</code>) of <code>Google.Cloud.Spanner.Data</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -213,7 +213,7 @@ deletes a row using a <code>DELETE</code> command:</p>
     // Include the primary key and update columns.
     SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
     updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
-    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);            
+    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
     await updateCmd.ExecuteNonQueryAsync();
 
     // Delete row for keys[1]
@@ -312,6 +312,37 @@ await retryPolicy.ExecuteAsync(
             }
         }
     });
+</code></pre><h2 id="session-pool-management">Session pool management</h2>
+<p><code>Google.Cloud.Spanner.Data</code> manages Spanner sessions for you via a
+session pool. The pool has various <a href="configuration.html">configuration
+options</a>, but additionally you may wish to take
+advantage of additional <code>SpannerConnection</code> methods at the start and
+end of your application.</p>
+<p>To ensure that the session pool is populated with the configured
+minimum number of sessions before serving requests from your
+application, you may wish to wait for the task returned by
+<code>SpannerConnection.WhenSessionPoolReady()</code> to complete before
+marking your application as &quot;ready to serve&quot;.</p>
+<pre><code class="lang-cs">// This would usually be executed during application start-up, before any Spanner
+// operations are performed. It can be used at any time, however. It is purely passive:
+// it doesn&#39;t modify the session pool or trigger any other actions.
+using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    await connection.WhenSessionPoolReady();
+}
+</code></pre><p>When your application is shutting down, you may wish to delete the
+sessions it has been using from the server. Most applications will
+not need to do this: sessions automatically expire after an idle
+time of an hour anyway, and the server-enforced session limit is
+high. Applications using a large number of sessions may wish to
+clean up sessions more actively, however. Again, <code>SpannerConnection</code>
+provides a simple method to accomplish this:</p>
+<pre><code class="lang-cs">// When your application is shutting down. Note that any pending or future requests
+// for sessions will fail.
+using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    await connection.ShutdownSessionPoolAsync();
+}
 </code></pre></article>
           </div>
           

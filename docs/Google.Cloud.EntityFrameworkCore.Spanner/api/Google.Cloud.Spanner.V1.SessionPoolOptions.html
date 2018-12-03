@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class SessionPoolOptions
    | Google.Cloud.EntityFrameworkCore.Spanner ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -106,7 +106,7 @@
   </h3>
   <a id="Google_Cloud_Spanner_V1_SessionPoolOptions__ctor_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.#ctor*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions__ctor" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.#ctor">SessionPoolOptions()</h4>
-  <div class="markdown level1 summary"><p>Constructs a new <a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html">SessionPoolOptions</a>.</p>
+  <div class="markdown level1 summary"><p>Constructs a new <a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html">SessionPoolOptions</a> with default values.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -115,9 +115,49 @@
   </div>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_IdleSessionRefreshDelay_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.IdleSessionRefreshDelay*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_IdleSessionRefreshDelay" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.IdleSessionRefreshDelay">IdleSessionRefreshDelay</h4>
+  <div class="markdown level1 summary"><p>The amount of time a session must be idle before it is refreshed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan IdleSessionRefreshDelay { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_V1_SessionPoolOptions_IdleSessionRefreshDelay_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This property must always be positive. The default value is 15 minutes.
+</p>
+<p>
+The exact value used is subject to &quot;jitter&quot; to avoid a lot of sessions being refreshed at the exact same time.
+</p>
+<p>
+A lower value will cause sessions to be refreshed more often, slightly reducing the risk of sessions expiring
+while being used, at the cost of performing more refreshes.
+</p>
+<p>
+This value must be less than the expire timer on the Spanner server which is currently set at 60 minutes.
+</p>
+</div>
   <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MaximumActiveSessions*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MaximumActiveSessions">MaximumActiveSessions</h4>
-  <div class="markdown level1 summary"><p>Maximum number of active sessions that can be in use by the application at any one time.</p>
+  <div class="markdown level1 summary"><p>Maximum number of sessions that can be active per database. An active session is one that has been
+acquired but not yet released back to the pool.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -139,9 +179,12 @@
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This property has a minimum value of 1, and a default value of 100.</p>
+</div>
   <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumConcurrentSessionCreates_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MaximumConcurrentSessionCreates*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumConcurrentSessionCreates" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MaximumConcurrentSessionCreates">MaximumConcurrentSessionCreates</h4>
-  <div class="markdown level1 summary"><p>The maximum number of session create operations allowed to occur simultaneously.
+  <div class="markdown level1 summary"><p>The maximum number of session create operations allowed to occur simultaneously per session pool.
 Spanner has limits on the number of sessions that can be created concurrently without affecting performance.
 This value is not typically changed.</p>
 </div>
@@ -165,14 +208,15 @@ This value is not typically changed.</p>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumPooledSessions_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MaximumPooledSessions*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumPooledSessions" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MaximumPooledSessions">MaximumPooledSessions</h4>
-  <div class="markdown level1 summary"><p>The maximum number of sessions that can be held in the session pool.</p>
+  <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_MinimumPooledSessions_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MinimumPooledSessions*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_MinimumPooledSessions" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.MinimumPooledSessions">MinimumPooledSessions</h4>
+  <div class="markdown level1 summary"><p>The minimum number of sessions to maintain in the pool of available sessions.
+If the number of pooled sessions falls below this number, more sessions are added automatically.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int MaximumPooledSessions { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int MinimumPooledSessions { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -189,12 +233,14 @@ This value is not typically changed.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_V1_SessionPoolOptions_MinimumPooledSessions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This property has a minimum value of 0, and a default value of 10.</p>
+</div>
   <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_PoolEvictionDelay_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.PoolEvictionDelay*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_PoolEvictionDelay" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.PoolEvictionDelay">PoolEvictionDelay</h4>
-  <div class="markdown level1 summary"><p>The amount of time before sessions get forcibly evicted from the session pool.
-A lower value will cause the process to free sessions more aggressively when they get released
-at the cost of performance due to lower reuse of sessions.
-This value must be less than the expire timer on the Spanner server which is currently set at 60 minutes.</p>
+  <div class="markdown level1 summary"><p>The amount of time before sessions are forcibly evicted from the pool. This is usually in the order of days,
+as sessions can be reused for a long time if they&apos;re suitably refreshed. Deleting long-lasting sessions
+can help with server-side resource management.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -216,9 +262,46 @@ This value must be less than the expire timer on the Spanner server which is cur
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_V1_SessionPoolOptions_PoolEvictionDelay_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This property must always be positive. The default value is 7 days.
+</p>
+<p>
+The exact value used is subject to &quot;jitter&quot; to avoid a lot of sessions being evicted at the exact same time.
+</p>
+<p>
+A lower value will cause sessions to be evicted more often, delaying operations if no sessions are available
+when requested.
+</p>
+</div>
+  <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_SessionLabels_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.SessionLabels*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_SessionLabels" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.SessionLabels">SessionLabels</h4>
+  <div class="markdown level1 summary"><p>Labels to use for any sessions created with this pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, string&gt; SessionLabels { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_Timeout_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.Timeout*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_Timeout" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.Timeout">Timeout</h4>
-  <div class="markdown level1 summary"><p>The total time in seconds allowed for a network call to the Cloud Spanner server, including retries.</p>
+  <div class="markdown level1 summary"><p>The total time in seconds allowed for a network call to the Cloud Spanner server, including retries. This setting
+is applied to calls to create, refresh and delete sessions, as well as beginning transactions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -240,42 +323,20 @@ This value must be less than the expire timer on the Spanner server which is cur
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_UseTransactionWarming_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.UseTransactionWarming*"></a>
-  <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_UseTransactionWarming" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.UseTransactionWarming">UseTransactionWarming</h4>
-  <div class="markdown level1 summary"><p>If set to true, Sessions placed back into the pool will have a new transaction created in the background with
-the same settings that were just used.  This will allow a later consumer of this session to skip creating a new
-transaction if the options were identical.</p>
+  <h5 id="Google_Cloud_Spanner_V1_SessionPoolOptions_Timeout_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This value cannot be negative, but it can be 0. The behavior of a 0 value depends on <a class="xref" href="Google.Cloud.Spanner.V1.SpannerSettings.html#Google_Cloud_Spanner_V1_SpannerSettings_AllowImmediateTimeouts">AllowImmediateTimeouts</a>.
+The default value is 60.
+</p>
 </div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool UseTransactionWarming { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_WaitOnResourcesExhausted_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.WaitOnResourcesExhausted*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_WaitOnResourcesExhausted" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.WaitOnResourcesExhausted">WaitOnResourcesExhausted</h4>
-  <div class="markdown level1 summary"><p>If true, then CreateSessionFromPoolAsync will block until CurrentActiveSessions is less than MaximumActiveSessions
-If false, then CreateSessionFromPoolAsync will throw an exception if CurrentActiveSessions is equal to or greater than
-MaximumActiveSessions</p>
+  <div class="markdown level1 summary"><p>Determines the behavior of a request for a session when <a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html#Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions">MaximumActiveSessions</a> has been reached.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool WaitOnResourcesExhausted { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public ResourcesExhaustedBehavior WaitOnResourcesExhausted { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -287,11 +348,45 @@ MaximumActiveSessions</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.ResourcesExhaustedBehavior.html">ResourcesExhaustedBehavior</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Cloud_Spanner_V1_SessionPoolOptions_WaitOnResourcesExhausted_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The default value is <a class="xref" href="Google.Cloud.Spanner.V1.ResourcesExhaustedBehavior.html#Google_Cloud_Spanner_V1_ResourcesExhaustedBehavior_Block">Block</a>.</p>
+</div>
+  <a id="Google_Cloud_Spanner_V1_SessionPoolOptions_WriteSessionsFraction_" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.WriteSessionsFraction*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_SessionPoolOptions_WriteSessionsFraction" data-uid="Google.Cloud.Spanner.V1.SessionPoolOptions.WriteSessionsFraction">WriteSessionsFraction</h4>
+  <div class="markdown level1 summary"><p>Fraction of sessions to be kept prepared for write transactions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double WriteSessionsFraction { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_V1_SessionPoolOptions_WriteSessionsFraction_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This is an optimisation to avoid the cost of sending a BeginTransaction() rpc. If all such sessions are in use and a
+write request comes, we will make the BeginTransaction() rpc inline.
+</p>
+<p>This property must always be in the range 0-1 (inclusive). The default value is 0.2.</p>
+</div>
 </article>
           </div>
           

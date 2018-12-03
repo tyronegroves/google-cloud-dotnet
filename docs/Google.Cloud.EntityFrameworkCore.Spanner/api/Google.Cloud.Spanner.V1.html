@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Google.Cloud.Spanner.V1
    | Google.Cloud.EntityFrameworkCore.Spanner ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -230,6 +230,10 @@ or [PartitionRead][google.spanner.v1.Spanner.PartitionRead]</p>
       <section><p>Condensed representation of a node and its subtree. Only present for
 <code>SCALAR</code> [PlanNode(s)][google.spanner.v1.PlanNode].</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.PooledSession.html">PooledSession</a></h4>
+      <section><p>A session from a <a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a>, with an associated transaction if
+requested. Instances must be released back to the pool via <a class="xref" href="Google.Cloud.Spanner.V1.PooledSession.html#Google_Cloud_Spanner_V1_PooledSession_ReleaseToPool_System_Boolean_">ReleaseToPool(Boolean)</a>.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.QueryPlan.html">QueryPlan</a></h4>
       <section><p>Contains an ordered list of nodes appearing in the query plan.</p>
 </section>
@@ -261,17 +265,17 @@ chunking and recoverable errors.</p>
       <section><p>Resource name for the &apos;session&apos; resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a></h4>
-      <section><p>The SessionPool is the preferred method of managing Spanner Sessions.
-It performs pooling of sessions with an evict timer along with configurable settings to control the maximum
-number of pooled and active sessions.
-To create a session using the sessionpool, use the extension method on SpannerClient.</p>
-<p>var session = await SpannerClient.CreateSessionFromPoolAsync(project, spannerInstance, database, cancellationtoken);</p>
-<p>To release a session back to the sessionpool:</p>
-<p>session.ReleaseToPool();</p>
-<p>If you use the SessionPool, you must make sure sessions are properly released back into the pool and are not simply GC&apos;d.
-Allowing a session to GC will incur penalties on the current process as the session will count towards the maximum allowed
-and it will incur a penalty on other Spanner processes because it will be an hour before the server frees the session if 
-it&apos;s not properly deleted.</p>
+      <section><p>A pool of sessions associated with a SpannerClient.
+Sessions can be acquired by specifying the desired transaction options, if any.
+A session/transaction pair is then returned, which should be returned to the pool when
+it is no longer required. Sessions are kept alive automatically, and retired if they
+are expired by the server.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.DatabaseStatistics.html">SessionPool.DatabaseStatistics</a></h4>
+      <section><p>A snapshot of statistics for one database within a <a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.Statistics.html">SessionPool.Statistics</a></h4>
+      <section><p>A snapshot of statistics for a <a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html">SessionPoolOptions</a></h4>
       <section><p>Options for session pools.</p>
@@ -324,7 +328,7 @@ active transaction is completed, the session can immediately be
 re-used for the next transaction. It is not necessary to create a
 new session for each transaction.</p>
 <h1 id="transaction-modes">Transaction Modes</h1>
-<p>Cloud Spanner supports two transaction modes:</p>
+<p>Cloud Spanner supports three transaction modes:</p>
 <ol>
 <li><p>Locking read-write. This type of transaction is the only way
 to write data into Cloud Spanner. These transactions rely on
@@ -337,6 +341,13 @@ consistency across several reads, but does not allow
 writes. Snapshot read-only transactions can be configured to
 read at timestamps in the past. Snapshot read-only
 transactions do not need to be committed.</p>
+</li>
+<li><p>Partitioned DML. This type of transaction is used to execute
+a single Partitioned DML statement. Partitioned DML partitions
+the key space and runs the DML statement over each partition
+in parallel using separate, internal transactions that commit
+independently. Partitioned DML transactions do not need to be
+committed.</p>
 </li>
 </ol>
 <p>For transactions that only read, snapshot read-only transactions
@@ -360,11 +371,8 @@ transaction has not been terminated by
 [Rollback][google.spanner.v1.Spanner.Rollback].  Long periods of
 inactivity at the client may cause Cloud Spanner to release a
 transaction&apos;s locks and abort it.</p>
-<p>Reads performed within a transaction acquire locks on the data
-being read. Writes can only be done at commit time, after all reads
-have been completed.
-Conceptually, a read-write transaction consists of zero or more
-reads or SQL queries followed by
+<p>Conceptually, a read-write transaction consists of zero or more
+reads or SQL statements followed by
 [Commit][google.spanner.v1.Spanner.Commit]. At any time before
 [Commit][google.spanner.v1.Spanner.Commit], the client can send a
 [Rollback][google.spanner.v1.Spanner.Rollback] request to abort the
@@ -416,8 +424,8 @@ collection policy is generous enough that most applications do not
 need to worry about this in practice.</p>
 <p>Snapshot read-only transactions do not need to call
 [Commit][google.spanner.v1.Spanner.Commit] or
-[Rollback]<a href="and in fact are not
-permitted to do so">google.spanner.v1.Spanner.Rollback</a>.</p>
+[Rollback][google.spanner.v1.Spanner.Rollback] (and in fact are not
+permitted to do so).</p>
 <p>To execute a snapshot transaction, the client specifies a timestamp
 bound, which tells Cloud Spanner how to choose a read timestamp.</p>
 <p>The types of timestamp bound are:</p>
@@ -492,9 +500,64 @@ at read timestamps more than one hour in the past. This
 restriction also applies to in-progress reads and/or SQL queries whose
 timestamp become too old while executing. Reads and SQL queries with
 too-old read timestamps fail with the error <code>FAILED_PRECONDITION</code>.</p>
+<h2 id="partitioned-dml-transactions">Partitioned DML Transactions</h2>
+<p>Partitioned DML transactions are used to execute DML statements with a
+different execution strategy that provides different, and often better,
+scalability properties for large, table-wide operations than DML in a
+ReadWrite transaction. Smaller scoped statements, such as an OLTP workload,
+should prefer using ReadWrite transactions.</p>
+<p>Partitioned DML partitions the keyspace and runs the DML statement on each
+partition in separate, internal transactions. These transactions commit
+automatically when complete, and run independently from one another.</p>
+<p>To reduce lock contention, this execution strategy only acquires read locks
+on rows that match the WHERE clause of the statement. Additionally, the
+smaller per-partition transactions hold locks for less time.</p>
+<p>That said, Partitioned DML is not a drop-in replacement for standard DML used
+in ReadWrite transactions.</p>
+<ul>
+<li><p>The DML statement must be fully-partitionable. Specifically, the statement
+must be expressible as the union of many statements which each access only
+a single row of the table.</p>
+</li>
+<li><p>The statement is not applied atomically to all rows of the table. Rather,
+the statement is applied atomically to partitions of the table, in
+independent transactions. Secondary index rows are updated atomically
+with the base table rows.</p>
+</li>
+<li><p>Partitioned DML does not guarantee exactly-once execution semantics
+against a partition. The statement will be applied at least once to each
+partition. It is strongly recommended that the DML statement should be
+idempotent to avoid unexpected results. For instance, it is potentially
+dangerous to run a statement such as
+<code>UPDATE table SET column = column + 1</code> as it could be run multiple times
+against some rows.</p>
+</li>
+<li><p>The partitions are committed automatically - there is no support for
+Commit or Rollback. If the call returns an error, or if the client issuing
+the ExecuteSql call dies, it is possible that some rows had the statement
+executed on them successfully. It is also possible that statement was
+never executed against other rows.</p>
+</li>
+<li><p>Partitioned DML transactions may only contain the execution of a single
+DML statement via ExecuteSql or ExecuteStreamingSql.</p>
+</li>
+<li><p>If any error is encountered during the execution of the partitioned DML
+operation (for instance, a UNIQUE INDEX violation, division by zero, or a
+value that cannot be stored due to schema constraints), then the
+operation is stopped at that point and an error is returned. It is
+possible that at this point, some partitions have been committed (or even
+committed multiple times), and other partitions have not been run at all.</p>
+</li>
+</ul>
+<p>Given the above, Partitioned DML is good fit for large, database-wide,
+operations that are idempotent, such as deleting old rows from a very large
+table.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionOptions.Types.html">TransactionOptions.Types</a></h4>
       <section><p>Container for nested types declared in the TransactionOptions message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionOptions.Types.PartitionedDml.html">TransactionOptions.Types.PartitionedDml</a></h4>
+      <section><p>Message type to initiate a Partitioned DML transaction.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionOptions.Types.ReadOnly.html">TransactionOptions.Types.ReadOnly</a></h4>
       <section><p>Message type to initiate a read-only transaction.</p>
@@ -502,12 +565,6 @@ too-old read timestamps fail with the error <code>FAILED_PRECONDITION</code>.</p
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionOptions.Types.ReadWrite.html">TransactionOptions.Types.ReadWrite</a></h4>
       <section><p>Message type to initiate a read-write transaction. Currently this
 transaction type has no options.</p>
-</section>
-      <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionPool.html">TransactionPool</a></h4>
-      <section><p>The TransactionPool works in conjunction with the Session pool to warm pooled Sessions
-with the transaction semantics it last used (if appropriate).
-When requesting a pooled session, the request can include TransactionOptions which
-is then used as a key in the SessionPool.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionSelector.html">TransactionSelector</a></h4>
       <section><p>This message is used to select the transaction in which a
@@ -528,7 +585,7 @@ table cell or returned from an SQL query.</p>
       <section><p>Enum of possible cases for the &quot;transaction&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteSqlRequest.Types.QueryMode.html">ExecuteSqlRequest.Types.QueryMode</a></h4>
-      <section><p>Mode in which the query must be processed.</p>
+      <section><p>Mode in which the statement must be processed.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.KeyRange.EndKeyTypeOneofCase.html">KeyRange.EndKeyTypeOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;end_key_type&quot; oneof.</p>
@@ -542,6 +599,13 @@ table cell or returned from an SQL query.</p>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.PlanNode.Types.Kind.html">PlanNode.Types.Kind</a></h4>
       <section><p>The kind of [PlanNode][google.spanner.v1.PlanNode]. Distinguishes between the two different kinds of
 nodes that can appear in a query plan.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResourcesExhaustedBehavior.html">ResourcesExhaustedBehavior</a></h4>
+      <section><p>Specifies the behavior when <a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html#Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions">MaximumActiveSessions</a>
+is reached.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResultSetStats.RowCountOneofCase.html">ResultSetStats.RowCountOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;row_count&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionOptions.ModeOneofCase.html">TransactionOptions.ModeOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;mode&quot; oneof.</p>

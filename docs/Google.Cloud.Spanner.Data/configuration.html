@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuration | Google.Cloud.Spanner.Data </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuration | Google.Cloud.Spanner.Data ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuration">Configuration</h1>
+
+<p>Many applications will only ever need to configure Spanner in terms
+of the database to connect via the connection string. (The database
+name consists of a project ID, instance ID and database ID.)</p>
+<p>Beyond that, configuration is largely for the sake of diagnostics
+and performance tuning. There are two main sources for configuration:</p>
+<ul>
+<li>The connection string provided to <code>SpannerConnection</code>. Options
+here are also exposed as properties on
+<code>SpannerConnectionStringBuilder</code></li>
+<li>The session pool options, as exposed via
+<code>Google.Cloud.Spanner.V1.SessionPoolOptions</code>.</li>
+</ul>
+<p>The connection string options are <a href="connection_string.html">specified in this
+document</a>. The remaining options relate to the
+session pool, which handles acquiring, refreshing and evicting
+sessions. Spanner sessions are relatively expensive (in terms of
+time) to create, so it&#39;s important that they are handled
+appropriately.</p>
+<h2 id="session-pool-options-explained">Session pool options explained</h2>
+<p><code>SessionPoolOptions</code> exposes the following properties:</p>
+<p><strong>MaximumActiveSessions</strong></p>
+<p>Default value: 100</p>
+<p>The maximum number of sessions that can be active per database. An
+active session is one that has been acquired but not yet released
+back to the pool. Broadly speaking, this is equivalent to the number
+of concurrent Spanner-based operations your application will be able
+to perform.</p>
+<p>Applications may wish to change this setting if they require high
+levels of concurrency.</p>
+<p><strong>MinimumPooledSessions</strong></p>
+<p>Default value: 10</p>
+<p>The minimum number of sessions to maintain in the pool of available
+sessions, on a per-database basis. If the number of pooled sessions
+falls below this number, more sessions are added automatically,
+unless that would require more than the configured maximum active
+session count. (Setting the minimum pool size to a larger value than
+the maximum active session count has no purpose; the size will still
+be bounded by the maximum active session count.)</p>
+<p>Applications may wish to change this setting if they are likely to
+encounter sudden bursts of requests, and don&#39;t wish to have to wait
+for sessions to be created.</p>
+<p><strong>WriteSessionsFraction</strong></p>
+<p>Default value: 0.2</p>
+<p>The session pool maintains sessions in two states:</p>
+<ul>
+<li>Without a transaction</li>
+<li>With a read/write transaction</li>
+</ul>
+<p>The value of this setting determines how many sessions to keep in
+each state. For example, with the default value of 0.2, roughly 20%
+of sessions will be pooled with a read/write transaction.</p>
+<p>When a session is acquired, if there is not one already available
+with the requested transaction options, a transaction can be
+requested. Using a session which was previously associated with a
+read/write transaction for operations which don&#39;t use that
+transaction does not affect the behavior; it just wastes the small
+amount of time spent creating the transaction to start with.</p>
+<p>Increasing this value will increase the average time taken to release a
+session back to the pool, as more read/write transactions will be
+acquired as part of that operation. However, acquiring sessions with
+read/write transactions from the pool will then be faster.</p>
+<p>Applications that are aware of their usage patterns ahead of time
+may wish to change this setting to reduce latency. This is
+particularly true for applications which only perform read-only
+operations (in which case this value should be set to 0) or only
+perform operations using read/write transactions (in which case this
+value should be set to 1.0).</p>
+<p><strong>IdleSessionRefreshDelay</strong></p>
+<p>Default value: 15 minutes</p>
+<p>After this amount of time, a session which has been idle is
+refreshed automatically.</p>
+<p>Sessions that are unused for long periods of time can be invalidated
+by the server. The session pool periodically checks whether pooled
+sessions need refreshing. When a session needs refreshing, the pool
+just executes a simple query using that session. Sessions are
+additionally checked for refresh when they are released back to the
+pool. Jitter is applied to the session refresh to avoid large
+numbers of sessions all being refreshed at exactly the same time.</p>
+<p>Applications rarely need to change this setting.</p>
+<p><strong>PoolEvictionDelay</strong></p>
+<p>Default value: 7 days</p>
+<p>Processes that run for extended periods may refresh sessions many
+times, and the server will generally permit this indefinitely.
+However, that puts a strain on server-side resource management. This
+setting controls the time after which sessions are evicted. Like
+refresh settings, jitter is applied so that sessions are not evicted
+all at once.</p>
+<p>Applications rarely need to change this setting.</p>
+<p><strong>WaitOnResourcesExhausted</strong></p>
+<p>Default value: Block</p>
+<p>This enum value controls the behavior when an application requests a
+new session despite having already acquired the maximum number of
+active sessions.</p>
+<p>The default value (<code>Block</code>) will block the pending
+session acquisition operation until a session is available. This
+allows an application to continue to function correctly, but with
+reduced responsiveness.</p>
+<p>The value of <code>Fail</code> will cause the pending session acquisition to
+throw an exception. This is useful for spotting resource leaks, and
+some applications may prefer a swift failure over a delayed response
+when the application is heavily loaded.</p>
+<p><strong>Timeout</strong></p>
+<p>Default value: 60</p>
+<p>The total time in seconds allowed for a network call to the Cloud
+Spanner server, including retries. This setting is applied to calls
+to create, refresh and delete sessions, as well as beginning
+transactions.</p>
+<p>Applications rarely need to change this setting</p>
+<p><strong>MaximumConcurrentSessionCreates</strong></p>
+<p>Default value: 10</p>
+<p>Spanner has limits on the number of sessions that can be created
+concurrently without affecting performance. The session pool uses
+this setting to throttle the number of concurrent session creation
+operations, across all databases.</p>
+<p>Applications rarely need to change this setting.</p>
+<p><strong>SessionLabels</strong></p>
+<p>Default value: empty</p>
+<p><code>SessionLabels</code> is a read-only property which returns a mutable
+string-to-string dictionary.</p>
+<p>When sessions are created, they can have key/value pairs as
+<em>labels</em>. These can be used diagnostically. For example, if your
+applicaiton contains a number of services, each service could use a
+different value for a &quot;service&quot; label so you could tell which
+services are creating how many sessions. You could additionally have
+a separate &quot;service-instance&quot; label for each instance of the service.</p>
+<h2 id="modifying-the-default-sessionpooloptions-from-adonet">Modifying the default SessionPoolOptions from ADO.NET</h2>
+<p>When using the ADO.NET implementation (Google.Cloud.Spanner.Data), a
+<code>SessionPoolManager</code> is used to create <code>SessionPool</code> instances based
+on the connection string. (Different endpoints would require
+different pools, for example.) Each <code>SessionPoolManager</code> has a set
+of <code>SessionPoolOptions</code> that it uses whenever it creates a new
+<code>SessionPool</code>. It&#39;s easy to modify the options used by
+the default <code>SessionPoolManager</code>. For example, to change the minimum
+number of sessions in each session pool:</p>
+<pre><code class="lang-csharp">SessionPoolManager.Default.SessionOptions.MinimumPooledSessions = 100;
+</code></pre><p>Any changes to the options should be made before the first Spanner
+operation is executed. Changes to the options used by a
+<code>SessionPool</code> after it has become active <em>may</em> still take effect,
+but that varies by option and may change over time as an
+implementation detail.</p>
+<h2 id="using-a-non-default-sessionpoolmanager">Using a non-default SessionPoolManager</h2>
+<p>An alternative to modifying the options used by the default
+<code>SessionPoolManager</code> is to create a new manager object with a new
+set of options. The <code>SessionPoolManager</code> can then be set in
+<code>SpannerConnectionStringBuilder</code> which is then used to build a
+<code>SpannerConnection</code>. For example:</p>
+<pre><code class="lang-cs">SessionPoolOptions options = new SessionPoolOptions
+{
+    MinimumPooledSessions = 100,
+    MaximumActiveSessions = 250,
+    SessionLabels =
+    {
+        { &quot;service&quot;, &quot;sales-report-generator&quot; },
+        { &quot;service-instance&quot;, instanceId }
+    }
+};
+SessionPoolManager manager = SessionPoolManager.Create(options);
+
+// Note: a single SpannerConnectionStringBuilder instance can be reused whenever you
+// need to build a connection
+SpannerConnectionStringBuilder builder = new SpannerConnectionStringBuilder(connectionString)
+{
+    SessionPoolManager = manager
+};
+
+// (Elsewhere in your code...)
+using (SpannerConnection connection = new SpannerConnection(builder))
+{
+    // Use the connection
+}
+</code></pre></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

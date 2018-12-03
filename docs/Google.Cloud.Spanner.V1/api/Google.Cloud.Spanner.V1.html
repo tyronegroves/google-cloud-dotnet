@@ -230,6 +230,10 @@ or [PartitionRead][google.spanner.v1.Spanner.PartitionRead]</p>
       <section><p>Condensed representation of a node and its subtree. Only present for
 <code>SCALAR</code> [PlanNode(s)][google.spanner.v1.PlanNode].</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.PooledSession.html">PooledSession</a></h4>
+      <section><p>A session from a <a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a>, with an associated transaction if
+requested. Instances must be released back to the pool via <a class="xref" href="Google.Cloud.Spanner.V1.PooledSession.html#Google_Cloud_Spanner_V1_PooledSession_ReleaseToPool_System_Boolean_">ReleaseToPool(Boolean)</a>.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.QueryPlan.html">QueryPlan</a></h4>
       <section><p>Contains an ordered list of nodes appearing in the query plan.</p>
 </section>
@@ -261,17 +265,17 @@ chunking and recoverable errors.</p>
       <section><p>Resource name for the &apos;session&apos; resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a></h4>
-      <section><p>The SessionPool is the preferred method of managing Spanner Sessions.
-It performs pooling of sessions with an evict timer along with configurable settings to control the maximum
-number of pooled and active sessions.
-To create a session using the sessionpool, use the extension method on SpannerClient.</p>
-<p>var session = await SpannerClient.CreateSessionFromPoolAsync(project, spannerInstance, database, cancellationtoken);</p>
-<p>To release a session back to the sessionpool:</p>
-<p>session.ReleaseToPool();</p>
-<p>If you use the SessionPool, you must make sure sessions are properly released back into the pool and are not simply GC&apos;d.
-Allowing a session to GC will incur penalties on the current process as the session will count towards the maximum allowed
-and it will incur a penalty on other Spanner processes because it will be an hour before the server frees the session if 
-it&apos;s not properly deleted.</p>
+      <section><p>A pool of sessions associated with a SpannerClient.
+Sessions can be acquired by specifying the desired transaction options, if any.
+A session/transaction pair is then returned, which should be returned to the pool when
+it is no longer required. Sessions are kept alive automatically, and retired if they
+are expired by the server.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.DatabaseStatistics.html">SessionPool.DatabaseStatistics</a></h4>
+      <section><p>A snapshot of statistics for one database within a <a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.Statistics.html">SessionPool.Statistics</a></h4>
+      <section><p>A snapshot of statistics for a <a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.html">SessionPool</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html">SessionPoolOptions</a></h4>
       <section><p>Options for session pools.</p>
@@ -562,12 +566,6 @@ table.</p>
       <section><p>Message type to initiate a read-write transaction. Currently this
 transaction type has no options.</p>
 </section>
-      <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionPool.html">TransactionPool</a></h4>
-      <section><p>The TransactionPool works in conjunction with the Session pool to warm pooled Sessions
-with the transaction semantics it last used (if appropriate).
-When requesting a pooled session, the request can include TransactionOptions which
-is then used as a key in the SessionPool.</p>
-</section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.TransactionSelector.html">TransactionSelector</a></h4>
       <section><p>This message is used to select the transaction in which a
 [Read][google.spanner.v1.Spanner.Read] or
@@ -601,6 +599,10 @@ table cell or returned from an SQL query.</p>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.PlanNode.Types.Kind.html">PlanNode.Types.Kind</a></h4>
       <section><p>The kind of [PlanNode][google.spanner.v1.PlanNode]. Distinguishes between the two different kinds of
 nodes that can appear in a query plan.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResourcesExhaustedBehavior.html">ResourcesExhaustedBehavior</a></h4>
+      <section><p>Specifies the behavior when <a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html#Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions">MaximumActiveSessions</a>
+is reached.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResultSetStats.RowCountOneofCase.html">ResultSetStats.RowCountOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;row_count&quot; oneof.</p>
