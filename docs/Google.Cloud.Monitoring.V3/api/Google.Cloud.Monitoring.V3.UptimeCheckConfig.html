@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class UptimeCheckConfig
    | Google.Cloud.Monitoring.V3 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -201,7 +201,7 @@ specified if a content match is required.</p>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_DisplayName_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.DisplayName*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_DisplayName" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.DisplayName">DisplayName</h4>
   <div class="markdown level1 summary"><p>A human-friendly name for the uptime check configuration. The display name
-should be unique within a Stackdriver Account in order to make it easier
+should be unique within a Stackdriver Workspace in order to make it easier
 to identify; however, uniqueness is not enforced. Required.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -251,7 +251,7 @@ to identify; however, uniqueness is not enforced. Required.</p>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_InternalCheckers_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.InternalCheckers*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_InternalCheckers" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.InternalCheckers">InternalCheckers</h4>
   <div class="markdown level1 summary"><p>The internal checkers that this check will egress from. If <code>is_internal</code> is
-true and this list is empty, the check will egress from all
+true and this list is empty, the check will egress from all the
 InternalCheckers configured for the project that owns this CheckConfig.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -276,7 +276,10 @@ InternalCheckers configured for the project that owns this CheckConfig.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_IsInternal_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.IsInternal*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_IsInternal" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.IsInternal">IsInternal</h4>
-  <div class="markdown level1 summary"><p>Denotes whether this is a check that egresses from InternalCheckers.</p>
+  <div class="markdown level1 summary"><p>If this is true, then checks are made only from the &apos;internal_checkers&apos;.
+If it is false, then checks are made only from the &apos;selected_regions&apos;.
+It is an error to provide &apos;selected_regions&apos; when is_internal is true,
+or to provide &apos;internal_checkers&apos; when is_internal is false.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -435,6 +438,7 @@ defaults to <code>300s</code>.</p>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_SelectedRegions_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.SelectedRegions*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_SelectedRegions" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.SelectedRegions">SelectedRegions</h4>
   <div class="markdown level1 summary"><p>The list of regions from which the check will be run.
+Some regions contain one location, and others contain more than one.
 If this field is specified, enough regions to include a minimum of
 3 locations must be provided, or an error message is returned.
 Not specifying this field will result in uptime checks running from all

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class InternalChecker
    | Google.Cloud.Monitoring.V3 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -73,7 +73,8 @@
   
   <h1 id="Google_Cloud_Monitoring_V3_InternalChecker" data-uid="Google.Cloud.Monitoring.V3.InternalChecker" class="text-break">Class InternalChecker
   </h1>
-  <div class="markdown level0 summary"><p>Nimbus InternalCheckers.</p>
+  <div class="markdown level0 summary"><p>An internal checker allows uptime checks to run on private/internal GCP
+resources.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -146,33 +147,11 @@
   </table>
   <h3 id="properties">Properties
   </h3>
-  <a id="Google_Cloud_Monitoring_V3_InternalChecker_CheckerId_" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.CheckerId*"></a>
-  <h4 id="Google_Cloud_Monitoring_V3_InternalChecker_CheckerId" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.CheckerId">CheckerId</h4>
-  <div class="markdown level1 summary"><p>The checker ID.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string CheckerId { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Google_Cloud_Monitoring_V3_InternalChecker_DisplayName_" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.DisplayName*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_InternalChecker_DisplayName" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.DisplayName">DisplayName</h4>
-  <div class="markdown level1 summary"><p>The checker&apos;s human-readable name.</p>
+  <div class="markdown level1 summary"><p>The checker&apos;s human-readable name. The display name
+should be unique within a Stackdriver Workspace in order to make it easier
+to identify; however, uniqueness is not enforced.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -219,9 +198,37 @@ internal uptime checks, where internal_network is specified.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Monitoring_V3_InternalChecker_Name_" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.Name*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_InternalChecker_Name" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.Name">Name</h4>
+  <div class="markdown level1 summary"><p>A unique resource name for this InternalChecker. The format is:</p>
+<p><code>projects/[PROJECT_ID]/internalCheckers/[INTERNAL_CHECKER_ID]</code>.</p>
+<p>PROJECT_ID is the stackdriver workspace project for the
+uptime check config associated with the internal checker.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Monitoring_V3_InternalChecker_Network_" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.Network*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_InternalChecker_Network" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.Network">Network</h4>
-  <div class="markdown level1 summary"><p>The internal network to perform this uptime check on.</p>
+  <div class="markdown level1 summary"><p>The <a href="https://cloud.google.com/vpc/docs/vpc">GCP VPC network</a> where the
+internal resource lives (ex: &quot;default&quot;).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -243,15 +250,15 @@ internal uptime checks, where internal_network is specified.</p>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Monitoring_V3_InternalChecker_ProjectId_" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.ProjectId*"></a>
-  <h4 id="Google_Cloud_Monitoring_V3_InternalChecker_ProjectId" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.ProjectId">ProjectId</h4>
-  <div class="markdown level1 summary"><p>The GCP project ID. Not necessarily the same as the project_id for the
-config.</p>
+  <a id="Google_Cloud_Monitoring_V3_InternalChecker_PeerProjectId_" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.PeerProjectId*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_InternalChecker_PeerProjectId" data-uid="Google.Cloud.Monitoring.V3.InternalChecker.PeerProjectId">PeerProjectId</h4>
+  <div class="markdown level1 summary"><p>The GCP project_id where the internal checker lives. Not necessary
+the same as the workspace project.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string ProjectId { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string PeerProjectId { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
