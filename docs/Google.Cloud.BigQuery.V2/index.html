@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.BigQuery.V2</code> is a.NET client library for the <a href="https://cloud.google.com/bigquery/">Google BigQuery API</a>.
 It wraps the <code>Google.Apis.Bigquery.v2</code> generated library, providing a higher-level API to make it easier to use.</p>
 <p>Note:
-This documentation is for version <code>1.3.0-beta05</code> of the library.
+This documentation is for version <code>1.3.0-beta06</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.BigQuery.V2</code> package from NuGet. Add it to
@@ -74,7 +74,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>1.3.0-beta05</code>) of <code>Google.Cloud.BigQuery.V2</code>.</p>
+pre-release version (<code>1.3.0-beta06</code>) of <code>Google.Cloud.BigQuery.V2</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -179,7 +179,28 @@ table.InsertRow(new BigQueryInsertRow
     { &quot;score&quot;, 85 },
     { &quot;gameStarted&quot;, new DateTime(2000, 1, 14, 10, 30, 0, DateTimeKind.Utc) }
 });
-</code></pre><h2 id="creating-a-table-partitioned-by-time">Creating a table partitioned by time</h2>
+</code></pre><h2 id="dml">DML</h2>
+<p>BigQuery supports
+<a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language">DML</a>.</p>
+<p>Suppose we have a high score table, and we realize that on one day
+we accidentally recorded incorrect scores: each player was only
+awarded half the score they actually earned. We can update the data
+afterwards using DML:</p>
+<pre><code class="lang-cs">BigQueryClient client = BigQueryClient.Create(projectId);
+BigQueryTable table = client.GetTable(datasetId, tableId);
+BigQueryResults result = client.ExecuteQuery(
+    $&quot;UPDATE {table} SET score = score * 2 WHERE DATE(game_started) = @date&quot;,
+    new[] { new BigQueryParameter(&quot;date&quot;, BigQueryDbType.Date, new DateTime(2013, 6, 1)) })
+    .ThrowOnAnyError();
+Console.WriteLine($&quot;Modified {result.NumDmlAffectedRows} row(s)&quot;);
+</code></pre><h3 id="important-note-on-the-result-returned-by-dml-operations">Important note on the result returned by DML operations</h3>
+<p>Iterating over the results of a <code>BigQueryResults</code> object returned
+from a DML operation will iterate over the entire table modified by
+that operation. This is a side-effect of the way the underlying API
+is called, but it&#39;s rarely useful to iterate over the results. The
+<code>NumDmlAffectedRows</code> property of the results object is useful,
+however, in determining how many rows were modified.</p>
+<h2 id="creating-a-table-partitioned-by-time">Creating a table partitioned by time</h2>
 <pre><code class="lang-cs">BigQueryClient client = BigQueryClient.Create(projectId);
 TableSchema schema = new TableSchemaBuilder
 {
