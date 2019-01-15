@@ -118,9 +118,10 @@ City city = new City
 DocumentReference document = await collection.AddAsync(city);
 </code></pre><p>Once created, a document can be modified in multiple ways.</p>
 <h3 id="updating-specific-fields">Updating specific fields</h3>
-<p>Specific fields in the document can be modified using <code>DocumentReference.UpdateAsync</code>. Currently this
-requires a <code>Dictionary&lt;FieldMask, object&gt;</code> to be passed in, but we intend to improve this experience.
-See <a href="furtherwork.html">further work items</a> for more discussion over improving this.</p>
+<p>Specific fields in the document can be modified using
+<code>DocumentReference.UpdateAsync</code>. Single fields can be updated by
+passing in the field name and the new value; to update multiple
+fields, pass in a dictionary mapping each field name to its new value.</p>
 <p>A precondition may be specified for the update.</p>
 <pre><code class="lang-cs">Dictionary&lt;FieldPath, object&gt; updates = new Dictionary&lt;FieldPath, object&gt;
 {

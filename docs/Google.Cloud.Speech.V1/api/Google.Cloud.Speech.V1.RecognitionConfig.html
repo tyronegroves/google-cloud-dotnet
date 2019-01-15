@@ -177,6 +177,35 @@ premium feature.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Speech_V1_RecognitionConfig_EnableSeparateRecognitionPerChannel_" data-uid="Google.Cloud.Speech.V1.RecognitionConfig.EnableSeparateRecognitionPerChannel*"></a>
+  <h4 id="Google_Cloud_Speech_V1_RecognitionConfig_EnableSeparateRecognitionPerChannel" data-uid="Google.Cloud.Speech.V1.RecognitionConfig.EnableSeparateRecognitionPerChannel">EnableSeparateRecognitionPerChannel</h4>
+  <div class="markdown level1 summary"><p>This needs to be set to <code>true</code> explicitly and <code>audio_channel_count</code> &gt; 1
+to get each channel recognized separately. The recognition result will
+contain a <code>channel_tag</code> field to state which channel that result belongs
+to. If this is not true, we will only recognize the first channel. The
+request is billed cumulatively for all channels recognized:
+<code>audio_channel_count</code> multiplied by the length of the audio.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EnableSeparateRecognitionPerChannel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Speech_V1_RecognitionConfig_EnableWordTimeOffsets_" data-uid="Google.Cloud.Speech.V1.RecognitionConfig.EnableWordTimeOffsets*"></a>
   <h4 id="Google_Cloud_Speech_V1_RecognitionConfig_EnableWordTimeOffsets" data-uid="Google.Cloud.Speech.V1.RecognitionConfig.EnableWordTimeOffsets">EnableWordTimeOffsets</h4>
   <div class="markdown level1 summary"><p><em>Optional</em> If <code>true</code>, the top result includes a list of words and
@@ -428,15 +457,20 @@ information, see <a href="/speech-to-text/docs/basics#phrase-hints">Phrase Hints
   <a id="Google_Cloud_Speech_V1_RecognitionConfig_UseEnhanced_" data-uid="Google.Cloud.Speech.V1.RecognitionConfig.UseEnhanced*"></a>
   <h4 id="Google_Cloud_Speech_V1_RecognitionConfig_UseEnhanced" data-uid="Google.Cloud.Speech.V1.RecognitionConfig.UseEnhanced">UseEnhanced</h4>
   <div class="markdown level1 summary"><p><em>Optional</em> Set to true to use an enhanced model for speech recognition.
-You must also set the <code>model</code> field to a valid, enhanced model. If
-<code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
-<code>use_enhanced</code> is ignored. If <code>use_enhanced</code> is true and an enhanced
-version of the specified model does not exist, then the speech is
-recognized using the standard version of the specified model.</p>
+If <code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
+an appropriate enhanced model is chosen if:</p>
+<ol>
+<li>project is eligible for requesting enhanced models</li>
+<li>an enhanced model exists for the audio</li>
+</ol>
+<p>If <code>use_enhanced</code> is true and an enhanced version of the specified model
+does not exist, then the speech is recognized using the standard version
+of the specified model.</p>
 <p>Enhanced speech models require that you opt-in to data logging using
-instructions in the <a href="/speech-to-text/enable-data-logging">documentation</a>.
-If you set <code>use_enhanced</code> to true and you have not enabled audio logging,
-then you will receive an error.</p>
+instructions in the
+<a href="/speech-to-text/docs/enable-data-logging">documentation</a>. If you set
+<code>use_enhanced</code> to true and you have not enabled audio logging, then you
+will receive an error.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
