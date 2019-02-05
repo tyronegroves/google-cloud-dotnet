@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class JobControllerClient
    | Google.Cloud.Dataproc.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -1762,7 +1762,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListJobsResponse, Job&gt; ListJobs(string projectId, string region, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListJobsResponse, Job&gt; ListJobs(string projectId, string region, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1835,6 +1835,134 @@ string region = &quot;&quot;;
 // Make the request
 PagedEnumerable&lt;ListJobsResponse, Job&gt; response =
     jobControllerClient.ListJobs(projectId, region);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Job item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListJobsResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Job item in page)
+    {
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Job&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Job item in singlePage)
+{
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dataproc_V1_JobControllerClient_ListJobs_" data-uid="Google.Cloud.Dataproc.V1.JobControllerClient.ListJobs*"></a>
+  <h4 id="Google_Cloud_Dataproc_V1_JobControllerClient_ListJobs_System_String_System_String_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dataproc.V1.JobControllerClient.ListJobs(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListJobs(String, String, String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists regions/{region}/jobs in a project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListJobsResponse, Job&gt; ListJobs(string projectId, string region, string filter, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">projectId</span></td>
+        <td><p>Required. The ID of the Google Cloud Platform project that the job
+belongs to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">region</span></td>
+        <td><p>Required. The Cloud Dataproc region in which to handle the request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Optional. A filter constraining the jobs to list. Filters are
+case-sensitive and have the following syntax:</p>
+<p>[field = value] AND [field [= value]] ...</p>
+<p>where <strong>field</strong> is <code>status.state</code> or <code>labels.[KEY]</code>, and <code>[KEY]</code> is a label
+key. <strong>value</strong> can be <code>*</code> to match all values.
+<code>status.state</code> can be either <code>ACTIVE</code> or <code>NON_ACTIVE</code>.
+Only the logical <code>AND</code> operator is supported; space-separated items are
+treated as having an implicit <code>AND</code> operator.</p>
+<p>Example filter:</p>
+<p>status.state = ACTIVE AND labels.env = staging AND labels.starred = *</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Dataproc.V1.ListJobsResponse.html">ListJobsResponse</a>, <a class="xref" href="Google.Cloud.Dataproc.V1.Job.html">Job</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Dataproc.V1.Job.html">Job</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dataproc_V1_JobControllerClient_ListJobs_System_String_System_String_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+JobControllerClient jobControllerClient = JobControllerClient.Create();
+// Initialize request argument(s)
+string projectId = &quot;&quot;;
+string region = &quot;&quot;;
+string filter = &quot;&quot;;
+// Make the request
+PagedEnumerable&lt;ListJobsResponse, Job&gt; response =
+    jobControllerClient.ListJobs(projectId: projectId, region: region, filter: filter);
 
 // Iterate over all response items, lazily performing RPCs as required
 foreach (Job item in response)
@@ -1968,7 +2096,7 @@ string nextPageToken = singlePage.NextPageToken;
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; ListJobsAsync(string projectId, string region, string pageToken = null, int? pageSize = default (int? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; ListJobsAsync(string projectId, string region, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2041,6 +2169,134 @@ string region = &quot;&quot;;
 // Make the request
 PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; response =
     jobControllerClient.ListJobsAsync(projectId, region);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Job item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListJobsResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Job item in page)
+    {
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Job&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Job item in singlePage)
+{
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dataproc_V1_JobControllerClient_ListJobsAsync_" data-uid="Google.Cloud.Dataproc.V1.JobControllerClient.ListJobsAsync*"></a>
+  <h4 id="Google_Cloud_Dataproc_V1_JobControllerClient_ListJobsAsync_System_String_System_String_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dataproc.V1.JobControllerClient.ListJobsAsync(System.String,System.String,System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListJobsAsync(String, String, String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists regions/{region}/jobs in a project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; ListJobsAsync(string projectId, string region, string filter, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">projectId</span></td>
+        <td><p>Required. The ID of the Google Cloud Platform project that the job
+belongs to.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">region</span></td>
+        <td><p>Required. The Cloud Dataproc region in which to handle the request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Optional. A filter constraining the jobs to list. Filters are
+case-sensitive and have the following syntax:</p>
+<p>[field = value] AND [field [= value]] ...</p>
+<p>where <strong>field</strong> is <code>status.state</code> or <code>labels.[KEY]</code>, and <code>[KEY]</code> is a label
+key. <strong>value</strong> can be <code>*</code> to match all values.
+<code>status.state</code> can be either <code>ACTIVE</code> or <code>NON_ACTIVE</code>.
+Only the logical <code>AND</code> operator is supported; space-separated items are
+treated as having an implicit <code>AND</code> operator.</p>
+<p>Example filter:</p>
+<p>status.state = ACTIVE AND labels.env = staging AND labels.starred = *</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Dataproc.V1.ListJobsResponse.html">ListJobsResponse</a>, <a class="xref" href="Google.Cloud.Dataproc.V1.Job.html">Job</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Dataproc.V1.Job.html">Job</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dataproc_V1_JobControllerClient_ListJobsAsync_System_String_System_String_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+JobControllerClient jobControllerClient = await JobControllerClient.CreateAsync();
+// Initialize request argument(s)
+string projectId = &quot;&quot;;
+string region = &quot;&quot;;
+string filter = &quot;&quot;;
+// Make the request
+PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; response =
+    jobControllerClient.ListJobsAsync(projectId: projectId, region: region, filter: filter);
 
 // Iterate over all response items, lazily performing RPCs as required
 await response.ForEachAsync((Job item) =&gt;
