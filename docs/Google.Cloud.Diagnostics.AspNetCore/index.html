@@ -67,7 +67,7 @@ It allows for simple integration of Stackdriver into ASP.NET applications with m
 <p><code>Google.Cloud.Diagnostics.AspNetCore</code> currently supports Stackdriver Error Reporting, Stackdriver Logging
 and Stackdriver Trace.</p>
 <p>Note:
-This documentation is for version <code>3.0.0-beta07</code> of the library.
+This documentation is for version <code>3.0.0-beta08</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Diagnostics.AspNetCore</code> package from NuGet. Add it to
@@ -76,7 +76,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>3.0.0-beta07</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
+pre-release version (<code>3.0.0-beta08</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -111,6 +111,7 @@ as well as the <code>Service</code> and <code>Version</code> with which to ident
 </code></pre><p>You can still initialize the separate components using the extension methods below. This can be useful
 if you only need to use some of the components or, for instance, if you need to access the <code>Configuration</code>
 property on the <code>Startup</code> class to obtain values for <code>ProjectID</code>, <code>Service</code> or <code>Version</code>.</p>
+<h1 id="error-reporting">Error Reporting</h1>
 <h2 id="registering-error-reporting">Registering Error Reporting</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
@@ -162,7 +163,8 @@ public void CatchesAndLogsException(string id, [FromServices]IExceptionLogger ex
         exceptionLogger.Log(e);
     }
 }
-</code></pre><h2 id="initializing-logging">Initializing Logging</h2>
+</code></pre><h1 id="logging">Logging</h1>
+<h2 id="initializing-logging">Initializing Logging</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
     services.AddMvc();
@@ -183,11 +185,11 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
     });
 }
 </code></pre><h2 id="initializing-logging-aspnet-core-20">Initializing Logging (ASP.NET Core 2.0+)</h2>
-<pre><code class="lang-cs">builder = new WebHostBuilder()
+<pre><code class="lang-cs">return new WebHostBuilder()
     .ConfigureServices(services =&gt;
     {
-        // Replace ProjectId with your Google Cloud Project ID.
-        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, ProjectId));
+        // Replace projectId with your Google Cloud Project ID.
+        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId));
     })
     .UseStartup&lt;Startup&gt;();
 </code></pre><h2 id="log">Log</h2>
@@ -204,7 +206,59 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         logger.LogInformation(id);
     }
 }
-</code></pre><h2 id="initializing-tracing">Initializing Tracing</h2>
+</code></pre><h2 id="troubleshooting-logging">Troubleshooting Logging</h2>
+<p>Sometimes it is neccessary to diagnose log operations. It might be that logging is failing or that
+we simply cannot find where the logs are being stored in GCP. What follows are a couple of code samples
+that can be useful to find out what might be wrong with logging operations.</p>
+<h3 id="propagating-exceptions">Propagating Exceptions</h3>
+<p>By default the Google Logger won&#39;t propagate any exceptions thrown during logging. This is to protect the
+application from crashing if logging is not possible. But logging is an important aspect of most applications
+so at times we need to know if it&#39;s failing and why. The following examples show how to configure Google Logger
+so that it propagates exceptions thrown during logging.</p>
+<h4 id="propagating-exceptions-1">Propagating Exceptions</h4>
+<pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc();
+}
+
+public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+{
+    // Explicitly create logger options that will propagate any exceptions thrown
+    // during logging.
+    RetryOptions retryOptions = RetryOptions.NoRetry(ExceptionHandling.Propagate);
+    // Also set the no buffer option so that writing the logs is attempted inmediately.
+    BufferOptions bufferOptions = BufferOptions.NoBuffer();
+    LoggerOptions loggerOptions = LoggerOptions.Create(retryOptions: retryOptions, bufferOptions: bufferOptions);
+
+    // Replace ProjectId with your Google Cloud Project ID.
+    loggerFactory.AddGoogle(app.ApplicationServices, ProjectId, options: loggerOptions);
+
+    // ...any other configuration your application requires.
+
+    app.UseMvc(routes =&gt;
+    {
+        routes.MapRoute(
+            name: &quot;default&quot;,
+            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
+}
+</code></pre><h4 id="propagating-exceptions-aspnet-core-20">Propagating Exceptions (ASP.NET Core 2.0+)</h4>
+<pre><code class="lang-cs">return new WebHostBuilder()
+    .ConfigureServices(services =&gt;
+    {
+        // Explicitly create logger options that will propagate any exceptions thrown
+        // during logging.
+        RetryOptions retryOptions = RetryOptions.NoRetry(ExceptionHandling.Propagate);
+        // Also set the no buffer option so that writing the logs is attempted inmediately.
+        BufferOptions bufferOptions = BufferOptions.NoBuffer();
+        LoggerOptions loggerOptions = LoggerOptions.Create(bufferOptions: bufferOptions, retryOptions: retryOptions);
+
+        // Replace projectId with your Google Cloud Project ID.
+        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId, options: loggerOptions));
+    })
+    .UseStartup&lt;Startup&gt;();
+</code></pre><h1 id="tracing">Tracing</h1>
+<h2 id="initializing-tracing">Initializing Tracing</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
     // The line below is needed for trace ids to be added to logs.
