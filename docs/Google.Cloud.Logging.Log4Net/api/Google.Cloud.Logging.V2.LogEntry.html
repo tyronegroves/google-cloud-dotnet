@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class LogEntry
    | Google.Cloud.Logging.Log4Net ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -174,9 +174,9 @@ log entry, if applicable.</p>
   <a id="Google_Cloud_Logging_V2_LogEntry_InsertId_" data-uid="Google.Cloud.Logging.V2.LogEntry.InsertId*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_InsertId" data-uid="Google.Cloud.Logging.V2.LogEntry.InsertId">InsertId</h4>
   <div class="markdown level1 summary"><p>Optional. A unique identifier for the log entry. If you provide a value,
-then Stackdriver Logging considers other log entries in the same project,
+then Logging considers other log entries in the same project,
 with the same <code>timestamp</code>, and with the same <code>insert_id</code> to be duplicates
-which can be removed.  If omitted in new log entries, then Stackdriver
+which can be removed.  If omitted in new log entries, then
 Logging assigns its own unique identifier. The <code>insert_id</code> is also used
 to order log entries that have the same <code>timestamp</code> value.</p>
 </div>
@@ -417,7 +417,7 @@ entry payloads.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_ReceiveTimestamp_" data-uid="Google.Cloud.Logging.V2.LogEntry.ReceiveTimestamp*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_ReceiveTimestamp" data-uid="Google.Cloud.Logging.V2.LogEntry.ReceiveTimestamp">ReceiveTimestamp</h4>
-  <div class="markdown level1 summary"><p>Output only. The time the log entry was received by Stackdriver Logging.</p>
+  <div class="markdown level1 summary"><p>Output only. The time the log entry was received by Logging.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -518,8 +518,8 @@ if any.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_SpanId_" data-uid="Google.Cloud.Logging.V2.LogEntry.SpanId*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_SpanId" data-uid="Google.Cloud.Logging.V2.LogEntry.SpanId">SpanId</h4>
-  <div class="markdown level1 summary"><p>Optional. The span ID within the trace associated with the log entry. For
-Stackdriver Trace spans, this is the same format that the Stackdriver Trace
+  <div class="markdown level1 summary"><p>Optional. The span ID within the trace associated with the log entry.
+For Trace spans, this is the same format that the Trace
 API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such
 as &lt;code&gt;&quot;000000000000004a&quot;&lt;/code&gt;.</p>
 </div>
@@ -572,7 +572,7 @@ as &lt;code&gt;&quot;000000000000004a&quot;&lt;/code&gt;.</p>
   <div class="markdown level1 summary"><p>Optional. The time the event described by the log entry occurred.
 This time is used to compute the log entry&apos;s age and to enforce
 the logs retention period. If this field is omitted in a new log
-entry, then Stackdriver Logging assigns it the current time.
+entry, then Logging assigns it the current time.
 Timestamps have nanosecond accuracy, but trailing zeros in the fractional
 seconds might be omitted when the timestamp is displayed.</p>
 <p>Incoming log entries should have timestamps that are no more than
@@ -625,6 +625,35 @@ to <code>//tracing.googleapis.com</code>. Example:
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Logging_V2_LogEntry_TraceSampled_" data-uid="Google.Cloud.Logging.V2.LogEntry.TraceSampled*"></a>
+  <h4 id="Google_Cloud_Logging_V2_LogEntry_TraceSampled" data-uid="Google.Cloud.Logging.V2.LogEntry.TraceSampled">TraceSampled</h4>
+  <div class="markdown level1 summary"><p>Optional. The sampling decision of the trace associated with the log entry.
+True means that the trace resource name in the <code>trace</code> field was sampled
+for storage in a trace backend. False means that the trace was not sampled
+for storage when this log entry was written, or the sampling decision was
+unknown at the time. A non-sampled <code>trace</code> value is still useful as a
+request correlation identifier. The default is False.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TraceSampled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>
