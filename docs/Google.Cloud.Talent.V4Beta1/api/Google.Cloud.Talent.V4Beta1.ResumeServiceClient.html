@@ -429,8 +429,9 @@ await channel.ShutdownAsync();</code></pre>
 
   <a id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResume_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResume*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResume_Google_Api_Gax_ResourceNames_ProjectName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResume(Google.Api.Gax.ResourceNames.ProjectName,Google.Protobuf.ByteString,Google.Api.Gax.Grpc.CallSettings)">ParseResume(ProjectName, ByteString, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The API attempts to fill out the
-following profile fields if present within the resume:</p>
+  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The
+API attempts to fill out the following profile fields if present within the
+resume:</p>
 <ul>
 <li>personNames</li>
 <li>addresses</li>
@@ -446,15 +447,16 @@ not present within the resume or unrecognizable by the resume parser.</p>
 <p>This API does not save the resume or profile. To create a profile from this
 resume, clients need to call the CreateProfile method again with the
 profile returned.</p>
-<p>This API supports the following list of formats:</p>
+<p>The following list of formats are supported:</p>
 <ul>
 <li>PDF</li>
 <li>TXT</li>
 <li>DOC</li>
 <li>RTF</li>
 <li>DOCX</li>
+<li>PNG (only when [ParseResumeRequest.enable_ocr][] is set to <code>true</code>,
+otherwise an error is thrown)</li>
 </ul>
-<p>An error is thrown if the input format is not supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -484,9 +486,9 @@ profile returned.</p>
         <td><a class="xref" href="Google.Protobuf.ByteString.html">ByteString</a></td>
         <td><span class="parametername">resume</span></td>
         <td><p>Required.</p>
-<p>The bytes of the resume file in common format. Currently the API supports
-the following formats:
-PDF, TXT, DOC, RTF and DOCX.</p>
+<p>The bytes of the resume file in common format, for example, PDF, TXT.
+UTF-8 encoding is required if the resume is text-based, otherwise an error
+is thrown.</p>
 </td>
       </tr>
       <tr>
@@ -526,8 +528,9 @@ ParseResumeResponse response = resumeServiceClient.ParseResume(parent, resume);
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResume_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResume*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResume_Google_Cloud_Talent_V4Beta1_ParseResumeRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResume(Google.Cloud.Talent.V4Beta1.ParseResumeRequest,Google.Api.Gax.Grpc.CallSettings)">ParseResume(ParseResumeRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The API attempts to fill out the
-following profile fields if present within the resume:</p>
+  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The
+API attempts to fill out the following profile fields if present within the
+resume:</p>
 <ul>
 <li>personNames</li>
 <li>addresses</li>
@@ -543,15 +546,16 @@ not present within the resume or unrecognizable by the resume parser.</p>
 <p>This API does not save the resume or profile. To create a profile from this
 resume, clients need to call the CreateProfile method again with the
 profile returned.</p>
-<p>This API supports the following list of formats:</p>
+<p>The following list of formats are supported:</p>
 <ul>
 <li>PDF</li>
 <li>TXT</li>
 <li>DOC</li>
 <li>RTF</li>
 <li>DOCX</li>
+<li>PNG (only when [ParseResumeRequest.enable_ocr][] is set to <code>true</code>,
+otherwise an error is thrown)</li>
 </ul>
-<p>An error is thrown if the input format is not supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -614,8 +618,9 @@ ParseResumeResponse response = resumeServiceClient.ParseResume(request);
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Protobuf.ByteString,Google.Api.Gax.Grpc.CallSettings)">ParseResumeAsync(ProjectName, ByteString, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The API attempts to fill out the
-following profile fields if present within the resume:</p>
+  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The
+API attempts to fill out the following profile fields if present within the
+resume:</p>
 <ul>
 <li>personNames</li>
 <li>addresses</li>
@@ -631,15 +636,16 @@ not present within the resume or unrecognizable by the resume parser.</p>
 <p>This API does not save the resume or profile. To create a profile from this
 resume, clients need to call the CreateProfile method again with the
 profile returned.</p>
-<p>This API supports the following list of formats:</p>
+<p>The following list of formats are supported:</p>
 <ul>
 <li>PDF</li>
 <li>TXT</li>
 <li>DOC</li>
 <li>RTF</li>
 <li>DOCX</li>
+<li>PNG (only when [ParseResumeRequest.enable_ocr][] is set to <code>true</code>,
+otherwise an error is thrown)</li>
 </ul>
-<p>An error is thrown if the input format is not supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -669,9 +675,9 @@ profile returned.</p>
         <td><a class="xref" href="Google.Protobuf.ByteString.html">ByteString</a></td>
         <td><span class="parametername">resume</span></td>
         <td><p>Required.</p>
-<p>The bytes of the resume file in common format. Currently the API supports
-the following formats:
-PDF, TXT, DOC, RTF and DOCX.</p>
+<p>The bytes of the resume file in common format, for example, PDF, TXT.
+UTF-8 encoding is required if the resume is text-based, otherwise an error
+is thrown.</p>
 </td>
       </tr>
       <tr>
@@ -711,8 +717,9 @@ ParseResumeResponse response = await resumeServiceClient.ParseResumeAsync(parent
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Protobuf_ByteString_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Protobuf.ByteString,System.Threading.CancellationToken)">ParseResumeAsync(ProjectName, ByteString, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The API attempts to fill out the
-following profile fields if present within the resume:</p>
+  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The
+API attempts to fill out the following profile fields if present within the
+resume:</p>
 <ul>
 <li>personNames</li>
 <li>addresses</li>
@@ -728,15 +735,16 @@ not present within the resume or unrecognizable by the resume parser.</p>
 <p>This API does not save the resume or profile. To create a profile from this
 resume, clients need to call the CreateProfile method again with the
 profile returned.</p>
-<p>This API supports the following list of formats:</p>
+<p>The following list of formats are supported:</p>
 <ul>
 <li>PDF</li>
 <li>TXT</li>
 <li>DOC</li>
 <li>RTF</li>
 <li>DOCX</li>
+<li>PNG (only when [ParseResumeRequest.enable_ocr][] is set to <code>true</code>,
+otherwise an error is thrown)</li>
 </ul>
-<p>An error is thrown if the input format is not supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -766,9 +774,9 @@ profile returned.</p>
         <td><a class="xref" href="Google.Protobuf.ByteString.html">ByteString</a></td>
         <td><span class="parametername">resume</span></td>
         <td><p>Required.</p>
-<p>The bytes of the resume file in common format. Currently the API supports
-the following formats:
-PDF, TXT, DOC, RTF and DOCX.</p>
+<p>The bytes of the resume file in common format, for example, PDF, TXT.
+UTF-8 encoding is required if the resume is text-based, otherwise an error
+is thrown.</p>
 </td>
       </tr>
       <tr>
@@ -808,8 +816,9 @@ ParseResumeResponse response = await resumeServiceClient.ParseResumeAsync(parent
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_Google_Cloud_Talent_V4Beta1_ParseResumeRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync(Google.Cloud.Talent.V4Beta1.ParseResumeRequest,Google.Api.Gax.Grpc.CallSettings)">ParseResumeAsync(ParseResumeRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The API attempts to fill out the
-following profile fields if present within the resume:</p>
+  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The
+API attempts to fill out the following profile fields if present within the
+resume:</p>
 <ul>
 <li>personNames</li>
 <li>addresses</li>
@@ -825,15 +834,16 @@ not present within the resume or unrecognizable by the resume parser.</p>
 <p>This API does not save the resume or profile. To create a profile from this
 resume, clients need to call the CreateProfile method again with the
 profile returned.</p>
-<p>This API supports the following list of formats:</p>
+<p>The following list of formats are supported:</p>
 <ul>
 <li>PDF</li>
 <li>TXT</li>
 <li>DOC</li>
 <li>RTF</li>
 <li>DOCX</li>
+<li>PNG (only when [ParseResumeRequest.enable_ocr][] is set to <code>true</code>,
+otherwise an error is thrown)</li>
 </ul>
-<p>An error is thrown if the input format is not supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -896,8 +906,9 @@ ParseResumeResponse response = await resumeServiceClient.ParseResumeAsync(reques
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_ResumeServiceClient_ParseResumeAsync_Google_Cloud_Talent_V4Beta1_ParseResumeRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.ResumeServiceClient.ParseResumeAsync(Google.Cloud.Talent.V4Beta1.ParseResumeRequest,System.Threading.CancellationToken)">ParseResumeAsync(ParseResumeRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The API attempts to fill out the
-following profile fields if present within the resume:</p>
+  <div class="markdown level1 summary"><p>Parses a resume into a [Profile][google.cloud.talent.v4beta1.Profile]. The
+API attempts to fill out the following profile fields if present within the
+resume:</p>
 <ul>
 <li>personNames</li>
 <li>addresses</li>
@@ -913,15 +924,16 @@ not present within the resume or unrecognizable by the resume parser.</p>
 <p>This API does not save the resume or profile. To create a profile from this
 resume, clients need to call the CreateProfile method again with the
 profile returned.</p>
-<p>This API supports the following list of formats:</p>
+<p>The following list of formats are supported:</p>
 <ul>
 <li>PDF</li>
 <li>TXT</li>
 <li>DOC</li>
 <li>RTF</li>
 <li>DOCX</li>
+<li>PNG (only when [ParseResumeRequest.enable_ocr][] is set to <code>true</code>,
+otherwise an error is thrown)</li>
 </ul>
-<p>An error is thrown if the input format is not supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
