@@ -107,7 +107,8 @@
   <a id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_BeginTransaction_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.BeginTransaction*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_BeginTransaction_Google_Cloud_Spanner_V1_BeginTransactionRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.BeginTransaction(Google.Cloud.Spanner.V1.BeginTransactionRequest,Grpc.Core.ServerCallContext)">BeginTransaction(BeginTransactionRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Begins a new transaction. This step can often be skipped:
-[Read][google.spanner.v1.Spanner.Read], [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
+[Read][google.spanner.v1.Spanner.Read],
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
 [Commit][google.spanner.v1.Spanner.Commit] can begin a new transaction as a
 side-effect.</p>
 </div>
@@ -133,7 +134,7 @@ side-effect.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -188,7 +189,7 @@ the transaction from the beginning, re-using the same session.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -252,7 +253,7 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -277,7 +278,9 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
   </table>
   <a id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_DeleteSession_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.DeleteSession*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_DeleteSession_Google_Cloud_Spanner_V1_DeleteSessionRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.DeleteSession(Google.Cloud.Spanner.V1.DeleteSessionRequest,Grpc.Core.ServerCallContext)">DeleteSession(DeleteSessionRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Ends a session, releasing server resources associated with it.</p>
+  <div class="markdown level1 summary"><p>Ends a session, releasing server resources associated with it. This will
+asynchronously trigger cancellation of any operations that are running with
+this session.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -301,7 +304,7 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -324,6 +327,70 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_ExecuteBatchDml_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.ExecuteBatchDml*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_ExecuteBatchDml_Google_Cloud_Spanner_V1_ExecuteBatchDmlRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.ExecuteBatchDml(Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest,Grpc.Core.ServerCallContext)">ExecuteBatchDml(ExecuteBatchDmlRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Executes a batch of SQL DML statements. This method allows many statements
+to be run with lower latency than submitting them sequentially with
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].</p>
+<p>Statements are executed in order, sequentially.
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse] will contain a
+[ResultSet][google.spanner.v1.ResultSet] for each DML statement that has successfully executed. If a
+statement fails, its error status will be returned as part of the
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse]. Execution will
+stop at the first failed statement; the remaining statements will not run.</p>
+<p>ExecuteBatchDml is expected to return an OK status with a response even if
+there was an error while processing one of the DML statements. Clients must
+inspect response.status to determine if there were any errors while
+processing the request.</p>
+<p>See more details in
+[ExecuteBatchDmlRequest][Spanner.ExecuteBatchDmlRequest] and
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecuteBatchDmlResponse&gt; ExecuteBatchDml(ExecuteBatchDmlRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest.html">ExecuteBatchDmlRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_ExecuteSql_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.ExecuteSql*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_ExecuteSql_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.ExecuteSql(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Grpc.Core.ServerCallContext)">ExecuteSql(ExecuteSqlRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Executes an SQL statement, returning all results in a single reply. This
@@ -332,9 +399,11 @@ if the query yields more data than that, the query fails with
 a <code>FAILED_PRECONDITION</code> error.</p>
 <p>Operations inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
+the beginning. See [Transaction][google.spanner.v1.Transaction] for more
+details.</p>
 <p>Larger result sets can be fetched in streaming fashion by calling
-[ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] instead.</p>
+[ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql]
+instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -358,7 +427,7 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -383,11 +452,11 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
   </table>
   <a id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_ExecuteStreamingSql_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.ExecuteStreamingSql*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_ExecuteStreamingSql_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Grpc_Core_IServerStreamWriter_Google_Cloud_Spanner_V1_PartialResultSet__Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.ExecuteStreamingSql(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Grpc.Core.IServerStreamWriter{Google.Cloud.Spanner.V1.PartialResultSet},Grpc.Core.ServerCallContext)">ExecuteStreamingSql(ExecuteSqlRequest, IServerStreamWriter&lt;PartialResultSet&gt;, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Like [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], except returns the result
-set as a stream. Unlike [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], there
-is no limit on the size of the returned result set. However, no
-individual row in the result set can exceed 100 MiB, and no
-column value can exceed 10 MiB.</p>
+  <div class="markdown level1 summary"><p>Like [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], except returns the
+result set as a stream. Unlike
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], there is no limit on
+the size of the returned result set. However, no individual row in the
+result set can exceed 100 MiB, and no column value can exceed 10 MiB.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -411,13 +480,13 @@ column value can exceed 10 MiB.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.IServerStreamWriter-1.html">IServerStreamWriter</a>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.PartialResultSet.html">PartialResultSet</a>&gt;</td>
+        <td><span class="xref">Grpc.Core.IServerStreamWriter</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.PartialResultSet.html">PartialResultSet</a>&gt;</td>
         <td><span class="parametername">responseStream</span></td>
         <td><p>Used for sending responses back to the client.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -468,7 +537,7 @@ alive.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -517,7 +586,7 @@ alive.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -544,10 +613,11 @@ alive.</p>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_PartitionQuery_Google_Cloud_Spanner_V1_PartitionQueryRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.PartitionQuery(Google.Cloud.Spanner.V1.PartitionQueryRequest,Grpc.Core.ServerCallContext)">PartitionQuery(PartitionQueryRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Creates a set of partition tokens that can be used to execute a query
 operation in parallel.  Each of the returned partition tokens can be used
-by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to specify a subset
-of the query result to read.  The same session and read-only transaction
-must be used by the PartitionQueryRequest used to create the
-partition tokens and the ExecuteSqlRequests that use the partition tokens.</p>
+by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to
+specify a subset of the query result to read.  The same session and
+read-only transaction must be used by the PartitionQueryRequest used to
+create the partition tokens and the ExecuteSqlRequests that use the
+partition tokens.</p>
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
 old.  When any of these happen, it is not possible to resume the query, and
@@ -575,7 +645,7 @@ the whole operation must be restarted from the beginning.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -602,12 +672,13 @@ the whole operation must be restarted from the beginning.</p>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_PartitionRead_Google_Cloud_Spanner_V1_PartitionReadRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.PartitionRead(Google.Cloud.Spanner.V1.PartitionReadRequest,Grpc.Core.ServerCallContext)">PartitionRead(PartitionReadRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Creates a set of partition tokens that can be used to execute a read
 operation in parallel.  Each of the returned partition tokens can be used
-by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a subset of the read
-result to read.  The same session and read-only transaction must be used by
-the PartitionReadRequest used to create the partition tokens and the
-ReadRequests that use the partition tokens.  There are no ordering
-guarantees on rows returned among the returned partition tokens, or even
-within each individual StreamingRead call issued with a partition_token.</p>
+by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a
+subset of the read result to read.  The same session and read-only
+transaction must be used by the PartitionReadRequest used to create the
+partition tokens and the ReadRequests that use the partition tokens.  There
+are no ordering guarantees on rows returned among the returned partition
+tokens, or even within each individual StreamingRead call issued with a
+partition_token.</p>
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
 old.  When any of these happen, it is not possible to resume the read, and
@@ -635,7 +706,7 @@ the whole operation must be restarted from the beginning.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -662,13 +733,14 @@ the whole operation must be restarted from the beginning.</p>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_Read_Google_Cloud_Spanner_V1_ReadRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.Read(Google.Cloud.Spanner.V1.ReadRequest,Grpc.Core.ServerCallContext)">Read(ReadRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Reads rows from the database using key lookups and scans, as a
 simple key/value style alternative to
-[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].  This method cannot be used to
-return a result set larger than 10 MiB; if the read matches more
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].  This method cannot be
+used to return a result set larger than 10 MiB; if the read matches more
 data than that, the read fails with a <code>FAILED_PRECONDITION</code>
 error.</p>
 <p>Reads inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
+the beginning. See [Transaction][google.spanner.v1.Transaction] for more
+details.</p>
 <p>Larger result sets can be yielded in streaming fashion by calling
 [StreamingRead][google.spanner.v1.Spanner.StreamingRead] instead.</p>
 </div>
@@ -694,7 +766,7 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -721,8 +793,9 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_Rollback_Google_Cloud_Spanner_V1_RollbackRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.Rollback(Google.Cloud.Spanner.V1.RollbackRequest,Grpc.Core.ServerCallContext)">Rollback(RollbackRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Rolls back a transaction, releasing any locks it holds. It is a good
 idea to call this for any transaction that includes one or more
-[Read][google.spanner.v1.Spanner.Read] or [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] requests and
-ultimately decides not to commit.</p>
+[Read][google.spanner.v1.Spanner.Read] or
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] requests and ultimately
+decides not to commit.</p>
 <p><code>Rollback</code> returns <code>OK</code> if it successfully aborts the transaction, the
 transaction was already aborted, or the transaction is not
 found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
@@ -749,7 +822,7 @@ found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>
@@ -774,9 +847,9 @@ found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
   </table>
   <a id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_StreamingRead_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.StreamingRead*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Spanner_SpannerBase_StreamingRead_Google_Cloud_Spanner_V1_ReadRequest_Grpc_Core_IServerStreamWriter_Google_Cloud_Spanner_V1_PartialResultSet__Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.V1.Spanner.SpannerBase.StreamingRead(Google.Cloud.Spanner.V1.ReadRequest,Grpc.Core.IServerStreamWriter{Google.Cloud.Spanner.V1.PartialResultSet},Grpc.Core.ServerCallContext)">StreamingRead(ReadRequest, IServerStreamWriter&lt;PartialResultSet&gt;, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Like [Read][google.spanner.v1.Spanner.Read], except returns the result set as a
-stream. Unlike [Read][google.spanner.v1.Spanner.Read], there is no limit on the
-size of the returned result set. However, no individual row in
+  <div class="markdown level1 summary"><p>Like [Read][google.spanner.v1.Spanner.Read], except returns the result set
+as a stream. Unlike [Read][google.spanner.v1.Spanner.Read], there is no
+limit on the size of the returned result set. However, no individual row in
 the result set can exceed 100 MiB, and no column value can exceed
 10 MiB.</p>
 </div>
@@ -802,13 +875,13 @@ the result set can exceed 100 MiB, and no column value can exceed
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.IServerStreamWriter-1.html">IServerStreamWriter</a>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.PartialResultSet.html">PartialResultSet</a>&gt;</td>
+        <td><span class="xref">Grpc.Core.IServerStreamWriter</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.PartialResultSet.html">PartialResultSet</a>&gt;</td>
         <td><span class="parametername">responseStream</span></td>
         <td><p>Used for sending responses back to the client.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The context of the server-side call handler being invoked.</p>
 </td>

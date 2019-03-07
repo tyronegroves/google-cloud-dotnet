@@ -78,7 +78,8 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.BeginTransactionRequest.html">BeginTransactionRequest</a></h4>
-      <section><p>The request for [BeginTransaction][google.spanner.v1.Spanner.BeginTransaction].</p>
+      <section><p>The request for
+[BeginTransaction][google.spanner.v1.Spanner.BeginTransaction].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.CommitRequest.html">CommitRequest</a></h4>
       <section><p>The request for [Commit][google.spanner.v1.Spanner.Commit].</p>
@@ -91,6 +92,35 @@
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.DeleteSessionRequest.html">DeleteSessionRequest</a></h4>
       <section><p>The request for [DeleteSession][google.spanner.v1.Spanner.DeleteSession].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest.html">ExecuteBatchDmlRequest</a></h4>
+      <section><p>The request for [ExecuteBatchDml][google.spanner.v1.Spanner.ExecuteBatchDml]</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest.Types.html">ExecuteBatchDmlRequest.Types</a></h4>
+      <section><p>Container for nested types declared in the ExecuteBatchDmlRequest message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest.Types.Statement.html">ExecuteBatchDmlRequest.Types.Statement</a></h4>
+      <section><p>A single DML statement.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a></h4>
+      <section><p>The response for [ExecuteBatchDml][google.spanner.v1.Spanner.ExecuteBatchDml]. Contains a list
+of [ResultSet][google.spanner.v1.ResultSet], one for each DML statement that has successfully executed.
+If a statement fails, the error is returned as part of the response payload.
+Clients can determine whether all DML statements have run successfully, or if
+a statement failed, using one of the following approaches:</p>
+<ol>
+<li>Check if &apos;status&apos; field is OkStatus.</li>
+<li>Check if result_sets_size() equals the number of statements in
+[ExecuteBatchDmlRequest][Spanner.ExecuteBatchDmlRequest].</li>
+</ol>
+<p>Example 1: A request with 5 DML statements, all executed successfully.
+Result: A response with 5 ResultSets, one for each statement in the same
+order, and an OK status.</p>
+<p>Example 2: A request with 5 DML statements. The 3rd statement has a syntax
+error.
+Result: A response with 2 ResultSets, for the first 2 statements that
+run successfully, and a syntax error (INVALID_ARGUMENT) status. From
+result_set_size() client can determine that the 3rd statement has failed.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteSqlRequest.html">ExecuteSqlRequest</a></h4>
       <section><p>The request for [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
@@ -108,7 +138,8 @@
 closed, indicating if the range includes rows with that key.</p>
 <p>Keys are represented by lists, where the ith value in the list
 corresponds to the ith component of the table or index primary key.
-Individual values are encoded as described [here][google.spanner.v1.TypeCode].</p>
+Individual values are encoded as described
+[here][google.spanner.v1.TypeCode].</p>
 <p>For example, consider the following table definition:</p>
 <p>CREATE TABLE UserEvents (
  UserName STRING(MAX),
@@ -190,7 +221,9 @@ applied to a Cloud Spanner database by sending them in a
       <section><p>Arguments to [delete][google.spanner.v1.Mutation.delete] operations.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.Mutation.Types.Write.html">Mutation.Types.Write</a></h4>
-      <section><p>Arguments to [insert][google.spanner.v1.Mutation.insert], [update][google.spanner.v1.Mutation.update], [insert_or_update][google.spanner.v1.Mutation.insert_or_update], and
+      <section><p>Arguments to [insert][google.spanner.v1.Mutation.insert],
+[update][google.spanner.v1.Mutation.update],
+[insert_or_update][google.spanner.v1.Mutation.insert_or_update], and
 [replace][google.spanner.v1.Mutation.replace] operations.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.PartialResultSet.html">PartialResultSet</a></h4>
@@ -217,7 +250,8 @@ PartitionReadRequest.</p>
 or [PartitionRead][google.spanner.v1.Spanner.PartitionRead]</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.PlanNode.html">PlanNode</a></h4>
-      <section><p>Node information for nodes appearing in a [QueryPlan.plan_nodes][google.spanner.v1.QueryPlan.plan_nodes].</p>
+      <section><p>Node information for nodes appearing in a
+[QueryPlan.plan_nodes][google.spanner.v1.QueryPlan.plan_nodes].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.PlanNode.Types.html">PlanNode.Types</a></h4>
       <section><p>Container for nested types declared in the PlanNode message type.</p>
@@ -250,10 +284,12 @@ chunking and recoverable errors.</p>
 [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResultSetMetadata.html">ResultSetMetadata</a></h4>
-      <section><p>Metadata about a [ResultSet][google.spanner.v1.ResultSet] or [PartialResultSet][google.spanner.v1.PartialResultSet].</p>
+      <section><p>Metadata about a [ResultSet][google.spanner.v1.ResultSet] or
+[PartialResultSet][google.spanner.v1.PartialResultSet].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResultSetStats.html">ResultSetStats</a></h4>
-      <section><p>Additional statistics about a [ResultSet][google.spanner.v1.ResultSet] or [PartialResultSet][google.spanner.v1.PartialResultSet].</p>
+      <section><p>Additional statistics about a [ResultSet][google.spanner.v1.ResultSet] or
+[PartialResultSet][google.spanner.v1.PartialResultSet].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.RollbackRequest.html">RollbackRequest</a></h4>
       <section><p>The request for [Rollback][google.spanner.v1.Spanner.Rollback].</p>
@@ -310,7 +346,8 @@ transactions on data stored in Cloud Spanner databases.</p>
       <section><p>Event argument type for <a class="xref" href="Google.Cloud.Spanner.V1.ReliableStreamReader.html#Google_Cloud_Spanner_V1_ReliableStreamReader_StreamClosed">StreamClosed</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.StructType.html">StructType</a></h4>
-      <section><p><code>StructType</code> defines the fields of a [STRUCT][google.spanner.v1.TypeCode.STRUCT] type.</p>
+      <section><p><code>StructType</code> defines the fields of a
+[STRUCT][google.spanner.v1.TypeCode.STRUCT] type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.StructType.Types.html">StructType.Types</a></h4>
       <section><p>Container for nested types declared in the StructType message type.</p>
@@ -450,7 +487,8 @@ transactions might return inconsistent results if there are
 concurrent writes. If consistency across reads is required, the
 reads should be executed within a transaction or at an exact read
 timestamp.</p>
-<p>See [TransactionOptions.ReadOnly.strong][google.spanner.v1.TransactionOptions.ReadOnly.strong].</p>
+<p>See
+[TransactionOptions.ReadOnly.strong][google.spanner.v1.TransactionOptions.ReadOnly.strong].</p>
 <h3 id="exact-staleness">Exact Staleness</h3>
 <p>These timestamp bounds execute reads at a user-specified
 timestamp. Reads at a timestamp are guaranteed to see a consistent
@@ -466,7 +504,9 @@ timestamp or a staleness relative to the current time.</p>
 timestamp. As a result, they execute slightly faster than the
 equivalent boundedly stale concurrency modes. On the other hand,
 boundedly stale reads usually return fresher results.</p>
-<p>See [TransactionOptions.ReadOnly.read_timestamp][google.spanner.v1.TransactionOptions.ReadOnly.read_timestamp] and
+<p>See
+[TransactionOptions.ReadOnly.read_timestamp][google.spanner.v1.TransactionOptions.ReadOnly.read_timestamp]
+and
 [TransactionOptions.ReadOnly.exact_staleness][google.spanner.v1.TransactionOptions.ReadOnly.exact_staleness].</p>
 <h3 id="bounded-staleness">Bounded Staleness</h3>
 <p>Bounded staleness modes allow Cloud Spanner to pick the read timestamp,
@@ -489,7 +529,9 @@ results, and are more likely to execute at the closest replica.</p>
 <p>Because the timestamp negotiation requires up-front knowledge of
 which rows will be read, it can only be used with single-use
 read-only transactions.</p>
-<p>See [TransactionOptions.ReadOnly.max_staleness][google.spanner.v1.TransactionOptions.ReadOnly.max_staleness] and
+<p>See
+[TransactionOptions.ReadOnly.max_staleness][google.spanner.v1.TransactionOptions.ReadOnly.max_staleness]
+and
 [TransactionOptions.ReadOnly.min_read_timestamp][google.spanner.v1.TransactionOptions.ReadOnly.min_read_timestamp].</p>
 <h3 id="old-read-timestamps-and-garbage-collection">Old Read Timestamps and Garbage Collection</h3>
 <p>Cloud Spanner continuously garbage collects deleted and overwritten data
@@ -570,7 +612,8 @@ transaction type has no options.</p>
       <section><p>This message is used to select the transaction in which a
 [Read][google.spanner.v1.Spanner.Read] or
 [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] call runs.</p>
-<p>See [TransactionOptions][google.spanner.v1.TransactionOptions] for more information about transactions.</p>
+<p>See [TransactionOptions][google.spanner.v1.TransactionOptions] for more
+information about transactions.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.Type.html">Type</a></h4>
       <section><p><code>Type</code> indicates the type of a Cloud Spanner value, as might be stored in a
@@ -597,8 +640,8 @@ table cell or returned from an SQL query.</p>
       <section><p>Enum of possible cases for the &quot;operation&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.PlanNode.Types.Kind.html">PlanNode.Types.Kind</a></h4>
-      <section><p>The kind of [PlanNode][google.spanner.v1.PlanNode]. Distinguishes between the two different kinds of
-nodes that can appear in a query plan.</p>
+      <section><p>The kind of [PlanNode][google.spanner.v1.PlanNode]. Distinguishes between
+the two different kinds of nodes that can appear in a query plan.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResourcesExhaustedBehavior.html">ResourcesExhaustedBehavior</a></h4>
       <section><p>Specifies the behavior when <a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html#Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions">MaximumActiveSessions</a>

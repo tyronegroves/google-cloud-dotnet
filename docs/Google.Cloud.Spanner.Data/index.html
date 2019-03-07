@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.Spanner.Data</code> is the ADO.NET provider for Cloud Spanner. It is the recommended
 package for regular Cloud Spanner database access from .NET.</p>
 <p>Note:
-This documentation is for version <code>2.0.0-beta07</code> of the library.
+This documentation is for version <code>2.0.0-beta08</code> of the library.
 Some samples may not work with other versions.</p>
 <p>The <a href="../Google.Cloud.Spanner.Admin.Instance.V1/">Google.Cloud.Spanner.Admin.Instance.V1</a> package
 should be used for Cloud Spanner instance administration, such as creating or deleting instances.</p>
@@ -76,7 +76,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>2.0.0-beta07</code>) of <code>Google.Cloud.Spanner.Data</code>.</p>
+pre-release version (<code>2.0.0-beta08</code>) of <code>Google.Cloud.Spanner.Data</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -161,6 +161,33 @@ update of large data sets. <code>ExecutePartitionedUpdate</code> or <code>Execut
 the update can be applied more than once to a row in some cases, and so is best used with idempotent updates.</p>
 <p>Not all DML statements can be partitioned. Please read the Cloud Spanner user documentation for details on
 the restrictions.</p>
+<h3 id="batch-dml">Batch DML</h3>
+<p>Batch DML allows you to execute multiple DML commands in one batched operation.</p>
+<pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    await connection.OpenAsync();
+
+    SpannerBatchCommand cmd = connection.CreateBatchDmlCommand();
+
+    cmd.Add(
+        &quot;UPDATE TestTable SET StringValue=&#39;Updated&#39; WHERE Int64Value=@value&quot;,
+        new SpannerParameterCollection { { &quot;value&quot;, SpannerDbType.Int64, 5 } });
+
+    cmd.Add(
+        &quot;DELETE FROM TestTable WHERE Int64Value=@value&quot;,
+        new SpannerParameterCollection { { &quot;value&quot;, SpannerDbType.Int64, 250 } });
+
+    IEnumerable&lt;long&gt; rowsAffected = await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine($&quot;{rowsAffected.ElementAt(0)} rows updated...&quot;);
+    Console.WriteLine($&quot;{rowsAffected.ElementAt(1)} rows deleted...&quot;);
+}
+</code></pre><p>Statements are executed sequentally in the same order they are provided. Changes made by one statement are
+visible to all subsequent statements in the batch.</p>
+<p>When one of the statemens in the batch fails, execution is halted and all subsequent statements are not
+executed. A <code>SpannerBatchNonQueryException</code> will be thrown that contains both information about the error
+and the number of rows affected by each of the statements that executed before the failed one. If you are executing
+the batch DML command inside a transaction you can simply commit the transaction when <code>SpannerBatchNonQueryException</code>
+is thrown if partial success is acceptable in your application.</p>
 <h3 id="direct-row-modifications">Direct row modifications</h3>
 <p>The following operations are supported for direct row modification:</p>
 <ul>
@@ -342,6 +369,28 @@ provides a simple method to accomplish this:</p>
 using (SpannerConnection connection = new SpannerConnection(connectionString))
 {
     await connection.ShutdownSessionPoolAsync();
+}
+</code></pre><p>If you want to diagnose session management issues,
+<code>SpannerConnection</code> provides a method to fetch a snapshot of
+the statistics for the session pool associated with the database
+associated with the connection:</p>
+<pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    SessionPool.DatabaseStatistics stats = connection.GetSessionPoolDatabaseStatistics();
+    if (stats is null)
+    {
+        Console.WriteLine(&quot;No session pool for this connection string yet&quot;);
+    }
+    else
+    {
+        // Access individual properties...
+        Console.WriteLine($&quot;Database name: {stats.DatabaseName}&quot;);
+        Console.WriteLine($&quot;Active sessions: {stats.ActiveSessionCount}&quot;);
+        Console.WriteLine($&quot;Pooled read-only sessions: {stats.ReadPoolCount}&quot;);
+        Console.WriteLine($&quot;Pooled read-write sessions: {stats.ReadWritePoolCount}&quot;);
+        // ... or just use the overridden ToString method to log all the statistics in one go:
+        Console.WriteLine(stats);
+    }
 }
 </code></pre></article>
           </div>

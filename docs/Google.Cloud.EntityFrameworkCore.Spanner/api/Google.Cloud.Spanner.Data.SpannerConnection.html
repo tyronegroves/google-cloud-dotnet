@@ -262,7 +262,7 @@ argument.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ChannelCredentials.html">ChannelCredentials</a></td>
+        <td><span class="xref">Grpc.Core.ChannelCredentials</span></td>
         <td><span class="parametername">credentials</span></td>
         <td><p>An optional credential for operations to be performed on the Spanner database.  May be null.</p>
 </td>
@@ -877,6 +877,33 @@ This method is thread safe.</p>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbConnection.Close()</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateBatchDmlCommand_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateBatchDmlCommand*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateBatchDmlCommand" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateBatchDmlCommand">CreateBatchDmlCommand()</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerBatchCommand.html">SpannerBatchCommand</a> to execute batched DML statements with this connection, without using a transaction.
+You can add commands to the batch by using <a class="xref" href="Google.Cloud.Spanner.Data.SpannerBatchCommand.html#Google_Cloud_Spanner_Data_SpannerBatchCommand_Add_Google_Cloud_Spanner_Data_SpannerCommand_">Add(SpannerCommand)</a>,
+<a class="xref" href="Google.Cloud.Spanner.Data.SpannerBatchCommand.html#Google_Cloud_Spanner_Data_SpannerBatchCommand_Add_Google_Cloud_Spanner_Data_SpannerCommandTextBuilder_Google_Cloud_Spanner_Data_SpannerParameterCollection_">Add(SpannerCommandTextBuilder, SpannerParameterCollection)</a>
+and <a class="xref" href="Google.Cloud.Spanner.Data.SpannerBatchCommand.html#Google_Cloud_Spanner_Data_SpannerBatchCommand_Add_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection_">Add(String, SpannerParameterCollection)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpannerBatchCommand CreateBatchDmlCommand()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Data.SpannerBatchCommand.html">SpannerBatchCommand</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateCommandWithPartition_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateCommandWithPartition*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateCommandWithPartition_Google_Cloud_Spanner_Data_CommandPartition_Google_Cloud_Spanner_Data_SpannerTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateCommandWithPartition(Google.Cloud.Spanner.Data.CommandPartition,Google.Cloud.Spanner.Data.SpannerTransaction)">CreateCommandWithPartition(CommandPartition, SpannerTransaction)</h4>
   <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a> from a <a class="xref" href="Google.Cloud.Spanner.Data.CommandPartition.html">CommandPartition</a>.
@@ -1373,6 +1400,33 @@ May be null.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbConnection.EnlistTransaction(System.Transactions.Transaction)</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_GetSessionPoolDatabaseStatistics_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.GetSessionPoolDatabaseStatistics*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_GetSessionPoolDatabaseStatistics" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.GetSessionPoolDatabaseStatistics">GetSessionPoolDatabaseStatistics()</h4>
+  <div class="markdown level1 summary"><p>Retrieves the database-specific statistics for the session pool associated with the connection string. The connection string must
+include a database name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SessionPool.DatabaseStatistics GetSessionPoolDatabaseStatistics()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.SessionPool.DatabaseStatistics.html">SessionPool.DatabaseStatistics</a></td>
+        <td><p>The session pool statistics, or <code>null</code> if there is no current session pool
+for the database specified in the connection string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_Open_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.Open*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_Open" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.Open">Open()</h4>
   <div class="markdown level1 summary"></div>
@@ -1623,7 +1677,7 @@ and also deleted.</p>
   </table>
   <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_WhenSessionPoolReady_System_Threading_CancellationToken__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the pool is unhealthy or becomes unhealthy before it reaches its minimum size,
-the returned task will be faulted with an <a class="xref" href="Grpc.Core.RpcException.html">RpcException</a>.</p>
+the returned task will be faulted with an <span class="xref">Grpc.Core.RpcException</span>.</p>
 </div>
 </article>
           </div>

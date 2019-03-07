@@ -151,6 +151,9 @@
       <a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ExecuteSqlAsync_Google_Cloud_Spanner_V1_ExecuteSqlRequest_System_Threading_CancellationToken_">SpannerClient.ExecuteSqlAsync(ExecuteSqlRequest, CancellationToken)</a>
     </div>
     <div>
+      <a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ExecuteBatchDmlAsync_Google_Cloud_Spanner_V1_ExecuteBatchDmlRequest_System_Threading_CancellationToken_">SpannerClient.ExecuteBatchDmlAsync(ExecuteBatchDmlRequest, CancellationToken)</a>
+    </div>
+    <div>
       <a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ReadAsync_Google_Cloud_Spanner_V1_ReadRequest_System_Threading_CancellationToken_">SpannerClient.ReadAsync(ReadRequest, CancellationToken)</a>
     </div>
     <div>
@@ -294,7 +297,8 @@
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_BeginTransaction_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.BeginTransaction*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_BeginTransaction_Google_Cloud_Spanner_V1_BeginTransactionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.BeginTransaction(Google.Cloud.Spanner.V1.BeginTransactionRequest,Google.Api.Gax.Grpc.CallSettings)">BeginTransaction(BeginTransactionRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Begins a new transaction. This step can often be skipped:
-[Read][google.spanner.v1.Spanner.Read], [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
+[Read][google.spanner.v1.Spanner.Read],
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
 [Commit][google.spanner.v1.Spanner.Commit] can begin a new transaction as a
 side-effect.</p>
 </div>
@@ -348,7 +352,8 @@ side-effect.</p>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_BeginTransactionAsync_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.BeginTransactionAsync*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_BeginTransactionAsync_Google_Cloud_Spanner_V1_BeginTransactionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.BeginTransactionAsync(Google.Cloud.Spanner.V1.BeginTransactionRequest,Google.Api.Gax.Grpc.CallSettings)">BeginTransactionAsync(BeginTransactionRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Begins a new transaction. This step can often be skipped:
-[Read][google.spanner.v1.Spanner.Read], [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
+[Read][google.spanner.v1.Spanner.Read],
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] and
 [Commit][google.spanner.v1.Spanner.Commit] can begin a new transaction as a
 side-effect.</p>
 </div>
@@ -647,7 +652,9 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_CreateSessionAsync_Google_Cloud_Spanner_V1_CreateSessionRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.CreateSessionAsync(CreateSessionRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_DeleteSession_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.DeleteSession*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_DeleteSession_Google_Cloud_Spanner_V1_DeleteSessionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.DeleteSession(Google.Cloud.Spanner.V1.DeleteSessionRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteSession(DeleteSessionRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Ends a session, releasing server resources associated with it.</p>
+  <div class="markdown level1 summary"><p>Ends a session, releasing server resources associated with it. This will
+asynchronously trigger cancellation of any operations that are running with
+this session.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -682,7 +689,9 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_DeleteSession_Google_Cloud_Spanner_V1_DeleteSessionRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.DeleteSession(DeleteSessionRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_DeleteSessionAsync_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.DeleteSessionAsync*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_DeleteSessionAsync_Google_Cloud_Spanner_V1_DeleteSessionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.DeleteSessionAsync(Google.Cloud.Spanner.V1.DeleteSessionRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteSessionAsync(DeleteSessionRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Ends a session, releasing server resources associated with it.</p>
+  <div class="markdown level1 summary"><p>Ends a session, releasing server resources associated with it. This will
+asynchronously trigger cancellation of any operations that are running with
+this session.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -731,6 +740,138 @@ periodically, e.g., <code>&amp;quot;SELECT 1&amp;quot;</code>.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_DeleteSessionAsync_Google_Cloud_Spanner_V1_DeleteSessionRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.DeleteSessionAsync(DeleteSessionRequest, CallSettings)</a></div>
+  <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteBatchDml_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteBatchDml*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteBatchDml_Google_Cloud_Spanner_V1_ExecuteBatchDmlRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteBatchDml(Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest,Google.Api.Gax.Grpc.CallSettings)">ExecuteBatchDml(ExecuteBatchDmlRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Executes a batch of SQL DML statements. This method allows many statements
+to be run with lower latency than submitting them sequentially with
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].</p>
+<p>Statements are executed in order, sequentially.
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse] will contain a
+[ResultSet][google.spanner.v1.ResultSet] for each DML statement that has successfully executed. If a
+statement fails, its error status will be returned as part of the
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse]. Execution will
+stop at the first failed statement; the remaining statements will not run.</p>
+<p>ExecuteBatchDml is expected to return an OK status with a response even if
+there was an error while processing one of the DML statements. Clients must
+inspect response.status to determine if there were any errors while
+processing the request.</p>
+<p>See more details in
+[ExecuteBatchDmlRequest][Spanner.ExecuteBatchDmlRequest] and
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ExecuteBatchDmlResponse ExecuteBatchDml(ExecuteBatchDmlRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest.html">ExecuteBatchDmlRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ExecuteBatchDml_Google_Cloud_Spanner_V1_ExecuteBatchDmlRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.ExecuteBatchDml(ExecuteBatchDmlRequest, CallSettings)</a></div>
+  <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteBatchDmlAsync_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteBatchDmlAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteBatchDmlAsync_Google_Cloud_Spanner_V1_ExecuteBatchDmlRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteBatchDmlAsync(Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest,Google.Api.Gax.Grpc.CallSettings)">ExecuteBatchDmlAsync(ExecuteBatchDmlRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Executes a batch of SQL DML statements. This method allows many statements
+to be run with lower latency than submitting them sequentially with
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].</p>
+<p>Statements are executed in order, sequentially.
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse] will contain a
+[ResultSet][google.spanner.v1.ResultSet] for each DML statement that has successfully executed. If a
+statement fails, its error status will be returned as part of the
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse]. Execution will
+stop at the first failed statement; the remaining statements will not run.</p>
+<p>ExecuteBatchDml is expected to return an OK status with a response even if
+there was an error while processing one of the DML statements. Clients must
+inspect response.status to determine if there were any errors while
+processing the request.</p>
+<p>See more details in
+[ExecuteBatchDmlRequest][Spanner.ExecuteBatchDmlRequest] and
+[ExecuteBatchDmlResponse][Spanner.ExecuteBatchDmlResponse].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task&lt;ExecuteBatchDmlResponse&gt; ExecuteBatchDmlAsync(ExecuteBatchDmlRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlRequest.html">ExecuteBatchDmlRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ExecuteBatchDmlAsync_Google_Cloud_Spanner_V1_ExecuteBatchDmlRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.ExecuteBatchDmlAsync(ExecuteBatchDmlRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSql_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSql*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteSql_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteSql(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Google.Api.Gax.Grpc.CallSettings)">ExecuteSql(ExecuteSqlRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Executes an SQL statement, returning all results in a single reply. This
@@ -739,9 +880,11 @@ if the query yields more data than that, the query fails with
 a <code>FAILED_PRECONDITION</code> error.</p>
 <p>Operations inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
+the beginning. See [Transaction][google.spanner.v1.Transaction] for more
+details.</p>
 <p>Larger result sets can be fetched in streaming fashion by calling
-[ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] instead.</p>
+[ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql]
+instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -798,9 +941,11 @@ if the query yields more data than that, the query fails with
 a <code>FAILED_PRECONDITION</code> error.</p>
 <p>Operations inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
+the beginning. See [Transaction][google.spanner.v1.Transaction] for more
+details.</p>
 <p>Larger result sets can be fetched in streaming fashion by calling
-[ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] instead.</p>
+[ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql]
+instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -851,11 +996,11 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_ExecuteSqlAsync_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.ExecuteSqlAsync(ExecuteSqlRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteStreamingSql_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteStreamingSql*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ExecuteStreamingSql_Google_Cloud_Spanner_V1_ExecuteSqlRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ExecuteStreamingSql(Google.Cloud.Spanner.V1.ExecuteSqlRequest,Google.Api.Gax.Grpc.CallSettings)">ExecuteStreamingSql(ExecuteSqlRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Like [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], except returns the result
-set as a stream. Unlike [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], there
-is no limit on the size of the returned result set. However, no
-individual row in the result set can exceed 100 MiB, and no
-column value can exceed 10 MiB.</p>
+  <div class="markdown level1 summary"><p>Like [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], except returns the
+result set as a stream. Unlike
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql], there is no limit on
+the size of the returned result set. However, no individual row in the
+result set can exceed 100 MiB, and no column value can exceed 10 MiB.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1116,10 +1261,11 @@ alive.</p>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_PartitionQuery_Google_Cloud_Spanner_V1_PartitionQueryRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.PartitionQuery(Google.Cloud.Spanner.V1.PartitionQueryRequest,Google.Api.Gax.Grpc.CallSettings)">PartitionQuery(PartitionQueryRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a set of partition tokens that can be used to execute a query
 operation in parallel.  Each of the returned partition tokens can be used
-by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to specify a subset
-of the query result to read.  The same session and read-only transaction
-must be used by the PartitionQueryRequest used to create the
-partition tokens and the ExecuteSqlRequests that use the partition tokens.</p>
+by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to
+specify a subset of the query result to read.  The same session and
+read-only transaction must be used by the PartitionQueryRequest used to
+create the partition tokens and the ExecuteSqlRequests that use the
+partition tokens.</p>
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
 old.  When any of these happen, it is not possible to resume the query, and
@@ -1176,10 +1322,11 @@ the whole operation must be restarted from the beginning.</p>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_PartitionQueryAsync_Google_Cloud_Spanner_V1_PartitionQueryRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.PartitionQueryAsync(Google.Cloud.Spanner.V1.PartitionQueryRequest,Google.Api.Gax.Grpc.CallSettings)">PartitionQueryAsync(PartitionQueryRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a set of partition tokens that can be used to execute a query
 operation in parallel.  Each of the returned partition tokens can be used
-by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to specify a subset
-of the query result to read.  The same session and read-only transaction
-must be used by the PartitionQueryRequest used to create the
-partition tokens and the ExecuteSqlRequests that use the partition tokens.</p>
+by [ExecuteStreamingSql][google.spanner.v1.Spanner.ExecuteStreamingSql] to
+specify a subset of the query result to read.  The same session and
+read-only transaction must be used by the PartitionQueryRequest used to
+create the partition tokens and the ExecuteSqlRequests that use the
+partition tokens.</p>
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
 old.  When any of these happen, it is not possible to resume the query, and
@@ -1236,12 +1383,13 @@ the whole operation must be restarted from the beginning.</p>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_PartitionRead_Google_Cloud_Spanner_V1_PartitionReadRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.PartitionRead(Google.Cloud.Spanner.V1.PartitionReadRequest,Google.Api.Gax.Grpc.CallSettings)">PartitionRead(PartitionReadRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a set of partition tokens that can be used to execute a read
 operation in parallel.  Each of the returned partition tokens can be used
-by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a subset of the read
-result to read.  The same session and read-only transaction must be used by
-the PartitionReadRequest used to create the partition tokens and the
-ReadRequests that use the partition tokens.  There are no ordering
-guarantees on rows returned among the returned partition tokens, or even
-within each individual StreamingRead call issued with a partition_token.</p>
+by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a
+subset of the read result to read.  The same session and read-only
+transaction must be used by the PartitionReadRequest used to create the
+partition tokens and the ReadRequests that use the partition tokens.  There
+are no ordering guarantees on rows returned among the returned partition
+tokens, or even within each individual StreamingRead call issued with a
+partition_token.</p>
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
 old.  When any of these happen, it is not possible to resume the read, and
@@ -1298,12 +1446,13 @@ the whole operation must be restarted from the beginning.</p>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_PartitionReadAsync_Google_Cloud_Spanner_V1_PartitionReadRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.PartitionReadAsync(Google.Cloud.Spanner.V1.PartitionReadRequest,Google.Api.Gax.Grpc.CallSettings)">PartitionReadAsync(PartitionReadRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a set of partition tokens that can be used to execute a read
 operation in parallel.  Each of the returned partition tokens can be used
-by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a subset of the read
-result to read.  The same session and read-only transaction must be used by
-the PartitionReadRequest used to create the partition tokens and the
-ReadRequests that use the partition tokens.  There are no ordering
-guarantees on rows returned among the returned partition tokens, or even
-within each individual StreamingRead call issued with a partition_token.</p>
+by [StreamingRead][google.spanner.v1.Spanner.StreamingRead] to specify a
+subset of the read result to read.  The same session and read-only
+transaction must be used by the PartitionReadRequest used to create the
+partition tokens and the ReadRequests that use the partition tokens.  There
+are no ordering guarantees on rows returned among the returned partition
+tokens, or even within each individual StreamingRead call issued with a
+partition_token.</p>
 <p>Partition tokens become invalid when the session used to create them
 is deleted, is idle for too long, begins a new transaction, or becomes too
 old.  When any of these happen, it is not possible to resume the read, and
@@ -1360,13 +1509,14 @@ the whole operation must be restarted from the beginning.</p>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_Read_Google_Cloud_Spanner_V1_ReadRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.Read(Google.Cloud.Spanner.V1.ReadRequest,Google.Api.Gax.Grpc.CallSettings)">Read(ReadRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Reads rows from the database using key lookups and scans, as a
 simple key/value style alternative to
-[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].  This method cannot be used to
-return a result set larger than 10 MiB; if the read matches more
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].  This method cannot be
+used to return a result set larger than 10 MiB; if the read matches more
 data than that, the read fails with a <code>FAILED_PRECONDITION</code>
 error.</p>
 <p>Reads inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
+the beginning. See [Transaction][google.spanner.v1.Transaction] for more
+details.</p>
 <p>Larger result sets can be yielded in streaming fashion by calling
 [StreamingRead][google.spanner.v1.Spanner.StreamingRead] instead.</p>
 </div>
@@ -1421,13 +1571,14 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_ReadAsync_Google_Cloud_Spanner_V1_ReadRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.ReadAsync(Google.Cloud.Spanner.V1.ReadRequest,Google.Api.Gax.Grpc.CallSettings)">ReadAsync(ReadRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Reads rows from the database using key lookups and scans, as a
 simple key/value style alternative to
-[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].  This method cannot be used to
-return a result set larger than 10 MiB; if the read matches more
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].  This method cannot be
+used to return a result set larger than 10 MiB; if the read matches more
 data than that, the read fails with a <code>FAILED_PRECONDITION</code>
 error.</p>
 <p>Reads inside read-write transactions might return <code>ABORTED</code>. If
 this occurs, the application should restart the transaction from
-the beginning. See [Transaction][google.spanner.v1.Transaction] for more details.</p>
+the beginning. See [Transaction][google.spanner.v1.Transaction] for more
+details.</p>
 <p>Larger result sets can be yielded in streaming fashion by calling
 [StreamingRead][google.spanner.v1.Spanner.StreamingRead] instead.</p>
 </div>
@@ -1482,8 +1633,9 @@ the beginning. See [Transaction][google.spanner.v1.Transaction] for more details
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_Rollback_Google_Cloud_Spanner_V1_RollbackRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.Rollback(Google.Cloud.Spanner.V1.RollbackRequest,Google.Api.Gax.Grpc.CallSettings)">Rollback(RollbackRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Rolls back a transaction, releasing any locks it holds. It is a good
 idea to call this for any transaction that includes one or more
-[Read][google.spanner.v1.Spanner.Read] or [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] requests and
-ultimately decides not to commit.</p>
+[Read][google.spanner.v1.Spanner.Read] or
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] requests and ultimately
+decides not to commit.</p>
 <p><code>Rollback</code> returns <code>OK</code> if it successfully aborts the transaction, the
 transaction was already aborted, or the transaction is not
 found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
@@ -1523,8 +1675,9 @@ found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_RollbackAsync_Google_Cloud_Spanner_V1_RollbackRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.RollbackAsync(Google.Cloud.Spanner.V1.RollbackRequest,Google.Api.Gax.Grpc.CallSettings)">RollbackAsync(RollbackRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Rolls back a transaction, releasing any locks it holds. It is a good
 idea to call this for any transaction that includes one or more
-[Read][google.spanner.v1.Spanner.Read] or [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] requests and
-ultimately decides not to commit.</p>
+[Read][google.spanner.v1.Spanner.Read] or
+[ExecuteSql][google.spanner.v1.Spanner.ExecuteSql] requests and ultimately
+decides not to commit.</p>
 <p><code>Rollback</code> returns <code>OK</code> if it successfully aborts the transaction, the
 transaction was already aborted, or the transaction is not
 found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
@@ -1578,9 +1731,9 @@ found. <code>Rollback</code> never returns <code>ABORTED</code>.</p>
   <div><a class="xref" href="Google.Cloud.Spanner.V1.SpannerClient.html#Google_Cloud_Spanner_V1_SpannerClient_RollbackAsync_Google_Cloud_Spanner_V1_RollbackRequest_Google_Api_Gax_Grpc_CallSettings_">SpannerClient.RollbackAsync(RollbackRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Spanner_V1_SpannerClientImpl_StreamingRead_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.StreamingRead*"></a>
   <h4 id="Google_Cloud_Spanner_V1_SpannerClientImpl_StreamingRead_Google_Cloud_Spanner_V1_ReadRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.V1.SpannerClientImpl.StreamingRead(Google.Cloud.Spanner.V1.ReadRequest,Google.Api.Gax.Grpc.CallSettings)">StreamingRead(ReadRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Like [Read][google.spanner.v1.Spanner.Read], except returns the result set as a
-stream. Unlike [Read][google.spanner.v1.Spanner.Read], there is no limit on the
-size of the returned result set. However, no individual row in
+  <div class="markdown level1 summary"><p>Like [Read][google.spanner.v1.Spanner.Read], except returns the result set
+as a stream. Unlike [Read][google.spanner.v1.Spanner.Read], there is no
+limit on the size of the returned result set. However, no individual row in
 the result set can exceed 100 MiB, and no column value can exceed
 10 MiB.</p>
 </div>
