@@ -148,11 +148,10 @@
   </h3>
   <a id="Google_Cloud_Tasks_V2Beta3_Task_AppEngineHttpRequest_" data-uid="Google.Cloud.Tasks.V2Beta3.Task.AppEngineHttpRequest*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Task_AppEngineHttpRequest" data-uid="Google.Cloud.Tasks.V2Beta3.Task.AppEngineHttpRequest">AppEngineHttpRequest</h4>
-  <div class="markdown level1 summary"><p>App Engine HTTP request that is sent to the task&apos;s target. Can
-be set only if
-[app_engine_http_queue][google.cloud.tasks.v2beta3.Queue.app_engine_http_queue] is set
-on the queue.</p>
-<p>An App Engine task is a task that has [AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest] set.</p>
+  <div class="markdown level1 summary"><p>HTTP request that is sent to the App Engine app handler.</p>
+<p>An App Engine task is a task that has
+[AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest]
+set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -202,7 +201,7 @@ on the queue.</p>
   <a id="Google_Cloud_Tasks_V2Beta3_Task_DispatchCount_" data-uid="Google.Cloud.Tasks.V2Beta3.Task.DispatchCount*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Task_DispatchCount" data-uid="Google.Cloud.Tasks.V2Beta3.Task.DispatchCount">DispatchCount</h4>
   <div class="markdown level1 summary"><p>Output only. The number of attempts dispatched.</p>
-<p>This count includes tasks which have been dispatched but haven&apos;t
+<p>This count includes attempts which have been dispatched but haven&apos;t
 received a response.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -225,11 +224,68 @@ received a response.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_Task_DispatchDeadline_" data-uid="Google.Cloud.Tasks.V2Beta3.Task.DispatchDeadline*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_Task_DispatchDeadline" data-uid="Google.Cloud.Tasks.V2Beta3.Task.DispatchDeadline">DispatchDeadline</h4>
+  <div class="markdown level1 summary"><p>The deadline for requests sent to the worker. If the worker does not
+respond by this deadline then the request is cancelled and the attempt
+is marked as a <code>DEADLINE_EXCEEDED</code> failure. Cloud Tasks will retry the
+task according to the
+[RetryConfig][google.cloud.tasks.v2beta3.RetryConfig].</p>
+<p>Note that when the request is cancelled, Cloud Tasks will stop listing for
+the response, but whether the worker stops processing depends on the
+worker. For example, if the worker is stuck, it may not react to cancelled
+requests.</p>
+<p>The default and maximum values depend on the type of request:</p>
+<ul>
+<li><p>For [HTTP tasks][google.cloud.tasks.v2beta3.HttpRequest], the default is
+10 minutes.
+The deadline must be in the interval [15 seconds, 30 minutes].</p>
+</li>
+<li><p>For [App Engine tasks][google.cloud.tasks.v2beta3.AppEngineHttpRequest],
+0 indicates that the
+request has the default deadline. The default deadline depends on the
+<a href="https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling">scaling
+type</a>
+of the service: 10 minutes for standard apps with automatic scaling, 24
+hours for standard apps with manual and basic scaling, and 60 minutes for
+flex apps. If the request deadline is set, it must be in the interval [15
+seconds, 24 hours 15 seconds]. Regardless of the task&apos;s
+<code>dispatch_deadline</code>, the app handler will not run for longer than than
+the service&apos;s timeout. We recommend setting the <code>dispatch_deadline</code> to
+at most a few seconds more than the app handler&apos;s timeout. For more
+information see
+<a href="https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts">Timeouts</a>.</p>
+</li>
+</ul>
+<p><code>dispatch_deadline</code> will be truncated to the nearest millisecond. The
+deadline is an approximate deadline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration DispatchDeadline { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Duration.html">Duration</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Tasks_V2Beta3_Task_FirstAttempt_" data-uid="Google.Cloud.Tasks.V2Beta3.Task.FirstAttempt*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Task_FirstAttempt" data-uid="Google.Cloud.Tasks.V2Beta3.Task.FirstAttempt">FirstAttempt</h4>
   <div class="markdown level1 summary"><p>Output only. The status of the task&apos;s first attempt.</p>
-<p>Only [dispatch_time][google.cloud.tasks.v2beta3.Attempt.dispatch_time] will be set.
-The other [Attempt][google.cloud.tasks.v2beta3.Attempt] information is not retained by Cloud Tasks.</p>
+<p>Only [dispatch_time][google.cloud.tasks.v2beta3.Attempt.dispatch_time] will
+be set. The other [Attempt][google.cloud.tasks.v2beta3.Attempt] information
+is not retained by Cloud Tasks.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -247,6 +303,35 @@ The other [Attempt][google.cloud.tasks.v2beta3.Attempt] information is not retai
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.Attempt.html">Attempt</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_Task_HttpRequest_" data-uid="Google.Cloud.Tasks.V2Beta3.Task.HttpRequest*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_Task_HttpRequest" data-uid="Google.Cloud.Tasks.V2Beta3.Task.HttpRequest">HttpRequest</h4>
+  <div class="markdown level1 summary"><p>HTTP request that is sent to the task&apos;s target.</p>
+<p>Warning: This is an <a href="https://cloud.google.com/terms/launch-stages">alpha</a>
+feature. If you haven&apos;t already joined, you can <a href="https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform?usp=sf_link">use this form to sign
+up</a>.</p>
+<p>An HTTP task is a task that has
+[HttpRequest][google.cloud.tasks.v2beta3.HttpRequest] set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpRequest HttpRequest { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.HttpRequest.html">HttpRequest</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -277,7 +362,8 @@ The other [Attempt][google.cloud.tasks.v2beta3.Attempt] information is not retai
   </table>
   <a id="Google_Cloud_Tasks_V2Beta3_Task_Name_" data-uid="Google.Cloud.Tasks.V2Beta3.Task.Name*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Task_Name" data-uid="Google.Cloud.Tasks.V2Beta3.Task.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Optionally caller-specified in [CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].</p>
+  <div class="markdown level1 summary"><p>Optionally caller-specified in
+[CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].</p>
 <p>The task name.</p>
 <p>The task name must have the following format:
 <code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code></p>
@@ -285,7 +371,8 @@ The other [Attempt][google.cloud.tasks.v2beta3.Attempt] information is not retai
 <li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
-<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
+<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying
+projects</a></li>
 <li><code>LOCATION_ID</code> is the canonical ID for the task&apos;s location.
 The list of available locations can be obtained by calling
 [ListLocations][google.cloud.location.Locations.ListLocations].
@@ -415,8 +502,8 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
   </table>
   <a id="Google_Cloud_Tasks_V2Beta3_Task_View_" data-uid="Google.Cloud.Tasks.V2Beta3.Task.View*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Task_View" data-uid="Google.Cloud.Tasks.V2Beta3.Task.View">View</h4>
-  <div class="markdown level1 summary"><p>Output only. The view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] has
-been returned.</p>
+  <div class="markdown level1 summary"><p>Output only. The view specifies which subset of the
+[Task][google.cloud.tasks.v2beta3.Task] has been returned.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

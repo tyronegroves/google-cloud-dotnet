@@ -150,8 +150,11 @@ retry options, queue types, and others.</p>
   </h3>
   <a id="Google_Cloud_Tasks_V2Beta3_Queue_AppEngineHttpQueue_" data-uid="Google.Cloud.Tasks.V2Beta3.Queue.AppEngineHttpQueue*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Queue_AppEngineHttpQueue" data-uid="Google.Cloud.Tasks.V2Beta3.Queue.AppEngineHttpQueue">AppEngineHttpQueue</h4>
-  <div class="markdown level1 summary"><p>App Engine HTTP queue.</p>
-<p>An App Engine queue is a queue that has an [AppEngineHttpQeueue][] type.</p>
+  <div class="markdown level1 summary"><p>[AppEngineHttpQueue][google.cloud.tasks.v2beta3.AppEngineHttpQueue]
+settings apply only to [App Engine
+tasks][google.cloud.tasks.v2beta3.AppEngineHttpRequest] in this queue.
+[Http tasks][google.cloud.tasks.v2beta3.HttpRequest] are not affected by
+this proto.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -175,8 +178,9 @@ retry options, queue types, and others.</p>
   </table>
   <a id="Google_Cloud_Tasks_V2Beta3_Queue_Name_" data-uid="Google.Cloud.Tasks.V2Beta3.Queue.Name*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Queue_Name" data-uid="Google.Cloud.Tasks.V2Beta3.Queue.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Caller-specified and required in [CreateQueue][google.cloud.tasks.v2beta3.CloudTasks.CreateQueue],
-after which it becomes output only.</p>
+  <div class="markdown level1 summary"><p>Caller-specified and required in
+[CreateQueue][google.cloud.tasks.v2beta3.CloudTasks.CreateQueue], after
+which it becomes output only.</p>
 <p>The queue name.</p>
 <p>The queue name must have the following format:
 <code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID</code></p>
@@ -184,7 +188,8 @@ after which it becomes output only.</p>
 <li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
-<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
+<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying
+projects</a></li>
 <li><code>LOCATION_ID</code> is the canonical ID for the queue&apos;s location.
 The list of available locations can be obtained by calling
 [ListLocations][google.cloud.location.Locations.ListLocations].
@@ -216,10 +221,12 @@ hyphens (-). The maximum length is 100 characters.</li>
   <a id="Google_Cloud_Tasks_V2Beta3_Queue_PurgeTime_" data-uid="Google.Cloud.Tasks.V2Beta3.Queue.PurgeTime*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Queue_PurgeTime" data-uid="Google.Cloud.Tasks.V2Beta3.Queue.PurgeTime">PurgeTime</h4>
   <div class="markdown level1 summary"><p>Output only. The last time this queue was purged.</p>
-<p>All tasks that were [created][google.cloud.tasks.v2beta3.Task.create_time] before this time
-were purged.</p>
-<p>A queue can be purged using [PurgeQueue][google.cloud.tasks.v2beta3.CloudTasks.PurgeQueue], the
-<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue">App Engine Task Queue SDK, or the Cloud Console</a>.</p>
+<p>All tasks that were [created][google.cloud.tasks.v2beta3.Task.create_time]
+before this time were purged.</p>
+<p>A queue can be purged using
+[PurgeQueue][google.cloud.tasks.v2beta3.CloudTasks.PurgeQueue], the <a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue">App
+Engine Task Queue SDK, or the Cloud
+Console</a>.</p>
 <p>Purge time will be truncated to the nearest microsecond. Purge
 time will be unset if the queue has never been purged.</p>
 </div>
@@ -294,18 +301,30 @@ time will be unset if the queue has never been purged.</p>
   <h4 id="Google_Cloud_Tasks_V2Beta3_Queue_RateLimits" data-uid="Google.Cloud.Tasks.V2Beta3.Queue.RateLimits">RateLimits</h4>
   <div class="markdown level1 summary"><p>Rate limits for task dispatches.</p>
 <p>[rate_limits][google.cloud.tasks.v2beta3.Queue.rate_limits] and
-[retry_config][google.cloud.tasks.v2beta3.Queue.retry_config] are related because they both
-control task attempts however they control how tasks are
-attempted in different ways:</p>
+[retry_config][google.cloud.tasks.v2beta3.Queue.retry_config] are related
+because they both control task attempts. However they control task attempts
+in different ways:</p>
 <ul>
-<li>[rate_limits][google.cloud.tasks.v2beta3.Queue.rate_limits] controls the total rate of
+<li>[rate_limits][google.cloud.tasks.v2beta3.Queue.rate_limits] controls the
+total rate of
 dispatches from a queue (i.e. all traffic dispatched from the
 queue, regardless of whether the dispatch is from a first
 attempt or a retry).</li>
-<li>[retry_config][google.cloud.tasks.v2beta3.Queue.retry_config] controls what happens to
+<li>[retry_config][google.cloud.tasks.v2beta3.Queue.retry_config] controls
+what happens to
 particular a task after its first attempt fails. That is,
-[retry_config][google.cloud.tasks.v2beta3.Queue.retry_config] controls task retries (the
-second attempt, third attempt, etc).</li>
+[retry_config][google.cloud.tasks.v2beta3.Queue.retry_config] controls
+task retries (the second attempt, third attempt, etc).</li>
+</ul>
+<p>The queue&apos;s actual dispatch rate is the result of:</p>
+<ul>
+<li>Number of tasks in the queue</li>
+<li>User-specified throttling: [rate limits][Queue.RateLimits]
+[retry configuration][Queue.RetryConfig], and the
+[queue&apos;s state][google.cloud.tasks.v2beta3.Queue.state].</li>
+<li>System throttling due to <code>429</code> (Too Many Requests) or <code>503</code> (Service
+Unavailable) responses from the worker, high error rates, or to smooth
+sudden large traffic spikes.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -338,7 +357,8 @@ Retry settings cannot be set on individual tasks.</li>
 <li>For tasks created using the App Engine SDK: the queue-level retry
 settings apply to all tasks in the queue which do not have retry settings
 explicitly set on the task and were created by the App Engine SDK. See
-<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks">App Engine documentation</a>.</li>
+<a href="https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/retrying-tasks">App Engine
+documentation</a>.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -366,9 +386,11 @@ explicitly set on the task and were created by the App Engine SDK. See
   <div class="markdown level1 summary"><p>Output only. The state of the queue.</p>
 <p><code>state</code> can only be changed by called
 [PauseQueue][google.cloud.tasks.v2beta3.CloudTasks.PauseQueue],
-[ResumeQueue][google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue], or uploading
+[ResumeQueue][google.cloud.tasks.v2beta3.CloudTasks.ResumeQueue], or
+uploading
 <a href="https://cloud.google.com/appengine/docs/python/config/queueref">queue.yaml/xml</a>.
-[UpdateQueue][google.cloud.tasks.v2beta3.CloudTasks.UpdateQueue] cannot be used to change <code>state</code>.</p>
+[UpdateQueue][google.cloud.tasks.v2beta3.CloudTasks.UpdateQueue] cannot be
+used to change <code>state</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
