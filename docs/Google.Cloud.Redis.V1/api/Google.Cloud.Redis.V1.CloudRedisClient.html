@@ -205,6 +205,30 @@
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceOperationsClient_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceOperationsClient*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceOperationsClient" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceOperationsClient">FailoverInstanceOperationsClient</h4>
+  <div class="markdown level1 summary"><p>The long-running operations client for <code>FailoverInstance</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual OperationsClient FailoverInstanceOperationsClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Redis_V1_CloudRedisClient_GrpcClient_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.GrpcClient*"></a>
   <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_GrpcClient" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.GrpcClient">GrpcClient</h4>
   <div class="markdown level1 summary"><p>The underlying gRPC CloudRedis client.</p>
@@ -1428,6 +1452,439 @@ if (retrievedResponse.IsCompleted)
 }
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstance_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstance*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstance_Google_Cloud_Redis_V1_FailoverInstanceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstance(Google.Cloud.Redis.V1.FailoverInstanceRequest,Google.Api.Gax.Grpc.CallSettings)">FailoverInstance(FailoverInstanceRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Failover the master role to current replica node against a specific
+STANDARD tier redis instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, OperationMetadata&gt; FailoverInstance(FailoverInstanceRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Redis.V1.FailoverInstanceRequest.html">FailoverInstanceRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Redis.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstance_Google_Cloud_Redis_V1_FailoverInstanceRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudRedisClient cloudRedisClient = CloudRedisClient.Create();
+// Initialize request argument(s)
+FailoverInstanceRequest request = new FailoverInstanceRequest
+{
+    Name = new InstanceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;).ToString(),
+    DataProtectionMode = FailoverInstanceRequest.Types.DataProtectionMode.Unspecified,
+};
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response =
+    cloudRedisClient.FailoverInstance(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse =
+    cloudRedisClient.PollOnceFailoverInstance(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstance_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstance*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstance_System_String_Google_Cloud_Redis_V1_FailoverInstanceRequest_Types_DataProtectionMode_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstance(System.String,Google.Cloud.Redis.V1.FailoverInstanceRequest.Types.DataProtectionMode,Google.Api.Gax.Grpc.CallSettings)">FailoverInstance(String, FailoverInstanceRequest.Types.DataProtectionMode, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Failover the master role to current replica node against a specific
+STANDARD tier redis instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, OperationMetadata&gt; FailoverInstance(string name, FailoverInstanceRequest.Types.DataProtectionMode dataProtectionMode, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Redis instance resource name using the form:
+<code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Redis.V1.FailoverInstanceRequest.Types.DataProtectionMode.html">FailoverInstanceRequest.Types.DataProtectionMode</a></td>
+        <td><span class="parametername">dataProtectionMode</span></td>
+        <td><p>Optional. Available data protection modes that the user can choose. If it&apos;s
+unspecified, data protection mode will be LIMITED_DATA_LOSS by default.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Redis.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstance_System_String_Google_Cloud_Redis_V1_FailoverInstanceRequest_Types_DataProtectionMode_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudRedisClient cloudRedisClient = CloudRedisClient.Create();
+// Initialize request argument(s)
+string formattedName = new InstanceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;).ToString();
+FailoverInstanceRequest.Types.DataProtectionMode dataProtectionMode = FailoverInstanceRequest.Types.DataProtectionMode.Unspecified;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response =
+    cloudRedisClient.FailoverInstance(formattedName, dataProtectionMode);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse =
+    cloudRedisClient.PollOnceFailoverInstance(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_Google_Cloud_Redis_V1_FailoverInstanceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceAsync(Google.Cloud.Redis.V1.FailoverInstanceRequest,Google.Api.Gax.Grpc.CallSettings)">FailoverInstanceAsync(FailoverInstanceRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Failover the master role to current replica node against a specific
+STANDARD tier redis instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; FailoverInstanceAsync(FailoverInstanceRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Redis.V1.FailoverInstanceRequest.html">FailoverInstanceRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Redis.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_Google_Cloud_Redis_V1_FailoverInstanceRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudRedisClient cloudRedisClient = await CloudRedisClient.CreateAsync();
+// Initialize request argument(s)
+FailoverInstanceRequest request = new FailoverInstanceRequest
+{
+    Name = new InstanceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;).ToString(),
+    DataProtectionMode = FailoverInstanceRequest.Types.DataProtectionMode.Unspecified,
+};
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response =
+    await cloudRedisClient.FailoverInstanceAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse =
+    await cloudRedisClient.PollOnceFailoverInstanceAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_System_String_Google_Cloud_Redis_V1_FailoverInstanceRequest_Types_DataProtectionMode_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceAsync(System.String,Google.Cloud.Redis.V1.FailoverInstanceRequest.Types.DataProtectionMode,Google.Api.Gax.Grpc.CallSettings)">FailoverInstanceAsync(String, FailoverInstanceRequest.Types.DataProtectionMode, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Failover the master role to current replica node against a specific
+STANDARD tier redis instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; FailoverInstanceAsync(string name, FailoverInstanceRequest.Types.DataProtectionMode dataProtectionMode, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Redis instance resource name using the form:
+<code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Redis.V1.FailoverInstanceRequest.Types.DataProtectionMode.html">FailoverInstanceRequest.Types.DataProtectionMode</a></td>
+        <td><span class="parametername">dataProtectionMode</span></td>
+        <td><p>Optional. Available data protection modes that the user can choose. If it&apos;s
+unspecified, data protection mode will be LIMITED_DATA_LOSS by default.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Redis.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_System_String_Google_Cloud_Redis_V1_FailoverInstanceRequest_Types_DataProtectionMode_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudRedisClient cloudRedisClient = await CloudRedisClient.CreateAsync();
+// Initialize request argument(s)
+string formattedName = new InstanceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;).ToString();
+FailoverInstanceRequest.Types.DataProtectionMode dataProtectionMode = FailoverInstanceRequest.Types.DataProtectionMode.Unspecified;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response =
+    await cloudRedisClient.FailoverInstanceAsync(formattedName, dataProtectionMode);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse =
+    await cloudRedisClient.PollOnceFailoverInstanceAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_System_String_Google_Cloud_Redis_V1_FailoverInstanceRequest_Types_DataProtectionMode_System_Threading_CancellationToken_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.FailoverInstanceAsync(System.String,Google.Cloud.Redis.V1.FailoverInstanceRequest.Types.DataProtectionMode,System.Threading.CancellationToken)">FailoverInstanceAsync(String, FailoverInstanceRequest.Types.DataProtectionMode, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Failover the master role to current replica node against a specific
+STANDARD tier redis instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; FailoverInstanceAsync(string name, FailoverInstanceRequest.Types.DataProtectionMode dataProtectionMode, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Redis instance resource name using the form:
+<code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Redis.V1.FailoverInstanceRequest.Types.DataProtectionMode.html">FailoverInstanceRequest.Types.DataProtectionMode</a></td>
+        <td><span class="parametername">dataProtectionMode</span></td>
+        <td><p>Optional. Available data protection modes that the user can choose. If it&apos;s
+unspecified, data protection mode will be LIMITED_DATA_LOSS by default.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Redis.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Redis_V1_CloudRedisClient_FailoverInstanceAsync_System_String_Google_Cloud_Redis_V1_FailoverInstanceRequest_Types_DataProtectionMode_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudRedisClient cloudRedisClient = await CloudRedisClient.CreateAsync();
+// Initialize request argument(s)
+string formattedName = new InstanceName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;).ToString();
+FailoverInstanceRequest.Types.DataProtectionMode dataProtectionMode = FailoverInstanceRequest.Types.DataProtectionMode.Unspecified;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response =
+    await cloudRedisClient.FailoverInstanceAsync(formattedName, dataProtectionMode);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse =
+    await cloudRedisClient.PollOnceFailoverInstanceAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Redis_V1_CloudRedisClient_GetInstance_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.GetInstance*"></a>
   <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_GetInstance_Google_Cloud_Redis_V1_GetInstanceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.GetInstance(Google.Cloud.Redis.V1.GetInstanceRequest,Google.Api.Gax.Grpc.CallSettings)">GetInstance(GetInstanceRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Gets the details of a specific Redis instance.</p>
@@ -2414,6 +2871,104 @@ string nextPageToken = singlePage.NextPageToken;
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A task representing the result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_PollOnceFailoverInstance_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.PollOnceFailoverInstance*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_PollOnceFailoverInstance_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.PollOnceFailoverInstance(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceFailoverInstance(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>FailoverInstance</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, OperationMetadata&gt; PollOnceFailoverInstance(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Redis.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Redis_V1_CloudRedisClient_PollOnceFailoverInstanceAsync_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.PollOnceFailoverInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Redis_V1_CloudRedisClient_PollOnceFailoverInstanceAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Redis.V1.CloudRedisClient.PollOnceFailoverInstanceAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceFailoverInstanceAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of <code>FailoverInstanceAsync</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; PollOnceFailoverInstanceAsync(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Redis.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Redis.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
         <td><p>A task representing the result of polling the operation.</p>
 </td>
       </tr>
