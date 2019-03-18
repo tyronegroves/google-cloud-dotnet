@@ -67,7 +67,7 @@ It allows for simple integration of Stackdriver into ASP.NET applications with m
 <p><code>Google.Cloud.Diagnostics.AspNetCore</code> currently supports Stackdriver Error Reporting, Stackdriver Logging
 and Stackdriver Trace.</p>
 <p>Note:
-This documentation is for version <code>3.0.0-beta09</code> of the library.
+This documentation is for version <code>3.0.0-beta10</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Diagnostics.AspNetCore</code> package from NuGet. Add it to
@@ -76,7 +76,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>3.0.0-beta09</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
+pre-release version (<code>3.0.0-beta10</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -255,6 +255,54 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
 
         // Replace projectId with your Google Cloud Project ID.
         services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId, options: loggerOptions));
+    })
+    .UseStartup&lt;Startup&gt;();
+</code></pre><h3 id="finding-out-the-url-where-logs-are-written">Finding out the URL where logs are written</h3>
+<p>Depending on where your code is running and the options you provided for creating a Google Logger,
+it might be hard to find your logs in the GCP Console. We have provided a way for you to obtain the URL
+where your logs can be found.</p>
+<p>As the following code samples show, you only need to pass a <code>System.IO.TextWriter</code> as part of the options
+when creating a Google Logger. Whenever a Google Logger is created, the URL where its logs can be found
+will be written to the given text writer.</p>
+<p>Please note that since this is a Google Logger diagnostics feature, we don&#39;t respect settings for exception
+handling, i.e. we propogate any exception thrown while writing the URL to the given text writer so you know
+what might be happening. This feature should only be activated as a one off, if you are having trouble trying
+to find your logs in the GCP Console, and not as a permanent feature in production code. To deactivate this feature
+simply stop passing a <code>System.IO.TextWriter</code> as part of the options when creating a Google Logger.</p>
+<h4 id="finding-out-the-url-where-logs-are-written-1">Finding out the URL where logs are written</h4>
+<pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc();
+}
+
+public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+{
+    // Once created, the GoogleLogger will write the URL where logs can be found
+    // to a given System.IO.TextWriter, for instance System.Console.Out.
+    LoggerOptions loggerOptions = LoggerOptions.Create(loggerDiagnosticsOutput: Console.Out);
+
+    // Replace ProjectId with your Google Cloud Project ID.
+    loggerFactory.AddGoogle(app.ApplicationServices, ProjectId, loggerOptions);
+
+    // ...any other configuration your application requires.
+
+    app.UseMvc(routes =&gt;
+    {
+        routes.MapRoute(
+            name: &quot;default&quot;,
+            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    });
+}
+</code></pre><h4 id="finding-out-the-url-where-logs-are-written-aspnet-core-20">Finding out the URL where logs are written (ASP.NET Core 2.0+)</h4>
+<pre><code class="lang-cs">return new WebHostBuilder()
+    .ConfigureServices(services =&gt;
+    {
+        // Once created, the GoogleLogger will write the URL where logs can be found
+        // to a given System.IO.TextWriter, for instance System.Console.Out.
+        LoggerOptions loggerOptions = LoggerOptions.Create(loggerDiagnosticsOutput: Console.Out);
+
+        // Replace projectId with your Google Cloud Project ID.
+        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId, loggerOptions));
     })
     .UseStartup&lt;Startup&gt;();
 </code></pre><h1 id="tracing">Tracing</h1>
