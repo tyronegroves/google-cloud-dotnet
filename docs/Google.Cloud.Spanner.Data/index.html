@@ -250,6 +250,63 @@ deletes a row using a <code>DELETE</code> command:</p>
 }
 </code></pre><p>When direct row modifications are performed in a transaction, they are only applied when the transaction is committed.
 Queries within the transaction will not observe any changes.</p>
+<h3 id="using-a-commit-timestamp">Using a commit timestamp</h3>
+<p>Spanner allows you to write a commit timestamp for insert and update
+operations.</p>
+<p>When using direct row modifications, the commit timestamp can be set
+using <code>SpannerParameter.CommitTimestamp</code> as the value for a
+parameter, as shown below.</p>
+<pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    await connection.OpenAsync();
+
+    string createTableStatement =
+        @&quot;CREATE TABLE UsersHistory (
+        Id INT64 NOT NULL,
+        CommitTs TIMESTAMP NOT NULL OPTIONS
+            (allow_commit_timestamp=true),
+        Name STRING(MAX) NOT NULL,
+        Email STRING(MAX),
+        Deleted BOOL NOT NULL,
+      ) PRIMARY KEY(Id, CommitTs DESC)&quot;;
+
+    await connection.CreateDdlCommand(createTableStatement).ExecuteNonQueryAsync();
+
+    // Insert a first row
+    SpannerCommand cmd = connection.CreateInsertCommand(&quot;UsersHistory&quot;,
+        new SpannerParameterCollection
+        {
+            { &quot;Id&quot;, SpannerDbType.Int64, 10L },
+            { &quot;CommitTs&quot;, SpannerDbType.Timestamp, SpannerParameter.CommitTimestamp },
+            { &quot;Name&quot;, SpannerDbType.String, &quot;Demo 1&quot; },
+            { &quot;Deleted&quot;, SpannerDbType.Bool, false }
+        });
+    int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+    // Insert a second row
+    cmd.Parameters[&quot;Id&quot;].Value = 11L;
+    cmd.Parameters[&quot;Name&quot;].Value = &quot;Demo 2&quot;;
+    rowsAffected += await cmd.ExecuteNonQueryAsync();
+    Console.WriteLine($&quot;{rowsAffected} rows written...&quot;);
+
+    // Display the inserted values
+    SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM UsersHistory&quot;);
+    using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
+    {
+        while (await reader.ReadAsync())
+        {
+            long id = reader.GetFieldValue&lt;long&gt;(&quot;Id&quot;);
+            string name = reader.GetFieldValue&lt;string&gt;(&quot;Name&quot;);
+            DateTime timestamp = reader.GetFieldValue&lt;DateTime&gt;(&quot;CommitTs&quot;);
+            Console.WriteLine($&quot;{id}: {name} - {timestamp:HH:mm:ss.ffffff}&quot;);
+        }
+    }
+}
+</code></pre><p>This parameter value cannot be used in DML. Instead, use the
+<code>PENDING_COMMIT_TIMESTAMP()</code> function in your DML statement.</p>
+<p>See the <a href="https://cloud.google.com/spanner/docs/commit-timestamp">Cloud Spanner
+documentation</a>
+for more information about commit timestamps.</p>
 <h2 id="transactions-and-fault-handling">Transactions and Fault Handling</h2>
 <p>Cloud Spanner is fully ACID compliant.</p>
 <p>Retries should be implemented at the transaction level (as opposed to individual call level)
