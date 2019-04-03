@@ -184,68 +184,6 @@
   <h3 id="methods">Methods
   </h3>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobs*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobs(Google.Api.Gax.ResourceNames.ProjectName,System.String,Google.Api.Gax.Grpc.CallSettings)">BatchDeleteJobs(ProjectName, String, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void BatchDeleteJobs(ProjectName parent, string filter, CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">filter</span></td>
-        <td><p>Required.</p>
-<p>The filter string specifies the jobs to be deleted.</p>
-<p>Supported operator: =, AND</p>
-<p>The fields eligible for filtering are:</p>
-<ul>
-<li><code>companyName</code> (Required)</li>
-<li><code>requisitionId</code> (Required)</li>
-</ul>
-<p>Sample Query: companyName = &quot;projects/api-test-project/companies/123&quot; AND
-requisitionId = &quot;req-1&quot;</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = JobServiceClient.Create();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-string filter = &quot;&quot;;
-// Make the request
-jobServiceClient.BatchDeleteJobs(parent, filter);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobs*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_Google_Cloud_Talent_V4Beta1_BatchDeleteJobsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobs(Google.Cloud.Talent.V4Beta1.BatchDeleteJobsRequest,Google.Api.Gax.Grpc.CallSettings)">BatchDeleteJobs(BatchDeleteJobsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.</p>
 </div>
@@ -285,21 +223,21 @@ JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
 BatchDeleteJobsRequest request = new BatchDeleteJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Filter = &quot;&quot;,
 };
 // Make the request
 jobServiceClient.BatchDeleteJobs(request);
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,Google.Api.Gax.Grpc.CallSettings)">BatchDeleteJobsAsync(ProjectName, String, CallSettings)</h4>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobs*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobs(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,System.String,Google.Api.Gax.Grpc.CallSettings)">BatchDeleteJobs(TenantOrProjectNameOneof, String, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task BatchDeleteJobsAsync(ProjectName parent, string filter, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void BatchDeleteJobs(TenantOrProjectNameOneof parent, string filter, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -312,12 +250,14 @@ jobServiceClient.BatchDeleteJobs(request);
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -343,109 +283,15 @@ requisitionId = &quot;req-1&quot;</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobs_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
 string filter = &quot;&quot;;
 // Make the request
-await jobServiceClient.BatchDeleteJobsAsync(parent, filter);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.Threading.CancellationToken)">BatchDeleteJobsAsync(ProjectName, String, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task BatchDeleteJobsAsync(ProjectName parent, string filter, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">filter</span></td>
-        <td><p>Required.</p>
-<p>The filter string specifies the jobs to be deleted.</p>
-<p>Supported operator: =, AND</p>
-<p>The fields eligible for filtering are:</p>
-<ul>
-<li><code>companyName</code> (Required)</li>
-<li><code>requisitionId</code> (Required)</li>
-</ul>
-<p>Sample Query: companyName = &quot;projects/api-test-project/companies/123&quot; AND
-requisitionId = &quot;req-1&quot;</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-string filter = &quot;&quot;;
-// Make the request
-await jobServiceClient.BatchDeleteJobsAsync(parent, filter);
+jobServiceClient.BatchDeleteJobs(parent, filter);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync*"></a>
@@ -504,7 +350,7 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 BatchDeleteJobsRequest request = new BatchDeleteJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Filter = &quot;&quot;,
 };
 // Make the request
@@ -567,11 +413,171 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 BatchDeleteJobsRequest request = new BatchDeleteJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Filter = &quot;&quot;,
 };
 // Make the request
 await jobServiceClient.BatchDeleteJobsAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,System.String,Google.Api.Gax.Grpc.CallSettings)">BatchDeleteJobsAsync(TenantOrProjectNameOneof, String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task BatchDeleteJobsAsync(TenantOrProjectNameOneof parent, string filter, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Required.</p>
+<p>The filter string specifies the jobs to be deleted.</p>
+<p>Supported operator: =, AND</p>
+<p>The fields eligible for filtering are:</p>
+<ul>
+<li><code>companyName</code> (Required)</li>
+<li><code>requisitionId</code> (Required)</li>
+</ul>
+<p>Sample Query: companyName = &quot;projects/api-test-project/companies/123&quot; AND
+requisitionId = &quot;req-1&quot;</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+// Initialize request argument(s)
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
+string filter = &quot;&quot;;
+// Make the request
+await jobServiceClient.BatchDeleteJobsAsync(parent, filter);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.BatchDeleteJobsAsync(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,System.String,System.Threading.CancellationToken)">BatchDeleteJobsAsync(TenantOrProjectNameOneof, String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a list of [Job][google.cloud.talent.v4beta1.Job]s by filter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task BatchDeleteJobsAsync(TenantOrProjectNameOneof parent, string filter, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Required.</p>
+<p>The filter string specifies the jobs to be deleted.</p>
+<p>Supported operator: =, AND</p>
+<p>The fields eligible for filtering are:</p>
+<ul>
+<li><code>companyName</code> (Required)</li>
+<li><code>requisitionId</code> (Required)</li>
+</ul>
+<p>Sample Query: companyName = &quot;projects/api-test-project/companies/123&quot; AND
+requisitionId = &quot;req-1&quot;</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_BatchDeleteJobsAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+// Initialize request argument(s)
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
+string filter = &quot;&quot;;
+// Make the request
+await jobServiceClient.BatchDeleteJobsAsync(parent, filter);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_Create_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.Create*"></a>
@@ -819,78 +825,6 @@ JobServiceClient client = JobServiceClient.Create(channel);
 await channel.ShutdownAsync();</code></pre>
 
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJob*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJob(Google.Api.Gax.ResourceNames.ProjectName,Google.Cloud.Talent.V4Beta1.Job,Google.Api.Gax.Grpc.CallSettings)">CreateJob(ProjectName, Job, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new job.</p>
-<p>Typically, the job becomes searchable within 10 seconds, but it may take
-up to 5 minutes.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Job CreateJob(ProjectName parent, Job job, CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a></td>
-        <td><span class="parametername">job</span></td>
-        <td><p>Required.</p>
-<p>The Job to be created.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a></td>
-        <td><p>The RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = JobServiceClient.Create();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-Job job = new Job();
-// Make the request
-Job response = jobServiceClient.CreateJob(parent, job);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJob*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_Google_Cloud_Talent_V4Beta1_CreateJobRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJob(Google.Cloud.Talent.V4Beta1.CreateJobRequest,Google.Api.Gax.Grpc.CallSettings)">CreateJob(CreateJobRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new job.</p>
 <p>Typically, the job becomes searchable within 10 seconds, but it may take
@@ -948,15 +882,15 @@ JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
 CreateJobRequest request = new CreateJobRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Job = new Job(),
 };
 // Make the request
 Job response = jobServiceClient.CreateJob(request);
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Cloud.Talent.V4Beta1.Job,Google.Api.Gax.Grpc.CallSettings)">CreateJobAsync(ProjectName, Job, CallSettings)</h4>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJob*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJob(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,Google.Cloud.Talent.V4Beta1.Job,Google.Api.Gax.Grpc.CallSettings)">CreateJob(TenantOrProjectNameOneof, Job, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new job.</p>
 <p>Typically, the job becomes searchable within 10 seconds, but it may take
 up to 5 minutes.</p>
@@ -964,7 +898,7 @@ up to 5 minutes.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; CreateJobAsync(ProjectName parent, Job job, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Job CreateJob(TenantOrProjectNameOneof parent, Job job, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -977,12 +911,14 @@ up to 5 minutes.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and a default tenant is created if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -1010,93 +946,21 @@ up to 5 minutes.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-Job job = new Job();
-// Make the request
-Job response = await jobServiceClient.CreateJobAsync(parent, job);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_Talent_V4Beta1_Job_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync(Google.Api.Gax.ResourceNames.ProjectName,Google.Cloud.Talent.V4Beta1.Job,System.Threading.CancellationToken)">CreateJobAsync(ProjectName, Job, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a new job.</p>
-<p>Typically, the job becomes searchable within 10 seconds, but it may take
-up to 5 minutes.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; CreateJobAsync(ProjectName parent, Job job, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
-</td>
-      </tr>
-      <tr>
         <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a></td>
-        <td><span class="parametername">job</span></td>
-        <td><p>Required.</p>
-<p>The Job to be created.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
+        <td><p>The RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Api_Gax_ResourceNames_ProjectName_Google_Cloud_Talent_V4Beta1_Job_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJob_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
 Job job = new Job();
 // Make the request
-Job response = await jobServiceClient.CreateJobAsync(parent, job);
+Job response = jobServiceClient.CreateJob(parent, job);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync*"></a>
@@ -1157,7 +1021,7 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 CreateJobRequest request = new CreateJobRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Job = new Job(),
 };
 // Make the request
@@ -1222,11 +1086,159 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 CreateJobRequest request = new CreateJobRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Job = new Job(),
 };
 // Make the request
 Job response = await jobServiceClient.CreateJobAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,Google.Cloud.Talent.V4Beta1.Job,Google.Api.Gax.Grpc.CallSettings)">CreateJobAsync(TenantOrProjectNameOneof, Job, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a new job.</p>
+<p>Typically, the job becomes searchable within 10 seconds, but it may take
+up to 5 minutes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; CreateJobAsync(TenantOrProjectNameOneof parent, Job job, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and a default tenant is created if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a></td>
+        <td><span class="parametername">job</span></td>
+        <td><p>Required.</p>
+<p>The Job to be created.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_Google_Cloud_Talent_V4Beta1_Job_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+// Initialize request argument(s)
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
+Job job = new Job();
+// Make the request
+Job response = await jobServiceClient.CreateJobAsync(parent, job);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_Google_Cloud_Talent_V4Beta1_Job_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.CreateJobAsync(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,Google.Cloud.Talent.V4Beta1.Job,System.Threading.CancellationToken)">CreateJobAsync(TenantOrProjectNameOneof, Job, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a new job.</p>
+<p>Typically, the job becomes searchable within 10 seconds, but it may take
+up to 5 minutes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; CreateJobAsync(TenantOrProjectNameOneof parent, Job job, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and a default tenant is created if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a></td>
+        <td><span class="parametername">job</span></td>
+        <td><p>Required.</p>
+<p>The Job to be created.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_CreateJobAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_Google_Cloud_Talent_V4Beta1_Job_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+// Initialize request argument(s)
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
+Job job = new Job();
+// Make the request
+Job response = await jobServiceClient.CreateJobAsync(parent, job);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJob_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJob*"></a>
@@ -1271,14 +1283,14 @@ JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
 DeleteJobRequest request = new DeleteJobRequest
 {
-    JobName = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;),
+    JobNameOneof = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;)),
 };
 // Make the request
 jobServiceClient.DeleteJob(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJob_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJob*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJob_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJob(Google.Cloud.Talent.V4Beta1.JobName,Google.Api.Gax.Grpc.CallSettings)">DeleteJob(JobName, CallSettings)</h4>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJob_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJob(Google.Cloud.Talent.V4Beta1.JobNameOneof,Google.Api.Gax.Grpc.CallSettings)">DeleteJob(JobNameOneof, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes the specified job.</p>
 <p>Typically, the job becomes unsearchable within 10 seconds, but it may take
 up to 5 minutes.</p>
@@ -1286,7 +1298,7 @@ up to 5 minutes.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void DeleteJob(JobName name, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void DeleteJob(JobNameOneof name, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1299,12 +1311,15 @@ up to 5 minutes.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobName.html">JobName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobNameOneof.html">JobNameOneof</a></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required.</p>
 <p>The resource name of the job to be deleted.</p>
-<p>The format is &quot;projects/{project_id}/jobs/{job_id}&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -1316,11 +1331,11 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJob_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJob_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
-JobName name = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;);
+JobNameOneof name = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;));
 // Make the request
 jobServiceClient.DeleteJob(name);
 </code></pre></div>
@@ -1383,7 +1398,7 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 DeleteJobRequest request = new DeleteJobRequest
 {
-    JobName = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;),
+    JobNameOneof = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;)),
 };
 // Make the request
 await jobServiceClient.DeleteJobAsync(request);
@@ -1447,14 +1462,14 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 DeleteJobRequest request = new DeleteJobRequest
 {
-    JobName = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;),
+    JobNameOneof = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;)),
 };
 // Make the request
 await jobServiceClient.DeleteJobAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJobAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJobAsync(Google.Cloud.Talent.V4Beta1.JobName,Google.Api.Gax.Grpc.CallSettings)">DeleteJobAsync(JobName, CallSettings)</h4>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJobAsync(Google.Cloud.Talent.V4Beta1.JobNameOneof,Google.Api.Gax.Grpc.CallSettings)">DeleteJobAsync(JobNameOneof, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes the specified job.</p>
 <p>Typically, the job becomes unsearchable within 10 seconds, but it may take
 up to 5 minutes.</p>
@@ -1462,7 +1477,7 @@ up to 5 minutes.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task DeleteJobAsync(JobName name, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteJobAsync(JobNameOneof name, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1475,12 +1490,15 @@ up to 5 minutes.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobName.html">JobName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobNameOneof.html">JobNameOneof</a></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required.</p>
 <p>The resource name of the job to be deleted.</p>
-<p>The format is &quot;projects/{project_id}/jobs/{job_id}&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -1508,17 +1526,17 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
-JobName name = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;);
+JobNameOneof name = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;));
 // Make the request
 await jobServiceClient.DeleteJobAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJobAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJobAsync(Google.Cloud.Talent.V4Beta1.JobName,System.Threading.CancellationToken)">DeleteJobAsync(JobName, CancellationToken)</h4>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.DeleteJobAsync(Google.Cloud.Talent.V4Beta1.JobNameOneof,System.Threading.CancellationToken)">DeleteJobAsync(JobNameOneof, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Deletes the specified job.</p>
 <p>Typically, the job becomes unsearchable within 10 seconds, but it may take
 up to 5 minutes.</p>
@@ -1526,7 +1544,7 @@ up to 5 minutes.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task DeleteJobAsync(JobName name, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteJobAsync(JobNameOneof name, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1539,12 +1557,15 @@ up to 5 minutes.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobName.html">JobName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobNameOneof.html">JobNameOneof</a></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required.</p>
 <p>The resource name of the job to be deleted.</p>
-<p>The format is &quot;projects/{project_id}/jobs/{job_id}&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -1572,11 +1593,11 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_DeleteJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
-JobName name = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;);
+JobNameOneof name = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;));
 // Make the request
 await jobServiceClient.DeleteJobAsync(name);
 </code></pre></div>
@@ -1638,21 +1659,21 @@ JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
 GetJobRequest request = new GetJobRequest
 {
-    JobName = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;),
+    JobNameOneof = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;)),
 };
 // Make the request
 Job response = jobServiceClient.GetJob(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJob_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJob*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJob_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJob(Google.Cloud.Talent.V4Beta1.JobName,Google.Api.Gax.Grpc.CallSettings)">GetJob(JobName, CallSettings)</h4>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJob_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJob(Google.Cloud.Talent.V4Beta1.JobNameOneof,Google.Api.Gax.Grpc.CallSettings)">GetJob(JobNameOneof, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Retrieves the specified job, whose status is OPEN or recently EXPIRED
 within the last 90 days.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Job GetJob(JobName name, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Job GetJob(JobNameOneof name, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1665,12 +1686,15 @@ within the last 90 days.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobName.html">JobName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobNameOneof.html">JobNameOneof</a></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required.</p>
 <p>The resource name of the job to retrieve.</p>
-<p>The format is &quot;projects/{project_id}/jobs/{job_id}&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -1698,11 +1722,11 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJob_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJob_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
-JobName name = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;);
+JobNameOneof name = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;));
 // Make the request
 Job response = jobServiceClient.GetJob(name);
 </code></pre></div>
@@ -1764,7 +1788,7 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 GetJobRequest request = new GetJobRequest
 {
-    JobName = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;),
+    JobNameOneof = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;)),
 };
 // Make the request
 Job response = await jobServiceClient.GetJobAsync(request);
@@ -1827,21 +1851,21 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 GetJobRequest request = new GetJobRequest
 {
-    JobName = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;),
+    JobNameOneof = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;)),
 };
 // Make the request
 Job response = await jobServiceClient.GetJobAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJobAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJobAsync(Google.Cloud.Talent.V4Beta1.JobName,Google.Api.Gax.Grpc.CallSettings)">GetJobAsync(JobName, CallSettings)</h4>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJobAsync(Google.Cloud.Talent.V4Beta1.JobNameOneof,Google.Api.Gax.Grpc.CallSettings)">GetJobAsync(JobNameOneof, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Retrieves the specified job, whose status is OPEN or recently EXPIRED
 within the last 90 days.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; GetJobAsync(JobName name, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; GetJobAsync(JobNameOneof name, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1854,12 +1878,15 @@ within the last 90 days.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobName.html">JobName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobNameOneof.html">JobNameOneof</a></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required.</p>
 <p>The resource name of the job to retrieve.</p>
-<p>The format is &quot;projects/{project_id}/jobs/{job_id}&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -1887,24 +1914,24 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
-JobName name = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;);
+JobNameOneof name = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;));
 // Make the request
 Job response = await jobServiceClient.GetJobAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJobAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJobAsync(Google.Cloud.Talent.V4Beta1.JobName,System.Threading.CancellationToken)">GetJobAsync(JobName, CancellationToken)</h4>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.GetJobAsync(Google.Cloud.Talent.V4Beta1.JobNameOneof,System.Threading.CancellationToken)">GetJobAsync(JobNameOneof, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Retrieves the specified job, whose status is OPEN or recently EXPIRED
 within the last 90 days.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; GetJobAsync(JobName name, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Job&gt; GetJobAsync(JobNameOneof name, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1917,12 +1944,15 @@ within the last 90 days.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobName.html">JobName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.JobNameOneof.html">JobNameOneof</a></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required.</p>
 <p>The resource name of the job to retrieve.</p>
-<p>The format is &quot;projects/{project_id}/jobs/{job_id}&quot;,
-for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
+<p>The format is
+&quot;projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}&quot;, for
+example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -1950,144 +1980,13 @@ for example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_GetJobAsync_Google_Cloud_Talent_V4Beta1_JobNameOneof_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
-JobName name = new JobName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;);
+JobNameOneof name = JobNameOneof.From(new JobOldName(&quot;[PROJECT]&quot;, &quot;[JOBS]&quot;));
 // Make the request
 Job response = await jobServiceClient.GetJobAsync(name);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobs_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobs*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobs_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobs(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListJobs(ProjectName, String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists jobs by filter.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListJobsResponse, Job&gt; ListJobs(ProjectName parent, string filter, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
-        <td><span class="parametername">parent</span></td>
-        <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">filter</span></td>
-        <td><p>Required.</p>
-<p>The filter string specifies the jobs to be enumerated.</p>
-<p>Supported operator: =, AND</p>
-<p>The fields eligible for filtering are:</p>
-<ul>
-<li><code>companyName</code> (Required)</li>
-<li><code>requisitionId</code> (Optional)</li>
-<li><code>status</code> (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
-OPEN if no value is specified.</li>
-</ul>
-<p>Sample Query:</p>
-<ul>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND requisitionId
-= &quot;req-1&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND status =
-&quot;EXPIRED&quot;</li>
-</ul>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">pageToken</span></td>
-        <td><p>The token returned from the previous request.
-A value of <code>null</code> or an empty string retrieves the first page.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
-        <td><span class="parametername">pageSize</span></td>
-        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
-A value of <code>null</code> or 0 uses a server-defined page size.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListJobsResponse.html">ListJobsResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
-        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a> resources.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobs_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = JobServiceClient.Create();
-// Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
-string filter = &quot;&quot;;
-// Make the request
-PagedEnumerable&lt;ListJobsResponse, Job&gt; response =
-    jobServiceClient.ListJobs(parent, filter);
-
-// Iterate over all response items, lazily performing RPCs as required
-foreach (Job item in response)
-{
-    // Do something with each item
-    Console.WriteLine(item);
-}
-
-// Or iterate over pages (of server-defined size), performing one RPC per page
-foreach (ListJobsResponse page in response.AsRawResponses())
-{
-    // Do something with each page of items
-    Console.WriteLine(&quot;A page of results:&quot;);
-    foreach (Job item in page)
-    {
-        Console.WriteLine(item);
-    }
-}
-
-// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
-int pageSize = 10;
-Page&lt;Job&gt; singlePage = response.ReadPage(pageSize);
-// Do something with the page of items
-Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
-foreach (Job item in singlePage)
-{
-    Console.WriteLine(item);
-}
-// Store the pageToken, for when the next page is required.
-string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobs_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobs*"></a>
@@ -2146,7 +2045,7 @@ JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
 ListJobsRequest request = new ListJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Filter = &quot;&quot;,
 };
 // Make the request
@@ -2184,14 +2083,14 @@ foreach (Job item in singlePage)
 string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
-  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobsAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobsAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListJobsAsync(ProjectName, String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobs_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobs*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobs_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobs(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListJobs(TenantOrProjectNameOneof, String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists jobs by filter.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; ListJobsAsync(ProjectName parent, string filter, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListJobsResponse, Job&gt; ListJobs(TenantOrProjectNameOneof parent, string filter, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2204,12 +2103,14 @@ string nextPageToken = singlePage.NextPageToken;
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required.</p>
-<p>The resource name of the project under which the job is created.</p>
-<p>The format is &quot;projects/{project_id}&quot;, for example,
-&quot;projects/api-test-project&quot;.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
 </td>
       </tr>
       <tr>
@@ -2227,11 +2128,11 @@ OPEN if no value is specified.</li>
 </ul>
 <p>Sample Query:</p>
 <ul>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND requisitionId
-= &quot;req-1&quot;</li>
-<li>companyName = &quot;projects/api-test-project/companies/123&quot; AND status =
-&quot;EXPIRED&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+requisitionId = &quot;req-1&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+status = &quot;EXPIRED&quot;</li>
 </ul>
 </td>
       </tr>
@@ -2267,32 +2168,32 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListJobsResponse.html">ListJobsResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
-        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a> resources.</p>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListJobsResponse.html">ListJobsResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a> resources.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobsAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobs_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
-JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
-ProjectName parent = new ProjectName(&quot;[PROJECT]&quot;);
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
 string filter = &quot;&quot;;
 // Make the request
-PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; response =
-    jobServiceClient.ListJobsAsync(parent, filter);
+PagedEnumerable&lt;ListJobsResponse, Job&gt; response =
+    jobServiceClient.ListJobs(parent, filter);
 
 // Iterate over all response items, lazily performing RPCs as required
-await response.ForEachAsync((Job item) =&gt;
+foreach (Job item in response)
 {
     // Do something with each item
     Console.WriteLine(item);
-});
+}
 
 // Or iterate over pages (of server-defined size), performing one RPC per page
-await response.AsRawResponses().ForEachAsync((ListJobsResponse page) =&gt;
+foreach (ListJobsResponse page in response.AsRawResponses())
 {
     // Do something with each page of items
     Console.WriteLine(&quot;A page of results:&quot;);
@@ -2300,11 +2201,11 @@ await response.AsRawResponses().ForEachAsync((ListJobsResponse page) =&gt;
     {
         Console.WriteLine(item);
     }
-});
+}
 
 // Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
 int pageSize = 10;
-Page&lt;Job&gt; singlePage = await response.ReadPageAsync(pageSize);
+Page&lt;Job&gt; singlePage = response.ReadPage(pageSize);
 // Do something with the page of items
 Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
 foreach (Job item in singlePage)
@@ -2371,12 +2272,145 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 ListJobsRequest request = new ListJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     Filter = &quot;&quot;,
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; response =
     jobServiceClient.ListJobsAsync(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Job item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListJobsResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Job item in page)
+    {
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Job&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Job item in singlePage)
+{
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobsAsync*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobsAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.JobServiceClient.ListJobsAsync(Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof,System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListJobsAsync(TenantOrProjectNameOneof, String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists jobs by filter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; ListJobsAsync(TenantOrProjectNameOneof parent, string filter, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantOrProjectNameOneof.html">TenantOrProjectNameOneof</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required.</p>
+<p>The resource name of the tenant under which the job is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;, for example,
+&quot;projects/api-test-project/tenant/foo&quot;.</p>
+<p>Tenant id is optional and the default tenant is used if unspecified, for
+example, &quot;projects/api-test-project&quot;.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Required.</p>
+<p>The filter string specifies the jobs to be enumerated.</p>
+<p>Supported operator: =, AND</p>
+<p>The fields eligible for filtering are:</p>
+<ul>
+<li><code>companyName</code> (Required)</li>
+<li><code>requisitionId</code> (Optional)</li>
+<li><code>status</code> (Optional) Available values: OPEN, EXPIRED, ALL. Defaults to
+OPEN if no value is specified.</li>
+</ul>
+<p>Sample Query:</p>
+<ul>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+requisitionId = &quot;req-1&quot;</li>
+<li>companyName = &quot;projects/api-test-project/tenants/foo/companies/bar&quot; AND
+status = &quot;EXPIRED&quot;</li>
+</ul>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListJobsResponse.html">ListJobsResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Job.html">Job</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Talent_V4Beta1_JobServiceClient_ListJobsAsync_Google_Cloud_Talent_V4Beta1_TenantOrProjectNameOneof_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
+// Initialize request argument(s)
+TenantOrProjectNameOneof parent = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;));
+string filter = &quot;&quot;;
+// Make the request
+PagedAsyncEnumerable&lt;ListJobsResponse, Job&gt; response =
+    jobServiceClient.ListJobsAsync(parent, filter);
 
 // Iterate over all response items, lazily performing RPCs as required
 await response.ForEachAsync((Job item) =&gt;
@@ -2470,7 +2504,7 @@ JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
 SearchJobsRequest request = new SearchJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     RequestMetadata = new RequestMetadata(),
 };
 // Make the request
@@ -2569,7 +2603,7 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 SearchJobsRequest request = new SearchJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     RequestMetadata = new RequestMetadata(),
 };
 // Make the request
@@ -2672,7 +2706,7 @@ JobServiceClient jobServiceClient = JobServiceClient.Create();
 // Initialize request argument(s)
 SearchJobsRequest request = new SearchJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     RequestMetadata = new RequestMetadata(),
 };
 // Make the request
@@ -2775,7 +2809,7 @@ JobServiceClient jobServiceClient = await JobServiceClient.CreateAsync();
 // Initialize request argument(s)
 SearchJobsRequest request = new SearchJobsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
     RequestMetadata = new RequestMetadata(),
 };
 // Make the request

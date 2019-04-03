@@ -75,8 +75,8 @@
   </h1>
   <div class="markdown level0 summary"><p>A resource that represents the profile for a job candidate (also referred to
 as a &quot;single-source profile&quot;). A profile belongs to a
-[Tenant][google.cloud.talent.v4beta1.Tenant], which is an isolated instance
-of the customer that owns the profile.</p>
+[Company][google.cloud.talent.v4beta1.Company], which is the
+company/organization that owns the profile.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -232,6 +232,54 @@ example, Hang-out, Skype.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Talent_V4Beta1_Profile_Applications_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Applications*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Applications" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Applications">Applications</h4>
+  <div class="markdown level1 summary"><p>Output only. The resource names of the candidate&apos;s applications.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;string&gt; Applications { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Talent_V4Beta1_Profile_Assignments_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Assignments*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Assignments" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Assignments">Assignments</h4>
+  <div class="markdown level1 summary"><p>Output only. The resource names of the candidate&apos;s assignments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;string&gt; Assignments { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Certifications_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Certifications*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Certifications" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Certifications">Certifications</h4>
   <div class="markdown level1 summary"><p>Optional.</p>
@@ -290,16 +338,17 @@ attributes that aren&apos;t covered by the provided structured fields. See
 [CustomAttribute][google.cloud.talent.v4beta1.CustomAttribute] for more
 details.</p>
 <p>At most 100 filterable and at most 100 unfilterable keys are supported. If
-limit is exceeded, an error is thrown.</p>
+limit is exceeded, an error is thrown. Custom attributes are <code>unfilterable</code>
+by default. These are filterable when the <code>filterable</code> flag is set to
+<code>true</code>.</p>
 <p>Numeric custom attributes: each key can only map to one numeric value,
-otherwise an error is thrown.</p>
+otherwise an error is thrown. Client can also filter on numeric custom
+attributes using &apos;&gt;&apos;, &apos;&lt;&apos; or &apos;=&apos; operators.</p>
 <p>String custom attributes: each key can map up to 50 string values. For
 filterable string value, each value has a byte size of no more than 256B.
 For unfilterable string values, the maximum byte size of a single key is
 64B. An error is thrown for any request exceeding the limit.
 The maximum total byte size is 10KB.</p>
-<p>Currently filterable numeric custom attributes are not supported, and
-they automatically set to unfilterable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -509,31 +558,6 @@ referring to the same candidate.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Talent_V4Beta1_Profile_JobApplications_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.JobApplications*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_JobApplications" data-uid="Google.Cloud.Talent.V4Beta1.Profile.JobApplications">JobApplications</h4>
-  <div class="markdown level1 summary"><p>Optional.</p>
-<p>The job applications of the candidate.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;JobApplication&gt; JobApplications { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.JobApplication.html">JobApplication</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -761,33 +785,6 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.Publication.html">Publication</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Talent_V4Beta1_Profile_RecruitingNotes_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.RecruitingNotes*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_RecruitingNotes" data-uid="Google.Cloud.Talent.V4Beta1.Profile.RecruitingNotes">RecruitingNotes</h4>
-  <div class="markdown level1 summary"><p>Optional.</p>
-<p>The recruiting notes added for the candidate.</p>
-<p>For example, the recruiter can add some unstructured comments for this
-candidate like &quot;this candidate also has experiences in volunteer work&quot;.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;RecruitingNote&gt; RecruitingNotes { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.RecruitingNote.html">RecruitingNote</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

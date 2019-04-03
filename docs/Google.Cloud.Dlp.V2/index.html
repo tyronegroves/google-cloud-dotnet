@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.Dlp.V2</code> is a.NET client library for the <a href="https://cloud.google.com/dlp/">Google Cloud Data Loss Prevention API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.0.0-beta09</code> of the library.
+This documentation is for version <code>1.0.0-beta10</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Dlp.V2</code> package from NuGet. Add it to
@@ -73,7 +73,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>1.0.0-beta09</code>) of <code>Google.Cloud.Dlp.V2</code>.</p>
+pre-release version (<code>1.0.0-beta10</code>) of <code>Google.Cloud.Dlp.V2</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -84,7 +84,39 @@ Authentication</a> guide for more details.</p>
 <p>All operations are performed through <a href="api/Google.Cloud.Dlp.V2.DlpServiceClient.html">DlpServiceClient</a>.</p>
 <p>Create a client instance by calling the static <code>Create</code> method, optionally
 specifying an end-point or channel and settings.</p>
-</article>
+<h1 id="sample-code">Sample code</h1>
+<h2 id="redact-information-in-plain-text">Redact information in plain text</h2>
+<pre><code class="lang-cs">DlpServiceClient client = DlpServiceClient.Create();
+DeidentifyContentRequest request = new DeidentifyContentRequest
+{
+    ParentAsProjectName = new ProjectName(projectId),
+    Item = new ContentItem
+    {
+        Value = &quot;Hi! My phone number is 555-1234-567. Please call me!&quot;
+    },
+    DeidentifyConfig = new DeidentifyConfig
+    {
+        InfoTypeTransformations = new InfoTypeTransformations
+        {
+            Transformations =
+            {
+                new InfoTypeTransformation
+                {
+                    PrimitiveTransformation = new PrimitiveTransformation
+                    {
+                        ReplaceConfig = new ReplaceValueConfig
+                        {
+                            NewValue = new Value { StringValue = &quot;(Redacted)&quot; }
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+DeidentifyContentResponse response = client.DeidentifyContent(request);
+Console.WriteLine(response.Item.Value);
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

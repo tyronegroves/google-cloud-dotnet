@@ -84,6 +84,10 @@ See <a href="https://cloud.google.com/dlp/docs/concepts-actions">https://cloud.g
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.Action.Types.html">Action.Types</a></h4>
       <section><p>Container for nested types declared in the Action message type.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.Action.Types.JobNotificationEmails.html">Action.Types.JobNotificationEmails</a></h4>
+      <section><p>Enable email notification to project owners and editors on jobs&apos;s
+completion/failure.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.Action.Types.PublishSummaryToCscc.html">Action.Types.PublishSummaryToCscc</a></h4>
       <section><p>Publish the result summary of a DlpJob to the Cloud Security
 Command Center (CSCC Alpha).
@@ -105,6 +109,9 @@ Compatible with: Inspect, Risk</p>
 OutputStorageConfig. Only a single instance of this action can be
 specified.
 Compatible with: Inspect, Risk</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.ActivateJobTriggerRequest.html">ActivateJobTriggerRequest</a></h4>
+      <section><p>Request message for ActivateJobTrigger.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.AnalyzeDataSourceRiskDetails.html">AnalyzeDataSourceRiskDetails</a></h4>
       <section><p>Result of a risk analysis operation request.</p>
@@ -323,13 +330,19 @@ Storage.</p>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CreateStoredInfoTypeRequest.html">CreateStoredInfoTypeRequest</a></h4>
       <section><p>Request message for CreateStoredInfoType.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Dlp.V2.CryptoDeterministicConfig.html">CryptoDeterministicConfig</a></h4>
+      <section><p>Pseudonymization method that generates deterministic encryption for the given
+input. Outputs a base64 encoded representation of the encrypted output.
+Uses AES-SIV based on the RFC <a href="https://tools.ietf.org/html/rfc5297">https://tools.ietf.org/html/rfc5297</a>.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CryptoHashConfig.html">CryptoHashConfig</a></h4>
       <section><p>Pseudonymization method that generates surrogates via cryptographic hashing.
 Uses SHA-256.
 The key size must be either 32 or 64 bytes.
-Outputs a 32 byte digest as an uppercase hex string
-(for example, 41D1567F7F99F1DC2A5FAB886DEE5BEE).
-Currently, only string and integer values can be hashed.</p>
+Outputs a base64 encoded representation of the hashed output
+(for example, L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=).
+Currently, only string and integer values can be hashed.
+See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.google.com/dlp/docs/pseudonymization</a> to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CryptoKey.html">CryptoKey</a></h4>
       <section><p>This is a data encryption key (DEK) (as opposed to
@@ -339,16 +352,18 @@ IAM policy on the KMS CryptoKey (KEK) to ensure an attacker cannot
 unwrap the data crypto key.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CryptoReplaceFfxFpeConfig.html">CryptoReplaceFfxFpeConfig</a></h4>
-      <section><p>Replaces an identifier with a surrogate using FPE with the FFX
-mode of operation; however when used in the <code>ReidentifyContent</code> API method,
-it serves the opposite function by reversing the surrogate back into
-the original identifier.
-The identifier must be encoded as ASCII.
-For a given crypto key and context, the same identifier will be
-replaced with the same surrogate.
-Identifiers must be at least two characters long.
-In the case that the identifier is the empty string, it will be skipped.
-See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.google.com/dlp/docs/pseudonymization</a> to learn more.</p>
+      <section><p>Replaces an identifier with a surrogate using Format Preserving Encryption
+(FPE) with the FFX mode of operation; however when used in the
+<code>ReidentifyContent</code> API method, it serves the opposite function by reversing
+the surrogate back into the original identifier. The identifier must be
+encoded as ASCII. For a given crypto key and context, the same identifier
+will be replaced with the same surrogate. Identifiers must be at least two
+characters long. In the case that the identifier is the empty string, it will
+be skipped. See <a href="https://cloud.google.com/dlp/docs/pseudonymization">https://cloud.google.com/dlp/docs/pseudonymization</a> to learn
+more.</p>
+<p>Note: We recommend using  CryptoDeterministicConfig for all use cases which
+do not require preserving the input alphabet space and size, plus warrant
+referential integrity.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.CryptoReplaceFfxFpeConfig.Types.html">CryptoReplaceFfxFpeConfig.Types</a></h4>
       <section><p>Container for nested types declared in the CryptoReplaceFfxFpeConfig message type.</p>
@@ -434,7 +449,8 @@ same context. See <a href="https://cloud.google.com/dlp/docs/concepts-date-shift
 to learn more.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DateTime.html">DateTime</a></h4>
-      <section><p>Message for a date time object.</p>
+      <section><p>Message for a date time object.
+e.g. 2018-01-01, 5th August.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.DateTime.Types.html">DateTime.Types</a></h4>
       <section><p>Container for nested types declared in the DateTime message type.</p>
@@ -623,7 +639,8 @@ running DlpJob.</p>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.InspectDataSourceDetails.Types.RequestedOptions.html">InspectDataSourceDetails.Types.RequestedOptions</a></h4>
       <section></section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.InspectDataSourceDetails.Types.Result.html">InspectDataSourceDetails.Types.Result</a></h4>
-      <section></section>
+      <section><p>All result fields mentioned below are updated while the job is processing.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.InspectionRule.html">InspectionRule</a></h4>
       <section><p>A single inspection rule to be applied to infoTypes, specified in
 <code>InspectionRuleSet</code>.</p>
@@ -675,6 +692,7 @@ If neither is set, the element is incomplete.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.KmsWrappedCryptoKey.html">KmsWrappedCryptoKey</a></h4>
       <section><p>Include to use an existing data crypto key wrapped by KMS.
+The wrapped key must be a 128/192/256 bit key.
 Authorization requires the following IAM permissions when sending a request
 to perform a crypto transformation using a kms-wrapped crypto key:
 dlp.kms.encrypt</p>
@@ -837,8 +855,10 @@ a field.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.RecordCondition.Types.Condition.html">RecordCondition.Types.Condition</a></h4>
       <section><p>The field type of <code>value</code> and <code>field</code> do not need to match to be
-considered equal, but not all comparisons are possible.</p>
-<p>A <code>value</code> of type:</p>
+considered equal, but not all comparisons are possible.
+EQUAL_TO and NOT_EQUAL_TO attempt to compare even with incompatible types,
+but all other comparisons are invalid with incompatible types.
+A <code>value</code> of type:</p>
 <ul>
 <li><code>string</code> can be compared against all other types</li>
 <li><code>boolean</code> can only be compared against other booleans</li>
@@ -981,7 +1001,7 @@ portion of the value.</p>
       <section><p>Overview of the modifications that occurred.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.TransformationSummary.html">TransformationSummary</a></h4>
-      <section><p>Summary of a single tranformation.
+      <section><p>Summary of a single transformation.
 Only one of &apos;transformation&apos;, &apos;field_transformation&apos;, or &apos;record_suppress&apos;
 will be set.</p>
 </section>
@@ -1033,8 +1053,8 @@ int64 only holds up to 8 bytes of data.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.BigQueryOptions.Types.SampleMethod.html">BigQueryOptions.Types.SampleMethod</a></h4>
       <section><p>How to sample rows if not all rows are scanned. Meaningful only when used
-in conjunction with rows_limit. If not specified, scanning would start
-from the top.</p>
+in conjunction with either rows_limit or rows_limit_percent. If not
+specified, scanning would start from the top.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dlp.V2.ByteContentItem.Types.BytesType.html">ByteContentItem.Types.BytesType</a></h4>
       <section></section>
