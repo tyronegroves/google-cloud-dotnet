@@ -171,9 +171,46 @@ The maximum allowed size for a job is 100KB.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Scheduler_V1Beta1_Job_AttemptDeadline_" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.AttemptDeadline*"></a>
+  <h4 id="Google_Cloud_Scheduler_V1Beta1_Job_AttemptDeadline" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.AttemptDeadline">AttemptDeadline</h4>
+  <div class="markdown level1 summary"><p>The deadline for job attempts. If the request handler does not respond by
+this deadline then the request is cancelled and the attempt is marked as a
+<code>DEADLINE_EXCEEDED</code> failure. The failed attempt can be viewed in
+execution logs. Cloud Scheduler will retry the job according
+to the [RetryConfig][google.cloud.scheduler.v1beta1.RetryConfig].</p>
+<p>The allowed duration for this deadline is:</p>
+<ul>
+<li>For [HTTP targets][google.cloud.scheduler.v1beta1.Job.http_target], between 15 seconds and 30 minutes.</li>
+<li>For [App Engine HTTP targets][google.cloud.scheduler.v1beta1.Job.app_engine_http_target], between 15
+seconds and 24 hours.</li>
+<li>For [PubSub targets][google.cloud.scheduler.v1beta1.Job.pubsub_target], this field is ignored.</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration AttemptDeadline { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Duration.html">Duration</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Scheduler_V1Beta1_Job_Description_" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.Description*"></a>
   <h4 id="Google_Cloud_Scheduler_V1Beta1_Job_Description" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.Description">Description</h4>
-  <div class="markdown level1 summary"><p>A human-readable description for the job. This string must not contain
+  <div class="markdown level1 summary"><p>Optionally caller-specified in [CreateJob][google.cloud.scheduler.v1beta1.CloudScheduler.CreateJob] or
+[UpdateJob][google.cloud.scheduler.v1beta1.CloudScheduler.UpdateJob].</p>
+<p>A human-readable description for the job. This string must not contain
 more than 500 characters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -270,13 +307,16 @@ more than 500 characters.</p>
   </table>
   <a id="Google_Cloud_Scheduler_V1Beta1_Job_Name_" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.Name*"></a>
   <h4 id="Google_Cloud_Scheduler_V1Beta1_Job_Name" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.Name">Name</h4>
-  <div class="markdown level1 summary"><p>The job name. For example:
+  <div class="markdown level1 summary"><p>Optionally caller-specified in [CreateJob][google.cloud.scheduler.v1beta1.CloudScheduler.CreateJob], after
+which it becomes output only.</p>
+<p>The job name. For example:
 <code>projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID</code>.</p>
 <ul>
 <li><code>PROJECT_ID</code> can contain letters ([A-Za-z]), numbers ([0-9]),
 hyphens (-), colons (:), or periods (.).
 For more information, see
-<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying projects</a></li>
+<a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Identifying
+projects</a></li>
 <li><code>LOCATION_ID</code> is the canonical ID for the job&apos;s location.
 The list of available locations can be obtained by calling
 [ListLocations][google.cloud.location.Locations.ListLocations].
@@ -355,8 +395,14 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
   </table>
   <a id="Google_Cloud_Scheduler_V1Beta1_Job_Schedule_" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.Schedule*"></a>
   <h4 id="Google_Cloud_Scheduler_V1Beta1_Job_Schedule" data-uid="Google.Cloud.Scheduler.V1Beta1.Job.Schedule">Schedule</h4>
-  <div class="markdown level1 summary"><p>Required.</p>
+  <div class="markdown level1 summary"><p>Required, except when used with [UpdateJob][google.cloud.scheduler.v1beta1.CloudScheduler.UpdateJob].</p>
 <p>Describes the schedule on which the job will be executed.</p>
+<p>The schedule can be either of the following types:</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Cron#Overview">Crontab</a></li>
+<li>English-like
+<a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules">schedule</a></li>
+</ul>
 <p>As a general rule, execution <code>n + 1</code> of a job will not begin
 until execution <code>n</code> has finished. Cloud Scheduler will never
 allow two simultaneously outstanding executions. For example,
@@ -369,11 +415,6 @@ execution has not ended when its scheduled time occurs.</p>
 the job will be tried a total of [retry_count][google.cloud.scheduler.v1beta1.RetryConfig.retry_count]
 times, with exponential backoff, until the next scheduled start
 time.</p>
-<p>The schedule can be either of the following types:</p>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Cron#Overview">Crontab</a></li>
-<li>English-like <a href="https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules">schedule</a></li>
-</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

@@ -75,7 +75,7 @@
   </h1>
   <div class="markdown level0 summary"><p>HTTP request.</p>
 <p>Warning: This is an <a href="https://cloud.google.com/terms/launch-stages">alpha</a>
-feature. If you haven&apos;t already joined, you can <a href="https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform?usp=sf_link">use this form to sign
+feature. If you haven&apos;t already joined, you can <a href="https://docs.google.com/forms/d/e/1FAIpQLSfc4uEy9CBHKYUSdnY1hdhKDCX7julVZHy3imOiR-XrU7bUNQ/viewform">use this form to sign
 up</a>.</p>
 <p>The task will be pushed to the worker as an HTTP request. If the worker
 or the redirected worker acknowledges the task by returning a successful HTTP
@@ -84,8 +84,7 @@ any other HTTP response code is returned or no response is received, the
 task will be retried according to the following:</p>
 <ul>
 <li><p>User-specified throttling: [retry configuration][Queue.RetryConfig],
-[rate limits][Queue.RateLimits], and the [queue&apos;s
-state][google.cloud.tasks.v2beta3.Queue.state].</p>
+[rate limits][Queue.RateLimits], and the [queue&apos;s state][google.cloud.tasks.v2beta3.Queue.state].</p>
 </li>
 <li><p>System throttling: To prevent the worker from overloading, Cloud Tasks may
 temporarily reduce the queue&apos;s effective rate. User-specified settings
@@ -179,13 +178,35 @@ that are scheduled at the same time).</p>
   </table>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Tasks_V2Beta3_HttpRequest_AuthorizationHeaderCase_" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.AuthorizationHeaderCase*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_HttpRequest_AuthorizationHeaderCase" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.AuthorizationHeaderCase">AuthorizationHeaderCase</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpRequest.AuthorizationHeaderOneofCase AuthorizationHeaderCase { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.HttpRequest.AuthorizationHeaderOneofCase.html">HttpRequest.AuthorizationHeaderOneofCase</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Tasks_V2Beta3_HttpRequest_Body_" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.Body*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_HttpRequest_Body" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.Body">Body</h4>
   <div class="markdown level1 summary"><p>HTTP request body.</p>
 <p>A request body is allowed only if the
-[HTTP method][google.cloud.tasks.v2beta3.HttpRequest.http_method] is POST,
-PUT, or PATCH. It is an error to set body on a task with an incompatible
-[HttpMethod][google.cloud.tasks.v2beta3.HttpMethod].</p>
+[HTTP method][google.cloud.tasks.v2beta3.HttpRequest.http_method] is POST, PUT, or PATCH. It is an
+error to set body on a task with an incompatible [HttpMethod][google.cloud.tasks.v2beta3.HttpMethod].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -273,6 +294,64 @@ specified using comma-separated values.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.HttpMethod.html">HttpMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_HttpRequest_OauthToken_" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.OauthToken*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_HttpRequest_OauthToken" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.OauthToken">OauthToken</h4>
+  <div class="markdown level1 summary"><p>If specified, an
+<a href="https://developers.google.com/identity/protocols/OAuth2">OAuth token</a>
+will be generated and attached as an <code>Authorization</code> header in the HTTP
+request.</p>
+<p>This type of authorization should be used when sending requests to a GCP
+endpoint.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthToken OauthToken { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.OAuthToken.html">OAuthToken</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2Beta3_HttpRequest_OidcToken_" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.OidcToken*"></a>
+  <h4 id="Google_Cloud_Tasks_V2Beta3_HttpRequest_OidcToken" data-uid="Google.Cloud.Tasks.V2Beta3.HttpRequest.OidcToken">OidcToken</h4>
+  <div class="markdown level1 summary"><p>If specified, an
+<a href="https://developers.google.com/identity/protocols/OpenIDConnect">OIDC</a>
+token will be generated and attached as an <code>Authorization</code> header in the
+HTTP request.</p>
+<p>This type of authorization should be used when sending requests to third
+party endpoints.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OidcToken OidcToken { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2Beta3.OidcToken.html">OidcToken</a></td>
         <td></td>
       </tr>
     </tbody>

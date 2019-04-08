@@ -65,12 +65,16 @@
 <p><code>Google.Cloud.Storage.V1</code> is a.NET client library for the <a href="https://cloud.google.com/storage/">Google Cloud Storage API</a>.
 It wraps the <code>Google.Apis.Storage.v1</code> generated library, providing a higher-level API to make it easier to use.</p>
 <p>Note:
-This documentation is for version <code>2.3.0</code> of the library.
+This documentation is for version <code>2.4.0-beta01</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Storage.V1</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
+Please ensure you enable pre-release packages (for example, in the
+Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>2.4.0-beta01</code>) of <code>Google.Cloud.Storage.V1</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -239,6 +243,32 @@ string url = await urlSigner.SignAsync(
     HttpMethod.Get);
 
 // Prove we can fetch the content of the test object with a simple unauthenticated GET request.
+HttpResponseMessage response = await httpClient.GetAsync(url);
+string content = await response.Content.ReadAsStringAsync();
+</code></pre><h3 id="specifying-the-signing-version">Specifying the signing version</h3>
+<p>(V4 signing is currently beta functionality.)</p>
+<p>Google Cloud Storage supports two signing process versions: V2 and V4.
+Currently the default is V2, although in the future the library may
+be updated to use V4 by default.</p>
+<p>To specify the URL signing versioning, use the
+<a href="api/Google.Cloud.Storage.V1.UrlSigner.html#Google_Cloud_Storage_V1_UrlSigner_WithSigningVersion_Google_Cloud_Storage_V1_SigningVersion_">UrlSigner.WithSigningVersion</a>
+method, specifying the signing version you wish to use. This does
+not change the UrlSigner it is called on; it returns a new UrlSigner
+that uses the specified version.</p>
+<p>Note that V4 signing is restricted to generating URLs that are valid
+for at most 7 days.</p>
+<pre><code class="lang-cs">// Create a signed URL which can be used to get a specific object for one hour,
+// using the V4 signing process.
+UrlSigner urlSigner = UrlSigner
+    .FromServiceAccountCredential(credential)
+    .WithSigningVersion(SigningVersion.V4);
+string url = urlSigner.Sign(
+    bucketName,
+    objectName,
+    TimeSpan.FromHours(1),
+    HttpMethod.Get);
+
+// Get the content at the created URL.
 HttpResponseMessage response = await httpClient.GetAsync(url);
 string content = await response.Content.ReadAsStringAsync();
 </code></pre><h2 id="upload-uris">Upload URIs</h2>

@@ -73,8 +73,7 @@
   
   <h1 id="Google_Cloud_Tasks_V2Beta3_CreateTaskRequest" data-uid="Google.Cloud.Tasks.V2Beta3.CreateTaskRequest" class="text-break">Class CreateTaskRequest
   </h1>
-  <div class="markdown level0 summary"><p>Request message for
-[CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].</p>
+  <div class="markdown level0 summary"><p>Request message for [CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -200,17 +199,16 @@
   </table>
   <a id="Google_Cloud_Tasks_V2Beta3_CreateTaskRequest_ResponseView_" data-uid="Google.Cloud.Tasks.V2Beta3.CreateTaskRequest.ResponseView*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_CreateTaskRequest_ResponseView" data-uid="Google.Cloud.Tasks.V2Beta3.CreateTaskRequest.ResponseView">ResponseView</h4>
-  <div class="markdown level1 summary"><p>The response_view specifies which subset of the
-[Task][google.cloud.tasks.v2beta3.Task] will be returned.</p>
-<p>By default response_view is
-[BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all information is
-retrieved by default because some data, such as payloads, might be
-desirable to return only when needed because of its large size or because
-of the sensitivity of data that it contains.</p>
-<p>Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL]
-requires <code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google
-IAM</a> permission on the
-[Task][google.cloud.tasks.v2beta3.Task] resource.</p>
+  <div class="markdown level1 summary"><p>The response_view specifies which subset of the [Task][google.cloud.tasks.v2beta3.Task] will be
+returned.</p>
+<p>By default response_view is [BASIC][google.cloud.tasks.v2beta3.Task.View.BASIC]; not all
+information is retrieved by default because some data, such as
+payloads, might be desirable to return only when needed because
+of its large size or because of the sensitivity of data that it
+contains.</p>
+<p>Authorization for [FULL][google.cloud.tasks.v2beta3.Task.View.FULL] requires
+<code>cloudtasks.tasks.fullView</code> <a href="https://cloud.google.com/iam/">Google IAM</a>
+permission on the [Task][google.cloud.tasks.v2beta3.Task] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -238,12 +236,12 @@ IAM</a> permission on the
 <p>The task to add.</p>
 <p>Task names have the following format:
 <code>projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID</code>.
-The user can optionally specify a task
-[name][google.cloud.tasks.v2beta3.Task.name]. If a name is not specified
-then the system will generate a random unique task id, which will be set in
-the task returned in the [response][google.cloud.tasks.v2beta3.Task.name].</p>
-<p>If [schedule_time][google.cloud.tasks.v2beta3.Task.schedule_time] is not
-set or is in the past then Cloud Tasks will set it to the current time.</p>
+The user can optionally specify a task [name][google.cloud.tasks.v2beta3.Task.name]. If a
+name is not specified then the system will generate a random
+unique task id, which will be set in the task returned in the
+[response][google.cloud.tasks.v2beta3.Task.name].</p>
+<p>If [schedule_time][google.cloud.tasks.v2beta3.Task.schedule_time] is not set or is in the
+past then Cloud Tasks will set it to the current time.</p>
 <p>Task De-duplication:</p>
 <p>Explicitly specifying a task ID enables task de-duplication.  If
 a task&apos;s ID is identical to that of an existing task or a task
@@ -255,10 +253,10 @@ deleted or executed. If the task&apos;s queue was created using queue.yaml or
 queue.xml, then another task with the same name can&apos;t be created
 for ~9days after the original task was deleted or executed.</p>
 <p>Because there is an extra lookup cost to identify duplicate task
-names, these [CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask]
-calls have significantly increased latency. Using hashed strings for the
-task id or for the prefix of the task id is recommended. Choosing task ids
-that are sequential or have sequential prefixes, for example using a
+names, these [CreateTask][google.cloud.tasks.v2beta3.CloudTasks.CreateTask] calls have significantly
+increased latency. Using hashed strings for the task id or for
+the prefix of the task id is recommended. Choosing task ids that
+are sequential or have sequential prefixes, for example using a
 timestamp, causes an increase in latency and error rates in all
 task commands. The infrastructure relies on an approximately
 uniform distribution of task ids to store and serve tasks
