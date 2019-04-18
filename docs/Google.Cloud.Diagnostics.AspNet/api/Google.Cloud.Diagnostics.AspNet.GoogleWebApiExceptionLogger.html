@@ -85,28 +85,13 @@ Reports exceptions to Stackdriver Error Reporting API.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger.html">IWebApiExceptionLogger</a></div>
-    <div><span class="xref">System.IDisposable</span></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
+    <div><span class="xref">IDisposable</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Diagnostics.AspNet.html">Google.Cloud.Diagnostics.AspNet</a></h6>
   <h6><strong>Assembly</strong>: Google.Cloud.Diagnostics.AspNet.dll</h6>
   <h5 id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class GoogleWebApiExceptionLogger : IWebApiExceptionLogger, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public class GoogleWebApiExceptionLogger : object, IWebApiExceptionLogger, IDisposable</code></pre>
   </div>
   <h5 id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_examples"><strong>Examples</strong></h5>
   <pre><code>string projectId = &quot;[Google Cloud Platform project ID]&quot;;
@@ -257,10 +242,8 @@ current platform.
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
   </div>
-  <h5 class="implements">Implements</h5>
-      <div><span class="xref">System.IDisposable.Dispose()</span></div>
   <a id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_Log_" data-uid="Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.Log*"></a>
-  <h4 id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_Log_System_Exception_System_Web_Http_Controllers_HttpActionContext_" data-uid="Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.Log(System.Exception,System.Web.Http.Controllers.HttpActionContext)">Log(Exception, HttpActionContext)</h4>
+  <h4 id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_Log_Exception_HttpActionContext_" data-uid="Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.Log(Exception,HttpActionContext)">Log(Exception, HttpActionContext)</h4>
   <div class="markdown level1 summary"><p>Logs an exception that occurred.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -279,13 +262,13 @@ current platform.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Exception</span></td>
+        <td><span class="xref">Exception</span></td>
         <td><span class="parametername">exception</span></td>
         <td><p>The exception to log. Must not be null.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Web.Http.Controllers.HttpActionContext</span></td>
+        <td><span class="xref">HttpActionContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>Optional, the current HTTP action context from which to get HTTP context information.
 If it is not set, no HTTP context information will be logged alongside exception information.</p>
@@ -294,15 +277,15 @@ If it is not set, no HTTP context information will be logged alongside exception
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger.html#Google_Cloud_Diagnostics_AspNet_IWebApiExceptionLogger_Log_System_Exception_System_Web_Http_Controllers_HttpActionContext_">IWebApiExceptionLogger.Log(Exception, HttpActionContext)</a></div>
+      <div><a class="xref" href="Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger.html#Google_Cloud_Diagnostics_AspNet_IWebApiExceptionLogger_Log_Exception_HttpActionContext_">IWebApiExceptionLogger.Log(Exception, HttpActionContext)</a></div>
   <a id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_LogAsync_" data-uid="Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.LogAsync*"></a>
-  <h4 id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_LogAsync_System_Exception_System_Web_Http_Controllers_HttpActionContext_System_Threading_CancellationToken_" data-uid="Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.LogAsync(System.Exception,System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">LogAsync(Exception, HttpActionContext, CancellationToken)</h4>
+  <h4 id="Google_Cloud_Diagnostics_AspNet_GoogleWebApiExceptionLogger_LogAsync_Exception_HttpActionContext_CancellationToken_" data-uid="Google.Cloud.Diagnostics.AspNet.GoogleWebApiExceptionLogger.LogAsync(Exception,HttpActionContext,CancellationToken)">LogAsync(Exception, HttpActionContext, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Asynchronously logs an exception that occurred.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task LogAsync(Exception exception, HttpActionContext context = null, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task LogAsync(Exception exception, HttpActionContext context = null, CancellationToken cancellationToken = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -315,20 +298,20 @@ If it is not set, no HTTP context information will be logged alongside exception
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Exception</span></td>
+        <td><span class="xref">Exception</span></td>
         <td><span class="parametername">exception</span></td>
         <td><p>The exception to log. Must not be null.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Web.Http.Controllers.HttpActionContext</span></td>
+        <td><span class="xref">HttpActionContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>Optional, the current HTTP action context from which to get HTTP context information.
 If it is not set, no HTTP context information will be logged alongside exception information.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="xref">CancellationToken</span></td>
         <td><span class="parametername">cancellationToken</span></td>
         <td><p>Optional, the token to monitor for cancellation requests.</p>
 </td>
@@ -345,14 +328,14 @@ If it is not set, no HTTP context information will be logged alongside exception
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td><p>A task representing the asynchronous operation.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger.html#Google_Cloud_Diagnostics_AspNet_IWebApiExceptionLogger_LogAsync_System_Exception_System_Web_Http_Controllers_HttpActionContext_System_Threading_CancellationToken_">IWebApiExceptionLogger.LogAsync(Exception, HttpActionContext, CancellationToken)</a></div>
+      <div><a class="xref" href="Google.Cloud.Diagnostics.AspNet.IWebApiExceptionLogger.html#Google_Cloud_Diagnostics_AspNet_IWebApiExceptionLogger_LogAsync_Exception_HttpActionContext_CancellationToken_">IWebApiExceptionLogger.LogAsync(Exception, HttpActionContext, CancellationToken)</a></div>
 </article>
           </div>
           
