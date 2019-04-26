@@ -148,11 +148,11 @@
   </h3>
   <a id="Google_Cloud_PubSub_V1_Subscription_AckDeadlineSeconds_" data-uid="Google.Cloud.PubSub.V1.Subscription.AckDeadlineSeconds*"></a>
   <h4 id="Google_Cloud_PubSub_V1_Subscription_AckDeadlineSeconds" data-uid="Google.Cloud.PubSub.V1.Subscription.AckDeadlineSeconds">AckDeadlineSeconds</h4>
-  <div class="markdown level1 summary"><p>This value is the maximum time after a subscriber receives a message
-before the subscriber should acknowledge the message. After message
-delivery but before the ack deadline expires and before the message is
-acknowledged, it is an outstanding message and will not be delivered
-again during that time (on a best-effort basis).</p>
+  <div class="markdown level1 summary"><p>The approximate amount of time (on a best-effort basis) Pub/Sub waits for
+the subscriber to acknowledge receipt before resending the message. In the
+interval after the message is delivered and before it is acknowledged, it
+is considered to be &lt;i&gt;outstanding&lt;/i&gt;. During that time period, the
+message will not be redelivered (on a best-effort basis).</p>
 <p>For pull subscriptions, this value is used as the initial value for the ack
 deadline. To override this value for a given message, call
 <code>ModifyAckDeadline</code> with the corresponding <code>ack_id</code> if using
@@ -182,6 +182,36 @@ system will eventually redeliver the message.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_PubSub_V1_Subscription_EnableMessageOrdering_" data-uid="Google.Cloud.PubSub.V1.Subscription.EnableMessageOrdering*"></a>
+  <h4 id="Google_Cloud_PubSub_V1_Subscription_EnableMessageOrdering" data-uid="Google.Cloud.PubSub.V1.Subscription.EnableMessageOrdering">EnableMessageOrdering</h4>
+  <div class="markdown level1 summary"><p>If true, messages published with the same <code>ordering_key</code> in <code>PubsubMessage</code>
+will be delivered to the subscribers in the order in which they
+are received by the Pub/Sub system. Otherwise, they may be delivered in
+any order.
+&lt;b&gt;EXPERIMENTAL:&lt;/b&gt; This feature is part of a closed alpha release. This
+API might be changed in backward-incompatible ways and is not recommended
+for production use. It is not subject to any SLA or deprecation policy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EnableMessageOrdering { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -220,7 +250,8 @@ use. It is not subject to any SLA or deprecation policy.</p>
   </table>
   <a id="Google_Cloud_PubSub_V1_Subscription_Labels_" data-uid="Google.Cloud.PubSub.V1.Subscription.Labels*"></a>
   <h4 id="Google_Cloud_PubSub_V1_Subscription_Labels" data-uid="Google.Cloud.PubSub.V1.Subscription.Labels">Labels</h4>
-  <div class="markdown level1 summary"><p>See &lt;a href=&quot;/pubsub/docs/labels&quot;&gt; Creating and managing labels&lt;/a&gt;.</p>
+  <div class="markdown level1 summary"><p>See &lt;a href=&quot;<a href="https://cloud.google.com/pubsub/docs/labels&quot;&gt;">https://cloud.google.com/pubsub/docs/labels&quot;></a> Creating and
+managing labels&lt;/a&gt;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -250,7 +281,7 @@ If <code>retain_acked_messages</code> is true, then this also configures the ret
 of acknowledged messages, and thus configures how far back in time a <code>Seek</code>
 can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
 minutes.&lt;br&gt;&lt;br&gt;
-&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+&lt;b&gt;BETA:&lt;/b&gt; This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 </div>
@@ -334,8 +365,12 @@ will pull and ack messages using API methods.</p>
   <div class="markdown level1 summary"><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&apos;s backlog, even if they are
 acknowledged, until they fall out of the <code>message_retention_duration</code>
-window.&lt;br&gt;&lt;br&gt;
-&lt;b&gt;ALPHA:&lt;/b&gt; This feature is part of an alpha release. This API might be
+window. This must be true if you would like to
+&lt;a
+href=&quot;<a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time&quot;&gt;">https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time&quot;></a>
+Seek to a timestamp&lt;/a&gt;.
+&lt;br&gt;&lt;br&gt;
+&lt;b&gt;BETA:&lt;/b&gt; This feature is part of a beta release. This API might be
 changed in backward-incompatible ways and is not recommended for production
 use. It is not subject to any SLA or deprecation policy.</p>
 </div>
