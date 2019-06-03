@@ -148,7 +148,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.ServiceEndpoint</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -253,9 +253,9 @@ necessary. See the example for how to use custom credentials.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.ServiceEndpoint</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <span class="xref">Google.Api.Gax.Grpc.ServiceEndpoint</span>.</p>
+        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
 </td>
       </tr>
       <tr>
@@ -424,9 +424,9 @@ necessary. See the example for how to use custom credentials.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.ServiceEndpoint</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
         <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <span class="xref">Google.Api.Gax.Grpc.ServiceEndpoint</span>.</p>
+        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
 </td>
       </tr>
       <tr>
@@ -527,7 +527,7 @@ The [response][google.longrunning.Operation.response] field type is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project in which to create the instance. Values
 are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
@@ -549,7 +549,7 @@ specified must be <code>&amp;lt;parent&gt;/instances/&amp;lt;instance_id&gt;</co
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -630,7 +630,104 @@ The [response][google.longrunning.Operation.response] field type is
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.LongRunning.Operation</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_CreateInstance_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.CreateInstance*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_CreateInstance_System_String_System_String_Google_Cloud_Spanner_Admin_Instance_V1_Instance_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.CreateInstance(System.String,System.String,Google.Cloud.Spanner.Admin.Instance.V1.Instance,Google.Api.Gax.Grpc.CallSettings)">CreateInstance(String, String, Instance, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates an instance and begins preparing it to begin serving. The
+returned [long-running operation][google.longrunning.Operation]
+can be used to track the progress of preparing the new
+instance. The instance name is assigned by the caller. If the
+named instance already exists, <code>CreateInstance</code> returns
+<code>ALREADY_EXISTS</code>.</p>
+<p>Immediately upon completion of this request:</p>
+<ul>
+<li>The instance is readable via the API, with all requested attributes
+but no allocated resources. Its state is <code>CREATING</code>.</li>
+</ul>
+<p>Until completion of the returned operation:</p>
+<ul>
+<li>Cancelling the operation renders the instance immediately unreadable
+via the API.</li>
+<li>The instance can be deleted.</li>
+<li>All other attempts to modify the instance are rejected.</li>
+</ul>
+<p>Upon completion of the returned operation:</p>
+<ul>
+<li>Billing for all successfully-allocated resources begins (some types
+may have lower than the requested levels).</li>
+<li>Databases can be created in the instance.</li>
+<li>The instance&apos;s allocated resource levels are readable via the API.</li>
+<li>The instance&apos;s state becomes <code>READY</code>.</li>
+</ul>
+<p>The returned [long-running operation][google.longrunning.Operation] will
+have a name of the format <code>&amp;lt;instance_name&gt;/operations/&amp;lt;operation_id&gt;</code> and
+can be used to track creation of the instance.  The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateInstanceMetadata][google.spanner.admin.instance.v1.CreateInstanceMetadata].
+The [response][google.longrunning.Operation.response] field type is
+[Instance][google.spanner.admin.instance.v1.Instance], if successful.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, CreateInstanceMetadata&gt; CreateInstance(string parent, string instanceId, Instance instance, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The name of the project in which to create the instance. Values
+are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instanceId</span></td>
+        <td><p>Required. The ID of the instance to create.  Valid identifiers are of the
+form <code>[a-z][-a-z0-9]*[a-z0-9]</code> and must be between 6 and 30 characters in
+length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. The instance to create.  The name may be omitted, but if
+specified must be <code>&amp;lt;parent&gt;/instances/&amp;lt;instance_id&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -705,7 +802,7 @@ The [response][google.longrunning.Operation.response] field type is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project in which to create the instance. Values
 are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
@@ -727,7 +824,7 @@ specified must be <code>&amp;lt;parent&gt;/instances/&amp;lt;instance_id&gt;</co
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -802,7 +899,7 @@ The [response][google.longrunning.Operation.response] field type is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project in which to create the instance. Values
 are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
@@ -905,9 +1002,203 @@ The [response][google.longrunning.Operation.response] field type is
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Google.LongRunning.Operation</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_CreateInstanceAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.CreateInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_CreateInstanceAsync_System_String_System_String_Google_Cloud_Spanner_Admin_Instance_V1_Instance_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.CreateInstanceAsync(System.String,System.String,Google.Cloud.Spanner.Admin.Instance.V1.Instance,Google.Api.Gax.Grpc.CallSettings)">CreateInstanceAsync(String, String, Instance, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates an instance and begins preparing it to begin serving. The
+returned [long-running operation][google.longrunning.Operation]
+can be used to track the progress of preparing the new
+instance. The instance name is assigned by the caller. If the
+named instance already exists, <code>CreateInstance</code> returns
+<code>ALREADY_EXISTS</code>.</p>
+<p>Immediately upon completion of this request:</p>
+<ul>
+<li>The instance is readable via the API, with all requested attributes
+but no allocated resources. Its state is <code>CREATING</code>.</li>
+</ul>
+<p>Until completion of the returned operation:</p>
+<ul>
+<li>Cancelling the operation renders the instance immediately unreadable
+via the API.</li>
+<li>The instance can be deleted.</li>
+<li>All other attempts to modify the instance are rejected.</li>
+</ul>
+<p>Upon completion of the returned operation:</p>
+<ul>
+<li>Billing for all successfully-allocated resources begins (some types
+may have lower than the requested levels).</li>
+<li>Databases can be created in the instance.</li>
+<li>The instance&apos;s allocated resource levels are readable via the API.</li>
+<li>The instance&apos;s state becomes <code>READY</code>.</li>
+</ul>
+<p>The returned [long-running operation][google.longrunning.Operation] will
+have a name of the format <code>&amp;lt;instance_name&gt;/operations/&amp;lt;operation_id&gt;</code> and
+can be used to track creation of the instance.  The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateInstanceMetadata][google.spanner.admin.instance.v1.CreateInstanceMetadata].
+The [response][google.longrunning.Operation.response] field type is
+[Instance][google.spanner.admin.instance.v1.Instance], if successful.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, CreateInstanceMetadata&gt;&gt; CreateInstanceAsync(string parent, string instanceId, Instance instance, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The name of the project in which to create the instance. Values
+are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instanceId</span></td>
+        <td><p>Required. The ID of the instance to create.  Valid identifiers are of the
+form <code>[a-z][-a-z0-9]*[a-z0-9]</code> and must be between 6 and 30 characters in
+length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. The instance to create.  The name may be omitted, but if
+specified must be <code>&amp;lt;parent&gt;/instances/&amp;lt;instance_id&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Google.LongRunning.Operation</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.CreateInstanceMetadata.html">CreateInstanceMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_CreateInstanceAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.CreateInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_CreateInstanceAsync_System_String_System_String_Google_Cloud_Spanner_Admin_Instance_V1_Instance_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.CreateInstanceAsync(System.String,System.String,Google.Cloud.Spanner.Admin.Instance.V1.Instance,System.Threading.CancellationToken)">CreateInstanceAsync(String, String, Instance, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates an instance and begins preparing it to begin serving. The
+returned [long-running operation][google.longrunning.Operation]
+can be used to track the progress of preparing the new
+instance. The instance name is assigned by the caller. If the
+named instance already exists, <code>CreateInstance</code> returns
+<code>ALREADY_EXISTS</code>.</p>
+<p>Immediately upon completion of this request:</p>
+<ul>
+<li>The instance is readable via the API, with all requested attributes
+but no allocated resources. Its state is <code>CREATING</code>.</li>
+</ul>
+<p>Until completion of the returned operation:</p>
+<ul>
+<li>Cancelling the operation renders the instance immediately unreadable
+via the API.</li>
+<li>The instance can be deleted.</li>
+<li>All other attempts to modify the instance are rejected.</li>
+</ul>
+<p>Upon completion of the returned operation:</p>
+<ul>
+<li>Billing for all successfully-allocated resources begins (some types
+may have lower than the requested levels).</li>
+<li>Databases can be created in the instance.</li>
+<li>The instance&apos;s allocated resource levels are readable via the API.</li>
+<li>The instance&apos;s state becomes <code>READY</code>.</li>
+</ul>
+<p>The returned [long-running operation][google.longrunning.Operation] will
+have a name of the format <code>&amp;lt;instance_name&gt;/operations/&amp;lt;operation_id&gt;</code> and
+can be used to track creation of the instance.  The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateInstanceMetadata][google.spanner.admin.instance.v1.CreateInstanceMetadata].
+The [response][google.longrunning.Operation.response] field type is
+[Instance][google.spanner.admin.instance.v1.Instance], if successful.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, CreateInstanceMetadata&gt;&gt; CreateInstanceAsync(string parent, string instanceId, Instance instance, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The name of the project in which to create the instance. Values
+are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instanceId</span></td>
+        <td><p>Required. The ID of the instance to create.  Valid identifiers are of the
+form <code>[a-z][-a-z0-9]*[a-z0-9]</code> and must be between 6 and 30 characters in
+length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. The instance to create.  The name may be omitted, but if
+specified must be <code>&amp;lt;parent&gt;/instances/&amp;lt;instance_id&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
 </td>
       </tr>
     </tbody>
@@ -964,7 +1255,7 @@ is permanently deleted.</li>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1008,7 +1299,51 @@ is permanently deleted.</li>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_DeleteInstance_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.DeleteInstance*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_DeleteInstance_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.DeleteInstance(System.String,Google.Api.Gax.Grpc.CallSettings)">DeleteInstance(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes an instance.</p>
+<p>Immediately upon completion of the request:</p>
+<ul>
+<li>Billing ceases for all of the instance&apos;s reserved resources.</li>
+</ul>
+<p>Soon afterward:</p>
+<ul>
+<li>The instance and <em>all of its databases</em> immediately and
+irrevocably disappear from the API. All data in the databases
+is permanently deleted.</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void DeleteInstance(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the instance to be deleted. Values are of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;</code></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1051,7 +1386,7 @@ is permanently deleted.</li>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1170,7 +1505,7 @@ is permanently deleted.</li>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1253,6 +1588,126 @@ is permanently deleted.</li>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_DeleteInstanceAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.DeleteInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_DeleteInstanceAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.DeleteInstanceAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">DeleteInstanceAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes an instance.</p>
+<p>Immediately upon completion of the request:</p>
+<ul>
+<li>Billing ceases for all of the instance&apos;s reserved resources.</li>
+</ul>
+<p>Soon afterward:</p>
+<ul>
+<li>The instance and <em>all of its databases</em> immediately and
+irrevocably disappear from the API. All data in the databases
+is permanently deleted.</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteInstanceAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the instance to be deleted. Values are of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;</code></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_DeleteInstanceAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.DeleteInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_DeleteInstanceAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.DeleteInstanceAsync(System.String,System.Threading.CancellationToken)">DeleteInstanceAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes an instance.</p>
+<p>Immediately upon completion of the request:</p>
+<ul>
+<li>Billing ceases for all of the instance&apos;s reserved resources.</li>
+</ul>
+<p>Soon afterward:</p>
+<ul>
+<li>The instance and <em>all of its databases</em> immediately and
+irrevocably disappear from the API. All data in the databases
+is permanently deleted.</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteInstanceAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the instance to be deleted. Values are of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;</code></p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task that completes when the RPC has completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetIamPolicy_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetIamPolicy*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetIamPolicy_Google_Cloud_Iam_V1_GetIamPolicyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetIamPolicy(Google.Cloud.Iam.V1.GetIamPolicyRequest,Google.Api.Gax.Grpc.CallSettings)">GetIamPolicy(GetIamPolicyRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Gets the access control policy for an instance resource. Returns an empty
@@ -1282,7 +1737,7 @@ policy if an instance exists but does not have a policy set.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1331,12 +1786,11 @@ policy if an instance exists but does not have a policy set.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1388,7 +1842,7 @@ policy if an instance exists but does not have a policy set.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1489,12 +1943,11 @@ policy if an instance exists but does not have a policy set.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1543,8 +1996,7 @@ policy if an instance exists but does not have a policy set.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
@@ -1597,7 +2049,7 @@ resource is specified as <code>projects/{project}</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1647,7 +2099,57 @@ resource is specified as <code>projects/{project}</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstance_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstance*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstance_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstance(System.String,Google.Api.Gax.Grpc.CallSettings)">GetInstance(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets information about a particular instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Instance GetInstance(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the requested instance. Values are of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1696,7 +2198,7 @@ resource is specified as <code>projects/{project}</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1795,7 +2297,7 @@ resource is specified as <code>projects/{project}</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1868,6 +2370,106 @@ resource is specified as <code>projects/{project}</code>.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetInstanceAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets information about a particular instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Instance&gt; GetInstanceAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the requested instance. Values are of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceAsync(System.String,System.Threading.CancellationToken)">GetInstanceAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets information about a particular instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Instance&gt; GetInstanceAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the requested instance. Values are of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfig_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfig*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfig_Google_Cloud_Spanner_Admin_Instance_V1_GetInstanceConfigRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfig(Google.Cloud.Spanner.Admin.Instance.V1.GetInstanceConfigRequest,Google.Api.Gax.Grpc.CallSettings)">GetInstanceConfig(GetInstanceConfigRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Gets information about a particular instance configuration.</p>
@@ -1894,7 +2496,7 @@ resource is specified as <code>projects/{project}</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1944,7 +2546,57 @@ the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfig_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfig*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfig_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfig(System.String,Google.Api.Gax.Grpc.CallSettings)">GetInstanceConfig(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets information about a particular instance configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual InstanceConfig GetInstanceConfig(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the requested instance configuration. Values are of
+the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1993,7 +2645,7 @@ the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2092,7 +2744,7 @@ the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2165,6 +2817,106 @@ the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfigAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfigAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfigAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfigAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetInstanceConfigAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets information about a particular instance configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceConfig&gt; GetInstanceConfigAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the requested instance configuration. Values are of
+the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfigAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfigAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_GetInstanceConfigAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.GetInstanceConfigAsync(System.String,System.Threading.CancellationToken)">GetInstanceConfigAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets information about a particular instance configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceConfig&gt; GetInstanceConfigAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the requested instance configuration. Values are of
+the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstanceConfigs_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstanceConfigs*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstanceConfigs_Google_Api_Gax_ResourceNames_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstanceConfigs(Google.Api.Gax.ResourceNames.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstanceConfigs(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the supported instance configurations for a given project.</p>
@@ -2185,7 +2937,7 @@ the form <code>projects/&amp;lt;project&gt;/instanceConfigs/&amp;lt;config&gt;</
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project for which a list of supported instance
 configurations is requested. Values are of the form
@@ -2207,7 +2959,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2224,7 +2976,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a> resources.</p>
 </td>
       </tr>
@@ -2256,7 +3008,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2273,7 +3025,72 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstanceConfigs_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstanceConfigs*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstanceConfigs_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstanceConfigs(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstanceConfigs(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists the supported instance configurations for a given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListInstanceConfigsResponse, InstanceConfig&gt; ListInstanceConfigs(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The name of the project for which a list of supported instance
+configurations is requested. Values are of the form
+<code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a> resources.</p>
 </td>
       </tr>
@@ -2299,7 +3116,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project for which a list of supported instance
 configurations is requested. Values are of the form
@@ -2321,7 +3138,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2338,7 +3155,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a> resources.</p>
 </td>
       </tr>
@@ -2370,7 +3187,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2387,7 +3204,72 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstanceConfigsAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstanceConfigsAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstanceConfigsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstanceConfigsAsync(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstanceConfigsAsync(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists the supported instance configurations for a given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListInstanceConfigsResponse, InstanceConfig&gt; ListInstanceConfigsAsync(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The name of the project for which a list of supported instance
+configurations is requested. Values are of the form
+<code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstanceConfigsResponse.html">ListInstanceConfigsResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.InstanceConfig.html">InstanceConfig</a> resources.</p>
 </td>
       </tr>
@@ -2413,7 +3295,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project for which a list of instances is
 requested. Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
@@ -2434,7 +3316,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2451,7 +3333,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a> resources.</p>
 </td>
       </tr>
@@ -2483,7 +3365,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2500,7 +3382,71 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstances_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstances*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstances_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstances(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstances(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists all instances in the given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListInstancesResponse, Instance&gt; ListInstances(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The name of the project for which a list of instances is
+requested. Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a> resources.</p>
 </td>
       </tr>
@@ -2526,7 +3472,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.ResourceNames.ProjectName</span></td>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project for which a list of instances is
 requested. Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
@@ -2547,7 +3493,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2564,7 +3510,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a> resources.</p>
 </td>
       </tr>
@@ -2596,7 +3542,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2613,7 +3559,71 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstancesAsync_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstancesAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Instance_V1_InstanceAdminClient_ListInstancesAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Spanner.Admin.Instance.V1.InstanceAdminClient.ListInstancesAsync(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstancesAsync(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists all instances in the given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListInstancesResponse, Instance&gt; ListInstancesAsync(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The name of the project for which a list of instances is
+requested. Values are of the form <code>projects/&amp;lt;project&gt;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.ListInstancesResponse.html">ListInstancesResponse</a>, <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Spanner.Admin.Instance.V1.Instance.html">Instance</a> resources.</p>
 </td>
       </tr>
@@ -2645,7 +3655,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2694,7 +3704,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2743,7 +3753,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2792,7 +3802,7 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2844,7 +3854,7 @@ existing policy.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2893,8 +3903,7 @@ existing policy.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy is being specified.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
@@ -2907,7 +3916,7 @@ might reject them.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2959,7 +3968,7 @@ existing policy.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3060,8 +4069,7 @@ existing policy.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy is being specified.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
@@ -3074,7 +4082,7 @@ might reject them.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3123,8 +4131,7 @@ existing policy.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy is being specified.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
@@ -3222,7 +4229,7 @@ empty set of permissions.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3272,8 +4279,7 @@ empty set of permissions.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy detail is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
@@ -3286,7 +4292,7 @@ information see
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3339,7 +4345,7 @@ empty set of permissions.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3442,8 +4448,7 @@ empty set of permissions.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy detail is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
@@ -3456,7 +4461,7 @@ information see
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3506,8 +4511,7 @@ empty set of permissions.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">resource</span></td>
         <td><p>REQUIRED: The resource for which the policy detail is being requested.
-<code>resource</code> is usually specified as a path. For example, a Project
-resource is specified as <code>projects/{project}</code>.</p>
+See the operation documentation for the appropriate value for this field.</p>
 </td>
       </tr>
       <tr>
@@ -3609,7 +4613,7 @@ be included.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Protobuf.WellKnownTypes.FieldMask</span></td>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
         <td><span class="parametername">fieldMask</span></td>
         <td><p>Required. A mask specifying which fields in
 [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should
@@ -3620,7 +4624,7 @@ accidentally by clients that do not know about them.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3706,7 +4710,7 @@ resource [name][google.spanner.admin.instance.v1.Instance.name].</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3795,7 +4799,7 @@ be included.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Protobuf.WellKnownTypes.FieldMask</span></td>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
         <td><span class="parametername">fieldMask</span></td>
         <td><p>Required. A mask specifying which fields in
 [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should
@@ -3806,7 +4810,7 @@ accidentally by clients that do not know about them.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3895,7 +4899,7 @@ be included.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Protobuf.WellKnownTypes.FieldMask</span></td>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
         <td><span class="parametername">fieldMask</span></td>
         <td><p>Required. A mask specifying which fields in
 [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should
@@ -3992,7 +4996,7 @@ resource [name][google.spanner.admin.instance.v1.Instance.name].</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
