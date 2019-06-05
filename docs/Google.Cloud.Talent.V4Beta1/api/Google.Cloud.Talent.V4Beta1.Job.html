@@ -74,8 +74,9 @@
   <h1 id="Google_Cloud_Talent_V4Beta1_Job" data-uid="Google.Cloud.Talent.V4Beta1.Job" class="text-break">Class Job
   </h1>
   <div class="markdown level0 summary"><p>A Job resource represents a job posting (also referred to as a &quot;job listing&quot;
-or &quot;job requisition&quot;). A job belongs to a [Company][google.cloud.talent.v4beta1.Company], which is the hiring
-entity responsible for the job.</p>
+or &quot;job requisition&quot;). A job belongs to a
+[Company][google.cloud.talent.v4beta1.Company], which is the hiring entity
+responsible for the job.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -156,12 +157,16 @@ entity responsible for the job.</p>
 better API results, especially job searches by commute time.</p>
 <p>At most 50 locations are allowed for best search performance. If a job has
 more locations, it is suggested to split it into multiple jobs with unique
-[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id]s (e.g. &apos;ReqA&apos; becomes &apos;ReqA-1&apos;, &apos;ReqA-2&apos;, and so on.) as
-multiple jobs with the same [company][google.cloud.talent.v4beta1.Job.name][], [language_code][] and
-[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id] are not allowed. If the original [requisition_id][google.cloud.talent.v4beta1.Job.requisition_id] must
-be preserved, a custom field should be used for storage. It is also
-suggested to group the locations that close to each other in the same job
-for better search experience.</p>
+[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id]s (e.g.
+&apos;ReqA&apos; becomes &apos;ReqA-1&apos;, &apos;ReqA-2&apos;, and so on.) as multiple jobs with the
+same [company][google.cloud.talent.v4beta1.Job.company],
+[language_code][google.cloud.talent.v4beta1.Job.language_code] and
+[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id] are not
+allowed. If the original
+[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id] must be
+preserved, a custom field should be used for storage. It is also suggested
+to group the locations that close to each other in the same job for better
+search experience.</p>
 <p>The maximum number of allowed characters is 500.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -428,9 +433,10 @@ position.</p>
   <div class="markdown level1 summary"><p>Required.</p>
 <p>The description of the job, which typically includes a multi-paragraph
 description of the company and related information. Separate fields are
-provided on the job object for [responsibilities][google.cloud.talent.v4beta1.Job.responsibilities],
-[qualifications][google.cloud.talent.v4beta1.Job.qualifications], and other job characteristics. Use of
-these separate job fields is recommended.</p>
+provided on the job object for
+[responsibilities][google.cloud.talent.v4beta1.Job.responsibilities],
+[qualifications][google.cloud.talent.v4beta1.Job.qualifications], and other
+job characteristics. Use of these separate job fields is recommended.</p>
 <p>This field accepts and sanitizes HTML input, and also accepts
 bold, italic, ordered list, and unordered list markup tags.</p>
 <p>The maximum number of allowed characters is 100,000.</p>
@@ -644,9 +650,11 @@ any requirements for fluency that are associated with the job.</p>
 For more information, see
 <a href="https://tools.ietf.org/html/bcp47">Tags for Identifying Languages</a>{:
 class=&quot;external&quot; target=&quot;_blank&quot; }.</p>
-<p>If this field is unspecified and [Job.description][google.cloud.talent.v4beta1.Job.description] is present, detected
-language code based on [Job.description][google.cloud.talent.v4beta1.Job.description] is assigned, otherwise
-defaults to &apos;en_US&apos;.</p>
+<p>If this field is unspecified and
+[Job.description][google.cloud.talent.v4beta1.Job.description] is present,
+detected language code based on
+[Job.description][google.cloud.talent.v4beta1.Job.description] is assigned,
+otherwise defaults to &apos;en_US&apos;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -679,7 +687,8 @@ example, &quot;projects/api-test-project/tenants/foo/jobs/1234&quot;.</p>
 <p>Tenant id is optional and the default tenant is used if unspecified, for
 example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 <p>Use of this field in job queries and API calls is preferred over the use of
-[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id] since this value is unique.</p>
+[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id] since this
+value is unique.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -731,12 +740,17 @@ example, &quot;projects/api-test-project/jobs/1234&quot;.</p>
 experience.</p>
 <p>The expiration timestamp of the job. After this timestamp, the
 job is marked as expired, and it no longer appears in search results. The
-expired job can&apos;t be deleted or listed by the [DeleteJob][] and
-[ListJobs][] APIs, but it can be retrieved with the [GetJob][] API or
-updated with the [UpdateJob][] API. An expired job can be updated and
-opened again by using a future expiration timestamp. Updating an expired
-job fails if there is another existing open job with same
-[company][google.cloud.talent.v4beta1.Job.name][], [language_code][] and [requisition_id][google.cloud.talent.v4beta1.Job.requisition_id].</p>
+expired job can&apos;t be deleted or listed by the
+[DeleteJob][google.cloud.talent.v4beta1.JobService.DeleteJob] and
+[ListJobs][google.cloud.talent.v4beta1.JobService.ListJobs] APIs, but it
+can be retrieved with the
+[GetJob][google.cloud.talent.v4beta1.JobService.GetJob] API or updated with
+the [UpdateJob][google.cloud.talent.v4beta1.JobService.UpdateJob] API. An
+expired job can be updated and opened again by using a future expiration
+timestamp. Updating an expired job fails if there is another existing open
+job with same [company][google.cloud.talent.v4beta1.Job.company],
+[language_code][google.cloud.talent.v4beta1.Job.language_code] and
+[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id].</p>
 <p>The expired jobs are retained in our system for 90 days. However, the
 overall expired job count cannot exceed 3 times the maximum of open jobs
 count over the past week, otherwise jobs with earlier expire time are
@@ -750,10 +764,13 @@ the job posting expires after 30 days from the job&apos;s creation time. For
 example, if the job was created on 2017/01/01 13:00AM UTC with an
 unspecified expiration date, the job expires after 2017/01/31 13:00AM UTC.</p>
 <p>If this value isn&apos;t provided on job update, it depends on the field masks
-set by [UpdateJobRequest.update_mask][google.cloud.talent.v4beta1.UpdateJobRequest.update_mask]. If the field masks include
-[expiry_time][], or the masks are empty meaning that every field is
-updated, the job posting expires after 30 days from the job&apos;s last
-update time. Otherwise the expiration date isn&apos;t updated.</p>
+set by
+[UpdateJobRequest.update_mask][google.cloud.talent.v4beta1.UpdateJobRequest.update_mask].
+If the field masks include
+[job_end_time][google.cloud.talent.v4beta1.Job.job_end_time], or the masks
+are empty meaning that every field is updated, the job posting expires
+after 30 days from the job&apos;s last update time. Otherwise the expiration
+date isn&apos;t updated.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -805,13 +822,16 @@ ignored.</p>
   <a id="Google_Cloud_Talent_V4Beta1_Job_PostingRegion_" data-uid="Google.Cloud.Talent.V4Beta1.Job.PostingRegion*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Job_PostingRegion" data-uid="Google.Cloud.Talent.V4Beta1.Job.PostingRegion">PostingRegion</h4>
   <div class="markdown level1 summary"><p>Optional.</p>
-<p>The job [PostingRegion][google.cloud.talent.v4beta1.PostingRegion] (for example, state, country) throughout
-which the job is available. If this field is set, a [LocationFilter][google.cloud.talent.v4beta1.LocationFilter]
-in a search query within the job region finds this job posting if an
-exact location match isn&apos;t specified. If this field is set to
-[PostingRegion.NATION][google.cloud.talent.v4beta1.PostingRegion.NATION] or [PostingRegion.ADMINISTRATIVE_AREA][google.cloud.talent.v4beta1.PostingRegion.ADMINISTRATIVE_AREA],
-setting job [Job.addresses][google.cloud.talent.v4beta1.Job.addresses] to the same location level as this field
-is strongly recommended.</p>
+<p>The job [PostingRegion][google.cloud.talent.v4beta1.PostingRegion] (for
+example, state, country) throughout which the job is available. If this
+field is set, a
+[LocationFilter][google.cloud.talent.v4beta1.LocationFilter] in a search
+query within the job region finds this job posting if an exact location
+match isn&apos;t specified. If this field is set to
+[PostingRegion.NATION][google.cloud.talent.v4beta1.PostingRegion.NATION] or
+[PostingRegion.ADMINISTRATIVE_AREA][google.cloud.talent.v4beta1.PostingRegion.ADMINISTRATIVE_AREA],
+setting job [Job.addresses][google.cloud.talent.v4beta1.Job.addresses] to
+the same location level as this field is strongly recommended.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -917,7 +937,8 @@ jobs with a promotionValue &gt;0 are returned in a FEATURED_JOB_SEARCH.</p>
   <div class="markdown level1 summary"><p>Optional.</p>
 <p>A description of the qualifications required to perform the
 job. The use of this field is recommended
-as an alternative to using the more general [description][google.cloud.talent.v4beta1.Job.description] field.</p>
+as an alternative to using the more general
+[description][google.cloud.talent.v4beta1.Job.description] field.</p>
 <p>This field accepts and sanitizes HTML input, and also accepts
 bold, italic, ordered list, and unordered list markup tags.</p>
 <p>The maximum number of allowed characters is 10,000.</p>
@@ -948,8 +969,10 @@ bold, italic, ordered list, and unordered list markup tags.</p>
 <p>The requisition ID, also referred to as the posting ID, is assigned by the
 client to identify a job. This field is intended to be used by clients
 for client identification and tracking of postings. A job isn&apos;t allowed
-to be created if there is another job with the same [company][google.cloud.talent.v4beta1.Job.name],
-[language_code][google.cloud.talent.v4beta1.Job.language_code] and [requisition_id][google.cloud.talent.v4beta1.Job.requisition_id].</p>
+to be created if there is another job with the same
+[company][google.cloud.talent.v4beta1.Job.name],
+[language_code][google.cloud.talent.v4beta1.Job.language_code] and
+[requisition_id][google.cloud.talent.v4beta1.Job.requisition_id].</p>
 <p>The maximum number of allowed characters is 255.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -976,8 +999,8 @@ to be created if there is another job with the same [company][google.cloud.talen
   <h4 id="Google_Cloud_Talent_V4Beta1_Job_Responsibilities" data-uid="Google.Cloud.Talent.V4Beta1.Job.Responsibilities">Responsibilities</h4>
   <div class="markdown level1 summary"><p>Optional.</p>
 <p>A description of job responsibilities. The use of this field is
-recommended as an alternative to using the more general [description][google.cloud.talent.v4beta1.Job.description]
-field.</p>
+recommended as an alternative to using the more general
+[description][google.cloud.talent.v4beta1.Job.description] field.</p>
 <p>This field accepts and sanitizes HTML input, and also accepts
 bold, italic, ordered list, and unordered list markup tags.</p>
 <p>The maximum number of allowed characters is 10,000.</p>
@@ -1032,7 +1055,9 @@ bold, italic, ordered list, and unordered list markup tags.</p>
   <h4 id="Google_Cloud_Talent_V4Beta1_Job_Visibility" data-uid="Google.Cloud.Talent.V4Beta1.Job.Visibility">Visibility</h4>
   <div class="markdown level1 summary"><p>Optional.</p>
 <p>The visibility of the job.</p>
-<p>Defaults to [Visibility.ACCOUNT_ONLY][google.cloud.talent.v4beta1.Visibility.ACCOUNT_ONLY] if not specified.</p>
+<p>Defaults to
+[Visibility.ACCOUNT_ONLY][google.cloud.talent.v4beta1.Visibility.ACCOUNT_ONLY]
+if not specified.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

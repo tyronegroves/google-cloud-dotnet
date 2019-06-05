@@ -148,12 +148,15 @@
   </h3>
   <a id="Google_Cloud_Dataproc_V1_ClusterConfig_ConfigBucket_" data-uid="Google.Cloud.Dataproc.V1.ClusterConfig.ConfigBucket*"></a>
   <h4 id="Google_Cloud_Dataproc_V1_ClusterConfig_ConfigBucket" data-uid="Google.Cloud.Dataproc.V1.ClusterConfig.ConfigBucket">ConfigBucket</h4>
-  <div class="markdown level1 summary"><p>Optional. A Cloud Storage staging bucket used for sharing generated
-SSH keys and config. If you do not specify a staging bucket, Cloud
-Dataproc will determine an appropriate Cloud Storage location (US,
+  <div class="markdown level1 summary"><p>Optional. A Google Cloud Storage bucket used to stage job
+dependencies, config files, and job driver console output.
+If you do not specify a staging bucket, Cloud
+Dataproc will determine a Cloud Storage location (US,
 ASIA, or EU) for your cluster&apos;s staging bucket according to the Google
-Compute Engine zone where your cluster is deployed, and then it will create
-and manage this project-level, per-location bucket for you.</p>
+Compute Engine zone where your cluster is deployed, and then create
+and manage this project-level, per-location bucket (see
+<a href="/dataproc/docs/concepts/configuring-clusters/staging-bucket">Cloud Dataproc staging
+bucket</a>).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -201,7 +204,7 @@ and manage this project-level, per-location bucket for you.</p>
   </table>
   <a id="Google_Cloud_Dataproc_V1_ClusterConfig_GceClusterConfig_" data-uid="Google.Cloud.Dataproc.V1.ClusterConfig.GceClusterConfig*"></a>
   <h4 id="Google_Cloud_Dataproc_V1_ClusterConfig_GceClusterConfig" data-uid="Google.Cloud.Dataproc.V1.ClusterConfig.GceClusterConfig">GceClusterConfig</h4>
-  <div class="markdown level1 summary"><p>Required. The shared Compute Engine config settings for
+  <div class="markdown level1 summary"><p>Optional. The shared Compute Engine config settings for
 all instances in a cluster.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -229,8 +232,10 @@ all instances in a cluster.</p>
   <div class="markdown level1 summary"><p>Optional. Commands to execute on each node after config is
 completed. By default, executables are run on master and all worker nodes.
 You can test a node&apos;s <code>role</code> metadata to run an executable on
-a master or worker node, as shown below using <code>curl</code> (you can also use <code>wget</code>):</p>
-<p>ROLE=$(curl -H Metadata-Flavor:Google <a href="http://metadata/computeMetadata/v1/instance/attributes/dataproc-role">http://metadata/computeMetadata/v1/instance/attributes/dataproc-role</a>)
+a master or worker node, as shown below using <code>curl</code> (you can also use
+<code>wget</code>):</p>
+<p>ROLE=$(curl -H Metadata-Flavor:Google
+<a href="http://metadata/computeMetadata/v1/instance/attributes/dataproc-role">http://metadata/computeMetadata/v1/instance/attributes/dataproc-role</a>)
 if [[ &quot;${ROLE}&quot; == &apos;Master&apos; ]]; then
  ... master specific actions ...
 else

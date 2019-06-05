@@ -148,15 +148,23 @@
   </h3>
   <a id="Google_Cloud_Vision_V1_GcsDestination_Uri_" data-uid="Google.Cloud.Vision.V1.GcsDestination.Uri*"></a>
   <h4 id="Google_Cloud_Vision_V1_GcsDestination_Uri" data-uid="Google.Cloud.Vision.V1.GcsDestination.Uri">Uri</h4>
-  <div class="markdown level1 summary"><p>Google Cloud Storage URI where the results will be stored. Results will
-be in JSON format and preceded by its corresponding input URI. This field
-can either represent a single file, or a prefix for multiple outputs.
-Prefixes must end in a <code>/</code>.</p>
+  <div class="markdown level1 summary"><p>Google Cloud Storage URI prefix where the results will be stored. Results
+will be in JSON format and preceded by its corresponding input URI prefix.
+This field can either represent a gcs file prefix or gcs directory. In
+either case, the uri should be unique because in order to get all of the
+output files, you will need to do a wildcard gcs search on the uri prefix
+you provide.</p>
 <p>Examples:</p>
 <ul>
-<li>File: gs://bucket-name/filename.json</li>
-<li>Prefix: gs://bucket-name/prefix/here/</li>
-<li>File: gs://bucket-name/prefix/here</li>
+<li><p>File Prefix: gs://bucket-name/here/filenameprefix   The output files
+will be created in gs://bucket-name/here/ and the names of the
+output files will begin with &quot;filenameprefix&quot;.</p>
+</li>
+<li><p>Directory Prefix: gs://bucket-name/some/location/   The output files
+will be created in gs://bucket-name/some/location/ and the names of the
+output files could be anything because there was no filename prefix
+specified.</p>
+</li>
 </ul>
 <p>If multiple outputs, each response is still AnnotateFileResponse, each of
 which contains some subset of the full list of AnnotateImageResponse.

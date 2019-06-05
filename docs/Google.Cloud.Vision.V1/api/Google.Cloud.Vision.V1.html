@@ -80,6 +80,9 @@
       <h4><a class="xref" href="Google.Cloud.Vision.V1.AddProductToProductSetRequest.html">AddProductToProductSetRequest</a></h4>
       <section><p>Request message for the <code>AddProductToProductSet</code> method.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Vision.V1.AnnotateFileRequest.html">AnnotateFileRequest</a></h4>
+      <section><p>A request to annotate one single file, e.g. a PDF, TIFF or GIF file.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.AnnotateFileResponse.html">AnnotateFileResponse</a></h4>
       <section><p>Response to a single file annotation request. A file may contain one or more
 images, which individually have their own responses.</p>
@@ -89,7 +92,7 @@ images, which individually have their own responses.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.AnnotateImageRequest.html">AnnotateImageRequest</a></h4>
       <section><p>Request for performing Google Cloud Vision API tasks over a user-provided
-image, with user-requested features.</p>
+image, with user-requested features, and with context information.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.AnnotateImageResponse.html">AnnotateImageResponse</a></h4>
       <section><p>Response to an image annotation request.</p>
@@ -106,6 +109,18 @@ call.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateFilesResponse.html">AsyncBatchAnnotateFilesResponse</a></h4>
       <section><p>Response to an async batch file annotation request.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesRequest.html">AsyncBatchAnnotateImagesRequest</a></h4>
+      <section><p>Request for async image annotation for a list of images.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a></h4>
+      <section><p>Response to an async batch image annotation request.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesRequest.html">BatchAnnotateFilesRequest</a></h4>
+      <section><p>A list of requests to annotate files using the BatchAnnotateFiles API.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesResponse.html">BatchAnnotateFilesResponse</a></h4>
+      <section><p>A list of file annotation responses.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateImagesRequest.html">BatchAnnotateImagesRequest</a></h4>
       <section><p>Multiple image annotation requests are batched into a single service call.</p>
@@ -251,8 +266,10 @@ ImportProductSetRequests in each line.</p>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.ImportProductSetsResponse.html">ImportProductSetsResponse</a></h4>
       <section><p>Response message for the <code>ImportProductSets</code> method.</p>
 <p>This message is returned by the
-[google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation] method in the returned
-[google.longrunning.Operation.response][google.longrunning.Operation.response] field.</p>
+[google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation]
+method in the returned
+[google.longrunning.Operation.response][google.longrunning.Operation.response]
+field.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.InputConfig.html">InputConfig</a></h4>
       <section><p>The desired input location and metadata.</p>
@@ -334,16 +351,18 @@ The position coordinates are in the same scale as the original image.</p>
       <section><p>Manages Products and ProductSets of reference images for use in product
 search. It uses the following resource model:</p>
 <ul>
-<li>The API has a collection of [ProductSet][google.cloud.vision.v1.ProductSet] resources, named
-<code>projects/*/locations/*/productSets/*</code>, which acts as a way to put different
-products into groups to limit identification.</li>
+<li>The API has a collection of [ProductSet][google.cloud.vision.v1.ProductSet]
+resources, named <code>projects/*/locations/*/productSets/*</code>, which acts as a way
+to put different products into groups to limit identification.</li>
 </ul>
 <p>In parallel,</p>
 <ul>
-<li><p>The API has a collection of [Product][google.cloud.vision.v1.Product] resources, named
+<li><p>The API has a collection of [Product][google.cloud.vision.v1.Product]
+resources, named
 <code>projects/*/locations/*/products/*</code></p>
 </li>
-<li><p>Each [Product][google.cloud.vision.v1.Product] has a collection of [ReferenceImage][google.cloud.vision.v1.ReferenceImage] resources, named
+<li><p>Each [Product][google.cloud.vision.v1.Product] has a collection of
+[ReferenceImage][google.cloud.vision.v1.ReferenceImage] resources, named
 <code>projects/*/locations/*/products/*/referenceImages/*</code></p>
 </li>
 </ul>
@@ -414,8 +433,9 @@ The hierarchy of an OCR extracted text structure is like this:
 TextAnnotation -&gt; Page -&gt; Block -&gt; Paragraph -&gt; Word -&gt; Symbol
 Each structural component, starting from Page, may further have their own
 properties. Properties describe detected languages, breaks etc.. Please refer
-to the [TextAnnotation.TextProperty][google.cloud.vision.v1.TextAnnotation.TextProperty] message definition below for more
-detail.</p>
+to the
+[TextAnnotation.TextProperty][google.cloud.vision.v1.TextAnnotation.TextProperty]
+message definition below for more detail.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Vision.V1.TextAnnotation.Types.html">TextAnnotation.Types</a></h4>
       <section><p>Container for nested types declared in the TextAnnotation message type.</p>

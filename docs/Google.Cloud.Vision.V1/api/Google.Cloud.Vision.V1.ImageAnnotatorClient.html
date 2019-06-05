@@ -129,6 +129,30 @@
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesOperationsClient_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesOperationsClient*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesOperationsClient" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesOperationsClient">AsyncBatchAnnotateImagesOperationsClient</h4>
+  <div class="markdown level1 summary"><p>The long-running operations client for <code>AsyncBatchAnnotateImages</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual OperationsClient AsyncBatchAnnotateImagesOperationsClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_DefaultEndpoint_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.DefaultEndpoint*"></a>
   <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_DefaultEndpoint" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.DefaultEndpoint">DefaultEndpoint</h4>
   <div class="markdown level1 summary"><p>The default endpoint for the ImageAnnotator service, which is a host of &quot;vision.googleapis.com&quot; and a port of 443.</p>
@@ -882,6 +906,851 @@ if (retrievedResponse.IsCompleted)
     // If it has completed, then access the result
     AsyncBatchAnnotateFilesResponse retrievedResult = retrievedResponse.Result;
 }
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImages_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImages*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImages_Google_Cloud_Vision_V1_AsyncBatchAnnotateImagesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImages(Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesRequest,Google.Api.Gax.Grpc.CallSettings)">AsyncBatchAnnotateImages(AsyncBatchAnnotateImagesRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Run asynchronous image detection and annotation for a list of images.</p>
+<p>Progress and results can be retrieved through the
+<code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>OperationMetadata</code> (metadata).
+<code>Operation.response</code> contains <code>AsyncBatchAnnotateImagesResponse</code> (results).</p>
+<p>This service will write image annotation outputs to json files in customer
+GCS bucket, each json file containing BatchAnnotateImagesResponse proto.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; AsyncBatchAnnotateImages(AsyncBatchAnnotateImagesRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesRequest.html">AsyncBatchAnnotateImagesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImages_Google_Cloud_Vision_V1_AsyncBatchAnnotateImagesRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = ImageAnnotatorClient.Create();
+// Initialize request argument(s)
+AsyncBatchAnnotateImagesRequest request = new AsyncBatchAnnotateImagesRequest
+{
+    Requests = { },
+    OutputConfig = new OutputConfig(),
+};
+// Make the request
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; response =
+    imageAnnotatorClient.AsyncBatchAnnotateImages(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+AsyncBatchAnnotateImagesResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; retrievedResponse =
+    imageAnnotatorClient.PollOnceAsyncBatchAnnotateImages(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    AsyncBatchAnnotateImagesResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImages_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImages*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImages_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateImageRequest__Google_Cloud_Vision_V1_OutputConfig_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImages(System.Collections.Generic.IEnumerable{Google.Cloud.Vision.V1.AnnotateImageRequest},Google.Cloud.Vision.V1.OutputConfig,Google.Api.Gax.Grpc.CallSettings)">AsyncBatchAnnotateImages(IEnumerable&lt;AnnotateImageRequest&gt;, OutputConfig, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Run asynchronous image detection and annotation for a list of images.</p>
+<p>Progress and results can be retrieved through the
+<code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>OperationMetadata</code> (metadata).
+<code>Operation.response</code> contains <code>AsyncBatchAnnotateImagesResponse</code> (results).</p>
+<p>This service will write image annotation outputs to json files in customer
+GCS bucket, each json file containing BatchAnnotateImagesResponse proto.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; AsyncBatchAnnotateImages(IEnumerable&lt;AnnotateImageRequest&gt; requests, OutputConfig outputConfig, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AnnotateImageRequest.html">AnnotateImageRequest</a>&gt;</td>
+        <td><span class="parametername">requests</span></td>
+        <td><p>Individual image annotation requests for this batch.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.OutputConfig.html">OutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The desired output location and metadata (e.g. format).</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImages_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateImageRequest__Google_Cloud_Vision_V1_OutputConfig_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = ImageAnnotatorClient.Create();
+// Initialize request argument(s)
+IEnumerable&lt;AnnotateImageRequest&gt; requests = new List&lt;AnnotateImageRequest&gt;();
+OutputConfig outputConfig = new OutputConfig();
+// Make the request
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; response =
+    imageAnnotatorClient.AsyncBatchAnnotateImages(requests, outputConfig);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+AsyncBatchAnnotateImagesResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; retrievedResponse =
+    imageAnnotatorClient.PollOnceAsyncBatchAnnotateImages(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    AsyncBatchAnnotateImagesResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_Google_Cloud_Vision_V1_AsyncBatchAnnotateImagesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesAsync(Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesRequest,Google.Api.Gax.Grpc.CallSettings)">AsyncBatchAnnotateImagesAsync(AsyncBatchAnnotateImagesRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Run asynchronous image detection and annotation for a list of images.</p>
+<p>Progress and results can be retrieved through the
+<code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>OperationMetadata</code> (metadata).
+<code>Operation.response</code> contains <code>AsyncBatchAnnotateImagesResponse</code> (results).</p>
+<p>This service will write image annotation outputs to json files in customer
+GCS bucket, each json file containing BatchAnnotateImagesResponse proto.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt;&gt; AsyncBatchAnnotateImagesAsync(AsyncBatchAnnotateImagesRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesRequest.html">AsyncBatchAnnotateImagesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_Google_Cloud_Vision_V1_AsyncBatchAnnotateImagesRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = await ImageAnnotatorClient.CreateAsync();
+// Initialize request argument(s)
+AsyncBatchAnnotateImagesRequest request = new AsyncBatchAnnotateImagesRequest
+{
+    Requests = { },
+    OutputConfig = new OutputConfig(),
+};
+// Make the request
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; response =
+    await imageAnnotatorClient.AsyncBatchAnnotateImagesAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+AsyncBatchAnnotateImagesResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; retrievedResponse =
+    await imageAnnotatorClient.PollOnceAsyncBatchAnnotateImagesAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    AsyncBatchAnnotateImagesResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateImageRequest__Google_Cloud_Vision_V1_OutputConfig_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Vision.V1.AnnotateImageRequest},Google.Cloud.Vision.V1.OutputConfig,Google.Api.Gax.Grpc.CallSettings)">AsyncBatchAnnotateImagesAsync(IEnumerable&lt;AnnotateImageRequest&gt;, OutputConfig, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Run asynchronous image detection and annotation for a list of images.</p>
+<p>Progress and results can be retrieved through the
+<code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>OperationMetadata</code> (metadata).
+<code>Operation.response</code> contains <code>AsyncBatchAnnotateImagesResponse</code> (results).</p>
+<p>This service will write image annotation outputs to json files in customer
+GCS bucket, each json file containing BatchAnnotateImagesResponse proto.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt;&gt; AsyncBatchAnnotateImagesAsync(IEnumerable&lt;AnnotateImageRequest&gt; requests, OutputConfig outputConfig, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AnnotateImageRequest.html">AnnotateImageRequest</a>&gt;</td>
+        <td><span class="parametername">requests</span></td>
+        <td><p>Individual image annotation requests for this batch.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.OutputConfig.html">OutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The desired output location and metadata (e.g. format).</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateImageRequest__Google_Cloud_Vision_V1_OutputConfig_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = await ImageAnnotatorClient.CreateAsync();
+// Initialize request argument(s)
+IEnumerable&lt;AnnotateImageRequest&gt; requests = new List&lt;AnnotateImageRequest&gt;();
+OutputConfig outputConfig = new OutputConfig();
+// Make the request
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; response =
+    await imageAnnotatorClient.AsyncBatchAnnotateImagesAsync(requests, outputConfig);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+AsyncBatchAnnotateImagesResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; retrievedResponse =
+    await imageAnnotatorClient.PollOnceAsyncBatchAnnotateImagesAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    AsyncBatchAnnotateImagesResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateImageRequest__Google_Cloud_Vision_V1_OutputConfig_System_Threading_CancellationToken_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.AsyncBatchAnnotateImagesAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Vision.V1.AnnotateImageRequest},Google.Cloud.Vision.V1.OutputConfig,System.Threading.CancellationToken)">AsyncBatchAnnotateImagesAsync(IEnumerable&lt;AnnotateImageRequest&gt;, OutputConfig, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Run asynchronous image detection and annotation for a list of images.</p>
+<p>Progress and results can be retrieved through the
+<code>google.longrunning.Operations</code> interface.
+<code>Operation.metadata</code> contains <code>OperationMetadata</code> (metadata).
+<code>Operation.response</code> contains <code>AsyncBatchAnnotateImagesResponse</code> (results).</p>
+<p>This service will write image annotation outputs to json files in customer
+GCS bucket, each json file containing BatchAnnotateImagesResponse proto.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt;&gt; AsyncBatchAnnotateImagesAsync(IEnumerable&lt;AnnotateImageRequest&gt; requests, OutputConfig outputConfig, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AnnotateImageRequest.html">AnnotateImageRequest</a>&gt;</td>
+        <td><span class="parametername">requests</span></td>
+        <td><p>Individual image annotation requests for this batch.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.OutputConfig.html">OutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The desired output location and metadata (e.g. format).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_AsyncBatchAnnotateImagesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateImageRequest__Google_Cloud_Vision_V1_OutputConfig_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = await ImageAnnotatorClient.CreateAsync();
+// Initialize request argument(s)
+IEnumerable&lt;AnnotateImageRequest&gt; requests = new List&lt;AnnotateImageRequest&gt;();
+OutputConfig outputConfig = new OutputConfig();
+// Make the request
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; response =
+    await imageAnnotatorClient.AsyncBatchAnnotateImagesAsync(requests, outputConfig);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+AsyncBatchAnnotateImagesResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; retrievedResponse =
+    await imageAnnotatorClient.PollOnceAsyncBatchAnnotateImagesAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    AsyncBatchAnnotateImagesResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFiles_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFiles*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFiles_Google_Cloud_Vision_V1_BatchAnnotateFilesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFiles(Google.Cloud.Vision.V1.BatchAnnotateFilesRequest,Google.Api.Gax.Grpc.CallSettings)">BatchAnnotateFiles(BatchAnnotateFilesRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Service that performs image detection and annotation for a batch of files.
+Now only &quot;application/pdf&quot;, &quot;image/tiff&quot; and &quot;image/gif&quot; are supported.</p>
+<p>This service will extract at most 5 (customers can specify which 5 in
+AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+file provided and perform detection and annotation for each image
+extracted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual BatchAnnotateFilesResponse BatchAnnotateFiles(BatchAnnotateFilesRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesRequest.html">BatchAnnotateFilesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesResponse.html">BatchAnnotateFilesResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFiles_Google_Cloud_Vision_V1_BatchAnnotateFilesRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = ImageAnnotatorClient.Create();
+// Initialize request argument(s)
+BatchAnnotateFilesRequest request = new BatchAnnotateFilesRequest
+{
+    Requests = { },
+};
+// Make the request
+BatchAnnotateFilesResponse response = imageAnnotatorClient.BatchAnnotateFiles(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFiles_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFiles*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFiles_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateFileRequest__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFiles(System.Collections.Generic.IEnumerable{Google.Cloud.Vision.V1.AnnotateFileRequest},Google.Api.Gax.Grpc.CallSettings)">BatchAnnotateFiles(IEnumerable&lt;AnnotateFileRequest&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Service that performs image detection and annotation for a batch of files.
+Now only &quot;application/pdf&quot;, &quot;image/tiff&quot; and &quot;image/gif&quot; are supported.</p>
+<p>This service will extract at most 5 (customers can specify which 5 in
+AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+file provided and perform detection and annotation for each image
+extracted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual BatchAnnotateFilesResponse BatchAnnotateFiles(IEnumerable&lt;AnnotateFileRequest&gt; requests, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AnnotateFileRequest.html">AnnotateFileRequest</a>&gt;</td>
+        <td><span class="parametername">requests</span></td>
+        <td><p>The list of file annotation requests. Right now we support only one
+AnnotateFileRequest in BatchAnnotateFilesRequest.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesResponse.html">BatchAnnotateFilesResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFiles_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateFileRequest__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = ImageAnnotatorClient.Create();
+// Initialize request argument(s)
+IEnumerable&lt;AnnotateFileRequest&gt; requests = new List&lt;AnnotateFileRequest&gt;();
+// Make the request
+BatchAnnotateFilesResponse response = imageAnnotatorClient.BatchAnnotateFiles(requests);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_Google_Cloud_Vision_V1_BatchAnnotateFilesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync(Google.Cloud.Vision.V1.BatchAnnotateFilesRequest,Google.Api.Gax.Grpc.CallSettings)">BatchAnnotateFilesAsync(BatchAnnotateFilesRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Service that performs image detection and annotation for a batch of files.
+Now only &quot;application/pdf&quot;, &quot;image/tiff&quot; and &quot;image/gif&quot; are supported.</p>
+<p>This service will extract at most 5 (customers can specify which 5 in
+AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+file provided and perform detection and annotation for each image
+extracted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;BatchAnnotateFilesResponse&gt; BatchAnnotateFilesAsync(BatchAnnotateFilesRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesRequest.html">BatchAnnotateFilesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesResponse.html">BatchAnnotateFilesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_Google_Cloud_Vision_V1_BatchAnnotateFilesRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = await ImageAnnotatorClient.CreateAsync();
+// Initialize request argument(s)
+BatchAnnotateFilesRequest request = new BatchAnnotateFilesRequest
+{
+    Requests = { },
+};
+// Make the request
+BatchAnnotateFilesResponse response = await imageAnnotatorClient.BatchAnnotateFilesAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_Google_Cloud_Vision_V1_BatchAnnotateFilesRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync(Google.Cloud.Vision.V1.BatchAnnotateFilesRequest,System.Threading.CancellationToken)">BatchAnnotateFilesAsync(BatchAnnotateFilesRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Service that performs image detection and annotation for a batch of files.
+Now only &quot;application/pdf&quot;, &quot;image/tiff&quot; and &quot;image/gif&quot; are supported.</p>
+<p>This service will extract at most 5 (customers can specify which 5 in
+AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+file provided and perform detection and annotation for each image
+extracted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;BatchAnnotateFilesResponse&gt; BatchAnnotateFilesAsync(BatchAnnotateFilesRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesRequest.html">BatchAnnotateFilesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesResponse.html">BatchAnnotateFilesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_Google_Cloud_Vision_V1_BatchAnnotateFilesRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = await ImageAnnotatorClient.CreateAsync();
+// Initialize request argument(s)
+BatchAnnotateFilesRequest request = new BatchAnnotateFilesRequest
+{
+    Requests = { },
+};
+// Make the request
+BatchAnnotateFilesResponse response = await imageAnnotatorClient.BatchAnnotateFilesAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateFileRequest__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Vision.V1.AnnotateFileRequest},Google.Api.Gax.Grpc.CallSettings)">BatchAnnotateFilesAsync(IEnumerable&lt;AnnotateFileRequest&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Service that performs image detection and annotation for a batch of files.
+Now only &quot;application/pdf&quot;, &quot;image/tiff&quot; and &quot;image/gif&quot; are supported.</p>
+<p>This service will extract at most 5 (customers can specify which 5 in
+AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+file provided and perform detection and annotation for each image
+extracted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;BatchAnnotateFilesResponse&gt; BatchAnnotateFilesAsync(IEnumerable&lt;AnnotateFileRequest&gt; requests, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AnnotateFileRequest.html">AnnotateFileRequest</a>&gt;</td>
+        <td><span class="parametername">requests</span></td>
+        <td><p>The list of file annotation requests. Right now we support only one
+AnnotateFileRequest in BatchAnnotateFilesRequest.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesResponse.html">BatchAnnotateFilesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateFileRequest__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = await ImageAnnotatorClient.CreateAsync();
+// Initialize request argument(s)
+IEnumerable&lt;AnnotateFileRequest&gt; requests = new List&lt;AnnotateFileRequest&gt;();
+// Make the request
+BatchAnnotateFilesResponse response = await imageAnnotatorClient.BatchAnnotateFilesAsync(requests);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateFileRequest__System_Threading_CancellationToken_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateFilesAsync(System.Collections.Generic.IEnumerable{Google.Cloud.Vision.V1.AnnotateFileRequest},System.Threading.CancellationToken)">BatchAnnotateFilesAsync(IEnumerable&lt;AnnotateFileRequest&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Service that performs image detection and annotation for a batch of files.
+Now only &quot;application/pdf&quot;, &quot;image/tiff&quot; and &quot;image/gif&quot; are supported.</p>
+<p>This service will extract at most 5 (customers can specify which 5 in
+AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each
+file provided and perform detection and annotation for each image
+extracted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;BatchAnnotateFilesResponse&gt; BatchAnnotateFilesAsync(IEnumerable&lt;AnnotateFileRequest&gt; requests, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AnnotateFileRequest.html">AnnotateFileRequest</a>&gt;</td>
+        <td><span class="parametername">requests</span></td>
+        <td><p>The list of file annotation requests. Right now we support only one
+AnnotateFileRequest in BatchAnnotateFilesRequest.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Vision.V1.BatchAnnotateFilesResponse.html">BatchAnnotateFilesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateFilesAsync_System_Collections_Generic_IEnumerable_Google_Cloud_Vision_V1_AnnotateFileRequest__System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ImageAnnotatorClient imageAnnotatorClient = await ImageAnnotatorClient.CreateAsync();
+// Initialize request argument(s)
+IEnumerable&lt;AnnotateFileRequest&gt; requests = new List&lt;AnnotateFileRequest&gt;();
+// Make the request
+BatchAnnotateFilesResponse response = await imageAnnotatorClient.BatchAnnotateFilesAsync(requests);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_BatchAnnotateImages_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.BatchAnnotateImages*"></a>
@@ -3713,6 +4582,104 @@ foreach (WebDetection.Types.WebEntity entity in webDetection.WebEntities)
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateFilesResponse.html">AsyncBatchAnnotateFilesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A task representing the result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_PollOnceAsyncBatchAnnotateImages_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.PollOnceAsyncBatchAnnotateImages*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_PollOnceAsyncBatchAnnotateImages_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.PollOnceAsyncBatchAnnotateImages(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceAsyncBatchAnnotateImages(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>AsyncBatchAnnotateImages</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt; PollOnceAsyncBatchAnnotateImages(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Vision_V1_ImageAnnotatorClient_PollOnceAsyncBatchAnnotateImagesAsync_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.PollOnceAsyncBatchAnnotateImagesAsync*"></a>
+  <h4 id="Google_Cloud_Vision_V1_ImageAnnotatorClient_PollOnceAsyncBatchAnnotateImagesAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Vision.V1.ImageAnnotatorClient.PollOnceAsyncBatchAnnotateImagesAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceAsyncBatchAnnotateImagesAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of <code>AsyncBatchAnnotateImagesAsync</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;AsyncBatchAnnotateImagesResponse, OperationMetadata&gt;&gt; PollOnceAsyncBatchAnnotateImagesAsync(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Vision.V1.AsyncBatchAnnotateImagesResponse.html">AsyncBatchAnnotateImagesResponse</a>, <a class="xref" href="Google.Cloud.Vision.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
         <td><p>A task representing the result of polling the operation.</p>
 </td>
       </tr>
