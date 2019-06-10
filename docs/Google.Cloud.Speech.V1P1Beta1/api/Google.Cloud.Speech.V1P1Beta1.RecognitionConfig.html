@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class RecognitionConfig
    | Google.Cloud.Speech.V1P1Beta1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -152,13 +152,13 @@ request.</p>
   <div class="markdown level1 summary"><p><em>Optional</em> A list of up to 3 additional
 <a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tags,
 listing possible alternative languages of the supplied audio.
-See <a href="https://cloud.google.com/speech/docs/languages">Language Support</a>
+See <a href="/speech-to-text/docs/languages">Language Support</a>
 for a list of the currently supported language codes.
 If alternative languages are listed, recognition result will contain
 recognition in the most likely language detected including the main
 language_code. The recognition result will include the language tag
 of the language detected in the audio.
-NOTE: This feature is only supported for Voice Command and Voice Search
+Note: This feature is only supported for Voice Command and Voice Search
 use cases and performance may vary for other use cases (e.g., phone call
 transcription).</p>
 </div>
@@ -190,9 +190,9 @@ Valid values for LINEAR16 and FLAC are <code>1</code>-<code>8</code>.
 Valid values for OGG_OPUS are &apos;1&apos;-&apos;254&apos;.
 Valid value for MULAW, AMR, AMR_WB and SPEEX_WITH_HEADER_BYTE is only <code>1</code>.
 If <code>0</code> or omitted, defaults to one channel (mono).
-NOTE: We only recognize the first channel by default.
+Note: We only recognize the first channel by default.
 To perform independent recognition on each channel set
-enable_separate_recognition_per_channel to &apos;true&apos;.</p>
+<code>enable_separate_recognition_per_channel</code> to &apos;true&apos;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -247,9 +247,9 @@ Ignored unless enable_speaker_diarization is set to true.&quot;</p>
 This feature is only available in select languages. Setting this for
 requests in other languages has no effect at all.
 The default &apos;false&apos; value does not add punctuation to result hypotheses.
-NOTE: &quot;This is currently offered as an experimental service, complimentary
+Note: This is currently offered as an experimental service, complimentary
 to all users. In the future this may be exclusively available as a
-premium feature.&quot;</p>
+premium feature.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -273,12 +273,12 @@ premium feature.&quot;</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSeparateRecognitionPerChannel_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSeparateRecognitionPerChannel*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSeparateRecognitionPerChannel" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSeparateRecognitionPerChannel">EnableSeparateRecognitionPerChannel</h4>
-  <div class="markdown level1 summary"><p>This needs to be set to ‘true’ explicitly and audio_channel_count &gt; 1
+  <div class="markdown level1 summary"><p>This needs to be set to ‘true’ explicitly and <code>audio_channel_count</code> &gt; 1
 to get each channel recognized separately. The recognition result will
-contain a channel_tag field to state which channel that result belongs to.
-If this is not ‘true’, we will only recognize the first channel.
-NOTE: The request is also billed cumulatively for all channels recognized:
-(audio_channel_count times the audio length)</p>
+contain a <code>channel_tag</code> field to state which channel that result belongs
+to. If this is not true, we will only recognize the first channel. The
+request is billed cumulatively for all channels recognized:
+<code>audio_channel_count</code> multiplied by the length of the audio.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -306,9 +306,11 @@ NOTE: The request is also billed cumulatively for all channels recognized:
 the top alternative of the recognition result using a speaker_tag provided
 in the WordInfo.
 Note: When this is true, we send all the words from the beginning of the
-audio for the top alternative in every consecutive responses.
+audio for the top alternative in every consecutive STREAMING responses.
 This is done in order to improve our speaker tags as our models learn to
-identify the speakers in the conversation over time.</p>
+identify the speakers in the conversation over time.
+For non-streaming requests, the diarization results will be provided only
+in the top alternative of the FINAL SpeechRecognitionResult.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -387,7 +389,8 @@ the start and end time offsets (timestamps) for those words. If
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Encoding" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Encoding">Encoding</h4>
   <div class="markdown level1 summary"><p>Encoding of audio data sent in all <code>RecognitionAudio</code> messages.
 This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
-for all other audio formats. For details, see [AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
+for all other audio formats. For details, see
+[AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -414,7 +417,7 @@ for all other audio formats. For details, see [AudioEncoding][google.cloud.speec
   <div class="markdown level1 summary"><p><em>Required</em> The language of the supplied audio as a
 <a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tag.
 Example: &quot;en-US&quot;.
-See <a href="https://cloud.google.com/speech/docs/languages">Language Support</a>
+See <a href="/speech-to-text/docs/languages">Language Support</a>
 for a list of the currently supported language codes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -580,7 +583,8 @@ won&apos;t be filtered out.</p>
 source to 16000 Hz. If that&apos;s not possible, use the native sample rate of
 the audio source (instead of re-sampling).
 This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
-for all other audio formats. For details, see [AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
+for all other audio formats. For details, see
+[AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -604,7 +608,10 @@ for all other audio formats. For details, see [AudioEncoding][google.cloud.speec
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_SpeechContexts_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.SpeechContexts*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_SpeechContexts" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.SpeechContexts">SpeechContexts</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> A means to provide context to assist the speech recognition.</p>
+  <div class="markdown level1 summary"><p><em>Optional</em> array of
+[SpeechContext][google.cloud.speech.v1p1beta1.SpeechContext]. A means to
+provide context to assist the speech recognition. For more information, see
+<a href="/speech-to-text/docs/basics#phrase-hints">Phrase Hints</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -629,13 +636,18 @@ for all other audio formats. For details, see [AudioEncoding][google.cloud.speec
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_UseEnhanced_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.UseEnhanced*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_UseEnhanced" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.UseEnhanced">UseEnhanced</h4>
   <div class="markdown level1 summary"><p><em>Optional</em> Set to true to use an enhanced model for speech recognition.
-You must also set the <code>model</code> field to a valid, enhanced model. If
-<code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
-<code>use_enhanced</code> is ignored. If <code>use_enhanced</code> is true and an enhanced
-version of the specified model does not exist, then the speech is
-recognized using the standard version of the specified model.</p>
-<p>Enhanced speech models require that you opt-in to the audio logging using
-instructions in the <a href="/speech/data-sharing">alpha documentation</a>. If you set
+If <code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
+an appropriate enhanced model is chosen if:</p>
+<ol>
+<li>project is eligible for requesting enhanced models</li>
+<li>an enhanced model exists for the audio</li>
+</ol>
+<p>If <code>use_enhanced</code> is true and an enhanced version of the specified model
+does not exist, then the speech is recognized using the standard version
+of the specified model.</p>
+<p>Enhanced speech models require that you opt-in to data logging using
+instructions in the
+<a href="/speech-to-text/docs/enable-data-logging">documentation</a>. If you set
 <code>use_enhanced</code> to true and you have not enabled audio logging, then you
 will receive an error.</p>
 </div>
