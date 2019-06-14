@@ -8,7 +8,7 @@
     <title>Frequently Asked Questions | Google Cloud APIs </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Frequently Asked Questions | Google Cloud APIs ">
-    <meta name="generator" content="docfx 2.28.2.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -64,11 +64,15 @@
 
 <h2 id="how-can-i-use-non-default-credentials-for-grpc-based-apis">How can I use non-default credentials for gRPC-based APIs?</h2>
 <p>The generated classes for gRPC-based APIs (such as
-<a href="Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherClient.html">PublisherClient</a>)
+<a href="Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherServiceApiClient.html">PublisherServiceApiClient</a>)
 have <code>Create</code> overloads of this form:</p>
-<pre><code class="lang-csharp">public static PublisherClient Create(ServiceEndpoint endpoint = null, PublisherSettings settings = null)
+<pre><code class="lang-csharp">public static PublisherServiceApiClient Create(
+    ServiceEndpoint endpoint = null,
+    PublisherServiceApiSettings settings = null)
 
-public static PublisherClient Create(Channel channel, PublisherSettings settings = null)
+public static PublisherServiceApiClient Create(
+    Channel channel,
+    PublisherServiceApiSettings settings = null)
 </code></pre><p>(Equivalent asynchronous overloads exist as well.)</p>
 <p>The first of these uses the default credentials to create a channel
 which is shared by all instances created in the same way, and
@@ -92,8 +96,8 @@ using Grpc.Auth;
 // https://developers.google.com/api-client-library/dotnet/guide/aaa_oauth
 UserCredential userCredential = ...;
 ChannelCredentials channelCredentials = userCredential.ToChannelCredentials();
-Channel channel = new Channel(PublisherClient.DefaultEndpoint, channelCredentials);
-PublisherClient client = PublisherClient.Create(channel);
+Channel channel = new Channel(PublisherServiceApiClient.DefaultEndpoint, channelCredentials);
+PublisherServiceApiClient client = PublisherServiceApiClient.Create(channel);
 // Now use client, and clean up channel if and when you need to.
 </code></pre><p>Note that if you construct a <code>GoogleCredential</code> (e.g. with
 <code>GoogleCredential.FromFile</code>) you should apply the scopes required by
@@ -101,7 +105,7 @@ the API using the <code>GoogleCredential.CreateScoped</code> method and the <cod
 property from the API you&#39;re using. For example:</p>
 <pre><code>GoogleCredential credential = GoogleCredential
     .FromFile(&quot;auth.json&quot;)
-    .CreateScoped(PublisherClient.DefaultScopes);
+    .CreateScoped(PublisherServiceApiClient.DefaultScopes);
 ChannelCredentials channelCredentials = credential.ToChannelCredentials();
 ...
 </code></pre><p>We know that it&#39;s annoying to have to specify the scopes. An
@@ -128,7 +132,7 @@ UserCredential userCredential = ...;
 CallCredentials callCredentials = userCredential.ToCallCredentials();
 
 // Use the default application credentials for the channel.
-PublisherClient client = PublisherClient.Create();
+PublisherServiceApiClient client = PublisherServiceApiClient.Create();
 client.Publish(/* regular method arguments */,
     CallSettings.FromCallCredentials(callCredentials));
 </code></pre><p>This approach means you don&#39;t need to worry about channel clean-up.</p>
@@ -198,9 +202,7 @@ client.ListLanguages();
 <a href="https://cloud.google.com/sdk/">Cloud SDK</a>. Client libraries in some
 other languages automatically use emulators if specific environment
 variables are set, but the Google Cloud Libraries for .NET do not do
-this. (We are hoping to work with a more ambient emulator manager
-solution which does not require environment variables, and is
-therefore more amenable to IDEs such as Visual Studio.)</p>
+this in GA libraries.</p>
 <p>However, it is quite simple to manually create the appropriate
 client for gRPC-based APIs, by first creating a channel and then
 passing that to the static <code>Create</code> method of the relevant client
@@ -211,13 +213,17 @@ credentials must be set to <code>ChannelCredentials.Insecure</code>.</p>
 string emulatorHostAndPort = Environment.GetEnvironmentVariable(&quot;PUBSUB_EMULATOR_HOST&quot;);
 
 Channel channel = new Channel(emulatorHostAndPort, ChannelCredentials.Insecure);
-PublisherClient client = PublisherClient.Create(channel);
+PublisherServiceApiClient client = PublisherServiceApiClient.Create(channel);
 client.CreateTopic(new TopicName(&quot;project&quot;, &quot;topic&quot;));
 foreach (var topic in client.ListTopics(new ProjectName(&quot;project&quot;)))
 {
     Console.WriteLine(topic.Name);
 }
-</code></pre><h2 id="why-arent-the-grpc-native-libraries-being-found">Why aren&#39;t the gRPC native libraries being found?</h2>
+</code></pre><h3 id="beta-support-for-datastore-emulator-detection">Beta support for Datastore emulator detection</h3>
+<p>From 2.2.0-beta02, the Datastore library has support for detecting
+and using the emulator. See the <a href="Google.Cloud.Datastore.V1/">Datastore API documentation</a>
+for more details and an example.</p>
+<h2 id="why-arent-the-grpc-native-libraries-being-found">Why aren&#39;t the gRPC native libraries being found?</h2>
 <p>The native libraries that gRPC relies on are present in
 <a href="https://www.nuget.org/packages/Grpc.Core/">Grpc.Core</a>,
 and the NuGet package has targets to copy them to appropriate output
