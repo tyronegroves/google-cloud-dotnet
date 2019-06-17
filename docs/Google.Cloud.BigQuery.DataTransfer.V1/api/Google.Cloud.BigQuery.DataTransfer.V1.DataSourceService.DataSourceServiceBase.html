@@ -1,0 +1,617 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DataSourceService.DataSourceServiceBase
+   | Google.Cloud.BigQuery.DataTransfer.V1 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DataSourceService.DataSourceServiceBase
+   | Google.Cloud.BigQuery.DataTransfer.V1 ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase">
+  
+  
+  <h1 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase" class="text-break">Class DataSourceService.DataSourceServiceBase
+  </h1>
+  <div class="markdown level0 summary"><p>Base class for server-side implementations of DataSourceService</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">DataSourceService.DataSourceServiceBase</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.html">Google.Cloud.BigQuery.DataTransfer.V1</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.BigQuery.DataTransfer.V1.dll</h6>
+  <h5 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class DataSourceServiceBase</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_CreateDataSourceDefinition_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.CreateDataSourceDefinition*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_CreateDataSourceDefinition_Google_Cloud_BigQuery_DataTransfer_V1_CreateDataSourceDefinitionRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.CreateDataSourceDefinition(Google.Cloud.BigQuery.DataTransfer.V1.CreateDataSourceDefinitionRequest,Grpc.Core.ServerCallContext)">CreateDataSourceDefinition(CreateDataSourceDefinitionRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Creates a data source definition.  Calling this method will automatically
+use your credentials to create the following Google Cloud resources in
+YOUR Google Cloud project.</p>
+<ol>
+<li>OAuth client</li>
+<li>Pub/Sub Topics and Subscriptions in each supported_location_ids. e.g.,
+projects/{project_id}/{topics|subscriptions}/bigquerydatatransfer.{data_source_id}.{location_id}.run
+The field data_source.client_id should be left empty in the input request,
+as the API will create a new OAuth client on behalf of the caller. On the
+other hand data_source.scopes usually need to be set when there are OAuth
+scopes that need to be granted by end users.</li>
+<li>We need a longer deadline due to the 60 seconds SLO from Pub/Sub admin
+Operations. This also applies to update and delete data source definition.</li>
+</ol>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DataSourceDefinition&gt; CreateDataSourceDefinition(CreateDataSourceDefinitionRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.CreateDataSourceDefinitionRequest.html">CreateDataSourceDefinitionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceDefinition.html">DataSourceDefinition</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_DeleteDataSourceDefinition_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.DeleteDataSourceDefinition*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_DeleteDataSourceDefinition_Google_Cloud_BigQuery_DataTransfer_V1_DeleteDataSourceDefinitionRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.DeleteDataSourceDefinition(Google.Cloud.BigQuery.DataTransfer.V1.DeleteDataSourceDefinitionRequest,Grpc.Core.ServerCallContext)">DeleteDataSourceDefinition(DeleteDataSourceDefinitionRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Deletes a data source definition, all of the transfer configs associated
+with this data source definition (if any) must be deleted first by the user
+in ALL regions, in order to delete the data source definition.
+This method is primarily meant for deleting data sources created during
+testing stage.
+If the data source is referenced by transfer configs in the region
+specified in the request URL, the method will fail immediately. If in the
+current region (e.g., US) it&apos;s not used by any transfer configs, but in
+another region (e.g., EU) it is, then although the method will succeed in
+region US, but it will fail when the deletion operation is replicated to
+region EU. And eventually, the system will replicate the data source
+definition back from EU to US, in order to bring all regions to
+consistency. The final effect is that the data source appears to be
+&apos;undeleted&apos; in the US region.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; DeleteDataSourceDefinition(DeleteDataSourceDefinitionRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DeleteDataSourceDefinitionRequest.html">DeleteDataSourceDefinitionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_FinishRun_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.FinishRun*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_FinishRun_Google_Cloud_BigQuery_DataTransfer_V1_FinishRunRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.FinishRun(Google.Cloud.BigQuery.DataTransfer.V1.FinishRunRequest,Grpc.Core.ServerCallContext)">FinishRun(FinishRunRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Notify the Data Transfer Service that the data source is done processing
+the run. No more status updates or requests to start/monitor jobs will be
+accepted. The run will be finalized by the Data Transfer Service when all
+monitored jobs are completed.
+Does not need to be called if the run is set to FAILED.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; FinishRun(FinishRunRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.FinishRunRequest.html">FinishRunRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_GetDataSourceDefinition_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.GetDataSourceDefinition*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_GetDataSourceDefinition_Google_Cloud_BigQuery_DataTransfer_V1_GetDataSourceDefinitionRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.GetDataSourceDefinition(Google.Cloud.BigQuery.DataTransfer.V1.GetDataSourceDefinitionRequest,Grpc.Core.ServerCallContext)">GetDataSourceDefinition(GetDataSourceDefinitionRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Retrieves an existing data source definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DataSourceDefinition&gt; GetDataSourceDefinition(GetDataSourceDefinitionRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.GetDataSourceDefinitionRequest.html">GetDataSourceDefinitionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceDefinition.html">DataSourceDefinition</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_ListDataSourceDefinitions_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.ListDataSourceDefinitions*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_ListDataSourceDefinitions_Google_Cloud_BigQuery_DataTransfer_V1_ListDataSourceDefinitionsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.ListDataSourceDefinitions(Google.Cloud.BigQuery.DataTransfer.V1.ListDataSourceDefinitionsRequest,Grpc.Core.ServerCallContext)">ListDataSourceDefinitions(ListDataSourceDefinitionsRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists supported data source definitions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListDataSourceDefinitionsResponse&gt; ListDataSourceDefinitions(ListDataSourceDefinitionsRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.ListDataSourceDefinitionsRequest.html">ListDataSourceDefinitionsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.ListDataSourceDefinitionsResponse.html">ListDataSourceDefinitionsResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_LogTransferRunMessages_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.LogTransferRunMessages*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_LogTransferRunMessages_Google_Cloud_BigQuery_DataTransfer_V1_LogTransferRunMessagesRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.LogTransferRunMessages(Google.Cloud.BigQuery.DataTransfer.V1.LogTransferRunMessagesRequest,Grpc.Core.ServerCallContext)">LogTransferRunMessages(LogTransferRunMessagesRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Log messages for a transfer run. If successful (at least 1 message), resets
+data_source.update_deadline_seconds timer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; LogTransferRunMessages(LogTransferRunMessagesRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.LogTransferRunMessagesRequest.html">LogTransferRunMessagesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_StartBigQueryJobs_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.StartBigQueryJobs*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_StartBigQueryJobs_Google_Cloud_BigQuery_DataTransfer_V1_StartBigQueryJobsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.StartBigQueryJobs(Google.Cloud.BigQuery.DataTransfer.V1.StartBigQueryJobsRequest,Grpc.Core.ServerCallContext)">StartBigQueryJobs(StartBigQueryJobsRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Notify the Data Transfer Service that data is ready for loading.
+The Data Transfer Service will start and monitor multiple BigQuery Load
+jobs for a transfer run. Monitored jobs will be automatically retried
+and produce log messages when starting and finishing a job.
+Can be called multiple times for the same transfer run.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; StartBigQueryJobs(StartBigQueryJobsRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.StartBigQueryJobsRequest.html">StartBigQueryJobsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_UpdateDataSourceDefinition_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.UpdateDataSourceDefinition*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_UpdateDataSourceDefinition_Google_Cloud_BigQuery_DataTransfer_V1_UpdateDataSourceDefinitionRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.UpdateDataSourceDefinition(Google.Cloud.BigQuery.DataTransfer.V1.UpdateDataSourceDefinitionRequest,Grpc.Core.ServerCallContext)">UpdateDataSourceDefinition(UpdateDataSourceDefinitionRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Updates an existing data source definition. If changing
+supported_location_ids, triggers same effects as mentioned in &quot;Create a
+data source definition.&quot;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DataSourceDefinition&gt; UpdateDataSourceDefinition(UpdateDataSourceDefinitionRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.UpdateDataSourceDefinitionRequest.html">UpdateDataSourceDefinitionRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceDefinition.html">DataSourceDefinition</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_UpdateTransferRun_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.UpdateTransferRun*"></a>
+  <h4 id="Google_Cloud_BigQuery_DataTransfer_V1_DataSourceService_DataSourceServiceBase_UpdateTransferRun_Google_Cloud_BigQuery_DataTransfer_V1_UpdateTransferRunRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.BigQuery.DataTransfer.V1.DataSourceService.DataSourceServiceBase.UpdateTransferRun(Google.Cloud.BigQuery.DataTransfer.V1.UpdateTransferRunRequest,Grpc.Core.ServerCallContext)">UpdateTransferRun(UpdateTransferRunRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Update a transfer run. If successful, resets
+data_source.update_deadline_seconds timer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TransferRun&gt; UpdateTransferRun(UpdateTransferRunRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.UpdateTransferRunRequest.html">UpdateTransferRunRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.BigQuery.DataTransfer.V1.TransferRun.html">TransferRun</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

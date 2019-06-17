@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Intent.Types.TrainingPhrase
    | Google.Cloud.Dialogflow.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -73,7 +73,7 @@
   
   <h1 id="Google_Cloud_Dialogflow_V2_Intent_Types_TrainingPhrase" data-uid="Google.Cloud.Dialogflow.V2.Intent.Types.TrainingPhrase" class="text-break">Class Intent.Types.TrainingPhrase
   </h1>
-  <div class="markdown level0 summary"><p>Represents an example or template that the agent is trained on.</p>
+  <div class="markdown level0 summary"><p>Represents an example that the agent is trained on.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -148,7 +148,7 @@
   </h3>
   <a id="Google_Cloud_Dialogflow_V2_Intent_Types_TrainingPhrase_Name_" data-uid="Google.Cloud.Dialogflow.V2.Intent.Types.TrainingPhrase.Name*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_Types_TrainingPhrase_Name" data-uid="Google.Cloud.Dialogflow.V2.Intent.Types.TrainingPhrase.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Required. The unique identifier of this training phrase.</p>
+  <div class="markdown level1 summary"><p>Output only. The unique identifier of this training phrase.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -172,9 +172,22 @@
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_Types_TrainingPhrase_Parts_" data-uid="Google.Cloud.Dialogflow.V2.Intent.Types.TrainingPhrase.Parts*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_Types_TrainingPhrase_Parts" data-uid="Google.Cloud.Dialogflow.V2.Intent.Types.TrainingPhrase.Parts">Parts</h4>
-  <div class="markdown level1 summary"><p>Required. The collection of training phrase parts (can be annotated).
-Fields: <code>entity_type</code>, <code>alias</code> and <code>user_defined</code> should be populated
-only for the annotated parts of the training phrase.</p>
+  <div class="markdown level1 summary"><p>Required. The ordered list of training phrase parts.
+The parts are concatenated in order to form the training phrase.</p>
+<p>Note: The API does not automatically annotate training phrases like the
+Dialogflow Console does.</p>
+<p>Note: Do not forget to include whitespace at part boundaries,
+so the training phrase is well formatted when the parts are concatenated.</p>
+<p>If the training phrase does not need to be annotated with parameters,
+you just need a single part with only the [Part.text][google.cloud.dialogflow.v2.Intent.TrainingPhrase.Part.text] field set.</p>
+<p>If you want to annotate the training phrase, you must create multiple
+parts, where the fields of each part are populated in one of two ways:</p>
+<ul>
+<li><code>Part.text</code> is set to a part of the phrase that has no parameters.</li>
+<li><code>Part.text</code> is set to a part of the phrase that you want to annotate,
+and the <code>entity_type</code>, <code>alias</code>, and <code>user_defined</code> fields are all
+set.</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -198,7 +211,7 @@ only for the annotated parts of the training phrase.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_Types_TrainingPhrase_TimesAddedCount_" data-uid="Google.Cloud.Dialogflow.V2.Intent.Types.TrainingPhrase.TimesAddedCount*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_Types_TrainingPhrase_TimesAddedCount" data-uid="Google.Cloud.Dialogflow.V2.Intent.Types.TrainingPhrase.TimesAddedCount">TimesAddedCount</h4>
-  <div class="markdown level1 summary"><p>Optional. Indicates how many times this example or template was added to
+  <div class="markdown level1 summary"><p>Optional. Indicates how many times this example was added to
 the intent. Each time a developer adds an existing sample by editing an
 intent or training, this counter is increased.</p>
 </div>

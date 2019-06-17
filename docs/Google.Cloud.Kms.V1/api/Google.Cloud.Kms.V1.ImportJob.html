@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ImportJob
+   | Google.Cloud.Kms.V1 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ImportJob
+   | Google.Cloud.Kms.V1 ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.Kms.V1.ImportJob">
+  
+  
+  <h1 id="Google_Cloud_Kms_V1_ImportJob" data-uid="Google.Cloud.Kms.V1.ImportJob" class="text-break">Class ImportJob
+  </h1>
+  <div class="markdown level0 summary"><p>An [ImportJob][google.cloud.kms.v1.ImportJob] can be used to create [CryptoKeys][google.cloud.kms.v1.CryptoKey] and
+[CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] using pre-existing key material,
+generated outside of Cloud KMS.</p>
+<p>When an [ImportJob][google.cloud.kms.v1.ImportJob] is created, Cloud KMS will generate a &quot;wrapping key&quot;,
+which is a public/private key pair. You use the wrapping key to encrypt (also
+known as wrap) the pre-existing key material to protect it during the import
+process. The nature of the wrapping key depends on the choice of
+[import_method][google.cloud.kms.v1.ImportJob.import_method]. When the wrapping key generation
+is complete, the [state][google.cloud.kms.v1.ImportJob.state] will be set to
+[ACTIVE][google.cloud.kms.v1.ImportJob.ImportJobState.ACTIVE] and the [public_key][google.cloud.kms.v1.ImportJob.public_key]
+can be fetched. The fetched public key can then be used to wrap your
+pre-existing key material.</p>
+<p>Once the key material is wrapped, it can be imported into a new
+[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in an existing [CryptoKey][google.cloud.kms.v1.CryptoKey] by calling
+[ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion].
+Multiple [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] can be imported with a single
+[ImportJob][google.cloud.kms.v1.ImportJob]. Cloud KMS uses the private key portion of the wrapping key to
+unwrap the key material. Only Cloud KMS has access to the private key.</p>
+<p>An [ImportJob][google.cloud.kms.v1.ImportJob] expires 3 days after it is created. Once expired, Cloud KMS
+will no longer be able to import or unwrap any key material that was wrapped
+with the [ImportJob][google.cloud.kms.v1.ImportJob]&apos;s public key.</p>
+<p>For more information, see
+<a href="https://cloud.google.com/kms/docs/importing-a-key">Importing a key</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ImportJob</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Kms.V1.html">Google.Cloud.Kms.V1</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.Kms.V1.dll</h6>
+  <h5 id="Google_Cloud_Kms_V1_ImportJob_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ImportJob : IMessage&lt;ImportJob&gt;, IMessage, IEquatable&lt;ImportJob&gt;, IDeepCloneable&lt;ImportJob&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Google_Cloud_Kms_V1_ImportJob__ctor_" data-uid="Google.Cloud.Kms.V1.ImportJob.#ctor*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob__ctor" data-uid="Google.Cloud.Kms.V1.ImportJob.#ctor">ImportJob()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImportJob()</code></pre>
+  </div>
+  <a id="Google_Cloud_Kms_V1_ImportJob__ctor_" data-uid="Google.Cloud.Kms.V1.ImportJob.#ctor*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob__ctor_Google_Cloud_Kms_V1_ImportJob_" data-uid="Google.Cloud.Kms.V1.ImportJob.#ctor(Google.Cloud.Kms.V1.ImportJob)">ImportJob(ImportJob)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImportJob(ImportJob other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <a id="Google_Cloud_Kms_V1_ImportJob_Attestation_" data-uid="Google.Cloud.Kms.V1.ImportJob.Attestation*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_Attestation" data-uid="Google.Cloud.Kms.V1.ImportJob.Attestation">Attestation</h4>
+  <div class="markdown level1 summary"><p>Output only. Statement that was generated and signed by the key creator
+(for example, an HSM) at key creation time. Use this statement to verify
+attributes of the key as stored on the HSM, independently of Google.
+Only present if the chosen [ImportMethod][google.cloud.kms.v1.ImportJob.ImportMethod] is one with a protection
+level of [HSM][google.cloud.kms.v1.ProtectionLevel.HSM].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KeyOperationAttestation Attestation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.KeyOperationAttestation.html">KeyOperationAttestation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_CreateTime_" data-uid="Google.Cloud.Kms.V1.ImportJob.CreateTime*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_CreateTime" data-uid="Google.Cloud.Kms.V1.ImportJob.CreateTime">CreateTime</h4>
+  <div class="markdown level1 summary"><p>Output only. The time at which this [ImportJob][google.cloud.kms.v1.ImportJob] was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp CreateTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_ExpireEventTime_" data-uid="Google.Cloud.Kms.V1.ImportJob.ExpireEventTime*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_ExpireEventTime" data-uid="Google.Cloud.Kms.V1.ImportJob.ExpireEventTime">ExpireEventTime</h4>
+  <div class="markdown level1 summary"><p>Output only. The time this [ImportJob][google.cloud.kms.v1.ImportJob] expired. Only present if
+[state][google.cloud.kms.v1.ImportJob.state] is [EXPIRED][google.cloud.kms.v1.ImportJob.ImportJobState.EXPIRED].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp ExpireEventTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_ExpireTime_" data-uid="Google.Cloud.Kms.V1.ImportJob.ExpireTime*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_ExpireTime" data-uid="Google.Cloud.Kms.V1.ImportJob.ExpireTime">ExpireTime</h4>
+  <div class="markdown level1 summary"><p>Output only. The time at which this [ImportJob][google.cloud.kms.v1.ImportJob] is scheduled for
+expiration and can no longer be used to import key material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp ExpireTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_GenerateTime_" data-uid="Google.Cloud.Kms.V1.ImportJob.GenerateTime*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_GenerateTime" data-uid="Google.Cloud.Kms.V1.ImportJob.GenerateTime">GenerateTime</h4>
+  <div class="markdown level1 summary"><p>Output only. The time this [ImportJob][google.cloud.kms.v1.ImportJob]&apos;s key material was generated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp GenerateTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_ImportMethod_" data-uid="Google.Cloud.Kms.V1.ImportJob.ImportMethod*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_ImportMethod" data-uid="Google.Cloud.Kms.V1.ImportJob.ImportMethod">ImportMethod</h4>
+  <div class="markdown level1 summary"><p>Required and immutable. The wrapping method to be used for incoming
+key material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImportJob.Types.ImportMethod ImportMethod { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.Types.ImportMethod.html">ImportJob.Types.ImportMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_Name_" data-uid="Google.Cloud.Kms.V1.ImportJob.Name*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_Name" data-uid="Google.Cloud.Kms.V1.ImportJob.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Output only. The resource name for this [ImportJob][google.cloud.kms.v1.ImportJob] in the format
+<code>projects/*/locations/*/keyRings/*/importJobs/*</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_ProtectionLevel_" data-uid="Google.Cloud.Kms.V1.ImportJob.ProtectionLevel*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_ProtectionLevel" data-uid="Google.Cloud.Kms.V1.ImportJob.ProtectionLevel">ProtectionLevel</h4>
+  <div class="markdown level1 summary"><p>Required and immutable. The protection level of the [ImportJob][google.cloud.kms.v1.ImportJob]. This
+must match the
+[protection_level][google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level] of the
+[version_template][google.cloud.kms.v1.CryptoKey.version_template] on the [CryptoKey][google.cloud.kms.v1.CryptoKey] you
+attempt to import into.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProtectionLevel ProtectionLevel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ProtectionLevel.html">ProtectionLevel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_PublicKey_" data-uid="Google.Cloud.Kms.V1.ImportJob.PublicKey*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_PublicKey" data-uid="Google.Cloud.Kms.V1.ImportJob.PublicKey">PublicKey</h4>
+  <div class="markdown level1 summary"><p>Output only. The public key with which to wrap key material prior to
+import. Only returned if [state][google.cloud.kms.v1.ImportJob.state] is
+[ACTIVE][google.cloud.kms.v1.ImportJob.ImportJobState.ACTIVE].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImportJob.Types.WrappingPublicKey PublicKey { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.Types.WrappingPublicKey.html">ImportJob.Types.WrappingPublicKey</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_ImportJob_State_" data-uid="Google.Cloud.Kms.V1.ImportJob.State*"></a>
+  <h4 id="Google_Cloud_Kms_V1_ImportJob_State" data-uid="Google.Cloud.Kms.V1.ImportJob.State">State</h4>
+  <div class="markdown level1 summary"><p>Output only. The current state of the [ImportJob][google.cloud.kms.v1.ImportJob], indicating if it can
+be used.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImportJob.Types.ImportJobState State { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.Types.ImportJobState.html">ImportJob.Types.ImportJobState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

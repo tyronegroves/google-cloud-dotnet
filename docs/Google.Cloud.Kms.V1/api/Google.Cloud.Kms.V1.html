@@ -95,6 +95,9 @@
       <h4><a class="xref" href="Google.Cloud.Kms.V1.CreateCryptoKeyVersionRequest.html">CreateCryptoKeyVersionRequest</a></h4>
       <section><p>Request message for [KeyManagementService.CreateCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion].</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.CreateImportJobRequest.html">CreateImportJobRequest</a></h4>
+      <section><p>Request message for [KeyManagementService.CreateImportJob][google.cloud.kms.v1.KeyManagementService.CreateImportJob].</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.CreateKeyRingRequest.html">CreateKeyRingRequest</a></h4>
       <section><p>Request message for [KeyManagementService.CreateKeyRing][google.cloud.kms.v1.KeyManagementService.CreateKeyRing].</p>
 </section>
@@ -159,11 +162,52 @@ automatically as a result of auto-rotation.</p>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.GetCryptoKeyVersionRequest.html">GetCryptoKeyVersionRequest</a></h4>
       <section><p>Request message for [KeyManagementService.GetCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.GetCryptoKeyVersion].</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.GetImportJobRequest.html">GetImportJobRequest</a></h4>
+      <section><p>Request message for [KeyManagementService.GetImportJob][google.cloud.kms.v1.KeyManagementService.GetImportJob].</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.GetKeyRingRequest.html">GetKeyRingRequest</a></h4>
       <section><p>Request message for [KeyManagementService.GetKeyRing][google.cloud.kms.v1.KeyManagementService.GetKeyRing].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.GetPublicKeyRequest.html">GetPublicKeyRequest</a></h4>
       <section><p>Request message for [KeyManagementService.GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportCryptoKeyVersionRequest.html">ImportCryptoKeyVersionRequest</a></h4>
+      <section><p>Request message for [KeyManagementService.ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a></h4>
+      <section><p>An [ImportJob][google.cloud.kms.v1.ImportJob] can be used to create [CryptoKeys][google.cloud.kms.v1.CryptoKey] and
+[CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] using pre-existing key material,
+generated outside of Cloud KMS.</p>
+<p>When an [ImportJob][google.cloud.kms.v1.ImportJob] is created, Cloud KMS will generate a &quot;wrapping key&quot;,
+which is a public/private key pair. You use the wrapping key to encrypt (also
+known as wrap) the pre-existing key material to protect it during the import
+process. The nature of the wrapping key depends on the choice of
+[import_method][google.cloud.kms.v1.ImportJob.import_method]. When the wrapping key generation
+is complete, the [state][google.cloud.kms.v1.ImportJob.state] will be set to
+[ACTIVE][google.cloud.kms.v1.ImportJob.ImportJobState.ACTIVE] and the [public_key][google.cloud.kms.v1.ImportJob.public_key]
+can be fetched. The fetched public key can then be used to wrap your
+pre-existing key material.</p>
+<p>Once the key material is wrapped, it can be imported into a new
+[CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in an existing [CryptoKey][google.cloud.kms.v1.CryptoKey] by calling
+[ImportCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion].
+Multiple [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] can be imported with a single
+[ImportJob][google.cloud.kms.v1.ImportJob]. Cloud KMS uses the private key portion of the wrapping key to
+unwrap the key material. Only Cloud KMS has access to the private key.</p>
+<p>An [ImportJob][google.cloud.kms.v1.ImportJob] expires 3 days after it is created. Once expired, Cloud KMS
+will no longer be able to import or unwrap any key material that was wrapped
+with the [ImportJob][google.cloud.kms.v1.ImportJob]&apos;s public key.</p>
+<p>For more information, see
+<a href="https://cloud.google.com/kms/docs/importing-a-key">Importing a key</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.Types.html">ImportJob.Types</a></h4>
+      <section><p>Container for nested types declared in the ImportJob message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.Types.WrappingPublicKey.html">ImportJob.Types.WrappingPublicKey</a></h4>
+      <section><p>The public key component of the wrapping key. For details of the type of
+key this public key corresponds to, see the [ImportMethod][google.cloud.kms.v1.ImportJob.ImportMethod].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportJobName.html">ImportJobName</a></h4>
+      <section><p>Resource name for the &apos;import_job&apos; resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyManagementService.html">KeyManagementService</a></h4>
       <section><p>Google Cloud Key Management Service</p>
@@ -186,6 +230,9 @@ model with the following objects:</p>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyManagementServiceClient.html">KeyManagementServiceClient</a></h4>
       <section><p>KeyManagementService client wrapper, for convenient use.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyManagementServiceClientBuilder.html">KeyManagementServiceClientBuilder</a></h4>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.Kms.V1.KeyManagementServiceClient.html">KeyManagementServiceClient</a> to provide simple configuration of credentials, endpoint etc.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyManagementServiceClientImpl.html">KeyManagementServiceClientImpl</a></h4>
       <section><p>KeyManagementService client wrapper implementation, for convenient use.</p>
 </section>
@@ -196,7 +243,8 @@ model with the following objects:</p>
       <section><p>Resource name which will contain one of a choice of resource names.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyOperationAttestation.html">KeyOperationAttestation</a></h4>
-      <section><p>Contains an HSM-generated attestation about a key operation.</p>
+      <section><p>Contains an HSM-generated attestation about a key operation. For more
+information, see <a href="https://cloud.google.com/kms/docs/attest-key">Verifying attestations</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyOperationAttestation.Types.html">KeyOperationAttestation.Types</a></h4>
       <section><p>Container for nested types declared in the KeyOperationAttestation message type.</p>
@@ -218,6 +266,12 @@ model with the following objects:</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.ListCryptoKeyVersionsResponse.html">ListCryptoKeyVersionsResponse</a></h4>
       <section><p>Response message for [KeyManagementService.ListCryptoKeyVersions][google.cloud.kms.v1.KeyManagementService.ListCryptoKeyVersions].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ListImportJobsRequest.html">ListImportJobsRequest</a></h4>
+      <section><p>Request message for [KeyManagementService.ListImportJobs][google.cloud.kms.v1.KeyManagementService.ListImportJobs].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ListImportJobsResponse.html">ListImportJobsResponse</a></h4>
+      <section><p>Response message for [KeyManagementService.ListImportJobs][google.cloud.kms.v1.KeyManagementService.ListImportJobs].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.ListKeyRingsRequest.html">ListKeyRingsRequest</a></h4>
       <section><p>Request message for [KeyManagementService.ListKeyRings][google.cloud.kms.v1.KeyManagementService.ListKeyRings].</p>
@@ -255,7 +309,8 @@ model with the following objects:</p>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.Types.CryptoKeyPurpose.html">CryptoKey.Types.CryptoKeyPurpose</a></h4>
       <section><p>[CryptoKeyPurpose][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose] describes the cryptographic capabilities of a
 [CryptoKey][google.cloud.kms.v1.CryptoKey]. A given key can only be used for the operations allowed by
-its purpose.</p>
+its purpose. For more information, see
+<a href="https://cloud.google.com/kms/docs/algorithms#key_purposes">Key purposes</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.Types.CryptoKeyVersionAlgorithm.html">CryptoKeyVersion.Types.CryptoKeyVersionAlgorithm</a></h4>
       <section><p>The algorithm of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion], indicating what
@@ -281,6 +336,7 @@ parameters: padding algorithm, modulus bit length, and digest algorithm.</p>
 [ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN].</p>
 <p>The fields in the name after &quot;EC_SIGN_&quot; correspond to the following
 parameters: elliptic curve, digest algorithm.</p>
+<p>For more information, see <a href="https://cloud.google.com/kms/docs/algorithms">Key purposes and algorithms</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.Types.CryptoKeyVersionState.html">CryptoKeyVersion.Types.CryptoKeyVersionState</a></h4>
       <section><p>The state of a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion], indicating if it can be used.</p>
@@ -294,14 +350,25 @@ for [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion] in
       <h4><a class="xref" href="Google.Cloud.Kms.V1.Digest.DigestOneofCase.html">Digest.DigestOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;digest&quot; oneof.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportCryptoKeyVersionRequest.WrappedKeyMaterialOneofCase.html">ImportCryptoKeyVersionRequest.WrappedKeyMaterialOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;wrapped_key_material&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.Types.ImportJobState.html">ImportJob.Types.ImportJobState</a></h4>
+      <section><p>The state of the [ImportJob][google.cloud.kms.v1.ImportJob], indicating if it can be used.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.Types.ImportMethod.html">ImportJob.Types.ImportMethod</a></h4>
+      <section><p>[ImportMethod][google.cloud.kms.v1.ImportJob.ImportMethod] describes the key wrapping method chosen for this
+[ImportJob][google.cloud.kms.v1.ImportJob].</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyNameOneof.OneofType.html">KeyNameOneof.OneofType</a></h4>
       <section><p>The possible contents of <a class="xref" href="Google.Cloud.Kms.V1.KeyNameOneof.html">KeyNameOneof</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.KeyOperationAttestation.Types.AttestationFormat.html">KeyOperationAttestation.Types.AttestationFormat</a></h4>
-      <section><p>Attestion formats provided by the HSM.</p>
+      <section><p>Attestation formats provided by the HSM.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Kms.V1.ProtectionLevel.html">ProtectionLevel</a></h4>
-      <section><p>[ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] specifies how cryptographic operations are performed.</p>
+      <section><p>[ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] specifies how cryptographic operations are performed.
+For more information, see <a href="https://cloud.google.com/kms/docs/algorithms#protection_levels">Protection levels</a>.</p>
 </section>
 </article>
           </div>

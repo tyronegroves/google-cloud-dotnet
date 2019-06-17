@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class QueryResult
    | Google.Cloud.Dialogflow.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -202,8 +202,9 @@ matched intent doesn&apos;t contain any required parameters.</li>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_QueryResult_DiagnosticInfo_" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.DiagnosticInfo*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_QueryResult_DiagnosticInfo" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.DiagnosticInfo">DiagnosticInfo</h4>
-  <div class="markdown level1 summary"><p>The free-form diagnostic info. For example, this field
-could contain webhook call latency.</p>
+  <div class="markdown level1 summary"><p>The free-form diagnostic info. For example, this field could contain
+webhook call latency. The string keys of the Struct&apos;s fields map can change
+without notice.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -251,7 +252,8 @@ could contain webhook call latency.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_QueryResult_FulfillmentText_" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.FulfillmentText*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_QueryResult_FulfillmentText" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.FulfillmentText">FulfillmentText</h4>
-  <div class="markdown level1 summary"><p>The text to be pronounced to the user or shown on the screen.</p>
+  <div class="markdown level1 summary"><p>The text to be pronounced to the user or shown on the screen.
+Note: This is a legacy field, <code>fulfillment_messages</code> should be preferred.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -302,7 +304,9 @@ all fields are filled in this message, including but not limited to:
   <a id="Google_Cloud_Dialogflow_V2_QueryResult_IntentDetectionConfidence_" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.IntentDetectionConfidence*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_QueryResult_IntentDetectionConfidence" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.IntentDetectionConfidence">IntentDetectionConfidence</h4>
   <div class="markdown level1 summary"><p>The intent detection confidence. Values range from 0.0
-(completely uncertain) to 1.0 (completely certain).</p>
+(completely uncertain) to 1.0 (completely certain).
+If there are <code>multiple knowledge_answers</code> messages, this value is set to
+the greatest <code>knowledgeAnswers.match_confidence</code> value in the list.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -327,7 +331,8 @@ all fields are filled in this message, including but not limited to:
   <a id="Google_Cloud_Dialogflow_V2_QueryResult_LanguageCode_" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.LanguageCode*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_QueryResult_LanguageCode" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.LanguageCode">LanguageCode</h4>
   <div class="markdown level1 summary"><p>The language that was triggered during intent detection.
-See <a href="https://dialogflow.com/docs/reference/language">Language Support</a>
+See <a href="https://cloud.google.com/dialogflow/docs/reference/language">Language
+Support</a>
 for a list of the currently supported language codes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -410,7 +415,8 @@ a copy of the input.</li>
 <li>If natural language speech audio was provided as input, <code>query_text</code>
 contains the speech recognition result. If speech recognizer produced
 multiple alternatives, a particular one is picked.</li>
-<li>If an event was provided as input, <code>query_text</code> is not set.</li>
+<li>If automatic spell correction is enabled, <code>query_text</code> will contain the
+corrected user input.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -433,16 +439,41 @@ multiple alternatives, a particular one is picked.</li>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Dialogflow_V2_QueryResult_SentimentAnalysisResult_" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.SentimentAnalysisResult*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_QueryResult_SentimentAnalysisResult" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.SentimentAnalysisResult">SentimentAnalysisResult</h4>
+  <div class="markdown level1 summary"><p>The sentiment analysis result, which depends on the
+<code>sentiment_analysis_request_config</code> specified in the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SentimentAnalysisResult SentimentAnalysisResult { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SentimentAnalysisResult.html">SentimentAnalysisResult</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Dialogflow_V2_QueryResult_SpeechRecognitionConfidence_" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.SpeechRecognitionConfidence*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_QueryResult_SpeechRecognitionConfidence" data-uid="Google.Cloud.Dialogflow.V2.QueryResult.SpeechRecognitionConfidence">SpeechRecognitionConfidence</h4>
   <div class="markdown level1 summary"><p>The Speech recognition confidence between 0.0 and 1.0. A higher number
 indicates an estimated greater likelihood that the recognized words are
 correct. The default of 0.0 is a sentinel value indicating that confidence
 was not set.</p>
-<p>You should not rely on this field as it isn&apos;t guaranteed to be accurate, or
-even set. In particular this field isn&apos;t set in Webhook calls and for
-StreamingDetectIntent since the streaming endpoint has separate confidence
-estimates per portion of the audio in StreamingRecognitionResult.</p>
+<p>This field is not guaranteed to be accurate or set. In particular this
+field isn&apos;t set for StreamingDetectIntent since the streaming endpoint has
+separate confidence estimates per portion of the audio in
+StreamingRecognitionResult.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

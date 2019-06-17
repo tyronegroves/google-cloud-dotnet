@@ -8,7 +8,7 @@
     <title>Google.Cloud.Dialogflow.V2 | Google.Cloud.Dialogflow.V2 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Dialogflow.V2 | Google.Cloud.Dialogflow.V2 ">
-    <meta name="generator" content="docfx 2.38.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.Dialogflow.V2</code> is a.NET client library for the <a href="https://cloud.google.com/dialogflow-enterprise/">Google Cloud Dialogflow API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.0.0-beta02</code> of the library.
+This documentation is for version <code>1.0.0-beta03</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Dialogflow.V2</code> package from NuGet. Add it to
@@ -73,7 +73,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>1.0.0-beta02</code>) of <code>Google.Cloud.Dialogflow.V2</code>.</p>
+pre-release version (<code>1.0.0-beta03</code>) of <code>Google.Cloud.Dialogflow.V2</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -107,8 +107,13 @@ details of Protocol Buffer JSON representations.</p>
 <p>Additionally, it&#39;s worth configuring the Protocol Buffer JSON parser
 to ignore unknown fields. This means your webhook won&#39;t break if
 additional fields are added to <code>WebhookRequest</code> in the future.</p>
-<p>Here&#39;s a template for a Dialogflow webhook implemented in ASP.NET
-Core.</p>
+<p>Please refer to the <a href="https://dialogflow.com/docs/fulfillment">fulfillment
+documentation</a> for more
+details around authentication, and the schema of requests and
+responses.</p>
+<p>The samples below provide a starting point for ASP.NET Core and
+ASP.NET.</p>
+<h3 id="web-hook-template-code-for-aspnet-core">Web hook template code for ASP.NET Core</h3>
 <pre><code class="lang-cs">public class DialogflowController : ControllerBase
 {
     // A Protobuf JSON parser configured to ignore unknown fields. This makes
@@ -141,11 +146,44 @@ Core.</p>
         return Content(responseJson, &quot;application/json&quot;);
     }
 }
-</code></pre><p>Please refer to the <a href="https://dialogflow.com/docs/fulfillment">fulfillment
-documentation</a> for more
-details around authentication, and the schema of requests and
-responses.</p>
-</article>
+</code></pre><h3 id="web-hook-template-code-for-aspnet-classic-web-api">Web hook template code for ASP.NET (classic) Web API</h3>
+<pre><code class="lang-cs">public class WebApiController : ApiController
+{
+    // A Protobuf JSON parser configured to ignore unknown fields. This makes
+    // the action robust against new fields being introduced by Dialogflow.
+    private static readonly JsonParser jsonParser =
+        new JsonParser(JsonParser.Settings.Default.WithIgnoreUnknownFields(true));
+
+    [HttpPost]
+    public async Task&lt;HttpResponseMessage&gt; Post()
+    {
+        WebhookRequest request;
+        using (var stream = await Request.Content.ReadAsStreamAsync())
+        {
+            using (var reader = new StreamReader(stream))
+            {
+                request = jsonParser.Parse&lt;WebhookRequest&gt;(reader);
+            }
+        }
+        WebhookResponse webhookResponse = new WebhookResponse
+        {
+            // ...
+        };
+        HttpResponseMessage httpResponse = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            // Ask Protobuf to format the JSON to return.
+            // Again, we don&#39;t want to use Json.NET - it doesn&#39;t know how to handle Struct
+            // values etc.
+            Content = new StringContent(webhookResponse.ToString())
+            {
+                Headers = { ContentType = new MediaTypeHeaderValue(&quot;text/json&quot;) }
+            }
+        };
+
+        return httpResponse;
+    }
+}
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

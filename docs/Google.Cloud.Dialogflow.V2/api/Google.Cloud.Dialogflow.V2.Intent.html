@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Intent
    | Google.Cloud.Dialogflow.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -150,7 +150,8 @@ action is an extraction of a user command or sentence semantics.</p>
   </h3>
   <a id="Google_Cloud_Dialogflow_V2_Intent_Action_" data-uid="Google.Cloud.Dialogflow.V2.Intent.Action*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_Action" data-uid="Google.Cloud.Dialogflow.V2.Intent.Action">Action</h4>
-  <div class="markdown level1 summary"><p>Optional. The name of the action associated with the intent.</p>
+  <div class="markdown level1 summary"><p>Optional. The name of the action associated with the intent.
+Note: The action name must not contain whitespaces.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -174,8 +175,8 @@ action is an extraction of a user command or sentence semantics.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_DefaultResponsePlatforms_" data-uid="Google.Cloud.Dialogflow.V2.Intent.DefaultResponsePlatforms*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_DefaultResponsePlatforms" data-uid="Google.Cloud.Dialogflow.V2.Intent.DefaultResponsePlatforms">DefaultResponsePlatforms</h4>
-  <div class="markdown level1 summary"><p>Optional. The list of platforms for which the first response will be
-taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
+  <div class="markdown level1 summary"><p>Optional. The list of platforms for which the first responses will be
+copied from the messages in PLATFORM_UNSPECIFIED (i.e. default platform).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -249,8 +250,8 @@ be present in the active user session for an event to trigger this intent.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_FollowupIntentInfo_" data-uid="Google.Cloud.Dialogflow.V2.Intent.FollowupIntentInfo*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_FollowupIntentInfo" data-uid="Google.Cloud.Dialogflow.V2.Intent.FollowupIntentInfo">FollowupIntentInfo</h4>
-  <div class="markdown level1 summary"><p>Optional. Collection of information about all followup intents that have
-name of this intent as a root_name.</p>
+  <div class="markdown level1 summary"><p>Read-only. Information about all followup intents that have this intent as
+a direct or indirect parent. We populate this field only in the output.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -400,9 +401,9 @@ auto-markup in the UI is turned off.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_Name_" data-uid="Google.Cloud.Dialogflow.V2.Intent.Name*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_Name" data-uid="Google.Cloud.Dialogflow.V2.Intent.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Required for all methods except <code>create</code> (<code>create</code> populates the name
-automatically.
-The unique identifier of this intent.
+  <div class="markdown level1 summary"><p>The unique identifier of this intent.
+Required for [Intents.UpdateIntent][google.cloud.dialogflow.v2.Intents.UpdateIntent] and [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents]
+methods.
 Format: <code>projects/&amp;lt;Project ID&gt;/agent/intents/&amp;lt;Intent ID&gt;</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -479,9 +480,11 @@ Format: <code>projects/&amp;lt;Project ID&gt;/agent/sessions/-/contexts/&amp;lt;
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_ParentFollowupIntentName_" data-uid="Google.Cloud.Dialogflow.V2.Intent.ParentFollowupIntentName*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_ParentFollowupIntentName" data-uid="Google.Cloud.Dialogflow.V2.Intent.ParentFollowupIntentName">ParentFollowupIntentName</h4>
-  <div class="markdown level1 summary"><p>The unique identifier of the parent intent in the chain of followup
-intents.
-It identifies the parent followup intent.
+  <div class="markdown level1 summary"><p>Read-only after creation. The unique identifier of the parent intent in the
+chain of followup intents. You can set this field when creating an intent,
+for example with [CreateIntent][] or [BatchUpdateIntents][], in order to
+make this intent a followup intent.</p>
+<p>It identifies the parent followup intent.
 Format: <code>projects/&amp;lt;Project ID&gt;/agent/intents/&amp;lt;Intent ID&gt;</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -507,7 +510,9 @@ Format: <code>projects/&amp;lt;Project ID&gt;/agent/intents/&amp;lt;Intent ID&gt
   <a id="Google_Cloud_Dialogflow_V2_Intent_Priority_" data-uid="Google.Cloud.Dialogflow.V2.Intent.Priority*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_Priority" data-uid="Google.Cloud.Dialogflow.V2.Intent.Priority">Priority</h4>
   <div class="markdown level1 summary"><p>Optional. The priority of this intent. Higher numbers represent higher
-priorities. Zero or negative numbers mean that the intent is disabled.</p>
+priorities. If this is zero or unspecified, we use the default
+priority 500000.</p>
+<p>Negative numbers mean that the intent is disabled.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -556,9 +561,10 @@ session when this intent is matched.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_RootFollowupIntentName_" data-uid="Google.Cloud.Dialogflow.V2.Intent.RootFollowupIntentName*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_RootFollowupIntentName" data-uid="Google.Cloud.Dialogflow.V2.Intent.RootFollowupIntentName">RootFollowupIntentName</h4>
-  <div class="markdown level1 summary"><p>The unique identifier of the root intent in the chain of followup intents.
-It identifies the correct followup intents chain for this intent.
-Format: <code>projects/&amp;lt;Project ID&gt;/agent/intents/&amp;lt;Intent ID&gt;</code>.</p>
+  <div class="markdown level1 summary"><p>Read-only. The unique identifier of the root intent in the chain of
+followup intents. It identifies the correct followup intents chain for
+this intent. We populate this field only in the output.</p>
+<p>Format: <code>projects/&amp;lt;Project ID&gt;/agent/intents/&amp;lt;Intent ID&gt;</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -582,7 +588,7 @@ Format: <code>projects/&amp;lt;Project ID&gt;/agent/intents/&amp;lt;Intent ID&gt
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_TrainingPhrases_" data-uid="Google.Cloud.Dialogflow.V2.Intent.TrainingPhrases*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_TrainingPhrases" data-uid="Google.Cloud.Dialogflow.V2.Intent.TrainingPhrases">TrainingPhrases</h4>
-  <div class="markdown level1 summary"><p>Optional. The collection of examples/templates that the agent is
+  <div class="markdown level1 summary"><p>Optional. The collection of examples that the agent is
 trained on.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -607,7 +613,7 @@ trained on.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Intent_WebhookState_" data-uid="Google.Cloud.Dialogflow.V2.Intent.WebhookState*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Intent_WebhookState" data-uid="Google.Cloud.Dialogflow.V2.Intent.WebhookState">WebhookState</h4>
-  <div class="markdown level1 summary"><p>Required. Indicates whether webhooks are enabled for the intent.</p>
+  <div class="markdown level1 summary"><p>Optional. Indicates whether webhooks are enabled for the intent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
