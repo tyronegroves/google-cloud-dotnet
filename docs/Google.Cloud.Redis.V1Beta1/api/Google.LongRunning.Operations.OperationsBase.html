@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Operations.OperationsBase
    | Google.Cloud.Redis.V1Beta1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -269,8 +269,13 @@ service.</p>
   <h4 id="Google_LongRunning_Operations_OperationsBase_ListOperations_Google_LongRunning_ListOperationsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.LongRunning.Operations.OperationsBase.ListOperations(Google.LongRunning.ListOperationsRequest,Grpc.Core.ServerCallContext)">ListOperations(ListOperationsRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Lists operations that match the specified filter in the request. If the
 server doesn&apos;t support this method, it returns <code>UNIMPLEMENTED</code>.</p>
-<p>NOTE: the <code>name</code> binding below allows API services to override the binding
-to use different resource name schemes, such as <code>users/*/operations</code>.</p>
+<p>NOTE: the <code>name</code> binding allows API services to override the binding
+to use different resource name schemes, such as <code>users/*/operations</code>. To
+override the binding, API services can add a binding such as
+<code>&amp;quot;/v1/{name=users/*}/operations&amp;quot;</code> to their service configuration.
+For backwards compatibility, the default name includes the operations
+collection id, however overriding users must ensure the name binding
+is the parent resource, without the operations collection id.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -312,6 +317,63 @@ to use different resource name schemes, such as <code>users/*/operations</code>.
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.ListOperationsResponse.html">ListOperationsResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_LongRunning_Operations_OperationsBase_WaitOperation_" data-uid="Google.LongRunning.Operations.OperationsBase.WaitOperation*"></a>
+  <h4 id="Google_LongRunning_Operations_OperationsBase_WaitOperation_Google_LongRunning_WaitOperationRequest_Grpc_Core_ServerCallContext_" data-uid="Google.LongRunning.Operations.OperationsBase.WaitOperation(Google.LongRunning.WaitOperationRequest,Grpc.Core.ServerCallContext)">WaitOperation(WaitOperationRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Waits for the specified long-running operation until it is done or reaches
+at most a specified timeout, returning the latest state.  If the operation
+is already done, the latest state is immediately returned.  If the timeout
+specified is greater than the default HTTP/RPC timeout, the HTTP/RPC
+timeout is used.  If the server does not support this method, it returns
+<code>google.rpc.Code.UNIMPLEMENTED</code>.
+Note that this method is on a best-effort basis.  It may return the latest
+state before the specified timeout (including immediately), meaning even an
+immediate response is no guarantee that the operation is done.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; WaitOperation(WaitOperationRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.WaitOperationRequest.html">WaitOperationRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
         <td><p>The response to send back to the client (wrapped by a task).</p>
 </td>
       </tr>

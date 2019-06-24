@@ -219,9 +219,41 @@ DocumentSnapshot snapshot = await document.GetSnapshotAsync();
 City citySnapshot = snapshot.ConvertTo&lt;City&gt;();
 Console.WriteLine(citySnapshot.Name); // Los Angeles
 </code></pre><p>In order to deserialize a map as an attributed class, the class must have a public parameterless constructor. (The C# compiler provides
-one by default if no other constructors are specified.) The properties in the map must each have an attributed, public instance property with a public setter,
+one by default if no other constructors are specified.) The properties in the map must each have an attributed instance property with a setter,
 and the type of the property must be suitable for the value in the map. If the attributed class doesn&#39;t have a suitable property for an element of the map,
 an exception is thrown.</p>
+<p>An additional attribute, <a href="api/Google.Cloud.Firestore.FirestoreDocumentIdAttribute.html">FirestoreDocumentId</a>, is also available for attributed classes.
+This must be placed on a property of type <code>string</code> or <code>DocumentReference</code>. The property plays no part in serializing data when writing to Firestore, but is automatically
+populated when deserializing a document. If the property is of type <code>string</code>, it is populated with the document ID. If the property is of type <code>DocumentReference</code>, it
+is populated with the complete reference to the document.</p>
+<p>For example, consider the following data model:</p>
+<pre><code class="lang-cs">[FirestoreData]
+public class ChatRoom
+{
+    [FirestoreDocumentId]
+    public DocumentReference Reference { get; set; }
+
+    [FirestoreProperty]
+    public string Name { get; set; }
+
+    [FirestoreProperty]
+    public bool Public { get; set; }
+}
+</code></pre><p>The following code creates a document for a chat room, then later fetches it.</p>
+<pre><code class="lang-cs">string projectId = _fixture.ProjectId;
+FirestoreDb db = FirestoreDb.Create(projectId);
+
+// Create a document with a random ID in the &quot;rooms&quot; collection.
+CollectionReference collection = db.Collection(&quot;rooms&quot;);
+DocumentReference document = await collection.AddAsync(new ChatRoom { Name = &quot;Jon&#39;s private chat&quot; });
+
+// Later in code, fetch a snapshot (potentially using a query; we&#39;re fetching directly for simplicity)
+DocumentSnapshot snapshot = await document.GetSnapshotAsync();
+ChatRoom room = snapshot.ConvertTo&lt;ChatRoom&gt;();
+// room.Reference is now populated with the document reference
+</code></pre><p>Without the <code>FirestoreDocumentId</code> attribute, the document reference would still be available to the code that deserializes the snapshot, but other code using the
+<code>ChatRoom</code> object later wouldn&#39;t have access to it without extra code to populate it. The <code>FirestoreDocumentId</code> attribute just allows you to get at the document ID
+or reference without any additional code.</p>
 <h2 id="mapping-with-dictionaries">Mapping with dictionaries</h2>
 <p>A map can be represented as a <code>Dictionary&lt;string, object&gt;</code> - or if you&#39;re only storing values of a particular type, a <code>Dictionary&lt;string, int&gt;</code>, <code>Dictionary&lt;string, string&gt;</code> etc.
 The key type for the dictionary must always be <code>string</code>, as the Firestore field name is used as the key.</p>

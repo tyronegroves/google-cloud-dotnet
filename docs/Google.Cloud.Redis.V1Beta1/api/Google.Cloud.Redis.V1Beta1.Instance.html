@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Instance
    | Google.Cloud.Redis.V1Beta1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -225,11 +225,11 @@ will be used.</p>
   </table>
   <a id="Google_Cloud_Redis_V1Beta1_Instance_CurrentLocationId_" data-uid="Google.Cloud.Redis.V1Beta1.Instance.CurrentLocationId*"></a>
   <h4 id="Google_Cloud_Redis_V1Beta1_Instance_CurrentLocationId" data-uid="Google.Cloud.Redis.V1Beta1.Instance.CurrentLocationId">CurrentLocationId</h4>
-  <div class="markdown level1 summary"><p>Output only. The current zone where the Redis endpoint is placed. In
-single zone deployments, this will always be the same as [location_id]
-provided by the user at creation time. In cross-zone instances (only
-applicable in STANDARD_HA tier), this can be either [location_id] or
-[alternative_location_id] and can change on a failover event.</p>
+  <div class="markdown level1 summary"><p>Output only. The current zone where the Redis endpoint is placed. For Basic
+Tier instances, this will always be the same as the [location_id]
+provided by the user at creation time. For Standard Tier instances,
+this can be either [location_id] or [alternative_location_id] and can
+change after a failover event.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -277,7 +277,7 @@ applicable in STANDARD_HA tier), this can be either [location_id] or
   </table>
   <a id="Google_Cloud_Redis_V1Beta1_Instance_Host_" data-uid="Google.Cloud.Redis.V1Beta1.Instance.Host*"></a>
   <h4 id="Google_Cloud_Redis_V1Beta1_Instance_Host" data-uid="Google.Cloud.Redis.V1Beta1.Instance.Host">Host</h4>
-  <div class="markdown level1 summary"><p>Output only. Hostname or IP address of the exposed redis endpoint used by
+  <div class="markdown level1 summary"><p>Output only. Hostname or IP address of the exposed Redis endpoint used by
 clients to connect to the service.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -329,7 +329,7 @@ clients to connect to the service.</p>
   <div class="markdown level1 summary"><p>Optional. The zone where the instance will be provisioned. If not provided,
 the service will choose a zone for the instance. For STANDARD_HA tier,
 instances will be created across two zones for protection against zonal
-failures. if [alternative_location_id] is also provided, it must be
+failures. If [alternative_location_id] is also provided, it must be
 different from [location_id].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -354,7 +354,7 @@ different from [location_id].</p>
   </table>
   <a id="Google_Cloud_Redis_V1Beta1_Instance_MemorySizeGb_" data-uid="Google.Cloud.Redis.V1Beta1.Instance.MemorySizeGb*"></a>
   <h4 id="Google_Cloud_Redis_V1Beta1_Instance_MemorySizeGb" data-uid="Google.Cloud.Redis.V1Beta1.Instance.MemorySizeGb">MemorySizeGb</h4>
-  <div class="markdown level1 summary"><p>Required. Redis memory size in GB.</p>
+  <div class="markdown level1 summary"><p>Required. Redis memory size in GiB.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -382,7 +382,7 @@ different from [location_id].</p>
 location using the form:
 <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code></p>
 <p>Note: Redis instances are managed and addressed at regional level so
-location_id here refers to a GCP region; however, users get to choose which
+location_id here refers to a GCP region; however, users may choose which
 specific zone (or collection of zones for cross-zone instances) an instance
 should be provisioned in. Refer to [location_id] and
 [alternative_location_id] fields for more details.</p>
@@ -407,9 +407,37 @@ should be provisioned in. Refer to [location_id] and
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Redis_V1Beta1_Instance_PersistenceIamIdentity_" data-uid="Google.Cloud.Redis.V1Beta1.Instance.PersistenceIamIdentity*"></a>
+  <h4 id="Google_Cloud_Redis_V1Beta1_Instance_PersistenceIamIdentity" data-uid="Google.Cloud.Redis.V1Beta1.Instance.PersistenceIamIdentity">PersistenceIamIdentity</h4>
+  <div class="markdown level1 summary"><p>Output only. Cloud IAM identity used by import / export operations to
+transfer data to/from Cloud Storage. Format is
+&quot;serviceAccount:&lt;service_account_email&gt;&quot;. The value may change over time
+for a given instance so should be checked before each import/export
+operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string PersistenceIamIdentity { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Redis_V1Beta1_Instance_Port_" data-uid="Google.Cloud.Redis.V1Beta1.Instance.Port*"></a>
   <h4 id="Google_Cloud_Redis_V1Beta1_Instance_Port" data-uid="Google.Cloud.Redis.V1Beta1.Instance.Port">Port</h4>
-  <div class="markdown level1 summary"><p>Output only. The port number of the exposed redis endpoint.</p>
+  <div class="markdown level1 summary"><p>Output only. The port number of the exposed Redis endpoint.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -436,9 +464,16 @@ should be provisioned in. Refer to [location_id] and
   <div class="markdown level1 summary"><p>Optional. Redis configuration parameters, according to
 <a href="http://redis.io/topics/config">http://redis.io/topics/config</a>. Currently, the only supported parameters
 are:</p>
+<p>Redis 3.2 and above:</p>
 <ul>
 <li>maxmemory-policy</li>
 <li>notify-keyspace-events</li>
+</ul>
+<p>Redis 4.0 and above:</p>
+<ul>
+<li>activedefrag</li>
+<li>lfu-log-factor</li>
+<li>lfu-decay-time</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -464,7 +499,13 @@ are:</p>
   <a id="Google_Cloud_Redis_V1Beta1_Instance_RedisVersion_" data-uid="Google.Cloud.Redis.V1Beta1.Instance.RedisVersion*"></a>
   <h4 id="Google_Cloud_Redis_V1Beta1_Instance_RedisVersion" data-uid="Google.Cloud.Redis.V1Beta1.Instance.RedisVersion">RedisVersion</h4>
   <div class="markdown level1 summary"><p>Optional. The version of Redis software.
-If not provided, latest supported version will be used.</p>
+If not provided, latest supported version will be used. Updating the
+version will perform an upgrade/downgrade to the new version. Currently,
+the supported values are:</p>
+<ul>
+<li><code>REDIS_4_0</code> for Redis 4.0 compatibility (default)</li>
+<li><code>REDIS_3_2</code> for Redis 3.2 compatibility</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -491,7 +532,7 @@ If not provided, latest supported version will be used.</p>
   <div class="markdown level1 summary"><p>Optional. The CIDR range of internal addresses that are reserved for this
 instance. If not provided, the service will choose an unused /29 block,
 for example, 10.0.0.0/29 or 192.168.0.0/29. Ranges must be unique
-and non-overlapping with existing subnets in a network.</p>
+and non-overlapping with existing subnets in an authorized network.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
