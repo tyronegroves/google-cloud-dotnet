@@ -203,7 +203,104 @@ could run into errors like this:</p>
 </code></pre><p>In that case, the simplest fix is to add a direct dependency to
 <code>Grpc.Core</code> from your application, which will ensure that the
 native libraries are copied appropriately.</p>
-</article>
+<h2 id="how-can-i-modify-repeated-fields-and-maps-in-protobuf-messages">How can I modify repeated fields and maps in protobuf messages?</h2>
+<p>The generated C# code for protobuf messages makes simple properties
+read/write, but repeated fields and map fields are read-only. That
+doesn&#39;t stop you from populating them, though: it just means you
+can&#39;t change the property to refer to a <em>different</em> list or map.</p>
+<p>Typically you&#39;ll populate this using a <em>collection initializer</em>
+nested within an <em>object initializer</em>. As an example, let&#39;s look at
+how we might create a <code>BatchAnnotateImagesRequest</code> message in the
+Vision API. (This is just an easy-to-understand example; the
+Google.Cloud.Vision.V1 package provides helper methods to avoid you
+having to create batches yourself in most cases.)</p>
+<p>The protobuf description looks like this:</p>
+<pre><code class="lang-proto">// Multiple image annotation requests are batched into a single service call.
+message BatchAnnotateImagesRequest {
+  // Individual image annotation requests for this batch.
+  repeated AnnotateImageRequest requests = 1;
+}
+</code></pre><p>In the generated C# code, the <code>Requests</code> property of
+<code>BatchAnnotateImagesRequest</code> is read-only, but you can populate it
+with a collection initializer:</p>
+<pre><code class="lang-cs">// In normal code you&#39;d populate these individual requests with more
+// information.
+AnnotateImageRequest request1 = new AnnotateImageRequest();
+AnnotateImageRequest request2 = new AnnotateImageRequest();
+
+// Create the batch request using an object initializer
+BatchAnnotateImagesRequest batch = new BatchAnnotateImagesRequest
+{
+    // Populate the repeated field with a collection initializer
+    Requests = { request1, request2 }
+};
+</code></pre><p>You don&#39;t <em>have</em> to use a collection initializer though, and
+sometimes it would be inconvenient to do so. It&#39;s perfectly valid to
+add to the repeated field after other initialization:</p>
+<pre><code class="lang-cs">// In normal code you&#39;d populate these individual requests with more
+// information.
+AnnotateImageRequest request1 = new AnnotateImageRequest();
+AnnotateImageRequest request2 = new AnnotateImageRequest();
+
+// Populate the batch without using an object initializer, just by calling
+// Add on the repeated field
+BatchAnnotateImagesRequest batch = new BatchAnnotateImagesRequest();
+batch.Requests.Add(request1);
+batch.Requests.Add(request2);
+</code></pre><p>Finally, it&#39;s worth being aware that <code>RepeatedField&lt;T&gt;</code> has an <code>Add</code>
+overload accepting an <code>IEnumerable&lt;T&gt;</code>. This allows you to use a
+collection initializer to copy items out of another collection, or a
+LINQ query result:</p>
+<pre><code class="lang-cs">// In normal code you&#39;d populate these individual requests with more
+// information.
+List&lt;AnnotateImageRequest&gt; requests = new List&lt;AnnotateImageRequest&gt;
+{
+    new AnnotateImageRequest(),
+    new AnnotateImageRequest()
+};
+
+// Create the batch request using an object initializer
+BatchAnnotateImagesRequest batch = new BatchAnnotateImagesRequest
+{
+    // Populate the repeated field using the Add overload that accepts
+    // an IEnumerable&lt;T&gt;
+    Requests = { requests }
+};
+</code></pre><p>Likewise for map fields (which are significantly less common) you
+can use collection initializers, or (from C# 6 onwards) the indexer
+syntax within an object initializer. As an example of this, let&#39;s
+consider the Scheduler V1 API, which contains a message like this:</p>
+<pre><code class="lang-proto">message HttpTarget {
+  // Other fields omitted
+
+  // The user can specify HTTP request headers to send with the job&#39;s
+  // HTTP request. (Further documentation omitted here.)
+  map&lt;string, string&gt; headers = 3;
+}
+</code></pre><p>Again, the <code>Headers</code> property in the generated message is read-only,
+but you can populate it with a collection initializer:</p>
+<pre><code class="lang-cs">HttpTarget target = new HttpTarget
+{
+    Headers =
+    {
+        {  &quot;X-Custom-Header1&quot;, &quot;Value1&quot; },
+        {  &quot;X-Custom-Header2&quot;, &quot;Value2&quot; },
+    }
+};
+</code></pre><p>Or an indexer in an object initializer:</p>
+<pre><code class="lang-cs">HttpTarget target = new HttpTarget
+{
+    Headers =
+    {
+        [&quot;X-Custom-Header1&quot;] = &quot;Value1&quot;,
+        [&quot;X-Custom-Header2&quot;] = &quot;Value2&quot;,
+    }
+};
+</code></pre><p>Or modify it after other initialization steps:</p>
+<pre><code class="lang-cs">HttpTarget target = new HttpTarget();
+target.Headers[&quot;X-Custom-Header1&quot;] = &quot;Value1&quot;;
+target.Headers[&quot;X-Custom-Header2&quot;] = &quot;Value2&quot;;
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
