@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Cluster
    | Google.Cloud.Container.V1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -73,7 +73,7 @@
   
   <h1 id="Google_Cloud_Container_V1_Cluster" data-uid="Google.Cloud.Container.V1.Cluster" class="text-break">Class Cluster
   </h1>
-  <div class="markdown level0 summary"><p>A Google Container Engine cluster.</p>
+  <div class="markdown level0 summary"><p>A Google Kubernetes Engine cluster.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -272,14 +272,17 @@ one automatically chosen or specify a <code>/14</code> block in <code>10.0.0.0/8
   </table>
   <a id="Google_Cloud_Container_V1_Cluster_CurrentNodeVersion_" data-uid="Google.Cloud.Container.V1.Cluster.CurrentNodeVersion*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_CurrentNodeVersion" data-uid="Google.Cloud.Container.V1.Cluster.CurrentNodeVersion">CurrentNodeVersion</h4>
-  <div class="markdown level1 summary"><p>[Output only] The current version of the node software components.
-If they are currently at multiple versions because they&apos;re in the process
-of being upgraded, this reflects the minimum version of all nodes.</p>
+  <div class="markdown level1 summary"><p>[Output only] Deprecated, use
+<a href="/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool">NodePool.version</a>
+instead. The current version of the node software components. If they are
+currently at multiple versions because they&apos;re in the process of being
+upgraded, this reflects the minimum version of all nodes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string CurrentNodeVersion { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public string CurrentNodeVersion { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -408,6 +411,15 @@ deleted in <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC3339</a> text forma
 found in validMasterVersions returned by getServerConfig.  The version can
 be upgraded over time; such upgrades are reflected in
 currentMasterVersion and currentNodeVersion.</p>
+<p>Users may specify either explicit versions offered by
+Kubernetes Engine or version aliases, which have the following behavior:</p>
+<ul>
+<li>&quot;latest&quot;: picks the highest valid Kubernetes version</li>
+<li>&quot;1.X&quot;: picks the highest valid patch+gke.N patch in the 1.X version</li>
+<li>&quot;1.X.Y&quot;: picks the highest valid gke.N patch in the 1.X.Y version</li>
+<li>&quot;1.X.Y-gke.N&quot;: picks an explicit Kubernetes version</li>
+<li>&quot;&quot;,&quot;-&quot;: picks the default Kubernetes version</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -467,7 +479,8 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;string&gt; InstanceGroupUrls { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public RepeatedField&lt;string&gt; InstanceGroupUrls { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -552,6 +565,33 @@ auto-generated name. Do not use this and a node_pool at the same time.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Container.V1.LegacyAbac.html">LegacyAbac</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Container_V1_Cluster_Location_" data-uid="Google.Cloud.Container.V1.Cluster.Location*"></a>
+  <h4 id="Google_Cloud_Container_V1_Cluster_Location" data-uid="Google.Cloud.Container.V1.Cluster.Location">Location</h4>
+  <div class="markdown level1 summary"><p>[Output only] The name of the Google Compute Engine
+<a href="/compute/docs/regions-zones/regions-zones#available">zone</a> or
+<a href="/compute/docs/regions-zones/regions-zones#available">region</a> in which
+the cluster resides.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Location { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -662,8 +702,7 @@ Currently available options:</p>
   </table>
   <a id="Google_Cloud_Container_V1_Cluster_MasterAuthorizedNetworksConfig_" data-uid="Google.Cloud.Container.V1.Cluster.MasterAuthorizedNetworksConfig*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_MasterAuthorizedNetworksConfig" data-uid="Google.Cloud.Container.V1.Cluster.MasterAuthorizedNetworksConfig">MasterAuthorizedNetworksConfig</h4>
-  <div class="markdown level1 summary"><p>Master authorized networks is a Beta feature.
-The configuration options for master authorized networks feature.</p>
+  <div class="markdown level1 summary"><p>The configuration options for master authorized networks feature.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -772,6 +811,30 @@ will be used.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_Cluster_NetworkConfig_" data-uid="Google.Cloud.Container.V1.Cluster.NetworkConfig*"></a>
+  <h4 id="Google_Cloud_Container_V1_Cluster_NetworkConfig" data-uid="Google.Cloud.Container.V1.Cluster.NetworkConfig">NetworkConfig</h4>
+  <div class="markdown level1 summary"><p>Configuration for cluster networking.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NetworkConfig NetworkConfig { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.NetworkConfig.html">NetworkConfig</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_Cluster_NetworkPolicy_" data-uid="Google.Cloud.Container.V1.Cluster.NetworkPolicy*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_NetworkPolicy" data-uid="Google.Cloud.Container.V1.Cluster.NetworkPolicy">NetworkPolicy</h4>
   <div class="markdown level1 summary"><p>Configuration options for the NetworkPolicy feature.</p>
@@ -876,6 +939,30 @@ specified.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Container.V1.NodePool.html">NodePool</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Container_V1_Cluster_PrivateClusterConfig_" data-uid="Google.Cloud.Container.V1.Cluster.PrivateClusterConfig*"></a>
+  <h4 id="Google_Cloud_Container_V1_Cluster_PrivateClusterConfig" data-uid="Google.Cloud.Container.V1.Cluster.PrivateClusterConfig">PrivateClusterConfig</h4>
+  <div class="markdown level1 summary"><p>Configuration for private cluster.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PrivateClusterConfig PrivateClusterConfig { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.PrivateClusterConfig.html">PrivateClusterConfig</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1036,12 +1123,14 @@ cluster is connected.</p>
   <h4 id="Google_Cloud_Container_V1_Cluster_Zone" data-uid="Google.Cloud.Container.V1.Cluster.Zone">Zone</h4>
   <div class="markdown level1 summary"><p>[Output only] The name of the Google Compute Engine
 <a href="/compute/docs/zones#available">zone</a> in which the cluster
-resides.</p>
+resides.
+This field is deprecated, use location instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Zone { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public string Zone { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
