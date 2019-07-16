@@ -254,6 +254,15 @@ ChatRoom room = snapshot.ConvertTo&lt;ChatRoom&gt;();
 </code></pre><p>Without the <code>FirestoreDocumentId</code> attribute, the document reference would still be available to the code that deserializes the snapshot, but other code using the
 <code>ChatRoom</code> object later wouldn&#39;t have access to it without extra code to populate it. The <code>FirestoreDocumentId</code> attribute just allows you to get at the document ID
 or reference without any additional code.</p>
+<p><strong>Note</strong>: The <code>FirestoreData</code> attribute can be applied to a struct
+as well, but this only makes sense for mutable structs - which are
+generally discouraged. The struct will be boxed as part of
+serialization and deserialization, so there&#39;s no memory advantage
+in that sense. However, this is supported for the sake of code which
+wishes to use mutable structs for other reasons elsewhere.
+To support immutable structs (which are generally prefered), write
+a <a href="#custom-converters">custom converter</a> in the same way as you
+would for a class.</p>
 <h2 id="mapping-with-dictionaries">Mapping with dictionaries</h2>
 <p>A map can be represented as a <code>Dictionary&lt;string, object&gt;</code> - or if you&#39;re only storing values of a particular type, a <code>Dictionary&lt;string, int&gt;</code>, <code>Dictionary&lt;string, string&gt;</code> etc.
 The key type for the dictionary must always be <code>string</code>, as the Firestore field name is used as the key.</p>
