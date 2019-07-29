@@ -90,13 +90,13 @@
   <h3 id="methods">Methods
   </h3>
   <a id="Google_Cloud_Diagnostics_AspNetCore_GoogleDiagnosticsWebHostBuilderExtensions_UseGoogleDiagnostics_" data-uid="Google.Cloud.Diagnostics.AspNetCore.GoogleDiagnosticsWebHostBuilderExtensions.UseGoogleDiagnostics*"></a>
-  <h4 id="Google_Cloud_Diagnostics_AspNetCore_GoogleDiagnosticsWebHostBuilderExtensions_UseGoogleDiagnostics_IWebHostBuilder_Func_WebHostBuilderContext_System_String__Func_WebHostBuilderContext_System_String__Func_WebHostBuilderContext_System_String__" data-uid="Google.Cloud.Diagnostics.AspNetCore.GoogleDiagnosticsWebHostBuilderExtensions.UseGoogleDiagnostics(IWebHostBuilder,Func{WebHostBuilderContext,System.String},Func{WebHostBuilderContext,System.String},Func{WebHostBuilderContext,System.String})">UseGoogleDiagnostics(IWebHostBuilder, Func&lt;WebHostBuilderContext, String&gt;, Func&lt;WebHostBuilderContext, String&gt;, Func&lt;WebHostBuilderContext, String&gt;)</h4>
+  <h4 id="Google_Cloud_Diagnostics_AspNetCore_GoogleDiagnosticsWebHostBuilderExtensions_UseGoogleDiagnostics_IWebHostBuilder_Func_WebHostBuilderContext_System_String__Func_WebHostBuilderContext_System_String__Func_WebHostBuilderContext_System_String__Func_WebHostBuilderContext_Google_Cloud_Diagnostics_AspNetCore_LoggerOptions__Func_WebHostBuilderContext_Google_Cloud_Diagnostics_Common_TraceOptions__Func_WebHostBuilderContext_Google_Cloud_Diagnostics_Common_ErrorReportingOptions__" data-uid="Google.Cloud.Diagnostics.AspNetCore.GoogleDiagnosticsWebHostBuilderExtensions.UseGoogleDiagnostics(IWebHostBuilder,Func{WebHostBuilderContext,System.String},Func{WebHostBuilderContext,System.String},Func{WebHostBuilderContext,System.String},Func{WebHostBuilderContext,Google.Cloud.Diagnostics.AspNetCore.LoggerOptions},Func{WebHostBuilderContext,Google.Cloud.Diagnostics.Common.TraceOptions},Func{WebHostBuilderContext,Google.Cloud.Diagnostics.Common.ErrorReportingOptions})">UseGoogleDiagnostics(IWebHostBuilder, Func&lt;WebHostBuilderContext, String&gt;, Func&lt;WebHostBuilderContext, String&gt;, Func&lt;WebHostBuilderContext, String&gt;, Func&lt;WebHostBuilderContext, LoggerOptions&gt;, Func&lt;WebHostBuilderContext, TraceOptions&gt;, Func&lt;WebHostBuilderContext, ErrorReportingOptions&gt;)</h4>
   <div class="markdown level1 summary"><p>Configures Google Diagnostics services for Logging, Tracing and Error Reporting middleware.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IWebHostBuilder UseGoogleDiagnostics(this IWebHostBuilder builder, Func&lt;WebHostBuilderContext, string&gt; projectIdGetter, Func&lt;WebHostBuilderContext, string&gt; serviceNameGetter, Func&lt;WebHostBuilderContext, string&gt; serviceVersionGetter)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IWebHostBuilder UseGoogleDiagnostics(this IWebHostBuilder builder, Func&lt;WebHostBuilderContext, string&gt; projectIdGetter, Func&lt;WebHostBuilderContext, string&gt; serviceNameGetter, Func&lt;WebHostBuilderContext, string&gt; serviceVersionGetter, Func&lt;WebHostBuilderContext, LoggerOptions&gt; loggerOptionsGetter = null, Func&lt;WebHostBuilderContext, TraceOptions&gt; traceOptionsGetter = null, Func&lt;WebHostBuilderContext, ErrorReportingOptions&gt; errorReportingOptionsGetter = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -138,6 +138,27 @@ Cannot be null but can return a null value for the service version, in such a ca
 and if running on GAE the service version will be detected from the platform.</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">WebHostBuilderContext</span>, <a class="xref" href="Google.Cloud.Diagnostics.AspNetCore.LoggerOptions.html">LoggerOptions</a>&gt;</td>
+        <td><span class="parametername">loggerOptionsGetter</span></td>
+        <td><p>A function that takes a <see cref="!:WebHostBuilderContext"></see> and retrieves the options to use for logging.
+May be null or return a null value for the options; in either of these cases the default options will be used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">WebHostBuilderContext</span>, <a class="xref" href="Google.Cloud.Diagnostics.Common.TraceOptions.html">TraceOptions</a>&gt;</td>
+        <td><span class="parametername">traceOptionsGetter</span></td>
+        <td><p>A function that takes a <see cref="!:WebHostBuilderContext"></see> and retrieves the options to use for tracing.
+May be null or return a null value for the options; in either of these cases the default options will be used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<span class="xref">WebHostBuilderContext</span>, <a class="xref" href="Google.Cloud.Diagnostics.Common.ErrorReportingOptions.html">ErrorReportingOptions</a>&gt;</td>
+        <td><span class="parametername">errorReportingOptionsGetter</span></td>
+        <td><p>A function that takes a <see cref="!:WebHostBuilderContext"></see> and retrieves the options to use for errorReporting.
+May be null or return a null value for the options; in either of these cases the default options will be used.</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -157,13 +178,13 @@ and if running on GAE the service version will be detected from the platform.</p
     </tbody>
   </table>
   <a id="Google_Cloud_Diagnostics_AspNetCore_GoogleDiagnosticsWebHostBuilderExtensions_UseGoogleDiagnostics_" data-uid="Google.Cloud.Diagnostics.AspNetCore.GoogleDiagnosticsWebHostBuilderExtensions.UseGoogleDiagnostics*"></a>
-  <h4 id="Google_Cloud_Diagnostics_AspNetCore_GoogleDiagnosticsWebHostBuilderExtensions_UseGoogleDiagnostics_IWebHostBuilder_System_String_System_String_System_String_" data-uid="Google.Cloud.Diagnostics.AspNetCore.GoogleDiagnosticsWebHostBuilderExtensions.UseGoogleDiagnostics(IWebHostBuilder,System.String,System.String,System.String)">UseGoogleDiagnostics(IWebHostBuilder, String, String, String)</h4>
+  <h4 id="Google_Cloud_Diagnostics_AspNetCore_GoogleDiagnosticsWebHostBuilderExtensions_UseGoogleDiagnostics_IWebHostBuilder_System_String_System_String_System_String_Google_Cloud_Diagnostics_AspNetCore_LoggerOptions_Google_Cloud_Diagnostics_Common_TraceOptions_Google_Cloud_Diagnostics_Common_ErrorReportingOptions_" data-uid="Google.Cloud.Diagnostics.AspNetCore.GoogleDiagnosticsWebHostBuilderExtensions.UseGoogleDiagnostics(IWebHostBuilder,System.String,System.String,System.String,Google.Cloud.Diagnostics.AspNetCore.LoggerOptions,Google.Cloud.Diagnostics.Common.TraceOptions,Google.Cloud.Diagnostics.Common.ErrorReportingOptions)">UseGoogleDiagnostics(IWebHostBuilder, String, String, String, LoggerOptions, TraceOptions, ErrorReportingOptions)</h4>
   <div class="markdown level1 summary"><p>Configures Google Diagnostics services for Logging, Tracing and Error Reporting middleware.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IWebHostBuilder UseGoogleDiagnostics(this IWebHostBuilder builder, string projectId = null, string serviceName = null, string serviceVersion = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IWebHostBuilder UseGoogleDiagnostics(this IWebHostBuilder builder, string projectId = null, string serviceName = null, string serviceVersion = null, LoggerOptions loggerOptions = null, TraceOptions traceOptions = null, ErrorReportingOptions errorReportingOptions = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -200,6 +221,24 @@ If unspecified and running on GAE the service name will be detected from the pla
         <td><span class="parametername">serviceVersion</span></td>
         <td><p>A string that represents the version of the service or the source code used for exception logging.
 If unspecified and running on GAE the service version will be detected from the platform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Diagnostics.AspNetCore.LoggerOptions.html">LoggerOptions</a></td>
+        <td><span class="parametername">loggerOptions</span></td>
+        <td><p>The options for logging. May be null, in which case default options will be used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Diagnostics.Common.TraceOptions.html">TraceOptions</a></td>
+        <td><span class="parametername">traceOptions</span></td>
+        <td><p>The options for tracing. May be null, in which case default options will be used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Diagnostics.Common.ErrorReportingOptions.html">ErrorReportingOptions</a></td>
+        <td><span class="parametername">errorReportingOptions</span></td>
+        <td><p>The options for error reporting. May be null, in which case default options will be used.</p>
 </td>
       </tr>
     </tbody>

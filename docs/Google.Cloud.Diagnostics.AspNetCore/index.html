@@ -64,10 +64,11 @@
 
 <p><code>Google.Cloud.Diagnostics.AspNetCore</code> is an ASP.NET Core instrumentation library for Google Stackdriver.
 It allows for simple integration of Stackdriver into ASP.NET applications with minimal code changes.</p>
-<p><code>Google.Cloud.Diagnostics.AspNetCore</code> currently supports Stackdriver Error Reporting, Stackdriver Logging
-and Stackdriver Trace.</p>
+<p>This package supports Stackdriver Error Reporting, Stackdriver
+Logging and Stackdriver Trace, and integrates with ASP.NET Core 2.1
+(which is the long-term support release of ASP.NET Core 2.x) and above.</p>
 <p>Note:
-This documentation is for version <code>3.0.0-beta13</code> of the library.
+This documentation is for version <code>3.0.0-beta14</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Diagnostics.AspNetCore</code> package from NuGet. Add it to
@@ -76,7 +77,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>3.0.0-beta13</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
+pre-release version (<code>3.0.0-beta14</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -88,29 +89,37 @@ Authentication</a> guide for more details.</p>
 entries are collected. However, to be able to collect this information PDBs must be included with
 the deployed code.</p>
 <h1 id="getting-started">Getting started</h1>
-<h2 id="initializing-google-diagnostics-aspnet-core-20">Initializing Google Diagnostics (ASP.NET Core 2.0+)</h2>
-<p>The easiest way to initialize Google Diagnostics services in ASP.NET Core 2.0 or higher
-is using the <code>UseGoogleDiagnostics</code> extentension method on <code>IWebHostBuilder</code>. This configures
-Logging, Tracing and Error Reporting middleware.</p>
-<p>If your application is runnng on GAE you don&#39;t need to provide a value for <code>ProjectID</code>, <code>Service</code>
-and <code>Version</code> since they can be automatically obtained by the <code>UseGoogleDiagnostics</code> method. The
-values used will be the ones associated with the running application.</p>
-<p>If your application is running on GKE or GCE you don&#39;t need to provide a value for <code>ProjectID</code>
-since it can be automatically determined by the <code>UseGoogleDiagnostics</code> method. It will be the
-<code>ProjectID</code> of the Google Cloud Project where the application is running. You do need to
-provide values for <code>Service</code> and <code>Version</code>, with which to identify the running application.</p>
-<p>If your application is running outside of GCP, including when it runs locally, then you&#39;ll need to
-provide the <code>ProjectID</code> of the Google Cloud Project in which to store the diagnostic information
-as well as the <code>Service</code> and <code>Version</code> with which to identify your application.</p>
+<h2 id="initializing-google-diagnostics">Initializing Google Diagnostics</h2>
+<p>The easiest way to initialize Google Diagnostics services is using
+the <code>UseGoogleDiagnostics</code> extentension method on <code>IWebHostBuilder</code>.
+This configures Logging, Tracing and Error Reporting middleware.</p>
+<p>If your application is runnng on Google App Engine, Google
+Kubernetes Engine, Google Cloud Run or Google Compute Engine, you
+don&#39;t need to provide a value for <code>ProjectID</code>, <code>Service</code> and
+<code>Version</code> since they can be automatically obtained by the
+<code>UseGoogleDiagnostics</code> method as far as they make sense for the
+environment. (Not every environment has the concept of a &quot;service&quot;
+or &quot;version&quot;.) The values used will be the ones associated with the running application.</p>
+<p>If your application is running outside of GCP, including when it
+runs locally, then you&#39;ll need to provide the <code>ProjectID</code> of the
+Google Cloud Project in which to store the diagnostic information as
+well as the <code>Service</code> and <code>Version</code> with which to identify your
+application.</p>
 <pre><code class="lang-cs">var webHostBuilder = new WebHostBuilder()
     // Replace ProjectId with your Google Cloud Project ID.
     // Replace Service with a name or identifier for the service.
     // Replace Version with a version for the service.
     .UseGoogleDiagnostics(ProjectId, Service, Version)
     .UseStartup&lt;Startup&gt;();
-</code></pre><p>You can still initialize the separate components using the extension methods below. This can be useful
-if you only need to use some of the components or, for instance, if you need to access the <code>Configuration</code>
-property on the <code>Startup</code> class to obtain values for <code>ProjectID</code>, <code>Service</code> or <code>Version</code>.</p>
+</code></pre><p>You can still initialize the separate components using the extension
+methods below. This can be useful if you only need to use some of
+the components or, for instance, if you need to access the
+<code>Configuration</code> property on the <code>Startup</code> class to obtain values for
+<code>ProjectID</code>, <code>Service</code> or <code>Version</code>.</p>
+<p>Optional parameters on <code>UseGoogleDiagnostics</code> are also available to
+specify options for each of the components (logging, tracing and
+error reporting). This is typically useful for diagnosing problems,
+as described below</p>
 <h1 id="error-reporting">Error Reporting</h1>
 <h2 id="registering-error-reporting">Registering Error Reporting</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
@@ -165,6 +174,24 @@ public void CatchesAndLogsException(string id, [FromServices]IExceptionLogger ex
 }
 </code></pre><h1 id="logging">Logging</h1>
 <h2 id="initializing-logging">Initializing Logging</h2>
+<p>Logging can be initialized using <code>ConfigureServices</code> when
+constructing a <code>WebHostBuilder()</code>:</p>
+<pre><code class="lang-cs">return new WebHostBuilder()
+    .ConfigureServices(services =&gt;
+    {
+        // Replace projectId with your Google Cloud Project ID.
+        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId));
+    })
+    .UseStartup&lt;Startup&gt;();
+</code></pre><p>Or using <code>ConfigureLogging</code> when constructing a <code>WebHostBuilder()</code>:</p>
+<pre><code class="lang-cs">return new WebHostBuilder()
+    .ConfigureLogging(builder =&gt; builder.AddProvider(GoogleLoggerProvider.Create(serviceProvider: null, projectId)))
+    .UseStartup&lt;Startup&gt;();
+</code></pre><p>Note that this approach does not support custom services (such as
+log entry label providers) being used as the service provider is
+not available within <code>ConfigureLogging</code>.</p>
+<p>Alternatively, logging can be configured within the application&#39;s
+<code>ConfigureServices</code> method:</p>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
     services.AddMvc();
@@ -184,14 +211,6 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
             template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
     });
 }
-</code></pre><h2 id="initializing-logging-aspnet-core-20">Initializing Logging (ASP.NET Core 2.0+)</h2>
-<pre><code class="lang-cs">return new WebHostBuilder()
-    .ConfigureServices(services =&gt;
-    {
-        // Replace projectId with your Google Cloud Project ID.
-        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId));
-    })
-    .UseStartup&lt;Startup&gt;();
 </code></pre><h2 id="log">Log</h2>
 <pre><code class="lang-cs">public class LoggingSamplesController : Controller
 {
@@ -213,104 +232,47 @@ that can be useful to find out what might be wrong with logging operations.</p>
 <h3 id="propagating-exceptions">Propagating Exceptions</h3>
 <p>By default the Google Logger won&#39;t propagate any exceptions thrown during logging. This is to protect the
 application from crashing if logging is not possible. But logging is an important aspect of most applications
-so at times we need to know if it&#39;s failing and why. The following examples show how to configure Google Logger
-so that it propagates exceptions thrown during logging.</p>
-<h4 id="propagating-exceptions-1">Propagating Exceptions</h4>
-<pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
-{
-    services.AddMvc();
-}
-
-public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
-{
-    // Explicitly create logger options that will propagate any exceptions thrown
-    // during logging.
-    RetryOptions retryOptions = RetryOptions.NoRetry(ExceptionHandling.Propagate);
-    // Also set the no buffer option so that writing the logs is attempted inmediately.
-    BufferOptions bufferOptions = BufferOptions.NoBuffer();
-    LoggerOptions loggerOptions = LoggerOptions.Create(retryOptions: retryOptions, bufferOptions: bufferOptions);
-
-    // Replace ProjectId with your Google Cloud Project ID.
-    loggerFactory.AddGoogle(app.ApplicationServices, ProjectId, options: loggerOptions);
-
-    // ...any other configuration your application requires.
-
-    app.UseMvc(routes =&gt;
-    {
-        routes.MapRoute(
-            name: &quot;default&quot;,
-            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
-    });
-}
-</code></pre><h4 id="propagating-exceptions-aspnet-core-20">Propagating Exceptions (ASP.NET Core 2.0+)</h4>
-<pre><code class="lang-cs">return new WebHostBuilder()
-    .ConfigureServices(services =&gt;
-    {
-        // Explicitly create logger options that will propagate any exceptions thrown
-        // during logging.
-        RetryOptions retryOptions = RetryOptions.NoRetry(ExceptionHandling.Propagate);
-        // Also set the no buffer option so that writing the logs is attempted inmediately.
-        BufferOptions bufferOptions = BufferOptions.NoBuffer();
-        LoggerOptions loggerOptions = LoggerOptions.Create(bufferOptions: bufferOptions, retryOptions: retryOptions);
-
-        // Replace projectId with your Google Cloud Project ID.
-        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId, options: loggerOptions));
-    })
+so at times we need to know if it&#39;s failing and why. The following
+example shows how to configure Google Logger so that it propagates exceptions thrown during logging.</p>
+<pre><code class="lang-cs">// Explicitly create logger options that will propagate any exceptions thrown
+// during logging.
+RetryOptions retryOptions = RetryOptions.NoRetry(ExceptionHandling.Propagate);
+// Also set the no buffer option so that writing the logs is attempted immediately.
+BufferOptions bufferOptions = BufferOptions.NoBuffer();
+LoggerOptions loggerOptions = LoggerOptions.Create(bufferOptions: bufferOptions, retryOptions: retryOptions);
+return new WebHostBuilder()
+    .UseGoogleDiagnostics(projectId, loggerOptions: loggerOptions)
     .UseStartup&lt;Startup&gt;();
-</code></pre><h3 id="finding-out-the-url-where-logs-are-written">Finding out the URL where logs are written</h3>
-<p>Depending on where your code is running and the options you provided for creating a Google Logger,
-it might be hard to find your logs in the GCP Console. We have provided a way for you to obtain the URL
+</code></pre><p>The same <code>LoggerOptions</code> can be specified in any of the other ways
+of registering logging.</p>
+<h3 id="finding-out-the-url-where-logs-are-written">Finding out the URL where logs are written</h3>
+<p>Depending on where your code is running and the options you provided
+for creating a Google Logger, it might be hard to find your logs in
+the GCP Console. We have provided a way for you to obtain the URL
 where your logs can be found.</p>
-<p>As the following code samples show, you only need to pass a <code>System.IO.TextWriter</code> as part of the options
-when creating a Google Logger. Whenever a Google Logger is created, the URL where its logs can be found
-will be written to the given text writer.</p>
-<p>Please note that since this is a Google Logger diagnostics feature, we don&#39;t respect settings for exception
-handling, i.e. we propagate any exception thrown while writing the URL to the given text writer so you know
-what might be happening. This feature should only be activated as a one off, if you are having trouble trying
-to find your logs in the GCP Console, and not as a permanent feature in production code. To deactivate this feature
-simply stop passing a <code>System.IO.TextWriter</code> as part of the options when creating a Google Logger.</p>
-<h4 id="finding-out-the-url-where-logs-are-written-1">Finding out the URL where logs are written</h4>
-<pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
-{
-    services.AddMvc();
-}
-
-public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
-{
-    // Once created, the GoogleLogger will write the URL where logs can be found
-    // to a given System.IO.TextWriter, for instance System.Console.Out.
-    LoggerOptions loggerOptions = LoggerOptions.Create(loggerDiagnosticsOutput: Console.Out);
-
-    // Replace ProjectId with your Google Cloud Project ID.
-    loggerFactory.AddGoogle(app.ApplicationServices, ProjectId, loggerOptions);
-
-    // ...any other configuration your application requires.
-
-    app.UseMvc(routes =&gt;
-    {
-        routes.MapRoute(
-            name: &quot;default&quot;,
-            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
-    });
-}
-</code></pre><h4 id="finding-out-the-url-where-logs-are-written-aspnet-core-20">Finding out the URL where logs are written (ASP.NET Core 2.0+)</h4>
+<p>As the following code sample shows, you only need to pass a
+<code>System.IO.TextWriter</code> (typically <code>Console.Out</code> or <code>Console.Error</code>)
+as part of the options when registering logging. When the
+<code>GoogleLoggerProvider</code> is initialized, the URL where its logs can be
+found will be written to the given text writer.</p>
 <pre><code class="lang-cs">return new WebHostBuilder()
-    .ConfigureServices(services =&gt;
-    {
-        // Once created, the GoogleLogger will write the URL where logs can be found
-        // to a given System.IO.TextWriter, for instance System.Console.Out.
-        LoggerOptions loggerOptions = LoggerOptions.Create(loggerDiagnosticsOutput: Console.Out);
-
-        // Replace projectId with your Google Cloud Project ID.
-        services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId, loggerOptions));
-    })
+    .UseGoogleDiagnostics(projectId, loggerOptions: LoggerOptions.Create(loggerDiagnosticsOutput: Console.Out))
     .UseStartup&lt;Startup&gt;();
-</code></pre><h1 id="tracing">Tracing</h1>
+</code></pre><p>Please note that since this is a Google Logger diagnostics feature,
+we don&#39;t respect settings for exception handling, i.e. we propagate
+any exception thrown while writing the URL to the given text writer
+so you know what might be happening. This feature should only be
+activated as a one off, if you are having trouble trying to find
+your logs in the GCP Console, and not as a permanent feature in
+production code. To deactivate this feature simply stop passing a
+<code>System.IO.TextWriter</code> as part of the options when creating a Google
+Logger.</p>
+<h1 id="tracing">Tracing</h1>
 <h2 id="initializing-tracing">Initializing Tracing</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
     // The line below is needed for trace ids to be added to logs.
-    services.AddSingleton&lt;IHttpContextAccessor, HttpContextAccessor&gt;();
+    services.AddHttpContextAccessor();
 
     // Replace ProjectId with your Google Cloud Project ID.
     services.AddGoogleTrace(options =&gt;
@@ -335,7 +297,16 @@ public void Configure(IApplicationBuilder app)
             template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
     });
 }
-</code></pre><h2 id="tracing-in-mvc-controllers">Tracing in MVC Controllers</h2>
+</code></pre><h2 id="troubleshooting-tracing">Troubleshooting Tracing</h2>
+<p>Just as with logging, trace is most easily diagnosed by removing
+buffering and propagating exceptions immediately.</p>
+<pre><code class="lang-cs">// Explicitly create trace options that will propagate any exceptions thrown during tracing.
+RetryOptions retryOptions = RetryOptions.NoRetry(ExceptionHandling.Propagate);
+// Also set the no buffer option so that tracing is attempted immediately.
+BufferOptions bufferOptions = BufferOptions.NoBuffer();
+TraceOptions traceOptions = TraceOptions.Create(bufferOptions: bufferOptions, retryOptions: retryOptions);
+</code></pre><p>The options can be specified wherever you are configuring tracing.</p>
+<h2 id="tracing-in-mvc-controllers">Tracing in MVC Controllers</h2>
 <p>To use the <code>IManagedTracer</code> in MVC controllers you can either inject the singleton instance of 
 <code>IManagedTracer</code> into the controller&#39;s constructor (see <code>TraceSamplesConstructorController</code>) or you
 can in inject the <code>IManagedTracer</code> into the action method using the <code>[FromServices]</code> attribute
@@ -411,22 +382,8 @@ public void TraceHelloWorldRunIn(string id, [FromServices]IManagedTracer tracer)
         // The name of the span.
         id);
 }
-</code></pre><h2 id="trace-outgoing-http-requests-all-platforms">Trace Outgoing HTTP Requests (all platforms)</h2>
-<pre><code class="lang-cs">/// &lt;summary&gt;
-/// Add a handler to trace outgoing requests and to propagate the trace header.
-/// The &lt;see cref=&quot;TraceHeaderPropagatingHandler&quot;/&gt; is populated by dependency injection
-/// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
-/// &lt;/summary&gt;
-public async Task&lt;HttpResponseMessage&gt; TraceOutgoing([FromServices] TraceHeaderPropagatingHandler traceHeaderHandler)
-{
-    using (var httpClient = new HttpClient(traceHeaderHandler))
-    {
-        // Any code that makes outgoing requests.
-        return await httpClient.GetAsync(&quot;https://weather.com/&quot;);
-    }
-}
-</code></pre><h2 id="trace-outgoing-http-requests-recommended-for-aspnet-core-20-upwards">Trace Outgoing HTTP Requests (recommended for ASP.NET Core 2.0 upwards)</h2>
-<p>The <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-2.1">recommended way of creating HttpClient</a> in ASP.NET Core 2.0 and upwards is to use the 
+</code></pre><h2 id="trace-outgoing-http-requests-recommended">Trace Outgoing HTTP Requests (recommended)</h2>
+<p>The <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-2.1">recommended way of creating HttpClient</a> in ASP.NET Core 2.0 and upwards is to use the
 <code>System.Net.Http.IHttpClientFactory</code> defined in the Microsoft.Extensions.Http package.
 The following example demonstrates how to register and use an HttpClient using Google Trace so that it traces
 outgoing requests.</p>
@@ -434,7 +391,7 @@ outgoing requests.</p>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
     // The line below is needed for trace ids to be added to logs.
-    services.AddSingleton&lt;IHttpContextAccessor, HttpContextAccessor&gt;();
+    services.AddHttpContextAccessor();
 
     // Replace ProjectId with your Google Cloud Project ID.
     services.AddGoogleTrace(options =&gt;
@@ -477,6 +434,23 @@ public async Task&lt;HttpResponseMessage&gt; TraceOutgoingClientFactory([FromSer
     var httpClient = clientFactory.CreateClient(&quot;tracesOutgoing&quot;);
     // Any code that makes outgoing requests.
     return await httpClient.GetAsync(&quot;https://weather.com/&quot;);
+}
+</code></pre><h2 id="trace-outgoing-http-requests-alternative">Trace Outgoing HTTP Requests (alternative)</h2>
+<p>Alternatively, if you need to construct <code>HttpClient</code> objects manually,
+<code>TraceHeaderPropagatingHandler</code> can be used to propagate trace
+headers:</p>
+<pre><code class="lang-cs">/// &lt;summary&gt;
+/// Add a handler to trace outgoing requests and to propagate the trace header.
+/// The &lt;see cref=&quot;TraceHeaderPropagatingHandler&quot;/&gt; is populated by dependency injection
+/// thanks to the use of the &lt;see cref=&quot;FromServicesAttribute&quot;/&gt; attribute.
+/// &lt;/summary&gt;
+public async Task&lt;HttpResponseMessage&gt; TraceOutgoing([FromServices] TraceHeaderPropagatingHandler traceHeaderHandler)
+{
+    using (var httpClient = new HttpClient(traceHeaderHandler))
+    {
+        // Any code that makes outgoing requests.
+        return await httpClient.GetAsync(&quot;https://weather.com/&quot;);
+    }
 }
 </code></pre></article>
           </div>
