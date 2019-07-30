@@ -99,7 +99,48 @@
       </tr>
       <tr>
         <td id="Google_Cloud_Talent_V4Beta1_ProfileEvent_Types_ProfileEventType_Impression">Impression</td>
-        <td><p>The profile is displayed.</p>
+        <td><p>Send this event when a
+[ProfileEvent.profiles][google.cloud.talent.v4beta1.ProfileEvent.profiles]
+meets all of the following criteria:</p>
+<ul>
+<li>Was sent as a part of a result set for a CTS API call.</li>
+<li>Was rendered in the end user&apos;s UI (that is, the
+[ProfileEvent.recruiter][google.cloud.talent.v4beta1.ProfileEvent.recruiter]).</li>
+<li>That UI rendering was displayed in the end user&apos;s viewport for &gt;=3
+seconds.</li>
+</ul>
+<p>In other words, send this event when the end user of the CTS service
+actually saw a resulting profile in their viewport.</p>
+<p>To understand how to use this event, consider an example:</p>
+<ul>
+<li>The customer&apos;s UI for interacting with CTS
+result sets is accessed by the end user through a web browser.</li>
+<li>The UI calls for a page size of 15 candidates (that is, 15 candidates
+are rendered on each page of results).</li>
+<li>However, the UI design calls for only 5 candidates to be shown at any
+given time in the viewport (that is, the end user can only see 5 results
+at any given time and needs to scroll up or down to view all 15 results).</li>
+</ul>
+<p>To render each page of results, the customer will send a
+request to CTS with a page size = 15.</p>
+<ul>
+<li>User loads page #1 of results.</li>
+<li>User scrolls down to expose results #1 - #5 and dwells on this view for
+30 seconds.</li>
+<li>Send an IMPRESSION event for result 1, 2, 3, 4, 5.</li>
+<li>User scrolls down a bit, exposing results #2 - #6 in the viewport and
+dwells on this view for 5 minutes.</li>
+<li>Send an IMPRESSION event for result 6.</li>
+<li>User scrolls to the bottom of the page, with results #7 - #15 shown in
+the viewport for ~5 seconds each.</li>
+<li>Specifically, NO IMPRESSION events are sent for result 7, 8, 9, 10, 11,
+12, 13, 14, 15.</li>
+<li>User clicks to the next page and loads page #2 of results.</li>
+<li>Within 2 seconds, user scrolls to expose results #20 - #24 in the
+viewport and dwells on this view for 20 mins.</li>
+<li>Send an IMPRESSION event for result 20, 21, 22, 23, 24</li>
+<li>User closes their browser window.</li>
+</ul>
 </td>
       </tr>
       <tr>
@@ -109,7 +150,39 @@
       </tr>
       <tr>
         <td id="Google_Cloud_Talent_V4Beta1_ProfileEvent_Types_ProfileEventType_View">View</td>
-        <td><p>The profile is viewed.</p>
+        <td><p>The VIEW event allows CTS to understand if a candidate&apos;s profile was
+viewed by an end user (that is, recruiter) of the system for &gt;=3 seconds.
+This is critical to tracking product metrics and should be sent for every
+profile VIEW that happens in the customer&apos;s system.</p>
+<p>VIEW events should be sent whether an end user views a candidate&apos;s
+profile as a result of seeing that profile in the result set of a
+CTS API request or whether the end user
+views the profile for some other reason (that is, clicks to the
+candidate&apos;s profile in the ATS, and so on).</p>
+<p>For a VIEW that happens as a result of seeing the profile in
+a CTS API request&apos;s result set, the
+[ClientEvent.request_id][google.cloud.talent.v4beta1.ClientEvent.request_id]
+should be populated.  If the VIEW happens for some other reason, the
+[request_id][google.cloud.talent.v4beta1.ClientEvent.request_id] should
+not be populated.</p>
+<p>This event requires a valid recruiter and one valid ID in profiles.</p>
+<p>To understand how to use this event, consider 2 examples in which a VIEW
+event should be sent:</p>
+<ul>
+<li>End user makes a request to the CTS API for a result set.</li>
+<li>Results for the request are shown to the end user.</li>
+<li>End user clicks on one of the candidates that are shown as part of the
+results.</li>
+<li><p>A VIEW event with the
+[ClientEvent.request_id][google.cloud.talent.v4beta1.ClientEvent.request_id]
+of the API call in the first step of this example is sent.</p>
+</li>
+<li><p>End user browses to a candidate&apos;s profile in the ATS.</p>
+</li>
+<li>A VIEW event without a
+[ClientEvent.request_id][google.cloud.talent.v4beta1.ClientEvent.request_id]
+is sent.</li>
+</ul>
 </td>
       </tr>
     </tbody>
