@@ -149,7 +149,8 @@ type that a value will be deserialized as, when no other information is availabl
       <td>Map</td>
       <td>Any <code>IDictionary&lt;string, TValue&gt;</code>, anonymous type or attributed-class (see later)</td>
       <td><code>Dictionary&lt;string, object&gt;</code></td>
-      <td>Represents an object embedded within a document. When indexed, you can query on subfields. If you exclude this value from indexing, then all subfields are also excluded from indexing.</td>
+      <td>Represents an object embedded within a document. When indexed, you can query on subfields. If you exclude this value from indexing, then all subfields are also excluded from indexing.
+      C# 7 value tuples are also supported in a limited set of contexts. See <a href="#value-tuples">the section below</a> for more details.</td>
     </tr>
     <tr>
       <td>Null</td>
@@ -222,16 +223,40 @@ Console.WriteLine(citySnapshot.Name); // Los Angeles
 one by default if no other constructors are specified.) The properties in the map must each have an attributed instance property with a setter,
 and the type of the property must be suitable for the value in the map. If the attributed class doesn&#39;t have a suitable property for an element of the map,
 an exception is thrown.</p>
-<p>An additional attribute, <a href="api/Google.Cloud.Firestore.FirestoreDocumentIdAttribute.html">FirestoreDocumentId</a>, is also available for attributed classes.
-This must be placed on a property of type <code>string</code> or <code>DocumentReference</code>. The property plays no part in serializing data when writing to Firestore, but is automatically
-populated when deserializing a document. If the property is of type <code>string</code>, it is populated with the document ID. If the property is of type <code>DocumentReference</code>, it
-is populated with the complete reference to the document.</p>
+<p>Four additional attributes are also available for attributed
+classes. The attributed properties play no part in serializing data
+when writing to Firestore, but are automatically populated when
+deserializing a document snapshot.</p>
+<ul>
+<li><a href="api/Google.Cloud.Firestore.FirestoreDocumentIdAttribute.html">FirestoreDocumentId</a></li>
+<li><a href="api/Google.Cloud.Firestore.FirestoreDocumentCreateTimestampAttribute.html">FirestoreDocumentCreateTimestamp</a></li>
+<li><a href="api/Google.Cloud.Firestore.FirestoreDocumentUpdateTimestampAttribute.html">FirestoreDocumentUpdateTimestamp</a></li>
+<li><a href="api/Google.Cloud.Firestore.FirestoreDocumentReadTimestampAttribute.html">FirestoreDocumentReadTimestamp</a></li>
+</ul>
+<p><code>FirestoreDocumentId</code> must be placed on a property of type <code>string</code>
+or <code>DocumentReference</code>. If the property is of type <code>string</code>, it is
+populated with the document ID. If the property is of type
+<code>DocumentReference</code>, it is populated with the complete reference to
+the document.</p>
+<p>Each timestamp attribute must be placed on a <code>DateTime</code>,
+<code>DateTimeOffset</code>, <code>Google.Cloud.Firestore.Timestamp</code> or
+<code>Google.Protobuf.WellKnownTypes.Timestamp</code> property. (Properties of
+nullable types are also permitted.)</p>
 <p>For example, consider the following data model:</p>
 <pre><code class="lang-cs">[FirestoreData]
 public class ChatRoom
 {
     [FirestoreDocumentId]
     public DocumentReference Reference { get; set; }
+
+    [FirestoreDocumentCreateTimestamp]
+    public Timestamp CreateTime { get; set; }
+
+    [FirestoreDocumentUpdateTimestamp]
+    public Timestamp UpdateTime { get; set; }
+
+    [FirestoreDocumentReadTimestamp]
+    public Timestamp ReadTime { get; set; }
 
     [FirestoreProperty]
     public string Name { get; set; }
@@ -250,10 +275,15 @@ DocumentReference document = await collection.AddAsync(new ChatRoom { Name = &qu
 // Later in code, fetch a snapshot (potentially using a query; we&#39;re fetching directly for simplicity)
 DocumentSnapshot snapshot = await document.GetSnapshotAsync();
 ChatRoom room = snapshot.ConvertTo&lt;ChatRoom&gt;();
-// room.Reference is now populated with the document reference
-</code></pre><p>Without the <code>FirestoreDocumentId</code> attribute, the document reference would still be available to the code that deserializes the snapshot, but other code using the
-<code>ChatRoom</code> object later wouldn&#39;t have access to it without extra code to populate it. The <code>FirestoreDocumentId</code> attribute just allows you to get at the document ID
-or reference without any additional code.</p>
+// room.Reference is now populated with the document reference,
+// room.CreateTime is populated with the time the document was created,
+// room.UpdateTime is populated with the time the document was updated,
+// room.ReadTime is populated with the time the document snapshot was read.
+</code></pre><p>Without the attributes, the document reference and timestamps would
+still be available to the code that deserializes the snapshot, but
+other code using the <code>ChatRoom</code> object later wouldn&#39;t have access to
+them without extra code to populate it. The attributes just allows
+you to populate this information in your model without any additional code.</p>
 <p><strong>Note</strong>: The <code>FirestoreData</code> attribute can be applied to a struct
 as well, but this only makes sense for mutable structs - which are
 generally discouraged. The struct will be boxed as part of
@@ -416,6 +446,26 @@ public class GuidConverter : IFirestoreConverter&lt;Guid&gt;
         }
     }
 }
+</code></pre><h3 id="converter-registries">Converter registries</h3>
+<p>In some cases, you may wish to apply custom conversions without any
+ability to add attributes to types or properties. In this situation,
+you can build a <code>FirestoreDb</code> with a converter registry to specify
+which custom converters you want to be applied by default. This
+can be done via <code>FirestoreDbBuilder</code>, which has a <code>ConverterRegistry</code>
+property.</p>
+<p>For example, instead of specifying the converter on the
+<code>PlayerWithGuidId.Id</code> property in the sample above, the converter could
+be registered in the <code>FirestoreDb</code> instead:</p>
+<pre><code class="lang-cs">FirestoreDb db = new FirestoreDbBuilder
+{
+    ProjectId = projectId,
+    ConverterRegistry = new ConverterRegistry
+    {
+        new GuidConverter()
+    }
+}.Build();
+// Documents serialized and deserialized via db will now use the
+// custom Guid converter.
 </code></pre><h3 id="document-converters">Document converters</h3>
 <p>If you wish a .NET type to be stored as a complete document after
 custom conversion, the converter must return a value which would be
@@ -474,12 +524,55 @@ rather than <code>IFirestoreConverter&lt;Guid?&gt;</code>. If a converter is sup
 for a non-nullable value type, the converter will automatically be
 used for the corresponding nullable value type too, with null values
 being handled transparently.</p>
+<h2 id="enum-conversions">Enum conversions</h2>
+<p>By default, C# enum values are converted to their underlying integer
+values. The Google.Cloud.Firestore package includes a custom converter
+that can be specified in the same way as any other custom converter, in
+order to convert between enum values and their names instead.</p>
+<p>The example below applies the converter on the enum itself, effectively
+changing the default serialization model for that enum. The converter
+could equally be applied on a property or registered in the converter
+registry for the <code>FirestoreDb</code> used to create and retrieve documents.</p>
+<pre><code class="lang-cs">[FirestoreData(ConverterType = typeof(FirestoreEnumNameConverter&lt;SerializedByName&gt;))]
+public enum SerializedByName
+{
+    None,
+    FirstValue,
+    SecondValue
+}
+</code></pre><h1 id="value-tuples">Value tuples</h1>
+<p>C# 7 introduced a feature around the <code>System.ValueTuple</code> generic structs which are part of
+the framework. When using <a href="#mapping-with-attributed-classes">attributed properties</a>, the built-in
+converters will serialize tuples as if they were a dictionary from the tuple element names to their values.</p>
+<p>Consider the following class:</p>
+<pre><code class="lang-cs">[FirestoreData]
+public class Company
+{
+    [FirestoreProperty]
+    public string Name { get; set; }
+
+    [FirestoreProperty]
+    public (string city, string state, string country) Location { get; set; }
+}
+</code></pre><p>A document representing a <code>Company</code> will be serialized as a top-level map with <code>Name</code> and <code>Location</code> fields;
+the <code>Location</code> field will itself be a map with <code>city</code>, <code>state</code> and <code>country</code> fields.</p>
+<p>There are some limitations on this feature:</p>
+<ul>
+<li>The feature only applies to attributed properties, not types in dictionaries,
+anonymous types etc.</li>
+<li>All tuple elements must be named. A tuple type of <code>(string name, int)</code> would be invalid, for example.</li>
+<li>The property type must be either the tuple type or the nullable equivalent. For example, a property
+with a type of <code>List&lt;(string name, int value)&gt;</code> would not be valid.</li>
+<li>Only tuples with up to 7 elements are supported.</li>
+</ul>
+<p>These restrictions primarily exist for simplicity of the implementation, and the feature may be expanded
+later to lift some of them.</p>
 <h1 id="sentinel-values">Sentinel values</h1>
-<p>So far all the values we&#39;ve looked at have been known by the C# code. There are two <em>sentinel values</em> available which behave slightly differently.</p>
+<p>So far all the values we&#39;ve looked at have been known by the C# code. There are additional <em>sentinel values</em> available which behave slightly differently.</p>
 <h2 id="server-side-timestamp">Server-side timestamp</h2>
 <p>When you update a document using the server-side timestamp sentinel value, the actual timestamp that&#39;s recorded is the commit time
 according to the Firestore server.</p>
-<p>For attributed classes, you can specify <code>SentinelValue = SentinelValue.ServerTimestamp</code> in the attribute declaration. Usually
+<p>For attributed classes, you can specify <code>ServerTimestamp</code> in the attribute declaration for the property. Usually
 this will be on a property of type <code>Timestamp</code> (or <code>DateTime</code> or <code>DateTimeOffset</code>) so that you can retrieve the timestamp later.</p>
 <pre><code class="lang-cs">[FirestoreData]
 public class HighScore
@@ -493,7 +586,7 @@ public class HighScore
     [FirestoreProperty, ServerTimestamp]
     public Timestamp LastUpdated { get; set; }
 }
-</code></pre><p>For dictionaries and anonymous types, you can use <code>SentinelValue.ServerTimestamp</code> as the value itself. For example,
+</code></pre><p>For dictionaries and anonymous types, you can use <code>FieldValue.ServerTimestamp</code> as the value itself. For example,
 to update just the <code>Score</code> and <code>Timestamp</code> fields of a <code>HighScore</code> document, you could use an anonymous type instead of
 the attributed model</p>
 <pre><code class="lang-cs">await document.SetAsync(
@@ -504,9 +597,18 @@ if a document may change in several ways, you may want a timestamp for when a sp
 <h2 id="deleted-fields">Deleted fields</h2>
 <p>It can be useful to indicate that a field needs to be deleted from a document, particularly using anonymous types. For example,
 to delete a single field in a document, you can use:</p>
-<pre><code class="lang-csharp">await doc.Set(new { Score = SentinelValue.Delete }, SetOptions.MergeAll);
+<pre><code class="lang-csharp">await doc.Set(new { Score = FieldValue.Delete }, SetOptions.MergeAll);
 </code></pre><p>You <em>can</em> specify <code>SentinelValue = SentinelValue.Delete</code> in a property attribute, but this would be highly unusual. It could be useful
 as part of a schema migration strategy, for example. It&#39;s mostly supported for the sake of consistency.</p>
+<h2 id="array-union-and-removal">Array union and removal</h2>
+<p>When updating a document that contains array fields, it can sometimes be inconvenient to update the whole field if you
+simply want to either ensure that a specific value is present in the array, or remove it.</p>
+<p>The <code>FieldValue.ArrayUnion</code> and <code>FieldValue.ArrayRemove</code> methods allow values to be created (usually as part of anonymous types
+for <code>UpdateAsync</code> operations) which express these requirements simply and without a complete &quot;read-modify-write&quot; cycle.</p>
+<h2 id="numeric-increment">Numeric increment</h2>
+<p>It&#39;s common to need to modify an existing document numeric value by incrementing it by a given amount. While this can be done
+with a &quot;read-modify-write&quot; cycle in a transaction, the <code>FieldValue.Increment</code> methods allow values to be created which
+perform this increment operation server-side, removing the need for a transaction.</p>
 </article>
           </div>
           
