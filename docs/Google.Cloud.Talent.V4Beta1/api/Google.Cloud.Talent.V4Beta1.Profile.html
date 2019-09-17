@@ -149,9 +149,9 @@ as a &quot;single-source profile&quot;).</p>
   </h3>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Activities_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Activities*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Activities" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Activities">Activities</h4>
-  <div class="markdown level1 summary"><p>Optional. The individual or collaborative activities which the candidate
-has participated in, for example, open-source projects, class assignments
-that aren&apos;t listed in
+  <div class="markdown level1 summary"><p>The individual or collaborative activities which the candidate has
+participated in, for example, open-source projects, class assignments that
+aren&apos;t listed in
 [employment_records][google.cloud.talent.v4beta1.Profile.employment_records].</p>
 <p>The limitation for max number of activities is 50.</p>
 </div>
@@ -177,7 +177,7 @@ that aren&apos;t listed in
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_AdditionalContactInfo_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.AdditionalContactInfo*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_AdditionalContactInfo" data-uid="Google.Cloud.Talent.V4Beta1.Profile.AdditionalContactInfo">AdditionalContactInfo</h4>
-  <div class="markdown level1 summary"><p>Optional. Available contact information besides
+  <div class="markdown level1 summary"><p>Available contact information besides
 [addresses][google.cloud.talent.v4beta1.Profile.addresses],
 [email_addresses][google.cloud.talent.v4beta1.Profile.email_addresses],
 [phone_numbers][google.cloud.talent.v4beta1.Profile.phone_numbers] and
@@ -206,7 +206,36 @@ example, Hang-out, Skype.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Addresses_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Addresses*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Addresses" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Addresses">Addresses</h4>
-  <div class="markdown level1 summary"><p>Optional. The candidate&apos;s postal addresses.</p>
+  <div class="markdown level1 summary"><p>The candidate&apos;s postal addresses. It&apos;s highly recommended to
+input this information as accurately as possible to help improve search
+quality. Here are some recommendations:</p>
+<ul>
+<li>Provide [Address.usage][google.cloud.talent.v4beta1.Address.usage] if
+possible, especially if the address is PERSONAL. During a search only
+personal addresses are considered. If there is no such address, all
+addresses with unspecified usage are assumed to be personal.</li>
+<li>Provide [Address.current][google.cloud.talent.v4beta1.Address.current]
+for the current address if possible. During a search, only current
+addresses are considered. If there is no such address, all addresses are
+assumed to be current.</li>
+</ul>
+<p>When displaying a candidate&apos;s addresses, it is sometimes desirable to limit
+the number of addresses shown. In these cases we recommend that you display
+the addresses in the following order of priority:</p>
+<ol>
+<li>[Address.usage][google.cloud.talent.v4beta1.Address.usage] is PERSONAL
+and [Address.current][google.cloud.talent.v4beta1.Address.current] is true.</li>
+<li>[Address.usage][google.cloud.talent.v4beta1.Address.usage] is PERSONAL
+and [Address.current][google.cloud.talent.v4beta1.Address.current] is false
+or not set.</li>
+<li>[Address.usage][google.cloud.talent.v4beta1.Address.usage] is
+CONTACT_INFO_USAGE_UNSPECIFIED and
+[Address.current][google.cloud.talent.v4beta1.Address.current] is true.</li>
+<li>[Address.usage][google.cloud.talent.v4beta1.Address.usage] is
+CONTACT_INFO_USAGE_UNSPECIFIED and
+[Address.current][google.cloud.talent.v4beta1.Address.current] is false or
+not set.</li>
+</ol>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -230,7 +259,7 @@ example, Hang-out, Skype.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Applications_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Applications*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Applications" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Applications">Applications</h4>
-  <div class="markdown level1 summary"><p>Output only. The resource names of the candidate&apos;s applications.</p>
+  <div class="markdown level1 summary"><p>The resource names of the candidate&apos;s applications.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -254,7 +283,7 @@ example, Hang-out, Skype.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Assignments_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Assignments*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Assignments" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Assignments">Assignments</h4>
-  <div class="markdown level1 summary"><p>Output only. The resource names of the candidate&apos;s assignments.</p>
+  <div class="markdown level1 summary"><p>The resource names of the candidate&apos;s assignments.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -278,7 +307,7 @@ example, Hang-out, Skype.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Certifications_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Certifications*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Certifications" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Certifications">Certifications</h4>
-  <div class="markdown level1 summary"><p>Optional. The certifications acquired by the candidate.</p>
+  <div class="markdown level1 summary"><p>The certifications acquired by the candidate.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -302,7 +331,7 @@ example, Hang-out, Skype.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_CreateTime_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.CreateTime*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_CreateTime" data-uid="Google.Cloud.Talent.V4Beta1.Profile.CreateTime">CreateTime</h4>
-  <div class="markdown level1 summary"><p>Optional. The timestamp when the profile was first created at this source.</p>
+  <div class="markdown level1 summary"><p>The timestamp when the profile was first created at this source.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -326,9 +355,9 @@ example, Hang-out, Skype.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_CustomAttributes_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.CustomAttributes*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_CustomAttributes" data-uid="Google.Cloud.Talent.V4Beta1.Profile.CustomAttributes">CustomAttributes</h4>
-  <div class="markdown level1 summary"><p>Optional. A map of fields to hold both filterable and non-filterable custom
-profile attributes that aren&apos;t covered by the provided structured fields.
-See [CustomAttribute][google.cloud.talent.v4beta1.CustomAttribute] for more
+  <div class="markdown level1 summary"><p>A map of fields to hold both filterable and non-filterable custom profile
+attributes that aren&apos;t covered by the provided structured fields. See
+[CustomAttribute][google.cloud.talent.v4beta1.CustomAttribute] for more
 details.</p>
 <p>At most 100 filterable and at most 100 unfilterable keys are supported. If
 limit is exceeded, an error is thrown. Custom attributes are <code>unfilterable</code>
@@ -363,11 +392,40 @@ The maximum total byte size is 10KB.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Talent_V4Beta1_Profile_DerivedAddresses_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.DerivedAddresses*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_DerivedAddresses" data-uid="Google.Cloud.Talent.V4Beta1.Profile.DerivedAddresses">DerivedAddresses</h4>
+  <div class="markdown level1 summary"><p>Output only. Derived locations of the profile, resolved from
+[Profile.addresses][google.cloud.talent.v4beta1.Profile.addresses].</p>
+<p>[derived_addresses][google.cloud.talent.v4beta1.Profile.derived_addresses]
+are exactly matched to
+[Profile.addresses][google.cloud.talent.v4beta1.Profile.addresses] in the
+same order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;Location&gt; DerivedAddresses { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.Location.html">Location</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_EducationRecords_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.EducationRecords*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_EducationRecords" data-uid="Google.Cloud.Talent.V4Beta1.Profile.EducationRecords">EducationRecords</h4>
-  <div class="markdown level1 summary"><p>Optional. The education history record of the candidate. It&apos;s highly
-recommended to input this information as accurately as possible to help
-improve search quality. Here are some recommendations:</p>
+  <div class="markdown level1 summary"><p>The education history record of the candidate. It&apos;s highly recommended to
+input this information as accurately as possible to help improve search
+quality. Here are some recommendations:</p>
 <ul>
 <li>Specify the start and end dates of the education records.</li>
 <li>List each education type separately, no matter how minor the change is.
@@ -378,7 +436,7 @@ school but different degrees.</li>
 for the current education if possible. If not, it&apos;s inferred from user
 inputs.</li>
 </ul>
-<p>The limitation for max number of education records is 10.</p>
+<p>The limitation for max number of education records is 100.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -402,7 +460,7 @@ inputs.</li>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_EmailAddresses_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.EmailAddresses*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_EmailAddresses" data-uid="Google.Cloud.Talent.V4Beta1.Profile.EmailAddresses">EmailAddresses</h4>
-  <div class="markdown level1 summary"><p>Optional. The candidate&apos;s email addresses.</p>
+  <div class="markdown level1 summary"><p>The candidate&apos;s email addresses.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -426,9 +484,9 @@ inputs.</li>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_EmploymentRecords_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.EmploymentRecords*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_EmploymentRecords" data-uid="Google.Cloud.Talent.V4Beta1.Profile.EmploymentRecords">EmploymentRecords</h4>
-  <div class="markdown level1 summary"><p>Optional. The employment history records of the candidate. It&apos;s highly
-recommended to input this information as accurately as possible to help
-improve search quality. Here are some recommendations:</p>
+  <div class="markdown level1 summary"><p>The employment history records of the candidate. It&apos;s highly recommended
+to input this information as accurately as possible to help improve search
+quality. Here are some recommendations:</p>
 <ul>
 <li>Specify the start and end dates of the employment records.</li>
 <li>List different employment types separately, no matter how minor the
@@ -440,7 +498,7 @@ software engineer&quot;.</li>
 for the current employment if possible. If not, it&apos;s inferred from user
 inputs.</li>
 </ul>
-<p>The limitation for max number of employment records is 50.</p>
+<p>The limitation for max number of employment records is 100.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -464,7 +522,9 @@ inputs.</li>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_ExternalId_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.ExternalId*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_ExternalId" data-uid="Google.Cloud.Talent.V4Beta1.Profile.ExternalId">ExternalId</h4>
-  <div class="markdown level1 summary"><p>Optional. Profile&apos;s id in client system if available.</p>
+  <div class="markdown level1 summary"><p>Profile&apos;s id in client system, if available. This value is unique for each
+profile inside a tenant. An error is thrown if another profile with the
+same external_id is created.</p>
 <p>The maximum number of bytes allowed is 100.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -489,8 +549,8 @@ inputs.</li>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_GroupId_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.GroupId*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_GroupId" data-uid="Google.Cloud.Talent.V4Beta1.Profile.GroupId">GroupId</h4>
-  <div class="markdown level1 summary"><p>Optional. The cluster id of the profile to associate with other profile(s)
-for the same candidate.</p>
+  <div class="markdown level1 summary"><p>The cluster id of the profile to associate with other profile(s) for the
+same candidate.</p>
 <p>This field should be generated by the customer. If a value is not provided,
 a random UUID is assigned to this field of the profile.</p>
 <p>This is used to link multiple profiles to the same candidate. For example,
@@ -523,7 +583,7 @@ referring to the same candidate.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_IsHirable_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.IsHirable*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_IsHirable" data-uid="Google.Cloud.Talent.V4Beta1.Profile.IsHirable">IsHirable</h4>
-  <div class="markdown level1 summary"><p>Optional. Indicates the hirable status of the candidate.</p>
+  <div class="markdown level1 summary"><p>Indicates the hirable status of the candidate.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -577,7 +637,7 @@ search query.  This is only returned in
 <p>Resource name assigned to a profile by the API.</p>
 <p>The format is
 &quot;projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}&quot;,
-for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
+for example, &quot;projects/foo/tenants/bar/profiles/baz&quot;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -601,7 +661,7 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Patents_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Patents*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Patents" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Patents">Patents</h4>
-  <div class="markdown level1 summary"><p>Optional. The patents acquired by the candidate.</p>
+  <div class="markdown level1 summary"><p>The patents acquired by the candidate.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -625,7 +685,7 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_PersonalUris_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.PersonalUris*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_PersonalUris" data-uid="Google.Cloud.Talent.V4Beta1.Profile.PersonalUris">PersonalUris</h4>
-  <div class="markdown level1 summary"><p>Optional. The candidate&apos;s personal URIs.</p>
+  <div class="markdown level1 summary"><p>The candidate&apos;s personal URIs.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -649,7 +709,7 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_PersonNames_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.PersonNames*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_PersonNames" data-uid="Google.Cloud.Talent.V4Beta1.Profile.PersonNames">PersonNames</h4>
-  <div class="markdown level1 summary"><p>Optional. The names of the candidate this profile references.</p>
+  <div class="markdown level1 summary"><p>The names of the candidate this profile references.</p>
 <p>Currently only one person name is supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -674,7 +734,7 @@ for example, &quot;projects/api-test-project/tenants/foo/profiles/bar&quot;.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_PhoneNumbers_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.PhoneNumbers*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_PhoneNumbers" data-uid="Google.Cloud.Talent.V4Beta1.Profile.PhoneNumbers">PhoneNumbers</h4>
-  <div class="markdown level1 summary"><p>Optional. The candidate&apos;s phone number(s).</p>
+  <div class="markdown level1 summary"><p>The candidate&apos;s phone number(s).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -748,7 +808,7 @@ searchable or not.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Publications_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Publications*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Publications" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Publications">Publications</h4>
-  <div class="markdown level1 summary"><p>Optional. The publications published by the candidate.</p>
+  <div class="markdown level1 summary"><p>The publications published by the candidate.</p>
 <p>The limitation for max number of publications is 50.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -773,7 +833,7 @@ searchable or not.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Resume_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Resume*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Resume" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Resume">Resume</h4>
-  <div class="markdown level1 summary"><p>Optional. The resume representing this profile.</p>
+  <div class="markdown level1 summary"><p>The resume representing this profile.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -797,9 +857,9 @@ searchable or not.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Skills_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Skills*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Skills" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Skills">Skills</h4>
-  <div class="markdown level1 summary"><p>Optional. The skill set of the candidate. It&apos;s highly recommended to
-provide as much information as possible to help improve the search quality.</p>
-<p>The limitation for max number of skills is 100.</p>
+  <div class="markdown level1 summary"><p>The skill set of the candidate. It&apos;s highly recommended to provide as
+much information as possible to help improve the search quality.</p>
+<p>The limitation for max number of skills is 500.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -823,7 +883,7 @@ provide as much information as possible to help improve the search quality.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Source_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Source*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Source" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Source">Source</h4>
-  <div class="markdown level1 summary"><p>Optional. The source description indicating where the profile is acquired.</p>
+  <div class="markdown level1 summary"><p>The source description indicating where the profile is acquired.</p>
 <p>For example, if a candidate profile is acquired from a resume, the user can
 input &quot;resume&quot; here to indicate the source.</p>
 <p>The maximum number of bytes allowed is 100.</p>
@@ -850,7 +910,7 @@ input &quot;resume&quot; here to indicate the source.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_UpdateTime_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.UpdateTime*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_UpdateTime" data-uid="Google.Cloud.Talent.V4Beta1.Profile.UpdateTime">UpdateTime</h4>
-  <div class="markdown level1 summary"><p>Optional. The timestamp when the profile was last updated at this source.</p>
+  <div class="markdown level1 summary"><p>The timestamp when the profile was last updated at this source.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -874,8 +934,7 @@ input &quot;resume&quot; here to indicate the source.</p>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Uri_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Uri*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Uri" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Uri">Uri</h4>
-  <div class="markdown level1 summary"><p>Optional. The URI set by clients that links to this profile&apos;s client-side
-copy.</p>
+  <div class="markdown level1 summary"><p>The URI set by clients that links to this profile&apos;s client-side copy.</p>
 <p>The maximum number of bytes allowed is 4000.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
