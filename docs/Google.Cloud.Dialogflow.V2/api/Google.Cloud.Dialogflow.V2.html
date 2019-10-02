@@ -371,7 +371,7 @@ action is an extraction of a user command or sentence semantics.</p>
       <section><p>Container for nested types declared in the Card message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dialogflow.V2.Intent.Types.Message.Types.Card.Types.Button.html">Intent.Types.Message.Types.Card.Types.Button</a></h4>
-      <section><p>Optional. Contains information about a button.</p>
+      <section><p>Contains information about a button.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dialogflow.V2.Intent.Types.Message.Types.CarouselSelect.html">Intent.Types.Message.Types.CarouselSelect</a></h4>
       <section><p>The card for presenting a carousel of options to select from.</p>
@@ -588,6 +588,9 @@ actionable data for your application.</p>
 entities that are built for an individual user such as
 favorites, preferences, playlists, and so on. You can redefine a session
 entity type at the session level.</p>
+<p>Session entity methods do not work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
 <p>For more information about entity types, see the
 <a href="https://cloud.google.com/dialogflow/docs/entities-overview">Dialogflow
 documentation</a>.</p>
@@ -645,17 +648,31 @@ user intent and respond.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dialogflow.V2.StreamingDetectIntentRequest.html">StreamingDetectIntentRequest</a></h4>
       <section><p>The top-level message sent by the client to the
-<code>StreamingDetectIntent</code> method.</p>
+[StreamingDetectIntent][] method.</p>
 <p>Multiple request messages should be sent in order:</p>
 <ol>
-<li><p>The first message must contain <code>session</code>, <code>query_input</code> plus optionally
-<code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.</p>
-</li>
-<li><p>If <code>query_input</code> was set to a streaming input audio config,
-all subsequent messages must contain only <code>input_audio</code>.
-Otherwise, finish the request stream.</p>
-</li>
+<li>The first message must contain [StreamingDetectIntentRequest.session][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.session],
+[StreamingDetectIntentRequest.query_input] plus optionally
+[StreamingDetectIntentRequest.query_params]. If the client wants to
+receive an audio response, it should also contain
+[StreamingDetectIntentRequest.output_audio_config][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config]. The message
+must not contain [StreamingDetectIntentRequest.input_audio][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.input_audio].</li>
+<li>If [StreamingDetectIntentRequest.query_input][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.query_input] was set to
+[StreamingDetectIntentRequest.query_input.audio_config][], all subsequent
+messages must contain [StreamingDetectIntentRequest.input_audio] to
+continue with Speech recognition.
+If you decide to rather detect an intent from text input after you
+already started Speech recognition, please send a message with
+[StreamingDetectIntentRequest.query_input.text][].</li>
 </ol>
+<p>However, note that:</p>
+<ul>
+<li>Dialogflow will bill you for the audio duration so far.</li>
+<li>Dialogflow discards all Speech recognition results in favor of the
+input text.</li>
+<li>Dialogflow will use the language code from the first message.</li>
+</ul>
+<p>After you sent all input, you must half-close or abort the request stream.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Dialogflow.V2.StreamingDetectIntentResponse.html">StreamingDetectIntentResponse</a></h4>
       <section><p>The top-level message returned from the
@@ -691,7 +708,7 @@ is_final: true</p>
 </li>
 <li><p>transcript: &quot; that is&quot;</p>
 </li>
-<li><p>message_type: <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code></p>
+<li><p>message_type: <code>END_OF_SINGLE_UTTERANCE</code></p>
 </li>
 <li><p>transcript: &quot; that is the question&quot;
 is_final: true</p>
@@ -702,9 +719,9 @@ is_final: true</p>
 or not to be that is the question&quot;.</p>
 <p>In each response we populate:</p>
 <ul>
-<li><p>for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</p>
+<li><p>for <code>TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</p>
 </li>
-<li><p>for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>message_type</code>.</p>
+<li><p>for <code>END_OF_SINGLE_UTTERANCE</code>: only <code>message_type</code>.</p>
 </li>
 </ul>
 </section>

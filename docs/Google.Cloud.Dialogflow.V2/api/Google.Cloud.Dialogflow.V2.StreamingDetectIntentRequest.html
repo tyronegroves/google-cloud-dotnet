@@ -74,17 +74,31 @@
   <h1 id="Google_Cloud_Dialogflow_V2_StreamingDetectIntentRequest" data-uid="Google.Cloud.Dialogflow.V2.StreamingDetectIntentRequest" class="text-break">Class StreamingDetectIntentRequest
   </h1>
   <div class="markdown level0 summary"><p>The top-level message sent by the client to the
-<code>StreamingDetectIntent</code> method.</p>
+[StreamingDetectIntent][] method.</p>
 <p>Multiple request messages should be sent in order:</p>
 <ol>
-<li><p>The first message must contain <code>session</code>, <code>query_input</code> plus optionally
-<code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.</p>
-</li>
-<li><p>If <code>query_input</code> was set to a streaming input audio config,
-all subsequent messages must contain only <code>input_audio</code>.
-Otherwise, finish the request stream.</p>
-</li>
+<li>The first message must contain [StreamingDetectIntentRequest.session][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.session],
+[StreamingDetectIntentRequest.query_input] plus optionally
+[StreamingDetectIntentRequest.query_params]. If the client wants to
+receive an audio response, it should also contain
+[StreamingDetectIntentRequest.output_audio_config][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config]. The message
+must not contain [StreamingDetectIntentRequest.input_audio][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.input_audio].</li>
+<li>If [StreamingDetectIntentRequest.query_input][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.query_input] was set to
+[StreamingDetectIntentRequest.query_input.audio_config][], all subsequent
+messages must contain [StreamingDetectIntentRequest.input_audio] to
+continue with Speech recognition.
+If you decide to rather detect an intent from text input after you
+already started Speech recognition, please send a message with
+[StreamingDetectIntentRequest.query_input.text][].</li>
 </ol>
+<p>However, note that:</p>
+<ul>
+<li>Dialogflow will bill you for the audio duration so far.</li>
+<li>Dialogflow discards all Speech recognition results in favor of the
+input text.</li>
+<li>Dialogflow will use the language code from the first message.</li>
+</ul>
+<p>After you sent all input, you must half-close or abort the request stream.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -297,19 +311,20 @@ ID must not exceed 36 characters.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_StreamingDetectIntentRequest_SingleUtterance_" data-uid="Google.Cloud.Dialogflow.V2.StreamingDetectIntentRequest.SingleUtterance*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_StreamingDetectIntentRequest_SingleUtterance" data-uid="Google.Cloud.Dialogflow.V2.StreamingDetectIntentRequest.SingleUtterance">SingleUtterance</h4>
-  <div class="markdown level1 summary"><p>Optional. If <code>false</code> (default), recognition does not cease until the
-client closes the stream.
-If <code>true</code>, the recognizer will detect a single spoken utterance in input
-audio. Recognition ceases when it detects the audio&apos;s voice has
-stopped or paused. In this case, once a detected intent is received, the
-client should close the stream and start a new request with a new stream as
-needed.
+  <div class="markdown level1 summary"><p>Optional. Please use [InputAudioConfig.single_utterance][google.cloud.dialogflow.v2.InputAudioConfig.single_utterance] instead.
+If <code>false</code> (default), recognition does not cease until
+the client closes the stream. If <code>true</code>, the recognizer will detect a
+single spoken utterance in input audio. Recognition ceases when it detects
+the audio&apos;s voice has stopped or paused. In this case, once a detected
+intent is received, the client should close the stream and start a new
+request with a new stream as needed.
 This setting is ignored when <code>query_input</code> is a piece of text or an event.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool SingleUtterance { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public bool SingleUtterance { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
