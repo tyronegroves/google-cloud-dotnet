@@ -105,6 +105,30 @@
   </div>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetOperationsClient_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDatasetOperationsClient*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetOperationsClient" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDatasetOperationsClient">CreateDatasetOperationsClient</h4>
+  <div class="markdown level1 summary"><p>The long-running operations client for <code>CreateDataset</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual OperationsClient CreateDatasetOperationsClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateModelOperationsClient_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateModelOperationsClient*"></a>
   <h4 id="Google_Cloud_AutoML_V1_AutoMlClient_CreateModelOperationsClient" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateModelOperationsClient">CreateModelOperationsClient</h4>
   <div class="markdown level1 summary"><p>The long-running operations client for <code>CreateModel</code>.</p>
@@ -554,7 +578,7 @@ await channel.ShutdownAsync();</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Operation CreateDataset(CreateDatasetRequest request, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Dataset, OperationMetadata&gt; CreateDataset(CreateDatasetRequest request, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -590,7 +614,7 @@ await channel.ShutdownAsync();</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.LongRunning.Operation.html">Operation</a></td>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
         <td><p>The RPC response.</p>
 </td>
       </tr>
@@ -607,7 +631,26 @@ CreateDatasetRequest request = new CreateDatasetRequest
     Dataset = new Dataset(),
 };
 // Make the request
-Operation response = autoMlClient.CreateDataset(request);
+Operation&lt;Dataset, OperationMetadata&gt; response =
+    autoMlClient.CreateDataset(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Dataset, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+Dataset result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Dataset, OperationMetadata&gt; retrievedResponse =
+    autoMlClient.PollOnceCreateDataset(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Dataset retrievedResult = retrievedResponse.Result;
+}
 </code></pre></div>
   </div>
   <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDataset_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDataset*"></a>
@@ -617,7 +660,7 @@ Operation response = autoMlClient.CreateDataset(request);
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Operation CreateDataset(LocationName parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Dataset, OperationMetadata&gt; CreateDataset(LocationName parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -659,7 +702,7 @@ Operation response = autoMlClient.CreateDataset(request);
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.LongRunning.Operation.html">Operation</a></td>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
         <td><p>The RPC response.</p>
 </td>
       </tr>
@@ -673,7 +716,26 @@ AutoMlClient autoMlClient = AutoMlClient.Create();
 LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 Dataset dataset = new Dataset();
 // Make the request
-Operation response = autoMlClient.CreateDataset(parent, dataset);
+Operation&lt;Dataset, OperationMetadata&gt; response =
+    autoMlClient.CreateDataset(parent, dataset);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Dataset, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+Dataset result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Dataset, OperationMetadata&gt; retrievedResponse =
+    autoMlClient.PollOnceCreateDataset(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Dataset retrievedResult = retrievedResponse.Result;
+}
 </code></pre></div>
   </div>
   <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDataset_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDataset*"></a>
@@ -683,7 +745,7 @@ Operation response = autoMlClient.CreateDataset(parent, dataset);
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Operation CreateDataset(string parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Dataset, OperationMetadata&gt; CreateDataset(string parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -725,7 +787,7 @@ Operation response = autoMlClient.CreateDataset(parent, dataset);
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.LongRunning.Operation.html">Operation</a></td>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
         <td><p>The RPC response.</p>
 </td>
       </tr>
@@ -738,7 +800,7 @@ Operation response = autoMlClient.CreateDataset(parent, dataset);
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateDatasetAsync(CreateDatasetRequest request, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Dataset, OperationMetadata&gt;&gt; CreateDatasetAsync(CreateDatasetRequest request, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -774,7 +836,7 @@ Operation response = autoMlClient.CreateDataset(parent, dataset);
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
         <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
@@ -791,70 +853,26 @@ CreateDatasetRequest request = new CreateDatasetRequest
     Dataset = new Dataset(),
 };
 // Make the request
-Operation response = await autoMlClient.CreateDatasetAsync(request);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetAsync_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDatasetAsync*"></a>
-  <h4 id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetAsync_Google_Cloud_AutoML_V1_CreateDatasetRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDatasetAsync(Google.Cloud.AutoML.V1.CreateDatasetRequest,System.Threading.CancellationToken)">CreateDatasetAsync(CreateDatasetRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a dataset.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateDatasetAsync(CreateDatasetRequest request, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.AutoML.V1.CreateDatasetRequest.html">CreateDatasetRequest</a></td>
-        <td><span class="parametername">request</span></td>
-        <td><p>The request object containing all of the parameters for the API call.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetAsync_Google_Cloud_AutoML_V1_CreateDatasetRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-AutoMlClient autoMlClient = await AutoMlClient.CreateAsync();
-// Initialize request argument(s)
-CreateDatasetRequest request = new CreateDatasetRequest
+Operation&lt;Dataset, OperationMetadata&gt; response =
+    await autoMlClient.CreateDatasetAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Dataset, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Dataset result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Dataset, OperationMetadata&gt; retrievedResponse =
+    await autoMlClient.PollOnceCreateDatasetAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
-    Dataset = new Dataset(),
-};
-// Make the request
-Operation response = await autoMlClient.CreateDatasetAsync(request);
+    // If it has completed, then access the result
+    Dataset retrievedResult = retrievedResponse.Result;
+}
 </code></pre></div>
   </div>
   <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetAsync_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDatasetAsync*"></a>
@@ -864,7 +882,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(request);
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateDatasetAsync(LocationName parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Dataset, OperationMetadata&gt;&gt; CreateDatasetAsync(LocationName parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -906,7 +924,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(request);
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
         <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
@@ -920,7 +938,26 @@ AutoMlClient autoMlClient = await AutoMlClient.CreateAsync();
 LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 Dataset dataset = new Dataset();
 // Make the request
-Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
+Operation&lt;Dataset, OperationMetadata&gt; response =
+    await autoMlClient.CreateDatasetAsync(parent, dataset);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Dataset, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Dataset result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Dataset, OperationMetadata&gt; retrievedResponse =
+    await autoMlClient.PollOnceCreateDatasetAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Dataset retrievedResult = retrievedResponse.Result;
+}
 </code></pre></div>
   </div>
   <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetAsync_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDatasetAsync*"></a>
@@ -930,7 +967,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateDatasetAsync(LocationName parent, Dataset dataset, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Dataset, OperationMetadata&gt;&gt; CreateDatasetAsync(LocationName parent, Dataset dataset, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -972,7 +1009,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
         <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
@@ -986,7 +1023,26 @@ AutoMlClient autoMlClient = await AutoMlClient.CreateAsync();
 LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 Dataset dataset = new Dataset();
 // Make the request
-Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
+Operation&lt;Dataset, OperationMetadata&gt; response =
+    await autoMlClient.CreateDatasetAsync(parent, dataset);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Dataset, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Dataset result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Dataset, OperationMetadata&gt; retrievedResponse =
+    await autoMlClient.PollOnceCreateDatasetAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Dataset retrievedResult = retrievedResponse.Result;
+}
 </code></pre></div>
   </div>
   <a id="Google_Cloud_AutoML_V1_AutoMlClient_CreateDatasetAsync_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.CreateDatasetAsync*"></a>
@@ -996,7 +1052,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateDatasetAsync(string parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Dataset, OperationMetadata&gt;&gt; CreateDatasetAsync(string parent, Dataset dataset, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1038,7 +1094,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
         <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
@@ -1051,7 +1107,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateDatasetAsync(string parent, Dataset dataset, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Dataset, OperationMetadata&gt;&gt; CreateDatasetAsync(string parent, Dataset dataset, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1093,7 +1149,7 @@ Operation response = await autoMlClient.CreateDatasetAsync(parent, dataset);
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
         <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
@@ -7187,6 +7243,104 @@ A value of <code>null</code> or 0 uses a server-defined page size.</p>
       <tr>
         <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.ListModelsResponse.html">ListModelsResponse</a>, <a class="xref" href="Google.Cloud.AutoML.V1.Model.html">Model</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.AutoML.V1.Model.html">Model</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_AutoML_V1_AutoMlClient_PollOnceCreateDataset_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.PollOnceCreateDataset*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_AutoMlClient_PollOnceCreateDataset_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.PollOnceCreateDataset(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceCreateDataset(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>CreateDataset</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Dataset, OperationMetadata&gt; PollOnceCreateDataset(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_AutoML_V1_AutoMlClient_PollOnceCreateDatasetAsync_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.PollOnceCreateDatasetAsync*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_AutoMlClient_PollOnceCreateDatasetAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.AutoMlClient.PollOnceCreateDatasetAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceCreateDatasetAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of <code>CreateDatasetAsync</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Dataset, OperationMetadata&gt;&gt; PollOnceCreateDatasetAsync(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.Dataset.html">Dataset</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A task representing the result of polling the operation.</p>
 </td>
       </tr>
     </tbody>
