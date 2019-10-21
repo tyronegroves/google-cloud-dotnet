@@ -73,9 +73,26 @@
   
   <h1 id="Google_Cloud_Monitoring_V3_TimeInterval" data-uid="Google.Cloud.Monitoring.V3.TimeInterval" class="text-break">Class TimeInterval
   </h1>
-  <div class="markdown level0 summary"><p>A time interval extending just after a start time through an end time.
-If the start time is the same as the end time, then the interval
-represents a single point in time.</p>
+  <div class="markdown level0 summary"><p>A closed time interval. It extends from the start time to the end time, and includes both: <code>[startTime, endTime]</code>. Valid time intervals depend on the <a href="/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind"><code>MetricKind</code></a> of the metric value. In no case can the end time be earlier than the start time.</p>
+<ul>
+<li><p>For a <code>GAUGE</code> metric, the <code>startTime</code> value is technically optional; if
+no value is specified, the start time defaults to the value of the
+end time, and the interval represents a single point in time. If both
+start and end times are specified, they must be identical. Such an
+interval is valid only for <code>GAUGE</code> metrics, which are point-in-time
+measurements.</p>
+</li>
+<li><p>For <code>DELTA</code> and <code>CUMULATIVE</code> metrics, the start time must be earlier
+than the end time.</p>
+</li>
+<li><p>In all cases, the start time of the next interval must be
+at least a microsecond after the end time of the previous interval.
+Because the interval is closed, if the start time of a new interval
+is the same as the end time of the previous interval, data written
+at the new start time could overwrite data written at the previous
+end time.</p>
+</li>
+</ul>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">

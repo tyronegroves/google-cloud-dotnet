@@ -172,11 +172,11 @@ availability.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_ContentMatchers_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.ContentMatchers*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_ContentMatchers" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.ContentMatchers">ContentMatchers</h4>
-  <div class="markdown level1 summary"><p>The expected content on the page the check is run against.
-Currently, only the first entry in the list is supported, and other entries
-will be ignored. The server will look for an exact match of the string in
-the page response&apos;s content. This field is optional and should only be
-specified if a content match is required.</p>
+  <div class="markdown level1 summary"><p>The content that is expected to appear in the data returned by the target
+server against which the check is run.  Currently, only the first entry
+in the <code>content_matchers</code> list is supported, and additional entries will
+be ignored. This field is optional and should only be specified if a
+content match is required as part of the/ Uptime check.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -200,7 +200,7 @@ specified if a content match is required.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_DisplayName_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.DisplayName*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_DisplayName" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.DisplayName">DisplayName</h4>
-  <div class="markdown level1 summary"><p>A human-friendly name for the uptime check configuration. The display name
+  <div class="markdown level1 summary"><p>A human-friendly name for the Uptime check configuration. The display name
 should be unique within a Stackdriver Workspace in order to make it easier
 to identify; however, uniqueness is not enforced. Required.</p>
 </div>
@@ -251,13 +251,15 @@ to identify; however, uniqueness is not enforced. Required.</p>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_InternalCheckers_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.InternalCheckers*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_InternalCheckers" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.InternalCheckers">InternalCheckers</h4>
   <div class="markdown level1 summary"><p>The internal checkers that this check will egress from. If <code>is_internal</code> is
-true and this list is empty, the check will egress from all the
-InternalCheckers configured for the project that owns this CheckConfig.</p>
+<code>true</code> and this list is empty, the check will egress from all the
+InternalCheckers configured for the project that owns this
+<code>UptimeCheckConfig</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;InternalChecker&gt; InternalCheckers { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public RepeatedField&lt;InternalChecker&gt; InternalCheckers { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -276,15 +278,16 @@ InternalCheckers configured for the project that owns this CheckConfig.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_IsInternal_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.IsInternal*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_IsInternal" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.IsInternal">IsInternal</h4>
-  <div class="markdown level1 summary"><p>If this is true, then checks are made only from the &apos;internal_checkers&apos;.
-If it is false, then checks are made only from the &apos;selected_regions&apos;.
-It is an error to provide &apos;selected_regions&apos; when is_internal is true,
-or to provide &apos;internal_checkers&apos; when is_internal is false.</p>
+  <div class="markdown level1 summary"><p>If this is <code>true</code>, then checks are made only from the &apos;internal_checkers&apos;.
+If it is <code>false</code>, then checks are made only from the &apos;selected_regions&apos;.
+It is an error to provide &apos;selected_regions&apos; when is_internal is <code>true</code>,
+or to provide &apos;internal_checkers&apos; when is_internal is <code>false</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsInternal { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public bool IsInternal { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -306,12 +309,12 @@ or to provide &apos;internal_checkers&apos; when is_internal is false.</p>
   <div class="markdown level1 summary"><p>The <a href="https://cloud.google.com/monitoring/api/resources">monitored
 resource</a> associated
 with the configuration.
-The following monitored resource types are supported for uptime checks:
-uptime_url
-gce_instance
-gae_app
-aws_ec2_instance
-aws_elb_load_balancer</p>
+The following monitored resource types are supported for Uptime checks:
+<code>uptime_url</code>,
+<code>gce_instance</code>,
+<code>gae_app</code>,
+<code>aws_ec2_instance</code>,
+<code>aws_elb_load_balancer</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -335,9 +338,9 @@ aws_elb_load_balancer</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Name_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Name*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Name" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Name">Name</h4>
-  <div class="markdown level1 summary"><p>A unique resource name for this UptimeCheckConfig. The format is:</p>
+  <div class="markdown level1 summary"><p>A unique resource name for this Uptime check configuration. The format is:</p>
 <p><code>projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]</code>.</p>
-<p>This field should be omitted when creating the uptime check configuration;
+<p>This field should be omitted when creating the Uptime check configuration;
 on create, the resource name is assigned by the server and included in the
 response.</p>
 </div>
@@ -363,10 +366,10 @@ response.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Period_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Period*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Period" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Period">Period</h4>
-  <div class="markdown level1 summary"><p>How often, in seconds, the uptime check is performed.
+  <div class="markdown level1 summary"><p>How often, in seconds, the Uptime check is performed.
 Currently, the only supported values are <code>60s</code> (1 minute), <code>300s</code>
 (5 minutes), <code>600s</code> (10 minutes), and <code>900s</code> (15 minutes). Optional,
-defaults to <code>300s</code>.</p>
+defaults to <code>60s</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -439,10 +442,9 @@ defaults to <code>300s</code>.</p>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_SelectedRegions" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.SelectedRegions">SelectedRegions</h4>
   <div class="markdown level1 summary"><p>The list of regions from which the check will be run.
 Some regions contain one location, and others contain more than one.
-If this field is specified, enough regions to include a minimum of
-3 locations must be provided, or an error message is returned.
-Not specifying this field will result in uptime checks running from all
-regions.</p>
+If this field is specified, enough regions must be provided to include a
+minimum of 3 locations.  Not specifying this field will result in Uptime
+checks running from all available regions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

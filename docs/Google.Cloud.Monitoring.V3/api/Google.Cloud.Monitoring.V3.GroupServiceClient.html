@@ -2560,6 +2560,175 @@ foreach (Group group in groups.Take(10))
 }
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroups_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroups*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroups_Google_Cloud_Monitoring_V3_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroups(Google.Cloud.Monitoring.V3.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListGroups(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists the existing groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListGroupsResponse, Group&gt; ListGroups(ProjectName name, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.ProjectName.html">ProjectName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The project whose groups are to be listed. The format is
+<code>&amp;quot;projects/{project_id_or_number}&amp;quot;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListGroupsResponse.html">ListGroupsResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroups_Google_Cloud_Monitoring_V3_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+GroupServiceClient groupServiceClient = GroupServiceClient.Create();
+// Initialize request argument(s)
+ProjectName name = new ProjectName(&quot;[PROJECT]&quot;);
+// Make the request
+PagedEnumerable&lt;ListGroupsResponse, Group&gt; response =
+    groupServiceClient.ListGroups(name);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Group item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListGroupsResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Group item in page)
+    {
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Group&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Group item in singlePage)
+{
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroups_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroups*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroups_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroups(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListGroups(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists the existing groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListGroupsResponse, Group&gt; ListGroups(string name, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The project whose groups are to be listed. The format is
+<code>&amp;quot;projects/{project_id_or_number}&amp;quot;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListGroupsResponse.html">ListGroupsResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroupsAsync_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroupsAsync*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroupsAsync_Google_Cloud_Monitoring_V3_ListGroupsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroupsAsync(Google.Cloud.Monitoring.V3.ListGroupsRequest,Google.Api.Gax.Grpc.CallSettings)">ListGroupsAsync(ListGroupsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the existing groups.</p>
@@ -2653,6 +2822,175 @@ foreach (Group item in singlePage)
 string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroupsAsync_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroupsAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroupsAsync_Google_Cloud_Monitoring_V3_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroupsAsync(Google.Cloud.Monitoring.V3.ProjectName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListGroupsAsync(ProjectName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists the existing groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListGroupsResponse, Group&gt; ListGroupsAsync(ProjectName name, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.ProjectName.html">ProjectName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The project whose groups are to be listed. The format is
+<code>&amp;quot;projects/{project_id_or_number}&amp;quot;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListGroupsResponse.html">ListGroupsResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroupsAsync_Google_Cloud_Monitoring_V3_ProjectName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+GroupServiceClient groupServiceClient = await GroupServiceClient.CreateAsync();
+// Initialize request argument(s)
+ProjectName name = new ProjectName(&quot;[PROJECT]&quot;);
+// Make the request
+PagedAsyncEnumerable&lt;ListGroupsResponse, Group&gt; response =
+    groupServiceClient.ListGroupsAsync(name);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Group item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListGroupsResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Group item in page)
+    {
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Group&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Group item in singlePage)
+{
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroupsAsync_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroupsAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ListGroupsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ListGroupsAsync(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListGroupsAsync(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists the existing groups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListGroupsResponse, Group&gt; ListGroupsAsync(string name, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>The project whose groups are to be listed. The format is
+<code>&amp;quot;projects/{project_id_or_number}&amp;quot;</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request.
+A value of <code>null</code> or an empty string retrieves the first page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller.
+A value of <code>null</code> or 0 uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListGroupsResponse.html">ListGroupsResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.Group.html">Group</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Monitoring_V3_GroupServiceClient_ShutdownDefaultChannelsAsync_" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ShutdownDefaultChannelsAsync*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_GroupServiceClient_ShutdownDefaultChannelsAsync" data-uid="Google.Cloud.Monitoring.V3.GroupServiceClient.ShutdownDefaultChannelsAsync">ShutdownDefaultChannelsAsync()</h4>
   <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Monitoring.V3.GroupServiceClient.html#Google_Cloud_Monitoring_V3_GroupServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Monitoring_V3_GroupServiceSettings_">Create(ServiceEndpoint, GroupServiceSettings)</a>

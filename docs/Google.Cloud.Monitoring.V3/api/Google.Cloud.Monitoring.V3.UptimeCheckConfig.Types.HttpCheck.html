@@ -73,7 +73,7 @@
   
   <h1 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck" class="text-break">Class UptimeCheckConfig.Types.HttpCheck
   </h1>
-  <div class="markdown level0 summary"><p>Information involved in an HTTP/HTTPS uptime check request.</p>
+  <div class="markdown level0 summary"><p>Information involved in an HTTP/HTTPS Uptime check request.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -173,7 +173,7 @@ defaults to empty.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Headers_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Headers*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Headers" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Headers">Headers</h4>
-  <div class="markdown level1 summary"><p>The list of headers to send as part of the uptime check request.
+  <div class="markdown level1 summary"><p>The list of headers to send as part of the Uptime check request.
 If two headers have the same key and different values, they should
 be entered as a single header, with the value being a comma-separated
 list of all the desired values as described at
@@ -208,8 +208,8 @@ The maximum number of headers allowed is 100.</p>
 Encryption should be specified for any headers related to authentication
 that you do not wish to be seen when retrieving the configuration. The
 server will be responsible for encrypting the headers.
-On Get/List calls, if mask_headers is set to True then the headers
-will be obscured with ******.</p>
+On Get/List calls, if <code>mask_headers</code> is set to <code>true</code> then the headers
+will be obscured with <code>******.</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -233,9 +233,11 @@ will be obscured with ******.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Path_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Path*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Path" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Path">Path</h4>
-  <div class="markdown level1 summary"><p>The path to the page to run the check against. Will be combined with the
-host (specified within the MonitoredResource) and port to construct the
-full URL. Optional (defaults to &quot;/&quot;).</p>
+  <div class="markdown level1 summary"><p>Optional (defaults to &quot;/&quot;). The path to the page against which to run
+the check. Will be combined with the <code>host</code> (specified within the
+<code>monitored_resource</code>) and <code>port</code> to construct the full URL. If the
+provided path does not begin with &quot;/&quot;, a &quot;/&quot; will be prepended
+automatically.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -259,9 +261,10 @@ full URL. Optional (defaults to &quot;/&quot;).</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Port_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Port*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Port" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Port">Port</h4>
-  <div class="markdown level1 summary"><p>The port to the page to run the check against. Will be combined with host
-(specified within the MonitoredResource) and path to construct the full
-URL. Optional (defaults to 80 without SSL, or 443 with SSL).</p>
+  <div class="markdown level1 summary"><p>Optional (defaults to 80 when <code>use_ssl</code> is <code>false</code>, and 443 when
+<code>use_ssl</code> is <code>true</code>). The TCP port on the HTTP server against which to
+run the check. Will be combined with host (specified within the
+<code>monitored_resource</code>) and <code>path</code> to construct the full URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -285,12 +288,39 @@ URL. Optional (defaults to 80 without SSL, or 443 with SSL).</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_UseSsl_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.UseSsl*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_UseSsl" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.UseSsl">UseSsl</h4>
-  <div class="markdown level1 summary"><p>If true, use HTTPS instead of HTTP to run the check.</p>
+  <div class="markdown level1 summary"><p>If <code>true</code>, use HTTPS instead of HTTP to run the check.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public bool UseSsl { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_ValidateSsl_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.ValidateSsl*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_ValidateSsl" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.ValidateSsl">ValidateSsl</h4>
+  <div class="markdown level1 summary"><p>Boolean specifying whether to include SSL certificate validation as a
+part of the Uptime check. Only applies to checks where
+<code>monitored_resource</code> is set to <code>uptime_url</code>. If <code>use_ssl</code> is <code>false</code>,
+setting <code>validate_ssl</code> to <code>true</code> has no effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ValidateSsl { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">

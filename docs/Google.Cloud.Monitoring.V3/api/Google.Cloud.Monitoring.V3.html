@@ -184,7 +184,8 @@ which can be reached by clicking the &quot;Monitoring&quot; tab in
       <section><p>The protocol for the <code>DeleteAlertPolicy</code> request.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.DeleteGroupRequest.html">DeleteGroupRequest</a></h4>
-      <section><p>The <code>DeleteGroup</code> request. You can only delete a group if it has no children.</p>
+      <section><p>The <code>DeleteGroup</code> request. The default behavior is to be able to delete a
+single group without any descendants.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.DeleteMetricDescriptorRequest.html">DeleteMetricDescriptorRequest</a></h4>
       <section><p>The <code>DeleteMetricDescriptor</code> request.</p>
@@ -282,8 +283,11 @@ from the infrastructure.</p>
       <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.GroupServiceClient.html">GroupServiceClient</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.InternalChecker.html">InternalChecker</a></h4>
-      <section><p>An internal checker allows uptime checks to run on private/internal GCP
+      <section><p>An internal checker allows Uptime checks to run on private/internal GCP
 resources.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.InternalChecker.Types.html">InternalChecker.Types</a></h4>
+      <section><p>Container for nested types declared in the InternalChecker message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ListAlertPoliciesRequest.html">ListAlertPoliciesRequest</a></h4>
       <section><p>The protocol for the <code>ListAlertPolicies</code> request.</p>
@@ -438,9 +442,26 @@ in google.api.Distribution values during aggregation.</p>
 projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.TimeInterval.html">TimeInterval</a></h4>
-      <section><p>A time interval extending just after a start time through an end time.
-If the start time is the same as the end time, then the interval
-represents a single point in time.</p>
+      <section><p>A closed time interval. It extends from the start time to the end time, and includes both: <code>[startTime, endTime]</code>. Valid time intervals depend on the <a href="/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind"><code>MetricKind</code></a> of the metric value. In no case can the end time be earlier than the start time.</p>
+<ul>
+<li><p>For a <code>GAUGE</code> metric, the <code>startTime</code> value is technically optional; if
+no value is specified, the start time defaults to the value of the
+end time, and the interval represents a single point in time. If both
+start and end times are specified, they must be identical. Such an
+interval is valid only for <code>GAUGE</code> metrics, which are point-in-time
+measurements.</p>
+</li>
+<li><p>For <code>DELTA</code> and <code>CUMULATIVE</code> metrics, the start time must be earlier
+than the end time.</p>
+</li>
+<li><p>In all cases, the start time of the next interval must be
+at least a microsecond after the end time of the previous interval.
+Because the interval is closed, if the start time of a new interval
+is the same as the end time of the previous interval, data written
+at the new start time could overwrite data written at the previous
+end time.</p>
+</li>
+</ul>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a></h4>
       <section><p>A collection of data points that describes the time-varying values
@@ -474,23 +495,27 @@ availability.</p>
       <section><p>Used to perform string matching. It allows substring and regular
 expressions, together with their negations.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.ContentMatcher.Types.html">UptimeCheckConfig.Types.ContentMatcher.Types</a></h4>
+      <section><p>Container for nested types declared in the ContentMatcher message type.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.html">UptimeCheckConfig.Types.HttpCheck</a></h4>
-      <section><p>Information involved in an HTTP/HTTPS uptime check request.</p>
+      <section><p>Information involved in an HTTP/HTTPS Uptime check request.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Types.html">UptimeCheckConfig.Types.HttpCheck.Types</a></h4>
       <section><p>Container for nested types declared in the HttpCheck message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Types.BasicAuthentication.html">UptimeCheckConfig.Types.HttpCheck.Types.BasicAuthentication</a></h4>
-      <section><p>A type of authentication to perform against the specified resource or URL
-that uses username and password.
-Currently, only Basic authentication is supported in Uptime Monitoring.</p>
+      <section><p>The authentication parameters to provide to the specified resource or
+URL that requires a username and password. Currently, only
+<a href="https://tools.ietf.org/html/rfc7617">Basic HTTP authentication</a> is
+supported in Uptime checks.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.ResourceGroup.html">UptimeCheckConfig.Types.ResourceGroup</a></h4>
       <section><p>The resource submessage for group checks. It can be used instead of a
 monitored resource, when multiple resources are being monitored.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.TcpCheck.html">UptimeCheckConfig.Types.TcpCheck</a></h4>
-      <section><p>Information required for a TCP uptime check request.</p>
+      <section><p>Information required for a TCP Uptime check request.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfigName.html">UptimeCheckConfigName</a></h4>
       <section><p>Resource name for the &apos;uptime_check_config&apos; resource.</p>
@@ -501,7 +526,7 @@ addresses where checkers in the location run from.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckService.html">UptimeCheckService</a></h4>
       <section><p>The UptimeCheckService API is used to manage (list, create, delete, edit)
-uptime check configurations in the Stackdriver Monitoring product. An uptime
+Uptime check configurations in the Stackdriver Monitoring product. An Uptime
 check is a piece of configuration that determines which resources and
 services to monitor for availability. These configurations can also be
 configured interactively by navigating to the <a href="http://console.cloud.google.com">Cloud Console</a>, selecting the appropriate project,
@@ -559,6 +584,9 @@ right.</p>
 The resource types <code>gae_app</code> and <code>uptime_url</code> are not valid here because
 group checks on App Engine modules and URLs are not allowed.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.InternalChecker.Types.State.html">InternalChecker.Types.State</a></h4>
+      <section><p>Operational states for an internal checker.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ListGroupsRequest.FilterOneofCase.html">ListGroupsRequest.FilterOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;filter&quot; oneof.</p>
 </section>
@@ -588,8 +616,11 @@ details.</p>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.ResourceOneofCase.html">UptimeCheckConfig.ResourceOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;resource&quot; oneof.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.ContentMatcher.Types.ContentMatcherOption.html">UptimeCheckConfig.Types.ContentMatcher.Types.ContentMatcherOption</a></h4>
+      <section><p>Options to perform content matching.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckRegion.html">UptimeCheckRegion</a></h4>
-      <section><p>The regions from which an uptime check can be run.</p>
+      <section><p>The regions from which an Uptime check can be run.</p>
 </section>
 </article>
           </div>
