@@ -8,7 +8,7 @@
     <title>Page streaming | Google Cloud APIs </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Page streaming | Google Cloud APIs ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -89,13 +89,20 @@ resources asynchronously return a
 <a href="../api/Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable&lt;TResponse, TResource&gt;</a>.
 These are equivalent other than their asynchrony, so
 this document focuses on the synchronous version for simplicity.</p>
+<p>Note that these methods don&#39;t immediately make any RPCs at all. They
+return immediately: the first request is only made when the calling
+code starts to iterate over the resource sequence. This has the
+side-effect that if there is a problem in the request, an exception
+will only be thrown at the point of iteration. In addition to
+failures due to invalid requests, network or service failures can
+cause exceptions even after the first results have been returned.</p>
 <h2 id="pagedenumerabletresponse-tresource"><code>PagedEnumerable&lt;TResponse, TResource&gt;</code></h2>
 <p>Let&#39;s look at the generic type parameters first. The <code>TResponse</code> is
 the API response type for the list operation, and the <code>TResource</code> is
 the type of the resource being listed. In the Pub/Sub API for
 example, the <code>ListTopics</code> operation accepts a <code>ListTopicsRequest</code>
 and returns a <code>ListTopicsResponse</code> containing a set of <code>Topic</code>
-resources - so the <a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherClient.html#Google_Cloud_PubSub_V1_PublisherClient_ListTopics_Google_Cloud_PubSub_V1_ProjectName_String_System_Nullable_System_Int32__Google_Api_Gax_CallSettings_">PublisherClient.ListTopics</a>
+resources - so the <a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherServiceApiClient.html#Google_Cloud_PubSub_V1_PublisherServiceApiClient_ListTopics_Google_Cloud_PubSub_V1_ProjectName_String_System_Nullable_System_Int32__Google_Api_Gax_CallSettings_">PublisherServiceApiClient.ListTopics</a>
 method returns a <code>PagedEnumerable&lt;ListTopicsResponse, Topic&gt;</code>.</p>
 <p><code>PagedEnumerable&lt;TResponse, TResource&gt;</code> implements
 <code>IEnumerable&lt;TResource&gt;</code>.  If you simply iterate over it, you will
@@ -127,7 +134,7 @@ within each page, along with the page token used to retrieve the next page. (Thi
 in the web results.)</p>
 <h2 id="use-case-sample-code">Use case sample code</h2>
 <h3 id="iterate-over-all-resources-ignoring-pagination">Iterate over all resources, ignoring pagination</h3>
-<pre><code class="lang-cs">PublisherClient client = PublisherClient.Create();
+<pre><code class="lang-cs">PublisherServiceApiClient client = PublisherServiceApiClient.Create();
 ProjectName projectName = new ProjectName(projectId);
 PagedEnumerable&lt;ListTopicsResponse, Topic&gt; topics = client.ListTopics(projectName, pageSize: 3);
 foreach (Topic topic in topics)
@@ -135,7 +142,7 @@ foreach (Topic topic in topics)
     Console.WriteLine(topic.Name);
 }
 </code></pre><h3 id="iterate-over-all-responses-remembering-page-tokens">Iterate over all responses, remembering page tokens</h3>
-<pre><code class="lang-cs">PublisherClient client = PublisherClient.Create();
+<pre><code class="lang-cs">PublisherServiceApiClient client = PublisherServiceApiClient.Create();
 ProjectName projectName = new ProjectName(projectId);
 PagedEnumerable&lt;ListTopicsResponse, Topic&gt; topics = client.ListTopics(projectName, pageSize: 3);
 IEnumerable&lt;ListTopicsResponse&gt; topicResponses = topics.AsRawResponses();
@@ -151,7 +158,7 @@ foreach (ListTopicsResponse response in topicResponses)
     Console.WriteLine($&quot;Next page token: {response.NextPageToken}&quot;);
 }
 </code></pre><h3 id="obtain-a-single-natural-page-of-results">Obtain a single &quot;natural&quot; page of results</h3>
-<pre><code class="lang-cs">PublisherClient client = PublisherClient.Create();
+<pre><code class="lang-cs">PublisherServiceApiClient client = PublisherServiceApiClient.Create();
 ProjectName projectName = new ProjectName(projectId);
 PagedEnumerable&lt;ListTopicsResponse, Topic&gt; topics = client.ListTopics(projectName, pageSize: 3);
 IEnumerable&lt;ListTopicsResponse&gt; topicResponses = topics.AsRawResponses();
@@ -169,7 +176,7 @@ Console.WriteLine($&quot;Next page token: {firstResponse.NextPageToken}&quot;);
 </code></pre><h3 id="display-the-next-fixed-sized-page-of-results">Display the next fixed-sized page of results</h3>
 <p>This is typically used in web applications; it will only display a less-than-full
 page if it reaches the end of the data.</p>
-<pre><code class="lang-cs">PublisherClient client = PublisherClient.Create();
+<pre><code class="lang-cs">PublisherServiceApiClient client = PublisherServiceApiClient.Create();
 ProjectName projectName = new ProjectName(projectId);
 PagedEnumerable&lt;ListTopicsResponse, Topic&gt; topics = client.ListTopics(projectName, pageTokenFromRequest);
 
@@ -183,7 +190,7 @@ foreach (Topic topic in page)
 Console.WriteLine($&quot;Next page token: {page.NextPageToken}&quot;);
 </code></pre><h2 id="feedback">Feedback</h2>
 <p>What other use cases should we consider? Does this meet your current needs?
-Please <a href="https://github.com/GoogleCloudPlatform/google-cloud-dotnet/issues/new">raise an issue on github</a>
+Please <a href="https://github.com/googleapis/google-cloud-dotnet/issues/new">raise an issue on github</a>
 to provide feedback.</p>
 </article>
           </div>

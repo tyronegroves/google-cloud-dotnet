@@ -8,7 +8,7 @@
     <title>Call settings | Google Cloud APIs </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Call settings | Google Cloud APIs ">
-    <meta name="generator" content="docfx 2.24.0.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -20,7 +20,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -85,7 +85,7 @@ to <code>CallOptions</code> as required.</p>
 <ul>
 <li>When calling an RPC method <em>(highest priority)</em>.</li>
 <li>Client-wide when creating a client object (for example, using
-<a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherClient.html#Google_Cloud_PubSub_V1_PublisherClient_Create_Google_Api_Gax_ServiceEndpoint_Google_Cloud_PubSub_V1_PublisherSettings_">PublisherClient.Create()</a>).</li>
+<a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherServiceApiClient.html#Google_Cloud_PubSub_V1_PublisherServiceApiClient_Create_Google_Api_Gax_ServiceEndpoint_Google_Cloud_PubSub_V1_PublisherServiceApiSettings_">PublisherServiceApiClient.Create()</a>).</li>
 <li>Per-RPC-method when creating a client object <em>(lowest priority)</em>.</li>
 </ul>
 <p>It&#39;s important to understand exactly which properties of which <code>CallSettings</code> will be used during an RPC invocation.
@@ -95,14 +95,14 @@ property is used.</p>
 <p>The client-wide <code>CallSettings</code> is higher-priority than per-RPC-method <code>CallSettings</code>
 because it is often useful to be able to easily specify common properties to use
 for all RPC invocations. For example, a common set of
-<a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_Headers">headers</a>;
+<a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_HeaderMutation">headers</a>;
 or a common
 <a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_Timing">deadline</a>
 for multiple RPC invocations.</p>
 <h2 id="examples">Examples</h2>
 <h3 id="per-rpc-highest-priority">Per-RPC (highest priority)</h3>
-<pre><code class="lang-cs">// Create a PublisherClient with default settings.
-PublisherClient client = PublisherClient.Create();
+<pre><code class="lang-cs">// Create a PublisherServiceApiClient with default settings.
+PublisherServiceApiClient client = PublisherServiceApiClient.Create();
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
 // Create a CallSettings with a custom header.
@@ -110,34 +110,34 @@ CallSettings callSettings = new CallSettings(null, null, null, metadata =&gt; me
 // This will cause the custom &#39;ClientVersion&#39; header to be included in the RPC call.
 Topic topic = client.CreateTopic(topicName, callSettings);
 </code></pre><h3 id="client-configuration-client-wide">Client configuration; client-wide</h3>
-<pre><code class="lang-cs">// Create a default PublisherSettings, with a custom header for calls to all RPC methods.
-PublisherSettings publisherSettings = new PublisherSettings
+<pre><code class="lang-cs">// Create a default PublisherServiceApiSettings, with a custom header for calls to all RPC methods.
+PublisherServiceApiSettings publisherSettings = new PublisherServiceApiSettings
 {
     CallSettings = new CallSettings(null, null, null, metadata =&gt; metadata.Add(&quot;ClientVersion&quot;, &quot;1.0.0&quot;), null, null)
 };
-PublisherClient client = PublisherClient.Create(settings: publisherSettings);
+PublisherServiceApiClient client = PublisherServiceApiClient.Create(settings: publisherSettings);
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
 // The custom &#39;ClientVersion&#39; header will be included in the RPC call, due to
 // the client being configured with &#39;publishersettings&#39; above.
 Topic topic = client.CreateTopic(topicName);
 </code></pre><h3 id="client-configuration-per-rpc-method-lowest-priority">Client configuration; per-RPC-method (lowest priority)</h3>
-<pre><code class="lang-cs">// Create a default PublisherSettings, with a custom header for calls
+<pre><code class="lang-cs">// Create a default PublisherServiceApiSettings, with a custom header for calls
 // to the CreateTopic RPC method.
-PublisherSettings publisherSettings = new PublisherSettings();
+PublisherServiceApiSettings publisherSettings = new PublisherServiceApiSettings();
 publisherSettings.CreateTopicSettings = publisherSettings.CreateTopicSettings.WithHeader(&quot;ClientVersion&quot;, &quot;1.0.0&quot;);
-PublisherClient client = PublisherClient.Create(settings: publisherSettings);
+PublisherServiceApiClient client = PublisherServiceApiClient.Create(settings: publisherSettings);
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
 // The custom &#39;ClientVersion&#39; header will be included in the RPC call, due to
 // the client being configured with &#39;publishersettings&#39; above.
 Topic topic = client.CreateTopic(topicName);
 </code></pre><h3 id="multiple-callsettings-specified">Multiple <code>Callsettings</code> specified</h3>
-<pre><code class="lang-cs">// Create a default PublisherSettings, with customizations for CreateTopic RPCs:
+<pre><code class="lang-cs">// Create a default PublisherServiceApiSettings, with customizations for CreateTopic RPCs:
 // * A custom &quot;ClientVersion&quot; header.
 // * A custom 5-second timeout Timing.
 // * No cancellation token.
-PublisherSettings publisherSettings = new PublisherSettings();
+PublisherServiceApiSettings publisherSettings = new PublisherServiceApiSettings();
 publisherSettings.CreateTopicSettings = publisherSettings.CreateTopicSettings
     .WithCancellationToken(CancellationToken.None)
     .WithCallTiming(CallTiming.FromTimeout(TimeSpan.FromSeconds(5)))
@@ -150,7 +150,7 @@ publisherSettings.CallSettings = CallSettings
     .WithCancellationToken(CancellationToken.None);
 
 // Create the client with the configured publisherSettings
-PublisherClient client = PublisherClient.Create(settings: publisherSettings);
+PublisherServiceApiClient client = PublisherServiceApiClient.Create(settings: publisherSettings);
 
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
@@ -164,7 +164,7 @@ Topic topic = client.CreateTopic(topicName, CallSettings.FromCancellationToken(c
 </code></pre><h2 id="defaults">Defaults</h2>
 <p>By default there is a per-RPC-method client configuration that specifies a sensible
 retry policy for every method. See, for example,
-<a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherSettings.html#Google_Cloud_PubSub_V1_PublisherSettings_CreateTopicSettings">PublisherSettings.CreateTopicSettings</a></p>
+<a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherServiceApiSettings.html#Google_Cloud_PubSub_V1_PublisherServiceApiSettings_CreateTopicSettings">PublisherServiceApiSettings.CreateTopicSettings</a></p>
 <h2 id="timing-settings">Timing settings</h2>
 <p>The timing settings for an RPC are specified using <a href="../api/Google.Api.Gax.Grpc.CallTiming.html">CallTiming</a>.
 This is either a simple <a href="../api/Google.Api.Gax.Expiration.html">Expiration</a>,
