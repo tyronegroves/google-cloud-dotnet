@@ -1,36 +1,36 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Grpc.Core.Interceptors.ChannelExtensions
-  commentId: T:Grpc.Core.Interceptors.ChannelExtensions
-  id: ChannelExtensions
+- uid: Grpc.Core.Interceptors.CallInvokerExtensions
+  commentId: T:Grpc.Core.Interceptors.CallInvokerExtensions
+  id: CallInvokerExtensions
   parent: Grpc.Core.Interceptors
   children:
-  - Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-  - Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-  - Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
+  - Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
+  - Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
+  - Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
   langs:
   - csharp
   - vb
-  name: ChannelExtensions
-  nameWithType: ChannelExtensions
-  fullName: Grpc.Core.Interceptors.ChannelExtensions
+  name: CallInvokerExtensions
+  nameWithType: CallInvokerExtensions
+  fullName: Grpc.Core.Interceptors.CallInvokerExtensions
   type: Class
   source:
     remote:
-      path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
+      path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
       branch: v1.22.x
       repo: https://github.com/grpc/grpc
-    id: ChannelExtensions
-    path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
-    startLine: 25
+    id: CallInvokerExtensions
+    path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
+    startLine: 27
   assemblies:
-  - Grpc.Core
+  - Grpc.Core.Api
   namespace: Grpc.Core.Interceptors
-  summary: "\nProvides extension methods to make it easy to register interceptors on Channel objects.\n"
+  summary: "\nExtends the CallInvoker class to provide the interceptor facility on the client side.\n"
   example: []
   syntax:
-    content: public static class ChannelExtensions
-    content.vb: Public Module ChannelExtensions
+    content: public static class CallInvokerExtensions
+    content.vb: Public Module CallInvokerExtensions
   inheritance:
   - System.Object
   inheritedMembers:
@@ -48,137 +48,137 @@ items:
   modifiers.vb:
   - Public
   - Module
-- uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-  id: Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
+- uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
+  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
+  id: Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
   isExtensionMethod: true
-  parent: Grpc.Core.Interceptors.ChannelExtensions
+  parent: Grpc.Core.Interceptors.CallInvokerExtensions
   langs:
   - csharp
   - vb
-  name: Intercept(Channel, Interceptor)
-  nameWithType: ChannelExtensions.Intercept(Channel, Interceptor)
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, Grpc.Core.Interceptors.Interceptor)
+  name: Intercept(CallInvoker, Interceptor)
+  nameWithType: CallInvokerExtensions.Intercept(CallInvoker, Interceptor)
+  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, Grpc.Core.Interceptors.Interceptor)
   type: Method
   source:
     remote:
-      path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
+      path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
       branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: Intercept
-    path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
-    startLine: 40
+    path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
+    startLine: 42
   assemblies:
-  - Grpc.Core
+  - Grpc.Core.Api
   namespace: Grpc.Core.Interceptors
-  summary: "\nReturns a <xref href=\"Grpc.Core.CallInvoker\" data-throw-if-not-resolved=\"false\"></xref> instance that intercepts\nthe channel with the given interceptor.\n"
-  remarks: "\nMultiple interceptors can be added on top of each other by calling\n&quot;channel.Intercept(a, b, c)&quot;.  The order of invocation will be &quot;a&quot;, &quot;b&quot;, and then &quot;c&quot;.\nInterceptors can be later added to an existing intercepted channel, effectively\nbuilding a chain like &quot;channel.Intercept(c).Intercept(b).Intercept(a)&quot;.  Note that\nin this case, the last interceptor added will be the first to take control.\n"
+  summary: "\nReturns a <xref href=\"Grpc.Core.CallInvoker\" data-throw-if-not-resolved=\"false\"></xref> instance that intercepts\nthe invoker with the given interceptor.\n"
+  remarks: "\nMultiple interceptors can be added on top of each other by calling\n&quot;invoker.Intercept(a, b, c)&quot;.  The order of invocation will be &quot;a&quot;, &quot;b&quot;, and then &quot;c&quot;.\nInterceptors can be later added to an existing intercepted CallInvoker, effectively\nbuilding a chain like &quot;invoker.Intercept(c).Intercept(b).Intercept(a)&quot;.  Note that\nin this case, the last interceptor added will be the first to take control.\n"
   example: []
   syntax:
-    content: public static CallInvoker Intercept(this Channel channel, Interceptor interceptor)
+    content: public static CallInvoker Intercept(this CallInvoker invoker, Interceptor interceptor)
     parameters:
-    - id: channel
-      type: Grpc.Core.Channel
-      description: The channel to intercept.
+    - id: invoker
+      type: Grpc.Core.CallInvoker
+      description: The underlying invoker to intercept.
     - id: interceptor
       type: Grpc.Core.Interceptors.Interceptor
-      description: The interceptor to intercept the channel with.
+      description: The interceptor to intercept calls to the invoker with.
     return:
       type: Grpc.Core.CallInvoker
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function Intercept(channel As Channel, interceptor As Interceptor) As CallInvoker
-  overload: Grpc.Core.Interceptors.ChannelExtensions.Intercept*
+      Public Shared Function Intercept(invoker As CallInvoker, interceptor As Interceptor) As CallInvoker
+  overload: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-  id: Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
+- uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
+  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
+  id: Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
   isExtensionMethod: true
-  parent: Grpc.Core.Interceptors.ChannelExtensions
+  parent: Grpc.Core.Interceptors.CallInvokerExtensions
   langs:
   - csharp
   - vb
-  name: Intercept(Channel, Interceptor[])
-  nameWithType: ChannelExtensions.Intercept(Channel, Interceptor[])
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, Grpc.Core.Interceptors.Interceptor[])
+  name: Intercept(CallInvoker, Interceptor[])
+  nameWithType: CallInvokerExtensions.Intercept(CallInvoker, Interceptor[])
+  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, Grpc.Core.Interceptors.Interceptor[])
   type: Method
   source:
     remote:
-      path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
+      path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
       branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: Intercept
-    path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
-    startLine: 61
+    path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
+    startLine: 63
   assemblies:
-  - Grpc.Core
+  - Grpc.Core.Api
   namespace: Grpc.Core.Interceptors
-  summary: "\nReturns a <xref href=\"Grpc.Core.CallInvoker\" data-throw-if-not-resolved=\"false\"></xref> instance that intercepts\nthe channel with the given interceptors.\n"
-  remarks: "\nMultiple interceptors can be added on top of each other by calling\n&quot;channel.Intercept(a, b, c)&quot;.  The order of invocation will be &quot;a&quot;, &quot;b&quot;, and then &quot;c&quot;.\nInterceptors can be later added to an existing intercepted channel, effectively\nbuilding a chain like &quot;channel.Intercept(c).Intercept(b).Intercept(a)&quot;.  Note that\nin this case, the last interceptor added will be the first to take control.\n"
+  summary: "\nReturns a <xref href=\"Grpc.Core.CallInvoker\" data-throw-if-not-resolved=\"false\"></xref> instance that intercepts\nthe invoker with the given interceptors.\n"
+  remarks: "\nMultiple interceptors can be added on top of each other by calling\n&quot;invoker.Intercept(a, b, c)&quot;.  The order of invocation will be &quot;a&quot;, &quot;b&quot;, and then &quot;c&quot;.\nInterceptors can be later added to an existing intercepted CallInvoker, effectively\nbuilding a chain like &quot;invoker.Intercept(c).Intercept(b).Intercept(a)&quot;.  Note that\nin this case, the last interceptor added will be the first to take control.\n"
   example: []
   syntax:
-    content: public static CallInvoker Intercept(this Channel channel, params Interceptor[] interceptors)
+    content: public static CallInvoker Intercept(this CallInvoker invoker, params Interceptor[] interceptors)
     parameters:
-    - id: channel
-      type: Grpc.Core.Channel
+    - id: invoker
+      type: Grpc.Core.CallInvoker
       description: The channel to intercept.
     - id: interceptors
       type: Grpc.Core.Interceptors.Interceptor[]
-      description: "\nAn array of interceptors to intercept the channel with.\nControl is passed to the interceptors in the order specified.\n"
+      description: "\nAn array of interceptors to intercept the calls to the invoker with.\nControl is passed to the interceptors in the order specified.\n"
     return:
       type: Grpc.Core.CallInvoker
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function Intercept(channel As Channel, ParamArray interceptors As Interceptor()) As CallInvoker
-  overload: Grpc.Core.Interceptors.ChannelExtensions.Intercept*
-  nameWithType.vb: ChannelExtensions.Intercept(Channel, Interceptor())
+      Public Shared Function Intercept(invoker As CallInvoker, ParamArray interceptors As Interceptor()) As CallInvoker
+  overload: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept*
+  nameWithType.vb: CallInvokerExtensions.Intercept(CallInvoker, Interceptor())
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, Grpc.Core.Interceptors.Interceptor())
-  name.vb: Intercept(Channel, Interceptor())
-- uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  id: Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
+  fullName.vb: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, Grpc.Core.Interceptors.Interceptor())
+  name.vb: Intercept(CallInvoker, Interceptor())
+- uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
+  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
+  id: Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
   isExtensionMethod: true
-  parent: Grpc.Core.Interceptors.ChannelExtensions
+  parent: Grpc.Core.Interceptors.CallInvokerExtensions
   langs:
   - csharp
   - vb
-  name: Intercept(Channel, Func<Metadata, Metadata>)
-  nameWithType: ChannelExtensions.Intercept(Channel, Func<Metadata, Metadata>)
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, System.Func<Grpc.Core.Metadata, Grpc.Core.Metadata>)
+  name: Intercept(CallInvoker, Func<Metadata, Metadata>)
+  nameWithType: CallInvokerExtensions.Intercept(CallInvoker, Func<Metadata, Metadata>)
+  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, System.Func<Grpc.Core.Metadata, Grpc.Core.Metadata>)
   type: Method
   source:
     remote:
-      path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
+      path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
       branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: Intercept
-    path: src/csharp/Grpc.Core/Interceptors/ChannelExtensions.cs
-    startLine: 81
+    path: src/csharp/Grpc.Core.Api/Interceptors/CallInvokerExtensions.cs
+    startLine: 91
   assemblies:
-  - Grpc.Core
+  - Grpc.Core.Api
   namespace: Grpc.Core.Interceptors
   summary: "\nReturns a <xref href=\"Grpc.Core.CallInvoker\" data-throw-if-not-resolved=\"false\"></xref> instance that intercepts\nthe invoker with the given interceptor.\n"
-  remarks: "\nMultiple interceptors can be added on top of each other by\nbuilding a chain like &quot;channel.Intercept(c).Intercept(b).Intercept(a)&quot;.  Note that\nin this case, the last interceptor added will be the first to take control.\n"
+  remarks: "\nMultiple interceptors can be added on top of each other by\nbuilding a chain like &quot;invoker.Intercept(c).Intercept(b).Intercept(a)&quot;.  Note that\nin this case, the last interceptor added will be the first to take control.\n"
   example: []
   syntax:
-    content: public static CallInvoker Intercept(this Channel channel, Func<Metadata, Metadata> interceptor)
+    content: public static CallInvoker Intercept(this CallInvoker invoker, Func<Metadata, Metadata> interceptor)
     parameters:
-    - id: channel
-      type: Grpc.Core.Channel
-      description: The channel to intercept.
+    - id: invoker
+      type: Grpc.Core.CallInvoker
+      description: The underlying invoker to intercept.
     - id: interceptor
       type: System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata}
       description: "\nAn interceptor delegate that takes the request metadata to be sent with an outgoing call\nand returns a <xref href=\"Grpc.Core.Metadata\" data-throw-if-not-resolved=\"false\"></xref> instance that will replace the existing\ninvocation metadata.\n"
@@ -187,17 +187,17 @@ items:
     content.vb: >-
       <ExtensionAttribute>
 
-      Public Shared Function Intercept(channel As Channel, interceptor As Func(Of Metadata, Metadata)) As CallInvoker
-  overload: Grpc.Core.Interceptors.ChannelExtensions.Intercept*
-  nameWithType.vb: ChannelExtensions.Intercept(Channel, Func(Of Metadata, Metadata))
+      Public Shared Function Intercept(invoker As CallInvoker, interceptor As Func(Of Metadata, Metadata)) As CallInvoker
+  overload: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept*
+  nameWithType.vb: CallInvokerExtensions.Intercept(CallInvoker, Func(Of Metadata, Metadata))
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, System.Func(Of Grpc.Core.Metadata, Grpc.Core.Metadata))
-  name.vb: Intercept(Channel, Func(Of Metadata, Metadata))
+  fullName.vb: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, System.Func(Of Grpc.Core.Metadata, Grpc.Core.Metadata))
+  name.vb: Intercept(CallInvoker, Func(Of Metadata, Metadata))
 references:
 - uid: Grpc.Core.Interceptors
   commentId: N:Grpc.Core.Interceptors
@@ -502,17 +502,11 @@ references:
   name: CallInvoker
   nameWithType: CallInvoker
   fullName: Grpc.Core.CallInvoker
-- uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept*
-  commentId: Overload:Grpc.Core.Interceptors.ChannelExtensions.Intercept
+- uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept*
+  commentId: Overload:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
   name: Intercept
-  nameWithType: ChannelExtensions.Intercept
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-- uid: Grpc.Core.Channel
-  commentId: T:Grpc.Core.Channel
-  parent: Grpc.Core
-  name: Channel
-  nameWithType: Channel
-  fullName: Grpc.Core.Channel
+  nameWithType: CallInvokerExtensions.Intercept
+  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
 - uid: Grpc.Core.Interceptors.Interceptor
   commentId: T:Grpc.Core.Interceptors.Interceptor
   parent: Grpc.Core.Interceptors

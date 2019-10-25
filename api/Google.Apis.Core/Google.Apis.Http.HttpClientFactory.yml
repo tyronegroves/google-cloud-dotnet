@@ -5,6 +5,7 @@ items:
   id: HttpClientFactory
   parent: Google.Apis.Http
   children:
+  - Google.Apis.Http.HttpClientFactory.CreateClientHandler
   - Google.Apis.Http.HttpClientFactory.CreateHandler(Google.Apis.Http.CreateHttpClientArgs)
   - Google.Apis.Http.HttpClientFactory.CreateHttpClient(Google.Apis.Http.CreateHttpClientArgs)
   langs:
@@ -124,6 +125,44 @@ items:
       type: System.Net.Http.HttpMessageHandler
     content.vb: Protected Overridable Function CreateHandler(args As CreateHttpClientArgs) As HttpMessageHandler
   overload: Google.Apis.Http.HttpClientFactory.CreateHandler*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: Google.Apis.Http.HttpClientFactory.CreateClientHandler
+  commentId: M:Google.Apis.Http.HttpClientFactory.CreateClientHandler
+  id: CreateClientHandler
+  parent: Google.Apis.Http.HttpClientFactory
+  langs:
+  - csharp
+  - vb
+  name: CreateClientHandler()
+  nameWithType: HttpClientFactory.CreateClientHandler()
+  fullName: Google.Apis.Http.HttpClientFactory.CreateClientHandler()
+  type: Method
+  source:
+    remote:
+      path: Src/Support/Google.Apis.Core/Http/HttpClientFactory.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: CreateClientHandler
+    path: Src/Support/Google.Apis.Core/Http/HttpClientFactory.cs
+    startLine: 126
+  assemblies:
+  - Google.Apis.Core
+  namespace: Google.Apis.Http
+  summary: "\nCreate a <xref href=\"System.Net.Http.HttpClientHandler\" data-throw-if-not-resolved=\"false\"></xref> for use when communicating with the server.\nPlease read the remarks closely before overriding this method.\n"
+  remarks: "\nWhen overriding this method, please observe the following:\n<ul><li>\n<xref href=\"System.Net.Http.HttpClientHandler.AllowAutoRedirect\" data-throw-if-not-resolved=\"false\"></xref> and\n<xref href=\"System.Net.Http.HttpClientHandler.AutomaticDecompression\" data-throw-if-not-resolved=\"false\"></xref>\nof the returned instance are configured after this method returns.\nConfiguring these within this method will have no effect.\n</li><li>\nReturn a new instance of an <xref href=\"System.Net.Http.HttpClientHandler\" data-throw-if-not-resolved=\"false\"></xref> for each call to this method.\n</li><li>\nThis method may be called once, or more than once, when initializing a single client service.\n</li></ul>\n"
+  example: []
+  syntax:
+    content: protected virtual HttpClientHandler CreateClientHandler()
+    return:
+      type: System.Net.Http.HttpClientHandler
+      description: A suitable <xref href="System.Net.Http.HttpClientHandler" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Protected Overridable Function CreateClientHandler As HttpClientHandler
+  overload: Google.Apis.Http.HttpClientFactory.CreateClientHandler*
   modifiers.csharp:
   - protected
   - virtual
@@ -611,3 +650,21 @@ references:
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
+- uid: System.Net.Http.HttpClientHandler
+  commentId: T:System.Net.Http.HttpClientHandler
+  parent: System.Net.Http
+  isExternal: true
+  name: HttpClientHandler
+  nameWithType: HttpClientHandler
+  fullName: System.Net.Http.HttpClientHandler
+- uid: System.Net.Http.HttpClientHandler.AllowAutoRedirect
+  commentId: P:System.Net.Http.HttpClientHandler.AllowAutoRedirect
+  isExternal: true
+- uid: System.Net.Http.HttpClientHandler.AutomaticDecompression
+  commentId: P:System.Net.Http.HttpClientHandler.AutomaticDecompression
+  isExternal: true
+- uid: Google.Apis.Http.HttpClientFactory.CreateClientHandler*
+  commentId: Overload:Google.Apis.Http.HttpClientFactory.CreateClientHandler
+  name: CreateClientHandler
+  nameWithType: HttpClientFactory.CreateClientHandler
+  fullName: Google.Apis.Http.HttpClientFactory.CreateClientHandler
