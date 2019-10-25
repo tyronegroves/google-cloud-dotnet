@@ -18,9 +18,14 @@ items:
   - Google.Apis.Bigquery.v2.Data.Table.Labels
   - Google.Apis.Bigquery.v2.Data.Table.LastModifiedTime
   - Google.Apis.Bigquery.v2.Data.Table.Location
+  - Google.Apis.Bigquery.v2.Data.Table.MaterializedView
+  - Google.Apis.Bigquery.v2.Data.Table.Model
   - Google.Apis.Bigquery.v2.Data.Table.NumBytes
   - Google.Apis.Bigquery.v2.Data.Table.NumLongTermBytes
+  - Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes
   - Google.Apis.Bigquery.v2.Data.Table.NumRows
+  - Google.Apis.Bigquery.v2.Data.Table.RangePartitioning
+  - Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter
   - Google.Apis.Bigquery.v2.Data.Table.Schema
   - Google.Apis.Bigquery.v2.Data.Table.SelfLink
   - Google.Apis.Bigquery.v2.Data.Table.StreamingBuffer
@@ -42,7 +47,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Table
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4361
+    startLine: 6543
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -87,14 +92,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Clustering
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4365
+    startLine: 6547
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Experimental] Clustering specification for the table. Must be specified with time-based
+    [Beta] Clustering specification for the table. Must be specified with partitioning, data in the
 
-    partitioning, data in the table will be first partitioned and subsequently clustered.
+    table will be first partitioned and subsequently clustered.
   example: []
   syntax:
     content: >-
@@ -141,7 +146,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: CreationTime
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4369
+    startLine: 6551
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -192,7 +197,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Description
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4373
+    startLine: 6555
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -243,7 +248,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: EncryptionConfiguration
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4377
+    startLine: 6559
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -294,11 +299,16 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ETag
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4381
+    startLine: 6565
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: '[Output-only] A hash of this resource.'
+  summary: >-
+    [Output-only] A hash of the table metadata. Used to ensure there were no concurrent modifications
+
+    to the resource when attempting an update. Not guaranteed to change when the table contents or the fields
+
+    numRows, numBytes, numLongTermBytes or lastModifiedTime change.
   example: []
   syntax:
     content: >-
@@ -347,7 +357,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExpirationTime
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4388
+    startLine: 6572
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -405,7 +415,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExternalDataConfiguration
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4394
+    startLine: 6578
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -461,7 +471,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: FriendlyName
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4398
+    startLine: 6582
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -512,7 +522,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Id
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4402
+    startLine: 6586
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -563,7 +573,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Kind
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4406
+    startLine: 6590
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -614,7 +624,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Labels
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4413
+    startLine: 6597
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -672,7 +682,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: LastModifiedTime
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4418
+    startLine: 6602
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -726,7 +736,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Location
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4423
+    startLine: 6607
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -762,6 +772,111 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Table.MaterializedView
+  commentId: P:Google.Apis.Bigquery.v2.Data.Table.MaterializedView
+  id: MaterializedView
+  parent: Google.Apis.Bigquery.v2.Data.Table
+  langs:
+  - csharp
+  - vb
+  name: MaterializedView
+  nameWithType: Table.MaterializedView
+  fullName: Google.Apis.Bigquery.v2.Data.Table.MaterializedView
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: MaterializedView
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 6611
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: '[Optional] Materialized view definition.'
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("materializedView")]
+
+      public virtual MaterializedViewDefinition MaterializedView { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.MaterializedViewDefinition
+    content.vb: >-
+      <JsonProperty("materializedView")>
+
+      Public Overridable Property MaterializedView As MaterializedViewDefinition
+  overload: Google.Apis.Bigquery.v2.Data.Table.MaterializedView*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: materializedView
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Table.Model
+  commentId: P:Google.Apis.Bigquery.v2.Data.Table.Model
+  id: Model
+  parent: Google.Apis.Bigquery.v2.Data.Table
+  langs:
+  - csharp
+  - vb
+  name: Model
+  nameWithType: Table.Model
+  fullName: Google.Apis.Bigquery.v2.Data.Table.Model
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: Model
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 6616
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Output-only, Beta] Present iff this table represents a ML model. Describes the training
+
+    information for the model, and it is required to run &apos;PREDICT&apos; queries.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("model")]
+
+      public virtual ModelDefinition Model { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.ModelDefinition
+    content.vb: >-
+      <JsonProperty("model")>
+
+      Public Overridable Property Model As ModelDefinition
+  overload: Google.Apis.Bigquery.v2.Data.Table.Model*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: model
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.Table.NumBytes
   commentId: P:Google.Apis.Bigquery.v2.Data.Table.NumBytes
   id: NumBytes
@@ -780,7 +895,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: NumBytes
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4428
+    startLine: 6621
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -834,7 +949,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: NumLongTermBytes
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4432
+    startLine: 6625
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -867,6 +982,60 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes
+  commentId: P:Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes
+  id: NumPhysicalBytes
+  parent: Google.Apis.Bigquery.v2.Data.Table
+  langs:
+  - csharp
+  - vb
+  name: NumPhysicalBytes
+  nameWithType: Table.NumPhysicalBytes
+  fullName: Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: NumPhysicalBytes
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 6630
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Output-only] [TrustedTester] The physical size of this table in bytes, excluding any data in the
+
+    streaming buffer. This includes compression and storage used for time travel.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("numPhysicalBytes")]
+
+      public virtual long? NumPhysicalBytes { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int64}
+    content.vb: >-
+      <JsonProperty("numPhysicalBytes")>
+
+      Public Overridable Property NumPhysicalBytes As Long?
+  overload: Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: numPhysicalBytes
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.Table.NumRows
   commentId: P:Google.Apis.Bigquery.v2.Data.Table.NumRows
   id: NumRows
@@ -885,7 +1054,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: NumRows
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4437
+    startLine: 6635
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -921,6 +1090,114 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Table.RangePartitioning
+  commentId: P:Google.Apis.Bigquery.v2.Data.Table.RangePartitioning
+  id: RangePartitioning
+  parent: Google.Apis.Bigquery.v2.Data.Table
+  langs:
+  - csharp
+  - vb
+  name: RangePartitioning
+  nameWithType: Table.RangePartitioning
+  fullName: Google.Apis.Bigquery.v2.Data.Table.RangePartitioning
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: RangePartitioning
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 6640
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and
+
+    rangePartitioning should be specified.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("rangePartitioning")]
+
+      public virtual RangePartitioning RangePartitioning { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.RangePartitioning
+    content.vb: >-
+      <JsonProperty("rangePartitioning")>
+
+      Public Overridable Property RangePartitioning As RangePartitioning
+  overload: Google.Apis.Bigquery.v2.Data.Table.RangePartitioning*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: rangePartitioning
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter
+  commentId: P:Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter
+  id: RequirePartitionFilter
+  parent: Google.Apis.Bigquery.v2.Data.Table
+  langs:
+  - csharp
+  - vb
+  name: RequirePartitionFilter
+  nameWithType: Table.RequirePartitionFilter
+  fullName: Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: RequirePartitionFilter
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 6645
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Beta] [Optional] If set to true, queries over this table require a partition filter that can be
+
+    used for partition elimination to be specified.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("requirePartitionFilter")]
+
+      public virtual bool? RequirePartitionFilter { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: >-
+      <JsonProperty("requirePartitionFilter")>
+
+      Public Overridable Property RequirePartitionFilter As Boolean?
+  overload: Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: requirePartitionFilter
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.Table.Schema
   commentId: P:Google.Apis.Bigquery.v2.Data.Table.Schema
   id: Schema
@@ -939,7 +1216,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Schema
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4441
+    startLine: 6649
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -990,7 +1267,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SelfLink
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4445
+    startLine: 6653
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1041,7 +1318,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: StreamingBuffer
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4451
+    startLine: 6659
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1097,7 +1374,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TableReference
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4455
+    startLine: 6663
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1148,11 +1425,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TimePartitioning
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4459
+    startLine: 6668
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: Time-based partitioning specification for this table.
+  summary: >-
+    Time-based partitioning specification for this table. Only one of timePartitioning and
+
+    rangePartitioning should be specified.
   example: []
   syntax:
     content: >-
@@ -1199,16 +1479,18 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Type
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4465
+    startLine: 6675
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
     [Output-only] Describes the table type. The following values are supported: TABLE: A normal
 
-    BigQuery table. VIEW: A virtual table defined by a SQL query. EXTERNAL: A table that references data stored
+    BigQuery table. VIEW: A virtual table defined by a SQL query. [TrustedTester] MATERIALIZED_VIEW: SQL query
 
-    in an external storage system, such as Google Cloud Storage. The default value is TABLE.
+    whose result is persisted. EXTERNAL: A table that references data stored in an external storage system, such
+
+    as Google Cloud Storage. The default value is TABLE.
   example: []
   syntax:
     content: >-
@@ -1255,7 +1537,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: View
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 4469
+    startLine: 6679
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1291,7 +1573,6 @@ items:
 references:
 - uid: Google.Apis.Bigquery.v2.Data
   commentId: N:Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Google.Apis.Bigquery.v2.Data
   nameWithType: Google.Apis.Bigquery.v2.Data
   fullName: Google.Apis.Bigquery.v2.Data
@@ -1590,32 +1871,29 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Apis.Requests
   commentId: N:Google.Apis.Requests
-  isExternal: false
+  isExternal: true
   name: Google.Apis.Requests
   nameWithType: Google.Apis.Requests
   fullName: Google.Apis.Requests
 - uid: Google.Apis.Bigquery.v2.Data.Table.Clustering*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Clustering
-  isExternal: false
   name: Clustering
   nameWithType: Table.Clustering
   fullName: Google.Apis.Bigquery.v2.Data.Table.Clustering
 - uid: Google.Apis.Bigquery.v2.Data.Clustering
   commentId: T:Google.Apis.Bigquery.v2.Data.Clustering
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Clustering
   nameWithType: Clustering
   fullName: Google.Apis.Bigquery.v2.Data.Clustering
 - uid: Google.Apis.Bigquery.v2.Data.Table.CreationTime*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.CreationTime
-  isExternal: false
   name: CreationTime
   nameWithType: Table.CreationTime
   fullName: Google.Apis.Bigquery.v2.Data.Table.CreationTime
@@ -1704,7 +1982,6 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.Table.Description*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Description
-  isExternal: false
   name: Description
   nameWithType: Table.Description
   fullName: Google.Apis.Bigquery.v2.Data.Table.Description
@@ -1717,20 +1994,17 @@ references:
   fullName: System.String
 - uid: Google.Apis.Bigquery.v2.Data.Table.EncryptionConfiguration*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.EncryptionConfiguration
-  isExternal: false
   name: EncryptionConfiguration
   nameWithType: Table.EncryptionConfiguration
   fullName: Google.Apis.Bigquery.v2.Data.Table.EncryptionConfiguration
 - uid: Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
   commentId: T:Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: EncryptionConfiguration
   nameWithType: EncryptionConfiguration
   fullName: Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
 - uid: Google.Apis.Bigquery.v2.Data.Table.ETag*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.ETag
-  isExternal: false
   name: ETag
   nameWithType: Table.ETag
   fullName: Google.Apis.Bigquery.v2.Data.Table.ETag
@@ -1743,44 +2017,37 @@ references:
   fullName: Google.Apis.Requests.IDirectResponseSchema.ETag
 - uid: Google.Apis.Bigquery.v2.Data.Table.ExpirationTime*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.ExpirationTime
-  isExternal: false
   name: ExpirationTime
   nameWithType: Table.ExpirationTime
   fullName: Google.Apis.Bigquery.v2.Data.Table.ExpirationTime
 - uid: Google.Apis.Bigquery.v2.Data.Table.ExternalDataConfiguration*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.ExternalDataConfiguration
-  isExternal: false
   name: ExternalDataConfiguration
   nameWithType: Table.ExternalDataConfiguration
   fullName: Google.Apis.Bigquery.v2.Data.Table.ExternalDataConfiguration
 - uid: Google.Apis.Bigquery.v2.Data.ExternalDataConfiguration
   commentId: T:Google.Apis.Bigquery.v2.Data.ExternalDataConfiguration
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: ExternalDataConfiguration
   nameWithType: ExternalDataConfiguration
   fullName: Google.Apis.Bigquery.v2.Data.ExternalDataConfiguration
 - uid: Google.Apis.Bigquery.v2.Data.Table.FriendlyName*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.FriendlyName
-  isExternal: false
   name: FriendlyName
   nameWithType: Table.FriendlyName
   fullName: Google.Apis.Bigquery.v2.Data.Table.FriendlyName
 - uid: Google.Apis.Bigquery.v2.Data.Table.Id*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Id
-  isExternal: false
   name: Id
   nameWithType: Table.Id
   fullName: Google.Apis.Bigquery.v2.Data.Table.Id
 - uid: Google.Apis.Bigquery.v2.Data.Table.Kind*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Kind
-  isExternal: false
   name: Kind
   nameWithType: Table.Kind
   fullName: Google.Apis.Bigquery.v2.Data.Table.Kind
 - uid: Google.Apis.Bigquery.v2.Data.Table.Labels*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Labels
-  isExternal: false
   name: Labels
   nameWithType: Table.Labels
   fullName: Google.Apis.Bigquery.v2.Data.Table.Labels
@@ -1897,13 +2164,12 @@ references:
     fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
-  isExternal: false
+  isExternal: true
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
 - uid: Google.Apis.Bigquery.v2.Data.Table.LastModifiedTime*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.LastModifiedTime
-  isExternal: false
   name: LastModifiedTime
   nameWithType: Table.LastModifiedTime
   fullName: Google.Apis.Bigquery.v2.Data.Table.LastModifiedTime
@@ -1953,102 +2219,173 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.Table.Location*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Location
-  isExternal: false
   name: Location
   nameWithType: Table.Location
   fullName: Google.Apis.Bigquery.v2.Data.Table.Location
+- uid: Google.Apis.Bigquery.v2.Data.Table.MaterializedView*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.MaterializedView
+  name: MaterializedView
+  nameWithType: Table.MaterializedView
+  fullName: Google.Apis.Bigquery.v2.Data.Table.MaterializedView
+- uid: Google.Apis.Bigquery.v2.Data.MaterializedViewDefinition
+  commentId: T:Google.Apis.Bigquery.v2.Data.MaterializedViewDefinition
+  parent: Google.Apis.Bigquery.v2.Data
+  name: MaterializedViewDefinition
+  nameWithType: MaterializedViewDefinition
+  fullName: Google.Apis.Bigquery.v2.Data.MaterializedViewDefinition
+- uid: Google.Apis.Bigquery.v2.Data.Table.Model*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Model
+  name: Model
+  nameWithType: Table.Model
+  fullName: Google.Apis.Bigquery.v2.Data.Table.Model
+- uid: Google.Apis.Bigquery.v2.Data.ModelDefinition
+  commentId: T:Google.Apis.Bigquery.v2.Data.ModelDefinition
+  parent: Google.Apis.Bigquery.v2.Data
+  name: ModelDefinition
+  nameWithType: ModelDefinition
+  fullName: Google.Apis.Bigquery.v2.Data.ModelDefinition
 - uid: Google.Apis.Bigquery.v2.Data.Table.NumBytes*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.NumBytes
-  isExternal: false
   name: NumBytes
   nameWithType: Table.NumBytes
   fullName: Google.Apis.Bigquery.v2.Data.Table.NumBytes
 - uid: Google.Apis.Bigquery.v2.Data.Table.NumLongTermBytes*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.NumLongTermBytes
-  isExternal: false
   name: NumLongTermBytes
   nameWithType: Table.NumLongTermBytes
   fullName: Google.Apis.Bigquery.v2.Data.Table.NumLongTermBytes
+- uid: Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes
+  name: NumPhysicalBytes
+  nameWithType: Table.NumPhysicalBytes
+  fullName: Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes
 - uid: Google.Apis.Bigquery.v2.Data.Table.NumRows*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.NumRows
-  isExternal: false
   name: NumRows
   nameWithType: Table.NumRows
   fullName: Google.Apis.Bigquery.v2.Data.Table.NumRows
+- uid: Google.Apis.Bigquery.v2.Data.Table.RangePartitioning*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.RangePartitioning
+  name: RangePartitioning
+  nameWithType: Table.RangePartitioning
+  fullName: Google.Apis.Bigquery.v2.Data.Table.RangePartitioning
+- uid: Google.Apis.Bigquery.v2.Data.RangePartitioning
+  commentId: T:Google.Apis.Bigquery.v2.Data.RangePartitioning
+  parent: Google.Apis.Bigquery.v2.Data
+  name: RangePartitioning
+  nameWithType: RangePartitioning
+  fullName: Google.Apis.Bigquery.v2.Data.RangePartitioning
+- uid: Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter
+  name: RequirePartitionFilter
+  nameWithType: Table.RequirePartitionFilter
+  fullName: Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Boolean>
+  nameWithType: Nullable<Boolean>
+  fullName: System.Nullable<System.Boolean>
+  nameWithType.vb: Nullable(Of Boolean)
+  fullName.vb: System.Nullable(Of System.Boolean)
+  name.vb: Nullable(Of Boolean)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.Table.Schema*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Schema
-  isExternal: false
   name: Schema
   nameWithType: Table.Schema
   fullName: Google.Apis.Bigquery.v2.Data.Table.Schema
 - uid: Google.Apis.Bigquery.v2.Data.TableSchema
   commentId: T:Google.Apis.Bigquery.v2.Data.TableSchema
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TableSchema
   nameWithType: TableSchema
   fullName: Google.Apis.Bigquery.v2.Data.TableSchema
 - uid: Google.Apis.Bigquery.v2.Data.Table.SelfLink*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.SelfLink
-  isExternal: false
   name: SelfLink
   nameWithType: Table.SelfLink
   fullName: Google.Apis.Bigquery.v2.Data.Table.SelfLink
 - uid: Google.Apis.Bigquery.v2.Data.Table.StreamingBuffer*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.StreamingBuffer
-  isExternal: false
   name: StreamingBuffer
   nameWithType: Table.StreamingBuffer
   fullName: Google.Apis.Bigquery.v2.Data.Table.StreamingBuffer
 - uid: Google.Apis.Bigquery.v2.Data.Streamingbuffer
   commentId: T:Google.Apis.Bigquery.v2.Data.Streamingbuffer
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Streamingbuffer
   nameWithType: Streamingbuffer
   fullName: Google.Apis.Bigquery.v2.Data.Streamingbuffer
 - uid: Google.Apis.Bigquery.v2.Data.Table.TableReference*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.TableReference
-  isExternal: false
   name: TableReference
   nameWithType: Table.TableReference
   fullName: Google.Apis.Bigquery.v2.Data.Table.TableReference
 - uid: Google.Apis.Bigquery.v2.Data.TableReference
   commentId: T:Google.Apis.Bigquery.v2.Data.TableReference
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TableReference
   nameWithType: TableReference
   fullName: Google.Apis.Bigquery.v2.Data.TableReference
 - uid: Google.Apis.Bigquery.v2.Data.Table.TimePartitioning*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.TimePartitioning
-  isExternal: false
   name: TimePartitioning
   nameWithType: Table.TimePartitioning
   fullName: Google.Apis.Bigquery.v2.Data.Table.TimePartitioning
 - uid: Google.Apis.Bigquery.v2.Data.TimePartitioning
   commentId: T:Google.Apis.Bigquery.v2.Data.TimePartitioning
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TimePartitioning
   nameWithType: TimePartitioning
   fullName: Google.Apis.Bigquery.v2.Data.TimePartitioning
 - uid: Google.Apis.Bigquery.v2.Data.Table.Type*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.Type
-  isExternal: false
   name: Type
   nameWithType: Table.Type
   fullName: Google.Apis.Bigquery.v2.Data.Table.Type
 - uid: Google.Apis.Bigquery.v2.Data.Table.View*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Table.View
-  isExternal: false
   name: View
   nameWithType: Table.View
   fullName: Google.Apis.Bigquery.v2.Data.Table.View
 - uid: Google.Apis.Bigquery.v2.Data.ViewDefinition
   commentId: T:Google.Apis.Bigquery.v2.Data.ViewDefinition
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: ViewDefinition
   nameWithType: ViewDefinition
   fullName: Google.Apis.Bigquery.v2.Data.ViewDefinition

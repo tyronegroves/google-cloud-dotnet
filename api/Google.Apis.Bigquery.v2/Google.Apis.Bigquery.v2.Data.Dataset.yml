@@ -8,6 +8,8 @@ items:
   - Google.Apis.Bigquery.v2.Data.Dataset.Access
   - Google.Apis.Bigquery.v2.Data.Dataset.CreationTime
   - Google.Apis.Bigquery.v2.Data.Dataset.DatasetReference
+  - Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration
+  - Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs
   - Google.Apis.Bigquery.v2.Data.Dataset.DefaultTableExpirationMs
   - Google.Apis.Bigquery.v2.Data.Dataset.Description
   - Google.Apis.Bigquery.v2.Data.Dataset.ETag
@@ -32,7 +34,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Dataset
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2767
+    startLine: 4198
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -77,7 +79,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Access
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2775
+    startLine: 4206
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -139,7 +141,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: CreationTime
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2779
+    startLine: 4210
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -190,7 +192,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DatasetReference
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2783
+    startLine: 4214
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -223,6 +225,123 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration
+  commentId: P:Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration
+  id: DefaultEncryptionConfiguration
+  parent: Google.Apis.Bigquery.v2.Data.Dataset
+  langs:
+  - csharp
+  - vb
+  name: DefaultEncryptionConfiguration
+  nameWithType: Dataset.DefaultEncryptionConfiguration
+  fullName: Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: DefaultEncryptionConfiguration
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 4217
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  syntax:
+    content: >-
+      [JsonProperty("defaultEncryptionConfiguration")]
+
+      public virtual EncryptionConfiguration DefaultEncryptionConfiguration { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
+    content.vb: >-
+      <JsonProperty("defaultEncryptionConfiguration")>
+
+      Public Overridable Property DefaultEncryptionConfiguration As EncryptionConfiguration
+  overload: Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: defaultEncryptionConfiguration
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs
+  commentId: P:Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs
+  id: DefaultPartitionExpirationMs
+  parent: Google.Apis.Bigquery.v2.Data.Dataset
+  langs:
+  - csharp
+  - vb
+  name: DefaultPartitionExpirationMs
+  nameWithType: Dataset.DefaultPartitionExpirationMs
+  fullName: Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: DefaultPartitionExpirationMs
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 4229
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Optional] The default partition expiration for all partitioned tables in the dataset, in
+
+    milliseconds. Once this property is set, all newly-created partitioned tables in the dataset will have an
+
+    expirationMs property in the timePartitioning settings set to this value, and changing the value will only
+
+    affect new tables, not existing ones. The storage in a partition will have an expiration time of its
+
+    partition time plus this value. Setting this property overrides the use of defaultTableExpirationMs for
+
+    partitioned tables: only one of defaultTableExpirationMs and defaultPartitionExpirationMs will be used for
+
+    any new partitioned table. If you provide an explicit timePartitioning.expirationMs when creating or
+
+    updating a partitioned table, that value takes precedence over the default partition expiration time
+
+    indicated by this property.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("defaultPartitionExpirationMs")]
+
+      public virtual long? DefaultPartitionExpirationMs { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int64}
+    content.vb: >-
+      <JsonProperty("defaultPartitionExpirationMs")>
+
+      Public Overridable Property DefaultPartitionExpirationMs As Long?
+  overload: Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: defaultPartitionExpirationMs
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.DefaultTableExpirationMs
   commentId: P:Google.Apis.Bigquery.v2.Data.Dataset.DefaultTableExpirationMs
   id: DefaultTableExpirationMs
@@ -241,7 +360,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DefaultTableExpirationMs
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2793
+    startLine: 4239
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -305,7 +424,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Description
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2797
+    startLine: 4243
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -356,7 +475,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ETag
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2801
+    startLine: 4247
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -409,7 +528,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: FriendlyName
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2805
+    startLine: 4251
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -460,7 +579,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Id
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2811
+    startLine: 4257
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -516,7 +635,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Kind
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2815
+    startLine: 4261
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -567,16 +686,16 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Labels
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2821
+    startLine: 4267
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
     The labels associated with this dataset. You can use these to organize and group your datasets. You
 
-    can set this property when inserting or updating a dataset. See Labeling Datasets for more
+    can set this property when inserting or updating a dataset. See Creating and Updating Dataset Labels for
 
-    information.
+    more information.
   example: []
   syntax:
     content: >-
@@ -623,7 +742,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: LastModifiedTime
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2826
+    startLine: 4272
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -677,14 +796,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Location
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2831
+    startLine: 4277
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
     The geographic location where the dataset should reside. The default value is US. See details at
 
-    https://cloud.google.com/bigquery/docs/dataset-locations.
+    https://cloud.google.com/bigquery/docs/locations.
   example: []
   syntax:
     content: >-
@@ -731,7 +850,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SelfLink
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2836
+    startLine: 4282
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -770,7 +889,6 @@ items:
 references:
 - uid: Google.Apis.Bigquery.v2.Data
   commentId: N:Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Google.Apis.Bigquery.v2.Data
   nameWithType: Google.Apis.Bigquery.v2.Data
   fullName: Google.Apis.Bigquery.v2.Data
@@ -1069,19 +1187,18 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Apis.Requests
   commentId: N:Google.Apis.Requests
-  isExternal: false
+  isExternal: true
   name: Google.Apis.Requests
   nameWithType: Google.Apis.Requests
   fullName: Google.Apis.Requests
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.Access*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.Access
-  isExternal: false
   name: Access
   nameWithType: Dataset.Access
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.Access
@@ -1168,13 +1285,12 @@ references:
     fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
-  isExternal: false
+  isExternal: true
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.CreationTime*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.CreationTime
-  isExternal: false
   name: CreationTime
   nameWithType: Dataset.CreationTime
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.CreationTime
@@ -1263,26 +1379,38 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.DatasetReference*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.DatasetReference
-  isExternal: false
   name: DatasetReference
   nameWithType: Dataset.DatasetReference
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.DatasetReference
 - uid: Google.Apis.Bigquery.v2.Data.DatasetReference
   commentId: T:Google.Apis.Bigquery.v2.Data.DatasetReference
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: DatasetReference
   nameWithType: DatasetReference
   fullName: Google.Apis.Bigquery.v2.Data.DatasetReference
+- uid: Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration
+  name: DefaultEncryptionConfiguration
+  nameWithType: Dataset.DefaultEncryptionConfiguration
+  fullName: Google.Apis.Bigquery.v2.Data.Dataset.DefaultEncryptionConfiguration
+- uid: Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
+  commentId: T:Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
+  parent: Google.Apis.Bigquery.v2.Data
+  name: EncryptionConfiguration
+  nameWithType: EncryptionConfiguration
+  fullName: Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
+- uid: Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs
+  name: DefaultPartitionExpirationMs
+  nameWithType: Dataset.DefaultPartitionExpirationMs
+  fullName: Google.Apis.Bigquery.v2.Data.Dataset.DefaultPartitionExpirationMs
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.DefaultTableExpirationMs*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.DefaultTableExpirationMs
-  isExternal: false
   name: DefaultTableExpirationMs
   nameWithType: Dataset.DefaultTableExpirationMs
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.DefaultTableExpirationMs
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.Description*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.Description
-  isExternal: false
   name: Description
   nameWithType: Dataset.Description
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.Description
@@ -1295,7 +1423,6 @@ references:
   fullName: System.String
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.ETag*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.ETag
-  isExternal: false
   name: ETag
   nameWithType: Dataset.ETag
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.ETag
@@ -1308,25 +1435,21 @@ references:
   fullName: Google.Apis.Requests.IDirectResponseSchema.ETag
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.FriendlyName*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.FriendlyName
-  isExternal: false
   name: FriendlyName
   nameWithType: Dataset.FriendlyName
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.FriendlyName
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.Id*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.Id
-  isExternal: false
   name: Id
   nameWithType: Dataset.Id
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.Id
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.Kind*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.Kind
-  isExternal: false
   name: Kind
   nameWithType: Dataset.Kind
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.Kind
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.Labels*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.Labels
-  isExternal: false
   name: Labels
   nameWithType: Dataset.Labels
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.Labels
@@ -1443,19 +1566,16 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.LastModifiedTime*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.LastModifiedTime
-  isExternal: false
   name: LastModifiedTime
   nameWithType: Dataset.LastModifiedTime
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.LastModifiedTime
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.Location*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.Location
-  isExternal: false
   name: Location
   nameWithType: Dataset.Location
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.Location
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.SelfLink*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.SelfLink
-  isExternal: false
   name: SelfLink
   nameWithType: Dataset.SelfLink
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.SelfLink

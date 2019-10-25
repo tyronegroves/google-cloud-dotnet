@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: OneofDescriptor
     path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
@@ -45,6 +45,7 @@ items:
   - Google.Protobuf.Reflection.DescriptorBase.Index
   - Google.Protobuf.Reflection.DescriptorBase.FullName
   - Google.Protobuf.Reflection.DescriptorBase.File
+  - Google.Protobuf.Reflection.DescriptorBase.Declaration
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -74,7 +75,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Name
     path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
@@ -114,7 +115,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ContainingType
     path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
@@ -152,7 +153,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Fields
     path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
@@ -190,15 +191,16 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Accessor
     path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-    startLine: 90
+    startLine: 100
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
   summary: "\nGets an accessor for reflective access to the values associated with the oneof\nin a particular message.\n"
+  remarks: "\n<p>\nIn descriptors for generated code, the value returned by this property will always be non-null.\n</p>\n<p>\nIn dynamically loaded descriptors, the value returned by this property will current be null;\nif and when dynamic messages are supported, it will return a suitable accessor to work with\nthem.\n</p>\n"
   example: []
   syntax:
     content: public OneofAccessor Accessor { get; }
@@ -228,11 +230,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: CustomOptions
     path: csharp/src/Google.Protobuf/Reflection/OneofDescriptor.cs
-    startLine: 95
+    startLine: 105
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -254,7 +256,6 @@ items:
 references:
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
-  isExternal: false
   name: Google.Protobuf.Reflection
   nameWithType: Google.Protobuf.Reflection
   fullName: Google.Protobuf.Reflection
@@ -268,38 +269,39 @@ references:
 - uid: Google.Protobuf.Reflection.DescriptorBase
   commentId: T:Google.Protobuf.Reflection.DescriptorBase
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: DescriptorBase
   nameWithType: DescriptorBase
   fullName: Google.Protobuf.Reflection.DescriptorBase
 - uid: Google.Protobuf.Reflection.IDescriptor
   commentId: T:Google.Protobuf.Reflection.IDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: IDescriptor
   nameWithType: IDescriptor
   fullName: Google.Protobuf.Reflection.IDescriptor
 - uid: Google.Protobuf.Reflection.DescriptorBase.Index
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.Index
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: Index
   nameWithType: DescriptorBase.Index
   fullName: Google.Protobuf.Reflection.DescriptorBase.Index
 - uid: Google.Protobuf.Reflection.DescriptorBase.FullName
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.FullName
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: FullName
   nameWithType: DescriptorBase.FullName
   fullName: Google.Protobuf.Reflection.DescriptorBase.FullName
 - uid: Google.Protobuf.Reflection.DescriptorBase.File
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.File
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: File
   nameWithType: DescriptorBase.File
   fullName: Google.Protobuf.Reflection.DescriptorBase.File
+- uid: Google.Protobuf.Reflection.DescriptorBase.Declaration
+  commentId: P:Google.Protobuf.Reflection.DescriptorBase.Declaration
+  parent: Google.Protobuf.Reflection.DescriptorBase
+  name: Declaration
+  nameWithType: DescriptorBase.Declaration
+  fullName: Google.Protobuf.Reflection.DescriptorBase.Declaration
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -581,20 +583,18 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Protobuf.Reflection.DescriptorBase.Name
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.Name
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: Name
   nameWithType: DescriptorBase.Name
   fullName: Google.Protobuf.Reflection.DescriptorBase.Name
 - uid: Google.Protobuf.Reflection.OneofDescriptor.Name*
   commentId: Overload:Google.Protobuf.Reflection.OneofDescriptor.Name
-  isExternal: false
   name: Name
   nameWithType: OneofDescriptor.Name
   fullName: Google.Protobuf.Reflection.OneofDescriptor.Name
@@ -607,20 +607,17 @@ references:
   fullName: System.String
 - uid: Google.Protobuf.Reflection.OneofDescriptor.ContainingType*
   commentId: Overload:Google.Protobuf.Reflection.OneofDescriptor.ContainingType
-  isExternal: false
   name: ContainingType
   nameWithType: OneofDescriptor.ContainingType
   fullName: Google.Protobuf.Reflection.OneofDescriptor.ContainingType
 - uid: Google.Protobuf.Reflection.MessageDescriptor
   commentId: T:Google.Protobuf.Reflection.MessageDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: MessageDescriptor
   nameWithType: MessageDescriptor
   fullName: Google.Protobuf.Reflection.MessageDescriptor
 - uid: Google.Protobuf.Reflection.OneofDescriptor.Fields*
   commentId: Overload:Google.Protobuf.Reflection.OneofDescriptor.Fields
-  isExternal: false
   name: Fields
   nameWithType: OneofDescriptor.Fields
   fullName: Google.Protobuf.Reflection.OneofDescriptor.Fields
@@ -707,33 +704,29 @@ references:
     fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
-  isExternal: false
+  isExternal: true
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
 - uid: Google.Protobuf.Reflection.OneofDescriptor.Accessor*
   commentId: Overload:Google.Protobuf.Reflection.OneofDescriptor.Accessor
-  isExternal: false
   name: Accessor
   nameWithType: OneofDescriptor.Accessor
   fullName: Google.Protobuf.Reflection.OneofDescriptor.Accessor
 - uid: Google.Protobuf.Reflection.OneofAccessor
   commentId: T:Google.Protobuf.Reflection.OneofAccessor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: OneofAccessor
   nameWithType: OneofAccessor
   fullName: Google.Protobuf.Reflection.OneofAccessor
 - uid: Google.Protobuf.Reflection.OneofDescriptor.CustomOptions*
   commentId: Overload:Google.Protobuf.Reflection.OneofDescriptor.CustomOptions
-  isExternal: false
   name: CustomOptions
   nameWithType: OneofDescriptor.CustomOptions
   fullName: Google.Protobuf.Reflection.OneofDescriptor.CustomOptions
 - uid: Google.Protobuf.Reflection.CustomOptions
   commentId: T:Google.Protobuf.Reflection.CustomOptions
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: CustomOptions
   nameWithType: CustomOptions
   fullName: Google.Protobuf.Reflection.CustomOptions

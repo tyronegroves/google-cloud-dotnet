@@ -6,9 +6,6 @@ items:
   parent: Google.Apis.Requests
   children:
   - Google.Apis.Requests.ClientServiceRequest`1.#ctor(Google.Apis.Services.IClientService)
-  - Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
-  - Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
-  - Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
   - Google.Apis.Requests.ClientServiceRequest`1.CreateRequest(System.Nullable{System.Boolean})
   - Google.Apis.Requests.ClientServiceRequest`1.ETagAction
   - Google.Apis.Requests.ClientServiceRequest`1.Execute
@@ -41,26 +38,34 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ClientServiceRequest
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 41
+    startLine: 96
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
   summary: "\nRepresents an abstract, strongly typed request base class to make requests to a service.\nSupports a strongly typed response.\n"
   example: []
   syntax:
-    content: 'public abstract class ClientServiceRequest<TResponse> : IClientServiceRequest<TResponse>, IClientServiceRequest'
+    content: 'public abstract class ClientServiceRequest<TResponse> : ClientServiceRequest, IClientServiceRequest<TResponse>, IClientServiceRequest'
     typeParameters:
     - id: TResponse
       description: The type of the response object
     content.vb: >-
       Public MustInherit Class ClientServiceRequest(Of TResponse)
+          Inherits ClientServiceRequest
           Implements IClientServiceRequest(Of TResponse), IClientServiceRequest
   inheritance:
   - System.Object
+  - Google.Apis.Requests.ClientServiceRequest
   implements:
   - Google.Apis.Requests.IClientServiceRequest{{TResponse}}
   - Google.Apis.Requests.IClientServiceRequest
   inheritedMembers:
+  - Google.Apis.Requests.ClientServiceRequest._unsuccessfulResponseHandlers
+  - Google.Apis.Requests.ClientServiceRequest._exceptionHandlers
+  - Google.Apis.Requests.ClientServiceRequest._executeInterceptors
+  - Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  - Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  - Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -97,7 +102,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ETagAction
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 50
+    startLine: 105
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -136,7 +141,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ModifyRequest
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 55
+    startLine: 110
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -175,7 +180,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: MethodName
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 64
+    startLine: 115
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -218,7 +223,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: RestPath
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 67
+    startLine: 118
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -261,7 +266,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: HttpMethod
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 70
+    startLine: 121
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -304,7 +309,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: RequestParameters
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 73
+    startLine: 124
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -345,7 +350,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Service
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 76
+    startLine: 127
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -386,7 +391,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: .ctor
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 84
+    startLine: 135
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -423,7 +428,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: InitParameters
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 93
+    startLine: 144
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -459,7 +464,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Execute
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 101
+    startLine: 152
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -496,7 +501,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExecuteAsStream
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 120
+    startLine: 171
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -534,7 +539,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExecuteAsync
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 141
+    startLine: 192
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -571,7 +576,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExecuteAsync
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 147
+    startLine: 198
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -611,7 +616,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExecuteAsStreamAsync
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 157
+    startLine: 208
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -649,7 +654,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ExecuteAsStreamAsync
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 163
+    startLine: 214
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -673,120 +678,6 @@ items:
   modifiers.vb:
   - Public
   fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).ExecuteAsStreamAsync(System.Threading.CancellationToken)
-- uid: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
-  commentId: M:Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
-  id: AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
-  parent: Google.Apis.Requests.ClientServiceRequest`1
-  langs:
-  - csharp
-  - vb
-  name: AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
-  nameWithType: ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
-  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
-  type: Method
-  source:
-    remote:
-      path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: AddUnsuccessfulResponseHandler
-    path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 206
-  assemblies:
-  - Google.Apis
-  namespace: Google.Apis.Requests
-  summary: "\nAdd an unsuccessful response handler for this request only.\n"
-  example: []
-  syntax:
-    content: public void AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler handler)
-    parameters:
-    - id: handler
-      type: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
-      description: The unsuccessful response handler. Must not be <code>null</code>.
-    content.vb: Public Sub AddUnsuccessfulResponseHandler(handler As IHttpUnsuccessfulResponseHandler)
-  overload: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler*
-  nameWithType.vb: ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
-- uid: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
-  commentId: M:Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
-  id: AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
-  parent: Google.Apis.Requests.ClientServiceRequest`1
-  langs:
-  - csharp
-  - vb
-  name: AddExceptionHandler(IHttpExceptionHandler)
-  nameWithType: ClientServiceRequest<TResponse>.AddExceptionHandler(IHttpExceptionHandler)
-  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
-  type: Method
-  source:
-    remote:
-      path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: AddExceptionHandler
-    path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 220
-  assemblies:
-  - Google.Apis
-  namespace: Google.Apis.Requests
-  summary: "\nAdd an exception handler for this request only.\n"
-  example: []
-  syntax:
-    content: public void AddExceptionHandler(IHttpExceptionHandler handler)
-    parameters:
-    - id: handler
-      type: Google.Apis.Http.IHttpExceptionHandler
-      description: The exception handler. Must not be <code>null</code>.
-    content.vb: Public Sub AddExceptionHandler(handler As IHttpExceptionHandler)
-  overload: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler*
-  nameWithType.vb: ClientServiceRequest(Of TResponse).AddExceptionHandler(IHttpExceptionHandler)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
-- uid: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
-  commentId: M:Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
-  id: AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
-  parent: Google.Apis.Requests.ClientServiceRequest`1
-  langs:
-  - csharp
-  - vb
-  name: AddExecuteInterceptor(IHttpExecuteInterceptor)
-  nameWithType: ClientServiceRequest<TResponse>.AddExecuteInterceptor(IHttpExecuteInterceptor)
-  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
-  type: Method
-  source:
-    remote:
-      path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-      branch: master
-      repo: https://github.com/google/google-api-dotnet-client
-    id: AddExecuteInterceptor
-    path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 234
-  assemblies:
-  - Google.Apis
-  namespace: Google.Apis.Requests
-  summary: "\nAdd an unsuccessful response handler for this request only.\n"
-  example: []
-  syntax:
-    content: public void AddExecuteInterceptor(IHttpExecuteInterceptor handler)
-    parameters:
-    - id: handler
-      type: Google.Apis.Http.IHttpExecuteInterceptor
-      description: The unsuccessful response handler. Must not be <code>null</code>.
-    content.vb: Public Sub AddExecuteInterceptor(handler As IHttpExecuteInterceptor)
-  overload: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor*
-  nameWithType.vb: ClientServiceRequest(Of TResponse).AddExecuteInterceptor(IHttpExecuteInterceptor)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
 - uid: Google.Apis.Requests.ClientServiceRequest`1.CreateRequest(System.Nullable{System.Boolean})
   commentId: M:Google.Apis.Requests.ClientServiceRequest`1.CreateRequest(System.Nullable{System.Boolean})
   id: CreateRequest(System.Nullable{System.Boolean})
@@ -805,14 +696,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: CreateRequest
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 245
+    startLine: 254
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
   summary: Creates a HTTP request message with all path and query parameters, ETag, etc.
   example: []
   syntax:
-    content: public HttpRequestMessage CreateRequest(bool? overrideGZipEnabled = default (bool? ))
+    content: public HttpRequestMessage CreateRequest(bool? overrideGZipEnabled = default(bool? ))
     parameters:
     - id: overrideGZipEnabled
       type: System.Nullable{System.Boolean}
@@ -848,7 +739,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: GenerateRequestUri
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 295
+    startLine: 304
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -884,7 +775,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: GetBody
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 299
+    startLine: 308
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -923,7 +814,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: GetDefaultETagAction
     path: Src/Support/Google.Apis/Requests/ClientServiceRequest.cs
-    startLine: 331
+    startLine: 340
   assemblies:
   - Google.Apis
   namespace: Google.Apis.Requests
@@ -949,7 +840,6 @@ items:
 references:
 - uid: Google.Apis.Requests
   commentId: N:Google.Apis.Requests
-  isExternal: false
   name: Google.Apis.Requests
   nameWithType: Google.Apis.Requests
   fullName: Google.Apis.Requests
@@ -960,6 +850,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Google.Apis.Requests.ClientServiceRequest
+  commentId: T:Google.Apis.Requests.ClientServiceRequest
+  parent: Google.Apis.Requests
+  name: ClientServiceRequest
+  nameWithType: ClientServiceRequest
+  fullName: Google.Apis.Requests.ClientServiceRequest
 - uid: Google.Apis.Requests.IClientServiceRequest{{TResponse}}
   commentId: T:Google.Apis.Requests.IClientServiceRequest{`0}
   parent: Google.Apis.Requests
@@ -1001,10 +897,135 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest
   commentId: T:Google.Apis.Requests.IClientServiceRequest
   parent: Google.Apis.Requests
-  isExternal: false
   name: IClientServiceRequest
   nameWithType: IClientServiceRequest
   fullName: Google.Apis.Requests.IClientServiceRequest
+- uid: Google.Apis.Requests.ClientServiceRequest._unsuccessfulResponseHandlers
+  commentId: F:Google.Apis.Requests.ClientServiceRequest._unsuccessfulResponseHandlers
+  parent: Google.Apis.Requests.ClientServiceRequest
+  name: _unsuccessfulResponseHandlers
+  nameWithType: ClientServiceRequest._unsuccessfulResponseHandlers
+  fullName: Google.Apis.Requests.ClientServiceRequest._unsuccessfulResponseHandlers
+- uid: Google.Apis.Requests.ClientServiceRequest._exceptionHandlers
+  commentId: F:Google.Apis.Requests.ClientServiceRequest._exceptionHandlers
+  parent: Google.Apis.Requests.ClientServiceRequest
+  name: _exceptionHandlers
+  nameWithType: ClientServiceRequest._exceptionHandlers
+  fullName: Google.Apis.Requests.ClientServiceRequest._exceptionHandlers
+- uid: Google.Apis.Requests.ClientServiceRequest._executeInterceptors
+  commentId: F:Google.Apis.Requests.ClientServiceRequest._executeInterceptors
+  parent: Google.Apis.Requests.ClientServiceRequest
+  name: _executeInterceptors
+  nameWithType: ClientServiceRequest._executeInterceptors
+  fullName: Google.Apis.Requests.ClientServiceRequest._executeInterceptors
+- uid: Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  parent: Google.Apis.Requests.ClientServiceRequest
+  name: AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  nameWithType: ClientServiceRequest.AddUnsuccessfulResponseHandler(IHttpUnsuccessfulResponseHandler)
+  fullName: Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+    name: AddUnsuccessfulResponseHandler
+    nameWithType: ClientServiceRequest.AddUnsuccessfulResponseHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    name: IHttpUnsuccessfulResponseHandler
+    nameWithType: IHttpUnsuccessfulResponseHandler
+    fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+    name: AddUnsuccessfulResponseHandler
+    nameWithType: ClientServiceRequest.AddUnsuccessfulResponseHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest.AddUnsuccessfulResponseHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+    name: IHttpUnsuccessfulResponseHandler
+    nameWithType: IHttpUnsuccessfulResponseHandler
+    fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  parent: Google.Apis.Requests.ClientServiceRequest
+  name: AddExceptionHandler(IHttpExceptionHandler)
+  nameWithType: ClientServiceRequest.AddExceptionHandler(IHttpExceptionHandler)
+  fullName: Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+    name: AddExceptionHandler
+    nameWithType: ClientServiceRequest.AddExceptionHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExceptionHandler
+    name: IHttpExceptionHandler
+    nameWithType: IHttpExceptionHandler
+    fullName: Google.Apis.Http.IHttpExceptionHandler
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+    name: AddExceptionHandler
+    nameWithType: ClientServiceRequest.AddExceptionHandler
+    fullName: Google.Apis.Requests.ClientServiceRequest.AddExceptionHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExceptionHandler
+    name: IHttpExceptionHandler
+    nameWithType: IHttpExceptionHandler
+    fullName: Google.Apis.Http.IHttpExceptionHandler
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  commentId: M:Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  parent: Google.Apis.Requests.ClientServiceRequest
+  name: AddExecuteInterceptor(IHttpExecuteInterceptor)
+  nameWithType: ClientServiceRequest.AddExecuteInterceptor(IHttpExecuteInterceptor)
+  fullName: Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  spec.csharp:
+  - uid: Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+    name: AddExecuteInterceptor
+    nameWithType: ClientServiceRequest.AddExecuteInterceptor
+    fullName: Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExecuteInterceptor
+    name: IHttpExecuteInterceptor
+    nameWithType: IHttpExecuteInterceptor
+    fullName: Google.Apis.Http.IHttpExecuteInterceptor
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+    name: AddExecuteInterceptor
+    nameWithType: ClientServiceRequest.AddExecuteInterceptor
+    fullName: Google.Apis.Requests.ClientServiceRequest.AddExecuteInterceptor
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Apis.Http.IHttpExecuteInterceptor
+    name: IHttpExecuteInterceptor
+    nameWithType: IHttpExecuteInterceptor
+    fullName: Google.Apis.Http.IHttpExecuteInterceptor
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -1286,13 +1307,12 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Apis.Requests.IClientServiceRequest`1
   commentId: T:Google.Apis.Requests.IClientServiceRequest`1
-  isExternal: false
   name: IClientServiceRequest<TResponse>
   nameWithType: IClientServiceRequest<TResponse>
   fullName: Google.Apis.Requests.IClientServiceRequest<TResponse>
@@ -1329,7 +1349,6 @@ references:
     fullName: )
 - uid: Google.Apis.Requests.ClientServiceRequest`1.ETagAction*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.ETagAction
-  isExternal: false
   name: ETagAction
   nameWithType: ClientServiceRequest<TResponse>.ETagAction
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.ETagAction
@@ -1338,19 +1357,16 @@ references:
 - uid: Google.Apis.ETagAction
   commentId: T:Google.Apis.ETagAction
   parent: Google.Apis
-  isExternal: false
   name: ETagAction
   nameWithType: ETagAction
   fullName: Google.Apis.ETagAction
 - uid: Google.Apis
   commentId: N:Google.Apis
-  isExternal: false
   name: Google.Apis
   nameWithType: Google.Apis
   fullName: Google.Apis
 - uid: Google.Apis.Requests.ClientServiceRequest`1.ModifyRequest*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.ModifyRequest
-  isExternal: false
   name: ModifyRequest
   nameWithType: ClientServiceRequest<TResponse>.ModifyRequest
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.ModifyRequest
@@ -1441,7 +1457,6 @@ references:
     fullName: )
 - uid: Google.Apis.Requests.ClientServiceRequest`1.MethodName*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.MethodName
-  isExternal: false
   name: MethodName
   nameWithType: ClientServiceRequest<TResponse>.MethodName
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.MethodName
@@ -1450,7 +1465,6 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest.MethodName
   commentId: P:Google.Apis.Requests.IClientServiceRequest.MethodName
   parent: Google.Apis.Requests.IClientServiceRequest
-  isExternal: false
   name: MethodName
   nameWithType: IClientServiceRequest.MethodName
   fullName: Google.Apis.Requests.IClientServiceRequest.MethodName
@@ -1463,7 +1477,6 @@ references:
   fullName: System.String
 - uid: Google.Apis.Requests.ClientServiceRequest`1.RestPath*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.RestPath
-  isExternal: false
   name: RestPath
   nameWithType: ClientServiceRequest<TResponse>.RestPath
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.RestPath
@@ -1472,13 +1485,11 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest.RestPath
   commentId: P:Google.Apis.Requests.IClientServiceRequest.RestPath
   parent: Google.Apis.Requests.IClientServiceRequest
-  isExternal: false
   name: RestPath
   nameWithType: IClientServiceRequest.RestPath
   fullName: Google.Apis.Requests.IClientServiceRequest.RestPath
 - uid: Google.Apis.Requests.ClientServiceRequest`1.HttpMethod*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.HttpMethod
-  isExternal: false
   name: HttpMethod
   nameWithType: ClientServiceRequest<TResponse>.HttpMethod
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.HttpMethod
@@ -1487,13 +1498,11 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest.HttpMethod
   commentId: P:Google.Apis.Requests.IClientServiceRequest.HttpMethod
   parent: Google.Apis.Requests.IClientServiceRequest
-  isExternal: false
   name: HttpMethod
   nameWithType: IClientServiceRequest.HttpMethod
   fullName: Google.Apis.Requests.IClientServiceRequest.HttpMethod
 - uid: Google.Apis.Requests.ClientServiceRequest`1.RequestParameters*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.RequestParameters
-  isExternal: false
   name: RequestParameters
   nameWithType: ClientServiceRequest<TResponse>.RequestParameters
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.RequestParameters
@@ -1502,7 +1511,6 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest.RequestParameters
   commentId: P:Google.Apis.Requests.IClientServiceRequest.RequestParameters
   parent: Google.Apis.Requests.IClientServiceRequest
-  isExternal: false
   name: RequestParameters
   nameWithType: IClientServiceRequest.RequestParameters
   fullName: Google.Apis.Requests.IClientServiceRequest.RequestParameters
@@ -1617,13 +1625,12 @@ references:
     fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
-  isExternal: false
+  isExternal: true
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
 - uid: Google.Apis.Requests.ClientServiceRequest`1.Service*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.Service
-  isExternal: false
   name: Service
   nameWithType: ClientServiceRequest<TResponse>.Service
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.Service
@@ -1632,26 +1639,22 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest.Service
   commentId: P:Google.Apis.Requests.IClientServiceRequest.Service
   parent: Google.Apis.Requests.IClientServiceRequest
-  isExternal: false
   name: Service
   nameWithType: IClientServiceRequest.Service
   fullName: Google.Apis.Requests.IClientServiceRequest.Service
 - uid: Google.Apis.Services.IClientService
   commentId: T:Google.Apis.Services.IClientService
   parent: Google.Apis.Services
-  isExternal: false
   name: IClientService
   nameWithType: IClientService
   fullName: Google.Apis.Services.IClientService
 - uid: Google.Apis.Services
   commentId: N:Google.Apis.Services
-  isExternal: false
   name: Google.Apis.Services
   nameWithType: Google.Apis.Services
   fullName: Google.Apis.Services
 - uid: Google.Apis.Requests.ClientServiceRequest`1.#ctor*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.#ctor
-  isExternal: false
   name: ClientServiceRequest
   nameWithType: ClientServiceRequest<TResponse>.ClientServiceRequest
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.ClientServiceRequest
@@ -1659,9 +1662,9 @@ references:
   fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).ClientServiceRequest
 - uid: Google.Apis.Requests.ClientServiceRequest`1.RequestParameters
   commentId: P:Google.Apis.Requests.ClientServiceRequest`1.RequestParameters
+  isExternal: true
 - uid: Google.Apis.Requests.ClientServiceRequest`1.InitParameters*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.InitParameters
-  isExternal: false
   name: InitParameters
   nameWithType: ClientServiceRequest<TResponse>.InitParameters
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.InitParameters
@@ -1669,7 +1672,6 @@ references:
   fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).InitParameters
 - uid: Google.Apis.Requests.ClientServiceRequest`1.Execute*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.Execute
-  isExternal: false
   name: Execute
   nameWithType: ClientServiceRequest<TResponse>.Execute
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.Execute
@@ -1714,7 +1716,6 @@ references:
   fullName: TResponse
 - uid: Google.Apis.Requests.IClientServiceRequest`1.Execute
   commentId: M:Google.Apis.Requests.IClientServiceRequest`1.Execute
-  isExternal: false
   name: Execute()
   nameWithType: IClientServiceRequest<TResponse>.Execute()
   fullName: Google.Apis.Requests.IClientServiceRequest<TResponse>.Execute()
@@ -1743,13 +1744,11 @@ references:
     nameWithType: )
     fullName: )
 - uid: TResponse
-  isExternal: false
   name: TResponse
   nameWithType: TResponse
   fullName: TResponse
 - uid: Google.Apis.Requests.ClientServiceRequest`1.ExecuteAsStream*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.ExecuteAsStream
-  isExternal: false
   name: ExecuteAsStream
   nameWithType: ClientServiceRequest<TResponse>.ExecuteAsStream
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.ExecuteAsStream
@@ -1758,7 +1757,6 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest.ExecuteAsStream
   commentId: M:Google.Apis.Requests.IClientServiceRequest.ExecuteAsStream
   parent: Google.Apis.Requests.IClientServiceRequest
-  isExternal: false
   name: ExecuteAsStream()
   nameWithType: IClientServiceRequest.ExecuteAsStream()
   fullName: Google.Apis.Requests.IClientServiceRequest.ExecuteAsStream()
@@ -1793,13 +1791,12 @@ references:
   fullName: System.IO.Stream
 - uid: System.IO
   commentId: N:System.IO
-  isExternal: false
+  isExternal: true
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
 - uid: Google.Apis.Requests.ClientServiceRequest`1.ExecuteAsync*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.ExecuteAsync
-  isExternal: false
   name: ExecuteAsync
   nameWithType: ClientServiceRequest<TResponse>.ExecuteAsync
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.ExecuteAsync
@@ -1878,7 +1875,6 @@ references:
     fullName: )
 - uid: Google.Apis.Requests.IClientServiceRequest`1.ExecuteAsync
   commentId: M:Google.Apis.Requests.IClientServiceRequest`1.ExecuteAsync
-  isExternal: false
   name: ExecuteAsync()
   nameWithType: IClientServiceRequest<TResponse>.ExecuteAsync()
   fullName: Google.Apis.Requests.IClientServiceRequest<TResponse>.ExecuteAsync()
@@ -1947,7 +1943,7 @@ references:
     fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
-  isExternal: false
+  isExternal: true
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
@@ -2041,13 +2037,12 @@ references:
     fullName: )
 - uid: System.Threading
   commentId: N:System.Threading
-  isExternal: false
+  isExternal: true
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
 - uid: Google.Apis.Requests.ClientServiceRequest`1.ExecuteAsStreamAsync*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.ExecuteAsStreamAsync
-  isExternal: false
   name: ExecuteAsStreamAsync
   nameWithType: ClientServiceRequest<TResponse>.ExecuteAsStreamAsync
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.ExecuteAsStreamAsync
@@ -2056,7 +2051,6 @@ references:
 - uid: Google.Apis.Requests.IClientServiceRequest.ExecuteAsStreamAsync
   commentId: M:Google.Apis.Requests.IClientServiceRequest.ExecuteAsStreamAsync
   parent: Google.Apis.Requests.IClientServiceRequest
-  isExternal: false
   name: ExecuteAsStreamAsync()
   nameWithType: IClientServiceRequest.ExecuteAsStreamAsync()
   fullName: Google.Apis.Requests.IClientServiceRequest.ExecuteAsStreamAsync()
@@ -2165,60 +2159,8 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler*
-  commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.AddUnsuccessfulResponseHandler
-  isExternal: false
-  name: AddUnsuccessfulResponseHandler
-  nameWithType: ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler
-  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddUnsuccessfulResponseHandler
-  nameWithType.vb: ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler
-  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddUnsuccessfulResponseHandler
-- uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
-  commentId: T:Google.Apis.Http.IHttpUnsuccessfulResponseHandler
-  parent: Google.Apis.Http
-  isExternal: false
-  name: IHttpUnsuccessfulResponseHandler
-  nameWithType: IHttpUnsuccessfulResponseHandler
-  fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
-- uid: Google.Apis.Http
-  commentId: N:Google.Apis.Http
-  isExternal: false
-  name: Google.Apis.Http
-  nameWithType: Google.Apis.Http
-  fullName: Google.Apis.Http
-- uid: Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler*
-  commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.AddExceptionHandler
-  isExternal: false
-  name: AddExceptionHandler
-  nameWithType: ClientServiceRequest<TResponse>.AddExceptionHandler
-  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExceptionHandler
-  nameWithType.vb: ClientServiceRequest(Of TResponse).AddExceptionHandler
-  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExceptionHandler
-- uid: Google.Apis.Http.IHttpExceptionHandler
-  commentId: T:Google.Apis.Http.IHttpExceptionHandler
-  parent: Google.Apis.Http
-  isExternal: false
-  name: IHttpExceptionHandler
-  nameWithType: IHttpExceptionHandler
-  fullName: Google.Apis.Http.IHttpExceptionHandler
-- uid: Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor*
-  commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.AddExecuteInterceptor
-  isExternal: false
-  name: AddExecuteInterceptor
-  nameWithType: ClientServiceRequest<TResponse>.AddExecuteInterceptor
-  fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.AddExecuteInterceptor
-  nameWithType.vb: ClientServiceRequest(Of TResponse).AddExecuteInterceptor
-  fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).AddExecuteInterceptor
-- uid: Google.Apis.Http.IHttpExecuteInterceptor
-  commentId: T:Google.Apis.Http.IHttpExecuteInterceptor
-  parent: Google.Apis.Http
-  isExternal: false
-  name: IHttpExecuteInterceptor
-  nameWithType: IHttpExecuteInterceptor
-  fullName: Google.Apis.Http.IHttpExecuteInterceptor
 - uid: Google.Apis.Requests.ClientServiceRequest`1.CreateRequest*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.CreateRequest
-  isExternal: false
   name: CreateRequest
   nameWithType: ClientServiceRequest<TResponse>.CreateRequest
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.CreateRequest
@@ -2380,13 +2322,12 @@ references:
     fullName: )
 - uid: System.Net.Http
   commentId: N:System.Net.Http
-  isExternal: false
+  isExternal: true
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
 - uid: Google.Apis.Requests.ClientServiceRequest`1.GenerateRequestUri*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.GenerateRequestUri
-  isExternal: false
   name: GenerateRequestUri
   nameWithType: ClientServiceRequest<TResponse>.GenerateRequestUri
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.GenerateRequestUri
@@ -2394,7 +2335,6 @@ references:
   fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).GenerateRequestUri
 - uid: Google.Apis.Requests.ClientServiceRequest`1.GetBody*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.GetBody
-  isExternal: false
   name: GetBody
   nameWithType: ClientServiceRequest<TResponse>.GetBody
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.GetBody
@@ -2402,7 +2342,6 @@ references:
   fullName.vb: Google.Apis.Requests.ClientServiceRequest(Of TResponse).GetBody
 - uid: Google.Apis.Requests.ClientServiceRequest`1.GetDefaultETagAction*
   commentId: Overload:Google.Apis.Requests.ClientServiceRequest`1.GetDefaultETagAction
-  isExternal: false
   name: GetDefaultETagAction
   nameWithType: ClientServiceRequest<TResponse>.GetDefaultETagAction
   fullName: Google.Apis.Requests.ClientServiceRequest<TResponse>.GetDefaultETagAction

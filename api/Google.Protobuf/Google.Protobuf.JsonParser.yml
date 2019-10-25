@@ -21,7 +21,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/JsonParser.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: JsonParser
     path: csharp/src/Google.Protobuf/JsonParser.cs
@@ -67,7 +67,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/JsonParser.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Default
     path: csharp/src/Google.Protobuf/JsonParser.cs
@@ -106,7 +106,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/JsonParser.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/JsonParser.cs
@@ -142,7 +142,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/JsonParser.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Parse
     path: csharp/src/Google.Protobuf/JsonParser.cs
@@ -153,7 +153,9 @@ items:
   summary: "\nParses <code data-dev-comment-type=\"paramref\" class=\"paramref\">json</code> into a new message.\n"
   example: []
   syntax:
-    content: 'public T Parse<T>(string json)where T : IMessage, new ()'
+    content: >-
+      public T Parse<T>(string json)
+          where T : IMessage, new()
     parameters:
     - id: json
       type: System.String
@@ -193,7 +195,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/JsonParser.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Parse
     path: csharp/src/Google.Protobuf/JsonParser.cs
@@ -204,7 +206,9 @@ items:
   summary: "\nParses JSON read from <code data-dev-comment-type=\"paramref\" class=\"paramref\">jsonReader</code> into a new message.\n"
   example: []
   syntax:
-    content: 'public T Parse<T>(TextReader jsonReader)where T : IMessage, new ()'
+    content: >-
+      public T Parse<T>(TextReader jsonReader)
+          where T : IMessage, new()
     parameters:
     - id: jsonReader
       type: System.IO.TextReader
@@ -244,7 +248,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/JsonParser.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Parse
     path: csharp/src/Google.Protobuf/JsonParser.cs
@@ -292,7 +296,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/JsonParser.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Parse
     path: csharp/src/Google.Protobuf/JsonParser.cs
@@ -329,7 +333,6 @@ items:
 references:
 - uid: Google.Protobuf
   commentId: N:Google.Protobuf
-  isExternal: false
   name: Google.Protobuf
   nameWithType: Google.Protobuf
   fullName: Google.Protobuf
@@ -621,54 +624,47 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Protobuf.JsonParser.Default*
   commentId: Overload:Google.Protobuf.JsonParser.Default
-  isExternal: false
   name: Default
   nameWithType: JsonParser.Default
   fullName: Google.Protobuf.JsonParser.Default
 - uid: Google.Protobuf.JsonParser
   commentId: T:Google.Protobuf.JsonParser
   parent: Google.Protobuf
-  isExternal: false
   name: JsonParser
   nameWithType: JsonParser
   fullName: Google.Protobuf.JsonParser
 - uid: Google.Protobuf.JsonParser.#ctor*
   commentId: Overload:Google.Protobuf.JsonParser.#ctor
-  isExternal: false
   name: JsonParser
   nameWithType: JsonParser.JsonParser
   fullName: Google.Protobuf.JsonParser.JsonParser
 - uid: Google.Protobuf.JsonParser.Settings
   commentId: T:Google.Protobuf.JsonParser.Settings
   parent: Google.Protobuf
-  isExternal: false
   name: JsonParser.Settings
   nameWithType: JsonParser.Settings
   fullName: Google.Protobuf.JsonParser.Settings
-- uid: Google.Protobuf.JsonParser.Parse*
-  commentId: Overload:Google.Protobuf.JsonParser.Parse
-  isExternal: false
-  name: Parse
-  nameWithType: JsonParser.Parse
-  fullName: Google.Protobuf.JsonParser.Parse
 - uid: Google.Protobuf.InvalidJsonException
   commentId: T:Google.Protobuf.InvalidJsonException
-  isExternal: false
   name: InvalidJsonException
   nameWithType: InvalidJsonException
   fullName: Google.Protobuf.InvalidJsonException
 - uid: Google.Protobuf.InvalidProtocolBufferException
   commentId: T:Google.Protobuf.InvalidProtocolBufferException
-  isExternal: false
   name: InvalidProtocolBufferException
   nameWithType: InvalidProtocolBufferException
   fullName: Google.Protobuf.InvalidProtocolBufferException
+- uid: Google.Protobuf.JsonParser.Parse*
+  commentId: Overload:Google.Protobuf.JsonParser.Parse
+  name: Parse
+  nameWithType: JsonParser.Parse
+  fullName: Google.Protobuf.JsonParser.Parse
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -683,7 +679,6 @@ references:
   nameWithType: T
   fullName: T
 - uid: T
-  isExternal: false
   name: T
   nameWithType: T
   fullName: T
@@ -696,27 +691,24 @@ references:
   fullName: System.IO.TextReader
 - uid: System.IO
   commentId: N:System.IO
-  isExternal: false
+  isExternal: true
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
 - uid: Google.Protobuf.Reflection.MessageDescriptor
   commentId: T:Google.Protobuf.Reflection.MessageDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: MessageDescriptor
   nameWithType: MessageDescriptor
   fullName: Google.Protobuf.Reflection.MessageDescriptor
 - uid: Google.Protobuf.IMessage
   commentId: T:Google.Protobuf.IMessage
   parent: Google.Protobuf
-  isExternal: false
   name: IMessage
   nameWithType: IMessage
   fullName: Google.Protobuf.IMessage
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
-  isExternal: false
   name: Google.Protobuf.Reflection
   nameWithType: Google.Protobuf.Reflection
   fullName: Google.Protobuf.Reflection

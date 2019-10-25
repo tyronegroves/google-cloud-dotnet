@@ -9,6 +9,7 @@ items:
   - Google.Protobuf.WellKnownTypes.Timestamp.#ctor(Google.Protobuf.WellKnownTypes.Timestamp)
   - Google.Protobuf.WellKnownTypes.Timestamp.CalculateSize
   - Google.Protobuf.WellKnownTypes.Timestamp.Clone
+  - Google.Protobuf.WellKnownTypes.Timestamp.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
   - Google.Protobuf.WellKnownTypes.Timestamp.Descriptor
   - Google.Protobuf.WellKnownTypes.Timestamp.Equals(Google.Protobuf.WellKnownTypes.Timestamp)
   - Google.Protobuf.WellKnownTypes.Timestamp.Equals(System.Object)
@@ -21,6 +22,12 @@ items:
   - Google.Protobuf.WellKnownTypes.Timestamp.Nanos
   - Google.Protobuf.WellKnownTypes.Timestamp.NanosFieldNumber
   - Google.Protobuf.WellKnownTypes.Timestamp.op_Addition(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Duration)
+  - Google.Protobuf.WellKnownTypes.Timestamp.op_Equality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  - Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  - Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  - Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  - Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  - Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
   - Google.Protobuf.WellKnownTypes.Timestamp.op_Subtraction(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Duration)
   - Google.Protobuf.WellKnownTypes.Timestamp.op_Subtraction(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
   - Google.Protobuf.WellKnownTypes.Timestamp.Parser
@@ -41,7 +48,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Timestamp
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -49,13 +56,13 @@ items:
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
-  summary: "\nA Timestamp represents a point in time independent of any time zone\nor calendar, represented as seconds and fractions of seconds at\nnanosecond resolution in UTC Epoch time. It is encoded using the\nProleptic Gregorian Calendar which extends the Gregorian calendar\nbackwards to year one. It is encoded assuming all minutes are 60\nseconds long, i.e. leap seconds are &quot;smeared&quot; so that no leap second\ntable is needed for interpretation. Range is from\n0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.\nBy restricting to that range, we ensure that we can convert to\nand from  RFC 3339 date strings.\nSee [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).\n\n# Examples\n\nExample 1: Compute Timestamp from POSIX `time()`.\n\nTimestamp timestamp;\ntimestamp.set_seconds(time(NULL));\ntimestamp.set_nanos(0);\n\nExample 2: Compute Timestamp from POSIX `gettimeofday()`.\n\nstruct timeval tv;\ngettimeofday(&amp;tv, NULL);\n\nTimestamp timestamp;\ntimestamp.set_seconds(tv.tv_sec);\ntimestamp.set_nanos(tv.tv_usec * 1000);\n\nExample 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\nFILETIME ft;\nGetSystemTimeAsFileTime(&amp;ft);\nUINT64 ticks = (((UINT64)ft.dwHighDateTime) &lt;&lt; 32) | ft.dwLowDateTime;\n\n// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\nTimestamp timestamp;\ntimestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\ntimestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\nExample 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\nlong millis = System.currentTimeMillis();\n\nTimestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n   .setNanos((int) ((millis % 1000) * 1000000)).build();\n\nExample 5: Compute Timestamp from current time in Python.\n\ntimestamp = Timestamp()\ntimestamp.GetCurrentTime()\n\n# JSON Mapping\n\nIn JSON format, the Timestamp type is encoded as a string in the\n[RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\nformat is &quot;{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z&quot;\nwhere {year} is always expressed using four digits while {month}, {day},\n{hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\nseconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\nare optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone\nis required. A proto3 JSON serializer should always use UTC (as indicated by\n&quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be\nable to accept both UTC and other timezones (as indicated by an offset).\n\nFor example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past\n01:30 UTC on January 15, 2017.\n\nIn JavaScript, one can convert a Date object to this format using the\nstandard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString]\nmethod. In Python, a standard `datetime.datetime` object can be converted\nto this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime)\nwith the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one\ncan use the Joda Time&apos;s [`ISODateTimeFormat.dateTime()`](\nhttp://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--\n) to obtain a formatter capable of generating timestamps in this format.\n"
+  summary: "\nA Timestamp represents a point in time independent of any time zone or local\ncalendar, encoded as a count of seconds and fractions of seconds at\nnanosecond resolution. The count is relative to an epoch at UTC midnight on\nJanuary 1, 1970, in the proleptic Gregorian calendar which extends the\nGregorian calendar backwards to year one.\n\nAll minutes are 60 seconds long. Leap seconds are &quot;smeared&quot; so that no leap\nsecond table is needed for interpretation, using a [24-hour linear\nsmear](https://developers.google.com/time/smear).\n\nThe range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By\nrestricting to that range, we ensure that we can convert to and from [RFC\n3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.\n\n# Examples\n\nExample 1: Compute Timestamp from POSIX `time()`.\n\nTimestamp timestamp;\ntimestamp.set_seconds(time(NULL));\ntimestamp.set_nanos(0);\n\nExample 2: Compute Timestamp from POSIX `gettimeofday()`.\n\nstruct timeval tv;\ngettimeofday(&amp;tv, NULL);\n\nTimestamp timestamp;\ntimestamp.set_seconds(tv.tv_sec);\ntimestamp.set_nanos(tv.tv_usec * 1000);\n\nExample 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.\n\nFILETIME ft;\nGetSystemTimeAsFileTime(&amp;ft);\nUINT64 ticks = (((UINT64)ft.dwHighDateTime) &lt;&lt; 32) | ft.dwLowDateTime;\n\n// A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z\n// is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.\nTimestamp timestamp;\ntimestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL));\ntimestamp.set_nanos((INT32) ((ticks % 10000000) * 100));\n\nExample 4: Compute Timestamp from Java `System.currentTimeMillis()`.\n\nlong millis = System.currentTimeMillis();\n\nTimestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)\n   .setNanos((int) ((millis % 1000) * 1000000)).build();\n\nExample 5: Compute Timestamp from current time in Python.\n\ntimestamp = Timestamp()\ntimestamp.GetCurrentTime()\n\n# JSON Mapping\n\nIn JSON format, the Timestamp type is encoded as a string in the\n[RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the\nformat is &quot;{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z&quot;\nwhere {year} is always expressed using four digits while {month}, {day},\n{hour}, {min}, and {sec} are zero-padded to two digits each. The fractional\nseconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),\nare optional. The &quot;Z&quot; suffix indicates the timezone (&quot;UTC&quot;); the timezone\nis required. A proto3 JSON serializer should always use UTC (as indicated by\n&quot;Z&quot;) when printing the Timestamp type and a proto3 JSON parser should be\nable to accept both UTC and other timezones (as indicated by an offset).\n\nFor example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past\n01:30 UTC on January 15, 2017.\n\nIn JavaScript, one can convert a Date object to this format using the\nstandard\n[toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)\nmethod. In Python, a standard `datetime.datetime` object can be converted\nto this format using\n[`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with\nthe time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one can use\nthe Joda Time&apos;s [`ISODateTimeFormat.dateTime()`](\nhttp://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D\n) to obtain a formatter capable of generating timestamps in this format.\n"
   example: []
   syntax:
-    content: 'public sealed class Timestamp : IMessage<Timestamp>, IEquatable<Timestamp>, IDeepCloneable<Timestamp>, ICustomDiagnosticMessage, IMessage'
+    content: 'public sealed class Timestamp : IMessage<Timestamp>, IEquatable<Timestamp>, IDeepCloneable<Timestamp>, ICustomDiagnosticMessage, IMessage, IComparable<Timestamp>'
     content.vb: >-
       Public NotInheritable Class Timestamp
-          Implements IMessage(Of Timestamp), IEquatable(Of Timestamp), IDeepCloneable(Of Timestamp), ICustomDiagnosticMessage, IMessage
+          Implements IMessage(Of Timestamp), IEquatable(Of Timestamp), IDeepCloneable(Of Timestamp), ICustomDiagnosticMessage, IMessage, IComparable(Of Timestamp)
   inheritance:
   - System.Object
   implements:
@@ -64,6 +71,7 @@ items:
   - Google.Protobuf.IDeepCloneable{Google.Protobuf.WellKnownTypes.Timestamp}
   - Google.Protobuf.ICustomDiagnosticMessage
   - Google.Protobuf.IMessage
+  - System.IComparable{Google.Protobuf.WellKnownTypes.Timestamp}
   inheritedMembers:
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.ReferenceEquals(System.Object,System.Object)
@@ -79,6 +87,7 @@ items:
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.WriteTo(System.IO.Stream)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.WriteDelimitedTo(System.IO.Stream)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.ToByteString
+  - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.IsInitialized
   modifiers.csharp:
   - public
   - sealed
@@ -101,11 +110,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Parser
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 124
+    startLine: 128
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -138,11 +147,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 127
+    startLine: 131
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -176,11 +185,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 132
+    startLine: 136
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -214,11 +223,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 137
+    startLine: 141
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -244,11 +253,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 144
+    startLine: 148
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -277,11 +286,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Clone
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 151
+    startLine: 155
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -311,11 +320,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: SecondsFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 157
+    startLine: 161
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -346,11 +355,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Seconds
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 164
+    startLine: 168
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -383,11 +392,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: NanosFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 173
+    startLine: 177
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -418,11 +427,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Nanos
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 181
+    startLine: 185
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -455,11 +464,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 189
+    startLine: 193
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -493,11 +502,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 194
+    startLine: 198
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -530,11 +539,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: GetHashCode
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 207
+    startLine: 211
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -565,11 +574,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ToString
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 218
+    startLine: 222
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -600,11 +609,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: WriteTo
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 223
+    startLine: 227
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -635,11 +644,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: CalculateSize
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 238
+    startLine: 242
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -669,11 +678,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 253
+    startLine: 257
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -704,11 +713,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/Timestamp.cs
-    startLine: 267
+    startLine: 271
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -739,7 +748,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: op_Subtraction
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -783,7 +792,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: op_Addition
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -827,7 +836,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: op_Subtraction
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -871,7 +880,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ToDateTime
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -914,7 +923,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ToDateTimeOffset
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -957,7 +966,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: FromDateTime
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -1002,7 +1011,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: FromDateTimeOffset
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
@@ -1035,6 +1044,318 @@ items:
   modifiers.vb:
   - Public
   - Shared
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  id: CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: Google.Protobuf.WellKnownTypes.Timestamp
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(Timestamp)
+  nameWithType: Timestamp.CompareTo(Timestamp)
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: CompareTo
+    path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+    startLine: 232
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nGiven another timestamp, returns 0 if the timestamps are equivalent, -1 if this timestamp precedes the other, and 1 otherwise\n"
+  remarks: "\nMake sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.\n"
+  example: []
+  syntax:
+    content: public int CompareTo(Timestamp other)
+    parameters:
+    - id: other
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: Timestamp to compare
+    return:
+      type: System.Int32
+      description: an integer indicating whether this timestamp precedes or follows the other
+    content.vb: Public Function CompareTo(other As Timestamp) As Integer
+  overload: Google.Protobuf.WellKnownTypes.Timestamp.CompareTo*
+  implements:
+  - System.IComparable{Google.Protobuf.WellKnownTypes.Timestamp}.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  id: op_LessThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: Google.Protobuf.WellKnownTypes.Timestamp
+  langs:
+  - csharp
+  - vb
+  name: LessThan(Timestamp, Timestamp)
+  nameWithType: Timestamp.LessThan(Timestamp, Timestamp)
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.LessThan(Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp)
+  type: Operator
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: op_LessThan
+    path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+    startLine: 251
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nCompares two timestamps and returns whether the first is less than (chronologically precedes) the second\n"
+  remarks: "\nMake sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(Timestamp a, Timestamp b)
+    parameters:
+    - id: a
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    - id: b
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    return:
+      type: System.Boolean
+      description: true if a precedes b
+    content.vb: Public Shared Operator <(a As Timestamp, b As Timestamp) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  id: op_GreaterThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: Google.Protobuf.WellKnownTypes.Timestamp
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(Timestamp, Timestamp)
+  nameWithType: Timestamp.GreaterThan(Timestamp, Timestamp)
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.GreaterThan(Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp)
+  type: Operator
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: op_GreaterThan
+    path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+    startLine: 265
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nCompares two timestamps and returns whether the first is greater than (chronologically follows) the second\n"
+  remarks: "\nMake sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(Timestamp a, Timestamp b)
+    parameters:
+    - id: a
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    - id: b
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    return:
+      type: System.Boolean
+      description: true if a follows b
+    content.vb: Public Shared Operator>(a As Timestamp, b As Timestamp) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  id: op_LessThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: Google.Protobuf.WellKnownTypes.Timestamp
+  langs:
+  - csharp
+  - vb
+  name: LessThanOrEqual(Timestamp, Timestamp)
+  nameWithType: Timestamp.LessThanOrEqual(Timestamp, Timestamp)
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.LessThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp)
+  type: Operator
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: op_LessThanOrEqual
+    path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+    startLine: 279
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nCompares two timestamps and returns whether the first is less than (chronologically precedes) the second\n"
+  remarks: "\nMake sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.\n"
+  example: []
+  syntax:
+    content: public static bool operator <=(Timestamp a, Timestamp b)
+    parameters:
+    - id: a
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    - id: b
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    return:
+      type: System.Boolean
+      description: true if a precedes b
+    content.vb: Public Shared Operator <=(a As Timestamp, b As Timestamp) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  id: op_GreaterThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: Google.Protobuf.WellKnownTypes.Timestamp
+  langs:
+  - csharp
+  - vb
+  name: GreaterThanOrEqual(Timestamp, Timestamp)
+  nameWithType: Timestamp.GreaterThanOrEqual(Timestamp, Timestamp)
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.GreaterThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp)
+  type: Operator
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: op_GreaterThanOrEqual
+    path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+    startLine: 293
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nCompares two timestamps and returns whether the first is greater than (chronologically follows) the second\n"
+  remarks: "\nMake sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.\n"
+  example: []
+  syntax:
+    content: public static bool operator >=(Timestamp a, Timestamp b)
+    parameters:
+    - id: a
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    - id: b
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    return:
+      type: System.Boolean
+      description: true if a follows b
+    content.vb: Public Shared Operator >=(a As Timestamp, b As Timestamp) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_Equality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.op_Equality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  id: op_Equality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: Google.Protobuf.WellKnownTypes.Timestamp
+  langs:
+  - csharp
+  - vb
+  name: Equality(Timestamp, Timestamp)
+  nameWithType: Timestamp.Equality(Timestamp, Timestamp)
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.Equality(Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp)
+  type: Operator
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: op_Equality
+    path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+    startLine: 308
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nReturns whether two timestamps are equivalent\n"
+  remarks: "\nMake sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(Timestamp a, Timestamp b)
+    parameters:
+    - id: a
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    - id: b
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    return:
+      type: System.Boolean
+      description: true if the two timestamps refer to the same nanosecond
+    content.vb: Public Shared Operator =(a As Timestamp, b As Timestamp) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.Timestamp.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  id: op_Inequality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: Google.Protobuf.WellKnownTypes.Timestamp
+  langs:
+  - csharp
+  - vb
+  name: Inequality(Timestamp, Timestamp)
+  nameWithType: Timestamp.Inequality(Timestamp, Timestamp)
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.Inequality(Google.Protobuf.WellKnownTypes.Timestamp, Google.Protobuf.WellKnownTypes.Timestamp)
+  type: Operator
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: op_Inequality
+    path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
+    startLine: 322
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nReturns whether two timestamps differ\n"
+  remarks: "\nMake sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(Timestamp a, Timestamp b)
+    parameters:
+    - id: a
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    - id: b
+      type: Google.Protobuf.WellKnownTypes.Timestamp
+      description: ''
+    return:
+      type: System.Boolean
+      description: true if the two timestamps differ
+    content.vb: Public Shared Operator <>(a As Timestamp, b As Timestamp) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.ToDiagnosticString
   commentId: M:Google.Protobuf.WellKnownTypes.Timestamp.ToDiagnosticString
   id: ToDiagnosticString
@@ -1049,11 +1370,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ToDiagnosticString
     path: csharp/src/Google.Protobuf/WellKnownTypes/TimestampPartial.cs
-    startLine: 235
+    startLine: 338
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -1076,7 +1397,6 @@ items:
 references:
 - uid: Google.Protobuf.WellKnownTypes
   commentId: N:Google.Protobuf.WellKnownTypes
-  isExternal: false
   name: Google.Protobuf.WellKnownTypes
   nameWithType: Google.Protobuf.WellKnownTypes
   fullName: Google.Protobuf.WellKnownTypes
@@ -1212,17 +1532,57 @@ references:
 - uid: Google.Protobuf.ICustomDiagnosticMessage
   commentId: T:Google.Protobuf.ICustomDiagnosticMessage
   parent: Google.Protobuf
-  isExternal: false
   name: ICustomDiagnosticMessage
   nameWithType: ICustomDiagnosticMessage
   fullName: Google.Protobuf.ICustomDiagnosticMessage
 - uid: Google.Protobuf.IMessage
   commentId: T:Google.Protobuf.IMessage
   parent: Google.Protobuf
-  isExternal: false
   name: IMessage
   nameWithType: IMessage
   fullName: Google.Protobuf.IMessage
+- uid: System.IComparable{Google.Protobuf.WellKnownTypes.Timestamp}
+  commentId: T:System.IComparable{Google.Protobuf.WellKnownTypes.Timestamp}
+  parent: System
+  definition: System.IComparable`1
+  name: IComparable<Timestamp>
+  nameWithType: IComparable<Timestamp>
+  fullName: System.IComparable<Google.Protobuf.WellKnownTypes.Timestamp>
+  nameWithType.vb: IComparable(Of Timestamp)
+  fullName.vb: System.IComparable(Of Google.Protobuf.WellKnownTypes.Timestamp)
+  name.vb: IComparable(Of Timestamp)
+  spec.csharp:
+  - uid: System.IComparable`1
+    name: IComparable
+    nameWithType: IComparable
+    fullName: System.IComparable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Google.Protobuf.WellKnownTypes.Timestamp
+    name: Timestamp
+    nameWithType: Timestamp
+    fullName: Google.Protobuf.WellKnownTypes.Timestamp
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.IComparable`1
+    name: IComparable
+    nameWithType: IComparable
+    fullName: System.IComparable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Google.Protobuf.WellKnownTypes.Timestamp
+    name: Timestamp
+    nameWithType: Timestamp
+    fullName: Google.Protobuf.WellKnownTypes.Timestamp
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
@@ -1778,15 +2138,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.IsInitialized
+  commentId: M:Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  parent: Google.Protobuf.MessageExtensions
+  definition: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  name: IsInitialized()
+  nameWithType: MessageExtensions.IsInitialized()
+  fullName: Google.Protobuf.MessageExtensions.IsInitialized()
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Protobuf.IMessage`1
   commentId: T:Google.Protobuf.IMessage`1
-  isExternal: false
   name: IMessage<T>
   nameWithType: IMessage<T>
   fullName: Google.Protobuf.IMessage<T>
@@ -1823,7 +2211,6 @@ references:
     fullName: )
 - uid: Google.Protobuf
   commentId: N:Google.Protobuf
-  isExternal: false
   name: Google.Protobuf
   nameWithType: Google.Protobuf
   fullName: Google.Protobuf
@@ -1868,7 +2255,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IDeepCloneable`1
   commentId: T:Google.Protobuf.IDeepCloneable`1
-  isExternal: false
   name: IDeepCloneable<T>
   nameWithType: IDeepCloneable<T>
   fullName: Google.Protobuf.IDeepCloneable<T>
@@ -1894,6 +2280,45 @@ references:
     name: IDeepCloneable
     nameWithType: IDeepCloneable
     fullName: Google.Protobuf.IDeepCloneable
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.IComparable`1
+  commentId: T:System.IComparable`1
+  isExternal: true
+  name: IComparable<T>
+  nameWithType: IComparable<T>
+  fullName: System.IComparable<T>
+  nameWithType.vb: IComparable(Of T)
+  fullName.vb: System.IComparable(Of T)
+  name.vb: IComparable(Of T)
+  spec.csharp:
+  - uid: System.IComparable`1
+    name: IComparable
+    nameWithType: IComparable
+    fullName: System.IComparable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.IComparable`1
+    name: IComparable
+    nameWithType: IComparable
+    fullName: System.IComparable
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -1967,7 +2392,6 @@ references:
 - uid: Google.Protobuf.MessageExtensions
   commentId: T:Google.Protobuf.MessageExtensions
   parent: Google.Protobuf
-  isExternal: false
   name: MessageExtensions
   nameWithType: MessageExtensions
   fullName: Google.Protobuf.MessageExtensions
@@ -2066,7 +2490,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
   commentId: M:Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
-  isExternal: false
   name: MergeFrom(IMessage, ByteString)
   nameWithType: MessageExtensions.MergeFrom(IMessage, ByteString)
   fullName: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage, Google.Protobuf.ByteString)
@@ -2220,7 +2643,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
   commentId: M:Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
-  isExternal: false
   name: ToByteArray(IMessage)
   nameWithType: MessageExtensions.ToByteArray(IMessage)
   fullName: Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
@@ -2360,7 +2782,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
   commentId: M:Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
-  isExternal: false
   name: ToByteString(IMessage)
   nameWithType: MessageExtensions.ToByteString(IMessage)
   fullName: Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
@@ -2394,9 +2815,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  commentId: M:Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  name: IsInitialized(IMessage)
+  nameWithType: MessageExtensions.IsInitialized(IMessage)
+  fullName: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Parser*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.Parser
-  isExternal: false
   name: Parser
   nameWithType: Timestamp.Parser
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Parser
@@ -2443,7 +2898,6 @@ references:
 - uid: Google.Protobuf.MessageParser`1
   commentId: T:Google.Protobuf.MessageParser`1
   parent: Google.Protobuf
-  isExternal: false
   name: MessageParser<T>
   nameWithType: MessageParser<T>
   fullName: Google.Protobuf.MessageParser<T>
@@ -2480,26 +2934,22 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Descriptor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.Descriptor
-  isExternal: false
   name: Descriptor
   nameWithType: Timestamp.Descriptor
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Descriptor
 - uid: Google.Protobuf.Reflection.MessageDescriptor
   commentId: T:Google.Protobuf.Reflection.MessageDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: MessageDescriptor
   nameWithType: MessageDescriptor
   fullName: Google.Protobuf.Reflection.MessageDescriptor
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
-  isExternal: false
   name: Google.Protobuf.Reflection
   nameWithType: Google.Protobuf.Reflection
   fullName: Google.Protobuf.Reflection
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Google#Protobuf#IMessage#Descriptor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.Google#Protobuf#IMessage#Descriptor
-  isExternal: false
   name: IMessage.Descriptor
   nameWithType: Timestamp.IMessage.Descriptor
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Google.Protobuf.IMessage.Descriptor
@@ -2509,26 +2959,22 @@ references:
 - uid: Google.Protobuf.IMessage.Descriptor
   commentId: P:Google.Protobuf.IMessage.Descriptor
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: Descriptor
   nameWithType: IMessage.Descriptor
   fullName: Google.Protobuf.IMessage.Descriptor
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.#ctor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.#ctor
-  isExternal: false
   name: Timestamp
   nameWithType: Timestamp.Timestamp
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Timestamp
 - uid: Google.Protobuf.WellKnownTypes.Timestamp
   commentId: T:Google.Protobuf.WellKnownTypes.Timestamp
   parent: Google.Protobuf.WellKnownTypes
-  isExternal: false
   name: Timestamp
   nameWithType: Timestamp
   fullName: Google.Protobuf.WellKnownTypes.Timestamp
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Clone*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.Clone
-  isExternal: false
   name: Clone
   nameWithType: Timestamp.Clone
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Clone
@@ -2565,7 +3011,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IDeepCloneable`1.Clone
   commentId: M:Google.Protobuf.IDeepCloneable`1.Clone
-  isExternal: false
   name: Clone()
   nameWithType: IDeepCloneable<T>.Clone()
   fullName: Google.Protobuf.IDeepCloneable<T>.Clone()
@@ -2602,7 +3047,6 @@ references:
   fullName: System.Int32
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Seconds*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.Seconds
-  isExternal: false
   name: Seconds
   nameWithType: Timestamp.Seconds
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Seconds
@@ -2615,7 +3059,6 @@ references:
   fullName: System.Int64
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Nanos*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.Nanos
-  isExternal: false
   name: Nanos
   nameWithType: Timestamp.Nanos
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Nanos
@@ -2662,7 +3105,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Equals*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.Equals
-  isExternal: false
   name: Equals
   nameWithType: Timestamp.Equals
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Equals
@@ -2785,7 +3227,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.GetHashCode*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.GetHashCode
-  isExternal: false
   name: GetHashCode
   nameWithType: Timestamp.GetHashCode
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.GetHashCode
@@ -2822,7 +3263,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.ToString*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.ToString
-  isExternal: false
   name: ToString
   nameWithType: Timestamp.ToString
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.ToString
@@ -2835,14 +3275,12 @@ references:
   fullName: System.String
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.WriteTo*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.WriteTo
-  isExternal: false
   name: WriteTo
   nameWithType: Timestamp.WriteTo
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.WriteTo
 - uid: Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
   commentId: M:Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: WriteTo(CodedOutputStream)
   nameWithType: IMessage.WriteTo(CodedOutputStream)
   fullName: Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
@@ -2879,20 +3317,17 @@ references:
 - uid: Google.Protobuf.CodedOutputStream
   commentId: T:Google.Protobuf.CodedOutputStream
   parent: Google.Protobuf
-  isExternal: false
   name: CodedOutputStream
   nameWithType: CodedOutputStream
   fullName: Google.Protobuf.CodedOutputStream
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.CalculateSize*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.CalculateSize
-  isExternal: false
   name: CalculateSize
   nameWithType: Timestamp.CalculateSize
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.CalculateSize
 - uid: Google.Protobuf.IMessage.CalculateSize
   commentId: M:Google.Protobuf.IMessage.CalculateSize
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: CalculateSize()
   nameWithType: IMessage.CalculateSize()
   fullName: Google.Protobuf.IMessage.CalculateSize()
@@ -2920,7 +3355,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.MergeFrom*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.MergeFrom
-  isExternal: false
   name: MergeFrom
   nameWithType: Timestamp.MergeFrom
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.MergeFrom
@@ -2965,7 +3399,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IMessage`1.MergeFrom(`0)
   commentId: M:Google.Protobuf.IMessage`1.MergeFrom(`0)
-  isExternal: false
   name: MergeFrom(T)
   nameWithType: IMessage<T>.MergeFrom(T)
   fullName: Google.Protobuf.IMessage<T>.MergeFrom(T)
@@ -3002,7 +3435,6 @@ references:
 - uid: Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
   commentId: M:Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: MergeFrom(CodedInputStream)
   nameWithType: IMessage.MergeFrom(CodedInputStream)
   fullName: Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
@@ -3039,26 +3471,22 @@ references:
 - uid: Google.Protobuf.CodedInputStream
   commentId: T:Google.Protobuf.CodedInputStream
   parent: Google.Protobuf
-  isExternal: false
   name: CodedInputStream
   nameWithType: CodedInputStream
   fullName: Google.Protobuf.CodedInputStream
 - uid: Google.Protobuf.WellKnownTypes.Duration
   commentId: T:Google.Protobuf.WellKnownTypes.Duration
   parent: Google.Protobuf.WellKnownTypes
-  isExternal: false
   name: Duration
   nameWithType: Duration
   fullName: Google.Protobuf.WellKnownTypes.Duration
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.op_Subtraction*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_Subtraction
-  isExternal: false
   name: Subtraction
   nameWithType: Timestamp.Subtraction
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Subtraction
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.op_Addition*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_Addition
-  isExternal: false
   name: Addition
   nameWithType: Timestamp.Addition
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.Addition
@@ -3071,14 +3499,15 @@ references:
   fullName: System.DateTime
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.Nanos
   commentId: P:Google.Protobuf.WellKnownTypes.Timestamp.Nanos
+  isExternal: true
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.ToDateTime*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.ToDateTime
-  isExternal: false
   name: ToDateTime
   nameWithType: Timestamp.ToDateTime
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.ToDateTime
-- uid: System.InvalidOperationException
-  commentId: T:System.InvalidOperationException
 - uid: System.DateTimeOffset
   commentId: T:System.DateTimeOffset
   parent: System
@@ -3088,34 +3517,144 @@ references:
   fullName: System.DateTimeOffset
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.ToDateTimeOffset*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.ToDateTimeOffset
-  isExternal: false
   name: ToDateTimeOffset
   nameWithType: Timestamp.ToDateTimeOffset
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.ToDateTimeOffset
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime
-  isExternal: false
   name: FromDateTime
   nameWithType: Timestamp.FromDateTime
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime
-- uid: System.ArgumentException
-  commentId: T:System.ArgumentException
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.FromDateTimeOffset*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.FromDateTimeOffset
-  isExternal: false
   name: FromDateTimeOffset
   nameWithType: Timestamp.FromDateTimeOffset
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.FromDateTimeOffset
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.CompareTo*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.CompareTo
+  name: CompareTo
+  nameWithType: Timestamp.CompareTo
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.CompareTo
+- uid: System.IComparable{Google.Protobuf.WellKnownTypes.Timestamp}.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  commentId: M:System.IComparable{Google.Protobuf.WellKnownTypes.Timestamp}.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  parent: System.IComparable{Google.Protobuf.WellKnownTypes.Timestamp}
+  definition: System.IComparable`1.CompareTo(`0)
+  name: CompareTo(Timestamp)
+  nameWithType: IComparable<Timestamp>.CompareTo(Timestamp)
+  fullName: System.IComparable<Google.Protobuf.WellKnownTypes.Timestamp>.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  nameWithType.vb: IComparable(Of Timestamp).CompareTo(Timestamp)
+  fullName.vb: System.IComparable(Of Google.Protobuf.WellKnownTypes.Timestamp).CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)
+  spec.csharp:
+  - uid: System.IComparable`1.CompareTo(`0)
+    name: CompareTo
+    nameWithType: IComparable<Timestamp>.CompareTo
+    fullName: System.IComparable<Google.Protobuf.WellKnownTypes.Timestamp>.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.WellKnownTypes.Timestamp
+    name: Timestamp
+    nameWithType: Timestamp
+    fullName: Google.Protobuf.WellKnownTypes.Timestamp
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable`1.CompareTo(`0)
+    name: CompareTo
+    nameWithType: IComparable(Of Timestamp).CompareTo
+    fullName: System.IComparable(Of Google.Protobuf.WellKnownTypes.Timestamp).CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.WellKnownTypes.Timestamp
+    name: Timestamp
+    nameWithType: Timestamp
+    fullName: Google.Protobuf.WellKnownTypes.Timestamp
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.IComparable`1.CompareTo(`0)
+  commentId: M:System.IComparable`1.CompareTo(`0)
+  isExternal: true
+  name: CompareTo(T)
+  nameWithType: IComparable<T>.CompareTo(T)
+  fullName: System.IComparable<T>.CompareTo(T)
+  nameWithType.vb: IComparable(Of T).CompareTo(T)
+  fullName.vb: System.IComparable(Of T).CompareTo(T)
+  spec.csharp:
+  - uid: System.IComparable`1.CompareTo(`0)
+    name: CompareTo
+    nameWithType: IComparable<T>.CompareTo
+    fullName: System.IComparable<T>.CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IComparable`1.CompareTo(`0)
+    name: CompareTo
+    nameWithType: IComparable(Of T).CompareTo
+    fullName: System.IComparable(Of T).CompareTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan
+  name: LessThan
+  nameWithType: Timestamp.LessThan
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.LessThan
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan
+  name: GreaterThan
+  nameWithType: Timestamp.GreaterThan
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.GreaterThan
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual
+  name: LessThanOrEqual
+  nameWithType: Timestamp.LessThanOrEqual
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.LessThanOrEqual
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual
+  name: GreaterThanOrEqual
+  nameWithType: Timestamp.GreaterThanOrEqual
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.GreaterThanOrEqual
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_Equality*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_Equality
+  name: Equality
+  nameWithType: Timestamp.Equality
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.Equality
+- uid: Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality
+  name: Inequality
+  nameWithType: Timestamp.Inequality
+  fullName: Google.Protobuf.WellKnownTypes.Timestamp.Inequality
 - uid: Google.Protobuf.WellKnownTypes.Timestamp.ToDiagnosticString*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Timestamp.ToDiagnosticString
-  isExternal: false
   name: ToDiagnosticString
   nameWithType: Timestamp.ToDiagnosticString
   fullName: Google.Protobuf.WellKnownTypes.Timestamp.ToDiagnosticString
 - uid: Google.Protobuf.ICustomDiagnosticMessage.ToDiagnosticString
   commentId: M:Google.Protobuf.ICustomDiagnosticMessage.ToDiagnosticString
   parent: Google.Protobuf.ICustomDiagnosticMessage
-  isExternal: false
   name: ToDiagnosticString()
   nameWithType: ICustomDiagnosticMessage.ToDiagnosticString()
   fullName: Google.Protobuf.ICustomDiagnosticMessage.ToDiagnosticString()

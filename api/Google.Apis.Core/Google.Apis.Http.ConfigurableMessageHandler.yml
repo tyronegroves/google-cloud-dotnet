@@ -15,6 +15,7 @@ items:
   - Google.Apis.Http.ConfigurableMessageHandler.ExecuteInterceptorKey
   - Google.Apis.Http.ConfigurableMessageHandler.ExecuteInterceptors
   - Google.Apis.Http.ConfigurableMessageHandler.FollowRedirect
+  - Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader
   - Google.Apis.Http.ConfigurableMessageHandler.IsLoggingEnabled
   - Google.Apis.Http.ConfigurableMessageHandler.LogEvents
   - Google.Apis.Http.ConfigurableMessageHandler.MaxAllowedNumTries
@@ -170,7 +171,7 @@ items:
   assemblies:
   - Google.Apis.Core
   namespace: Google.Apis.Http
-  summary: "\nKey for unsuccessful response handlers in an <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
+  summary: "\nKey for exception handlers in an <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
   example: []
   syntax:
     content: public const string ExceptionHandlerKey = "__ExceptionHandlerKey"
@@ -205,7 +206,7 @@ items:
   assemblies:
   - Google.Apis.Core
   namespace: Google.Apis.Http
-  summary: "\nKey for unsuccessful response handlers in an <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
+  summary: "\nKey for execute handlers in an <xref href=\"System.Net.Http.HttpRequestMessage\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
   example: []
   syntax:
     content: public const string ExecuteInterceptorKey = "__ExecuteInterceptorKey"
@@ -832,6 +833,43 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader
+  commentId: P:Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader
+  id: GoogleApiClientHeader
+  parent: Google.Apis.Http.ConfigurableMessageHandler
+  langs:
+  - csharp
+  - vb
+  name: GoogleApiClientHeader
+  nameWithType: ConfigurableMessageHandler.GoogleApiClientHeader
+  fullName: Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader
+  type: Property
+  source:
+    remote:
+      path: Src/Support/Google.Apis.Core/Http/ConfigurableMessageHandler.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: GoogleApiClientHeader
+    path: Src/Support/Google.Apis.Core/Http/ConfigurableMessageHandler.cs
+    startLine: 325
+  assemblies:
+  - Google.Apis.Core
+  namespace: Google.Apis.Http
+  summary: Gets or sets the value set for the x-goog-api-client header.
+  example: []
+  syntax:
+    content: public string GoogleApiClientHeader { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property GoogleApiClientHeader As String
+  overload: Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Google.Apis.Http.ConfigurableMessageHandler.#ctor(System.Net.Http.HttpMessageHandler)
   commentId: M:Google.Apis.Http.ConfigurableMessageHandler.#ctor(System.Net.Http.HttpMessageHandler)
   id: '#ctor(System.Net.Http.HttpMessageHandler)'
@@ -850,7 +888,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: .ctor
     path: Src/Support/Google.Apis.Core/Http/ConfigurableMessageHandler.cs
-    startLine: 325
+    startLine: 328
   assemblies:
   - Google.Apis.Core
   namespace: Google.Apis.Http
@@ -885,7 +923,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SendAsync
     path: Src/Support/Google.Apis.Core/Http/ConfigurableMessageHandler.cs
-    startLine: 370
+    startLine: 373
   assemblies:
   - Google.Apis.Core
   namespace: Google.Apis.Http
@@ -913,27 +951,23 @@ references:
 - uid: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
   commentId: T:Google.Apis.Http.IHttpUnsuccessfulResponseHandler
   parent: Google.Apis.Http
-  isExternal: false
   name: IHttpUnsuccessfulResponseHandler
   nameWithType: IHttpUnsuccessfulResponseHandler
   fullName: Google.Apis.Http.IHttpUnsuccessfulResponseHandler
 - uid: Google.Apis.Http.IHttpExceptionHandler
   commentId: T:Google.Apis.Http.IHttpExceptionHandler
   parent: Google.Apis.Http
-  isExternal: false
   name: IHttpExceptionHandler
   nameWithType: IHttpExceptionHandler
   fullName: Google.Apis.Http.IHttpExceptionHandler
 - uid: Google.Apis.Http.IHttpExecuteInterceptor
   commentId: T:Google.Apis.Http.IHttpExecuteInterceptor
   parent: Google.Apis.Http
-  isExternal: false
   name: IHttpExecuteInterceptor
   nameWithType: IHttpExecuteInterceptor
   fullName: Google.Apis.Http.IHttpExecuteInterceptor
 - uid: Google.Apis.Http
   commentId: N:Google.Apis.Http
-  isExternal: false
   name: Google.Apis.Http
   nameWithType: Google.Apis.Http
   fullName: Google.Apis.Http
@@ -1367,13 +1401,13 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: System.Net.Http
   commentId: N:System.Net.Http
-  isExternal: false
+  isExternal: true
   name: System.Net.Http
   nameWithType: System.Net.Http
   fullName: System.Net.Http
@@ -1433,13 +1467,11 @@ references:
 - uid: Google.Apis.Util.Utilities
   commentId: T:Google.Apis.Util.Utilities
   parent: Google.Apis.Util
-  isExternal: false
   name: Utilities
   nameWithType: Utilities
   fullName: Google.Apis.Util.Utilities
 - uid: Google.Apis.Util
   commentId: N:Google.Apis.Util
-  isExternal: false
   name: Google.Apis.Util
   nameWithType: Google.Apis.Util
   fullName: Google.Apis.Util
@@ -1466,11 +1498,12 @@ references:
   fullName: System.String
 - uid: Google.Apis.Http.ConfigurableMessageHandler.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
   commentId: M:Google.Apis.Http.ConfigurableMessageHandler.AddUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.RemoveUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
   commentId: M:Google.Apis.Http.ConfigurableMessageHandler.RemoveUnsuccessfulResponseHandler(Google.Apis.Http.IHttpUnsuccessfulResponseHandler)
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.UnsuccessfulResponseHandlers*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.UnsuccessfulResponseHandlers
-  isExternal: false
   name: UnsuccessfulResponseHandlers
   nameWithType: ConfigurableMessageHandler.UnsuccessfulResponseHandlers
   fullName: Google.Apis.Http.ConfigurableMessageHandler.UnsuccessfulResponseHandlers
@@ -1557,29 +1590,28 @@ references:
     fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
-  isExternal: false
+  isExternal: true
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
 - uid: Google.Apis.Http.ConfigurableMessageHandler.AddUnsuccessfulResponseHandler*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.AddUnsuccessfulResponseHandler
-  isExternal: false
   name: AddUnsuccessfulResponseHandler
   nameWithType: ConfigurableMessageHandler.AddUnsuccessfulResponseHandler
   fullName: Google.Apis.Http.ConfigurableMessageHandler.AddUnsuccessfulResponseHandler
 - uid: Google.Apis.Http.ConfigurableMessageHandler.RemoveUnsuccessfulResponseHandler*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.RemoveUnsuccessfulResponseHandler
-  isExternal: false
   name: RemoveUnsuccessfulResponseHandler
   nameWithType: ConfigurableMessageHandler.RemoveUnsuccessfulResponseHandler
   fullName: Google.Apis.Http.ConfigurableMessageHandler.RemoveUnsuccessfulResponseHandler
 - uid: Google.Apis.Http.ConfigurableMessageHandler.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
   commentId: M:Google.Apis.Http.ConfigurableMessageHandler.AddExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.RemoveExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
   commentId: M:Google.Apis.Http.ConfigurableMessageHandler.RemoveExceptionHandler(Google.Apis.Http.IHttpExceptionHandler)
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.ExceptionHandlers*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.ExceptionHandlers
-  isExternal: false
   name: ExceptionHandlers
   nameWithType: ConfigurableMessageHandler.ExceptionHandlers
   fullName: Google.Apis.Http.ConfigurableMessageHandler.ExceptionHandlers
@@ -1627,23 +1659,22 @@ references:
     fullName: )
 - uid: Google.Apis.Http.ConfigurableMessageHandler.AddExceptionHandler*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.AddExceptionHandler
-  isExternal: false
   name: AddExceptionHandler
   nameWithType: ConfigurableMessageHandler.AddExceptionHandler
   fullName: Google.Apis.Http.ConfigurableMessageHandler.AddExceptionHandler
 - uid: Google.Apis.Http.ConfigurableMessageHandler.RemoveExceptionHandler*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.RemoveExceptionHandler
-  isExternal: false
   name: RemoveExceptionHandler
   nameWithType: ConfigurableMessageHandler.RemoveExceptionHandler
   fullName: Google.Apis.Http.ConfigurableMessageHandler.RemoveExceptionHandler
 - uid: Google.Apis.Http.ConfigurableMessageHandler.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
   commentId: M:Google.Apis.Http.ConfigurableMessageHandler.AddExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.RemoveExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
   commentId: M:Google.Apis.Http.ConfigurableMessageHandler.RemoveExecuteInterceptor(Google.Apis.Http.IHttpExecuteInterceptor)
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.ExecuteInterceptors*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.ExecuteInterceptors
-  isExternal: false
   name: ExecuteInterceptors
   nameWithType: ConfigurableMessageHandler.ExecuteInterceptors
   fullName: Google.Apis.Http.ConfigurableMessageHandler.ExecuteInterceptors
@@ -1691,35 +1722,32 @@ references:
     fullName: )
 - uid: Google.Apis.Http.ConfigurableMessageHandler.AddExecuteInterceptor*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.AddExecuteInterceptor
-  isExternal: false
   name: AddExecuteInterceptor
   nameWithType: ConfigurableMessageHandler.AddExecuteInterceptor
   fullName: Google.Apis.Http.ConfigurableMessageHandler.AddExecuteInterceptor
 - uid: Google.Apis.Http.ConfigurableMessageHandler.RemoveExecuteInterceptor*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.RemoveExecuteInterceptor
-  isExternal: false
   name: RemoveExecuteInterceptor
   nameWithType: ConfigurableMessageHandler.RemoveExecuteInterceptor
   fullName: Google.Apis.Http.ConfigurableMessageHandler.RemoveExecuteInterceptor
 - uid: Google.Apis.Http.ConfigurableMessageHandler.NumRedirects
   commentId: P:Google.Apis.Http.ConfigurableMessageHandler.NumRedirects
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.NumTries
   commentId: P:Google.Apis.Http.ConfigurableMessageHandler.NumTries
+  isExternal: true
 - uid: Google.Apis.Http.ConfigurableMessageHandler.NumTries*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.NumTries
-  isExternal: false
   name: NumTries
   nameWithType: ConfigurableMessageHandler.NumTries
   fullName: Google.Apis.Http.ConfigurableMessageHandler.NumTries
 - uid: Google.Apis.Http.ConfigurableMessageHandler.NumRedirects*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.NumRedirects
-  isExternal: false
   name: NumRedirects
   nameWithType: ConfigurableMessageHandler.NumRedirects
   fullName: Google.Apis.Http.ConfigurableMessageHandler.NumRedirects
 - uid: Google.Apis.Http.ConfigurableMessageHandler.FollowRedirect*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.FollowRedirect
-  isExternal: false
   name: FollowRedirect
   nameWithType: ConfigurableMessageHandler.FollowRedirect
   fullName: Google.Apis.Http.ConfigurableMessageHandler.FollowRedirect
@@ -1732,37 +1760,38 @@ references:
   fullName: System.Boolean
 - uid: Google.Apis.Http.ConfigurableMessageHandler.IsLoggingEnabled*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.IsLoggingEnabled
-  isExternal: false
   name: IsLoggingEnabled
   nameWithType: ConfigurableMessageHandler.IsLoggingEnabled
   fullName: Google.Apis.Http.ConfigurableMessageHandler.IsLoggingEnabled
 - uid: Google.Apis.Http.ConfigurableMessageHandler.LogEvents*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.LogEvents
-  isExternal: false
   name: LogEvents
   nameWithType: ConfigurableMessageHandler.LogEvents
   fullName: Google.Apis.Http.ConfigurableMessageHandler.LogEvents
 - uid: Google.Apis.Http.ConfigurableMessageHandler.LogEventType
   commentId: T:Google.Apis.Http.ConfigurableMessageHandler.LogEventType
   parent: Google.Apis.Http
-  isExternal: false
   name: ConfigurableMessageHandler.LogEventType
   nameWithType: ConfigurableMessageHandler.LogEventType
   fullName: Google.Apis.Http.ConfigurableMessageHandler.LogEventType
 - uid: Google.Apis.Http.ConfigurableMessageHandler.ApplicationName*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.ApplicationName
-  isExternal: false
   name: ApplicationName
   nameWithType: ConfigurableMessageHandler.ApplicationName
   fullName: Google.Apis.Http.ConfigurableMessageHandler.ApplicationName
+- uid: Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader*
+  commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader
+  name: GoogleApiClientHeader
+  nameWithType: ConfigurableMessageHandler.GoogleApiClientHeader
+  fullName: Google.Apis.Http.ConfigurableMessageHandler.GoogleApiClientHeader
 - uid: Google.Apis.Http.ConfigurableMessageHandler.#ctor*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.#ctor
-  isExternal: false
   name: ConfigurableMessageHandler
   nameWithType: ConfigurableMessageHandler.ConfigurableMessageHandler
   fullName: Google.Apis.Http.ConfigurableMessageHandler.ConfigurableMessageHandler
 - uid: Google.Apis.Http.ConfigurableMessageHandler.ApplicationName
   commentId: P:Google.Apis.Http.ConfigurableMessageHandler.ApplicationName
+  isExternal: true
 - uid: System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   commentId: M:System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
   parent: System.Net.Http.DelegatingHandler
@@ -1822,7 +1851,6 @@ references:
     fullName: )
 - uid: Google.Apis.Http.ConfigurableMessageHandler.SendAsync*
   commentId: Overload:Google.Apis.Http.ConfigurableMessageHandler.SendAsync
-  isExternal: false
   name: SendAsync
   nameWithType: ConfigurableMessageHandler.SendAsync
   fullName: Google.Apis.Http.ConfigurableMessageHandler.SendAsync
@@ -1879,7 +1907,7 @@ references:
     fullName: )
 - uid: System.Threading
   commentId: N:System.Threading
-  isExternal: false
+  isExternal: true
   name: System.Threading
   nameWithType: System.Threading
   fullName: System.Threading
@@ -1924,7 +1952,7 @@ references:
     fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
-  isExternal: false
+  isExternal: true
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks

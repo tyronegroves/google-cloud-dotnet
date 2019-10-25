@@ -7,6 +7,7 @@ items:
   children:
   - Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Domain
   - Google.Apis.Bigquery.v2.Data.Dataset.AccessData.GroupByEmail
+  - Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember
   - Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Role
   - Google.Apis.Bigquery.v2.Data.Dataset.AccessData.SpecialGroup
   - Google.Apis.Bigquery.v2.Data.Dataset.AccessData.UserByEmail
@@ -25,7 +26,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: AccessData
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2841
+    startLine: 4287
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -66,14 +67,16 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Domain
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2845
+    startLine: 4292
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
     [Pick one] A domain to grant access to. Any users signed in with the domain specified will be
 
-    granted the specified access. Example: &quot;example.com&quot;.
+    granted the specified access. Example: &quot;example.com&quot;. Maps to IAM policy member
+
+    &quot;domain:DOMAIN&quot;.
   example: []
   syntax:
     content: >-
@@ -120,11 +123,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: GroupByEmail
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2849
+    startLine: 4297
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: '[Pick one] An email address of a Google Group to grant access to.'
+  summary: >-
+    [Pick one] An email address of a Google Group to grant access to. Maps to IAM policy member
+
+    &quot;group:GROUP&quot;.
   example: []
   syntax:
     content: >-
@@ -153,6 +159,60 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember
+  commentId: P:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember
+  id: IamMember
+  parent: Google.Apis.Bigquery.v2.Data.Dataset.AccessData
+  langs:
+  - csharp
+  - vb
+  name: IamMember
+  nameWithType: Dataset.AccessData.IamMember
+  fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: IamMember
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 4302
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Pick one] Some other type of member that appears in the IAM Policy but isn&apos;t a user, group,
+
+    domain, or special group.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("iamMember")]
+
+      public virtual string IamMember { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("iamMember")>
+
+      Public Overridable Property IamMember As String
+  overload: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: iamMember
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Role
   commentId: P:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Role
   id: Role
@@ -171,14 +231,20 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Role
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2854
+    startLine: 4310
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Required] Describes the rights granted to the user specified by the other member of the access
+    [Required] An IAM role ID that should be granted to the user, group, or domain specified in
 
-    object. The following string values are supported: READER, WRITER, OWNER.
+    this access entry. The following legacy mappings will be applied: OWNER  roles/bigquery.dataOwner WRITER
+
+    roles/bigquery.dataEditor READER  roles/bigquery.dataViewer This field will accept any of the above
+
+    formats, but will return only the legacy format. For example, if you set this field to
+
+    &quot;roles/bigquery.dataOwner&quot;, it will be returned back as &quot;OWNER&quot;.
   example: []
   syntax:
     content: >-
@@ -225,7 +291,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SpecialGroup
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2860
+    startLine: 4317
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -234,7 +300,9 @@ items:
 
     of the enclosing project. projectReaders: Readers of the enclosing project. projectWriters: Writers of
 
-    the enclosing project. allAuthenticatedUsers: All authenticated BigQuery users.
+    the enclosing project. allAuthenticatedUsers: All authenticated BigQuery users. Maps to similarly-named
+
+    IAM members.
   example: []
   syntax:
     content: >-
@@ -281,14 +349,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: UserByEmail
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2865
+    startLine: 4322
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Pick one] An email address of a user to grant access to. For example:
+    [Pick one] An email address of a user to grant access to. For example: fred@example.com. Maps
 
-    fred@example.com.
+    to IAM policy member &quot;user:EMAIL&quot; or &quot;serviceAccount:EMAIL&quot;.
   example: []
   syntax:
     content: >-
@@ -335,7 +403,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: View
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 2872
+    startLine: 4329
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -378,7 +446,6 @@ items:
 references:
 - uid: Google.Apis.Bigquery.v2.Data
   commentId: N:Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Google.Apis.Bigquery.v2.Data
   nameWithType: Google.Apis.Bigquery.v2.Data
   fullName: Google.Apis.Bigquery.v2.Data
@@ -670,13 +737,12 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Domain*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Domain
-  isExternal: false
   name: Domain
   nameWithType: Dataset.AccessData.Domain
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Domain
@@ -689,38 +755,37 @@ references:
   fullName: System.String
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.GroupByEmail*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.GroupByEmail
-  isExternal: false
   name: GroupByEmail
   nameWithType: Dataset.AccessData.GroupByEmail
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.GroupByEmail
+- uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember
+  name: IamMember
+  nameWithType: Dataset.AccessData.IamMember
+  fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.IamMember
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Role*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Role
-  isExternal: false
   name: Role
   nameWithType: Dataset.AccessData.Role
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.Role
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.SpecialGroup*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.SpecialGroup
-  isExternal: false
   name: SpecialGroup
   nameWithType: Dataset.AccessData.SpecialGroup
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.SpecialGroup
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.UserByEmail*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.UserByEmail
-  isExternal: false
   name: UserByEmail
   nameWithType: Dataset.AccessData.UserByEmail
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.UserByEmail
 - uid: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.View*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.Dataset.AccessData.View
-  isExternal: false
   name: View
   nameWithType: Dataset.AccessData.View
   fullName: Google.Apis.Bigquery.v2.Data.Dataset.AccessData.View
 - uid: Google.Apis.Bigquery.v2.Data.TableReference
   commentId: T:Google.Apis.Bigquery.v2.Data.TableReference
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TableReference
   nameWithType: TableReference
   fullName: Google.Apis.Bigquery.v2.Data.TableReference

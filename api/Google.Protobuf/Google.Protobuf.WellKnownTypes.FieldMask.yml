@@ -12,15 +12,29 @@ items:
   - Google.Protobuf.WellKnownTypes.FieldMask.Descriptor
   - Google.Protobuf.WellKnownTypes.FieldMask.Equals(Google.Protobuf.WellKnownTypes.FieldMask)
   - Google.Protobuf.WellKnownTypes.FieldMask.Equals(System.Object)
+  - Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Collections.Generic.IEnumerable{System.Int32})
+  - Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Int32[])
+  - Google.Protobuf.WellKnownTypes.FieldMask.FromString(System.String)
+  - Google.Protobuf.WellKnownTypes.FieldMask.FromString``1(System.String)
+  - Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable``1(System.Collections.Generic.IEnumerable{System.String})
   - Google.Protobuf.WellKnownTypes.FieldMask.GetHashCode
   - Google.Protobuf.WellKnownTypes.FieldMask.Google#Protobuf#IMessage#Descriptor
+  - Google.Protobuf.WellKnownTypes.FieldMask.Intersection(Google.Protobuf.WellKnownTypes.FieldMask)
+  - Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,Google.Protobuf.WellKnownTypes.FieldMask)
+  - Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,System.String)
+  - Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(Google.Protobuf.WellKnownTypes.FieldMask)
+  - Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(System.String)
+  - Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage)
+  - Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage,Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions)
   - Google.Protobuf.WellKnownTypes.FieldMask.MergeFrom(Google.Protobuf.CodedInputStream)
   - Google.Protobuf.WellKnownTypes.FieldMask.MergeFrom(Google.Protobuf.WellKnownTypes.FieldMask)
+  - Google.Protobuf.WellKnownTypes.FieldMask.Normalize
   - Google.Protobuf.WellKnownTypes.FieldMask.Parser
   - Google.Protobuf.WellKnownTypes.FieldMask.Paths
   - Google.Protobuf.WellKnownTypes.FieldMask.PathsFieldNumber
   - Google.Protobuf.WellKnownTypes.FieldMask.ToDiagnosticString
   - Google.Protobuf.WellKnownTypes.FieldMask.ToString
+  - Google.Protobuf.WellKnownTypes.FieldMask.Union(Google.Protobuf.WellKnownTypes.FieldMask[])
   - Google.Protobuf.WellKnownTypes.FieldMask.WriteTo(Google.Protobuf.CodedOutputStream)
   langs:
   - csharp
@@ -32,7 +46,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: FieldMask
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -40,7 +54,7 @@ items:
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
-  summary: "\n`FieldMask` represents a set of symbolic field paths, for example:\n\npaths: &quot;f.a&quot;\npaths: &quot;f.b.d&quot;\n\nHere `f` represents a field in some root message, `a` and `b`\nfields in the message found in `f`, and `d` a field found in the\nmessage in `f.b`.\n\nField masks are used to specify a subset of fields that should be\nreturned by a get operation or modified by an update operation.\nField masks also have a custom JSON encoding (see below).\n\n# Field Masks in Projections\n\nWhen used in the context of a projection, a response message or\nsub-message is filtered by the API to only contain those fields as\nspecified in the mask. For example, if the mask in the previous\nexample is applied to a response message as follows:\n\nf {\n a : 22\n b {\n   d : 1\n   x : 2\n }\n y : 13\n}\nz: 8\n\nThe result will not contain specific values for fields x,y and z\n(their value will be set to the default, and omitted in proto text\noutput):\n\nf {\n a : 22\n b {\n   d : 1\n }\n}\n\nA repeated field is not allowed except at the last position of a\npaths string.\n\nIf a FieldMask object is not present in a get operation, the\noperation applies to all fields (as if a FieldMask of all fields\nhad been specified).\n\nNote that a field mask does not necessarily apply to the\ntop-level response message. In case of a REST get operation, the\nfield mask applies directly to the response, but in case of a REST\nlist operation, the mask instead applies to each individual message\nin the returned resource list. In case of a REST custom method,\nother definitions may be used. Where the mask applies will be\nclearly documented together with its declaration in the API.  In\nany case, the effect on the returned resource/resources is required\nbehavior for APIs.\n\n# Field Masks in Update Operations\n\nA field mask in update operations specifies which fields of the\ntargeted resource are going to be updated. The API is required\nto only change the values of the fields as specified in the mask\nand leave the others untouched. If a resource is passed in to\ndescribe the updated values, the API ignores the values of all\nfields not covered by the mask.\n\nIf a repeated field is specified for an update operation, the existing\nrepeated values in the target resource will be overwritten by the new values.\nNote that a repeated field is only allowed in the last position of a `paths`\nstring.\n\nIf a sub-message is specified in the last position of the field mask for an\nupdate operation, then the existing sub-message in the target resource is\noverwritten. Given the target message:\n\nf {\n b {\n   d : 1\n   x : 2\n }\n c : 1\n}\n\nAnd an update message:\n\nf {\n b {\n   d : 10\n }\n}\n\nthen if the field mask is:\n\npaths: &quot;f.b&quot;\n\nthen the result will be:\n\nf {\n b {\n   d : 10\n }\n c : 1\n}\n\nHowever, if the update mask was:\n\npaths: &quot;f.b.d&quot;\n\nthen the result would be:\n\nf {\n b {\n   d : 10\n   x : 2\n }\n c : 1\n}\n\nIn order to reset a field&apos;s value to the default, the field must\nbe in the mask and set to the default value in the provided resource.\nHence, in order to reset all fields of a resource, provide a default\ninstance of the resource and set all fields in the mask, or do\nnot provide a mask as described below.\n\nIf a field mask is not present on update, the operation applies to\nall fields (as if a field mask of all fields has been specified).\nNote that in the presence of schema evolution, this may mean that\nfields the client does not know and has therefore not filled into\nthe request will be reset to their default. If this is unwanted\nbehavior, a specific service may require a client to always specify\na field mask, producing an error if not.\n\nAs with get operations, the location of the resource which\ndescribes the updated values in the request message depends on the\noperation kind. In any case, the effect of the field mask is\nrequired to be honored by the API.\n\n## Considerations for HTTP REST\n\nThe HTTP kind of an update operation which uses a field mask must\nbe set to PATCH instead of PUT in order to satisfy HTTP semantics\n(PUT must only be used for full updates).\n\n# JSON Encoding of Field Masks\n\nIn JSON, a field mask is encoded as a single string where paths are\nseparated by a comma. Fields name in each path are converted\nto/from lower-camel naming conventions.\n\nAs an example, consider the following message declarations:\n\nmessage Profile {\n User user = 1;\n Photo photo = 2;\n}\nmessage User {\n string display_name = 1;\n string address = 2;\n}\n\nIn proto a field mask for `Profile` may look as such:\n\nmask {\n paths: &quot;user.display_name&quot;\n paths: &quot;photo&quot;\n}\n\nIn JSON, the same mask is represented as below:\n\n{\n mask: &quot;user.displayName,photo&quot;\n}\n\n# Field Masks and Oneof Fields\n\nField masks treat fields in oneofs just as regular fields. Consider the\nfollowing message:\n\nmessage SampleMessage {\n oneof test_oneof {\n   string name = 4;\n   SubMessage sub_message = 9;\n }\n}\n\nThe field mask can be:\n\nmask {\n paths: &quot;name&quot;\n}\n\nOr:\n\nmask {\n paths: &quot;sub_message&quot;\n}\n\nNote that oneof type names (&quot;test_oneof&quot; in this case) cannot be used in\npaths.\n\n## Field Mask Verification\n\nThe implementation of any API method which has a FieldMask type field in the\nrequest should verify the included field paths, and return an\n`INVALID_ARGUMENT` error if any path is duplicated or unmappable.\n"
+  summary: "\n`FieldMask` represents a set of symbolic field paths, for example:\n\npaths: &quot;f.a&quot;\npaths: &quot;f.b.d&quot;\n\nHere `f` represents a field in some root message, `a` and `b`\nfields in the message found in `f`, and `d` a field found in the\nmessage in `f.b`.\n\nField masks are used to specify a subset of fields that should be\nreturned by a get operation or modified by an update operation.\nField masks also have a custom JSON encoding (see below).\n\n# Field Masks in Projections\n\nWhen used in the context of a projection, a response message or\nsub-message is filtered by the API to only contain those fields as\nspecified in the mask. For example, if the mask in the previous\nexample is applied to a response message as follows:\n\nf {\n a : 22\n b {\n   d : 1\n   x : 2\n }\n y : 13\n}\nz: 8\n\nThe result will not contain specific values for fields x,y and z\n(their value will be set to the default, and omitted in proto text\noutput):\n\nf {\n a : 22\n b {\n   d : 1\n }\n}\n\nA repeated field is not allowed except at the last position of a\npaths string.\n\nIf a FieldMask object is not present in a get operation, the\noperation applies to all fields (as if a FieldMask of all fields\nhad been specified).\n\nNote that a field mask does not necessarily apply to the\ntop-level response message. In case of a REST get operation, the\nfield mask applies directly to the response, but in case of a REST\nlist operation, the mask instead applies to each individual message\nin the returned resource list. In case of a REST custom method,\nother definitions may be used. Where the mask applies will be\nclearly documented together with its declaration in the API.  In\nany case, the effect on the returned resource/resources is required\nbehavior for APIs.\n\n# Field Masks in Update Operations\n\nA field mask in update operations specifies which fields of the\ntargeted resource are going to be updated. The API is required\nto only change the values of the fields as specified in the mask\nand leave the others untouched. If a resource is passed in to\ndescribe the updated values, the API ignores the values of all\nfields not covered by the mask.\n\nIf a repeated field is specified for an update operation, new values will\nbe appended to the existing repeated field in the target resource. Note that\na repeated field is only allowed in the last position of a `paths` string.\n\nIf a sub-message is specified in the last position of the field mask for an\nupdate operation, then new value will be merged into the existing sub-message\nin the target resource.\n\nFor example, given the target message:\n\nf {\n b {\n   d: 1\n   x: 2\n }\n c: [1]\n}\n\nAnd an update message:\n\nf {\n b {\n   d: 10\n }\n c: [2]\n}\n\nthen if the field mask is:\n\npaths: [&quot;f.b&quot;, &quot;f.c&quot;]\n\nthen the result will be:\n\nf {\n b {\n   d: 10\n   x: 2\n }\n c: [1, 2]\n}\n\nAn implementation may provide options to override this default behavior for\nrepeated and message fields.\n\nIn order to reset a field&apos;s value to the default, the field must\nbe in the mask and set to the default value in the provided resource.\nHence, in order to reset all fields of a resource, provide a default\ninstance of the resource and set all fields in the mask, or do\nnot provide a mask as described below.\n\nIf a field mask is not present on update, the operation applies to\nall fields (as if a field mask of all fields has been specified).\nNote that in the presence of schema evolution, this may mean that\nfields the client does not know and has therefore not filled into\nthe request will be reset to their default. If this is unwanted\nbehavior, a specific service may require a client to always specify\na field mask, producing an error if not.\n\nAs with get operations, the location of the resource which\ndescribes the updated values in the request message depends on the\noperation kind. In any case, the effect of the field mask is\nrequired to be honored by the API.\n\n## Considerations for HTTP REST\n\nThe HTTP kind of an update operation which uses a field mask must\nbe set to PATCH instead of PUT in order to satisfy HTTP semantics\n(PUT must only be used for full updates).\n\n# JSON Encoding of Field Masks\n\nIn JSON, a field mask is encoded as a single string where paths are\nseparated by a comma. Fields name in each path are converted\nto/from lower-camel naming conventions.\n\nAs an example, consider the following message declarations:\n\nmessage Profile {\n User user = 1;\n Photo photo = 2;\n}\nmessage User {\n string display_name = 1;\n string address = 2;\n}\n\nIn proto a field mask for `Profile` may look as such:\n\nmask {\n paths: &quot;user.display_name&quot;\n paths: &quot;photo&quot;\n}\n\nIn JSON, the same mask is represented as below:\n\n{\n mask: &quot;user.displayName,photo&quot;\n}\n\n# Field Masks and Oneof Fields\n\nField masks treat fields in oneofs just as regular fields. Consider the\nfollowing message:\n\nmessage SampleMessage {\n oneof test_oneof {\n   string name = 4;\n   SubMessage sub_message = 9;\n }\n}\n\nThe field mask can be:\n\nmask {\n paths: &quot;name&quot;\n}\n\nOr:\n\nmask {\n paths: &quot;sub_message&quot;\n}\n\nNote that oneof type names (&quot;test_oneof&quot; in this case) cannot be used in\npaths.\n\n## Field Mask Verification\n\nThe implementation of any API method which has a FieldMask type field in the\nrequest should verify the included field paths, and return an\n`INVALID_ARGUMENT` error if any path is duplicated or unmappable.\n"
   example: []
   syntax:
     content: 'public sealed class FieldMask : IMessage<FieldMask>, IEquatable<FieldMask>, IDeepCloneable<FieldMask>, ICustomDiagnosticMessage, IMessage'
@@ -70,6 +84,7 @@ items:
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.WriteTo(System.IO.Stream)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.WriteDelimitedTo(System.IO.Stream)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.ToByteString
+  - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.IsInitialized
   modifiers.csharp:
   - public
   - sealed
@@ -92,11 +107,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Parser
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 253
+    startLine: 245
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -129,11 +144,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 256
+    startLine: 248
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -167,11 +182,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 261
+    startLine: 253
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -205,11 +220,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 266
+    startLine: 258
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -235,11 +250,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 273
+    startLine: 265
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -268,11 +283,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Clone
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 279
+    startLine: 271
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -302,11 +317,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: PathsFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 285
+    startLine: 277
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -337,11 +352,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Paths
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 292
+    startLine: 284
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -374,11 +389,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 297
+    startLine: 289
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -412,11 +427,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 302
+    startLine: 294
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -449,11 +464,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: GetHashCode
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 314
+    startLine: 306
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -484,11 +499,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ToString
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 324
+    startLine: 316
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -519,11 +534,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: WriteTo
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 329
+    startLine: 321
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -554,11 +569,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: CalculateSize
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 337
+    startLine: 329
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -588,11 +603,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 347
+    startLine: 339
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -623,11 +638,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-    startLine: 356
+    startLine: 348
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -658,11 +673,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ToDiagnosticString
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-    startLine: 122
+    startLine: 100
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -682,10 +697,599 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromString(System.String)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.FromString(System.String)
+  id: FromString(System.String)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: FromString(String)
+  nameWithType: FieldMask.FromString(String)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromString(System.String)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: FromString
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 108
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nParses from a string to a FieldMask.\n"
+  example: []
+  syntax:
+    content: public static FieldMask FromString(string value)
+    parameters:
+    - id: value
+      type: System.String
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Shared Function FromString(value As String) As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.FromString*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromString``1(System.String)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.FromString``1(System.String)
+  id: FromString``1(System.String)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: FromString<T>(String)
+  nameWithType: FieldMask.FromString<T>(String)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromString<T>(System.String)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: FromString
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 117
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nParses from a string to a FieldMask and validates all field paths.\n"
+  example: []
+  syntax:
+    content: >-
+      public static FieldMask FromString<T>(string value)
+          where T : IMessage
+    parameters:
+    - id: value
+      type: System.String
+    typeParameters:
+    - id: T
+      description: The type to validate the field paths against.
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Shared Function FromString(Of T As IMessage)(value As String) As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.FromString*
+  nameWithType.vb: FieldMask.FromString(Of T)(String)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask.FromString(Of T)(System.String)
+  name.vb: FromString(Of T)(String)
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable``1(System.Collections.Generic.IEnumerable{System.String})
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable``1(System.Collections.Generic.IEnumerable{System.String})
+  id: FromStringEnumerable``1(System.Collections.Generic.IEnumerable{System.String})
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: FromStringEnumerable<T>(IEnumerable<String>)
+  nameWithType: FieldMask.FromStringEnumerable<T>(IEnumerable<String>)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable<T>(System.Collections.Generic.IEnumerable<System.String>)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: FromStringEnumerable
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 126
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nConstructs a FieldMask for a list of field paths in a certain type.\n"
+  example: []
+  syntax:
+    content: >-
+      public static FieldMask FromStringEnumerable<T>(IEnumerable<string> paths)
+          where T : IMessage
+    parameters:
+    - id: paths
+      type: System.Collections.Generic.IEnumerable{System.String}
+    typeParameters:
+    - id: T
+      description: The type to validate the field paths against.
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Shared Function FromStringEnumerable(Of T As IMessage)(paths As IEnumerable(Of String)) As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable*
+  nameWithType.vb: FieldMask.FromStringEnumerable(Of T)(IEnumerable(Of String))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable(Of T)(System.Collections.Generic.IEnumerable(Of System.String))
+  name.vb: FromStringEnumerable(Of T)(IEnumerable(Of String))
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Int32[])
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Int32[])
+  id: FromFieldNumbers``1(System.Int32[])
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: FromFieldNumbers<T>(Int32[])
+  nameWithType: FieldMask.FromFieldNumbers<T>(Int32[])
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers<T>(System.Int32[])
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: FromFieldNumbers
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 153
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nConstructs a FieldMask from the passed field numbers.\n"
+  example: []
+  syntax:
+    content: >-
+      public static FieldMask FromFieldNumbers<T>(params int[] fieldNumbers)
+          where T : IMessage
+    parameters:
+    - id: fieldNumbers
+      type: System.Int32[]
+    typeParameters:
+    - id: T
+      description: The type to validate the field paths against.
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Shared Function FromFieldNumbers(Of T As IMessage)(ParamArray fieldNumbers As Integer()) As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers*
+  nameWithType.vb: FieldMask.FromFieldNumbers(Of T)(Int32())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers(Of T)(System.Int32())
+  name.vb: FromFieldNumbers(Of T)(Int32())
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Collections.Generic.IEnumerable{System.Int32})
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Collections.Generic.IEnumerable{System.Int32})
+  id: FromFieldNumbers``1(System.Collections.Generic.IEnumerable{System.Int32})
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: FromFieldNumbers<T>(IEnumerable<Int32>)
+  nameWithType: FieldMask.FromFieldNumbers<T>(IEnumerable<Int32>)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers<T>(System.Collections.Generic.IEnumerable<System.Int32>)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: FromFieldNumbers
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 162
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nConstructs a FieldMask from the passed field numbers.\n"
+  example: []
+  syntax:
+    content: >-
+      public static FieldMask FromFieldNumbers<T>(IEnumerable<int> fieldNumbers)
+          where T : IMessage
+    parameters:
+    - id: fieldNumbers
+      type: System.Collections.Generic.IEnumerable{System.Int32}
+    typeParameters:
+    - id: T
+      description: The type to validate the field paths against.
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Shared Function FromFieldNumbers(Of T As IMessage)(fieldNumbers As IEnumerable(Of Integer)) As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers*
+  nameWithType.vb: FieldMask.FromFieldNumbers(Of T)(IEnumerable(Of Int32))
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers(Of T)(System.Collections.Generic.IEnumerable(Of System.Int32))
+  name.vb: FromFieldNumbers(Of T)(IEnumerable(Of Int32))
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(Google.Protobuf.WellKnownTypes.FieldMask)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(Google.Protobuf.WellKnownTypes.FieldMask)
+  id: IsValid``1(Google.Protobuf.WellKnownTypes.FieldMask)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: IsValid<T>(FieldMask)
+  nameWithType: FieldMask.IsValid<T>(FieldMask)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.IsValid<T>(Google.Protobuf.WellKnownTypes.FieldMask)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: IsValid
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 210
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nChecks whether paths in a given fields mask are valid.\n"
+  example: []
+  syntax:
+    content: >-
+      public static bool IsValid<T>(FieldMask fieldMask)
+          where T : IMessage
+    parameters:
+    - id: fieldMask
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    typeParameters:
+    - id: T
+      description: The type to validate the field paths against.
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsValid(Of T As IMessage)(fieldMask As FieldMask) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.IsValid*
+  nameWithType.vb: FieldMask.IsValid(Of T)(FieldMask)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Of T)(Google.Protobuf.WellKnownTypes.FieldMask)
+  name.vb: IsValid(Of T)(FieldMask)
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,Google.Protobuf.WellKnownTypes.FieldMask)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,Google.Protobuf.WellKnownTypes.FieldMask)
+  id: IsValid(Google.Protobuf.Reflection.MessageDescriptor,Google.Protobuf.WellKnownTypes.FieldMask)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: IsValid(MessageDescriptor, FieldMask)
+  nameWithType: FieldMask.IsValid(MessageDescriptor, FieldMask)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor, Google.Protobuf.WellKnownTypes.FieldMask)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: IsValid
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 220
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nChecks whether paths in a given fields mask are valid.\n"
+  example: []
+  syntax:
+    content: public static bool IsValid(MessageDescriptor descriptor, FieldMask fieldMask)
+    parameters:
+    - id: descriptor
+      type: Google.Protobuf.Reflection.MessageDescriptor
+    - id: fieldMask
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsValid(descriptor As MessageDescriptor, fieldMask As FieldMask) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.IsValid*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(System.String)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(System.String)
+  id: IsValid``1(System.String)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: IsValid<T>(String)
+  nameWithType: FieldMask.IsValid<T>(String)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.IsValid<T>(System.String)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: IsValid
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 237
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nChecks whether a given field path is valid.\n"
+  example: []
+  syntax:
+    content: >-
+      public static bool IsValid<T>(string path)
+          where T : IMessage
+    parameters:
+    - id: path
+      type: System.String
+    typeParameters:
+    - id: T
+      description: The type to validate the field paths against.
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsValid(Of T As IMessage)(path As String) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.IsValid*
+  nameWithType.vb: FieldMask.IsValid(Of T)(String)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Of T)(System.String)
+  name.vb: IsValid(Of T)(String)
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,System.String)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,System.String)
+  id: IsValid(Google.Protobuf.Reflection.MessageDescriptor,System.String)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: IsValid(MessageDescriptor, String)
+  nameWithType: FieldMask.IsValid(MessageDescriptor, String)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor, System.String)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: IsValid
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 247
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nChecks whether paths in a given fields mask are valid.\n"
+  example: []
+  syntax:
+    content: public static bool IsValid(MessageDescriptor descriptor, string path)
+    parameters:
+    - id: descriptor
+      type: Google.Protobuf.Reflection.MessageDescriptor
+    - id: path
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function IsValid(descriptor As MessageDescriptor, path As String) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.IsValid*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Normalize
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.Normalize
+  id: Normalize
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: Normalize()
+  nameWithType: FieldMask.Normalize()
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Normalize()
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: Normalize
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 282
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nConverts this FieldMask to its canonical form. In the canonical form of a\nFieldMask, all field paths are sorted alphabetically and redundant field\npaths are removed.\n"
+  example: []
+  syntax:
+    content: public FieldMask Normalize()
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Function Normalize As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.Normalize*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Union(Google.Protobuf.WellKnownTypes.FieldMask[])
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.Union(Google.Protobuf.WellKnownTypes.FieldMask[])
+  id: Union(Google.Protobuf.WellKnownTypes.FieldMask[])
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: Union(FieldMask[])
+  nameWithType: FieldMask.Union(FieldMask[])
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Union(Google.Protobuf.WellKnownTypes.FieldMask[])
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: Union
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 290
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nCreates a union of two or more FieldMasks.\n"
+  example: []
+  syntax:
+    content: public FieldMask Union(params FieldMask[] otherMasks)
+    parameters:
+    - id: otherMasks
+      type: Google.Protobuf.WellKnownTypes.FieldMask[]
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Function Union(ParamArray otherMasks As FieldMask()) As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.Union*
+  nameWithType.vb: FieldMask.Union(FieldMask())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask.Union(Google.Protobuf.WellKnownTypes.FieldMask())
+  name.vb: Union(FieldMask())
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Intersection(Google.Protobuf.WellKnownTypes.FieldMask)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.Intersection(Google.Protobuf.WellKnownTypes.FieldMask)
+  id: Intersection(Google.Protobuf.WellKnownTypes.FieldMask)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: Intersection(FieldMask)
+  nameWithType: FieldMask.Intersection(FieldMask)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Intersection(Google.Protobuf.WellKnownTypes.FieldMask)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: Intersection
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 304
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nCalculates the intersection of two FieldMasks.\n"
+  example: []
+  syntax:
+    content: public FieldMask Intersection(FieldMask additionalMask)
+    parameters:
+    - id: additionalMask
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    return:
+      type: Google.Protobuf.WellKnownTypes.FieldMask
+    content.vb: Public Function Intersection(additionalMask As FieldMask) As FieldMask
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.Intersection*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage,Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage,Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions)
+  id: Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage,Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: Merge(IMessage, IMessage, FieldMask.MergeOptions)
+  nameWithType: FieldMask.Merge(IMessage, IMessage, FieldMask.MergeOptions)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage, Google.Protobuf.IMessage, Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: Merge
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 320
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nMerges fields specified by this FieldMask from one message to another with the\nspecified merge options.\n"
+  example: []
+  syntax:
+    content: public void Merge(IMessage source, IMessage destination, FieldMask.MergeOptions options)
+    parameters:
+    - id: source
+      type: Google.Protobuf.IMessage
+    - id: destination
+      type: Google.Protobuf.IMessage
+    - id: options
+      type: Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions
+    content.vb: Public Sub Merge(source As IMessage, destination As IMessage, options As FieldMask.MergeOptions)
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.Merge*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage)
+  commentId: M:Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage)
+  id: Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage)
+  parent: Google.Protobuf.WellKnownTypes.FieldMask
+  langs:
+  - csharp
+  - vb
+  name: Merge(IMessage, IMessage)
+  nameWithType: FieldMask.Merge(IMessage, IMessage)
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage, Google.Protobuf.IMessage)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: Merge
+    path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
+    startLine: 328
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nMerges fields specified by this FieldMask from one message to another.\n"
+  example: []
+  syntax:
+    content: public void Merge(IMessage source, IMessage destination)
+    parameters:
+    - id: source
+      type: Google.Protobuf.IMessage
+    - id: destination
+      type: Google.Protobuf.IMessage
+    content.vb: Public Sub Merge(source As IMessage, destination As IMessage)
+  overload: Google.Protobuf.WellKnownTypes.FieldMask.Merge*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 references:
 - uid: Google.Protobuf.WellKnownTypes
   commentId: N:Google.Protobuf.WellKnownTypes
-  isExternal: false
   name: Google.Protobuf.WellKnownTypes
   nameWithType: Google.Protobuf.WellKnownTypes
   fullName: Google.Protobuf.WellKnownTypes
@@ -821,14 +1425,12 @@ references:
 - uid: Google.Protobuf.ICustomDiagnosticMessage
   commentId: T:Google.Protobuf.ICustomDiagnosticMessage
   parent: Google.Protobuf
-  isExternal: false
   name: ICustomDiagnosticMessage
   nameWithType: ICustomDiagnosticMessage
   fullName: Google.Protobuf.ICustomDiagnosticMessage
 - uid: Google.Protobuf.IMessage
   commentId: T:Google.Protobuf.IMessage
   parent: Google.Protobuf
-  isExternal: false
   name: IMessage
   nameWithType: IMessage
   fullName: Google.Protobuf.IMessage
@@ -1387,15 +1989,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.IsInitialized
+  commentId: M:Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  parent: Google.Protobuf.MessageExtensions
+  definition: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  name: IsInitialized()
+  nameWithType: MessageExtensions.IsInitialized()
+  fullName: Google.Protobuf.MessageExtensions.IsInitialized()
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Protobuf.IMessage`1
   commentId: T:Google.Protobuf.IMessage`1
-  isExternal: false
   name: IMessage<T>
   nameWithType: IMessage<T>
   fullName: Google.Protobuf.IMessage<T>
@@ -1432,7 +2062,6 @@ references:
     fullName: )
 - uid: Google.Protobuf
   commentId: N:Google.Protobuf
-  isExternal: false
   name: Google.Protobuf
   nameWithType: Google.Protobuf
   fullName: Google.Protobuf
@@ -1477,7 +2106,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IDeepCloneable`1
   commentId: T:Google.Protobuf.IDeepCloneable`1
-  isExternal: false
   name: IDeepCloneable<T>
   nameWithType: IDeepCloneable<T>
   fullName: Google.Protobuf.IDeepCloneable<T>
@@ -1576,7 +2204,6 @@ references:
 - uid: Google.Protobuf.MessageExtensions
   commentId: T:Google.Protobuf.MessageExtensions
   parent: Google.Protobuf
-  isExternal: false
   name: MessageExtensions
   nameWithType: MessageExtensions
   fullName: Google.Protobuf.MessageExtensions
@@ -1675,7 +2302,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
   commentId: M:Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
-  isExternal: false
   name: MergeFrom(IMessage, ByteString)
   nameWithType: MessageExtensions.MergeFrom(IMessage, ByteString)
   fullName: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage, Google.Protobuf.ByteString)
@@ -1829,7 +2455,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
   commentId: M:Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
-  isExternal: false
   name: ToByteArray(IMessage)
   nameWithType: MessageExtensions.ToByteArray(IMessage)
   fullName: Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
@@ -1969,7 +2594,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
   commentId: M:Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
-  isExternal: false
   name: ToByteString(IMessage)
   nameWithType: MessageExtensions.ToByteString(IMessage)
   fullName: Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
@@ -2003,9 +2627,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  commentId: M:Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  name: IsInitialized(IMessage)
+  nameWithType: MessageExtensions.IsInitialized(IMessage)
+  fullName: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.Parser*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Parser
-  isExternal: false
   name: Parser
   nameWithType: FieldMask.Parser
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.Parser
@@ -2052,7 +2710,6 @@ references:
 - uid: Google.Protobuf.MessageParser`1
   commentId: T:Google.Protobuf.MessageParser`1
   parent: Google.Protobuf
-  isExternal: false
   name: MessageParser<T>
   nameWithType: MessageParser<T>
   fullName: Google.Protobuf.MessageParser<T>
@@ -2089,26 +2746,22 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.Descriptor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Descriptor
-  isExternal: false
   name: Descriptor
   nameWithType: FieldMask.Descriptor
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.Descriptor
 - uid: Google.Protobuf.Reflection.MessageDescriptor
   commentId: T:Google.Protobuf.Reflection.MessageDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: MessageDescriptor
   nameWithType: MessageDescriptor
   fullName: Google.Protobuf.Reflection.MessageDescriptor
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
-  isExternal: false
   name: Google.Protobuf.Reflection
   nameWithType: Google.Protobuf.Reflection
   fullName: Google.Protobuf.Reflection
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.Google#Protobuf#IMessage#Descriptor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Google#Protobuf#IMessage#Descriptor
-  isExternal: false
   name: IMessage.Descriptor
   nameWithType: FieldMask.IMessage.Descriptor
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.Google.Protobuf.IMessage.Descriptor
@@ -2118,26 +2771,22 @@ references:
 - uid: Google.Protobuf.IMessage.Descriptor
   commentId: P:Google.Protobuf.IMessage.Descriptor
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: Descriptor
   nameWithType: IMessage.Descriptor
   fullName: Google.Protobuf.IMessage.Descriptor
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.#ctor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.#ctor
-  isExternal: false
   name: FieldMask
   nameWithType: FieldMask.FieldMask
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.FieldMask
 - uid: Google.Protobuf.WellKnownTypes.FieldMask
   commentId: T:Google.Protobuf.WellKnownTypes.FieldMask
   parent: Google.Protobuf.WellKnownTypes
-  isExternal: false
   name: FieldMask
   nameWithType: FieldMask
   fullName: Google.Protobuf.WellKnownTypes.FieldMask
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.Clone*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Clone
-  isExternal: false
   name: Clone
   nameWithType: FieldMask.Clone
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.Clone
@@ -2174,7 +2823,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IDeepCloneable`1.Clone
   commentId: M:Google.Protobuf.IDeepCloneable`1.Clone
-  isExternal: false
   name: Clone()
   nameWithType: IDeepCloneable<T>.Clone()
   fullName: Google.Protobuf.IDeepCloneable<T>.Clone()
@@ -2211,7 +2859,6 @@ references:
   fullName: System.Int32
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.Paths*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Paths
-  isExternal: false
   name: Paths
   nameWithType: FieldMask.Paths
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.Paths
@@ -2260,7 +2907,6 @@ references:
 - uid: Google.Protobuf.Collections.RepeatedField`1
   commentId: T:Google.Protobuf.Collections.RepeatedField`1
   parent: Google.Protobuf.Collections
-  isExternal: false
   name: RepeatedField<T>
   nameWithType: RepeatedField<T>
   fullName: Google.Protobuf.Collections.RepeatedField<T>
@@ -2297,7 +2943,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.Collections
   commentId: N:Google.Protobuf.Collections
-  isExternal: false
   name: Google.Protobuf.Collections
   nameWithType: Google.Protobuf.Collections
   fullName: Google.Protobuf.Collections
@@ -2344,7 +2989,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.Equals*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Equals
-  isExternal: false
   name: Equals
   nameWithType: FieldMask.Equals
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.Equals
@@ -2467,7 +3111,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.GetHashCode*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.GetHashCode
-  isExternal: false
   name: GetHashCode
   nameWithType: FieldMask.GetHashCode
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.GetHashCode
@@ -2504,7 +3147,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.ToString*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.ToString
-  isExternal: false
   name: ToString
   nameWithType: FieldMask.ToString
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.ToString
@@ -2517,14 +3159,12 @@ references:
   fullName: System.String
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.WriteTo*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.WriteTo
-  isExternal: false
   name: WriteTo
   nameWithType: FieldMask.WriteTo
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.WriteTo
 - uid: Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
   commentId: M:Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: WriteTo(CodedOutputStream)
   nameWithType: IMessage.WriteTo(CodedOutputStream)
   fullName: Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
@@ -2561,20 +3201,17 @@ references:
 - uid: Google.Protobuf.CodedOutputStream
   commentId: T:Google.Protobuf.CodedOutputStream
   parent: Google.Protobuf
-  isExternal: false
   name: CodedOutputStream
   nameWithType: CodedOutputStream
   fullName: Google.Protobuf.CodedOutputStream
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.CalculateSize*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.CalculateSize
-  isExternal: false
   name: CalculateSize
   nameWithType: FieldMask.CalculateSize
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.CalculateSize
 - uid: Google.Protobuf.IMessage.CalculateSize
   commentId: M:Google.Protobuf.IMessage.CalculateSize
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: CalculateSize()
   nameWithType: IMessage.CalculateSize()
   fullName: Google.Protobuf.IMessage.CalculateSize()
@@ -2602,7 +3239,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.MergeFrom*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.MergeFrom
-  isExternal: false
   name: MergeFrom
   nameWithType: FieldMask.MergeFrom
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.MergeFrom
@@ -2647,7 +3283,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IMessage`1.MergeFrom(`0)
   commentId: M:Google.Protobuf.IMessage`1.MergeFrom(`0)
-  isExternal: false
   name: MergeFrom(T)
   nameWithType: IMessage<T>.MergeFrom(T)
   fullName: Google.Protobuf.IMessage<T>.MergeFrom(T)
@@ -2684,7 +3319,6 @@ references:
 - uid: Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
   commentId: M:Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: MergeFrom(CodedInputStream)
   nameWithType: IMessage.MergeFrom(CodedInputStream)
   fullName: Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
@@ -2721,20 +3355,17 @@ references:
 - uid: Google.Protobuf.CodedInputStream
   commentId: T:Google.Protobuf.CodedInputStream
   parent: Google.Protobuf
-  isExternal: false
   name: CodedInputStream
   nameWithType: CodedInputStream
   fullName: Google.Protobuf.CodedInputStream
 - uid: Google.Protobuf.WellKnownTypes.FieldMask.ToDiagnosticString*
   commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.ToDiagnosticString
-  isExternal: false
   name: ToDiagnosticString
   nameWithType: FieldMask.ToDiagnosticString
   fullName: Google.Protobuf.WellKnownTypes.FieldMask.ToDiagnosticString
 - uid: Google.Protobuf.ICustomDiagnosticMessage.ToDiagnosticString
   commentId: M:Google.Protobuf.ICustomDiagnosticMessage.ToDiagnosticString
   parent: Google.Protobuf.ICustomDiagnosticMessage
-  isExternal: false
   name: ToDiagnosticString()
   nameWithType: ICustomDiagnosticMessage.ToDiagnosticString()
   fullName: Google.Protobuf.ICustomDiagnosticMessage.ToDiagnosticString()
@@ -2760,3 +3391,232 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromString*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.FromString
+  name: FromString
+  nameWithType: FieldMask.FromString
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromString
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable
+  name: FromStringEnumerable
+  nameWithType: FieldMask.FromStringEnumerable
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<String>
+  nameWithType: IEnumerable<String>
+  fullName: System.Collections.Generic.IEnumerable<System.String>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers
+  name: FromFieldNumbers
+  nameWithType: FieldMask.FromFieldNumbers
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers
+- uid: System.Int32[]
+  isExternal: true
+  name: Int32[]
+  nameWithType: Int32[]
+  fullName: System.Int32[]
+  nameWithType.vb: Int32()
+  fullName.vb: System.Int32()
+  name.vb: Int32()
+  spec.csharp:
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: System.Collections.Generic.IEnumerable{System.Int32}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Int32}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<Int32>
+  nameWithType: IEnumerable<Int32>
+  fullName: System.Collections.Generic.IEnumerable<System.Int32>
+  nameWithType.vb: IEnumerable(Of Int32)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Int32)
+  name.vb: IEnumerable(Of Int32)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.IsValid*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.IsValid
+  name: IsValid
+  nameWithType: FieldMask.IsValid
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.IsValid
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Normalize*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Normalize
+  name: Normalize
+  nameWithType: FieldMask.Normalize
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Normalize
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Union*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Union
+  name: Union
+  nameWithType: FieldMask.Union
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Union
+- uid: Google.Protobuf.WellKnownTypes.FieldMask[]
+  isExternal: true
+  name: FieldMask[]
+  nameWithType: FieldMask[]
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask[]
+  nameWithType.vb: FieldMask()
+  fullName.vb: Google.Protobuf.WellKnownTypes.FieldMask()
+  name.vb: FieldMask()
+  spec.csharp:
+  - uid: Google.Protobuf.WellKnownTypes.FieldMask
+    name: FieldMask
+    nameWithType: FieldMask
+    fullName: Google.Protobuf.WellKnownTypes.FieldMask
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Google.Protobuf.WellKnownTypes.FieldMask
+    name: FieldMask
+    nameWithType: FieldMask
+    fullName: Google.Protobuf.WellKnownTypes.FieldMask
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Intersection*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Intersection
+  name: Intersection
+  nameWithType: FieldMask.Intersection
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Intersection
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.Merge*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.FieldMask.Merge
+  name: Merge
+  nameWithType: FieldMask.Merge
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.Merge
+- uid: Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions
+  commentId: T:Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions
+  parent: Google.Protobuf.WellKnownTypes
+  name: FieldMask.MergeOptions
+  nameWithType: FieldMask.MergeOptions
+  fullName: Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions

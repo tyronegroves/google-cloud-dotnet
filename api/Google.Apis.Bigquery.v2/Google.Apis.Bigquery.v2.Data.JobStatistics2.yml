@@ -8,11 +8,16 @@ items:
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.BillingTier
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.CacheHit
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlOperationPerformed
+  - Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetTable
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.EstimatedBytesProcessed
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.ETag
+  - Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining
+  - Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration
+  - Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.NumDmlAffectedRows
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.QueryPlan
+  - Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedTables
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.ReservationUsage
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.Schema
@@ -20,6 +25,7 @@ items:
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.Timeline
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesBilled
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessed
+  - Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalPartitionsProcessed
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalSlotMs
   - Google.Apis.Bigquery.v2.Data.JobStatistics2.UndeclaredQueryParameters
@@ -37,7 +43,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: JobStatistics2
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3881
+    startLine: 5554
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -82,7 +88,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: BillingTier
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3884
+    startLine: 5557
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -133,7 +139,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: CacheHit
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3888
+    startLine: 5561
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -184,22 +190,22 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DdlOperationPerformed
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3897
+    startLine: 5570
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Output-only, Experimental] The DDL operation performed, possibly dependent on the pre-existence of
+    The DDL operation performed, possibly dependent on the pre-existence of the DDL target. Possible
 
-    the DDL target. Possible values (new values might be added in the future): &quot;CREATE&quot;: The query created the
+    values (new values might be added in the future): &quot;CREATE&quot;: The query created the DDL target. &quot;SKIP&quot;: No-op.
 
-    DDL target. &quot;SKIP&quot;: No-op. Example cases: the query is CREATE TABLE IF NOT EXISTS while the table already
+    Example cases: the query is CREATE TABLE IF NOT EXISTS while the table already exists, or the query is DROP
 
-    exists, or the query is DROP TABLE IF EXISTS while the table does not exist. &quot;REPLACE&quot;: The query replaced
+    TABLE IF EXISTS while the table does not exist. &quot;REPLACE&quot;: The query replaced the DDL target. Example case:
 
-    the DDL target. Example case: the query is CREATE OR REPLACE TABLE, and the table already exists. &quot;DROP&quot;:
+    the query is CREATE OR REPLACE TABLE, and the table already exists. &quot;DROP&quot;: The query deleted the DDL
 
-    The query deleted the DDL target.
+    target.
   example: []
   syntax:
     content: >-
@@ -228,6 +234,57 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine
+  id: DdlTargetRoutine
+  parent: Google.Apis.Bigquery.v2.Data.JobStatistics2
+  langs:
+  - csharp
+  - vb
+  name: DdlTargetRoutine
+  nameWithType: JobStatistics2.DdlTargetRoutine
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: DdlTargetRoutine
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5574
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: The DDL target routine. Present only for CREATE/DROP FUNCTION/PROCEDURE queries.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("ddlTargetRoutine")]
+
+      public virtual RoutineReference DdlTargetRoutine { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.RoutineReference
+    content.vb: >-
+      <JsonProperty("ddlTargetRoutine")>
+
+      Public Overridable Property DdlTargetRoutine As RoutineReference
+  overload: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: ddlTargetRoutine
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetTable
   commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetTable
   id: DdlTargetTable
@@ -246,14 +303,11 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DdlTargetTable
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3902
+    startLine: 5578
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: >-
-    [Output-only, Experimental] The DDL target table. Present only for CREATE/DROP TABLE/VIEW
-
-    queries.
+  summary: The DDL target table. Present only for CREATE/DROP TABLE/VIEW queries.
   example: []
   syntax:
     content: >-
@@ -300,7 +354,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: EstimatedBytesProcessed
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3906
+    startLine: 5582
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -333,6 +387,159 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining
+  id: ModelTraining
+  parent: Google.Apis.Bigquery.v2.Data.JobStatistics2
+  langs:
+  - csharp
+  - vb
+  name: ModelTraining
+  nameWithType: JobStatistics2.ModelTraining
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: ModelTraining
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5586
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: '[Output-only, Beta] Information about create model query job progress.'
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("modelTraining")]
+
+      public virtual BigQueryModelTraining ModelTraining { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.BigQueryModelTraining
+    content.vb: >-
+      <JsonProperty("modelTraining")>
+
+      Public Overridable Property ModelTraining As BigQueryModelTraining
+  overload: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: modelTraining
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration
+  id: ModelTrainingCurrentIteration
+  parent: Google.Apis.Bigquery.v2.Data.JobStatistics2
+  langs:
+  - csharp
+  - vb
+  name: ModelTrainingCurrentIteration
+  nameWithType: JobStatistics2.ModelTrainingCurrentIteration
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: ModelTrainingCurrentIteration
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5590
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: '[Output-only, Beta] Deprecated; do not use.'
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("modelTrainingCurrentIteration")]
+
+      public virtual int? ModelTrainingCurrentIteration { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: >-
+      <JsonProperty("modelTrainingCurrentIteration")>
+
+      Public Overridable Property ModelTrainingCurrentIteration As Integer?
+  overload: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: modelTrainingCurrentIteration
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration
+  id: ModelTrainingExpectedTotalIteration
+  parent: Google.Apis.Bigquery.v2.Data.JobStatistics2
+  langs:
+  - csharp
+  - vb
+  name: ModelTrainingExpectedTotalIteration
+  nameWithType: JobStatistics2.ModelTrainingExpectedTotalIteration
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: ModelTrainingExpectedTotalIteration
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5594
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: '[Output-only, Beta] Deprecated; do not use.'
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("modelTrainingExpectedTotalIteration")]
+
+      public virtual long? ModelTrainingExpectedTotalIteration { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int64}
+    content.vb: >-
+      <JsonProperty("modelTrainingExpectedTotalIteration")>
+
+      Public Overridable Property ModelTrainingExpectedTotalIteration As Long?
+  overload: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: modelTrainingExpectedTotalIteration
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.NumDmlAffectedRows
   commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.NumDmlAffectedRows
   id: NumDmlAffectedRows
@@ -351,7 +558,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: NumDmlAffectedRows
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3911
+    startLine: 5599
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -405,7 +612,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: QueryPlan
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3915
+    startLine: 5603
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -438,6 +645,60 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines
+  id: ReferencedRoutines
+  parent: Google.Apis.Bigquery.v2.Data.JobStatistics2
+  langs:
+  - csharp
+  - vb
+  name: ReferencedRoutines
+  nameWithType: JobStatistics2.ReferencedRoutines
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: ReferencedRoutines
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5608
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Output-only] Referenced routines (persistent user-defined functions and stored procedures) for the
+
+    job.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("referencedRoutines")]
+
+      public virtual IList<RoutineReference> ReferencedRoutines { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IList{Google.Apis.Bigquery.v2.Data.RoutineReference}
+    content.vb: >-
+      <JsonProperty("referencedRoutines")>
+
+      Public Overridable Property ReferencedRoutines As IList(Of RoutineReference)
+  overload: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: referencedRoutines
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedTables
   commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedTables
   id: ReferencedTables
@@ -456,7 +717,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ReferencedTables
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3920
+    startLine: 5613
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -510,7 +771,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ReservationUsage
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3924
+    startLine: 5617
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -561,7 +822,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Schema
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3929
+    startLine: 5622
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -615,26 +876,34 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: StatementType
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3940
+    startLine: 5637
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Output-only, Experimental] The type of query statement, if valid. Possible values (new values
+    The type of query statement, if valid. Possible values (new values might be added in the future):
 
-    might be added in the future): &quot;SELECT&quot;: SELECT query. &quot;INSERT&quot;: INSERT query; see
+    &quot;SELECT&quot;: SELECT query. &quot;INSERT&quot;: INSERT query; see https://cloud.google.com/bigquery/docs/reference
 
-    https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language &quot;UPDATE&quot;: UPDATE
+    /standard-sql/data-manipulation-language. &quot;UPDATE&quot;: UPDATE query; see
 
-    query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language
+    https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language. &quot;DELETE&quot;: DELETE
 
-    &quot;DELETE&quot;: DELETE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-
+    query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language.
 
-    language &quot;CREATE_TABLE&quot;: CREATE [OR REPLACE] TABLE without AS SELECT. &quot;CREATE_TABLE_AS_SELECT&quot;: CREATE [OR
+    &quot;MERGE&quot;: MERGE query; see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-
 
-    REPLACE] TABLE ... AS SELECT ... &quot;DROP_TABLE&quot;: DROP TABLE query. &quot;CREATE_VIEW&quot;: CREATE [OR REPLACE] VIEW ...
+    language. &quot;ALTER_TABLE&quot;: ALTER TABLE query. &quot;ALTER_VIEW&quot;: ALTER VIEW query. &quot;ASSERT&quot;: ASSERT condition AS
 
-    AS SELECT ... &quot;DROP_VIEW&quot;: DROP VIEW query.
+    &apos;description&apos;. &quot;CREATE_FUNCTION&quot;: CREATE FUNCTION query. &quot;CREATE_MODEL&quot;: CREATE [OR REPLACE] MODEL ... AS
+
+    SELECT ... . &quot;CREATE_PROCEDURE&quot;: CREATE PROCEDURE query. &quot;CREATE_TABLE&quot;: CREATE [OR REPLACE] TABLE without
+
+    AS SELECT. &quot;CREATE_TABLE_AS_SELECT&quot;: CREATE [OR REPLACE] TABLE ... AS SELECT ... . &quot;CREATE_VIEW&quot;: CREATE [OR
+
+    REPLACE] VIEW ... AS SELECT ... . &quot;DROP_FUNCTION&quot; : DROP FUNCTION query. &quot;DROP_PROCEDURE&quot;: DROP PROCEDURE
+
+    query. &quot;DROP_TABLE&quot;: DROP TABLE query. &quot;DROP_VIEW&quot;: DROP VIEW query.
   example: []
   syntax:
     content: >-
@@ -681,11 +950,11 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Timeline
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3944
+    startLine: 5641
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: '[Output-only] [Experimental] Describes a timeline of job execution.'
+  summary: '[Output-only] [Beta] Describes a timeline of job execution.'
   example: []
   syntax:
     content: >-
@@ -732,7 +1001,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TotalBytesBilled
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3948
+    startLine: 5645
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -783,7 +1052,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TotalBytesProcessed
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3952
+    startLine: 5649
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -816,6 +1085,64 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy
+  id: TotalBytesProcessedAccuracy
+  parent: Google.Apis.Bigquery.v2.Data.JobStatistics2
+  langs:
+  - csharp
+  - vb
+  name: TotalBytesProcessedAccuracy
+  nameWithType: JobStatistics2.TotalBytesProcessedAccuracy
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: TotalBytesProcessedAccuracy
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5656
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Output-only] For dry-run jobs, totalBytesProcessed is an estimate and this field specifies the
+
+    accuracy of the estimate. Possible values can be: UNKNOWN: accuracy of the estimate is unknown. PRECISE:
+
+    estimate is precise. LOWER_BOUND: estimate is lower bound of what the query would cost. UPPER_BOUND:
+
+    estimate is upper bound of what the query would cost.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("totalBytesProcessedAccuracy")]
+
+      public virtual string TotalBytesProcessedAccuracy { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("totalBytesProcessedAccuracy")>
+
+      Public Overridable Property TotalBytesProcessedAccuracy As String
+  overload: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: totalBytesProcessedAccuracy
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalPartitionsProcessed
   commentId: P:Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalPartitionsProcessed
   id: TotalPartitionsProcessed
@@ -834,7 +1161,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TotalPartitionsProcessed
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3957
+    startLine: 5661
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -888,7 +1215,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TotalSlotMs
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3961
+    startLine: 5665
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -939,14 +1266,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: UndeclaredQueryParameters
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3966
+    startLine: 5670
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Output-only, Experimental] Standard SQL only: list of undeclared query parameters detected during
+    Standard SQL only: list of undeclared query parameters detected during a dry run
 
-    a dry run validation.
+    validation.
   example: []
   syntax:
     content: >-
@@ -993,7 +1320,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ETag
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3970
+    startLine: 5674
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1019,7 +1346,6 @@ items:
 references:
 - uid: Google.Apis.Bigquery.v2.Data
   commentId: N:Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Google.Apis.Bigquery.v2.Data
   nameWithType: Google.Apis.Bigquery.v2.Data
   fullName: Google.Apis.Bigquery.v2.Data
@@ -1318,19 +1644,18 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Apis.Requests
   commentId: N:Google.Apis.Requests
-  isExternal: false
+  isExternal: true
   name: Google.Apis.Requests
   nameWithType: Google.Apis.Requests
   fullName: Google.Apis.Requests
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.BillingTier*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.BillingTier
-  isExternal: false
   name: BillingTier
   nameWithType: JobStatistics2.BillingTier
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.BillingTier
@@ -1419,7 +1744,6 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.CacheHit*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.CacheHit
-  isExternal: false
   name: CacheHit
   nameWithType: JobStatistics2.CacheHit
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.CacheHit
@@ -1469,7 +1793,6 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlOperationPerformed*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlOperationPerformed
-  isExternal: false
   name: DdlOperationPerformed
   nameWithType: JobStatistics2.DdlOperationPerformed
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlOperationPerformed
@@ -1480,22 +1803,30 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine
+  name: DdlTargetRoutine
+  nameWithType: JobStatistics2.DdlTargetRoutine
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetRoutine
+- uid: Google.Apis.Bigquery.v2.Data.RoutineReference
+  commentId: T:Google.Apis.Bigquery.v2.Data.RoutineReference
+  parent: Google.Apis.Bigquery.v2.Data
+  name: RoutineReference
+  nameWithType: RoutineReference
+  fullName: Google.Apis.Bigquery.v2.Data.RoutineReference
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetTable*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetTable
-  isExternal: false
   name: DdlTargetTable
   nameWithType: JobStatistics2.DdlTargetTable
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.DdlTargetTable
 - uid: Google.Apis.Bigquery.v2.Data.TableReference
   commentId: T:Google.Apis.Bigquery.v2.Data.TableReference
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TableReference
   nameWithType: TableReference
   fullName: Google.Apis.Bigquery.v2.Data.TableReference
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.EstimatedBytesProcessed*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.EstimatedBytesProcessed
-  isExternal: false
   name: EstimatedBytesProcessed
   nameWithType: JobStatistics2.EstimatedBytesProcessed
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.EstimatedBytesProcessed
@@ -1543,15 +1874,34 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining
+  name: ModelTraining
+  nameWithType: JobStatistics2.ModelTraining
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTraining
+- uid: Google.Apis.Bigquery.v2.Data.BigQueryModelTraining
+  commentId: T:Google.Apis.Bigquery.v2.Data.BigQueryModelTraining
+  parent: Google.Apis.Bigquery.v2.Data
+  name: BigQueryModelTraining
+  nameWithType: BigQueryModelTraining
+  fullName: Google.Apis.Bigquery.v2.Data.BigQueryModelTraining
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration
+  name: ModelTrainingCurrentIteration
+  nameWithType: JobStatistics2.ModelTrainingCurrentIteration
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingCurrentIteration
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration
+  name: ModelTrainingExpectedTotalIteration
+  nameWithType: JobStatistics2.ModelTrainingExpectedTotalIteration
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ModelTrainingExpectedTotalIteration
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.NumDmlAffectedRows*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.NumDmlAffectedRows
-  isExternal: false
   name: NumDmlAffectedRows
   nameWithType: JobStatistics2.NumDmlAffectedRows
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.NumDmlAffectedRows
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.QueryPlan*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.QueryPlan
-  isExternal: false
   name: QueryPlan
   nameWithType: JobStatistics2.QueryPlan
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.QueryPlan
@@ -1638,13 +1988,59 @@ references:
     fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
-  isExternal: false
+  isExternal: true
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines
+  name: ReferencedRoutines
+  nameWithType: JobStatistics2.ReferencedRoutines
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedRoutines
+- uid: System.Collections.Generic.IList{Google.Apis.Bigquery.v2.Data.RoutineReference}
+  commentId: T:System.Collections.Generic.IList{Google.Apis.Bigquery.v2.Data.RoutineReference}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<RoutineReference>
+  nameWithType: IList<RoutineReference>
+  fullName: System.Collections.Generic.IList<Google.Apis.Bigquery.v2.Data.RoutineReference>
+  nameWithType.vb: IList(Of RoutineReference)
+  fullName.vb: System.Collections.Generic.IList(Of Google.Apis.Bigquery.v2.Data.RoutineReference)
+  name.vb: IList(Of RoutineReference)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Google.Apis.Bigquery.v2.Data.RoutineReference
+    name: RoutineReference
+    nameWithType: RoutineReference
+    fullName: Google.Apis.Bigquery.v2.Data.RoutineReference
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Google.Apis.Bigquery.v2.Data.RoutineReference
+    name: RoutineReference
+    nameWithType: RoutineReference
+    fullName: Google.Apis.Bigquery.v2.Data.RoutineReference
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedTables*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedTables
-  isExternal: false
   name: ReferencedTables
   nameWithType: JobStatistics2.ReferencedTables
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReferencedTables
@@ -1692,7 +2088,6 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReservationUsage*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.ReservationUsage
-  isExternal: false
   name: ReservationUsage
   nameWithType: JobStatistics2.ReservationUsage
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ReservationUsage
@@ -1740,26 +2135,22 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.Schema*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.Schema
-  isExternal: false
   name: Schema
   nameWithType: JobStatistics2.Schema
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.Schema
 - uid: Google.Apis.Bigquery.v2.Data.TableSchema
   commentId: T:Google.Apis.Bigquery.v2.Data.TableSchema
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TableSchema
   nameWithType: TableSchema
   fullName: Google.Apis.Bigquery.v2.Data.TableSchema
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.StatementType*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.StatementType
-  isExternal: false
   name: StatementType
   nameWithType: JobStatistics2.StatementType
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.StatementType
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.Timeline*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.Timeline
-  isExternal: false
   name: Timeline
   nameWithType: JobStatistics2.Timeline
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.Timeline
@@ -1807,31 +2198,31 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesBilled*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesBilled
-  isExternal: false
   name: TotalBytesBilled
   nameWithType: JobStatistics2.TotalBytesBilled
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesBilled
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessed*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessed
-  isExternal: false
   name: TotalBytesProcessed
   nameWithType: JobStatistics2.TotalBytesProcessed
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessed
+- uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy
+  name: TotalBytesProcessedAccuracy
+  nameWithType: JobStatistics2.TotalBytesProcessedAccuracy
+  fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalBytesProcessedAccuracy
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalPartitionsProcessed*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalPartitionsProcessed
-  isExternal: false
   name: TotalPartitionsProcessed
   nameWithType: JobStatistics2.TotalPartitionsProcessed
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalPartitionsProcessed
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalSlotMs*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalSlotMs
-  isExternal: false
   name: TotalSlotMs
   nameWithType: JobStatistics2.TotalSlotMs
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.TotalSlotMs
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.UndeclaredQueryParameters*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.UndeclaredQueryParameters
-  isExternal: false
   name: UndeclaredQueryParameters
   nameWithType: JobStatistics2.UndeclaredQueryParameters
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.UndeclaredQueryParameters
@@ -1879,7 +2270,6 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobStatistics2.ETag*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobStatistics2.ETag
-  isExternal: false
   name: ETag
   nameWithType: JobStatistics2.ETag
   fullName: Google.Apis.Bigquery.v2.Data.JobStatistics2.ETag

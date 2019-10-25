@@ -16,6 +16,7 @@ items:
   - Google.Protobuf.Reflection.FieldDescriptor.IsMap
   - Google.Protobuf.Reflection.FieldDescriptor.IsPacked
   - Google.Protobuf.Reflection.FieldDescriptor.IsRepeated
+  - Google.Protobuf.Reflection.FieldDescriptor.IsRequired
   - Google.Protobuf.Reflection.FieldDescriptor.JsonName
   - Google.Protobuf.Reflection.FieldDescriptor.MessageType
   - Google.Protobuf.Reflection.FieldDescriptor.Name
@@ -29,7 +30,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: FieldDescriptor
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
@@ -55,6 +56,7 @@ items:
   - Google.Protobuf.Reflection.DescriptorBase.Index
   - Google.Protobuf.Reflection.DescriptorBase.FullName
   - Google.Protobuf.Reflection.DescriptorBase.File
+  - Google.Protobuf.Reflection.DescriptorBase.Declaration
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -84,7 +86,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ContainingType
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
@@ -121,7 +123,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ContainingOneof
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
@@ -158,7 +160,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: JsonName
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
@@ -195,11 +197,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Name
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 106
+    startLine: 105
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -235,16 +237,16 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Accessor
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 126
+    startLine: 130
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
   summary: "\nReturns the accessor for this field.\n"
-  remarks: "\n<p>\nWhile a <xref href=\"Google.Protobuf.Reflection.FieldDescriptor\" data-throw-if-not-resolved=\"false\"></xref> describes the field, it does not provide\nany way of obtaining or changing the value of the field within a specific message;\nthat is the responsibility of the accessor.\n</p>\n<p>\nThe value returned by this property will be non-null for all regular fields. However,\nif a message containing a map field is introspected, the list of nested messages will include\nan auto-generated nested key/value pair message for the field. This is not represented in any\ngenerated type, and the value of the map field itself is represented by a dictionary in the\nreflection API. There are never instances of those &quot;hidden&quot; messages, so no accessor is provided\nand this property will return null.\n</p>\n"
+  remarks: "\n<p>\nWhile a <xref href=\"Google.Protobuf.Reflection.FieldDescriptor\" data-throw-if-not-resolved=\"false\"></xref> describes the field, it does not provide\nany way of obtaining or changing the value of the field within a specific message;\nthat is the responsibility of the accessor.\n</p>\n<p>\nIn descriptors for generated code, the value returned by this property will be non-null for all\nregular fields. However, if a message containing a map field is introspected, the list of nested messages will include\nan auto-generated nested key/value pair message for the field. This is not represented in any\ngenerated type, and the value of the map field itself is represented by a dictionary in the\nreflection API. There are never instances of those &quot;hidden&quot; messages, so no accessor is provided\nand this property will return null.\n</p>\n<p>\nIn dynamically loaded descriptors, the value returned by this property will current be null;\nif and when dynamic messages are supported, it will return a suitable accessor to work with\nthem.\n</p>\n"
   example: []
   syntax:
     content: public IFieldAccessor Accessor { get; }
@@ -273,11 +275,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: IsRepeated
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 179
+    startLine: 183
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -290,6 +292,43 @@ items:
       type: System.Boolean
     content.vb: Public ReadOnly Property IsRepeated As Boolean
   overload: Google.Protobuf.Reflection.FieldDescriptor.IsRepeated*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Protobuf.Reflection.FieldDescriptor.IsRequired
+  commentId: P:Google.Protobuf.Reflection.FieldDescriptor.IsRequired
+  id: IsRequired
+  parent: Google.Protobuf.Reflection.FieldDescriptor
+  langs:
+  - csharp
+  - vb
+  name: IsRequired
+  nameWithType: FieldDescriptor.IsRequired
+  fullName: Google.Protobuf.Reflection.FieldDescriptor.IsRequired
+  type: Property
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: IsRequired
+    path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
+    startLine: 188
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.Reflection
+  summary: "\nReturns <code>true</code> if this field is a required field; <code>false</code> otherwise.\n"
+  example: []
+  syntax:
+    content: public bool IsRequired { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsRequired As Boolean
+  overload: Google.Protobuf.Reflection.FieldDescriptor.IsRequired*
   modifiers.csharp:
   - public
   - get
@@ -310,11 +349,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: IsMap
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 184
+    startLine: 193
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -347,11 +386,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: IsPacked
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 189
+    startLine: 198
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -384,11 +423,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: FieldType
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 199
+    startLine: 203
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -421,11 +460,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: FieldNumber
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 204
+    startLine: 208
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -458,11 +497,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: CompareTo
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 212
+    startLine: 216
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -497,11 +536,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: EnumType
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 225
+    startLine: 229
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -534,11 +573,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: MessageType
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 240
+    startLine: 244
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -571,11 +610,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: CustomOptions
     path: csharp/src/Google.Protobuf/Reflection/FieldDescriptor.cs
-    startLine: 255
+    startLine: 259
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -597,7 +636,6 @@ items:
 references:
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
-  isExternal: false
   name: Google.Protobuf.Reflection
   nameWithType: Google.Protobuf.Reflection
   fullName: Google.Protobuf.Reflection
@@ -611,14 +649,12 @@ references:
 - uid: Google.Protobuf.Reflection.DescriptorBase
   commentId: T:Google.Protobuf.Reflection.DescriptorBase
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: DescriptorBase
   nameWithType: DescriptorBase
   fullName: Google.Protobuf.Reflection.DescriptorBase
 - uid: Google.Protobuf.Reflection.IDescriptor
   commentId: T:Google.Protobuf.Reflection.IDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: IDescriptor
   nameWithType: IDescriptor
   fullName: Google.Protobuf.Reflection.IDescriptor
@@ -667,24 +703,27 @@ references:
 - uid: Google.Protobuf.Reflection.DescriptorBase.Index
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.Index
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: Index
   nameWithType: DescriptorBase.Index
   fullName: Google.Protobuf.Reflection.DescriptorBase.Index
 - uid: Google.Protobuf.Reflection.DescriptorBase.FullName
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.FullName
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: FullName
   nameWithType: DescriptorBase.FullName
   fullName: Google.Protobuf.Reflection.DescriptorBase.FullName
 - uid: Google.Protobuf.Reflection.DescriptorBase.File
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.File
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: File
   nameWithType: DescriptorBase.File
   fullName: Google.Protobuf.Reflection.DescriptorBase.File
+- uid: Google.Protobuf.Reflection.DescriptorBase.Declaration
+  commentId: P:Google.Protobuf.Reflection.DescriptorBase.Declaration
+  parent: Google.Protobuf.Reflection.DescriptorBase
+  name: Declaration
+  nameWithType: DescriptorBase.Declaration
+  fullName: Google.Protobuf.Reflection.DescriptorBase.Declaration
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -966,7 +1005,7 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
@@ -1011,33 +1050,28 @@ references:
     fullName: )
 - uid: Google.Protobuf.Reflection.FieldDescriptor.ContainingType*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.ContainingType
-  isExternal: false
   name: ContainingType
   nameWithType: FieldDescriptor.ContainingType
   fullName: Google.Protobuf.Reflection.FieldDescriptor.ContainingType
 - uid: Google.Protobuf.Reflection.MessageDescriptor
   commentId: T:Google.Protobuf.Reflection.MessageDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: MessageDescriptor
   nameWithType: MessageDescriptor
   fullName: Google.Protobuf.Reflection.MessageDescriptor
 - uid: Google.Protobuf.Reflection.FieldDescriptor.ContainingOneof*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.ContainingOneof
-  isExternal: false
   name: ContainingOneof
   nameWithType: FieldDescriptor.ContainingOneof
   fullName: Google.Protobuf.Reflection.FieldDescriptor.ContainingOneof
 - uid: Google.Protobuf.Reflection.OneofDescriptor
   commentId: T:Google.Protobuf.Reflection.OneofDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: OneofDescriptor
   nameWithType: OneofDescriptor
   fullName: Google.Protobuf.Reflection.OneofDescriptor
 - uid: Google.Protobuf.Reflection.FieldDescriptor.JsonName*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.JsonName
-  isExternal: false
   name: JsonName
   nameWithType: FieldDescriptor.JsonName
   fullName: Google.Protobuf.Reflection.FieldDescriptor.JsonName
@@ -1051,39 +1085,33 @@ references:
 - uid: Google.Protobuf.Reflection.DescriptorBase.Name
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.Name
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: Name
   nameWithType: DescriptorBase.Name
   fullName: Google.Protobuf.Reflection.DescriptorBase.Name
 - uid: Google.Protobuf.Reflection.FieldDescriptor.Name*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.Name
-  isExternal: false
   name: Name
   nameWithType: FieldDescriptor.Name
   fullName: Google.Protobuf.Reflection.FieldDescriptor.Name
 - uid: Google.Protobuf.Reflection.FieldDescriptor
   commentId: T:Google.Protobuf.Reflection.FieldDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: FieldDescriptor
   nameWithType: FieldDescriptor
   fullName: Google.Protobuf.Reflection.FieldDescriptor
 - uid: Google.Protobuf.Reflection.FieldDescriptor.Accessor*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.Accessor
-  isExternal: false
   name: Accessor
   nameWithType: FieldDescriptor.Accessor
   fullName: Google.Protobuf.Reflection.FieldDescriptor.Accessor
 - uid: Google.Protobuf.Reflection.IFieldAccessor
   commentId: T:Google.Protobuf.Reflection.IFieldAccessor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: IFieldAccessor
   nameWithType: IFieldAccessor
   fullName: Google.Protobuf.Reflection.IFieldAccessor
 - uid: Google.Protobuf.Reflection.FieldDescriptor.IsRepeated*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.IsRepeated
-  isExternal: false
   name: IsRepeated
   nameWithType: FieldDescriptor.IsRepeated
   fullName: Google.Protobuf.Reflection.FieldDescriptor.IsRepeated
@@ -1094,34 +1122,34 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: Google.Protobuf.Reflection.FieldDescriptor.IsRequired*
+  commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.IsRequired
+  name: IsRequired
+  nameWithType: FieldDescriptor.IsRequired
+  fullName: Google.Protobuf.Reflection.FieldDescriptor.IsRequired
 - uid: Google.Protobuf.Reflection.FieldDescriptor.IsMap*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.IsMap
-  isExternal: false
   name: IsMap
   nameWithType: FieldDescriptor.IsMap
   fullName: Google.Protobuf.Reflection.FieldDescriptor.IsMap
 - uid: Google.Protobuf.Reflection.FieldDescriptor.IsPacked*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.IsPacked
-  isExternal: false
   name: IsPacked
   nameWithType: FieldDescriptor.IsPacked
   fullName: Google.Protobuf.Reflection.FieldDescriptor.IsPacked
 - uid: Google.Protobuf.Reflection.FieldDescriptor.FieldType*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.FieldType
-  isExternal: false
   name: FieldType
   nameWithType: FieldDescriptor.FieldType
   fullName: Google.Protobuf.Reflection.FieldDescriptor.FieldType
 - uid: Google.Protobuf.Reflection.FieldType
   commentId: T:Google.Protobuf.Reflection.FieldType
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: FieldType
   nameWithType: FieldType
   fullName: Google.Protobuf.Reflection.FieldType
 - uid: Google.Protobuf.Reflection.FieldDescriptor.FieldNumber*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.FieldNumber
-  isExternal: false
   name: FieldNumber
   nameWithType: FieldDescriptor.FieldNumber
   fullName: Google.Protobuf.Reflection.FieldDescriptor.FieldNumber
@@ -1134,9 +1162,9 @@ references:
   fullName: System.Int32
 - uid: Google.Protobuf.Reflection.FieldDescriptor.ContainingType
   commentId: P:Google.Protobuf.Reflection.FieldDescriptor.ContainingType
+  isExternal: true
 - uid: Google.Protobuf.Reflection.FieldDescriptor.CompareTo*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.CompareTo
-  isExternal: false
   name: CompareTo
   nameWithType: FieldDescriptor.CompareTo
   fullName: Google.Protobuf.Reflection.FieldDescriptor.CompareTo
@@ -1221,33 +1249,28 @@ references:
     fullName: )
 - uid: Google.Protobuf.Reflection.FieldDescriptor.EnumType*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.EnumType
-  isExternal: false
   name: EnumType
   nameWithType: FieldDescriptor.EnumType
   fullName: Google.Protobuf.Reflection.FieldDescriptor.EnumType
 - uid: Google.Protobuf.Reflection.EnumDescriptor
   commentId: T:Google.Protobuf.Reflection.EnumDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: EnumDescriptor
   nameWithType: EnumDescriptor
   fullName: Google.Protobuf.Reflection.EnumDescriptor
 - uid: Google.Protobuf.Reflection.FieldDescriptor.MessageType*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.MessageType
-  isExternal: false
   name: MessageType
   nameWithType: FieldDescriptor.MessageType
   fullName: Google.Protobuf.Reflection.FieldDescriptor.MessageType
 - uid: Google.Protobuf.Reflection.FieldDescriptor.CustomOptions*
   commentId: Overload:Google.Protobuf.Reflection.FieldDescriptor.CustomOptions
-  isExternal: false
   name: CustomOptions
   nameWithType: FieldDescriptor.CustomOptions
   fullName: Google.Protobuf.Reflection.FieldDescriptor.CustomOptions
 - uid: Google.Protobuf.Reflection.CustomOptions
   commentId: T:Google.Protobuf.Reflection.CustomOptions
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: CustomOptions
   nameWithType: CustomOptions
   fullName: Google.Protobuf.Reflection.CustomOptions

@@ -15,6 +15,7 @@ items:
   - Google.Protobuf.WellKnownTypes.Any.GetHashCode
   - Google.Protobuf.WellKnownTypes.Any.GetTypeName(System.String)
   - Google.Protobuf.WellKnownTypes.Any.Google#Protobuf#IMessage#Descriptor
+  - Google.Protobuf.WellKnownTypes.Any.Is(Google.Protobuf.Reflection.MessageDescriptor)
   - Google.Protobuf.WellKnownTypes.Any.MergeFrom(Google.Protobuf.CodedInputStream)
   - Google.Protobuf.WellKnownTypes.Any.MergeFrom(Google.Protobuf.WellKnownTypes.Any)
   - Google.Protobuf.WellKnownTypes.Any.Pack(Google.Protobuf.IMessage)
@@ -38,7 +39,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Any
     path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
@@ -75,6 +76,7 @@ items:
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.WriteTo(System.IO.Stream)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.WriteDelimitedTo(System.IO.Stream)
   - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.ToByteString
+  - Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.IsInitialized
   modifiers.csharp:
   - public
   - sealed
@@ -97,7 +99,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Parser
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
@@ -134,7 +136,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
@@ -172,7 +174,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
@@ -210,7 +212,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
@@ -240,7 +242,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
@@ -273,7 +275,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Clone
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
@@ -307,7 +309,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: TypeUrlFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
@@ -342,15 +344,15 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: TypeUrl
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 187
+    startLine: 188
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
-  summary: "\nA URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. The last segment of the URL&apos;s path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading &quot;.&quot; is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\nvalue in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\nURL, or have them precompiled into a binary to avoid any\nlookup. Therefore, binary compatibility needs to be preserved\non changes to types. (Use versioned type names to manage\nbreaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics.\n"
+  summary: "\nA URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none &quot;/&quot; character. The last segment of the URL&apos;s path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading &quot;.&quot; is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\nvalue in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\nURL, or have them precompiled into a binary to avoid any\nlookup. Therefore, binary compatibility needs to be preserved\non changes to types. (Use versioned type names to manage\nbreaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics.\n"
   example: []
   syntax:
     content: public string TypeUrl { get; set; }
@@ -379,11 +381,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ValueFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 196
+    startLine: 197
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -414,11 +416,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Value
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 201
+    startLine: 202
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -451,11 +453,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 209
+    startLine: 210
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -489,11 +491,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 214
+    startLine: 215
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -526,11 +528,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: GetHashCode
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 227
+    startLine: 228
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -561,11 +563,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: ToString
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 238
+    startLine: 239
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -596,11 +598,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: WriteTo
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 243
+    startLine: 244
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -631,11 +633,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: CalculateSize
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 258
+    startLine: 259
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -665,11 +667,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 273
+    startLine: 274
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -700,11 +702,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/Any.cs
-    startLine: 287
+    startLine: 288
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -735,7 +737,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: GetTypeName
     path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
@@ -744,7 +746,7 @@ items:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
   summary: "\nRetrieves the type name for a type URL, matching the <xref href=\"Google.Protobuf.Reflection.DescriptorBase.FullName\" data-throw-if-not-resolved=\"false\"></xref>\nof the packed message type.\n"
-  remarks: "\n<p>\nThis is always just the last part of the URL, after the final slash. No validation of \nanything before the trailing slash is performed. If the type URL does not include a slash,\nan empty string is returned rather than an exception being thrown; this won&apos;t match any types,\nand the calling code is probably in a better position to give a meaningful error.\n</p>\n<p>\nThere is no handling of fragments or queries  at the moment.\n</p>\n"
+  remarks: "\n<p>\nThis is always just the last part of the URL, after the final slash. No validation of\nanything before the trailing slash is performed. If the type URL does not include a slash,\nan empty string is returned rather than an exception being thrown; this won&apos;t match any types,\nand the calling code is probably in a better position to give a meaningful error.\n</p>\n<p>\nThere is no handling of fragments or queries  at the moment.\n</p>\n"
   example: []
   syntax:
     content: public static string GetTypeName(string typeUrl)
@@ -763,6 +765,45 @@ items:
   modifiers.vb:
   - Public
   - Shared
+- uid: Google.Protobuf.WellKnownTypes.Any.Is(Google.Protobuf.Reflection.MessageDescriptor)
+  commentId: M:Google.Protobuf.WellKnownTypes.Any.Is(Google.Protobuf.Reflection.MessageDescriptor)
+  id: Is(Google.Protobuf.Reflection.MessageDescriptor)
+  parent: Google.Protobuf.WellKnownTypes.Any
+  langs:
+  - csharp
+  - vb
+  name: Is(MessageDescriptor)
+  nameWithType: Any.Is(MessageDescriptor)
+  fullName: Google.Protobuf.WellKnownTypes.Any.Is(Google.Protobuf.Reflection.MessageDescriptor)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
+      branch: 3.8.x
+      repo: https://github.com/google/protobuf
+    id: Is
+    path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
+    startLine: 74
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.WellKnownTypes
+  summary: "\nReturns a bool indictating whether this Any message is of the target message type\n"
+  example: []
+  syntax:
+    content: public bool Is(MessageDescriptor descriptor)
+    parameters:
+    - id: descriptor
+      type: Google.Protobuf.Reflection.MessageDescriptor
+      description: The descriptor of the message type
+    return:
+      type: System.Boolean
+      description: <code>true</code> if the type name matches the descriptor&apos;s full name or <code>false</code> otherwise
+    content.vb: Public Function Is(descriptor As MessageDescriptor) As Boolean
+  overload: Google.Protobuf.WellKnownTypes.Any.Is*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: Google.Protobuf.WellKnownTypes.Any.Unpack``1
   commentId: M:Google.Protobuf.WellKnownTypes.Any.Unpack``1
   id: Unpack``1
@@ -777,18 +818,20 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Unpack
     path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-    startLine: 76
+    startLine: 87
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
   summary: "\nUnpacks the content of this Any message into the target message type,\nwhich must match the type URL within this Any message.\n"
   example: []
   syntax:
-    content: 'public T Unpack<T>()where T : IMessage, new ()'
+    content: >-
+      public T Unpack<T>()
+          where T : IMessage, new()
     typeParameters:
     - id: T
       description: The type of message to unpack the content into.
@@ -822,18 +865,20 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: TryUnpack
     path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-    startLine: 96
+    startLine: 107
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
   summary: "\nAttempts to unpack the content of this Any message into the target message type,\nif it matches the type URL within this Any message.\n"
   example: []
   syntax:
-    content: 'public bool TryUnpack<T>(out T result)where T : IMessage, new ()'
+    content: >-
+      public bool TryUnpack<T>(out T result)
+          where T : IMessage, new()
     parameters:
     - id: result
       type: '{T}'
@@ -866,11 +911,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Pack
     path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-    startLine: 116
+    startLine: 127
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -907,11 +952,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-      branch: 3.6.x
+      branch: 3.8.x
       repo: https://github.com/google/protobuf
     id: Pack
     path: csharp/src/Google.Protobuf/WellKnownTypes/AnyPartial.cs
-    startLine: 124
+    startLine: 135
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
@@ -940,7 +985,6 @@ items:
 references:
 - uid: Google.Protobuf.WellKnownTypes
   commentId: N:Google.Protobuf.WellKnownTypes
-  isExternal: false
   name: Google.Protobuf.WellKnownTypes
   nameWithType: Google.Protobuf.WellKnownTypes
   fullName: Google.Protobuf.WellKnownTypes
@@ -994,7 +1038,6 @@ references:
 - uid: Google.Protobuf.IMessage
   commentId: T:Google.Protobuf.IMessage
   parent: Google.Protobuf
-  isExternal: false
   name: IMessage
   nameWithType: IMessage
   fullName: Google.Protobuf.IMessage
@@ -1635,15 +1678,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Protobuf.IMessage.Google.Protobuf.MessageExtensions.IsInitialized
+  commentId: M:Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  parent: Google.Protobuf.MessageExtensions
+  definition: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  name: IsInitialized()
+  nameWithType: MessageExtensions.IsInitialized()
+  fullName: Google.Protobuf.MessageExtensions.IsInitialized()
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Protobuf.IMessage`1
   commentId: T:Google.Protobuf.IMessage`1
-  isExternal: false
   name: IMessage<T>
   nameWithType: IMessage<T>
   fullName: Google.Protobuf.IMessage<T>
@@ -1680,7 +1751,6 @@ references:
     fullName: )
 - uid: Google.Protobuf
   commentId: N:Google.Protobuf
-  isExternal: false
   name: Google.Protobuf
   nameWithType: Google.Protobuf
   fullName: Google.Protobuf
@@ -1725,7 +1795,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IDeepCloneable`1
   commentId: T:Google.Protobuf.IDeepCloneable`1
-  isExternal: false
   name: IDeepCloneable<T>
   nameWithType: IDeepCloneable<T>
   fullName: Google.Protobuf.IDeepCloneable<T>
@@ -1824,7 +1893,6 @@ references:
 - uid: Google.Protobuf.MessageExtensions
   commentId: T:Google.Protobuf.MessageExtensions
   parent: Google.Protobuf
-  isExternal: false
   name: MessageExtensions
   nameWithType: MessageExtensions
   fullName: Google.Protobuf.MessageExtensions
@@ -1923,7 +1991,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
   commentId: M:Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage,Google.Protobuf.ByteString)
-  isExternal: false
   name: MergeFrom(IMessage, ByteString)
   nameWithType: MessageExtensions.MergeFrom(IMessage, ByteString)
   fullName: Google.Protobuf.MessageExtensions.MergeFrom(Google.Protobuf.IMessage, Google.Protobuf.ByteString)
@@ -2077,7 +2144,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
   commentId: M:Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
-  isExternal: false
   name: ToByteArray(IMessage)
   nameWithType: MessageExtensions.ToByteArray(IMessage)
   fullName: Google.Protobuf.MessageExtensions.ToByteArray(Google.Protobuf.IMessage)
@@ -2217,7 +2283,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
   commentId: M:Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
-  isExternal: false
   name: ToByteString(IMessage)
   nameWithType: MessageExtensions.ToByteString(IMessage)
   fullName: Google.Protobuf.MessageExtensions.ToByteString(Google.Protobuf.IMessage)
@@ -2251,9 +2316,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  commentId: M:Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  name: IsInitialized(IMessage)
+  nameWithType: MessageExtensions.IsInitialized(IMessage)
+  fullName: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+  spec.csharp:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Protobuf.MessageExtensions.IsInitialized(Google.Protobuf.IMessage)
+    name: IsInitialized
+    nameWithType: MessageExtensions.IsInitialized
+    fullName: Google.Protobuf.MessageExtensions.IsInitialized
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Protobuf.IMessage
+    name: IMessage
+    nameWithType: IMessage
+    fullName: Google.Protobuf.IMessage
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Any.Parser*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Parser
-  isExternal: false
   name: Parser
   nameWithType: Any.Parser
   fullName: Google.Protobuf.WellKnownTypes.Any.Parser
@@ -2300,7 +2399,6 @@ references:
 - uid: Google.Protobuf.MessageParser`1
   commentId: T:Google.Protobuf.MessageParser`1
   parent: Google.Protobuf
-  isExternal: false
   name: MessageParser<T>
   nameWithType: MessageParser<T>
   fullName: Google.Protobuf.MessageParser<T>
@@ -2337,26 +2435,22 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Any.Descriptor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Descriptor
-  isExternal: false
   name: Descriptor
   nameWithType: Any.Descriptor
   fullName: Google.Protobuf.WellKnownTypes.Any.Descriptor
 - uid: Google.Protobuf.Reflection.MessageDescriptor
   commentId: T:Google.Protobuf.Reflection.MessageDescriptor
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: MessageDescriptor
   nameWithType: MessageDescriptor
   fullName: Google.Protobuf.Reflection.MessageDescriptor
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
-  isExternal: false
   name: Google.Protobuf.Reflection
   nameWithType: Google.Protobuf.Reflection
   fullName: Google.Protobuf.Reflection
 - uid: Google.Protobuf.WellKnownTypes.Any.Google#Protobuf#IMessage#Descriptor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Google#Protobuf#IMessage#Descriptor
-  isExternal: false
   name: IMessage.Descriptor
   nameWithType: Any.IMessage.Descriptor
   fullName: Google.Protobuf.WellKnownTypes.Any.Google.Protobuf.IMessage.Descriptor
@@ -2366,26 +2460,22 @@ references:
 - uid: Google.Protobuf.IMessage.Descriptor
   commentId: P:Google.Protobuf.IMessage.Descriptor
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: Descriptor
   nameWithType: IMessage.Descriptor
   fullName: Google.Protobuf.IMessage.Descriptor
 - uid: Google.Protobuf.WellKnownTypes.Any.#ctor*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.#ctor
-  isExternal: false
   name: Any
   nameWithType: Any.Any
   fullName: Google.Protobuf.WellKnownTypes.Any.Any
 - uid: Google.Protobuf.WellKnownTypes.Any
   commentId: T:Google.Protobuf.WellKnownTypes.Any
   parent: Google.Protobuf.WellKnownTypes
-  isExternal: false
   name: Any
   nameWithType: Any
   fullName: Google.Protobuf.WellKnownTypes.Any
 - uid: Google.Protobuf.WellKnownTypes.Any.Clone*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Clone
-  isExternal: false
   name: Clone
   nameWithType: Any.Clone
   fullName: Google.Protobuf.WellKnownTypes.Any.Clone
@@ -2422,7 +2512,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IDeepCloneable`1.Clone
   commentId: M:Google.Protobuf.IDeepCloneable`1.Clone
-  isExternal: false
   name: Clone()
   nameWithType: IDeepCloneable<T>.Clone()
   fullName: Google.Protobuf.IDeepCloneable<T>.Clone()
@@ -2459,7 +2548,6 @@ references:
   fullName: System.Int32
 - uid: Google.Protobuf.WellKnownTypes.Any.TypeUrl*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.TypeUrl
-  isExternal: false
   name: TypeUrl
   nameWithType: Any.TypeUrl
   fullName: Google.Protobuf.WellKnownTypes.Any.TypeUrl
@@ -2472,14 +2560,12 @@ references:
   fullName: System.String
 - uid: Google.Protobuf.WellKnownTypes.Any.Value*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Value
-  isExternal: false
   name: Value
   nameWithType: Any.Value
   fullName: Google.Protobuf.WellKnownTypes.Any.Value
 - uid: Google.Protobuf.ByteString
   commentId: T:Google.Protobuf.ByteString
   parent: Google.Protobuf
-  isExternal: false
   name: ByteString
   nameWithType: ByteString
   fullName: Google.Protobuf.ByteString
@@ -2526,7 +2612,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Any.Equals*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Equals
-  isExternal: false
   name: Equals
   nameWithType: Any.Equals
   fullName: Google.Protobuf.WellKnownTypes.Any.Equals
@@ -2649,7 +2734,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Any.GetHashCode*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.GetHashCode
-  isExternal: false
   name: GetHashCode
   nameWithType: Any.GetHashCode
   fullName: Google.Protobuf.WellKnownTypes.Any.GetHashCode
@@ -2686,20 +2770,17 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Any.ToString*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.ToString
-  isExternal: false
   name: ToString
   nameWithType: Any.ToString
   fullName: Google.Protobuf.WellKnownTypes.Any.ToString
 - uid: Google.Protobuf.WellKnownTypes.Any.WriteTo*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.WriteTo
-  isExternal: false
   name: WriteTo
   nameWithType: Any.WriteTo
   fullName: Google.Protobuf.WellKnownTypes.Any.WriteTo
 - uid: Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
   commentId: M:Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: WriteTo(CodedOutputStream)
   nameWithType: IMessage.WriteTo(CodedOutputStream)
   fullName: Google.Protobuf.IMessage.WriteTo(Google.Protobuf.CodedOutputStream)
@@ -2736,20 +2817,17 @@ references:
 - uid: Google.Protobuf.CodedOutputStream
   commentId: T:Google.Protobuf.CodedOutputStream
   parent: Google.Protobuf
-  isExternal: false
   name: CodedOutputStream
   nameWithType: CodedOutputStream
   fullName: Google.Protobuf.CodedOutputStream
 - uid: Google.Protobuf.WellKnownTypes.Any.CalculateSize*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.CalculateSize
-  isExternal: false
   name: CalculateSize
   nameWithType: Any.CalculateSize
   fullName: Google.Protobuf.WellKnownTypes.Any.CalculateSize
 - uid: Google.Protobuf.IMessage.CalculateSize
   commentId: M:Google.Protobuf.IMessage.CalculateSize
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: CalculateSize()
   nameWithType: IMessage.CalculateSize()
   fullName: Google.Protobuf.IMessage.CalculateSize()
@@ -2777,7 +2855,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.WellKnownTypes.Any.MergeFrom*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.MergeFrom
-  isExternal: false
   name: MergeFrom
   nameWithType: Any.MergeFrom
   fullName: Google.Protobuf.WellKnownTypes.Any.MergeFrom
@@ -2822,7 +2899,6 @@ references:
     fullName: )
 - uid: Google.Protobuf.IMessage`1.MergeFrom(`0)
   commentId: M:Google.Protobuf.IMessage`1.MergeFrom(`0)
-  isExternal: false
   name: MergeFrom(T)
   nameWithType: IMessage<T>.MergeFrom(T)
   fullName: Google.Protobuf.IMessage<T>.MergeFrom(T)
@@ -2859,7 +2935,6 @@ references:
 - uid: Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
   commentId: M:Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
   parent: Google.Protobuf.IMessage
-  isExternal: false
   name: MergeFrom(CodedInputStream)
   nameWithType: IMessage.MergeFrom(CodedInputStream)
   fullName: Google.Protobuf.IMessage.MergeFrom(Google.Protobuf.CodedInputStream)
@@ -2896,42 +2971,41 @@ references:
 - uid: Google.Protobuf.CodedInputStream
   commentId: T:Google.Protobuf.CodedInputStream
   parent: Google.Protobuf
-  isExternal: false
   name: CodedInputStream
   nameWithType: CodedInputStream
   fullName: Google.Protobuf.CodedInputStream
 - uid: Google.Protobuf.Reflection.DescriptorBase.FullName
   commentId: P:Google.Protobuf.Reflection.DescriptorBase.FullName
   parent: Google.Protobuf.Reflection.DescriptorBase
-  isExternal: false
   name: FullName
   nameWithType: DescriptorBase.FullName
   fullName: Google.Protobuf.Reflection.DescriptorBase.FullName
 - uid: Google.Protobuf.WellKnownTypes.Any.GetTypeName*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.GetTypeName
-  isExternal: false
   name: GetTypeName
   nameWithType: Any.GetTypeName
   fullName: Google.Protobuf.WellKnownTypes.Any.GetTypeName
 - uid: Google.Protobuf.Reflection.DescriptorBase
   commentId: T:Google.Protobuf.Reflection.DescriptorBase
   parent: Google.Protobuf.Reflection
-  isExternal: false
   name: DescriptorBase
   nameWithType: DescriptorBase
   fullName: Google.Protobuf.Reflection.DescriptorBase
-- uid: Google.Protobuf.WellKnownTypes.Any.Unpack*
-  commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Unpack
-  isExternal: false
-  name: Unpack
-  nameWithType: Any.Unpack
-  fullName: Google.Protobuf.WellKnownTypes.Any.Unpack
+- uid: Google.Protobuf.WellKnownTypes.Any.Is*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Is
+  name: Is
+  nameWithType: Any.Is
+  fullName: Google.Protobuf.WellKnownTypes.Any.Is
 - uid: Google.Protobuf.InvalidProtocolBufferException
   commentId: T:Google.Protobuf.InvalidProtocolBufferException
-  isExternal: false
   name: InvalidProtocolBufferException
   nameWithType: InvalidProtocolBufferException
   fullName: Google.Protobuf.InvalidProtocolBufferException
+- uid: Google.Protobuf.WellKnownTypes.Any.Unpack*
+  commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Unpack
+  name: Unpack
+  nameWithType: Any.Unpack
+  fullName: Google.Protobuf.WellKnownTypes.Any.Unpack
 - uid: '{T}'
   commentId: '!:T'
   definition: T
@@ -2939,19 +3013,16 @@ references:
   nameWithType: T
   fullName: T
 - uid: T
-  isExternal: false
   name: T
   nameWithType: T
   fullName: T
 - uid: Google.Protobuf.WellKnownTypes.Any.TryUnpack*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.TryUnpack
-  isExternal: false
   name: TryUnpack
   nameWithType: Any.TryUnpack
   fullName: Google.Protobuf.WellKnownTypes.Any.TryUnpack
 - uid: Google.Protobuf.WellKnownTypes.Any.Pack*
   commentId: Overload:Google.Protobuf.WellKnownTypes.Any.Pack
-  isExternal: false
   name: Pack
   nameWithType: Any.Pack
   fullName: Google.Protobuf.WellKnownTypes.Any.Pack

@@ -7,8 +7,13 @@ items:
   children:
   - Grpc.Core.ChannelOption.#ctor(System.String,System.Int32)
   - Grpc.Core.ChannelOption.#ctor(System.String,System.String)
+  - Grpc.Core.ChannelOption.Equals(Grpc.Core.ChannelOption)
+  - Grpc.Core.ChannelOption.Equals(System.Object)
+  - Grpc.Core.ChannelOption.GetHashCode
   - Grpc.Core.ChannelOption.IntValue
   - Grpc.Core.ChannelOption.Name
+  - Grpc.Core.ChannelOption.op_Equality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
+  - Grpc.Core.ChannelOption.op_Inequality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
   - Grpc.Core.ChannelOption.StringValue
   - Grpc.Core.ChannelOption.Type
   langs:
@@ -21,27 +26,29 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/ChannelOptions.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: ChannelOption
     path: src/csharp/Grpc.Core/ChannelOptions.cs
-    startLine: 29
+    startLine: 31
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
-  summary: "\nChannel option specified when creating a channel.\nCorresponds to grpc_channel_args from grpc/grpc.h.\n"
+  summary: "\nChannel option specified when creating a channel.\nCorresponds to grpc_channel_args from grpc/grpc.h.\nCommonly used channel option names are defined in <code>ChannelOptions</code>,\nbut any of the GRPC_ARG_* channel options names defined in grpc_types.h can be used.\n"
   example: []
   syntax:
-    content: public sealed class ChannelOption
-    content.vb: Public NotInheritable Class ChannelOption
+    content: 'public sealed class ChannelOption : IEquatable<ChannelOption>'
+    content.vb: >-
+      Public NotInheritable Class ChannelOption
+          Implements IEquatable(Of ChannelOption)
   inheritance:
   - System.Object
+  implements:
+  - System.IEquatable{Grpc.Core.ChannelOption}
   inheritedMembers:
   - System.Object.ToString
-  - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
   modifiers.csharp:
@@ -66,11 +73,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/ChannelOptions.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: .ctor
     path: src/csharp/Grpc.Core/ChannelOptions.cs
-    startLine: 57
+    startLine: 59
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -105,11 +112,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/ChannelOptions.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: .ctor
     path: src/csharp/Grpc.Core/ChannelOptions.cs
-    startLine: 69
+    startLine: 71
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -144,11 +151,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/ChannelOptions.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: Type
     path: src/csharp/Grpc.Core/ChannelOptions.cs
-    startLine: 79
+    startLine: 81
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -181,11 +188,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/ChannelOptions.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: Name
     path: src/csharp/Grpc.Core/ChannelOptions.cs
-    startLine: 90
+    startLine: 92
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -218,11 +225,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/ChannelOptions.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: IntValue
     path: src/csharp/Grpc.Core/ChannelOptions.cs
-    startLine: 101
+    startLine: 103
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -255,11 +262,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/ChannelOptions.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: StringValue
     path: src/csharp/Grpc.Core/ChannelOptions.cs
-    startLine: 113
+    startLine: 115
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -278,10 +285,207 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Grpc.Core.ChannelOption.Equals(System.Object)
+  commentId: M:Grpc.Core.ChannelOption.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Grpc.Core.ChannelOption
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: ChannelOption.Equals(Object)
+  fullName: Grpc.Core.ChannelOption.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/ChannelOptions.cs
+      branch: v1.22.x
+      repo: https://github.com/grpc/grpc
+    id: Equals
+    path: src/csharp/Grpc.Core/ChannelOptions.cs
+    startLine: 127
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nDetermines whether the specified object is equal to the current object.\n"
+  example: []
+  syntax:
+    content: public override bool Equals(object obj)
+    parameters:
+    - id: obj
+      type: System.Object
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Grpc.Core.ChannelOption.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Grpc.Core.ChannelOption.Equals(Grpc.Core.ChannelOption)
+  commentId: M:Grpc.Core.ChannelOption.Equals(Grpc.Core.ChannelOption)
+  id: Equals(Grpc.Core.ChannelOption)
+  parent: Grpc.Core.ChannelOption
+  langs:
+  - csharp
+  - vb
+  name: Equals(ChannelOption)
+  nameWithType: ChannelOption.Equals(ChannelOption)
+  fullName: Grpc.Core.ChannelOption.Equals(Grpc.Core.ChannelOption)
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/ChannelOptions.cs
+      branch: v1.22.x
+      repo: https://github.com/grpc/grpc
+    id: Equals
+    path: src/csharp/Grpc.Core/ChannelOptions.cs
+    startLine: 135
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nDetermines whether the specified object is equal to the current object.\n"
+  example: []
+  syntax:
+    content: public bool Equals(ChannelOption other)
+    parameters:
+    - id: other
+      type: Grpc.Core.ChannelOption
+    return:
+      type: System.Boolean
+    content.vb: Public Function Equals(other As ChannelOption) As Boolean
+  overload: Grpc.Core.ChannelOption.Equals*
+  implements:
+  - System.IEquatable{Grpc.Core.ChannelOption}.Equals(Grpc.Core.ChannelOption)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Grpc.Core.ChannelOption.GetHashCode
+  commentId: M:Grpc.Core.ChannelOption.GetHashCode
+  id: GetHashCode
+  parent: Grpc.Core.ChannelOption
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: ChannelOption.GetHashCode()
+  fullName: Grpc.Core.ChannelOption.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/ChannelOptions.cs
+      branch: v1.22.x
+      repo: https://github.com/grpc/grpc
+    id: GetHashCode
+    path: src/csharp/Grpc.Core/ChannelOptions.cs
+    startLine: 147
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nA hash code for the current object.\n"
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.Object.GetHashCode
+  overload: Grpc.Core.ChannelOption.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Grpc.Core.ChannelOption.op_Equality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
+  commentId: M:Grpc.Core.ChannelOption.op_Equality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
+  id: op_Equality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
+  parent: Grpc.Core.ChannelOption
+  langs:
+  - csharp
+  - vb
+  name: Equality(ChannelOption, ChannelOption)
+  nameWithType: ChannelOption.Equality(ChannelOption, ChannelOption)
+  fullName: Grpc.Core.ChannelOption.Equality(Grpc.Core.ChannelOption, Grpc.Core.ChannelOption)
+  type: Operator
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/ChannelOptions.cs
+      branch: v1.22.x
+      repo: https://github.com/grpc/grpc
+    id: op_Equality
+    path: src/csharp/Grpc.Core/ChannelOptions.cs
+    startLine: 160
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nEquality operator.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(ChannelOption option1, ChannelOption option2)
+    parameters:
+    - id: option1
+      type: Grpc.Core.ChannelOption
+    - id: option2
+      type: Grpc.Core.ChannelOption
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(option1 As ChannelOption, option2 As ChannelOption) As Boolean
+  overload: Grpc.Core.ChannelOption.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Grpc.Core.ChannelOption.op_Inequality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
+  commentId: M:Grpc.Core.ChannelOption.op_Inequality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
+  id: op_Inequality(Grpc.Core.ChannelOption,Grpc.Core.ChannelOption)
+  parent: Grpc.Core.ChannelOption
+  langs:
+  - csharp
+  - vb
+  name: Inequality(ChannelOption, ChannelOption)
+  nameWithType: ChannelOption.Inequality(ChannelOption, ChannelOption)
+  fullName: Grpc.Core.ChannelOption.Inequality(Grpc.Core.ChannelOption, Grpc.Core.ChannelOption)
+  type: Operator
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/ChannelOptions.cs
+      branch: v1.22.x
+      repo: https://github.com/grpc/grpc
+    id: op_Inequality
+    path: src/csharp/Grpc.Core/ChannelOptions.cs
+    startLine: 168
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nInequality operator.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(ChannelOption option1, ChannelOption option2)
+    parameters:
+    - id: option1
+      type: Grpc.Core.ChannelOption
+    - id: option2
+      type: Grpc.Core.ChannelOption
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(option1 As ChannelOption, option2 As ChannelOption) As Boolean
+  overload: Grpc.Core.ChannelOption.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 references:
 - uid: Grpc.Core
   commentId: N:Grpc.Core
-  isExternal: false
   name: Grpc.Core
   nameWithType: Grpc.Core
   fullName: Grpc.Core
@@ -292,6 +496,48 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.IEquatable{Grpc.Core.ChannelOption}
+  commentId: T:System.IEquatable{Grpc.Core.ChannelOption}
+  parent: System
+  definition: System.IEquatable`1
+  name: IEquatable<ChannelOption>
+  nameWithType: IEquatable<ChannelOption>
+  fullName: System.IEquatable<Grpc.Core.ChannelOption>
+  nameWithType.vb: IEquatable(Of ChannelOption)
+  fullName.vb: System.IEquatable(Of Grpc.Core.ChannelOption)
+  name.vb: IEquatable(Of ChannelOption)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    nameWithType: IEquatable
+    fullName: System.IEquatable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Grpc.Core.ChannelOption
+    name: ChannelOption
+    nameWithType: ChannelOption
+    fullName: Grpc.Core.ChannelOption
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    nameWithType: IEquatable
+    fullName: System.IEquatable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Grpc.Core.ChannelOption
+    name: ChannelOption
+    nameWithType: ChannelOption
+    fullName: Grpc.Core.ChannelOption
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -320,47 +566,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -478,37 +683,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.GetType
   commentId: M:System.Object.GetType
   parent: System.Object
@@ -573,13 +747,51 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    nameWithType: IEquatable
+    fullName: System.IEquatable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    nameWithType: IEquatable
+    fullName: System.IEquatable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Grpc.Core.ChannelOption.#ctor*
   commentId: Overload:Grpc.Core.ChannelOption.#ctor
-  isExternal: false
   name: ChannelOption
   nameWithType: ChannelOption.ChannelOption
   fullName: Grpc.Core.ChannelOption.ChannelOption
@@ -599,32 +811,211 @@ references:
   fullName: System.Int32
 - uid: Grpc.Core.ChannelOption.Type*
   commentId: Overload:Grpc.Core.ChannelOption.Type
-  isExternal: false
   name: Type
   nameWithType: ChannelOption.Type
   fullName: Grpc.Core.ChannelOption.Type
 - uid: Grpc.Core.ChannelOption.OptionType
   commentId: T:Grpc.Core.ChannelOption.OptionType
   parent: Grpc.Core
-  isExternal: false
   name: ChannelOption.OptionType
   nameWithType: ChannelOption.OptionType
   fullName: Grpc.Core.ChannelOption.OptionType
 - uid: Grpc.Core.ChannelOption.Name*
   commentId: Overload:Grpc.Core.ChannelOption.Name
-  isExternal: false
   name: Name
   nameWithType: ChannelOption.Name
   fullName: Grpc.Core.ChannelOption.Name
 - uid: Grpc.Core.ChannelOption.IntValue*
   commentId: Overload:Grpc.Core.ChannelOption.IntValue
-  isExternal: false
   name: IntValue
   nameWithType: ChannelOption.IntValue
   fullName: Grpc.Core.ChannelOption.IntValue
 - uid: Grpc.Core.ChannelOption.StringValue*
   commentId: Overload:Grpc.Core.ChannelOption.StringValue
-  isExternal: false
   name: StringValue
   nameWithType: ChannelOption.StringValue
   fullName: Grpc.Core.ChannelOption.StringValue
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Grpc.Core.ChannelOption.Equals*
+  commentId: Overload:Grpc.Core.ChannelOption.Equals
+  name: Equals
+  nameWithType: ChannelOption.Equals
+  fullName: Grpc.Core.ChannelOption.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.IEquatable{Grpc.Core.ChannelOption}.Equals(Grpc.Core.ChannelOption)
+  commentId: M:System.IEquatable{Grpc.Core.ChannelOption}.Equals(Grpc.Core.ChannelOption)
+  parent: System.IEquatable{Grpc.Core.ChannelOption}
+  definition: System.IEquatable`1.Equals(`0)
+  name: Equals(ChannelOption)
+  nameWithType: IEquatable<ChannelOption>.Equals(ChannelOption)
+  fullName: System.IEquatable<Grpc.Core.ChannelOption>.Equals(Grpc.Core.ChannelOption)
+  nameWithType.vb: IEquatable(Of ChannelOption).Equals(ChannelOption)
+  fullName.vb: System.IEquatable(Of Grpc.Core.ChannelOption).Equals(Grpc.Core.ChannelOption)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    nameWithType: IEquatable<ChannelOption>.Equals
+    fullName: System.IEquatable<Grpc.Core.ChannelOption>.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Grpc.Core.ChannelOption
+    name: ChannelOption
+    nameWithType: ChannelOption
+    fullName: Grpc.Core.ChannelOption
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    nameWithType: IEquatable(Of ChannelOption).Equals
+    fullName: System.IEquatable(Of Grpc.Core.ChannelOption).Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Grpc.Core.ChannelOption
+    name: ChannelOption
+    nameWithType: ChannelOption
+    fullName: Grpc.Core.ChannelOption
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Grpc.Core.ChannelOption
+  commentId: T:Grpc.Core.ChannelOption
+  parent: Grpc.Core
+  name: ChannelOption
+  nameWithType: ChannelOption
+  fullName: Grpc.Core.ChannelOption
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    nameWithType: IEquatable<T>.Equals
+    fullName: System.IEquatable<T>.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    nameWithType: IEquatable(Of T).Equals
+    fullName: System.IEquatable(Of T).Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Grpc.Core.ChannelOption.GetHashCode*
+  commentId: Overload:Grpc.Core.ChannelOption.GetHashCode
+  name: GetHashCode
+  nameWithType: ChannelOption.GetHashCode
+  fullName: Grpc.Core.ChannelOption.GetHashCode
+- uid: Grpc.Core.ChannelOption.op_Equality*
+  commentId: Overload:Grpc.Core.ChannelOption.op_Equality
+  name: Equality
+  nameWithType: ChannelOption.Equality
+  fullName: Grpc.Core.ChannelOption.Equality
+- uid: Grpc.Core.ChannelOption.op_Inequality*
+  commentId: Overload:Grpc.Core.ChannelOption.op_Inequality
+  name: Inequality
+  nameWithType: ChannelOption.Inequality
+  fullName: Grpc.Core.ChannelOption.Inequality

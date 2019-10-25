@@ -16,11 +16,11 @@ items:
   type: Class
   source:
     remote:
-      path: src/Google.Api.Gax.Rest/UserAgentHelper.cs
+      path: Google.Api.Gax.Rest/UserAgentHelper.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: UserAgentHelper
-    path: src/Google.Api.Gax.Rest/UserAgentHelper.cs
+    path: Google.Api.Gax.Rest/UserAgentHelper.cs
     startLine: 15
   assemblies:
   - Google.Api.Gax.Rest
@@ -60,11 +60,11 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.Gax.Rest/UserAgentHelper.cs
+      path: Google.Api.Gax.Rest/UserAgentHelper.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: GetDefaultUserAgent
-    path: src/Google.Api.Gax.Rest/UserAgentHelper.cs
+    path: Google.Api.Gax.Rest/UserAgentHelper.cs
     startLine: 22
   assemblies:
   - Google.Api.Gax.Rest
@@ -101,11 +101,11 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.Gax.Rest/UserAgentHelper.cs
+      path: Google.Api.Gax.Rest/UserAgentHelper.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: CreateRequestModifier
-    path: src/Google.Api.Gax.Rest/UserAgentHelper.cs
+    path: Google.Api.Gax.Rest/UserAgentHelper.cs
     startLine: 29
   assemblies:
   - Google.Api.Gax.Rest
@@ -113,7 +113,10 @@ items:
   summary: "\nCreates a request modifier which sets the Google-specific version header in HTTP requests.\n"
   example: []
   syntax:
-    content: public static Action<HttpRequestMessage> CreateRequestModifier(Type type)
+    content: >-
+      [Obsolete("Use BaseClientService.Initializer.VersionHeaderBuilder instead")]
+
+      public static Action<HttpRequestMessage> CreateRequestModifier(Type type)
     parameters:
     - id: type
       type: System.Type
@@ -121,8 +124,17 @@ items:
     return:
       type: System.Action{System.Net.Http.HttpRequestMessage}
       description: A request modifier.
-    content.vb: Public Shared Function CreateRequestModifier(type As Type) As Action(Of HttpRequestMessage)
+    content.vb: >-
+      <Obsolete("Use BaseClientService.Initializer.VersionHeaderBuilder instead")>
+
+      Public Shared Function CreateRequestModifier(type As Type) As Action(Of HttpRequestMessage)
   overload: Google.Api.Gax.Rest.UserAgentHelper.CreateRequestModifier*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use BaseClientService.Initializer.VersionHeaderBuilder instead
   modifiers.csharp:
   - public
   - static
@@ -132,7 +144,6 @@ items:
 references:
 - uid: Google.Api.Gax.Rest
   commentId: N:Google.Api.Gax.Rest
-  isExternal: false
   name: Google.Api.Gax.Rest
   nameWithType: Google.Api.Gax.Rest
   fullName: Google.Api.Gax.Rest
@@ -424,13 +435,12 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Api.Gax.Rest.UserAgentHelper.GetDefaultUserAgent*
   commentId: Overload:Google.Api.Gax.Rest.UserAgentHelper.GetDefaultUserAgent
-  isExternal: false
   name: GetDefaultUserAgent
   nameWithType: UserAgentHelper.GetDefaultUserAgent
   fullName: Google.Api.Gax.Rest.UserAgentHelper.GetDefaultUserAgent
@@ -450,7 +460,6 @@ references:
   fullName: System.String
 - uid: Google.Api.Gax.Rest.UserAgentHelper.CreateRequestModifier*
   commentId: Overload:Google.Api.Gax.Rest.UserAgentHelper.CreateRequestModifier
-  isExternal: false
   name: CreateRequestModifier
   nameWithType: UserAgentHelper.CreateRequestModifier
   fullName: Google.Api.Gax.Rest.UserAgentHelper.CreateRequestModifier

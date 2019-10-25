@@ -22,7 +22,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: DefaultCallInvoker
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -48,10 +48,6 @@ items:
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
-  extensionMethods:
-  - Grpc.Core.CallInvoker.Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-  - Grpc.Core.CallInvoker.Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-  - Grpc.Core.CallInvoker.Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
   modifiers.csharp:
   - public
   - class
@@ -72,7 +68,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: .ctor
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -108,7 +104,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: BlockingUnaryCall
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -119,7 +115,9 @@ items:
   summary: "\nInvokes a simple remote call in a blocking fashion.\n"
   example: []
   syntax:
-    content: 'public override TResponse BlockingUnaryCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)where TRequest : class where TResponse : class'
+    content: >-
+      public override TResponse BlockingUnaryCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)
+          where TRequest : class where TResponse : class
     parameters:
     - id: method
       type: Grpc.Core.Method{{TRequest},{TResponse}}
@@ -160,7 +158,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: AsyncUnaryCall
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -171,7 +169,9 @@ items:
   summary: "\nInvokes a simple remote call asynchronously.\n"
   example: []
   syntax:
-    content: 'public override AsyncUnaryCall<TResponse> AsyncUnaryCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)where TRequest : class where TResponse : class'
+    content: >-
+      public override AsyncUnaryCall<TResponse> AsyncUnaryCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)
+          where TRequest : class where TResponse : class
     parameters:
     - id: method
       type: Grpc.Core.Method{{TRequest},{TResponse}}
@@ -212,7 +212,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: AsyncServerStreamingCall
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -223,7 +223,9 @@ items:
   summary: "\nInvokes a server streaming call asynchronously.\nIn server streaming scenario, client sends on request and server responds with a stream of responses.\n"
   example: []
   syntax:
-    content: 'public override AsyncServerStreamingCall<TResponse> AsyncServerStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)where TRequest : class where TResponse : class'
+    content: >-
+      public override AsyncServerStreamingCall<TResponse> AsyncServerStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options, TRequest request)
+          where TRequest : class where TResponse : class
     parameters:
     - id: method
       type: Grpc.Core.Method{{TRequest},{TResponse}}
@@ -264,7 +266,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: AsyncClientStreamingCall
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -275,7 +277,9 @@ items:
   summary: "\nInvokes a client streaming call asynchronously.\nIn client streaming scenario, client sends a stream of requests and server responds with a single response.\n"
   example: []
   syntax:
-    content: 'public override AsyncClientStreamingCall<TRequest, TResponse> AsyncClientStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)where TRequest : class where TResponse : class'
+    content: >-
+      public override AsyncClientStreamingCall<TRequest, TResponse> AsyncClientStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)
+          where TRequest : class where TResponse : class
     parameters:
     - id: method
       type: Grpc.Core.Method{{TRequest},{TResponse}}
@@ -314,7 +318,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: AsyncDuplexStreamingCall
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -325,7 +329,9 @@ items:
   summary: "\nInvokes a duplex streaming call asynchronously.\nIn duplex streaming scenario, client sends a stream of requests and server responds with a stream of responses.\nThe response stream is completely independent and both side can be sending messages at the same time.\n"
   example: []
   syntax:
-    content: 'public override AsyncDuplexStreamingCall<TRequest, TResponse> AsyncDuplexStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)where TRequest : class where TResponse : class'
+    content: >-
+      public override AsyncDuplexStreamingCall<TRequest, TResponse> AsyncDuplexStreamingCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)
+          where TRequest : class where TResponse : class
     parameters:
     - id: method
       type: Grpc.Core.Method{{TRequest},{TResponse}}
@@ -364,7 +370,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
-      branch: v1.13.x
+      branch: v1.22.x
       repo: https://github.com/grpc/grpc
     id: CreateCall
     path: src/csharp/Grpc.Core/DefaultCallInvoker.cs
@@ -375,7 +381,9 @@ items:
   summary: Creates call invocation details for given method.
   example: []
   syntax:
-    content: 'protected virtual CallInvocationDetails<TRequest, TResponse> CreateCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)where TRequest : class where TResponse : class'
+    content: >-
+      protected virtual CallInvocationDetails<TRequest, TResponse> CreateCall<TRequest, TResponse>(Method<TRequest, TResponse> method, string host, CallOptions options)
+          where TRequest : class where TResponse : class
     parameters:
     - id: method
       type: Grpc.Core.Method{{TRequest},{TResponse}}
@@ -402,13 +410,11 @@ items:
 references:
 - uid: Grpc.Core.Calls
   commentId: T:Grpc.Core.Calls
-  isExternal: false
   name: Calls
   nameWithType: Calls
   fullName: Grpc.Core.Calls
 - uid: Grpc.Core
   commentId: N:Grpc.Core
-  isExternal: false
   name: Grpc.Core
   nameWithType: Grpc.Core
   fullName: Grpc.Core
@@ -422,7 +428,6 @@ references:
 - uid: Grpc.Core.CallInvoker
   commentId: T:Grpc.Core.CallInvoker
   parent: Grpc.Core
-  isExternal: false
   name: CallInvoker
   nameWithType: CallInvoker
   fullName: Grpc.Core.CallInvoker
@@ -705,398 +710,25 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Grpc.Core.CallInvoker.Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
-  parent: Grpc.Core.Interceptors.CallInvokerExtensions
-  definition: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
-  name: Intercept(Interceptor)
-  nameWithType: CallInvokerExtensions.Intercept(Interceptor)
-  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.CallInvoker.Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
-  parent: Grpc.Core.Interceptors.CallInvokerExtensions
-  definition: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
-  name: Intercept(Interceptor[])
-  nameWithType: CallInvokerExtensions.Intercept(Interceptor[])
-  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-  nameWithType.vb: CallInvokerExtensions.Intercept(Interceptor())
-  fullName.vb: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor())
-  name.vb: Intercept(Interceptor())
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.CallInvoker.Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  parent: Grpc.Core.Interceptors.CallInvokerExtensions
-  definition: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  name: Intercept(Func<Metadata, Metadata>)
-  nameWithType: CallInvokerExtensions.Intercept(Func<Metadata, Metadata>)
-  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(System.Func<Grpc.Core.Metadata, Grpc.Core.Metadata>)
-  nameWithType.vb: CallInvokerExtensions.Intercept(Func(Of Metadata, Metadata))
-  fullName.vb: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(System.Func(Of Grpc.Core.Metadata, Grpc.Core.Metadata))
-  name.vb: Intercept(Func(Of Metadata, Metadata))
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
-- uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
-  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
-  isExternal: false
-  name: Intercept(CallInvoker, Interceptor)
-  nameWithType: CallInvokerExtensions.Intercept(CallInvoker, Interceptor)
-  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, Grpc.Core.Interceptors.Interceptor)
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.CallInvoker
-    name: CallInvoker
-    nameWithType: CallInvoker
-    fullName: Grpc.Core.CallInvoker
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.CallInvoker
-    name: CallInvoker
-    nameWithType: CallInvoker
-    fullName: Grpc.Core.CallInvoker
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Interceptors.CallInvokerExtensions
-  commentId: T:Grpc.Core.Interceptors.CallInvokerExtensions
-  parent: Grpc.Core.Interceptors
-  isExternal: false
-  name: CallInvokerExtensions
-  nameWithType: CallInvokerExtensions
-  fullName: Grpc.Core.Interceptors.CallInvokerExtensions
-- uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
-  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
-  isExternal: false
-  name: Intercept(CallInvoker, Interceptor[])
-  nameWithType: CallInvokerExtensions.Intercept(CallInvoker, Interceptor[])
-  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, Grpc.Core.Interceptors.Interceptor[])
-  nameWithType.vb: CallInvokerExtensions.Intercept(CallInvoker, Interceptor())
-  fullName.vb: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, Grpc.Core.Interceptors.Interceptor())
-  name.vb: Intercept(CallInvoker, Interceptor())
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.CallInvoker
-    name: CallInvoker
-    nameWithType: CallInvoker
-    fullName: Grpc.Core.CallInvoker
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.CallInvoker
-    name: CallInvoker
-    nameWithType: CallInvoker
-    fullName: Grpc.Core.CallInvoker
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  commentId: M:Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  isExternal: true
-  name: Intercept(CallInvoker, Func<Metadata, Metadata>)
-  nameWithType: CallInvokerExtensions.Intercept(CallInvoker, Func<Metadata, Metadata>)
-  fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, System.Func<Grpc.Core.Metadata, Grpc.Core.Metadata>)
-  nameWithType.vb: CallInvokerExtensions.Intercept(CallInvoker, Func(Of Metadata, Metadata))
-  fullName.vb: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker, System.Func(Of Grpc.Core.Metadata, Grpc.Core.Metadata))
-  name.vb: Intercept(CallInvoker, Func(Of Metadata, Metadata))
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.CallInvoker
-    name: CallInvoker
-    nameWithType: CallInvoker
-    fullName: Grpc.Core.CallInvoker
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept(Grpc.Core.CallInvoker,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: CallInvokerExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.CallInvokerExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.CallInvoker
-    name: CallInvoker
-    nameWithType: CallInvoker
-    fullName: Grpc.Core.CallInvoker
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Interceptors
-  commentId: N:Grpc.Core.Interceptors
-  isExternal: false
-  name: Grpc.Core.Interceptors
-  nameWithType: Grpc.Core.Interceptors
-  fullName: Grpc.Core.Interceptors
 - uid: Grpc.Core.DefaultCallInvoker
   commentId: T:Grpc.Core.DefaultCallInvoker
-  isExternal: false
   name: DefaultCallInvoker
   nameWithType: DefaultCallInvoker
   fullName: Grpc.Core.DefaultCallInvoker
 - uid: Grpc.Core.DefaultCallInvoker.#ctor*
   commentId: Overload:Grpc.Core.DefaultCallInvoker.#ctor
-  isExternal: false
   name: DefaultCallInvoker
   nameWithType: DefaultCallInvoker.DefaultCallInvoker
   fullName: Grpc.Core.DefaultCallInvoker.DefaultCallInvoker
 - uid: Grpc.Core.Channel
   commentId: T:Grpc.Core.Channel
   parent: Grpc.Core
-  isExternal: false
   name: Channel
   nameWithType: Channel
   fullName: Grpc.Core.Channel
@@ -1214,7 +846,6 @@ references:
     fullName: )
 - uid: Grpc.Core.DefaultCallInvoker.BlockingUnaryCall*
   commentId: Overload:Grpc.Core.DefaultCallInvoker.BlockingUnaryCall
-  isExternal: false
   name: BlockingUnaryCall
   nameWithType: DefaultCallInvoker.BlockingUnaryCall
   fullName: Grpc.Core.DefaultCallInvoker.BlockingUnaryCall
@@ -1278,7 +909,6 @@ references:
 - uid: Grpc.Core.CallOptions
   commentId: T:Grpc.Core.CallOptions
   parent: Grpc.Core
-  isExternal: false
   name: CallOptions
   nameWithType: CallOptions
   fullName: Grpc.Core.CallOptions
@@ -1407,7 +1037,6 @@ references:
     fullName: )
 - uid: Grpc.Core.Method`2
   commentId: T:Grpc.Core.Method`2
-  isExternal: false
   name: Method<TRequest, TResponse>
   nameWithType: Method<TRequest, TResponse>
   fullName: Grpc.Core.Method<TRequest, TResponse>
@@ -1455,12 +1084,10 @@ references:
     nameWithType: )
     fullName: )
 - uid: TRequest
-  isExternal: false
   name: TRequest
   nameWithType: TRequest
   fullName: TRequest
 - uid: TResponse
-  isExternal: false
   name: TResponse
   nameWithType: TResponse
   fullName: TResponse
@@ -1578,7 +1205,6 @@ references:
     fullName: )
 - uid: Grpc.Core.DefaultCallInvoker.AsyncUnaryCall*
   commentId: Overload:Grpc.Core.DefaultCallInvoker.AsyncUnaryCall
-  isExternal: false
   name: AsyncUnaryCall
   nameWithType: DefaultCallInvoker.AsyncUnaryCall
   fullName: Grpc.Core.DefaultCallInvoker.AsyncUnaryCall
@@ -1733,7 +1359,6 @@ references:
     fullName: )
 - uid: Grpc.Core.AsyncUnaryCall`1
   commentId: T:Grpc.Core.AsyncUnaryCall`1
-  isExternal: false
   name: AsyncUnaryCall<TResponse>
   nameWithType: AsyncUnaryCall<TResponse>
   fullName: Grpc.Core.AsyncUnaryCall<TResponse>
@@ -1882,7 +1507,6 @@ references:
     fullName: )
 - uid: Grpc.Core.DefaultCallInvoker.AsyncServerStreamingCall*
   commentId: Overload:Grpc.Core.DefaultCallInvoker.AsyncServerStreamingCall
-  isExternal: false
   name: AsyncServerStreamingCall
   nameWithType: DefaultCallInvoker.AsyncServerStreamingCall
   fullName: Grpc.Core.DefaultCallInvoker.AsyncServerStreamingCall
@@ -2037,7 +1661,6 @@ references:
     fullName: )
 - uid: Grpc.Core.AsyncServerStreamingCall`1
   commentId: T:Grpc.Core.AsyncServerStreamingCall`1
-  isExternal: false
   name: AsyncServerStreamingCall<TResponse>
   nameWithType: AsyncServerStreamingCall<TResponse>
   fullName: Grpc.Core.AsyncServerStreamingCall<TResponse>
@@ -2174,7 +1797,6 @@ references:
     fullName: )
 - uid: Grpc.Core.DefaultCallInvoker.AsyncClientStreamingCall*
   commentId: Overload:Grpc.Core.DefaultCallInvoker.AsyncClientStreamingCall
-  isExternal: false
   name: AsyncClientStreamingCall
   nameWithType: DefaultCallInvoker.AsyncClientStreamingCall
   fullName: Grpc.Core.DefaultCallInvoker.AsyncClientStreamingCall
@@ -2329,7 +1951,6 @@ references:
     fullName: )
 - uid: Grpc.Core.AsyncClientStreamingCall`2
   commentId: T:Grpc.Core.AsyncClientStreamingCall`2
-  isExternal: false
   name: AsyncClientStreamingCall<TRequest, TResponse>
   nameWithType: AsyncClientStreamingCall<TRequest, TResponse>
   fullName: Grpc.Core.AsyncClientStreamingCall<TRequest, TResponse>
@@ -2478,7 +2099,6 @@ references:
     fullName: )
 - uid: Grpc.Core.DefaultCallInvoker.AsyncDuplexStreamingCall*
   commentId: Overload:Grpc.Core.DefaultCallInvoker.AsyncDuplexStreamingCall
-  isExternal: false
   name: AsyncDuplexStreamingCall
   nameWithType: DefaultCallInvoker.AsyncDuplexStreamingCall
   fullName: Grpc.Core.DefaultCallInvoker.AsyncDuplexStreamingCall
@@ -2633,7 +2253,6 @@ references:
     fullName: )
 - uid: Grpc.Core.AsyncDuplexStreamingCall`2
   commentId: T:Grpc.Core.AsyncDuplexStreamingCall`2
-  isExternal: false
   name: AsyncDuplexStreamingCall<TRequest, TResponse>
   nameWithType: AsyncDuplexStreamingCall<TRequest, TResponse>
   fullName: Grpc.Core.AsyncDuplexStreamingCall<TRequest, TResponse>
@@ -2682,7 +2301,6 @@ references:
     fullName: )
 - uid: Grpc.Core.DefaultCallInvoker.CreateCall*
   commentId: Overload:Grpc.Core.DefaultCallInvoker.CreateCall
-  isExternal: false
   name: CreateCall
   nameWithType: DefaultCallInvoker.CreateCall
   fullName: Grpc.Core.DefaultCallInvoker.CreateCall
@@ -2739,7 +2357,6 @@ references:
 - uid: Grpc.Core.CallInvocationDetails`2
   commentId: T:Grpc.Core.CallInvocationDetails`2
   parent: Grpc.Core
-  isExternal: false
   name: CallInvocationDetails<TRequest, TResponse>
   nameWithType: CallInvocationDetails<TRequest, TResponse>
   fullName: Grpc.Core.CallInvocationDetails<TRequest, TResponse>

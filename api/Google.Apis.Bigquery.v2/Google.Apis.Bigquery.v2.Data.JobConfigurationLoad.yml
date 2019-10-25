@@ -16,11 +16,14 @@ items:
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Encoding
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ETag
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.FieldDelimiter
+  - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode
+  - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.IgnoreUnknownValues
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.MaxBadRecords
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.NullMarker
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ProjectionFields
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Quote
+  - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Schema
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInline
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInlineFormat
@@ -29,6 +32,7 @@ items:
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceFormat
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceUris
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.TimePartitioning
+  - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes
   - Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.WriteDisposition
   langs:
   - csharp
@@ -44,7 +48,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: JobConfigurationLoad
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3434
+    startLine: 5037
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -89,7 +93,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: AllowJaggedRows
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3440
+    startLine: 5043
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -147,7 +151,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: AllowQuotedNewlines
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3445
+    startLine: 5048
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -201,7 +205,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Autodetect
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3450
+    startLine: 5053
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -255,14 +259,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Clustering
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3455
+    startLine: 5058
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
-    [Experimental] Clustering specification for the destination table. Must be specified with time-
+    [Beta] Clustering specification for the destination table. Must be specified with time-based
 
-    based partitioning, data in the table will be first partitioned and subsequently clustered.
+    partitioning, data in the table will be first partitioned and subsequently clustered.
   example: []
   syntax:
     content: >-
@@ -309,7 +313,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: CreateDisposition
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3463
+    startLine: 5066
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -369,7 +373,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DestinationEncryptionConfiguration
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3467
+    startLine: 5070
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -420,7 +424,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DestinationTable
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3471
+    startLine: 5074
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -471,14 +475,11 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: DestinationTableProperties
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3476
+    startLine: 5078
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: >-
-    [Experimental] [Optional] Properties with which to create the destination table if it is
-
-    new.
+  summary: '[Beta] [Optional] Properties with which to create the destination table if it is new.'
   example: []
   syntax:
     content: >-
@@ -525,7 +526,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Encoding
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3482
+    startLine: 5084
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -581,7 +582,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: FieldDelimiter
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3490
+    startLine: 5092
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -623,6 +624,111 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode
+  id: HivePartitioningMode
+  parent: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad
+  langs:
+  - csharp
+  - vb
+  name: HivePartitioningMode
+  nameWithType: JobConfigurationLoad.HivePartitioningMode
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: HivePartitioningMode
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5097
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Optional, Trusted Tester] Deprecated, do not use. Please set hivePartitioningOptions
+
+    instead.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("hivePartitioningMode")]
+
+      public virtual string HivePartitioningMode { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("hivePartitioningMode")>
+
+      Public Overridable Property HivePartitioningMode As String
+  overload: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: hivePartitioningMode
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions
+  id: HivePartitioningOptions
+  parent: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad
+  langs:
+  - csharp
+  - vb
+  name: HivePartitioningOptions
+  nameWithType: JobConfigurationLoad.HivePartitioningOptions
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: HivePartitioningOptions
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5101
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: '[Optional, Trusted Tester] Options to configure hive partitioning support.'
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("hivePartitioningOptions")]
+
+      public virtual HivePartitioningOptions HivePartitioningOptions { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.HivePartitioningOptions
+    content.vb: >-
+      <JsonProperty("hivePartitioningOptions")>
+
+      Public Overridable Property HivePartitioningOptions As HivePartitioningOptions
+  overload: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: hivePartitioningOptions
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.IgnoreUnknownValues
   commentId: P:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.IgnoreUnknownValues
   id: IgnoreUnknownValues
@@ -641,7 +747,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: IgnoreUnknownValues
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3498
+    startLine: 5109
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -701,16 +807,16 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: MaxBadRecords
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3504
+    startLine: 5115
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
   summary: >-
     [Optional] The maximum number of bad records that BigQuery can ignore when running the job. If the
 
-    number of bad records exceeds this value, an invalid error is returned in the job result. The default value
+    number of bad records exceeds this value, an invalid error is returned in the job result. This is only valid
 
-    is 0, which requires that all records are valid.
+    for CSV and JSON. The default value is 0, which requires that all records are valid.
   example: []
   syntax:
     content: >-
@@ -757,7 +863,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: NullMarker
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3512
+    startLine: 5123
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -817,7 +923,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ProjectionFields
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3519
+    startLine: 5130
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -875,7 +981,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Quote
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3527
+    startLine: 5138
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -917,6 +1023,60 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning
+  id: RangePartitioning
+  parent: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad
+  langs:
+  - csharp
+  - vb
+  name: RangePartitioning
+  nameWithType: JobConfigurationLoad.RangePartitioning
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: RangePartitioning
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5143
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and
+
+    rangePartitioning should be specified.
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("rangePartitioning")]
+
+      public virtual RangePartitioning RangePartitioning { get; set; }
+    parameters: []
+    return:
+      type: Google.Apis.Bigquery.v2.Data.RangePartitioning
+    content.vb: >-
+      <JsonProperty("rangePartitioning")>
+
+      Public Overridable Property RangePartitioning As RangePartitioning
+  overload: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: rangePartitioning
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Schema
   commentId: P:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Schema
   id: Schema
@@ -935,7 +1095,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: Schema
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3532
+    startLine: 5148
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -989,7 +1149,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SchemaInline
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3537
+    startLine: 5153
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1043,7 +1203,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SchemaInlineFormat
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3541
+    startLine: 5157
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1094,7 +1254,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SchemaUpdateOptions
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3551
+    startLine: 5167
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1158,7 +1318,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SkipLeadingRows
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3557
+    startLine: 5173
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1214,7 +1374,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SourceFormat
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3563
+    startLine: 5179
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1270,7 +1430,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: SourceUris
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3572
+    startLine: 5188
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1332,11 +1492,14 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: TimePartitioning
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3576
+    startLine: 5193
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
-  summary: Time-based partitioning specification for the destination table.
+  summary: >-
+    Time-based partitioning specification for the destination table. Only one of timePartitioning and
+
+    rangePartitioning should be specified.
   example: []
   syntax:
     content: >-
@@ -1365,6 +1528,62 @@ items:
   modifiers.vb:
   - Public
   - Overridable
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes
+  commentId: P:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes
+  id: UseAvroLogicalTypes
+  parent: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad
+  langs:
+  - csharp
+  - vb
+  name: UseAvroLogicalTypes
+  nameWithType: JobConfigurationLoad.UseAvroLogicalTypes
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes
+  type: Property
+  source:
+    remote:
+      path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+      branch: master
+      repo: https://github.com/google/google-api-dotnet-client
+    id: UseAvroLogicalTypes
+    path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
+    startLine: 5199
+  assemblies:
+  - Google.Apis.Bigquery.v2
+  namespace: Google.Apis.Bigquery.v2.Data
+  summary: >-
+    [Optional] If sourceFormat is set to &quot;AVRO&quot;, indicates whether to enable interpreting logical types
+
+    into their corresponding types (ie. TIMESTAMP), instead of only using their raw types (ie.
+
+    INTEGER).
+  example: []
+  syntax:
+    content: >-
+      [JsonProperty("useAvroLogicalTypes")]
+
+      public virtual bool? UseAvroLogicalTypes { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: >-
+      <JsonProperty("useAvroLogicalTypes")>
+
+      Public Overridable Property UseAvroLogicalTypes As Boolean?
+  overload: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: useAvroLogicalTypes
+  modifiers.csharp:
+  - public
+  - virtual
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overridable
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.WriteDisposition
   commentId: P:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.WriteDisposition
   id: WriteDisposition
@@ -1383,7 +1602,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: WriteDisposition
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3585
+    startLine: 5208
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1445,7 +1664,7 @@ items:
       repo: https://github.com/google/google-api-dotnet-client
     id: ETag
     path: Src/Generated/Google.Apis.Bigquery.v2/Google.Apis.Bigquery.v2.cs
-    startLine: 3589
+    startLine: 5212
   assemblies:
   - Google.Apis.Bigquery.v2
   namespace: Google.Apis.Bigquery.v2.Data
@@ -1471,7 +1690,6 @@ items:
 references:
 - uid: Google.Apis.Bigquery.v2.Data
   commentId: N:Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Google.Apis.Bigquery.v2.Data
   nameWithType: Google.Apis.Bigquery.v2.Data
   fullName: Google.Apis.Bigquery.v2.Data
@@ -1770,19 +1988,18 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
 - uid: Google.Apis.Requests
   commentId: N:Google.Apis.Requests
-  isExternal: false
+  isExternal: true
   name: Google.Apis.Requests
   nameWithType: Google.Apis.Requests
   fullName: Google.Apis.Requests
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.AllowJaggedRows*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.AllowJaggedRows
-  isExternal: false
   name: AllowJaggedRows
   nameWithType: JobConfigurationLoad.AllowJaggedRows
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.AllowJaggedRows
@@ -1871,32 +2088,27 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.AllowQuotedNewlines*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.AllowQuotedNewlines
-  isExternal: false
   name: AllowQuotedNewlines
   nameWithType: JobConfigurationLoad.AllowQuotedNewlines
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.AllowQuotedNewlines
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Autodetect*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Autodetect
-  isExternal: false
   name: Autodetect
   nameWithType: JobConfigurationLoad.Autodetect
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Autodetect
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Clustering*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Clustering
-  isExternal: false
   name: Clustering
   nameWithType: JobConfigurationLoad.Clustering
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Clustering
 - uid: Google.Apis.Bigquery.v2.Data.Clustering
   commentId: T:Google.Apis.Bigquery.v2.Data.Clustering
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: Clustering
   nameWithType: Clustering
   fullName: Google.Apis.Bigquery.v2.Data.Clustering
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.CreateDisposition*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.CreateDisposition
-  isExternal: false
   name: CreateDisposition
   nameWithType: JobConfigurationLoad.CreateDisposition
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.CreateDisposition
@@ -1909,64 +2121,70 @@ references:
   fullName: System.String
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationEncryptionConfiguration*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationEncryptionConfiguration
-  isExternal: false
   name: DestinationEncryptionConfiguration
   nameWithType: JobConfigurationLoad.DestinationEncryptionConfiguration
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationEncryptionConfiguration
 - uid: Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
   commentId: T:Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: EncryptionConfiguration
   nameWithType: EncryptionConfiguration
   fullName: Google.Apis.Bigquery.v2.Data.EncryptionConfiguration
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationTable*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationTable
-  isExternal: false
   name: DestinationTable
   nameWithType: JobConfigurationLoad.DestinationTable
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationTable
 - uid: Google.Apis.Bigquery.v2.Data.TableReference
   commentId: T:Google.Apis.Bigquery.v2.Data.TableReference
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TableReference
   nameWithType: TableReference
   fullName: Google.Apis.Bigquery.v2.Data.TableReference
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationTableProperties*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationTableProperties
-  isExternal: false
   name: DestinationTableProperties
   nameWithType: JobConfigurationLoad.DestinationTableProperties
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.DestinationTableProperties
 - uid: Google.Apis.Bigquery.v2.Data.DestinationTableProperties
   commentId: T:Google.Apis.Bigquery.v2.Data.DestinationTableProperties
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: DestinationTableProperties
   nameWithType: DestinationTableProperties
   fullName: Google.Apis.Bigquery.v2.Data.DestinationTableProperties
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Encoding*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Encoding
-  isExternal: false
   name: Encoding
   nameWithType: JobConfigurationLoad.Encoding
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Encoding
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.FieldDelimiter*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.FieldDelimiter
-  isExternal: false
   name: FieldDelimiter
   nameWithType: JobConfigurationLoad.FieldDelimiter
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.FieldDelimiter
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode
+  name: HivePartitioningMode
+  nameWithType: JobConfigurationLoad.HivePartitioningMode
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningMode
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions
+  name: HivePartitioningOptions
+  nameWithType: JobConfigurationLoad.HivePartitioningOptions
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.HivePartitioningOptions
+- uid: Google.Apis.Bigquery.v2.Data.HivePartitioningOptions
+  commentId: T:Google.Apis.Bigquery.v2.Data.HivePartitioningOptions
+  parent: Google.Apis.Bigquery.v2.Data
+  name: HivePartitioningOptions
+  nameWithType: HivePartitioningOptions
+  fullName: Google.Apis.Bigquery.v2.Data.HivePartitioningOptions
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.IgnoreUnknownValues*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.IgnoreUnknownValues
-  isExternal: false
   name: IgnoreUnknownValues
   nameWithType: JobConfigurationLoad.IgnoreUnknownValues
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.IgnoreUnknownValues
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.MaxBadRecords*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.MaxBadRecords
-  isExternal: false
   name: MaxBadRecords
   nameWithType: JobConfigurationLoad.MaxBadRecords
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.MaxBadRecords
@@ -2016,13 +2234,11 @@ references:
     fullName: )
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.NullMarker*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.NullMarker
-  isExternal: false
   name: NullMarker
   nameWithType: JobConfigurationLoad.NullMarker
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.NullMarker
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ProjectionFields*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ProjectionFields
-  isExternal: false
   name: ProjectionFields
   nameWithType: JobConfigurationLoad.ProjectionFields
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ProjectionFields
@@ -2111,87 +2327,90 @@ references:
     fullName: )
 - uid: System.Collections.Generic
   commentId: N:System.Collections.Generic
-  isExternal: false
+  isExternal: true
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Quote*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Quote
-  isExternal: false
   name: Quote
   nameWithType: JobConfigurationLoad.Quote
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Quote
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning
+  name: RangePartitioning
+  nameWithType: JobConfigurationLoad.RangePartitioning
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.RangePartitioning
+- uid: Google.Apis.Bigquery.v2.Data.RangePartitioning
+  commentId: T:Google.Apis.Bigquery.v2.Data.RangePartitioning
+  parent: Google.Apis.Bigquery.v2.Data
+  name: RangePartitioning
+  nameWithType: RangePartitioning
+  fullName: Google.Apis.Bigquery.v2.Data.RangePartitioning
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Schema*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Schema
-  isExternal: false
   name: Schema
   nameWithType: JobConfigurationLoad.Schema
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.Schema
 - uid: Google.Apis.Bigquery.v2.Data.TableSchema
   commentId: T:Google.Apis.Bigquery.v2.Data.TableSchema
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TableSchema
   nameWithType: TableSchema
   fullName: Google.Apis.Bigquery.v2.Data.TableSchema
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInline*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInline
-  isExternal: false
   name: SchemaInline
   nameWithType: JobConfigurationLoad.SchemaInline
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInline
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInlineFormat*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInlineFormat
-  isExternal: false
   name: SchemaInlineFormat
   nameWithType: JobConfigurationLoad.SchemaInlineFormat
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaInlineFormat
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaUpdateOptions*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaUpdateOptions
-  isExternal: false
   name: SchemaUpdateOptions
   nameWithType: JobConfigurationLoad.SchemaUpdateOptions
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SchemaUpdateOptions
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SkipLeadingRows*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SkipLeadingRows
-  isExternal: false
   name: SkipLeadingRows
   nameWithType: JobConfigurationLoad.SkipLeadingRows
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SkipLeadingRows
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceFormat*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceFormat
-  isExternal: false
   name: SourceFormat
   nameWithType: JobConfigurationLoad.SourceFormat
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceFormat
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceUris*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceUris
-  isExternal: false
   name: SourceUris
   nameWithType: JobConfigurationLoad.SourceUris
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.SourceUris
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.TimePartitioning*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.TimePartitioning
-  isExternal: false
   name: TimePartitioning
   nameWithType: JobConfigurationLoad.TimePartitioning
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.TimePartitioning
 - uid: Google.Apis.Bigquery.v2.Data.TimePartitioning
   commentId: T:Google.Apis.Bigquery.v2.Data.TimePartitioning
   parent: Google.Apis.Bigquery.v2.Data
-  isExternal: false
   name: TimePartitioning
   nameWithType: TimePartitioning
   fullName: Google.Apis.Bigquery.v2.Data.TimePartitioning
+- uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes*
+  commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes
+  name: UseAvroLogicalTypes
+  nameWithType: JobConfigurationLoad.UseAvroLogicalTypes
+  fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.UseAvroLogicalTypes
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.WriteDisposition*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.WriteDisposition
-  isExternal: false
   name: WriteDisposition
   nameWithType: JobConfigurationLoad.WriteDisposition
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.WriteDisposition
 - uid: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ETag*
   commentId: Overload:Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ETag
-  isExternal: false
   name: ETag
   nameWithType: JobConfigurationLoad.ETag
   fullName: Google.Apis.Bigquery.v2.Data.JobConfigurationLoad.ETag

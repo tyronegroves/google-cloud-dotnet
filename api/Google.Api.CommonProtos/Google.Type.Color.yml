@@ -36,16 +36,16 @@ items:
   type: Class
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Color
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 165
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 171
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
-  summary: "\nRepresents a color in the RGBA color space. This representation is designed\nfor simplicity of conversion to/from color representations in various\nlanguages over compactness; for example, the fields of this representation\ncan be trivially provided to the constructor of &quot;java.awt.Color&quot; in Java; it\ncan also be trivially provided to UIColor&apos;s &quot;+colorWithRed:green:blue:alpha&quot;\nmethod in iOS; and, with just a little work, it can be easily formatted into\na CSS &quot;rgba()&quot; string in JavaScript, as well. Here are some examples:\n\nExample (Java):\n\nimport com.google.type.Color;\n\n// ...\npublic static java.awt.Color fromProto(Color protocolor) {\n  float alpha = protocolor.hasAlpha()\n      ? protocolor.getAlpha().getValue()\n      : 1.0;\n\n  return new java.awt.Color(\n      protocolor.getRed(),\n      protocolor.getGreen(),\n      protocolor.getBlue(),\n      alpha);\n}\n\npublic static Color toProto(java.awt.Color color) {\n  float red = (float) color.getRed();\n  float green = (float) color.getGreen();\n  float blue = (float) color.getBlue();\n  float denominator = 255.0;\n  Color.Builder resultBuilder =\n      Color\n          .newBuilder()\n          .setRed(red / denominator)\n          .setGreen(green / denominator)\n          .setBlue(blue / denominator);\n  int alpha = color.getAlpha();\n  if (alpha != 255) {\n    result.setAlpha(\n        FloatValue\n            .newBuilder()\n            .setValue(((float) alpha) / denominator)\n            .build());\n  }\n  return resultBuilder.build();\n}\n// ...\n\nExample (iOS / Obj-C):\n\n// ...\nstatic UIColor* fromProto(Color* protocolor) {\n   float red = [protocolor red];\n   float green = [protocolor green];\n   float blue = [protocolor blue];\n   FloatValue* alpha_wrapper = [protocolor alpha];\n   float alpha = 1.0;\n   if (alpha_wrapper != nil) {\n     alpha = [alpha_wrapper value];\n   }\n   return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];\n}\n\nstatic Color* toProto(UIColor* color) {\n    CGFloat red, green, blue, alpha;\n    if (![color getRed:&amp;red green:&amp;green blue:&amp;blue alpha:&amp;alpha]) {\n      return nil;\n    }\n    Color* result = [Color alloc] init];\n    [result setRed:red];\n    [result setGreen:green];\n    [result setBlue:blue];\n    if (alpha &lt;= 0.9999) {\n      [result setAlpha:floatWrapperWithValue(alpha)];\n    }\n    [result autorelease];\n    return result;\n}\n// ...\n\nExample (JavaScript):\n\n// ...\n\nvar protoToCssColor = function(rgb_color) {\n  var redFrac = rgb_color.red || 0.0;\n  var greenFrac = rgb_color.green || 0.0;\n  var blueFrac = rgb_color.blue || 0.0;\n  var red = Math.floor(redFrac * 255);\n  var green = Math.floor(greenFrac * 255);\n  var blue = Math.floor(blueFrac * 255);\n\n  if (!(&apos;alpha&apos; in rgb_color)) {\n     return rgbToCssColor_(red, green, blue);\n  }\n\n  var alphaFrac = rgb_color.alpha.value || 0.0;\n  var rgbParams = [red, green, blue].join(&apos;,&apos;);\n  return [&apos;rgba(&apos;, rgbParams, &apos;,&apos;, alphaFrac, &apos;)&apos;].join(&apos;&apos;);\n};\n\nvar rgbToCssColor_ = function(red, green, blue) {\n var rgbNumber = new Number((red &lt;&lt; 16) | (green &lt;&lt; 8) | blue);\n var hexString = rgbNumber.toString(16);\n var missingZeros = 6 - hexString.length;\n var resultBuilder = [&apos;#&apos;];\n for (var i = 0; i &lt; missingZeros; i++) {\n    resultBuilder.push(&apos;0&apos;);\n }\n resultBuilder.push(hexString);\n return resultBuilder.join(&apos;&apos;);\n};\n\n// ...\n"
+  summary: "\nRepresents a color in the RGBA color space. This representation is designed\nfor simplicity of conversion to/from color representations in various\nlanguages over compactness; for example, the fields of this representation\ncan be trivially provided to the constructor of &quot;java.awt.Color&quot; in Java; it\ncan also be trivially provided to UIColor&apos;s &quot;+colorWithRed:green:blue:alpha&quot;\nmethod in iOS; and, with just a little work, it can be easily formatted into\na CSS &quot;rgba()&quot; string in JavaScript, as well.\n\nNote: this proto does not carry information about the absolute color space\nthat should be used to interpret the RGB value (e.g. sRGB, Adobe RGB,\nDCI-P3, BT.2020, etc.). By default, applications SHOULD assume the sRGB color\nspace.\n\nExample (Java):\n\nimport com.google.type.Color;\n\n// ...\npublic static java.awt.Color fromProto(Color protocolor) {\n  float alpha = protocolor.hasAlpha()\n      ? protocolor.getAlpha().getValue()\n      : 1.0;\n\n  return new java.awt.Color(\n      protocolor.getRed(),\n      protocolor.getGreen(),\n      protocolor.getBlue(),\n      alpha);\n}\n\npublic static Color toProto(java.awt.Color color) {\n  float red = (float) color.getRed();\n  float green = (float) color.getGreen();\n  float blue = (float) color.getBlue();\n  float denominator = 255.0;\n  Color.Builder resultBuilder =\n      Color\n          .newBuilder()\n          .setRed(red / denominator)\n          .setGreen(green / denominator)\n          .setBlue(blue / denominator);\n  int alpha = color.getAlpha();\n  if (alpha != 255) {\n    result.setAlpha(\n        FloatValue\n            .newBuilder()\n            .setValue(((float) alpha) / denominator)\n            .build());\n  }\n  return resultBuilder.build();\n}\n// ...\n\nExample (iOS / Obj-C):\n\n// ...\nstatic UIColor* fromProto(Color* protocolor) {\n   float red = [protocolor red];\n   float green = [protocolor green];\n   float blue = [protocolor blue];\n   FloatValue* alpha_wrapper = [protocolor alpha];\n   float alpha = 1.0;\n   if (alpha_wrapper != nil) {\n     alpha = [alpha_wrapper value];\n   }\n   return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];\n}\n\nstatic Color* toProto(UIColor* color) {\n    CGFloat red, green, blue, alpha;\n    if (![color getRed:&amp;red green:&amp;green blue:&amp;blue alpha:&amp;alpha]) {\n      return nil;\n    }\n    Color* result = [[Color alloc] init];\n    [result setRed:red];\n    [result setGreen:green];\n    [result setBlue:blue];\n    if (alpha &lt;= 0.9999) {\n      [result setAlpha:floatWrapperWithValue(alpha)];\n    }\n    [result autorelease];\n    return result;\n}\n// ...\n\nExample (JavaScript):\n\n// ...\n\nvar protoToCssColor = function(rgb_color) {\n  var redFrac = rgb_color.red || 0.0;\n  var greenFrac = rgb_color.green || 0.0;\n  var blueFrac = rgb_color.blue || 0.0;\n  var red = Math.floor(redFrac * 255);\n  var green = Math.floor(greenFrac * 255);\n  var blue = Math.floor(blueFrac * 255);\n\n  if (!(&apos;alpha&apos; in rgb_color)) {\n     return rgbToCssColor_(red, green, blue);\n  }\n\n  var alphaFrac = rgb_color.alpha.value || 0.0;\n  var rgbParams = [red, green, blue].join(&apos;,&apos;);\n  return [&apos;rgba(&apos;, rgbParams, &apos;,&apos;, alphaFrac, &apos;)&apos;].join(&apos;&apos;);\n};\n\nvar rgbToCssColor_ = function(red, green, blue) {\n var rgbNumber = new Number((red &lt;&lt; 16) | (green &lt;&lt; 8) | blue);\n var hexString = rgbNumber.toString(16);\n var missingZeros = 6 - hexString.length;\n var resultBuilder = [&apos;#&apos;];\n for (var i = 0; i &lt; missingZeros; i++) {\n    resultBuilder.push(&apos;0&apos;);\n }\n resultBuilder.push(hexString);\n return resultBuilder.join(&apos;&apos;);\n};\n\n// ...\n"
   example: []
   syntax:
     content: 'public sealed class Color : IMessage<Color>, IMessage, IEquatable<Color>, IDeepCloneable<Color>'
@@ -85,12 +85,12 @@ items:
   type: Property
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Parser
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 168
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 174
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -122,12 +122,12 @@ items:
   type: Property
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Descriptor
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 171
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 177
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -160,12 +160,12 @@ items:
   type: Property
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: pb::Google.Protobuf.IMessage.Descriptor
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 176
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 182
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -198,12 +198,12 @@ items:
   type: Constructor
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 181
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 187
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -228,12 +228,12 @@ items:
   type: Constructor
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 188
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 194
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -261,12 +261,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Clone
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 197
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 203
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -295,12 +295,12 @@ items:
   type: Field
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: RedFieldNumber
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 203
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 209
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -330,12 +330,12 @@ items:
   type: Property
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Red
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 208
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 214
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -367,12 +367,12 @@ items:
   type: Field
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: GreenFieldNumber
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 217
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 223
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -402,12 +402,12 @@ items:
   type: Property
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Green
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 222
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 228
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -439,12 +439,12 @@ items:
   type: Field
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: BlueFieldNumber
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 231
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 237
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -474,12 +474,12 @@ items:
   type: Property
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Blue
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 236
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 242
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -511,12 +511,12 @@ items:
   type: Field
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: AlphaFieldNumber
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 245
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 251
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -546,12 +546,12 @@ items:
   type: Property
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Alpha
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 261
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 267
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -583,12 +583,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 269
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 276
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -621,12 +621,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 274
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 281
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -658,12 +658,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: GetHashCode
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 289
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 296
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -693,12 +693,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 302
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 309
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -728,12 +728,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: WriteTo
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 307
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 314
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -763,12 +763,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: CalculateSize
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 329
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 336
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -797,12 +797,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 350
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 357
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -832,12 +832,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Google.Api.CommonProtos/Type/Color.cs
+      path: Google.Api.CommonProtos/Type/Color.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
-    path: src/Google.Api.CommonProtos/Type/Color.cs
-    startLine: 372
+    path: Google.Api.CommonProtos/Type/Color.cs
+    startLine: 379
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Type
@@ -857,7 +857,6 @@ items:
 references:
 - uid: Google.Type
   commentId: N:Google.Type
-  isExternal: false
   name: Google.Type
   nameWithType: Google.Type
   fullName: Google.Type
@@ -1179,7 +1178,7 @@ references:
     fullName: )
 - uid: System
   commentId: N:System
-  isExternal: false
+  isExternal: true
   name: System
   nameWithType: System
   fullName: System
@@ -1224,7 +1223,7 @@ references:
     fullName: )
 - uid: Google.Protobuf
   commentId: N:Google.Protobuf
-  isExternal: false
+  isExternal: true
   name: Google.Protobuf
   nameWithType: Google.Protobuf
   fullName: Google.Protobuf
@@ -1308,7 +1307,6 @@ references:
     fullName: )
 - uid: Google.Type.Color.Parser*
   commentId: Overload:Google.Type.Color.Parser
-  isExternal: false
   name: Parser
   nameWithType: Color.Parser
   fullName: Google.Type.Color.Parser
@@ -1395,7 +1393,6 @@ references:
     fullName: )
 - uid: Google.Type.Color.Descriptor*
   commentId: Overload:Google.Type.Color.Descriptor
-  isExternal: false
   name: Descriptor
   nameWithType: Color.Descriptor
   fullName: Google.Type.Color.Descriptor
@@ -1408,13 +1405,12 @@ references:
   fullName: Google.Protobuf.Reflection.MessageDescriptor
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
-  isExternal: false
+  isExternal: true
   name: Google.Protobuf.Reflection
   nameWithType: Google.Protobuf.Reflection
   fullName: Google.Protobuf.Reflection
 - uid: Google.Type.Color.Google#Protobuf#IMessage#Descriptor*
   commentId: Overload:Google.Type.Color.Google#Protobuf#IMessage#Descriptor
-  isExternal: false
   name: IMessage.Descriptor
   nameWithType: Color.IMessage.Descriptor
   fullName: Google.Type.Color.Google.Protobuf.IMessage.Descriptor
@@ -1430,20 +1426,17 @@ references:
   fullName: Google.Protobuf.IMessage.Descriptor
 - uid: Google.Type.Color.#ctor*
   commentId: Overload:Google.Type.Color.#ctor
-  isExternal: false
   name: Color
   nameWithType: Color.Color
   fullName: Google.Type.Color.Color
 - uid: Google.Type.Color
   commentId: T:Google.Type.Color
   parent: Google.Type
-  isExternal: false
   name: Color
   nameWithType: Color
   fullName: Google.Type.Color
 - uid: Google.Type.Color.Clone*
   commentId: Overload:Google.Type.Color.Clone
-  isExternal: false
   name: Clone
   nameWithType: Color.Clone
   fullName: Google.Type.Color.Clone
@@ -1521,7 +1514,6 @@ references:
   fullName: System.Int32
 - uid: Google.Type.Color.Red*
   commentId: Overload:Google.Type.Color.Red
-  isExternal: false
   name: Red
   nameWithType: Color.Red
   fullName: Google.Type.Color.Red
@@ -1534,19 +1526,16 @@ references:
   fullName: System.Single
 - uid: Google.Type.Color.Green*
   commentId: Overload:Google.Type.Color.Green
-  isExternal: false
   name: Green
   nameWithType: Color.Green
   fullName: Google.Type.Color.Green
 - uid: Google.Type.Color.Blue*
   commentId: Overload:Google.Type.Color.Blue
-  isExternal: false
   name: Blue
   nameWithType: Color.Blue
   fullName: Google.Type.Color.Blue
 - uid: Google.Type.Color.Alpha*
   commentId: Overload:Google.Type.Color.Alpha
-  isExternal: false
   name: Alpha
   nameWithType: Color.Alpha
   fullName: Google.Type.Color.Alpha
@@ -1676,7 +1665,6 @@ references:
     fullName: )
 - uid: Google.Type.Color.Equals*
   commentId: Overload:Google.Type.Color.Equals
-  isExternal: false
   name: Equals
   nameWithType: Color.Equals
   fullName: Google.Type.Color.Equals
@@ -1799,7 +1787,6 @@ references:
     fullName: )
 - uid: Google.Type.Color.GetHashCode*
   commentId: Overload:Google.Type.Color.GetHashCode
-  isExternal: false
   name: GetHashCode
   nameWithType: Color.GetHashCode
   fullName: Google.Type.Color.GetHashCode
@@ -1836,7 +1823,6 @@ references:
     fullName: )
 - uid: Google.Type.Color.ToString*
   commentId: Overload:Google.Type.Color.ToString
-  isExternal: false
   name: ToString
   nameWithType: Color.ToString
   fullName: Google.Type.Color.ToString
@@ -1849,7 +1835,6 @@ references:
   fullName: System.String
 - uid: Google.Type.Color.WriteTo*
   commentId: Overload:Google.Type.Color.WriteTo
-  isExternal: false
   name: WriteTo
   nameWithType: Color.WriteTo
   fullName: Google.Type.Color.WriteTo
@@ -1903,7 +1888,6 @@ references:
   fullName: Google.Protobuf.CodedOutputStream
 - uid: Google.Type.Color.CalculateSize*
   commentId: Overload:Google.Type.Color.CalculateSize
-  isExternal: false
   name: CalculateSize
   nameWithType: Color.CalculateSize
   fullName: Google.Type.Color.CalculateSize
@@ -1940,7 +1924,6 @@ references:
     fullName: )
 - uid: Google.Type.Color.MergeFrom*
   commentId: Overload:Google.Type.Color.MergeFrom
-  isExternal: false
   name: MergeFrom
   nameWithType: Color.MergeFrom
   fullName: Google.Type.Color.MergeFrom
