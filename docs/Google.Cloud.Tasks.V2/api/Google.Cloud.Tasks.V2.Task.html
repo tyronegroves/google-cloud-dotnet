@@ -234,7 +234,10 @@ worker. For example, if the worker is stuck, it may not react to cancelled
 requests.</p>
 <p>The default and maximum values depend on the type of request:</p>
 <ul>
-<li>For [App Engine tasks][google.cloud.tasks.v2.AppEngineHttpRequest], 0 indicates that the
+<li><p>For [HTTP tasks][google.cloud.tasks.v2.HttpRequest], the default is 10 minutes. The deadline
+must be in the interval [15 seconds, 30 minutes].</p>
+</li>
+<li><p>For [App Engine tasks][google.cloud.tasks.v2.AppEngineHttpRequest], 0 indicates that the
 request has the default deadline. The default deadline depends on the
 <a href="https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling">scaling
 type</a>
@@ -246,7 +249,8 @@ seconds, 24 hours 15 seconds]. Regardless of the task&apos;s
 the service&apos;s timeout. We recommend setting the <code>dispatch_deadline</code> to
 at most a few seconds more than the app handler&apos;s timeout. For more
 information see
-<a href="https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts">Timeouts</a>.</li>
+<a href="https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts">Timeouts</a>.</p>
+</li>
 </ul>
 <p><code>dispatch_deadline</code> will be truncated to the nearest millisecond. The
 deadline is an approximate deadline.</p>
@@ -293,6 +297,31 @@ The other [Attempt][google.cloud.tasks.v2.Attempt] information is not retained b
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Tasks.V2.Attempt.html">Attempt</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2_Task_HttpRequest_" data-uid="Google.Cloud.Tasks.V2.Task.HttpRequest*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_Task_HttpRequest" data-uid="Google.Cloud.Tasks.V2.Task.HttpRequest">HttpRequest</h4>
+  <div class="markdown level1 summary"><p>HTTP request that is sent to the worker.</p>
+<p>An HTTP task is a task that has [HttpRequest][google.cloud.tasks.v2.HttpRequest] set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpRequest HttpRequest { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.html">HttpRequest</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -412,8 +441,7 @@ hyphens (-), or underscores (_). The maximum length is 500 characters.</li>
   </table>
   <a id="Google_Cloud_Tasks_V2_Task_ScheduleTime_" data-uid="Google.Cloud.Tasks.V2.Task.ScheduleTime*"></a>
   <h4 id="Google_Cloud_Tasks_V2_Task_ScheduleTime" data-uid="Google.Cloud.Tasks.V2.Task.ScheduleTime">ScheduleTime</h4>
-  <div class="markdown level1 summary"><p>The time when the task is scheduled to be attempted.</p>
-<p>For App Engine queues, this is when the task will be attempted or retried.</p>
+  <div class="markdown level1 summary"><p>The time when the task is scheduled to be attempted or retried.</p>
 <p><code>schedule_time</code> will be truncated to the nearest microsecond.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

@@ -101,11 +101,10 @@ protocol.</p>
 <p>The [AppEngineRouting][google.cloud.tasks.v2.AppEngineRouting] used to construct the URL that the task is
 delivered to can be set at the queue-level or task-level:</p>
 <ul>
-<li>If set,
-[app_engine_routing_override][google.cloud.tasks.v2.AppEngineHttpQueue.app_engine_routing_override]
-is used for all tasks in the queue, no matter what the setting
-is for the
-[task-level app_engine_routing][google.cloud.tasks.v2.AppEngineHttpRequest.app_engine_routing].</li>
+<li>If [app_engine_routing_override is set on the
+queue][Queue.app_engine_routing_override], this value is used for all
+tasks in the queue, no matter what the setting is for the [task-level
+app_engine_routing][AppEngineHttpRequest.app_engine_routing].</li>
 </ul>
 <p>The <code>url</code> that the task will be sent to is:</p>
 <ul>
@@ -126,7 +125,7 @@ response code in the range [<code>200</code> - <code>299</code>]. The task attem
 the app&apos;s handler returns a non-2xx response code or Cloud Tasks does
 not receive response before the [deadline][google.cloud.tasks.v2.Task.dispatch_deadline]. Failed
 tasks will be retried according to the
-[retry configuration][Queue.RetryConfig]. <code>503</code> (Service Unavailable) is
+[retry configuration][google.cloud.tasks.v2.Queue.retry_config]. <code>503</code> (Service Unavailable) is
 considered an App Engine system error instead of an application error and
 will cause Cloud Tasks&apos; traffic congestion control to temporarily throttle
 the queue&apos;s dispatches. Unlike other types of task targets, a <code>429</code> (Too Many
@@ -146,6 +145,11 @@ Engine</a>,
 routing</a>,
 and <a href="https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed">App Engine Flex request
 routing</a>.</p>
+<p>Using [AppEngineRouting][google.cloud.tasks.v2.AppEngineRouting] requires
+<a href="https://cloud.google.com/appengine/docs/admin-api/access-control"><code>appengine.applications.get</code></a>
+Google IAM permission for the project
+and the following scope:</p>
+<p><code>https://www.googleapis.com/auth/cloud-platform</code></p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2.Attempt.html">Attempt</a></h4>
       <section><p>The status of a task attempt.</p>
@@ -191,6 +195,38 @@ work in their applications.</p>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2.GetTaskRequest.html">GetTaskRequest</a></h4>
       <section><p>Request message for getting a task using [GetTask][google.cloud.tasks.v2.CloudTasks.GetTask].</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.html">HttpRequest</a></h4>
+      <section><p>HTTP request.</p>
+<p>The task will be pushed to the worker as an HTTP request. If the worker
+or the redirected worker acknowledges the task by returning a successful HTTP
+response code ([<code>200</code> - <code>299</code>]), the task will removed from the queue. If
+any other HTTP response code is returned or no response is received, the
+task will be retried according to the following:</p>
+<ul>
+<li><p>User-specified throttling: [retry configuration][google.cloud.tasks.v2.Queue.retry_config],
+[rate limits][google.cloud.tasks.v2.Queue.rate_limits], and the [queue&apos;s state][google.cloud.tasks.v2.Queue.state].</p>
+</li>
+<li><p>System throttling: To prevent the worker from overloading, Cloud Tasks may
+temporarily reduce the queue&apos;s effective rate. User-specified settings
+will not be changed.</p>
+</li>
+</ul>
+<p>System throttling happens because:</p>
+<ul>
+<li><p>Cloud Tasks backs off on all errors. Normally the backoff specified in
+[rate limits][google.cloud.tasks.v2.Queue.rate_limits] will be used. But if the worker returns
+<code>429</code> (Too Many Requests), <code>503</code> (Service Unavailable), or the rate of
+errors is high, Cloud Tasks will use a higher backoff rate. The retry
+specified in the <code>Retry-After</code> HTTP response header is considered.</p>
+</li>
+<li><p>To prevent traffic spikes and to smooth sudden large traffic spikes,
+dispatches ramp up slowly when the queue is newly created or idle and
+if large numbers of tasks suddenly become available to dispatch (due to
+spikes in create task rates, the queue being unpaused, or many tasks
+that are scheduled at the same time).</p>
+</li>
+</ul>
+</section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2.ListQueuesRequest.html">ListQueuesRequest</a></h4>
       <section><p>Request message for [ListQueues][google.cloud.tasks.v2.CloudTasks.ListQueues].</p>
 </section>
@@ -205,6 +241,20 @@ work in their applications.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2.LocationName.html">LocationName</a></h4>
       <section><p>Resource name for the &apos;location&apos; resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2.OAuthToken.html">OAuthToken</a></h4>
+      <section><p>Contains information needed for generating an
+<a href="https://developers.google.com/identity/protocols/OAuth2">OAuth token</a>.
+This type of authorization should generally only be used when calling Google
+APIs hosted on *.googleapis.com.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2.OidcToken.html">OidcToken</a></h4>
+      <section><p>Contains information needed for generating an
+<a href="https://developers.google.com/identity/protocols/OpenIDConnect">OpenID Connect
+token</a>.
+This type of authorization can be used for many scenarios, including
+calling Cloud Run, or endpoints where you intend to validate the token
+yourself.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2.PauseQueueRequest.html">PauseQueueRequest</a></h4>
       <section><p>Request message for [PauseQueue][google.cloud.tasks.v2.CloudTasks.PauseQueue].</p>
@@ -257,6 +307,9 @@ even if the queue has reached its [RateLimits][google.cloud.tasks.v2.RateLimits]
   </h3>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2.HttpMethod.html">HttpMethod</a></h4>
       <section><p>The HTTP method used to deliver the task.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.AuthorizationHeaderOneofCase.html">HttpRequest.AuthorizationHeaderOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;authorization_header&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2.Queue.Types.State.html">Queue.Types.State</a></h4>
       <section><p>State of the queue.</p>

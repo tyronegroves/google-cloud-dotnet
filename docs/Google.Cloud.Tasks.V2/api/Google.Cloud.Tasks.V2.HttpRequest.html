@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class HttpRequest
+   | Google.Cloud.Tasks.V2 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class HttpRequest
+   | Google.Cloud.Tasks.V2 ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.Tasks.V2.HttpRequest">
+  
+  
+  <h1 id="Google_Cloud_Tasks_V2_HttpRequest" data-uid="Google.Cloud.Tasks.V2.HttpRequest" class="text-break">Class HttpRequest
+  </h1>
+  <div class="markdown level0 summary"><p>HTTP request.</p>
+<p>The task will be pushed to the worker as an HTTP request. If the worker
+or the redirected worker acknowledges the task by returning a successful HTTP
+response code ([<code>200</code> - <code>299</code>]), the task will removed from the queue. If
+any other HTTP response code is returned or no response is received, the
+task will be retried according to the following:</p>
+<ul>
+<li><p>User-specified throttling: [retry configuration][google.cloud.tasks.v2.Queue.retry_config],
+[rate limits][google.cloud.tasks.v2.Queue.rate_limits], and the [queue&apos;s state][google.cloud.tasks.v2.Queue.state].</p>
+</li>
+<li><p>System throttling: To prevent the worker from overloading, Cloud Tasks may
+temporarily reduce the queue&apos;s effective rate. User-specified settings
+will not be changed.</p>
+</li>
+</ul>
+<p>System throttling happens because:</p>
+<ul>
+<li><p>Cloud Tasks backs off on all errors. Normally the backoff specified in
+[rate limits][google.cloud.tasks.v2.Queue.rate_limits] will be used. But if the worker returns
+<code>429</code> (Too Many Requests), <code>503</code> (Service Unavailable), or the rate of
+errors is high, Cloud Tasks will use a higher backoff rate. The retry
+specified in the <code>Retry-After</code> HTTP response header is considered.</p>
+</li>
+<li><p>To prevent traffic spikes and to smooth sudden large traffic spikes,
+dispatches ramp up slowly when the queue is newly created or idle and
+if large numbers of tasks suddenly become available to dispatch (due to
+spikes in create task rates, the queue being unpaused, or many tasks
+that are scheduled at the same time).</p>
+</li>
+</ul>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">HttpRequest</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.html">HttpRequest</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.html">HttpRequest</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.html">HttpRequest</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Tasks.V2.html">Google.Cloud.Tasks.V2</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.Tasks.V2.dll</h6>
+  <h5 id="Google_Cloud_Tasks_V2_HttpRequest_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class HttpRequest : IMessage&lt;HttpRequest&gt;, IMessage, IEquatable&lt;HttpRequest&gt;, IDeepCloneable&lt;HttpRequest&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest__ctor_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.#ctor*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest__ctor" data-uid="Google.Cloud.Tasks.V2.HttpRequest.#ctor">HttpRequest()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpRequest()</code></pre>
+  </div>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest__ctor_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.#ctor*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest__ctor_Google_Cloud_Tasks_V2_HttpRequest_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.#ctor(Google.Cloud.Tasks.V2.HttpRequest)">HttpRequest(HttpRequest)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpRequest(HttpRequest other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.html">HttpRequest</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest_AuthorizationHeaderCase_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.AuthorizationHeaderCase*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest_AuthorizationHeaderCase" data-uid="Google.Cloud.Tasks.V2.HttpRequest.AuthorizationHeaderCase">AuthorizationHeaderCase</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpRequest.AuthorizationHeaderOneofCase AuthorizationHeaderCase { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2.HttpRequest.AuthorizationHeaderOneofCase.html">HttpRequest.AuthorizationHeaderOneofCase</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest_Body_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.Body*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest_Body" data-uid="Google.Cloud.Tasks.V2.HttpRequest.Body">Body</h4>
+  <div class="markdown level1 summary"><p>HTTP request body.</p>
+<p>A request body is allowed only if the
+[HTTP method][google.cloud.tasks.v2.HttpRequest.http_method] is POST, PUT, or PATCH. It is an
+error to set body on a task with an incompatible [HttpMethod][google.cloud.tasks.v2.HttpMethod].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteString Body { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.ByteString.html">ByteString</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest_Headers_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.Headers*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest_Headers" data-uid="Google.Cloud.Tasks.V2.HttpRequest.Headers">Headers</h4>
+  <div class="markdown level1 summary"><p>HTTP request headers.</p>
+<p>This map contains the header field names and values.
+Headers can be set when the
+[task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].</p>
+<p>These headers represent a subset of the headers that will accompany the
+task&apos;s HTTP request. Some HTTP request headers will be ignored or replaced.</p>
+<p>A partial list of headers that will be ignored or replaced is:</p>
+<ul>
+<li>Host: This will be computed by Cloud Tasks and derived from
+[HttpRequest.url][google.cloud.tasks.v2.HttpRequest.url].</li>
+<li>Content-Length: This will be computed by Cloud Tasks.</li>
+<li>User-Agent: This will be set to <code>&amp;quot;Google-Cloud-Tasks&amp;quot;</code>.</li>
+<li>X-Google-*: Google use only.</li>
+<li>X-AppEngine-*: Google use only.</li>
+</ul>
+<p><code>Content-Type</code> won&apos;t be set by Cloud Tasks. You can explicitly set
+<code>Content-Type</code> to a media type when the
+[task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].
+For example, <code>Content-Type</code> can be set to <code>&amp;quot;application/octet-stream&amp;quot;</code> or
+<code>&amp;quot;application/json&amp;quot;</code>.</p>
+<p>Headers which can have multiple values (according to RFC2616) can be
+specified using comma-separated values.</p>
+<p>The size of the headers must be less than 80KB.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapField&lt;string, string&gt; Headers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.MapField-2.html">MapField</a>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest_HttpMethod_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.HttpMethod*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest_HttpMethod" data-uid="Google.Cloud.Tasks.V2.HttpRequest.HttpMethod">HttpMethod</h4>
+  <div class="markdown level1 summary"><p>The HTTP method to use for the request. The default is POST.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HttpMethod HttpMethod { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2.HttpMethod.html">HttpMethod</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest_OauthToken_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.OauthToken*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest_OauthToken" data-uid="Google.Cloud.Tasks.V2.HttpRequest.OauthToken">OauthToken</h4>
+  <div class="markdown level1 summary"><p>If specified, an
+<a href="https://developers.google.com/identity/protocols/OAuth2">OAuth token</a>
+will be generated and attached as an <code>Authorization</code> header in the HTTP
+request.</p>
+<p>This type of authorization should generally only be used when calling
+Google APIs hosted on *.googleapis.com.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OAuthToken OauthToken { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2.OAuthToken.html">OAuthToken</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest_OidcToken_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.OidcToken*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest_OidcToken" data-uid="Google.Cloud.Tasks.V2.HttpRequest.OidcToken">OidcToken</h4>
+  <div class="markdown level1 summary"><p>If specified, an
+<a href="https://developers.google.com/identity/protocols/OpenIDConnect">OIDC</a>
+token will be generated and attached as an <code>Authorization</code> header in the
+HTTP request.</p>
+<p>This type of authorization can be used for many scenarios, including
+calling Cloud Run, or endpoints where you intend to validate the token
+yourself.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OidcToken OidcToken { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Tasks.V2.OidcToken.html">OidcToken</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Tasks_V2_HttpRequest_Url_" data-uid="Google.Cloud.Tasks.V2.HttpRequest.Url*"></a>
+  <h4 id="Google_Cloud_Tasks_V2_HttpRequest_Url" data-uid="Google.Cloud.Tasks.V2.HttpRequest.Url">Url</h4>
+  <div class="markdown level1 summary"><p>Required. The full url path that the request will be sent to.</p>
+<p>This string must begin with either &quot;http://&quot; or &quot;https://&quot;. Some examples
+are: <code>http://acme.com</code> and <code>https://acme.com/sales:8080</code>. Cloud Tasks will
+encode some characters for safety and compatibility. The maximum allowed
+URL length is 2083 characters after encoding.</p>
+<p>The <code>Location</code> header response from a redirect response [<code>300</code> - <code>399</code>]
+may be followed. The redirect is not counted as a separate attempt.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Url { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

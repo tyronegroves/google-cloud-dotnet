@@ -96,11 +96,10 @@ protocol.</p>
 <p>The [AppEngineRouting][google.cloud.tasks.v2.AppEngineRouting] used to construct the URL that the task is
 delivered to can be set at the queue-level or task-level:</p>
 <ul>
-<li>If set,
-[app_engine_routing_override][google.cloud.tasks.v2.AppEngineHttpQueue.app_engine_routing_override]
-is used for all tasks in the queue, no matter what the setting
-is for the
-[task-level app_engine_routing][google.cloud.tasks.v2.AppEngineHttpRequest.app_engine_routing].</li>
+<li>If [app_engine_routing_override is set on the
+queue][Queue.app_engine_routing_override], this value is used for all
+tasks in the queue, no matter what the setting is for the [task-level
+app_engine_routing][AppEngineHttpRequest.app_engine_routing].</li>
 </ul>
 <p>The <code>url</code> that the task will be sent to is:</p>
 <ul>
@@ -121,7 +120,7 @@ response code in the range [<code>200</code> - <code>299</code>]. The task attem
 the app&apos;s handler returns a non-2xx response code or Cloud Tasks does
 not receive response before the [deadline][google.cloud.tasks.v2.Task.dispatch_deadline]. Failed
 tasks will be retried according to the
-[retry configuration][Queue.RetryConfig]. <code>503</code> (Service Unavailable) is
+[retry configuration][google.cloud.tasks.v2.Queue.retry_config]. <code>503</code> (Service Unavailable) is
 considered an App Engine system error instead of an application error and
 will cause Cloud Tasks&apos; traffic congestion control to temporarily throttle
 the queue&apos;s dispatches. Unlike other types of task targets, a <code>429</code> (Too Many
@@ -202,10 +201,12 @@ control to throttle the queue.</p>
   <a id="Google_Cloud_Tasks_V2_AppEngineHttpRequest_AppEngineRouting_" data-uid="Google.Cloud.Tasks.V2.AppEngineHttpRequest.AppEngineRouting*"></a>
   <h4 id="Google_Cloud_Tasks_V2_AppEngineHttpRequest_AppEngineRouting" data-uid="Google.Cloud.Tasks.V2.AppEngineHttpRequest.AppEngineRouting">AppEngineRouting</h4>
   <div class="markdown level1 summary"><p>Task-level setting for App Engine routing.</p>
-<p>If set,
-[app_engine_routing_override][google.cloud.tasks.v2.AppEngineHttpQueue.app_engine_routing_override]
-is used for all tasks in the queue, no matter what the setting is for the
-[task-level app_engine_routing][google.cloud.tasks.v2.AppEngineHttpRequest.app_engine_routing].</p>
+<ul>
+<li>If [app_engine_routing_override is set on the
+queue][Queue.app_engine_routing_override], this value is used for all
+tasks in the queue, no matter what the setting is for the [task-level
+app_engine_routing][AppEngineHttpRequest.app_engine_routing].</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
