@@ -148,8 +148,8 @@
   </h3>
   <a id="Google_Cloud_Logging_V2_LogEntry_HttpRequest_" data-uid="Google.Cloud.Logging.V2.LogEntry.HttpRequest*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_HttpRequest" data-uid="Google.Cloud.Logging.V2.LogEntry.HttpRequest">HttpRequest</h4>
-  <div class="markdown level1 summary"><p>Optional. Information about the HTTP request associated with this
-log entry, if applicable.</p>
+  <div class="markdown level1 summary"><p>Optional. Information about the HTTP request associated with this log
+entry, if applicable.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -174,11 +174,11 @@ log entry, if applicable.</p>
   <a id="Google_Cloud_Logging_V2_LogEntry_InsertId_" data-uid="Google.Cloud.Logging.V2.LogEntry.InsertId*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_InsertId" data-uid="Google.Cloud.Logging.V2.LogEntry.InsertId">InsertId</h4>
   <div class="markdown level1 summary"><p>Optional. A unique identifier for the log entry. If you provide a value,
-then Logging considers other log entries in the same project,
-with the same <code>timestamp</code>, and with the same <code>insert_id</code> to be duplicates
-which can be removed.  If omitted in new log entries, then
-Logging assigns its own unique identifier. The <code>insert_id</code> is also used
-to order log entries that have the same <code>timestamp</code> value.</p>
+then Logging considers other log entries in the same project, with the same
+<code>timestamp</code>, and with the same <code>insert_id</code> to be duplicates which can be
+removed. If omitted in new log entries, then Logging assigns its own unique
+identifier. The <code>insert_id</code> is also used to order log entries that have the
+same <code>timestamp</code> value.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -257,9 +257,9 @@ information about the log entry.</p>
 &quot;organizations/[ORGANIZATION_ID]/logs/[LOG_ID]&quot;
 &quot;billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]&quot;
 &quot;folders/[FOLDER_ID]/logs/[LOG_ID]&quot;</p>
-<p>A project number may optionally be used in place of PROJECT_ID. The
-project number is translated to its corresponding PROJECT_ID internally
-and the <code>log_name</code> field will contain PROJECT_ID in queries and exports.</p>
+<p>A project number may optionally be used in place of PROJECT_ID. The project
+number is translated to its corresponding PROJECT_ID internally and the
+<code>log_name</code> field will contain PROJECT_ID in queries and exports.</p>
 <p><code>[LOG_ID]</code> must be URL-encoded within <code>log_name</code>. Example:
 <code>&amp;quot;organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity&amp;quot;</code>.
 <code>[LOG_ID]</code> must be less than 512 characters long and can only include the
@@ -317,14 +317,20 @@ any results.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_Metadata_" data-uid="Google.Cloud.Logging.V2.LogEntry.Metadata*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_Metadata" data-uid="Google.Cloud.Logging.V2.LogEntry.Metadata">Metadata</h4>
-  <div class="markdown level1 summary"><p>Output only. Additional metadata about the monitored resource.
-Only <code>k8s_container</code>, <code>k8s_pod</code>, and <code>k8s_node</code> MonitoredResources have
-this field populated.</p>
+  <div class="markdown level1 summary"><p>Deprecated. Output only. Additional metadata about the monitored resource.</p>
+<p>Only <code>k8s_container</code>, <code>k8s_pod</code>, and <code>k8s_node</code> MonitoredResources have
+this field populated for GKE versions older than 1.12.6. For GKE versions
+1.12.6 and above, the <code>metadata</code> field has been deprecated. The Kubernetes
+pod labels that used to be in <code>metadata.userLabels</code> will now be present in
+the <code>labels</code> field with a key prefix of <code>k8s-pod/</code>. The Stackdriver system
+labels that were present in the <code>metadata.systemLabels</code> field will no
+longer be available in the LogEntry.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MonitoredResourceMetadata Metadata { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public MonitoredResourceMetadata Metadata { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -391,9 +397,12 @@ applicable.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_ProtoPayload_" data-uid="Google.Cloud.Logging.V2.LogEntry.ProtoPayload*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_ProtoPayload" data-uid="Google.Cloud.Logging.V2.LogEntry.ProtoPayload">ProtoPayload</h4>
-  <div class="markdown level1 summary"><p>The log entry payload, represented as a protocol buffer.  Some
-Google Cloud Platform services use this field for their log
-entry payloads.</p>
+  <div class="markdown level1 summary"><p>The log entry payload, represented as a protocol buffer. Some Google
+Cloud Platform services use this field for their log entry payloads.</p>
+<p>The following protocol buffer types are supported; user-defined types
+are not supported:</p>
+<p>&quot;type.googleapis.com/google.cloud.audit.AuditLog&quot;
+&quot;type.googleapis.com/google.appengine.logging.v1.RequestLog&quot;</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -441,10 +450,10 @@ entry payloads.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_Resource_" data-uid="Google.Cloud.Logging.V2.LogEntry.Resource*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_Resource" data-uid="Google.Cloud.Logging.V2.LogEntry.Resource">Resource</h4>
-  <div class="markdown level1 summary"><p>Required. The primary monitored resource associated with this log entry.
-Example: a log entry that reports a database error would be
-associated with the monitored resource designating the particular
-database that reported the error.</p>
+  <div class="markdown level1 summary"><p>Required. The monitored resource that produced this log entry.</p>
+<p>Example: a log entry that reports a database error would be associated with
+the monitored resource designating the particular database that reported
+the error.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -518,10 +527,10 @@ if any.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_SpanId_" data-uid="Google.Cloud.Logging.V2.LogEntry.SpanId*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_SpanId" data-uid="Google.Cloud.Logging.V2.LogEntry.SpanId">SpanId</h4>
-  <div class="markdown level1 summary"><p>Optional. The span ID within the trace associated with the log entry.
-For Trace spans, this is the same format that the Trace
-API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such
-as &lt;code&gt;&quot;000000000000004a&quot;&lt;/code&gt;.</p>
+  <div class="markdown level1 summary"><p>Optional. The span ID within the trace associated with the log entry.</p>
+<p>For Trace spans, this is the same format that the Trace API v2 uses: a
+16-character hexadecimal encoding of an 8-byte array, such as
+&lt;code&gt;&quot;000000000000004a&quot;&lt;/code&gt;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -569,18 +578,17 @@ as &lt;code&gt;&quot;000000000000004a&quot;&lt;/code&gt;.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_Timestamp_" data-uid="Google.Cloud.Logging.V2.LogEntry.Timestamp*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_Timestamp" data-uid="Google.Cloud.Logging.V2.LogEntry.Timestamp">Timestamp</h4>
-  <div class="markdown level1 summary"><p>Optional. The time the event described by the log entry occurred.
-This time is used to compute the log entry&apos;s age and to enforce
-the logs retention period. If this field is omitted in a new log
-entry, then Logging assigns it the current time.
-Timestamps have nanosecond accuracy, but trailing zeros in the fractional
-seconds might be omitted when the timestamp is displayed.</p>
-<p>Incoming log entries should have timestamps that are no more than
-the <a href="/logging/quotas">logs retention period</a> in the past,
-and no more than 24 hours in the future. Log entries outside those time
-boundaries will not be available when calling <code>entries.list</code>, but
-those log entries can still be exported with
-<a href="/logging/docs/api/tasks/exporting-logs">LogSinks</a>.</p>
+  <div class="markdown level1 summary"><p>Optional. The time the event described by the log entry occurred.  This
+time is used to compute the log entry&apos;s age and to enforce the logs
+retention period. If this field is omitted in a new log entry, then Logging
+assigns it the current time.  Timestamps have nanosecond accuracy, but
+trailing zeros in the fractional seconds might be omitted when the
+timestamp is displayed.</p>
+<p>Incoming log entries should have timestamps that are no more than the <a href="/logging/quotas">logs
+retention period</a> in the past, and no more than 24 hours
+in the future. Log entries outside those time boundaries will not be
+available when calling <code>entries.list</code>, but those log entries can still be
+<a href="/logging/docs/api/tasks/exporting-logs">exported with LogSinks</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -631,8 +639,8 @@ to <code>//tracing.googleapis.com</code>. Example:
   </table>
   <a id="Google_Cloud_Logging_V2_LogEntry_TraceSampled_" data-uid="Google.Cloud.Logging.V2.LogEntry.TraceSampled*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogEntry_TraceSampled" data-uid="Google.Cloud.Logging.V2.LogEntry.TraceSampled">TraceSampled</h4>
-  <div class="markdown level1 summary"><p>Optional. The sampling decision of the trace associated with the log entry.
-True means that the trace resource name in the <code>trace</code> field was sampled
+  <div class="markdown level1 summary"><p>Optional. The sampling decision of the trace associated with the log entry.</p>
+<p>True means that the trace resource name in the <code>trace</code> field was sampled
 for storage in a trace backend. False means that the trace was not sampled
 for storage when this log entry was written, or the sampling decision was
 unknown at the time. A non-sampled <code>trace</code> value is still useful as a
