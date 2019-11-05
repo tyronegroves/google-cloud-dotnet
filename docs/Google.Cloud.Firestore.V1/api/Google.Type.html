@@ -77,6 +77,9 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
+      <h4><a class="xref" href="Google.Type.CalendarPeriodReflection.html">CalendarPeriodReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/type/calendar_period.proto</p>
+</section>
       <h4><a class="xref" href="Google.Type.Color.html">Color</a></h4>
       <section><p>Represents a color in the RGBA color space. This representation is designed
 for simplicity of conversion to/from color representations in various
@@ -84,7 +87,11 @@ languages over compactness; for example, the fields of this representation
 can be trivially provided to the constructor of &quot;java.awt.Color&quot; in Java; it
 can also be trivially provided to UIColor&apos;s &quot;+colorWithRed:green:blue:alpha&quot;
 method in iOS; and, with just a little work, it can be easily formatted into
-a CSS &quot;rgba()&quot; string in JavaScript, as well. Here are some examples:</p>
+a CSS &quot;rgba()&quot; string in JavaScript, as well.</p>
+<p>Note: this proto does not carry information about the absolute color space
+that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB,
+DCI-P3, BT.2020, etc.). By default, applications SHOULD assume the sRGB color
+space.</p>
 <p>Example (Java):</p>
 <p>import com.google.type.Color;</p>
 <p>// ...
@@ -138,7 +145,7 @@ static UIColor* fromProto(Color* protocolor) {
     if (![color getRed:&amp;red green:&amp;green blue:&amp;blue alpha:&amp;alpha]) {
       return nil;
     }
-    Color* result = [Color alloc] init];
+    Color* result = [[Color alloc] init];
     [result setRed:red];
     [result setGreen:green];
     [result setBlue:blue];
@@ -182,13 +189,16 @@ static UIColor* fromProto(Color* protocolor) {
       <section><p>Holder for reflection information generated from google/type/color.proto</p>
 </section>
       <h4><a class="xref" href="Google.Type.Date.html">Date</a></h4>
-      <section><p>Represents a whole calendar date, e.g. date of birth. The time of day and
-time zone are either specified elsewhere or are not significant. The date
-is relative to the Proleptic Gregorian Calendar. The day may be 0 to
-represent a year and month where the day is not significant, e.g. credit card
-expiration date. The year may be 0 to represent a month and day independent
-of year, e.g. anniversary date. Related types are [google.type.TimeOfDay][google.type.TimeOfDay]
-and <code>google.protobuf.Timestamp</code>.</p>
+      <section><p>Represents a whole or partial calendar date, e.g. a birthday. The time of day
+and time zone are either specified elsewhere or are not significant. The date
+is relative to the Proleptic Gregorian Calendar. This can represent:</p>
+<ul>
+<li>A full date, with non-zero year, month and day values</li>
+<li>A month and day value, with a zero year, e.g. an anniversary</li>
+<li>A year on its own, with zero month and day values</li>
+<li>A year and month value, with a zero day, e.g. a credit card expiration date</li>
+</ul>
+<p>Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and <code>google.protobuf.Timestamp</code>.</p>
 </section>
       <h4><a class="xref" href="Google.Type.DateExtensions.html">DateExtensions</a></h4>
       <section><p>Extension methods built for <a class="xref" href="Google.Type.Date.html">Date</a>.</p>
@@ -199,42 +209,27 @@ and <code>google.protobuf.Timestamp</code>.</p>
       <h4><a class="xref" href="Google.Type.DayofweekReflection.html">DayofweekReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/dayofweek.proto</p>
 </section>
+      <h4><a class="xref" href="Google.Type.Expr.html">Expr</a></h4>
+      <section><p>Represents an expression text. Example:</p>
+<p>title: &quot;User account presence&quot;
+description: &quot;Determines whether the request has a user account&quot;
+expression: &quot;size(request.user) &gt; 0&quot;</p>
+</section>
+      <h4><a class="xref" href="Google.Type.ExprReflection.html">ExprReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/type/expr.proto</p>
+</section>
+      <h4><a class="xref" href="Google.Type.Fraction.html">Fraction</a></h4>
+      <section><p>Represents a fraction in terms of a numerator divided by a denominator.</p>
+</section>
+      <h4><a class="xref" href="Google.Type.FractionReflection.html">FractionReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/type/fraction.proto</p>
+</section>
       <h4><a class="xref" href="Google.Type.LatLng.html">LatLng</a></h4>
       <section><p>An object representing a latitude/longitude pair. This is expressed as a pair
 of doubles representing degrees latitude and degrees longitude. Unless
 specified otherwise, this must conform to the
 &lt;a href=&quot;<a href="http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf&quot;&gt;WGS84">http://www.unoosa.org/pdf/icg/2012/template/WGS_84.pdf&quot;>WGS84</a>
 standard&lt;/a&gt;. Values must be within normalized ranges.</p>
-<p>Example of normalization code in Python:</p>
-<p>def NormalizeLongitude(longitude):
- &quot;&quot;&quot;Wraps decimal degrees longitude to [-180.0, 180.0].&quot;&quot;&quot;
- q, r = divmod(longitude, 360.0)
- if r &gt; 180.0 or (r == 180.0 and q &lt;= -1.0):
-   return r - 360.0
- return r</p>
-<p>def NormalizeLatLng(latitude, longitude):
- &quot;&quot;&quot;Wraps decimal degrees latitude and longitude to
- [-90.0, 90.0] and [-180.0, 180.0], respectively.&quot;&quot;&quot;
- r = latitude % 360.0
- if r &lt;= 90.0:
-   return r, NormalizeLongitude(longitude)
- elif r &gt;= 270.0:
-   return r - 360, NormalizeLongitude(longitude)
- else:
-   return 180 - r, NormalizeLongitude(longitude + 180.0)</p>
-<p>assert 180.0 == NormalizeLongitude(180.0)
-assert -180.0 == NormalizeLongitude(-180.0)
-assert -179.0 == NormalizeLongitude(181.0)
-assert (0.0, 0.0) == NormalizeLatLng(360.0, 0.0)
-assert (0.0, 0.0) == NormalizeLatLng(-360.0, 0.0)
-assert (85.0, 180.0) == NormalizeLatLng(95.0, 0.0)
-assert (-85.0, -170.0) == NormalizeLatLng(-95.0, 10.0)
-assert (90.0, 10.0) == NormalizeLatLng(90.0, 10.0)
-assert (-90.0, -10.0) == NormalizeLatLng(-90.0, -10.0)
-assert (0.0, -170.0) == NormalizeLatLng(-180.0, 10.0)
-assert (0.0, -170.0) == NormalizeLatLng(180.0, 10.0)
-assert (-90.0, 10.0) == NormalizeLatLng(270.0, 10.0)
-assert (90.0, 10.0) == NormalizeLatLng(-270.0, 10.0)</p>
 </section>
       <h4><a class="xref" href="Google.Type.LatlngReflection.html">LatlngReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/latlng.proto</p>
@@ -256,7 +251,7 @@ existing data, depending on the type of process.</p>
 <p>Advice on address input / editing:</p>
 <ul>
 <li>Use an i18n-ready address widget such as
-<a href="https://github.com/googlei18n/libaddressinput">https://github.com/googlei18n/libaddressinput</a>)</li>
+<a href="https://github.com/google/libaddressinput">https://github.com/google/libaddressinput</a>)</li>
 <li>Users should not be presented with UI elements for input or editing of
 fields outside countries where that field is used.</li>
 </ul>
@@ -266,9 +261,59 @@ fields outside countries where that field is used.</li>
       <h4><a class="xref" href="Google.Type.PostalAddressReflection.html">PostalAddressReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/postal_address.proto</p>
 </section>
+      <h4><a class="xref" href="Google.Type.Quaternion.html">Quaternion</a></h4>
+      <section><p>A quaternion is defined as the quotient of two directed lines in a
+three-dimensional space or equivalently as the quotient of two Euclidean
+vectors (<a href="https://en.wikipedia.org/wiki/Quaternion">https://en.wikipedia.org/wiki/Quaternion</a>).</p>
+<p>Quaternions are often used in calculations involving three-dimensional
+rotations (<a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation</a>),
+as they provide greater mathematical robustness by avoiding the gimbal lock
+problems that can be encountered when using Euler angles
+(<a href="https://en.wikipedia.org/wiki/Gimbal_lock">https://en.wikipedia.org/wiki/Gimbal_lock</a>).</p>
+<p>Quaternions are generally represented in this form:</p>
+<p>w + xi + yj + zk</p>
+<p>where x, y, z, and w are real numbers, and i, j, and k are three imaginary
+numbers.</p>
+<p>Our naming choice (x, y, z, w) comes from the desire to avoid confusion for
+those interested in the geometric properties of the quaternion in the 3D
+Cartesian space. Other texts often use alternative names or subscripts, such
+as (a, b, c, d), (1, i, j, k), or (0, 1, 2, 3), which are perhaps better
+suited for mathematical interpretations.</p>
+<p>To avoid any confusion, as well as to maintain compatibility with a large
+number of software libraries, the quaternions represented using the protocol
+buffer below <em>must</em> follow the Hamilton convention, which defines ij = k
+(i.e. a right-handed algebra), and therefore:</p>
+<p>i^2 = j^2 = k^2 = ijk = −1
+ij = −ji = k
+jk = −kj = i
+ki = −ik = j</p>
+<p>Please DO NOT use this to represent quaternions that follow the JPL
+convention, or any of the other quaternion flavors out there.</p>
+<p>Definitions:</p>
+<ul>
+<li>Quaternion norm (or magnitude): sqrt(x^2 + y^2 + z^2 + w^2).</li>
+<li>Unit (or normalized) quaternion: a quaternion whose norm is 1.</li>
+<li>Pure quaternion: a quaternion whose scalar component (w) is 0.</li>
+<li>Rotation quaternion: a unit quaternion used to represent rotation.</li>
+<li>Orientation quaternion: a unit quaternion used to represent orientation.</li>
+</ul>
+<p>A quaternion can be normalized by dividing it by its norm. The resulting
+quaternion maintains the same direction, but has a norm of 1, i.e. it moves
+on the unit sphere. This is generally necessary for rotation and orientation
+quaternions, to avoid rounding errors:
+<a href="https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions">https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions</a></p>
+<p>Note that (x, y, z, w) and (-x, -y, -z, -w) represent the same rotation, but
+normalization would be even more useful, e.g. for comparison purposes, if it
+would produce a unique representation. It is thus recommended that w be kept
+positive, which can be achieved by changing all the signs when w is negative.</p>
+<p>Next available tag: 5</p>
+</section>
+      <h4><a class="xref" href="Google.Type.QuaternionReflection.html">QuaternionReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/type/quaternion.proto</p>
+</section>
       <h4><a class="xref" href="Google.Type.TimeOfDay.html">TimeOfDay</a></h4>
       <section><p>Represents a time of day. The date and time zone are either not significant
-or are specified elsewhere. An API may chose to allow leap seconds. Related
+or are specified elsewhere. An API may choose to allow leap seconds. Related
 types are [google.type.Date][google.type.Date] and <code>google.protobuf.Timestamp</code>.</p>
 </section>
       <h4><a class="xref" href="Google.Type.TimeofdayReflection.html">TimeofdayReflection</a></h4>
@@ -276,6 +321,11 @@ types are [google.type.Date][google.type.Date] and <code>google.protobuf.Timesta
 </section>
     <h3 id="enums">Enums
   </h3>
+      <h4><a class="xref" href="Google.Type.CalendarPeriod.html">CalendarPeriod</a></h4>
+      <section><p>A <code>CalendarPeriod</code> represents the abstract concept of a time period that has
+a canonical start. Grammatically, &quot;the start of the current
+<code>CalendarPeriod</code>.&quot; All calendar times begin at midnight UTC.</p>
+</section>
       <h4><a class="xref" href="Google.Type.DayOfWeek.html">DayOfWeek</a></h4>
       <section><p>Represents a day of week.</p>
 </section>

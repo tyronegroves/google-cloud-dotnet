@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.Firestore</code> is a.NET client library for the <a href="https://firebase.google.com/docs/firestore/">Firestore API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.1.0-beta01</code> of the library.
+This documentation is for version <code>1.1.0-beta02</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Firestore</code> package from NuGet. Add it to
@@ -73,7 +73,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>1.1.0-beta01</code>) of <code>Google.Cloud.Firestore</code>.</p>
+pre-release version (<code>1.1.0-beta02</code>) of <code>Google.Cloud.Firestore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -120,6 +120,32 @@ foreach (DocumentSnapshot queryResult in querySnapshot.Documents)
     Console.WriteLine($&quot;{firstName} {lastName}; born {born}&quot;);
 }
 </code></pre><p>See the <a href="userguide.html">user guide</a> for more samples.</p>
+<h1 id="connecting-to-the-emulator">Connecting to the emulator</h1>
+<p>To connect to the <a href="https://cloud.google.com/sdk/gcloud/reference/beta/emulators/firestore/">Firestore
+Emulator</a>,
+you need to:</p>
+<ul>
+<li>Connect to the emulator endpoint</li>
+<li>Use <code>ChannelCredentials.Insecure</code> as the channel credentials</li>
+<li>Specify an &quot;Authorization: Bearer owner&quot; header on each request</li>
+</ul>
+<p>As of version 1.1.0-beta02, the library has support for detecting
+the emulator via the environment variable and connecting to it
+automatically, if requested. This is configured via
+<code>FirestoreDbBuilder</code>, which can also be used to configure custom
+credentials easily.</p>
+<p>The following code creates a <code>FirestoreDb</code> which will use the
+emulator when the environment variables are present, but will
+otherwise connect to the production environment.</p>
+<pre><code class="lang-cs">FirestoreDb db = new FirestoreDbBuilder
+{
+    ProjectId = projectId,
+    EmulatorDetection = EmulatorDetection.ProductionOrEmulator
+}.Build();
+// Use db as normal
+</code></pre><p>See the
+<a href="api/Google.Cloud.Firestore.EmulatorDetection.html">EmulatorDetection</a>
+enum for details of the other possible values.</p>
 </article>
           </div>
           
