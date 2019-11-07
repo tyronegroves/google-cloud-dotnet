@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BatchPredictInputConfig
+   | Google.Cloud.AutoML.V1 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BatchPredictInputConfig
+   | Google.Cloud.AutoML.V1 ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig">
+  
+  
+  <h1 id="Google_Cloud_AutoML_V1_BatchPredictInputConfig" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig" class="text-break">Class BatchPredictInputConfig
+  </h1>
+  <div class="markdown level0 summary"><p>Input configuration for BatchPredict Action.</p>
+<p>The format of input depends on the ML problem of the model used for
+prediction. As input source the
+[gcs_source][google.cloud.automl.v1.InputConfig.gcs_source]
+is expected, unless specified otherwise.</p>
+<p>The formats are represented in EBNF with commas being literal and with
+non-terminal symbols defined near the end of this comment. The formats
+are:</p>
+<p>&lt;h4&gt;AutoML Natural Language&lt;/h4&gt;
+&lt;div class=&quot;ds-selector-tabs&quot;&gt;&lt;section&gt;&lt;h5&gt;Classification&lt;/h5&gt;</p>
+<p>One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH</p>
+<p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of a text file.
+Supported file extensions: .TXT, .PDF
+Text files can be no larger than 10MB in size.</p>
+<p>Sample rows:</p>
+<p>gs://folder/text1.txt
+gs://folder/text2.pdf</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Sentiment Analysis&lt;/h5&gt;
+One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH</p>
+<p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of a text file.
+Supported file extensions: .TXT, .PDF
+Text files can be no larger than 128kB in size.</p>
+<p>Sample rows:</p>
+<p>gs://folder/text1.txt
+gs://folder/text2.pdf</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Entity Extraction&lt;/h5&gt;</p>
+<p>One or more JSONL (JSON Lines) files that either provide inline text or
+documents. You can only use one format, either inline text or documents,
+for a single call to [AutoMl.BatchPredict].</p>
+<p>Each JSONL file contains a per line a proto that
+wraps a temporary user-assigned TextSnippet ID (string up to 2000
+characters long) called &quot;id&quot;, a TextSnippet proto (in
+JSON representation) and zero or more TextFeature protos. Any given
+text snippet content must have 30,000 characters or less, and also
+be UTF-8 NFC encoded (ASCII already is). The IDs provided should be
+unique.</p>
+<p>Each document JSONL file contains, per line, a proto that wraps a
+Document proto with <code>input_config</code> set. Only PDF documents are
+currently supported, and each PDF document cannot exceed 2MB in size.</p>
+<p>Each JSONL file must not exceed 100MB in size, and no more than 20
+JSONL files may be passed.</p>
+<p>Sample inline JSONL file (Shown with artificial line
+breaks. Actual line breaks are denoted by &quot;\n&quot;.):</p>
+<p>{
+  &quot;id&quot;: &quot;my_first_id&quot;,
+  &quot;text_snippet&quot;: { &quot;content&quot;: &quot;dog car cat&quot;},
+  &quot;text_features&quot;: [
+    {
+      &quot;text_segment&quot;: {&quot;start_offset&quot;: 4, &quot;end_offset&quot;: 6},
+      &quot;structural_type&quot;: PARAGRAPH,
+      &quot;bounding_poly&quot;: {
+        &quot;normalized_vertices&quot;: [
+          {&quot;x&quot;: 0.1, &quot;y&quot;: 0.1},
+          {&quot;x&quot;: 0.1, &quot;y&quot;: 0.3},
+          {&quot;x&quot;: 0.3, &quot;y&quot;: 0.3},
+          {&quot;x&quot;: 0.3, &quot;y&quot;: 0.1},
+        ]
+      },
+    }
+  ],
+}\n
+{
+  &quot;id&quot;: &quot;2&quot;,
+  &quot;text_snippet&quot;: {
+    &quot;content&quot;: &quot;Extended sample content&quot;,
+    &quot;mime_type&quot;: &quot;text/plain&quot;
+  }
+}</p>
+<p>Sample document JSONL file (Shown with artificial line
+breaks. Actual line breaks are denoted by &quot;\n&quot;.):</p>
+<p>{
+  &quot;document&quot;: {
+    &quot;input_config&quot;: {
+      &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document1.pdf&quot; ]
+      }
+    }
+  }
+}\n
+{
+  &quot;document&quot;: {
+    &quot;input_config&quot;: {
+      &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document2.pdf&quot; ]
+      }
+    }
+  }
+}
+&lt;/section&gt;
+&lt;/div&gt;</p>
+<p><strong>Input field definitions:</strong></p>
+<p><code>GCS_FILE_PATH</code>
+: The path to a file on Google Cloud Storage. For example,
+&quot;gs://folder/video.avi&quot;.</p>
+<p><strong>Errors:</strong></p>
+<p>If any of the provided CSV files can&apos;t be parsed or if more than certain
+percent of CSV rows cannot be processed then the operation fails and
+prediction does not happen. Regardless of overall success or failure the
+per-row failures, up to a certain count cap, will be listed in
+Operation.metadata.partial_failures.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">BatchPredictInputConfig</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.AutoML.V1.html">Google.Cloud.AutoML.V1</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.AutoML.V1.dll</h6>
+  <h5 id="Google_Cloud_AutoML_V1_BatchPredictInputConfig_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class BatchPredictInputConfig : IMessage&lt;BatchPredictInputConfig&gt;, IMessage, IEquatable&lt;BatchPredictInputConfig&gt;, IDeepCloneable&lt;BatchPredictInputConfig&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Google_Cloud_AutoML_V1_BatchPredictInputConfig__ctor_" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.#ctor*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_BatchPredictInputConfig__ctor" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.#ctor">BatchPredictInputConfig()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BatchPredictInputConfig()</code></pre>
+  </div>
+  <a id="Google_Cloud_AutoML_V1_BatchPredictInputConfig__ctor_" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.#ctor*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_BatchPredictInputConfig__ctor_Google_Cloud_AutoML_V1_BatchPredictInputConfig_" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.#ctor(Google.Cloud.AutoML.V1.BatchPredictInputConfig)">BatchPredictInputConfig(BatchPredictInputConfig)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BatchPredictInputConfig(BatchPredictInputConfig other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <a id="Google_Cloud_AutoML_V1_BatchPredictInputConfig_GcsSource_" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.GcsSource*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_BatchPredictInputConfig_GcsSource" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.GcsSource">GcsSource</h4>
+  <div class="markdown level1 summary"><p>Required. The Google Cloud Storage location for the input content.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GcsSource GcsSource { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.GcsSource.html">GcsSource</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_AutoML_V1_BatchPredictInputConfig_SourceCase_" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.SourceCase*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_BatchPredictInputConfig_SourceCase" data-uid="Google.Cloud.AutoML.V1.BatchPredictInputConfig.SourceCase">SourceCase</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BatchPredictInputConfig.SourceOneofCase SourceCase { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.SourceOneofCase.html">BatchPredictInputConfig.SourceOneofCase</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

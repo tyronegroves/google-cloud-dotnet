@@ -73,22 +73,76 @@
   
   <h1 id="Google_Cloud_AutoML_V1_OutputConfig" data-uid="Google.Cloud.AutoML.V1.OutputConfig" class="text-break">Class OutputConfig
   </h1>
-  <div class="markdown level0 summary"><ul>
-<li>For Translation:
+  <div class="markdown level0 summary"><p>Output configuration for ExportData.</p>
+<p>As destination the
+[gcs_destination][google.cloud.automl.v1.OutputConfig.gcs_destination]
+must be set unless specified otherwise for a domain. If gcs_destination is
+set then in the given directory a new directory is created. Its name
+will be &quot;export_data-&lt;dataset-display-name&gt;-&lt;timestamp-of-export-call&gt;&quot;,
+where timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format.
+Only ground truth annotations are exported (not approved annotations are
+not exported).</p>
+<p>The outputs correspond to how the data was imported, and may be used as
+input to import data. The output formats are represented as EBNF with literal
+commas and same non-terminal symbols definitions are these in import data&apos;s
+[InputConfig][google.cloud.automl.v1.InputConfig]:</p>
+<ul>
+<li><p>For Image Classification:
+CSV file(s) <code>image_classification_1.csv</code>,
+<code>image_classification_2.csv</code>,...,<code>image_classification_N.csv</code>with
+each line in format:
+ML_USE,GCS_FILE_PATH,LABEL,LABEL,...
+where GCS_FILE_PATHs point at the original, source locations of the
+imported images.
+For MULTICLASS classification type, there can be at most one LABEL
+per example.</p>
+</li>
+<li><p>For Image Object Detection:
+CSV file(s) <code>image_object_detection_1.csv</code>,
+<code>image_object_detection_2.csv</code>,...,<code>image_object_detection_N.csv</code>
+with each line in format:
+ML_USE,GCS_FILE_PATH,[LABEL],(BOUNDING_BOX | ,,,,,,,)
+where GCS_FILE_PATHs point at the original, source locations of the
+imported images.</p>
+</li>
+<li><p>For Text Classification:
+In the created directory CSV file(s) <code>text_classification_1.csv</code>,
+<code>text_classification_2.csv</code>, ...,<code>text_classification_N.csv</code> will be
+created where N depends on the total number of examples exported.
+Each line in the CSV is of the format:
+ML_USE,GCS_FILE_PATH,LABEL,LABEL,...
+where GCS_FILE_PATHs point at the exported .txt files containing
+the text content of the imported example. For MULTICLASS
+classification type, there will be at most one LABEL per example.</p>
+</li>
+<li><p>For Text Sentiment:
+In the created directory CSV file(s) <code>text_sentiment_1.csv</code>,
+<code>text_sentiment_2.csv</code>, ...,<code>text_sentiment_N.csv</code> will be
+created where N depends on the total number of examples exported.
+Each line in the CSV is of the format:
+ML_USE,GCS_FILE_PATH,SENTIMENT
+where GCS_FILE_PATHs point at the exported .txt files containing
+the text content of the imported example.</p>
+</li>
+<li><p>For Text Extraction:
+CSV file <code>text_extraction.csv</code>, with each line in format:
+ML_USE,GCS_FILE_PATH
+GCS_FILE_PATH leads to a .JSONL (i.e. JSON Lines) file which
+contains, per line, a proto that wraps a TextSnippet proto (in json
+representation) followed by AnnotationPayload protos (called
+annotations). If initially documents had been imported, the JSONL
+will point at the original, source locations of the imported
+documents.</p>
+</li>
+<li><p>For Translation:
 CSV file <code>translation.csv</code>, with each line in format:
 ML_USE,GCS_FILE_PATH
 GCS_FILE_PATH leads to a .TSV file which describes examples that have
 given ML_USE, using the following row format per line:
 TEXT_SNIPPET (in source language) \t TEXT_SNIPPET (in target
-language)</li>
+language)</p>
+</li>
 </ul>
-<p><code>export_data_&amp;lt;automl-dataset-display-name&gt;_&amp;lt;timestamp-of-export-call&gt;</code>
-     where &lt;automl-dataset-display-name&gt; will be made
-     BigQuery-dataset-name compatible (e.g. most special characters will
-     become underscores), and timestamp will be in
-     YYYY_MM_DDThh_mm_ss_sssZ &quot;based on ISO-8601&quot; format. In that
-     dataset a new table called <code>primary_table</code> will be created, and
-     filled with precisely the same data as this obtained on import.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -186,9 +240,9 @@ language)</li>
   </table>
   <a id="Google_Cloud_AutoML_V1_OutputConfig_GcsDestination_" data-uid="Google.Cloud.AutoML.V1.OutputConfig.GcsDestination*"></a>
   <h4 id="Google_Cloud_AutoML_V1_OutputConfig_GcsDestination" data-uid="Google.Cloud.AutoML.V1.OutputConfig.GcsDestination">GcsDestination</h4>
-  <div class="markdown level1 summary"><p>The Google Cloud Storage location where the output is to be written to.
-For Image Object Detection, Text Extraction, Video Classification and
-Tables, in the given directory a new directory will be created with name:
+  <div class="markdown level1 summary"><p>Required. The Google Cloud Storage location where the output is to be
+written to. For Image Object Detection, Text Extraction in the given
+directory a new directory will be created with name:
 export_data-&lt;dataset-display-name&gt;-&lt;timestamp-of-export-call&gt; where
 timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format. All export
 output will be written into that directory.</p>

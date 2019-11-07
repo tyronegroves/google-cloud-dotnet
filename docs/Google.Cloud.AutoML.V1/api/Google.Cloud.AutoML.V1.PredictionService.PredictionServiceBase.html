@@ -105,14 +105,86 @@ public abstract class PredictionServiceBase</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
+  <a id="Google_Cloud_AutoML_V1_PredictionService_PredictionServiceBase_BatchPredict_" data-uid="Google.Cloud.AutoML.V1.PredictionService.PredictionServiceBase.BatchPredict*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionService_PredictionServiceBase_BatchPredict_Google_Cloud_AutoML_V1_BatchPredictRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.AutoML.V1.PredictionService.PredictionServiceBase.BatchPredict(Google.Cloud.AutoML.V1.BatchPredictRequest,Grpc.Core.ServerCallContext)">BatchPredict(BatchPredictRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; BatchPredict(BatchPredictRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictRequest.html">BatchPredictRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_AutoML_V1_PredictionService_PredictionServiceBase_Predict_" data-uid="Google.Cloud.AutoML.V1.PredictionService.PredictionServiceBase.Predict*"></a>
   <h4 id="Google_Cloud_AutoML_V1_PredictionService_PredictionServiceBase_Predict_Google_Cloud_AutoML_V1_PredictRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.AutoML.V1.PredictionService.PredictionServiceBase.Predict(Google.Cloud.AutoML.V1.PredictRequest,Grpc.Core.ServerCallContext)">Predict(PredictRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Perform an online prediction. The prediction result will be directly
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                   up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                     up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                  UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+              UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
           encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+              encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>

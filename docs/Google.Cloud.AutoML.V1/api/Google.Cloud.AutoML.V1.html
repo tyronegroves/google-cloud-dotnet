@@ -80,6 +80,12 @@
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.AnnotationPayload.html">AnnotationPayload</a></h4>
       <section><p>Contains annotation information that is relevant to AutoML.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.AnnotationSpec.html">AnnotationSpec</a></h4>
+      <section><p>A definition of an annotation spec.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.AnnotationSpecName.html">AnnotationSpecName</a></h4>
+      <section><p>Resource name for the &apos;annotation_spec&apos; resource.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.AutoMl.html">AutoMl</a></h4>
       <section><p>AutoML Server API.</p>
 <p>The resource names are assigned by the server.
@@ -110,6 +116,260 @@ snake_case or kebab-case, either of those cases is accepted.</p>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.AutoMlSettings.html">AutoMlSettings</a></h4>
       <section><p>Settings for a <a class="xref" href="Google.Cloud.AutoML.V1.AutoMlClient.html">AutoMlClient</a>.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></h4>
+      <section><p>Input configuration for BatchPredict Action.</p>
+<p>The format of input depends on the ML problem of the model used for
+prediction. As input source the
+[gcs_source][google.cloud.automl.v1.InputConfig.gcs_source]
+is expected, unless specified otherwise.</p>
+<p>The formats are represented in EBNF with commas being literal and with
+non-terminal symbols defined near the end of this comment. The formats
+are:</p>
+<p>&lt;h4&gt;AutoML Natural Language&lt;/h4&gt;
+&lt;div class=&quot;ds-selector-tabs&quot;&gt;&lt;section&gt;&lt;h5&gt;Classification&lt;/h5&gt;</p>
+<p>One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH</p>
+<p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of a text file.
+Supported file extensions: .TXT, .PDF
+Text files can be no larger than 10MB in size.</p>
+<p>Sample rows:</p>
+<p>gs://folder/text1.txt
+gs://folder/text2.pdf</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Sentiment Analysis&lt;/h5&gt;
+One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH</p>
+<p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of a text file.
+Supported file extensions: .TXT, .PDF
+Text files can be no larger than 128kB in size.</p>
+<p>Sample rows:</p>
+<p>gs://folder/text1.txt
+gs://folder/text2.pdf</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Entity Extraction&lt;/h5&gt;</p>
+<p>One or more JSONL (JSON Lines) files that either provide inline text or
+documents. You can only use one format, either inline text or documents,
+for a single call to [AutoMl.BatchPredict].</p>
+<p>Each JSONL file contains a per line a proto that
+wraps a temporary user-assigned TextSnippet ID (string up to 2000
+characters long) called &quot;id&quot;, a TextSnippet proto (in
+JSON representation) and zero or more TextFeature protos. Any given
+text snippet content must have 30,000 characters or less, and also
+be UTF-8 NFC encoded (ASCII already is). The IDs provided should be
+unique.</p>
+<p>Each document JSONL file contains, per line, a proto that wraps a
+Document proto with <code>input_config</code> set. Only PDF documents are
+currently supported, and each PDF document cannot exceed 2MB in size.</p>
+<p>Each JSONL file must not exceed 100MB in size, and no more than 20
+JSONL files may be passed.</p>
+<p>Sample inline JSONL file (Shown with artificial line
+breaks. Actual line breaks are denoted by &quot;\n&quot;.):</p>
+<p>{
+  &quot;id&quot;: &quot;my_first_id&quot;,
+  &quot;text_snippet&quot;: { &quot;content&quot;: &quot;dog car cat&quot;},
+  &quot;text_features&quot;: [
+    {
+      &quot;text_segment&quot;: {&quot;start_offset&quot;: 4, &quot;end_offset&quot;: 6},
+      &quot;structural_type&quot;: PARAGRAPH,
+      &quot;bounding_poly&quot;: {
+        &quot;normalized_vertices&quot;: [
+          {&quot;x&quot;: 0.1, &quot;y&quot;: 0.1},
+          {&quot;x&quot;: 0.1, &quot;y&quot;: 0.3},
+          {&quot;x&quot;: 0.3, &quot;y&quot;: 0.3},
+          {&quot;x&quot;: 0.3, &quot;y&quot;: 0.1},
+        ]
+      },
+    }
+  ],
+}\n
+{
+  &quot;id&quot;: &quot;2&quot;,
+  &quot;text_snippet&quot;: {
+    &quot;content&quot;: &quot;Extended sample content&quot;,
+    &quot;mime_type&quot;: &quot;text/plain&quot;
+  }
+}</p>
+<p>Sample document JSONL file (Shown with artificial line
+breaks. Actual line breaks are denoted by &quot;\n&quot;.):</p>
+<p>{
+  &quot;document&quot;: {
+    &quot;input_config&quot;: {
+      &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document1.pdf&quot; ]
+      }
+    }
+  }
+}\n
+{
+  &quot;document&quot;: {
+    &quot;input_config&quot;: {
+      &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document2.pdf&quot; ]
+      }
+    }
+  }
+}
+&lt;/section&gt;
+&lt;/div&gt;</p>
+<p><strong>Input field definitions:</strong></p>
+<p><code>GCS_FILE_PATH</code>
+: The path to a file on Google Cloud Storage. For example,
+&quot;gs://folder/video.avi&quot;.</p>
+<p><strong>Errors:</strong></p>
+<p>If any of the provided CSV files can&apos;t be parsed or if more than certain
+percent of CSV rows cannot be processed then the operation fails and
+prediction does not happen. Regardless of overall success or failure the
+per-row failures, up to a certain count cap, will be listed in
+Operation.metadata.partial_failures.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOperationMetadata.html">BatchPredictOperationMetadata</a></h4>
+      <section><p>Details of BatchPredict operation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOperationMetadata.Types.html">BatchPredictOperationMetadata.Types</a></h4>
+      <section><p>Container for nested types declared in the BatchPredictOperationMetadata message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOperationMetadata.Types.BatchPredictOutputInfo.html">BatchPredictOperationMetadata.Types.BatchPredictOutputInfo</a></h4>
+      <section><p>Further describes this batch predict&apos;s output.
+Supplements</p>
+<p>[BatchPredictOutputConfig][google.cloud.automl.v1.BatchPredictOutputConfig].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.html">BatchPredictOutputConfig</a></h4>
+      <section><p>Output configuration for BatchPredict Action.</p>
+<p>As destination the</p>
+<p>[gcs_destination][google.cloud.automl.v1.BatchPredictOutputConfig.gcs_destination]
+must be set unless specified otherwise for a domain. If gcs_destination is
+set then in the given directory a new directory is created. Its name
+will be
+&quot;prediction-&lt;model-display-name&gt;-&lt;timestamp-of-prediction-call&gt;&quot;,
+where timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format. The contents
+of it depends on the ML problem the predictions are made for.</p>
+<ul>
+<li><p>For Text Classification:
+In the created directory files <code>text_classification_1.jsonl</code>,
+<code>text_classification_2.jsonl</code>,...,<code>text_classification_N.jsonl</code>
+will be created, where N may be 1, and depends on the
+total number of inputs and annotations found.</p>
+<p>Each .JSONL file will contain, per line, a JSON representation of a
+proto that wraps input text (or pdf) file in
+the text snippet (or document) proto and a list of
+zero or more AnnotationPayload protos (called annotations), which
+have classification detail populated. A single text (or pdf) file
+will be listed only once with all its annotations, and its
+annotations will never be split across files.</p>
+<p>If prediction for any text (or pdf) file failed (partially or
+completely), then additional <code>errors_1.jsonl</code>, <code>errors_2.jsonl</code>,...,
+<code>errors_N.jsonl</code> files will be created (N depends on total number of
+failed predictions). These files will have a JSON representation of a
+proto that wraps input text (or pdf) file followed by exactly one</p>
+</li>
+</ul>
+<p>[<code>google.rpc.Status</code>](https:
+//github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+   containing only <code>code</code> and <code>message</code>.</p>
+<ul>
+<li><p>For Text Sentiment:
+In the created directory files <code>text_sentiment_1.jsonl</code>,
+<code>text_sentiment_2.jsonl</code>,...,<code>text_sentiment_N.jsonl</code>
+will be created, where N may be 1, and depends on the
+total number of inputs and annotations found.</p>
+<p>Each .JSONL file will contain, per line, a JSON representation of a
+proto that wraps input text (or pdf) file in
+the text snippet (or document) proto and a list of
+zero or more AnnotationPayload protos (called annotations), which
+have text_sentiment detail populated. A single text (or pdf) file
+will be listed only once with all its annotations, and its
+annotations will never be split across files.</p>
+<p>If prediction for any text (or pdf) file failed (partially or
+completely), then additional <code>errors_1.jsonl</code>, <code>errors_2.jsonl</code>,...,
+<code>errors_N.jsonl</code> files will be created (N depends on total number of
+failed predictions). These files will have a JSON representation of a
+proto that wraps input text (or pdf) file followed by exactly one</p>
+</li>
+</ul>
+<p>[<code>google.rpc.Status</code>](https:
+//github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+   containing only <code>code</code> and <code>message</code>.</p>
+<ul>
+<li>For Text Extraction:
+In the created directory files <code>text_extraction_1.jsonl</code>,
+<code>text_extraction_2.jsonl</code>,...,<code>text_extraction_N.jsonl</code>
+will be created, where N may be 1, and depends on the
+total number of inputs and annotations found.
+The contents of these .JSONL file(s) depend on whether the input
+used inline text, or documents.
+If input was inline, then each .JSONL file will contain, per line,
+  a JSON representation of a proto that wraps given in request text
+  snippet&apos;s &quot;id&quot; (if specified), followed by input text snippet,
+  and a list of zero or more
+  AnnotationPayload protos (called annotations), which have
+  text_extraction detail populated. A single text snippet will be
+  listed only once with all its annotations, and its annotations will
+  never be split across files.
+If input used documents, then each .JSONL file will contain, per
+  line, a JSON representation of a proto that wraps given in request
+  document proto, followed by its OCR-ed representation in the form
+  of a text snippet, finally followed by a list of zero or more
+  AnnotationPayload protos (called annotations), which have
+  text_extraction detail populated and refer, via their indices, to
+  the OCR-ed text snippet. A single document (and its text snippet)
+  will be listed only once with all its annotations, and its
+  annotations will never be split across files.
+If prediction for any text snippet failed (partially or completely),
+then additional <code>errors_1.jsonl</code>, <code>errors_2.jsonl</code>,...,
+<code>errors_N.jsonl</code> files will be created (N depends on total number of
+failed predictions). These files will have a JSON representation of a
+proto that wraps either the &quot;id&quot; : &quot;&lt;id_value&gt;&quot; (in case of inline)
+or the document proto (in case of document) but here followed by
+exactly one [<code>google.rpc.Status</code>](https:
+//github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
+containing only <code>code</code> and <code>message</code>.</li>
+</ul>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictRequest.html">BatchPredictRequest</a></h4>
+      <section><p>Request message for
+[PredictionService.BatchPredict][google.cloud.automl.v1.PredictionService.BatchPredict].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a></h4>
+      <section><p>Result of the Batch Predict. This message is returned in
+[response][google.longrunning.Operation.response] of the operation returned
+by the
+[PredictionService.BatchPredict][google.cloud.automl.v1.PredictionService.BatchPredict].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BoundingBoxMetricsEntry.html">BoundingBoxMetricsEntry</a></h4>
+      <section><p>Bounding box matching model metrics for a single intersection-over-union
+threshold and multiple label match confidence thresholds.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BoundingBoxMetricsEntry.Types.html">BoundingBoxMetricsEntry.Types</a></h4>
+      <section><p>Container for nested types declared in the BoundingBoxMetricsEntry message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BoundingBoxMetricsEntry.Types.ConfidenceMetricsEntry.html">BoundingBoxMetricsEntry.Types.ConfidenceMetricsEntry</a></h4>
+      <section><p>Metrics for a single confidence threshold.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BoundingPoly.html">BoundingPoly</a></h4>
+      <section><p>A bounding polygon of a detected object on a plane.
+On output both vertices and normalized_vertices are provided.
+The polygon is formed by connecting vertices in the order they are listed.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationAnnotation.html">ClassificationAnnotation</a></h4>
+      <section><p>Contains annotation details specific to classification.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationEvaluationMetrics.html">ClassificationEvaluationMetrics</a></h4>
+      <section><p>Model evaluation metrics for classification problems.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationEvaluationMetrics.Types.html">ClassificationEvaluationMetrics.Types</a></h4>
+      <section><p>Container for nested types declared in the ClassificationEvaluationMetrics message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationEvaluationMetrics.Types.ConfidenceMetricsEntry.html">ClassificationEvaluationMetrics.Types.ConfidenceMetricsEntry</a></h4>
+      <section><p>Metrics for a single confidence threshold.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationEvaluationMetrics.Types.ConfusionMatrix.html">ClassificationEvaluationMetrics.Types.ConfusionMatrix</a></h4>
+      <section><p>Confusion matrix of the model running the classification.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationEvaluationMetrics.Types.ConfusionMatrix.Types.html">ClassificationEvaluationMetrics.Types.ConfusionMatrix.Types</a></h4>
+      <section><p>Container for nested types declared in the ConfusionMatrix message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationEvaluationMetrics.Types.ConfusionMatrix.Types.Row.html">ClassificationEvaluationMetrics.Types.ConfusionMatrix.Types.Row</a></h4>
+      <section><p>Output only. A row in the confusion matrix.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.CreateDatasetOperationMetadata.html">CreateDatasetOperationMetadata</a></h4>
+      <section><p>Details of CreateDataset operation.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.CreateDatasetRequest.html">CreateDatasetRequest</a></h4>
       <section><p>Request message for
 [AutoMl.CreateDataset][google.cloud.automl.v1.AutoMl.CreateDataset].</p>
@@ -139,18 +399,79 @@ A workspace contains examples that may be annotated.</p>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.DeleteOperationMetadata.html">DeleteOperationMetadata</a></h4>
       <section><p>Details of operations that perform deletes of any entities.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.DeployModelOperationMetadata.html">DeployModelOperationMetadata</a></h4>
+      <section><p>Details of DeployModel operation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.DeployModelRequest.html">DeployModelRequest</a></h4>
+      <section><p>Request message for
+[AutoMl.DeployModel][google.cloud.automl.v1.AutoMl.DeployModel].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.Document.html">Document</a></h4>
+      <section><p>A structured text document e.g. a PDF.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.Document.Types.html">Document.Types</a></h4>
+      <section><p>Container for nested types declared in the Document message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.Document.Types.Layout.html">Document.Types.Layout</a></h4>
+      <section><p>Describes the layout information of a
+[text_segment][google.cloud.automl.v1.Document.Layout.text_segment] in the
+document.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.Document.Types.Layout.Types.html">Document.Types.Layout.Types</a></h4>
+      <section><p>Container for nested types declared in the Layout message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.DocumentDimensions.html">DocumentDimensions</a></h4>
+      <section><p>Message that describes dimension of a document.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.DocumentDimensions.Types.html">DocumentDimensions.Types</a></h4>
+      <section><p>Container for nested types declared in the DocumentDimensions message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.DocumentInputConfig.html">DocumentInputConfig</a></h4>
+      <section><p>Input configuration of a [Document][google.cloud.automl.v1.Document].</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExamplePayload.html">ExamplePayload</a></h4>
       <section><p>Example data used for training or prediction.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportDataOperationMetadata.html">ExportDataOperationMetadata</a></h4>
+      <section><p>Details of ExportData operation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportDataOperationMetadata.Types.html">ExportDataOperationMetadata.Types</a></h4>
+      <section><p>Container for nested types declared in the ExportDataOperationMetadata message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportDataOperationMetadata.Types.ExportDataOutputInfo.html">ExportDataOperationMetadata.Types.ExportDataOutputInfo</a></h4>
+      <section><p>Further describes this export data&apos;s output.
+Supplements
+[OutputConfig][google.cloud.automl.v1.OutputConfig].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportDataRequest.html">ExportDataRequest</a></h4>
       <section><p>Request message for
 [AutoMl.ExportData][google.cloud.automl.v1.AutoMl.ExportData].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportModelOperationMetadata.html">ExportModelOperationMetadata</a></h4>
+      <section><p>Details of ExportModel operation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportModelOperationMetadata.Types.html">ExportModelOperationMetadata.Types</a></h4>
+      <section><p>Container for nested types declared in the ExportModelOperationMetadata message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportModelOperationMetadata.Types.ExportModelOutputInfo.html">ExportModelOperationMetadata.Types.ExportModelOutputInfo</a></h4>
+      <section><p>Further describes the output of model export.
+Supplements
+[ModelExportOutputConfig][google.cloud.automl.v1.ModelExportOutputConfig].</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportModelRequest.html">ExportModelRequest</a></h4>
+      <section><p>Request message for
+[AutoMl.ExportModel][google.cloud.automl.v1.AutoMl.ExportModel]. Models need
+to be enabled for exporting, otherwise an error code will be returned.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.GcsDestination.html">GcsDestination</a></h4>
       <section><p>The Google Cloud Storage location where the output is to be written to.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.GcsSource.html">GcsSource</a></h4>
       <section><p>The Google Cloud Storage location for the input content.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.GetAnnotationSpecRequest.html">GetAnnotationSpecRequest</a></h4>
+      <section><p>Request message for
+[AutoMl.GetAnnotationSpec][google.cloud.automl.v1.AutoMl.GetAnnotationSpec].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.GetDatasetRequest.html">GetDatasetRequest</a></h4>
       <section><p>Request message for
@@ -164,24 +485,416 @@ A workspace contains examples that may be annotated.</p>
       <section><p>Request message for
 [AutoMl.GetModel][google.cloud.automl.v1.AutoMl.GetModel].</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.Image.html">Image</a></h4>
+      <section><p>A representation of an image.
+Only images up to 30MB in size are supported.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageClassificationDatasetMetadata.html">ImageClassificationDatasetMetadata</a></h4>
+      <section><p>Dataset metadata that is specific to image classification.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageClassificationModelDeploymentMetadata.html">ImageClassificationModelDeploymentMetadata</a></h4>
+      <section><p>Model deployment metadata specific to Image Classification.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageClassificationModelMetadata.html">ImageClassificationModelMetadata</a></h4>
+      <section><p>Model metadata for image classification.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageObjectDetectionAnnotation.html">ImageObjectDetectionAnnotation</a></h4>
+      <section><p>Annotation details for image object detection.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageObjectDetectionDatasetMetadata.html">ImageObjectDetectionDatasetMetadata</a></h4>
+      <section><p>Dataset metadata specific to image object detection.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageObjectDetectionEvaluationMetrics.html">ImageObjectDetectionEvaluationMetrics</a></h4>
+      <section><p>Model evaluation metrics for image object detection problems.
+Evaluates prediction quality of labeled bounding boxes.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageObjectDetectionModelDeploymentMetadata.html">ImageObjectDetectionModelDeploymentMetadata</a></h4>
+      <section><p>Model deployment metadata specific to Image Object Detection.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImageObjectDetectionModelMetadata.html">ImageObjectDetectionModelMetadata</a></h4>
+      <section><p>Model metadata specific to image object detection.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImportDataOperationMetadata.html">ImportDataOperationMetadata</a></h4>
+      <section><p>Details of ImportData operation.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.ImportDataRequest.html">ImportDataRequest</a></h4>
       <section><p>Request message for
 [AutoMl.ImportData][google.cloud.automl.v1.AutoMl.ImportData].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.InputConfig.html">InputConfig</a></h4>
-      <section><p>Input configuration for ImportData Action.</p>
+      <section><p>Input configuration for
+[AutoMl.ImportData][google.cloud.automl.v1.AutoMl.ImportData] action.</p>
 <p>The format of input depends on dataset_metadata the Dataset into which
 the import is happening has. As input source the
-[gcs_source][google.cloud.automl.v1beta1.InputConfig.gcs_source]
+[gcs_source][google.cloud.automl.v1.InputConfig.gcs_source]
 is expected, unless specified otherwise. Additionally any input .CSV file
 by itself must be 100MB or smaller, unless specified otherwise.
 If an &quot;example&quot; file (that is, image, video etc.) with identical content
-(even if it had different GCS_FILE_PATH) is mentioned multiple times, then
+(even if it had different <code>GCS_FILE_PATH</code>) is mentioned multiple times, then
 its label, bounding boxes etc. are appended. The same file should be always
-provided with the same ML_USE and GCS_FILE_PATH, if it is not, then
+provided with the same <code>ML_USE</code> and <code>GCS_FILE_PATH</code>, if it is not, then
 these values are nondeterministically selected from the given ones.</p>
-<p>Errors:
-If any of the provided CSV files can&apos;t be parsed or if more than certain
+<p>The formats are represented in EBNF with commas being literal and with
+non-terminal symbols defined near the end of this comment. The formats are:</p>
+<p>&lt;h4&gt;AutoML Vision&lt;/h4&gt;</p>
+<p>&lt;div class=&quot;ds-selector-tabs&quot;&gt;&lt;section&gt;&lt;h5&gt;Classification&lt;/h5&gt;</p>
+<p>See <a href="https://cloud.google.com/vision/automl/docs/prepare">Preparing your training
+data</a> for more
+information.</p>
+<p>CSV file(s) with each line in format:</p>
+<p>ML_USE,GCS_FILE_PATH,LABEL,LABEL,...</p>
+<ul>
+<li><code>ML_USE</code> - Identifies the data set that the current row (file) applies
+to.
+This value can be one of the following:</li>
+<li><code>TRAIN</code> - Rows in this file are used to train the model.</li>
+<li><code>TEST</code> - Rows in this file are used to test the model during training.</li>
+<li><p><code>UNASSIGNED</code> - Rows in this file are not categorized. They are
+Automatically divided into train and test data. 80% for training and
+20% for testing.</p>
+</li>
+<li><p><code>GCS_FILE_PATH</code> - The Google Cloud Storage location of an image of up to
+30MB in size. Supported extensions: .JPEG, .GIF, .PNG, .WEBP, .BMP,
+.TIFF, .ICO.</p>
+</li>
+<li><p><code>LABEL</code> - A label that identifies the object in the image.</p>
+</li>
+</ul>
+<p>For the <code>MULTICLASS</code> classification type, at most one <code>LABEL</code> is allowed
+per image. If an image has not yet been labeled, then it should be
+mentioned just once with no <code>LABEL</code>.</p>
+<p>Some sample rows:</p>
+<p>TRAIN,gs://folder/image1.jpg,daisy
+TEST,gs://folder/image2.jpg,dandelion,tulip,rose
+UNASSIGNED,gs://folder/image3.jpg,daisy
+UNASSIGNED,gs://folder/image4.jpg</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Object Detection&lt;/h5&gt;
+See <a href="https://cloud.google.com/vision/automl/object-detection/docs/prepare">Preparing your training
+data</a>
+for more information.</p>
+<p>A CSV file(s) with each line in format:</p>
+<p>ML_USE,GCS_FILE_PATH,[LABEL],(BOUNDING_BOX | ,,,,,,,)</p>
+<ul>
+<li><code>ML_USE</code> - Identifies the data set that the current row (file) applies
+to.
+This value can be one of the following:</li>
+<li><code>TRAIN</code> - Rows in this file are used to train the model.</li>
+<li><code>TEST</code> - Rows in this file are used to test the model during training.</li>
+<li><p><code>UNASSIGNED</code> - Rows in this file are not categorized. They are
+Automatically divided into train and test data. 80% for training and
+20% for testing.</p>
+</li>
+<li><p><code>GCS_FILE_PATH</code> - The Google Cloud Storage location of an image of up to
+30MB in size. Supported extensions: .JPEG, .GIF, .PNG. Each image
+is assumed to be exhaustively labeled.</p>
+</li>
+<li><p><code>LABEL</code> - A label that identifies the object in the image specified by the
+<code>BOUNDING_BOX</code>.</p>
+</li>
+<li><p><code>BOUNDING BOX</code> - The vertices of an object in the example image.
+The minimum allowed <code>BOUNDING_BOX</code> edge length is 0.01, and no more than
+500 <code>BOUNDING_BOX</code> instances per image are allowed (one <code>BOUNDING_BOX</code>
+per line). If an image has no looked for objects then it should be
+mentioned just once with no LABEL and the &quot;,,,,,,,&quot; in place of the
+<code>BOUNDING_BOX</code>.</p>
+</li>
+</ul>
+<p><strong>Four sample rows:</strong></p>
+<p>TRAIN,gs://folder/image1.png,car,0.1,0.1,,,0.3,0.3,,
+TRAIN,gs://folder/image1.png,bike,.7,.6,,,.8,.9,,
+UNASSIGNED,gs://folder/im2.png,car,0.1,0.1,0.2,0.1,0.2,0.3,0.1,0.3
+TEST,gs://folder/im3.png,,,,,,,,,
+&lt;/section&gt;
+&lt;/div&gt;</p>
+<p>&lt;h4&gt;AutoML Natural Language&lt;/h4&gt;</p>
+<p>&lt;div class=&quot;ds-selector-tabs&quot;&gt;&lt;section&gt;&lt;h5&gt;Entity Extraction&lt;/h5&gt;</p>
+<p>See <a href="/natural-language/automl/entity-analysis/docs/prepare">Preparing your training
+data</a> for more
+information.</p>
+<p>One or more CSV file(s) with each line in the following format:</p>
+<p>ML_USE,GCS_FILE_PATH</p>
+<ul>
+<li><code>ML_USE</code> - Identifies the data set that the current row (file) applies
+to.
+This value can be one of the following:</li>
+<li><code>TRAIN</code> - Rows in this file are used to train the model.</li>
+<li><code>TEST</code> - Rows in this file are used to test the model during training.</li>
+<li><p><code>UNASSIGNED</code> - Rows in this file are not categorized. They are
+Automatically divided into train and test data. 80% for training and
+20% for testing..</p>
+</li>
+<li><p><code>GCS_FILE_PATH</code> - a Identifies JSON Lines (.JSONL) file stored in
+Google Cloud Storage that contains in-line text in-line as documents
+for model training.</p>
+</li>
+</ul>
+<p>After the training data set has been determined from the <code>TRAIN</code> and
+<code>UNASSIGNED</code> CSV files, the training data is divided into train and
+validation data sets. 70% for training and 30% for validation.</p>
+<p>For example:</p>
+<p>TRAIN,gs://folder/file1.jsonl
+VALIDATE,gs://folder/file2.jsonl
+TEST,gs://folder/file3.jsonl</p>
+<p><strong>In-line JSONL files</strong></p>
+<p>In-line .JSONL files contain, per line, a JSON document that wraps a
+[<code>text_snippet</code>][google.cloud.automl.v1.TextSnippet] field followed by
+one or more [<code>annotations</code>][google.cloud.automl.v1.AnnotationPayload]
+fields, which have <code>display_name</code> and <code>text_extraction</code> fields to describe
+the entity from the text snippet. Multiple JSON documents can be separated
+using line breaks (\n).</p>
+<p>The supplied text must be annotated exhaustively. For example, if you
+include the text &quot;horse&quot;, but do not label it as &quot;animal&quot;,
+then &quot;horse&quot; is assumed to not be an &quot;animal&quot;.</p>
+<p>Any given text snippet content must have 30,000 characters or
+less, and also be UTF-8 NFC encoded. ASCII is accepted as it is
+UTF-8 NFC encoded.</p>
+<p>For example:</p>
+<p>{
+ &quot;text_snippet&quot;: {
+   &quot;content&quot;: &quot;dog car cat&quot;
+ },
+ &quot;annotations&quot;: [
+    {
+      &quot;display_name&quot;: &quot;animal&quot;,
+      &quot;text_extraction&quot;: {
+        &quot;text_segment&quot;: {&quot;start_offset&quot;: 0, &quot;end_offset&quot;: 2}
+     }
+    },
+    {
+     &quot;display_name&quot;: &quot;vehicle&quot;,
+      &quot;text_extraction&quot;: {
+        &quot;text_segment&quot;: {&quot;start_offset&quot;: 4, &quot;end_offset&quot;: 6}
+      }
+    },
+    {
+      &quot;display_name&quot;: &quot;animal&quot;,
+      &quot;text_extraction&quot;: {
+        &quot;text_segment&quot;: {&quot;start_offset&quot;: 8, &quot;end_offset&quot;: 10}
+      }
+    }
+]
+}\n
+{
+  &quot;text_snippet&quot;: {
+    &quot;content&quot;: &quot;This dog is good.&quot;
+  },
+  &quot;annotations&quot;: [
+     {
+       &quot;display_name&quot;: &quot;animal&quot;,
+       &quot;text_extraction&quot;: {
+         &quot;text_segment&quot;: {&quot;start_offset&quot;: 5, &quot;end_offset&quot;: 7}
+       }
+     }
+  ]
+}</p>
+<p><strong>JSONL files that reference documents</strong></p>
+<p>.JSONL files contain, per line, a JSON document that wraps a
+<code>input_config</code> that contains the path to a source PDF document.
+Multiple JSON documents can be separated using line breaks (\n).</p>
+<p>For example:</p>
+<p>{
+ &quot;document&quot;: {
+   &quot;input_config&quot;: {
+     &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document1.pdf&quot; ]
+     }
+   }
+ }
+}\n
+{
+ &quot;document&quot;: {
+   &quot;input_config&quot;: {
+     &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document2.pdf&quot; ]
+     }
+   }
+ }
+}</p>
+<p><strong>In-line JSONL files with PDF layout information</strong></p>
+<p><strong>Note:</strong> You can only annotate PDF files using the UI. The format described
+below applies to annotated PDF files exported using the UI or <code>exportData</code>.</p>
+<p>In-line .JSONL files for PDF documents contain, per line, a JSON document
+that wraps a <code>document</code> field that provides the textual content of the PDF
+document and the layout information.</p>
+<p>For example:</p>
+<p>{
+ &quot;document&quot;: {
+         &quot;document_text&quot;: {
+           &quot;content&quot;: &quot;dog car cat&quot;
+         }
+         &quot;layout&quot;: [
+           {
+             &quot;text_segment&quot;: {
+               &quot;start_offset&quot;: 0,
+               &quot;end_offset&quot;: 11,
+              },
+              &quot;page_number&quot;: 1,
+              &quot;bounding_poly&quot;: {
+                 &quot;normalized_vertices&quot;: [
+                   {&quot;x&quot;: 0.1, &quot;y&quot;: 0.1},
+                   {&quot;x&quot;: 0.1, &quot;y&quot;: 0.3},
+                   {&quot;x&quot;: 0.3, &quot;y&quot;: 0.3},
+                   {&quot;x&quot;: 0.3, &quot;y&quot;: 0.1},
+                 ],
+               },
+               &quot;text_segment_type&quot;: TOKEN,
+           }
+         ],
+         &quot;document_dimensions&quot;: {
+           &quot;width&quot;: 8.27,
+           &quot;height&quot;: 11.69,
+           &quot;unit&quot;: INCH,
+         }
+         &quot;page_count&quot;: 3,
+       },
+       &quot;annotations&quot;: [
+         {
+           &quot;display_name&quot;: &quot;animal&quot;,
+           &quot;text_extraction&quot;: {
+             &quot;text_segment&quot;: {&quot;start_offset&quot;: 0, &quot;end_offset&quot;: 3}
+           }
+         },
+         {
+           &quot;display_name&quot;: &quot;vehicle&quot;,
+           &quot;text_extraction&quot;: {
+             &quot;text_segment&quot;: {&quot;start_offset&quot;: 4, &quot;end_offset&quot;: 7}
+           }
+         },
+         {
+           &quot;display_name&quot;: &quot;animal&quot;,
+           &quot;text_extraction&quot;: {
+             &quot;text_segment&quot;: {&quot;start_offset&quot;: 8, &quot;end_offset&quot;: 11}
+           }
+         },
+       ],</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Classification&lt;/h5&gt;</p>
+<p>See <a href="https://cloud.google.com/natural-language/automl/docs/prepare">Preparing your training
+data</a> for more
+information.</p>
+<p>One or more CSV file(s) with each line in the following format:</p>
+<p>ML_USE,(TEXT_SNIPPET | GCS_FILE_PATH),LABEL,LABEL,...</p>
+<ul>
+<li><code>ML_USE</code> - Identifies the data set that the current row (file) applies
+to.
+This value can be one of the following:</li>
+<li><code>TRAIN</code> - Rows in this file are used to train the model.</li>
+<li><code>TEST</code> - Rows in this file are used to test the model during training.</li>
+<li><p><code>UNASSIGNED</code> - Rows in this file are not categorized. They are
+Automatically divided into train and test data. 80% for training and
+20% for testing.</p>
+</li>
+<li><p><code>TEXT_SNIPPET</code> and <code>GCS_FILE_PATH</code> are distinguished by a pattern. If
+the column content is a valid Google Cloud Storage file path, that is,
+prefixed by &quot;gs://&quot;, it is treated as a <code>GCS_FILE_PATH</code>. Otherwise, if
+the content is enclosed in double quotes (&quot;&quot;), it is treated as a
+<code>TEXT_SNIPPET</code>. For <code>GCS_FILE_PATH</code>, the path must lead to a
+file with supported extension and UTF-8 encoding, for example,
+&quot;gs://folder/content.txt&quot; AutoML imports the file content
+as a text snippet. For <code>TEXT_SNIPPET</code>, AutoML imports the column content
+excluding quotes. In both cases, size of the content must be 10MB or
+less in size. For zip files, the size of each file inside the zip must be
+10MB or less in size.</p>
+</li>
+</ul>
+<p>For the <code>MULTICLASS</code> classification type, at most one <code>LABEL</code> is allowed.
+The <code>ML_USE</code> and <code>LABEL</code> columns are optional.
+Supported file extensions: .TXT, .PDF, .ZIP</p>
+<p>A maximum of 100 unique labels are allowed per CSV row.</p>
+<p>Sample rows:</p>
+<p>TRAIN,&quot;They have bad food and very rude&quot;,RudeService,BadFood
+gs://folder/content.txt,SlowService
+TEST,gs://folder/document.pdf
+VALIDATE,gs://folder/text_files.zip,BadFood</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Sentiment Analysis&lt;/h5&gt;</p>
+<p>See <a href="https://cloud.google.com/natural-language/automl/docs/prepare">Preparing your training
+data</a> for more
+information.</p>
+<p>CSV file(s) with each line in format:</p>
+<p>ML_USE,(TEXT_SNIPPET | GCS_FILE_PATH),SENTIMENT</p>
+<ul>
+<li><code>ML_USE</code> - Identifies the data set that the current row (file) applies
+to.
+This value can be one of the following:</li>
+<li><code>TRAIN</code> - Rows in this file are used to train the model.</li>
+<li><code>TEST</code> - Rows in this file are used to test the model during training.</li>
+<li><p><code>UNASSIGNED</code> - Rows in this file are not categorized. They are
+Automatically divided into train and test data. 80% for training and
+20% for testing.</p>
+</li>
+<li><p><code>TEXT_SNIPPET</code> and <code>GCS_FILE_PATH</code> are distinguished by a pattern. If
+the column content is a valid  Google Cloud Storage file path, that is,
+prefixed by &quot;gs://&quot;, it is treated as a <code>GCS_FILE_PATH</code>. Otherwise, if
+the content is enclosed in double quotes (&quot;&quot;), it is treated as a
+<code>TEXT_SNIPPET</code>. For <code>GCS_FILE_PATH</code>, the path must lead to a
+file with supported extension and UTF-8 encoding, for example,
+&quot;gs://folder/content.txt&quot; AutoML imports the file content
+as a text snippet. For <code>TEXT_SNIPPET</code>, AutoML imports the column content
+excluding quotes. In both cases, size of the content must be 128kB or
+less in size. For zip files, the size of each file inside the zip must be
+128kB or less in size.</p>
+</li>
+</ul>
+<p>The <code>ML_USE</code> and <code>SENTIMENT</code> columns are optional.
+Supported file extensions: .TXT, .PDF, .ZIP</p>
+<ul>
+<li><code>SENTIMENT</code> - An integer between 0 and
+Dataset.text_sentiment_dataset_metadata.sentiment_max
+(inclusive). Describes the ordinal of the sentiment - higher
+value means a more positive sentiment. All the values are
+completely relative, i.e. neither 0 needs to mean a negative or
+neutral sentiment nor sentiment_max needs to mean a positive one -
+it is just required that 0 is the least positive sentiment
+in the data, and sentiment_max is the  most positive one.
+The SENTIMENT shouldn&apos;t be confused with &quot;score&quot; or &quot;magnitude&quot;
+from the previous Natural Language Sentiment Analysis API.
+All SENTIMENT values between 0 and sentiment_max must be
+represented in the imported data. On prediction the same 0 to
+sentiment_max range will be used. The difference between
+neighboring sentiment values needs not to be uniform, e.g. 1 and
+2 may be similar whereas the difference between 2 and 3 may be
+large.</li>
+</ul>
+<p>Sample rows:</p>
+<p>TRAIN,&amp;quot;@freewrytin this is way too good for your product&quot;,2
+gs://folder/content.txt,3
+TEST,gs://folder/document.pdf
+VALIDATE,gs://folder/text_files.zip,2
+&lt;/section&gt;
+&lt;/div&gt;</p>
+<p><strong>Input field definitions:</strong></p>
+<p><code>ML_USE</code>
+: (&quot;TRAIN&quot; | &quot;VALIDATE&quot; | &quot;TEST&quot; | &quot;UNASSIGNED&quot;)
+Describes how the given example (file) should be used for model
+training. &quot;UNASSIGNED&quot; can be used when user has no preference.</p>
+<p><code>GCS_FILE_PATH</code>
+: The path to a file on Google Cloud Storage. For example,
+&quot;gs://folder/image1.png&quot;.</p>
+<p><code>LABEL</code>
+: A display name of an object on an image, video etc., e.g. &quot;dog&quot;.
+Must be up to 32 characters long and can consist only of ASCII
+Latin letters A-Z and a-z, underscores(_), and ASCII digits 0-9.
+For each label an AnnotationSpec is created which display_name
+becomes the label; AnnotationSpecs are given back in predictions.</p>
+<p><code>BOUNDING_BOX</code>
+: (<code>VERTEX,VERTEX,VERTEX,VERTEX</code> | <code>VERTEX,,,VERTEX,,</code>)
+A rectangle parallel to the frame of the example (image,
+video). If 4 vertices are given they are connected by edges
+in the order provided, if 2 are given they are recognized
+as diagonally opposite vertices of the rectangle.</p>
+<p><code>VERTEX</code>
+: (<code>COORDINATE,COORDINATE</code>)
+First coordinate is horizontal (x), the second is vertical (y).</p>
+<p><code>COORDINATE</code>
+: A float in 0 to 1 range, relative to total length of
+image or video in given dimension. For fractions the
+leading non-decimal 0 can be omitted (i.e. 0.3 = .3).
+Point 0,0 is in top left.</p>
+<p><code>TEXT_SNIPPET</code>
+: The content of a text snippet, UTF-8 encoded, enclosed within
+double quotes (&quot;&quot;).</p>
+<p><code>DOCUMENT</code>
+: A field that provides the textual content with document and the layout
+information.</p>
+<p><strong>Errors:</strong></p>
+<p>If any of the provided CSV files can&apos;t be parsed or if more than certain
 percent of CSV rows cannot be processed then the operation fails and
 nothing is imported. Regardless of overall success or failure the per-row
 failures, up to a certain count cap, is listed in
@@ -226,29 +939,93 @@ Operation.metadata.partial_failures.</p>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluationName.html">ModelEvaluationName</a></h4>
       <section><p>Resource name for the &apos;model_evaluation&apos; resource.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ModelExportOutputConfig.html">ModelExportOutputConfig</a></h4>
+      <section><p>Output configuration for ModelExport Action.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.ModelName.html">ModelName</a></h4>
       <section><p>Resource name for the &apos;model&apos; resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.NormalizedVertex.html">NormalizedVertex</a></h4>
+      <section><p>A vertex represents a 2D point in the image.
+The normalized vertex coordinates are between 0 to 1 fractions relative to
+the original plane (image, video). E.g. if the plane (e.g. whole image) would
+have size 10 x 20 then a point with normalized coordinates (0.1, 0.3) would
+be at the position (1, 6) on that plane.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a></h4>
       <section><p>Metadata used across all long running operations returned by AutoML API.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.OutputConfig.html">OutputConfig</a></h4>
-      <section><ul>
-<li>For Translation:
+      <section><p>Output configuration for ExportData.</p>
+<p>As destination the
+[gcs_destination][google.cloud.automl.v1.OutputConfig.gcs_destination]
+must be set unless specified otherwise for a domain. If gcs_destination is
+set then in the given directory a new directory is created. Its name
+will be &quot;export_data-&lt;dataset-display-name&gt;-&lt;timestamp-of-export-call&gt;&quot;,
+where timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format.
+Only ground truth annotations are exported (not approved annotations are
+not exported).</p>
+<p>The outputs correspond to how the data was imported, and may be used as
+input to import data. The output formats are represented as EBNF with literal
+commas and same non-terminal symbols definitions are these in import data&apos;s
+[InputConfig][google.cloud.automl.v1.InputConfig]:</p>
+<ul>
+<li><p>For Image Classification:
+CSV file(s) <code>image_classification_1.csv</code>,
+<code>image_classification_2.csv</code>,...,<code>image_classification_N.csv</code>with
+each line in format:
+ML_USE,GCS_FILE_PATH,LABEL,LABEL,...
+where GCS_FILE_PATHs point at the original, source locations of the
+imported images.
+For MULTICLASS classification type, there can be at most one LABEL
+per example.</p>
+</li>
+<li><p>For Image Object Detection:
+CSV file(s) <code>image_object_detection_1.csv</code>,
+<code>image_object_detection_2.csv</code>,...,<code>image_object_detection_N.csv</code>
+with each line in format:
+ML_USE,GCS_FILE_PATH,[LABEL],(BOUNDING_BOX | ,,,,,,,)
+where GCS_FILE_PATHs point at the original, source locations of the
+imported images.</p>
+</li>
+<li><p>For Text Classification:
+In the created directory CSV file(s) <code>text_classification_1.csv</code>,
+<code>text_classification_2.csv</code>, ...,<code>text_classification_N.csv</code> will be
+created where N depends on the total number of examples exported.
+Each line in the CSV is of the format:
+ML_USE,GCS_FILE_PATH,LABEL,LABEL,...
+where GCS_FILE_PATHs point at the exported .txt files containing
+the text content of the imported example. For MULTICLASS
+classification type, there will be at most one LABEL per example.</p>
+</li>
+<li><p>For Text Sentiment:
+In the created directory CSV file(s) <code>text_sentiment_1.csv</code>,
+<code>text_sentiment_2.csv</code>, ...,<code>text_sentiment_N.csv</code> will be
+created where N depends on the total number of examples exported.
+Each line in the CSV is of the format:
+ML_USE,GCS_FILE_PATH,SENTIMENT
+where GCS_FILE_PATHs point at the exported .txt files containing
+the text content of the imported example.</p>
+</li>
+<li><p>For Text Extraction:
+CSV file <code>text_extraction.csv</code>, with each line in format:
+ML_USE,GCS_FILE_PATH
+GCS_FILE_PATH leads to a .JSONL (i.e. JSON Lines) file which
+contains, per line, a proto that wraps a TextSnippet proto (in json
+representation) followed by AnnotationPayload protos (called
+annotations). If initially documents had been imported, the JSONL
+will point at the original, source locations of the imported
+documents.</p>
+</li>
+<li><p>For Translation:
 CSV file <code>translation.csv</code>, with each line in format:
 ML_USE,GCS_FILE_PATH
 GCS_FILE_PATH leads to a .TSV file which describes examples that have
 given ML_USE, using the following row format per line:
 TEXT_SNIPPET (in source language) \t TEXT_SNIPPET (in target
-language)</li>
+language)</p>
+</li>
 </ul>
-<p><code>export_data_&amp;lt;automl-dataset-display-name&gt;_&amp;lt;timestamp-of-export-call&gt;</code>
-     where &lt;automl-dataset-display-name&gt; will be made
-     BigQuery-dataset-name compatible (e.g. most special characters will
-     become underscores), and timestamp will be in
-     YYYY_MM_DDThh_mm_ss_sssZ &quot;based on ISO-8601&quot; format. In that
-     dataset a new table called <code>primary_table</code> will be created, and
-     filled with precisely the same data as this obtained on import.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.PredictionService.html">PredictionService</a></h4>
       <section><p>AutoML Prediction API.</p>
@@ -281,6 +1058,45 @@ snake_case or kebab-case, either of those cases is accepted.</p>
       <section><p>Response message for
 [PredictionService.Predict][google.cloud.automl.v1.PredictionService.Predict].</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextClassificationDatasetMetadata.html">TextClassificationDatasetMetadata</a></h4>
+      <section><p>Dataset metadata for classification.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextClassificationModelMetadata.html">TextClassificationModelMetadata</a></h4>
+      <section><p>Model metadata that is specific to text classification.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextExtractionAnnotation.html">TextExtractionAnnotation</a></h4>
+      <section><p>Annotation for identifying spans of text.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextExtractionDatasetMetadata.html">TextExtractionDatasetMetadata</a></h4>
+      <section><p>Dataset metadata that is specific to text extraction</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextExtractionEvaluationMetrics.html">TextExtractionEvaluationMetrics</a></h4>
+      <section><p>Model evaluation metrics for text extraction problems.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextExtractionEvaluationMetrics.Types.html">TextExtractionEvaluationMetrics.Types</a></h4>
+      <section><p>Container for nested types declared in the TextExtractionEvaluationMetrics message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextExtractionEvaluationMetrics.Types.ConfidenceMetricsEntry.html">TextExtractionEvaluationMetrics.Types.ConfidenceMetricsEntry</a></h4>
+      <section><p>Metrics for a single confidence threshold.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextExtractionModelMetadata.html">TextExtractionModelMetadata</a></h4>
+      <section><p>Model metadata that is specific to text extraction.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextSegment.html">TextSegment</a></h4>
+      <section><p>A contiguous part of a text (string), assuming it has an UTF-8 NFC encoding.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextSentimentAnnotation.html">TextSentimentAnnotation</a></h4>
+      <section><p>Contains annotation details specific to text sentiment.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextSentimentDatasetMetadata.html">TextSentimentDatasetMetadata</a></h4>
+      <section><p>Dataset metadata for text sentiment.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextSentimentEvaluationMetrics.html">TextSentimentEvaluationMetrics</a></h4>
+      <section><p>Model evaluation metrics for text sentiment problems.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextSentimentModelMetadata.html">TextSentimentModelMetadata</a></h4>
+      <section><p>Model metadata that is specific to text sentiment.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextSnippet.html">TextSnippet</a></h4>
       <section><p>A representation of a text snippet.</p>
 </section>
@@ -296,6 +1112,13 @@ snake_case or kebab-case, either of those cases is accepted.</p>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.TranslationModelMetadata.html">TranslationModelMetadata</a></h4>
       <section><p>Model metadata that is specific to translation.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.UndeployModelOperationMetadata.html">UndeployModelOperationMetadata</a></h4>
+      <section><p>Details of UndeployModel operation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.UndeployModelRequest.html">UndeployModelRequest</a></h4>
+      <section><p>Request message for
+[AutoMl.UndeployModel][google.cloud.automl.v1.AutoMl.UndeployModel].</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.UpdateDatasetRequest.html">UpdateDatasetRequest</a></h4>
       <section><p>Request message for
 [AutoMl.UpdateDataset][google.cloud.automl.v1.AutoMl.UpdateDataset]</p>
@@ -309,11 +1132,38 @@ snake_case or kebab-case, either of those cases is accepted.</p>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.AnnotationPayload.DetailOneofCase.html">AnnotationPayload.DetailOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;detail&quot; oneof.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.SourceOneofCase.html">BatchPredictInputConfig.SourceOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;source&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOperationMetadata.Types.BatchPredictOutputInfo.OutputLocationOneofCase.html">BatchPredictOperationMetadata.Types.BatchPredictOutputInfo.OutputLocationOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;output_location&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.DestinationOneofCase.html">BatchPredictOutputConfig.DestinationOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;destination&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ClassificationType.html">ClassificationType</a></h4>
+      <section><p>Type of the classification problem.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.Dataset.DatasetMetadataOneofCase.html">Dataset.DatasetMetadataOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;dataset_metadata&quot; oneof.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.DeployModelRequest.ModelDeploymentMetadataOneofCase.html">DeployModelRequest.ModelDeploymentMetadataOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;model_deployment_metadata&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.Document.Types.Layout.Types.TextSegmentType.html">Document.Types.Layout.Types.TextSegmentType</a></h4>
+      <section><p>The type of TextSegment in the context of the original document.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.DocumentDimensions.Types.DocumentDimensionUnit.html">DocumentDimensions.Types.DocumentDimensionUnit</a></h4>
+      <section><p>Unit of the document dimension.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExamplePayload.PayloadOneofCase.html">ExamplePayload.PayloadOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;payload&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ExportDataOperationMetadata.Types.ExportDataOutputInfo.OutputLocationOneofCase.html">ExportDataOperationMetadata.Types.ExportDataOutputInfo.OutputLocationOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;output_location&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.Image.DataOneofCase.html">Image.DataOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;data&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.InputConfig.SourceOneofCase.html">InputConfig.SourceOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;source&quot; oneof.</p>
@@ -327,11 +1177,17 @@ snake_case or kebab-case, either of those cases is accepted.</p>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluation.MetricsOneofCase.html">ModelEvaluation.MetricsOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;metrics&quot; oneof.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.ModelExportOutputConfig.DestinationOneofCase.html">ModelExportOutputConfig.DestinationOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;destination&quot; oneof.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.DetailsOneofCase.html">OperationMetadata.DetailsOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;details&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.AutoML.V1.OutputConfig.DestinationOneofCase.html">OutputConfig.DestinationOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;destination&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.AutoML.V1.TextExtractionAnnotation.AnnotationOneofCase.html">TextExtractionAnnotation.AnnotationOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;annotation&quot; oneof.</p>
 </section>
 </article>
           </div>

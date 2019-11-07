@@ -105,6 +105,30 @@
   </div>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictOperationsClient_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictOperationsClient*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictOperationsClient" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictOperationsClient">BatchPredictOperationsClient</h4>
+  <div class="markdown level1 summary"><p>The long-running operations client for <code>BatchPredict</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual OperationsClient BatchPredictOperationsClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_DefaultEndpoint_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.DefaultEndpoint*"></a>
   <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_DefaultEndpoint" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.DefaultEndpoint">DefaultEndpoint</h4>
   <div class="markdown level1 summary"><p>The default endpoint for the PredictionService service, which is a host of &quot;automl.googleapis.com&quot; and a port of 443.</p>
@@ -183,6 +207,912 @@
   </table>
   <h3 id="methods">Methods
   </h3>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredict*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_Google_Cloud_AutoML_V1_BatchPredictRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredict(Google.Cloud.AutoML.V1.BatchPredictRequest,Google.Api.Gax.Grpc.CallSettings)">BatchPredict(BatchPredictRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;BatchPredictResult, OperationMetadata&gt; BatchPredict(BatchPredictRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictRequest.html">BatchPredictRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_Google_Cloud_AutoML_V1_BatchPredictRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+PredictionServiceClient predictionServiceClient = PredictionServiceClient.Create();
+// Initialize request argument(s)
+BatchPredictRequest request = new BatchPredictRequest
+{
+    ModelName = new ModelName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[MODEL]&quot;),
+    InputConfig = new BatchPredictInputConfig(),
+    OutputConfig = new BatchPredictOutputConfig(),
+};
+// Make the request
+Operation&lt;BatchPredictResult, OperationMetadata&gt; response =
+    predictionServiceClient.BatchPredict(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;BatchPredictResult, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+BatchPredictResult result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;BatchPredictResult, OperationMetadata&gt; retrievedResponse =
+    predictionServiceClient.PollOnceBatchPredict(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    BatchPredictResult retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredict*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_Google_Cloud_AutoML_V1_ModelName_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredict(Google.Cloud.AutoML.V1.ModelName,Google.Cloud.AutoML.V1.BatchPredictInputConfig,Google.Cloud.AutoML.V1.BatchPredictOutputConfig,System.Collections.Generic.IDictionary{System.String,System.String},Google.Api.Gax.Grpc.CallSettings)">BatchPredict(ModelName, BatchPredictInputConfig, BatchPredictOutputConfig, IDictionary&lt;String, String&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;BatchPredictResult, OperationMetadata&gt; BatchPredict(ModelName name, BatchPredictInputConfig inputConfig, BatchPredictOutputConfig outputConfig, IDictionary&lt;string, string&gt; params, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.ModelName.html">ModelName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of the model requested to serve the batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></td>
+        <td><span class="parametername">inputConfig</span></td>
+        <td><p>Required. The input configuration for batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.html">BatchPredictOutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The Configuration specifying where output predictions should
+be written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+<ul>
+<li>For Text Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for a text snippet, it will only produce results
+   that have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for an image, it will only produce results that
+   have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:</li>
+</ul>
+<p><code>score_threshold</code> - (float) When Model detects objects on the image,
+  it will only produce bounding boxes which have at least this
+  confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+  boxes will be produced per image. Default is 100, the
+  requested value may be limited by server.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_Google_Cloud_AutoML_V1_ModelName_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+PredictionServiceClient predictionServiceClient = PredictionServiceClient.Create();
+// Initialize request argument(s)
+ModelName name = new ModelName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[MODEL]&quot;);
+BatchPredictInputConfig inputConfig = new BatchPredictInputConfig();
+BatchPredictOutputConfig outputConfig = new BatchPredictOutputConfig();
+IDictionary&lt;string, string&gt; @params = new Dictionary&lt;string, string&gt;();
+// Make the request
+Operation&lt;BatchPredictResult, OperationMetadata&gt; response =
+    predictionServiceClient.BatchPredict(name, inputConfig, outputConfig, @params);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;BatchPredictResult, OperationMetadata&gt; completedResponse =
+    response.PollUntilCompleted();
+// Retrieve the operation result
+BatchPredictResult result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;BatchPredictResult, OperationMetadata&gt; retrievedResponse =
+    predictionServiceClient.PollOnceBatchPredict(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    BatchPredictResult retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredict*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredict_System_String_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredict(System.String,Google.Cloud.AutoML.V1.BatchPredictInputConfig,Google.Cloud.AutoML.V1.BatchPredictOutputConfig,System.Collections.Generic.IDictionary{System.String,System.String},Google.Api.Gax.Grpc.CallSettings)">BatchPredict(String, BatchPredictInputConfig, BatchPredictOutputConfig, IDictionary&lt;String, String&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;BatchPredictResult, OperationMetadata&gt; BatchPredict(string name, BatchPredictInputConfig inputConfig, BatchPredictOutputConfig outputConfig, IDictionary&lt;string, string&gt; params, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of the model requested to serve the batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></td>
+        <td><span class="parametername">inputConfig</span></td>
+        <td><p>Required. The input configuration for batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.html">BatchPredictOutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The Configuration specifying where output predictions should
+be written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+<ul>
+<li>For Text Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for a text snippet, it will only produce results
+   that have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for an image, it will only produce results that
+   have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:</li>
+</ul>
+<p><code>score_threshold</code> - (float) When Model detects objects on the image,
+  it will only produce bounding boxes which have at least this
+  confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+  boxes will be produced per image. Default is 100, the
+  requested value may be limited by server.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_Google_Cloud_AutoML_V1_BatchPredictRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync(Google.Cloud.AutoML.V1.BatchPredictRequest,Google.Api.Gax.Grpc.CallSettings)">BatchPredictAsync(BatchPredictRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;BatchPredictResult, OperationMetadata&gt;&gt; BatchPredictAsync(BatchPredictRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictRequest.html">BatchPredictRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_Google_Cloud_AutoML_V1_BatchPredictRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+PredictionServiceClient predictionServiceClient = await PredictionServiceClient.CreateAsync();
+// Initialize request argument(s)
+BatchPredictRequest request = new BatchPredictRequest
+{
+    ModelName = new ModelName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[MODEL]&quot;),
+    InputConfig = new BatchPredictInputConfig(),
+    OutputConfig = new BatchPredictOutputConfig(),
+};
+// Make the request
+Operation&lt;BatchPredictResult, OperationMetadata&gt; response =
+    await predictionServiceClient.BatchPredictAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;BatchPredictResult, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+BatchPredictResult result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;BatchPredictResult, OperationMetadata&gt; retrievedResponse =
+    await predictionServiceClient.PollOnceBatchPredictAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    BatchPredictResult retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_Google_Cloud_AutoML_V1_ModelName_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync(Google.Cloud.AutoML.V1.ModelName,Google.Cloud.AutoML.V1.BatchPredictInputConfig,Google.Cloud.AutoML.V1.BatchPredictOutputConfig,System.Collections.Generic.IDictionary{System.String,System.String},Google.Api.Gax.Grpc.CallSettings)">BatchPredictAsync(ModelName, BatchPredictInputConfig, BatchPredictOutputConfig, IDictionary&lt;String, String&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;BatchPredictResult, OperationMetadata&gt;&gt; BatchPredictAsync(ModelName name, BatchPredictInputConfig inputConfig, BatchPredictOutputConfig outputConfig, IDictionary&lt;string, string&gt; params, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.ModelName.html">ModelName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of the model requested to serve the batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></td>
+        <td><span class="parametername">inputConfig</span></td>
+        <td><p>Required. The input configuration for batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.html">BatchPredictOutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The Configuration specifying where output predictions should
+be written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+<ul>
+<li>For Text Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for a text snippet, it will only produce results
+   that have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for an image, it will only produce results that
+   have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:</li>
+</ul>
+<p><code>score_threshold</code> - (float) When Model detects objects on the image,
+  it will only produce bounding boxes which have at least this
+  confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+  boxes will be produced per image. Default is 100, the
+  requested value may be limited by server.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_Google_Cloud_AutoML_V1_ModelName_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+PredictionServiceClient predictionServiceClient = await PredictionServiceClient.CreateAsync();
+// Initialize request argument(s)
+ModelName name = new ModelName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[MODEL]&quot;);
+BatchPredictInputConfig inputConfig = new BatchPredictInputConfig();
+BatchPredictOutputConfig outputConfig = new BatchPredictOutputConfig();
+IDictionary&lt;string, string&gt; @params = new Dictionary&lt;string, string&gt;();
+// Make the request
+Operation&lt;BatchPredictResult, OperationMetadata&gt; response =
+    await predictionServiceClient.BatchPredictAsync(name, inputConfig, outputConfig, @params);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;BatchPredictResult, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+BatchPredictResult result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;BatchPredictResult, OperationMetadata&gt; retrievedResponse =
+    await predictionServiceClient.PollOnceBatchPredictAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    BatchPredictResult retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_Google_Cloud_AutoML_V1_ModelName_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__System_Threading_CancellationToken_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync(Google.Cloud.AutoML.V1.ModelName,Google.Cloud.AutoML.V1.BatchPredictInputConfig,Google.Cloud.AutoML.V1.BatchPredictOutputConfig,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)">BatchPredictAsync(ModelName, BatchPredictInputConfig, BatchPredictOutputConfig, IDictionary&lt;String, String&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;BatchPredictResult, OperationMetadata&gt;&gt; BatchPredictAsync(ModelName name, BatchPredictInputConfig inputConfig, BatchPredictOutputConfig outputConfig, IDictionary&lt;string, string&gt; params, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.ModelName.html">ModelName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of the model requested to serve the batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></td>
+        <td><span class="parametername">inputConfig</span></td>
+        <td><p>Required. The input configuration for batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.html">BatchPredictOutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The Configuration specifying where output predictions should
+be written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+<ul>
+<li>For Text Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for a text snippet, it will only produce results
+   that have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for an image, it will only produce results that
+   have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:</li>
+</ul>
+<p><code>score_threshold</code> - (float) When Model detects objects on the image,
+  it will only produce bounding boxes which have at least this
+  confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+  boxes will be produced per image. Default is 100, the
+  requested value may be limited by server.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_Google_Cloud_AutoML_V1_ModelName_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+PredictionServiceClient predictionServiceClient = await PredictionServiceClient.CreateAsync();
+// Initialize request argument(s)
+ModelName name = new ModelName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[MODEL]&quot;);
+BatchPredictInputConfig inputConfig = new BatchPredictInputConfig();
+BatchPredictOutputConfig outputConfig = new BatchPredictOutputConfig();
+IDictionary&lt;string, string&gt; @params = new Dictionary&lt;string, string&gt;();
+// Make the request
+Operation&lt;BatchPredictResult, OperationMetadata&gt; response =
+    await predictionServiceClient.BatchPredictAsync(name, inputConfig, outputConfig, @params);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;BatchPredictResult, OperationMetadata&gt; completedResponse =
+    await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+BatchPredictResult result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;BatchPredictResult, OperationMetadata&gt; retrievedResponse =
+    await predictionServiceClient.PollOnceBatchPredictAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    BatchPredictResult retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_System_String_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync(System.String,Google.Cloud.AutoML.V1.BatchPredictInputConfig,Google.Cloud.AutoML.V1.BatchPredictOutputConfig,System.Collections.Generic.IDictionary{System.String,System.String},Google.Api.Gax.Grpc.CallSettings)">BatchPredictAsync(String, BatchPredictInputConfig, BatchPredictOutputConfig, IDictionary&lt;String, String&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;BatchPredictResult, OperationMetadata&gt;&gt; BatchPredictAsync(string name, BatchPredictInputConfig inputConfig, BatchPredictOutputConfig outputConfig, IDictionary&lt;string, string&gt; params, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of the model requested to serve the batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></td>
+        <td><span class="parametername">inputConfig</span></td>
+        <td><p>Required. The input configuration for batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.html">BatchPredictOutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The Configuration specifying where output predictions should
+be written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+<ul>
+<li>For Text Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for a text snippet, it will only produce results
+   that have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for an image, it will only produce results that
+   have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:</li>
+</ul>
+<p><code>score_threshold</code> - (float) When Model detects objects on the image,
+  it will only produce bounding boxes which have at least this
+  confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+  boxes will be produced per image. Default is 100, the
+  requested value may be limited by server.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_BatchPredictAsync_System_String_Google_Cloud_AutoML_V1_BatchPredictInputConfig_Google_Cloud_AutoML_V1_BatchPredictOutputConfig_System_Collections_Generic_IDictionary_System_String_System_String__System_Threading_CancellationToken_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.BatchPredictAsync(System.String,Google.Cloud.AutoML.V1.BatchPredictInputConfig,Google.Cloud.AutoML.V1.BatchPredictOutputConfig,System.Collections.Generic.IDictionary{System.String,System.String},System.Threading.CancellationToken)">BatchPredictAsync(String, BatchPredictInputConfig, BatchPredictOutputConfig, IDictionary&lt;String, String&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Perform a batch prediction. Unlike the online
+[Predict][google.cloud.automl.v1.PredictionService.Predict], batch
+prediction result won&apos;t be immediately available in the response. Instead,
+a long running operation object is returned. User can poll the operation
+result via [GetOperation][google.longrunning.Operations.GetOperation]
+method. Once the operation is done,
+[BatchPredictResult][google.cloud.automl.v1.BatchPredictResult] is returned
+in the [response][google.longrunning.Operation.response] field. Available
+for following ML problems:</p>
+<ul>
+<li>Image Classification</li>
+<li>Image Object Detection</li>
+<li>Text Extraction</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;BatchPredictResult, OperationMetadata&gt;&gt; BatchPredictAsync(string name, BatchPredictInputConfig inputConfig, BatchPredictOutputConfig outputConfig, IDictionary&lt;string, string&gt; params, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Name of the model requested to serve the batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a></td>
+        <td><span class="parametername">inputConfig</span></td>
+        <td><p>Required. The input configuration for batch prediction.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictOutputConfig.html">BatchPredictOutputConfig</a></td>
+        <td><span class="parametername">outputConfig</span></td>
+        <td><p>Required. The Configuration specifying where output predictions should
+be written.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">params</span></td>
+        <td><p>Additional domain-specific parameters for the predictions, any string must
+be up to 25000 characters long.</p>
+<ul>
+<li>For Text Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for a text snippet, it will only produce results
+   that have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+   makes predictions for an image, it will only produce results that
+   have at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:</li>
+</ul>
+<p><code>score_threshold</code> - (float) When Model detects objects on the image,
+  it will only produce bounding boxes which have at least this
+  confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+  boxes will be produced per image. Default is 100, the
+  requested value may be limited by server.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_Create_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.Create*"></a>
   <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_AutoML_V1_PredictionServiceSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.AutoML.V1.PredictionServiceSettings)">Create(ServiceEndpoint, PredictionServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.AutoML.V1.PredictionServiceClient.html">PredictionServiceClient</a>, applying defaults for all unspecified settings,
@@ -427,14 +1357,122 @@ PredictionServiceClient client = PredictionServiceClient.Create(channel);
 // Shutdown the channel when it is no longer required.
 await channel.ShutdownAsync();</code></pre>
 
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_PollOnceBatchPredict_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.PollOnceBatchPredict*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_PollOnceBatchPredict_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.PollOnceBatchPredict(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceBatchPredict(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>BatchPredict</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;BatchPredictResult, OperationMetadata&gt; PollOnceBatchPredict(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_PollOnceBatchPredictAsync_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.PollOnceBatchPredictAsync*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_PollOnceBatchPredictAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.PollOnceBatchPredictAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceBatchPredictAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of <code>BatchPredictAsync</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;BatchPredictResult, OperationMetadata&gt;&gt; PollOnceBatchPredictAsync(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictResult.html">BatchPredictResult</a>, <a class="xref" href="Google.Cloud.AutoML.V1.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A task representing the result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_AutoML_V1_PredictionServiceClient_Predict_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.Predict*"></a>
   <h4 id="Google_Cloud_AutoML_V1_PredictionServiceClient_Predict_Google_Cloud_AutoML_V1_ModelName_Google_Cloud_AutoML_V1_ExamplePayload_System_Collections_Generic_IDictionary_System_String_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.AutoML.V1.PredictionServiceClient.Predict(Google.Cloud.AutoML.V1.ModelName,Google.Cloud.AutoML.V1.ExamplePayload,System.Collections.Generic.IDictionary{System.String,System.String},Google.Api.Gax.Grpc.CallSettings)">Predict(ModelName, ExamplePayload, IDictionary&lt;String, String&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Perform an online prediction. The prediction result will be directly
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                  up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                    up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                 UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+             UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
-          encoded.</li>
+         encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+             encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -470,6 +1508,21 @@ problem type that the model was trained to solve.</p>
         <td><span class="parametername">params</span></td>
         <td><p>Additional domain-specific parameters, any string must be up to 25000
 characters long.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for an image, it will only produce results that have
+at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:
+<code>score_threshold</code> - (float) When Model detects objects on the image,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned in the response. Default is 100, the
+requested value may be limited by server.</li>
+</ul>
 </td>
       </tr>
       <tr>
@@ -514,8 +1567,18 @@ PredictResponse response = predictionServiceClient.Predict(name, payload, @param
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                   up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                     up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                  UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+              UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
           encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+              encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -583,8 +1646,18 @@ PredictResponse response = predictionServiceClient.Predict(request);
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                  up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                    up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                 UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+             UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
-          encoded.</li>
+         encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+             encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -620,6 +1693,21 @@ problem type that the model was trained to solve.</p>
         <td><span class="parametername">params</span></td>
         <td><p>Additional domain-specific parameters, any string must be up to 25000
 characters long.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for an image, it will only produce results that have
+at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:
+<code>score_threshold</code> - (float) When Model detects objects on the image,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned in the response. Default is 100, the
+requested value may be limited by server.</li>
+</ul>
 </td>
       </tr>
       <tr>
@@ -652,8 +1740,18 @@ characters long.</p>
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                  up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                    up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                 UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+             UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
-          encoded.</li>
+         encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+             encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -689,6 +1787,21 @@ problem type that the model was trained to solve.</p>
         <td><span class="parametername">params</span></td>
         <td><p>Additional domain-specific parameters, any string must be up to 25000
 characters long.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for an image, it will only produce results that have
+at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:
+<code>score_threshold</code> - (float) When Model detects objects on the image,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned in the response. Default is 100, the
+requested value may be limited by server.</li>
+</ul>
 </td>
       </tr>
       <tr>
@@ -733,8 +1846,18 @@ PredictResponse response = await predictionServiceClient.PredictAsync(name, payl
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                  up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                    up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                 UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+             UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
-          encoded.</li>
+         encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+             encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -770,6 +1893,21 @@ problem type that the model was trained to solve.</p>
         <td><span class="parametername">params</span></td>
         <td><p>Additional domain-specific parameters, any string must be up to 25000
 characters long.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for an image, it will only produce results that have
+at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:
+<code>score_threshold</code> - (float) When Model detects objects on the image,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned in the response. Default is 100, the
+requested value may be limited by server.</li>
+</ul>
 </td>
       </tr>
       <tr>
@@ -814,8 +1952,18 @@ PredictResponse response = await predictionServiceClient.PredictAsync(name, payl
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                   up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                     up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                  UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+              UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
           encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+              encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -883,8 +2031,18 @@ PredictResponse response = await predictionServiceClient.PredictAsync(request);
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                   up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                     up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                  UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+              UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
           encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+              encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -952,8 +2110,18 @@ PredictResponse response = await predictionServiceClient.PredictAsync(request);
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                  up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                    up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                 UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+             UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
-          encoded.</li>
+         encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+             encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -989,6 +2157,21 @@ problem type that the model was trained to solve.</p>
         <td><span class="parametername">params</span></td>
         <td><p>Additional domain-specific parameters, any string must be up to 25000
 characters long.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for an image, it will only produce results that have
+at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:
+<code>score_threshold</code> - (float) When Model detects objects on the image,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned in the response. Default is 100, the
+requested value may be limited by server.</li>
+</ul>
 </td>
       </tr>
       <tr>
@@ -1021,8 +2204,18 @@ characters long.</p>
 returned in the response.
 Available for following ML problems, and their expected request payloads:</p>
 <ul>
+<li>Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes
+                  up to 30MB.</li>
+<li>Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes
+                    up to 30MB.</li>
+<li>Text Classification - TextSnippet, content up to 60,000 characters,
+                 UTF-8 encoded.</li>
+<li>Text Extraction - TextSnippet, content up to 30,000 characters,
+             UTF-8 NFC encoded.</li>
 <li>Translation - TextSnippet, content up to 25,000 characters, UTF-8
-          encoded.</li>
+         encoded.</li>
+<li>Text Sentiment - TextSnippet, content up 500 characters, UTF-8
+             encoded.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1058,6 +2251,21 @@ problem type that the model was trained to solve.</p>
         <td><span class="parametername">params</span></td>
         <td><p>Additional domain-specific parameters, any string must be up to 25000
 characters long.</p>
+<ul>
+<li>For Image Classification:</li>
+</ul>
+<p><code>score_threshold</code> - (float) A value from 0.0 to 1.0. When the model
+makes predictions for an image, it will only produce results that have
+at least this confidence score. The default is 0.5.</p>
+<ul>
+<li>For Image Object Detection:
+<code>score_threshold</code> - (float) When Model detects objects on the image,
+it will only produce bounding boxes which have at least this
+confidence score. Value in 0 to 1 range, default is 0.5.
+<code>max_bounding_box_count</code> - (int64) No more than this number of bounding
+boxes will be returned in the response. Default is 100, the
+requested value may be limited by server.</li>
+</ul>
 </td>
       </tr>
       <tr>
