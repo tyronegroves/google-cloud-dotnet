@@ -259,7 +259,7 @@ not set.</li>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Applications_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Applications*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Applications" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Applications">Applications</h4>
-  <div class="markdown level1 summary"><p>The resource names of the candidate&apos;s applications.</p>
+  <div class="markdown level1 summary"><p>Output only. The resource names of the candidate&apos;s applications.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -283,7 +283,7 @@ not set.</li>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_Profile_Assignments_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Assignments*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_Profile_Assignments" data-uid="Google.Cloud.Talent.V4Beta1.Profile.Assignments">Assignments</h4>
-  <div class="markdown level1 summary"><p>The resource names of the candidate&apos;s assignments.</p>
+  <div class="markdown level1 summary"><p>Output only. The resource names of the candidate&apos;s assignments.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -301,6 +301,74 @@ not set.</li>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Talent_V4Beta1_Profile_AvailabilitySignals_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.AvailabilitySignals*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_AvailabilitySignals" data-uid="Google.Cloud.Talent.V4Beta1.Profile.AvailabilitySignals">AvailabilitySignals</h4>
+  <div class="markdown level1 summary"><p>Output only. Candidate&apos;s availability signals.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;AvailabilitySignal&gt; AvailabilitySignals { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.AvailabilitySignal.html">AvailabilitySignal</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Talent_V4Beta1_Profile_CandidateUpdateTime_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.CandidateUpdateTime*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_CandidateUpdateTime" data-uid="Google.Cloud.Talent.V4Beta1.Profile.CandidateUpdateTime">CandidateUpdateTime</h4>
+  <div class="markdown level1 summary"><p>The timestamp when the profile was last updated as a result of a direct or
+indirect action by a candidate.</p>
+<p>These actions include:</p>
+<ul>
+<li>Direct actions such as the candidate submitting a new resume as part of a
+job application to the agency, using a self-service tool such as a website
+to update their profile, and so on.</li>
+<li>Indirect actions by the candidate such as uploading a resume to a job
+board that is collected by the agency through a feed, providing a resume to
+a recruiter who then uploads it into the ATS, and so on.</li>
+<li>Updates made to the candidate&apos;s profile by the recruiter as a result of
+interacting with the candidate (for example adding a skill or work
+preference, and so on). Changes to
+[recruiting_notes][google.cloud.talent.v4beta1.Profile.recruiting_notes]
+are specifically excluded from this action type.</li>
+</ul>
+<p>Note:
+[candidate_update_time][google.cloud.talent.v4beta1.Profile.candidate_update_time]
+must be greater than or equal to
+[resume_update_time][google.cloud.talent.v4beta1.Profile.resume_update_time]
+or an error is thrown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp CandidateUpdateTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -851,6 +919,36 @@ searchable or not.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.Resume.html">Resume</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Talent_V4Beta1_Profile_ResumeUpdateTime_" data-uid="Google.Cloud.Talent.V4Beta1.Profile.ResumeUpdateTime*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_Profile_ResumeUpdateTime" data-uid="Google.Cloud.Talent.V4Beta1.Profile.ResumeUpdateTime">ResumeUpdateTime</h4>
+  <div class="markdown level1 summary"><p>The timestamp when the candidate&apos;s resume was added or updated on the
+candidate&apos;s profile. Whether that resume was directly uploaded by a
+candidate, pulled from a 3rd party job board feed, added by a recruiter,
+and so on.</p>
+<p>If this field is updated, it&apos;s expected that
+[resume][google.cloud.talent.v4beta1.Profile.resume] is provided in the
+create or update calls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp ResumeUpdateTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
         <td></td>
       </tr>
     </tbody>

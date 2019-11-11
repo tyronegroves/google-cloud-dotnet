@@ -219,9 +219,47 @@ the job application.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Talent_V4Beta1_ProfileQuery_AvailabilityFilters_" data-uid="Google.Cloud.Talent.V4Beta1.ProfileQuery.AvailabilityFilters*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_ProfileQuery_AvailabilityFilters" data-uid="Google.Cloud.Talent.V4Beta1.ProfileQuery.AvailabilityFilters">AvailabilityFilters</h4>
+  <div class="markdown level1 summary"><p>The availability filter which filters based on
+[Profile.availability_signals][google.cloud.talent.v4beta1.Profile.availability_signals].</p>
+<p>The availability filter helps a recruiter understand if a
+specific candidate is likely to be actively seeking new job opportunities
+based on an aggregated set of signals.  Specifically, the intent is NOT to
+indicate the candidate&apos;s potential qualification / interest / close ability
+for a specific job.</p>
+<p>There can be at most one
+[AvailabilityFilter][google.cloud.talent.v4beta1.AvailabilityFilter] per
+[signal_type][google.cloud.talent.v4beta1.AvailabilityFilter.signal_type].
+If there are multiple
+[AvailabilityFilter][google.cloud.talent.v4beta1.AvailabilityFilter] for a
+[signal_type][google.cloud.talent.v4beta1.AvailabilityFilter.signal_type],
+an error is thrown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;AvailabilityFilter&gt; AvailabilityFilters { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.AvailabilityFilter.html">AvailabilityFilter</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Talent_V4Beta1_ProfileQuery_CandidateAvailabilityFilter_" data-uid="Google.Cloud.Talent.V4Beta1.ProfileQuery.CandidateAvailabilityFilter*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_ProfileQuery_CandidateAvailabilityFilter" data-uid="Google.Cloud.Talent.V4Beta1.ProfileQuery.CandidateAvailabilityFilter">CandidateAvailabilityFilter</h4>
-  <div class="markdown level1 summary"><p>The candidate availability filter which filters based on availability
+  <div class="markdown level1 summary"><p>Deprecated. Use availability_filters instead.</p>
+<p>The candidate availability filter which filters based on availability
 signals.</p>
 <p>Signal 1: Number of days since most recent job application.  See
 [Availability.JobApplicationAvailabilitySignal][google.cloud.talent.v4beta1.Availability.JobApplicationAvailabilitySignal]
@@ -238,7 +276,8 @@ for a specific job.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CandidateAvailabilityFilter CandidateAvailabilityFilter { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public CandidateAvailabilityFilter CandidateAvailabilityFilter { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -433,20 +472,23 @@ are provided, an error is thrown.</p>
 <p>The following logic is used to determine which locations in
 the profile to filter against:</p>
 <ol>
-<li>All of the profile&apos;s geocoded
+<li><p>All of the profile&apos;s geocoded
 [Profile.addresses][google.cloud.talent.v4beta1.Profile.addresses] where
 [Address.usage][google.cloud.talent.v4beta1.Address.usage] is PERSONAL and
-[Address.current][google.cloud.talent.v4beta1.Address.current] is true.</li>
-<li>If the above set of locations is empty, all of the profile&apos;s geocoded
+[Address.current][google.cloud.talent.v4beta1.Address.current] is true.</p>
+</li>
+<li><p>If the above set of locations is empty, all of the profile&apos;s geocoded
 [Profile.addresses][google.cloud.talent.v4beta1.Profile.addresses] where
 [Address.usage][google.cloud.talent.v4beta1.Address.usage] is
 CONTACT_INFO_USAGE_UNSPECIFIED and
-[Address.current][google.cloud.talent.v4beta1.Address.current] is true.</li>
-<li>If the above set of locations is empty, all of the profile&apos;s geocoded
+[Address.current][google.cloud.talent.v4beta1.Address.current] is true.</p>
+</li>
+<li><p>If the above set of locations is empty, all of the profile&apos;s geocoded
 [Profile.addresses][google.cloud.talent.v4beta1.Profile.addresses] where
 [Address.usage][google.cloud.talent.v4beta1.Address.usage] is PERSONAL or
 CONTACT_INFO_USAGE_UNSPECIFIED and
-[Address.current][google.cloud.talent.v4beta1.Address.current] is not set.</li>
+[Address.current][google.cloud.talent.v4beta1.Address.current] is not set.</p>
+</li>
 </ol>
 <p>This means that any profiles without any
 [Profile.addresses][google.cloud.talent.v4beta1.Profile.addresses] that
