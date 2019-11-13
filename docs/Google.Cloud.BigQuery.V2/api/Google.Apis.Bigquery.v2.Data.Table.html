@@ -118,8 +118,8 @@
   </h3>
   <a id="Google_Apis_Bigquery_v2_Data_Table_Clustering_" data-uid="Google.Apis.Bigquery.v2.Data.Table.Clustering*"></a>
   <h4 id="Google_Apis_Bigquery_v2_Data_Table_Clustering" data-uid="Google.Apis.Bigquery.v2.Data.Table.Clustering">Clustering</h4>
-  <div class="markdown level1 summary"><p>[Experimental] Clustering specification for the table. Must be specified with time-based
-partitioning, data in the table will be first partitioned and subsequently clustered.</p>
+  <div class="markdown level1 summary"><p>[Beta] Clustering specification for the table. Must be specified with partitioning, data in the
+table will be first partitioned and subsequently clustered.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -219,7 +219,9 @@ public virtual EncryptionConfiguration EncryptionConfiguration { get; set; }</co
   </table>
   <a id="Google_Apis_Bigquery_v2_Data_Table_ETag_" data-uid="Google.Apis.Bigquery.v2.Data.Table.ETag*"></a>
   <h4 id="Google_Apis_Bigquery_v2_Data_Table_ETag" data-uid="Google.Apis.Bigquery.v2.Data.Table.ETag">ETag</h4>
-  <div class="markdown level1 summary"><p>[Output-only] A hash of this resource.</p>
+  <div class="markdown level1 summary"><p>[Output-only] A hash of the table metadata. Used to ensure there were no concurrent modifications
+to the resource when attempting an update. Not guaranteed to change when the table contents or the fields
+numRows, numBytes, numLongTermBytes or lastModifiedTime change.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -454,6 +456,57 @@ public virtual string Location { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Apis_Bigquery_v2_Data_Table_MaterializedView_" data-uid="Google.Apis.Bigquery.v2.Data.Table.MaterializedView*"></a>
+  <h4 id="Google_Apis_Bigquery_v2_Data_Table_MaterializedView" data-uid="Google.Apis.Bigquery.v2.Data.Table.MaterializedView">MaterializedView</h4>
+  <div class="markdown level1 summary"><p>[Optional] Materialized view definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;materializedView&quot;)]
+public virtual MaterializedViewDefinition MaterializedView { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Apis.Bigquery.v2.Data.MaterializedViewDefinition.html">MaterializedViewDefinition</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Apis_Bigquery_v2_Data_Table_Model_" data-uid="Google.Apis.Bigquery.v2.Data.Table.Model*"></a>
+  <h4 id="Google_Apis_Bigquery_v2_Data_Table_Model" data-uid="Google.Apis.Bigquery.v2.Data.Table.Model">Model</h4>
+  <div class="markdown level1 summary"><p>[Output-only, Beta] Present iff this table represents a ML model. Describes the training
+information for the model, and it is required to run &apos;PREDICT&apos; queries.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;model&quot;)]
+public virtual ModelDefinition Model { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Apis.Bigquery.v2.Data.ModelDefinition.html">ModelDefinition</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Apis_Bigquery_v2_Data_Table_NumBytes_" data-uid="Google.Apis.Bigquery.v2.Data.Table.NumBytes*"></a>
   <h4 id="Google_Apis_Bigquery_v2_Data_Table_NumBytes" data-uid="Google.Apis.Bigquery.v2.Data.Table.NumBytes">NumBytes</h4>
   <div class="markdown level1 summary"><p>[Output-only] The size of this table in bytes, excluding any data in the streaming
@@ -505,6 +558,32 @@ public virtual long? NumLongTermBytes { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Apis_Bigquery_v2_Data_Table_NumPhysicalBytes_" data-uid="Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes*"></a>
+  <h4 id="Google_Apis_Bigquery_v2_Data_Table_NumPhysicalBytes" data-uid="Google.Apis.Bigquery.v2.Data.Table.NumPhysicalBytes">NumPhysicalBytes</h4>
+  <div class="markdown level1 summary"><p>[Output-only] [TrustedTester] The physical size of this table in bytes, excluding any data in the
+streaming buffer. This includes compression and storage used for time travel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;numPhysicalBytes&quot;)]
+public virtual long? NumPhysicalBytes { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Apis_Bigquery_v2_Data_Table_NumRows_" data-uid="Google.Apis.Bigquery.v2.Data.Table.NumRows*"></a>
   <h4 id="Google_Apis_Bigquery_v2_Data_Table_NumRows" data-uid="Google.Apis.Bigquery.v2.Data.Table.NumRows">NumRows</h4>
   <div class="markdown level1 summary"><p>[Output-only] The number of rows of data in this table, excluding any data in the streaming
@@ -527,6 +606,58 @@ public virtual ulong? NumRows { get; set; }</code></pre>
     <tbody>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.UInt64</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Apis_Bigquery_v2_Data_Table_RangePartitioning_" data-uid="Google.Apis.Bigquery.v2.Data.Table.RangePartitioning*"></a>
+  <h4 id="Google_Apis_Bigquery_v2_Data_Table_RangePartitioning" data-uid="Google.Apis.Bigquery.v2.Data.Table.RangePartitioning">RangePartitioning</h4>
+  <div class="markdown level1 summary"><p>[TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and
+rangePartitioning should be specified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;rangePartitioning&quot;)]
+public virtual RangePartitioning RangePartitioning { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Apis.Bigquery.v2.Data.RangePartitioning.html">RangePartitioning</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Apis_Bigquery_v2_Data_Table_RequirePartitionFilter_" data-uid="Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter*"></a>
+  <h4 id="Google_Apis_Bigquery_v2_Data_Table_RequirePartitionFilter" data-uid="Google.Apis.Bigquery.v2.Data.Table.RequirePartitionFilter">RequirePartitionFilter</h4>
+  <div class="markdown level1 summary"><p>[Beta] [Optional] If set to true, queries over this table require a partition filter that can be
+used for partition elimination to be specified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;requirePartitionFilter&quot;)]
+public virtual bool? RequirePartitionFilter { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -635,7 +766,8 @@ public virtual TableReference TableReference { get; set; }</code></pre>
   </table>
   <a id="Google_Apis_Bigquery_v2_Data_Table_TimePartitioning_" data-uid="Google.Apis.Bigquery.v2.Data.Table.TimePartitioning*"></a>
   <h4 id="Google_Apis_Bigquery_v2_Data_Table_TimePartitioning" data-uid="Google.Apis.Bigquery.v2.Data.Table.TimePartitioning">TimePartitioning</h4>
-  <div class="markdown level1 summary"><p>Time-based partitioning specification for this table.</p>
+  <div class="markdown level1 summary"><p>Time-based partitioning specification for this table. Only one of timePartitioning and
+rangePartitioning should be specified.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -661,8 +793,9 @@ public virtual TimePartitioning TimePartitioning { get; set; }</code></pre>
   <a id="Google_Apis_Bigquery_v2_Data_Table_Type_" data-uid="Google.Apis.Bigquery.v2.Data.Table.Type*"></a>
   <h4 id="Google_Apis_Bigquery_v2_Data_Table_Type" data-uid="Google.Apis.Bigquery.v2.Data.Table.Type">Type</h4>
   <div class="markdown level1 summary"><p>[Output-only] Describes the table type. The following values are supported: TABLE: A normal
-BigQuery table. VIEW: A virtual table defined by a SQL query. EXTERNAL: A table that references data stored
-in an external storage system, such as Google Cloud Storage. The default value is TABLE.</p>
+BigQuery table. VIEW: A virtual table defined by a SQL query. [TrustedTester] MATERIALIZED_VIEW: SQL query
+whose result is persisted. EXTERNAL: A table that references data stored in an external storage system, such
+as Google Cloud Storage. The default value is TABLE.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
