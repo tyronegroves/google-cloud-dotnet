@@ -122,15 +122,17 @@ authorization check will be done.</p>
       <section><p>Holder for reflection information generated from google/api/experimental/authorization_config.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.AuthProvider.html">AuthProvider</a></h4>
-      <section><p>Configuration for an anthentication provider, including support for
-<a href="https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32">JSON Web Token (JWT)</a>.</p>
+      <section><p>Configuration for an authentication provider, including support for
+<a href="https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32">JSON Web Token
+(JWT)</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Api.AuthReflection.html">AuthReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/auth.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.AuthRequirement.html">AuthRequirement</a></h4>
       <section><p>User-defined authentication requirements, including support for
-<a href="https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32">JSON Web Token (JWT)</a>.</p>
+<a href="https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32">JSON Web Token
+(JWT)</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Backend.html">Backend</a></h4>
       <section><p><code>Backend</code> defines the backend configuration for a service.</p>
@@ -140,6 +142,9 @@ authorization check will be done.</p>
 </section>
       <h4><a class="xref" href="Google.Api.BackendRule.html">BackendRule</a></h4>
       <section><p>A backend rule provides configuration for an individual API element.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.BackendRule.Types.html">BackendRule.Types</a></h4>
+      <section><p>Container for nested types declared in the BackendRule message type.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Billing.html">Billing</a></h4>
       <section><p>Billing related configuration of the service.</p>
@@ -180,6 +185,9 @@ bill against consumer project).</p>
       <h4><a class="xref" href="Google.Api.BillingReflection.html">BillingReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/billing.proto</p>
 </section>
+      <h4><a class="xref" href="Google.Api.ClientReflection.html">ClientReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/api/client.proto</p>
+</section>
       <h4><a class="xref" href="Google.Api.ConfigChange.html">ConfigChange</a></h4>
       <section><p>Output generated from semantically comparing two versions of a service
 configuration.</p>
@@ -211,6 +219,25 @@ requested:<ul>
 <code>google.rpc.context.OriginContext</code>.</p>
 <p>Available context types are defined in package
 <code>google.rpc.context</code>.</p>
+<p>This also provides mechanism to whitelist any protobuf message extension that
+can be sent in grpc metadata using “x-goog-ext-&lt;extension_id&gt;-bin” and
+“x-goog-ext-&lt;extension_id&gt;-jspb” format. For example, list any service
+specific protobuf types that can appear in grpc metadata as follows in your
+yaml file:</p>
+<p>Example:</p>
+<p>context:
+ rules:</p>
+<ul>
+<li>selector: &quot;google.example.library.v1.LibraryService.CreateBook&quot;
+allowed_request_extensions:<ul>
+<li>google.foo.v1.NewExtension
+allowed_response_extensions:</li>
+<li>google.foo.v1.NewExtension</li>
+</ul>
+</li>
+</ul>
+<p>You can also specify extension ID instead of fully qualified extension name
+here.</p>
 </section>
       <h4><a class="xref" href="Google.Api.ContextReflection.html">ContextReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/context.proto</p>
@@ -231,15 +258,15 @@ monitoring, etc.</p>
       <section><p>A custom pattern is used for defining custom HTTP verb.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Distribution.html">Distribution</a></h4>
-      <section><p>Distribution contains summary statistics for a population of values and,
-optionally, a histogram representing the distribution of those values across
-a specified set of histogram buckets.</p>
+      <section><p><code>Distribution</code> contains summary statistics for a population of values. It
+optionally contains a histogram representing the distribution of those values
+across a set of buckets.</p>
 <p>The summary statistics are the count, mean, sum of the squared deviation from
-the mean, the minimum, and the maximum of the set of population of values.</p>
-<p>The histogram is based on a sequence of buckets and gives a count of values
-that fall into each bucket.  The boundaries of the buckets are given either
-explicitly or by specifying parameters for a method of computing them
-(buckets of fixed width or buckets of exponentially increasing width).</p>
+the mean, the minimum, and the maximum of the set of population of values.
+The histogram is based on a sequence of buckets and gives a count of values
+that fall into each bucket. The boundaries of the buckets are given either
+explicitly or by formulas for buckets of fixed or exponentially increasing
+widths.</p>
 <p>Although it is not forbidden, it is generally a bad idea to include
 non-finite values (infinities or NaNs) in the population of values, as this
 will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fields meaningless.</p>
@@ -248,56 +275,58 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
       <section><p>Container for nested types declared in the Distribution message type.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Distribution.Types.BucketOptions.html">Distribution.Types.BucketOptions</a></h4>
-      <section><p>A Distribution may optionally contain a histogram of the values in the
-population.  The histogram is given in <code>bucket_counts</code> as counts of values
-that fall into one of a sequence of non-overlapping buckets.  The sequence
-of buckets is described by <code>bucket_options</code>.</p>
-<p>A bucket specifies an inclusive lower bound and exclusive upper bound for
-the values that are counted for that bucket.  The upper bound of a bucket
-is strictly greater than the lower bound.</p>
-<p>The sequence of N buckets for a Distribution consists of an underflow
-bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-The buckets span the whole range of finite values: lower bound of the
-underflow bucket is -infinity and the upper bound of the overflow bucket is
-+infinity.  The finite buckets are so-called because both bounds are
-finite.</p>
-<p><code>BucketOptions</code> describes bucket boundaries in one of three ways.  Two
-describe the boundaries by giving parameters for a formula to generate
-boundaries and one gives the bucket boundaries explicitly.</p>
-<p>If <code>bucket_boundaries</code> is not given, then no <code>bucket_counts</code> may be given.</p>
+      <section><p><code>BucketOptions</code> describes the bucket boundaries used to create a histogram
+for the distribution. The buckets can be in a linear sequence, an
+exponential sequence, or each bucket can be specified explicitly.
+<code>BucketOptions</code> does not include the number of values in each bucket.</p>
+<p>A bucket has an inclusive lower bound and exclusive upper bound for the
+values that are counted for that bucket. The upper bound of a bucket must
+be strictly greater than the lower bound. The sequence of N buckets for a
+distribution consists of an underflow bucket (number 0), zero or more
+finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+same as the upper bound of bucket i - 1. The buckets span the whole range
+of finite values: lower bound of the underflow bucket is -infinity and the
+upper bound of the overflow bucket is +infinity. The finite buckets are
+so-called because both bounds are finite.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Distribution.Types.BucketOptions.Types.html">Distribution.Types.BucketOptions.Types</a></h4>
       <section><p>Container for nested types declared in the BucketOptions message type.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Distribution.Types.BucketOptions.Types.Explicit.html">Distribution.Types.BucketOptions.Types.Explicit</a></h4>
-      <section><p>A set of buckets with arbitrary widths.</p>
-<p>Defines <code>size(bounds) + 1</code> (= N) buckets with these boundaries for
-bucket i:</p>
+      <section><p>Specifies a set of buckets with arbitrary widths.</p>
+<p>There are <code>size(bounds) + 1</code> (= N) buckets. Bucket <code>i</code> has the following
+boundaries:</p>
 <p>Upper bound (0 &lt;= i &lt; N-1):     bounds[i]
 Lower bound (1 &lt;= i &lt; N);       bounds[i - 1]</p>
-<p>There must be at least one element in <code>bounds</code>.  If <code>bounds</code> has only one
-element, there are no finite buckets, and that single element is the
-common boundary of the overflow and underflow buckets.</p>
+<p>The <code>bounds</code> field must contain at least one element. If <code>bounds</code> has
+only one element, then there are no finite buckets, and that single
+element is the common boundary of the overflow and underflow buckets.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Distribution.Types.BucketOptions.Types.Exponential.html">Distribution.Types.BucketOptions.Types.Exponential</a></h4>
-      <section><p>Specify a sequence of buckets that have a width that is proportional to
-the value of the lower bound.  Each bucket represents a constant relative
-uncertainty on a specific value in the bucket.</p>
-<p>Defines <code>num_finite_buckets + 2</code> (= N) buckets with these boundaries for
-bucket i:</p>
+      <section><p>Specifies an exponential sequence of buckets that have a width that is
+proportional to the value of the lower bound. Each bucket represents a
+constant relative uncertainty on a specific value in the bucket.</p>
+<p>There are <code>num_finite_buckets + 2</code> (= N) buckets. Bucket <code>i</code> has the
+following boundaries:</p>
 <p>Upper bound (0 &lt;= i &lt; N-1):     scale * (growth_factor ^ i).
 Lower bound (1 &lt;= i &lt; N):       scale * (growth_factor ^ (i - 1)).</p>
 </section>
       <h4><a class="xref" href="Google.Api.Distribution.Types.BucketOptions.Types.Linear.html">Distribution.Types.BucketOptions.Types.Linear</a></h4>
-      <section><p>Specify a sequence of buckets that all have the same width (except
-overflow and underflow).  Each bucket represents a constant absolute
-uncertainty on the specific value in the bucket.</p>
-<p>Defines <code>num_finite_buckets + 2</code> (= N) buckets with these boundaries for
-bucket <code>i</code>:</p>
+      <section><p>Specifies a linear sequence of buckets that all have the same width
+(except overflow and underflow). Each bucket represents a constant
+absolute uncertainty on the specific value in the bucket.</p>
+<p>There are <code>num_finite_buckets + 2</code> (= N) buckets. Bucket <code>i</code> has the
+following boundaries:</p>
 <p>Upper bound (0 &lt;= i &lt; N-1):     offset + (width * i).
 Lower bound (1 &lt;= i &lt; N):       offset + (width * (i - 1)).</p>
+</section>
+      <h4><a class="xref" href="Google.Api.Distribution.Types.Exemplar.html">Distribution.Types.Exemplar</a></h4>
+      <section><p>Exemplars are example points that may be used to annotate aggregated
+distribution values. They are metadata that gives information about a
+particular value added to a Distribution bucket, such as a trace ID that
+was active when a value was added. They may contain further information,
+such as a example values and timestamps, origin, etc.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Distribution.Types.Range.html">Distribution.Types.Range</a></h4>
       <section><p>The range of the population values.</p>
@@ -393,6 +422,9 @@ only be used by whitelisted users.</p>
       <h4><a class="xref" href="Google.Api.ExperimentalReflection.html">ExperimentalReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/experimental/experimental.proto</p>
 </section>
+      <h4><a class="xref" href="Google.Api.FieldBehaviorReflection.html">FieldBehaviorReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/api/field_behavior.proto</p>
+</section>
       <h4><a class="xref" href="Google.Api.Http.html">Http</a></h4>
       <section><p>Defines the HTTP configuration for an API service. It contains a list of
 [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method
@@ -416,7 +448,8 @@ request fields and also want access to the raw HTTP body.</p>
 }</p>
 <p>service ResourceService {
  rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
- rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty);
+ rpc UpdateResource(google.api.HttpBody) returns
+ (google.protobuf.Empty);
 }</p>
 <p>Example with streaming methods:</p>
 <p>service CaldavService {
@@ -435,100 +468,102 @@ handled, all other features will continue to work unchanged.</p>
       <section><p>Holder for reflection information generated from google/api/http.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.HttpRule.html">HttpRule</a></h4>
-      <section><p><code>HttpRule</code> defines the mapping of an RPC method to one or more HTTP
-REST API methods. The mapping specifies how different portions of the RPC
-request message are mapped to URL path, URL query parameters, and
-HTTP request body. The mapping is typically specified as an
-<code>google.api.http</code> annotation on the RPC method,
-see &quot;google/api/annotations.proto&quot; for details.</p>
-<p>The mapping consists of a field specifying the path template and
-method kind.  The path template can refer to fields in the request
-message, as in the example below which describes a REST GET
-operation on a resource collection of messages:</p>
+      <section><h1 id="grpc-transcoding">gRPC Transcoding</h1>
+<p>gRPC Transcoding is a feature for mapping between a gRPC method and one or
+more HTTP REST endpoints. It allows developers to build a single API service
+that supports both gRPC APIs and REST APIs. Many systems, including <a href="https://github.com/googleapis/googleapis">Google
+APIs</a>,
+<a href="https://cloud.google.com/endpoints">Cloud Endpoints</a>, <a href="https://github.com/grpc-ecosystem/grpc-gateway">gRPC
+Gateway</a>,
+and <a href="https://github.com/envoyproxy/envoy">Envoy</a> proxy support this feature
+and use it for large scale production services.</p>
+<p><code>HttpRule</code> defines the schema of the gRPC/REST mapping. The mapping specifies
+how different portions of the gRPC request message are mapped to the URL
+path, URL query parameters, and HTTP request body. It also controls how the
+gRPC response message is mapped to the HTTP response body. <code>HttpRule</code> is
+typically specified as an <code>google.api.http</code> annotation on the gRPC method.</p>
+<p>Each mapping specifies a URL path template and an HTTP method. The path
+template may refer to one or more fields in the gRPC request message, as long
+as each field is a non-repeated field with a primitive (non-message) type.
+The path template controls how fields of the request message are mapped to
+the URL path.</p>
+<p>Example:</p>
 <p>service Messaging {
  rpc GetMessage(GetMessageRequest) returns (Message) {
-   option (google.api.http).get = &quot;/v1/messages/{message_id}/{sub.subfield}&quot;;
+   option (google.api.http) = {
+       get: &quot;/v1/{name=messages/*}&quot;
+   };
  }
 }
 message GetMessageRequest {
- message SubMessage {
-   string subfield = 1;
- }
- string message_id = 1; // mapped to the URL
- SubMessage sub = 2;    // <code>sub.subfield</code> is url-mapped
+ string name = 1; // Mapped to URL path.
 }
 message Message {
- string text = 1; // content of the resource
+ string text = 1; // The resource content.
 }</p>
-<p>The same http annotation can alternatively be expressed inside the
-<code>GRPC API Configuration</code> YAML file.</p>
-<p>http:
- rules:</p>
-<ul>
-<li>selector: &lt;proto_package_name&gt;.Messaging.GetMessage
-get: /v1/messages/{message_id}/{sub.subfield}</li>
-</ul>
-<p>This definition enables an automatic, bidrectional mapping of HTTP
-JSON to RPC. Example:</p>
+<p>This enables an HTTP REST to gRPC mapping as below:</p>
 <table>
 <thead>
 <tr>
 <th>HTTP</th>
-<th>RPC</th>
+<th>gRPC</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>GET /v1/messages/123456/foo</code></td>
-<td><code>GetMessage(message_id: &amp;quot;123456&amp;quot; sub: SubMessage(subfield: &amp;quot;foo&amp;quot;))</code></td>
+<td><code>GET /v1/messages/123456</code></td>
+<td><code>GetMessage(name: &amp;quot;messages/123456&amp;quot;)</code></td>
 </tr>
 </tbody>
 </table>
-<p>In general, not only fields but also field paths can be referenced
-from a path pattern. Fields mapped to the path pattern cannot be
-repeated and must have a primitive (non-message) type.</p>
-<p>Any fields in the request message which are not bound by the path
-pattern automatically become (optional) HTTP query
-parameters. Assume the following definition of the request message:</p>
+<p>Any fields in the request message which are not bound by the path template
+automatically become HTTP query parameters if there is no HTTP request body.
+For example:</p>
 <p>service Messaging {
  rpc GetMessage(GetMessageRequest) returns (Message) {
-   option (google.api.http).get = &quot;/v1/messages/{message_id}&quot;;
+   option (google.api.http) = {
+       get:&quot;/v1/messages/{message_id}&quot;
+   };
  }
 }
 message GetMessageRequest {
  message SubMessage {
    string subfield = 1;
  }
- string message_id = 1; // mapped to the URL
- int64 revision = 2;    // becomes a parameter
- SubMessage sub = 3;    // <code>sub.subfield</code> becomes a parameter
+ string message_id = 1; // Mapped to URL path.
+ int64 revision = 2;    // Mapped to URL query parameter <code>revision</code>.
+ SubMessage sub = 3;    // Mapped to URL query parameter <code>sub.subfield</code>.
 }</p>
 <p>This enables a HTTP JSON to RPC mapping as below:</p>
 <table>
 <thead>
 <tr>
 <th>HTTP</th>
-<th>RPC</th>
+<th>gRPC</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>GET /v1/messages/123456?revision=2&amp;amp;sub.subfield=foo</code></td>
-<td><code>GetMessage(message_id: &amp;quot;123456&amp;quot; revision: 2 sub: SubMessage(subfield: &amp;quot;foo&amp;quot;))</code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p>Note that fields which are mapped to HTTP parameters must have a
-primitive type or a repeated primitive type. Message types are not
-allowed. In the case of a repeated type, the parameter can be
-repeated in the URL, as in <code>...?param=A&amp;amp;param=B</code>.</p>
-<p>For HTTP method kinds which allow a request body, the <code>body</code> field
+<p><code>GetMessage(message_id: &amp;quot;123456&amp;quot; revision: 2 sub: SubMessage(subfield:
+&amp;quot;foo&amp;quot;))</code></p>
+<p>Note that fields which are mapped to URL query parameters must have a
+primitive type or a repeated primitive type or a non-repeated message type.
+In the case of a repeated type, the parameter can be repeated in the URL
+as <code>...?param=A&amp;amp;param=B</code>. In the case of a message type, each field of the
+message is mapped to a separate parameter, such as
+<code>...?foo.a=A&amp;amp;foo.b=B&amp;amp;foo.c=C</code>.</p>
+<p>For HTTP methods that allow a request body, the <code>body</code> field
 specifies the mapping. Consider a REST update method on the
 message resource collection:</p>
 <p>service Messaging {
  rpc UpdateMessage(UpdateMessageRequest) returns (Message) {
    option (google.api.http) = {
-     put: &quot;/v1/messages/{message_id}&quot;
+     patch: &quot;/v1/messages/{message_id}&quot;
      body: &quot;message&quot;
    };
  }
@@ -544,16 +579,17 @@ protos JSON encoding:</p>
 <thead>
 <tr>
 <th>HTTP</th>
-<th>RPC</th>
+<th>gRPC</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>PUT /v1/messages/123456 { &amp;quot;text&amp;quot;: &amp;quot;Hi!&amp;quot; }</code></td>
-<td><code>UpdateMessage(message_id: &amp;quot;123456&amp;quot; message { text: &amp;quot;Hi!&amp;quot; })</code></td>
+<td><code>PATCH /v1/messages/123456 { &amp;quot;text&amp;quot;: &amp;quot;Hi!&amp;quot; }</code></td>
+<td>`UpdateMessage(message_id:</td>
 </tr>
 </tbody>
 </table>
+<p>&quot;123456&quot; message { text: &quot;Hi!&quot; })`</p>
 <p>The special name <code>*</code> can be used in the body mapping to define that
 every field not bound by the path template should be mapped to the
 request body.  This enables the following alternative definition of
@@ -561,7 +597,7 @@ the update method:</p>
 <p>service Messaging {
  rpc UpdateMessage(Message) returns (Message) {
    option (google.api.http) = {
-     put: &quot;/v1/messages/{message_id}&quot;
+     patch: &quot;/v1/messages/{message_id}&quot;
      body: &quot;*&quot;
    };
  }
@@ -575,19 +611,20 @@ message Message {
 <thead>
 <tr>
 <th>HTTP</th>
-<th>RPC</th>
+<th>gRPC</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>PUT /v1/messages/123456 { &amp;quot;text&amp;quot;: &amp;quot;Hi!&amp;quot; }</code></td>
-<td><code>UpdateMessage(message_id: &amp;quot;123456&amp;quot; text: &amp;quot;Hi!&amp;quot;)</code></td>
+<td><code>PATCH /v1/messages/123456 { &amp;quot;text&amp;quot;: &amp;quot;Hi!&amp;quot; }</code></td>
+<td>`UpdateMessage(message_id:</td>
 </tr>
 </tbody>
 </table>
+<p>&quot;123456&quot; text: &quot;Hi!&quot;)`</p>
 <p>Note that when using <code>*</code> in the body mapping, it is not possible to
 have HTTP parameters, as all fields not bound by the path end in
-the body. This makes this option more rarely used in practice of
+the body. This makes this option more rarely used in practice when
 defining REST APIs. The common usage of <code>*</code> is in custom methods
 which don&apos;t use the URL at all for transferring data.</p>
 <p>It is possible to define multiple HTTP methods for one RPC by using
@@ -606,13 +643,12 @@ message GetMessageRequest {
  string message_id = 1;
  string user_id = 2;
 }</p>
-<p>This enables the following two alternative HTTP JSON to RPC
-mappings:</p>
+<p>This enables the following two alternative HTTP JSON to RPC mappings:</p>
 <table>
 <thead>
 <tr>
 <th>HTTP</th>
-<th>RPC</th>
+<th>gRPC</th>
 </tr>
 </thead>
 <tbody>
@@ -622,55 +658,100 @@ mappings:</p>
 </tr>
 <tr>
 <td><code>GET /v1/users/me/messages/123456</code></td>
-<td><code>GetMessage(user_id: &amp;quot;me&amp;quot; message_id: &amp;quot;123456&amp;quot;)</code></td>
+<td>`GetMessage(user_id: &quot;me&quot; message_id:</td>
 </tr>
 </tbody>
 </table>
-<h1 id="rules-for-http-mapping">Rules for HTTP mapping</h1>
-<p>The rules for mapping HTTP path, query parameters, and body fields
-to the request message are as follows:</p>
+<p>&quot;123456&quot;)`</p>
+<h2 id="rules-for-http-mapping">Rules for HTTP mapping</h2>
 <ol>
-<li>The <code>body</code> field specifies either <code>*</code> or a field path, or is
-omitted. If omitted, it indicates there is no HTTP request body.</li>
-<li>Leaf fields (recursive expansion of nested messages in the
-request) can be classified into three types:
-(a) Matched in the URL template.
-(b) Covered by body (if body is <code>*</code>, everything except (a) fields;
-else everything under the body field)
-(c) All other fields.</li>
-<li>URL query parameters found in the HTTP request are mapped to (c) fields.</li>
-<li>Any body sent with an HTTP request can contain only (b) fields.</li>
+<li>Leaf request fields (recursive expansion nested messages in the request
+message) are classified into three categories:</li>
+<li>Fields referred by the path template. They are passed via the URL path.</li>
+<li>Fields referred by the [HttpRule.body][google.api.HttpRule.body]. They are passed via the HTTP
+request body.</li>
+<li>All other fields are passed via the URL query parameters, and the
+parameter name is the field path in the request message. A repeated
+field can be represented as multiple query parameters under the same
+name.</li>
+<li>If [HttpRule.body][google.api.HttpRule.body] is &quot;*&quot;, there is no URL query parameter, all fields
+are passed via URL path and HTTP request body.</li>
+<li>If [HttpRule.body][google.api.HttpRule.body] is omitted, there is no HTTP request body, all
+fields are passed via URL path and URL query parameters.</li>
 </ol>
-<p>The syntax of the path template is as follows:</p>
+<h3 id="path-template-syntax">Path template syntax</h3>
 <p>Template = &quot;/&quot; Segments [ Verb ] ;
 Segments = Segment { &quot;/&quot; Segment } ;
 Segment  = &quot;<em>&quot; | &quot;</em>*&quot; | LITERAL | Variable ;
 Variable = &quot;{&quot; FieldPath [ &quot;=&quot; Segments ] &quot;}&quot; ;
 FieldPath = IDENT { &quot;.&quot; IDENT } ;
 Verb     = &quot;:&quot; LITERAL ;</p>
-<p>The syntax <code>*</code> matches a single path segment. The syntax <code>**</code> matches zero
-or more path segments, which must be the last part of the path except the
-<code>Verb</code>. The syntax <code>LITERAL</code> matches literal text in the path.</p>
+<p>The syntax <code>*</code> matches a single URL path segment. The syntax <code>**</code> matches
+zero or more URL path segments, which must be the last part of the URL path
+except the <code>Verb</code>.</p>
 <p>The syntax <code>Variable</code> matches part of the URL path as specified by its
 template. A variable template must not contain other variables. If a variable
 matches a single path segment, its template may be omitted, e.g. <code>{var}</code>
 is equivalent to <code>{var=*}</code>.</p>
+<p>The syntax <code>LITERAL</code> matches literal text in the URL path. If the <code>LITERAL</code>
+contains any reserved character, such characters should be percent-encoded
+before the matching.</p>
 <p>If a variable contains exactly one path segment, such as <code>&amp;quot;{var}&amp;quot;</code> or
-<code>&amp;quot;{var=*}&amp;quot;</code>, when such a variable is expanded into a URL path, all characters
-except <code>[-_.~0-9a-zA-Z]</code> are percent-encoded. Such variables show up in the
-Discovery Document as <code>{var}</code>.</p>
-<p>If a variable contains one or more path segments, such as <code>&amp;quot;{var=foo/*}&amp;quot;</code>
-or <code>&amp;quot;{var=**}&amp;quot;</code>, when such a variable is expanded into a URL path, all
-characters except <code>[-_.~/0-9a-zA-Z]</code> are percent-encoded. Such variables
-show up in the Discovery Document as <code>{+var}</code>.</p>
-<p>NOTE: While the single segment variable matches the semantics of
-<a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.2
-Simple String Expansion, the multi segment variable <strong>does not</strong> match
-RFC 6570 Reserved Expansion. The reason is that the Reserved Expansion
+<code>&amp;quot;{var=*}&amp;quot;</code>, when such a variable is expanded into a URL path on the client
+side, all characters except <code>[-_.~0-9a-zA-Z]</code> are percent-encoded. The
+server side does the reverse decoding. Such variables show up in the
+<a href="https://developers.google.com/discovery/v1/reference/apis">Discovery
+Document</a> as
+<code>{var}</code>.</p>
+<p>If a variable contains multiple path segments, such as <code>&amp;quot;{var=foo/*}&amp;quot;</code>
+or <code>&amp;quot;{var=**}&amp;quot;</code>, when such a variable is expanded into a URL path on the
+client side, all characters except <code>[-_.~/0-9a-zA-Z]</code> are percent-encoded.
+The server side does the reverse decoding, except &quot;%2F&quot; and &quot;%2f&quot; are left
+unchanged. Such variables show up in the
+<a href="https://developers.google.com/discovery/v1/reference/apis">Discovery
+Document</a> as
+<code>{+var}</code>.</p>
+<h2 id="using-grpc-api-service-configuration">Using gRPC API Service Configuration</h2>
+<p>gRPC API Service Configuration (service config) is a configuration language
+for configuring a gRPC service to become a user-facing product. The
+service config is simply the YAML representation of the <code>google.api.Service</code>
+proto message.</p>
+<p>As an alternative to annotating your proto file, you can configure gRPC
+transcoding in your service config YAML files. You do this by specifying a
+<code>HttpRule</code> that maps the gRPC method to a REST endpoint, achieving the same
+effect as the proto annotation. This can be particularly useful if you
+have a proto that is reused in multiple services. Note that any transcoding
+specified in the service config will override any matching transcoding
+configuration in the proto.</p>
+<p>Example:</p>
+<p>http:
+ rules:</p>
+<h1 id="selects-a-grpc-method-and-applies-httprule-to-it">Selects a gRPC method and applies HttpRule to it.</h1>
+<ul>
+<li>selector: example.v1.Messaging.GetMessage
+get: /v1/messages/{message_id}/{sub.subfield}</li>
+</ul>
+<h2 id="special-notes">Special notes</h2>
+<p>When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the
+proto to JSON conversion must follow the <a href="https://developers.google.com/protocol-buffers/docs/proto3#json">proto3
+specification</a>.</p>
+<p>While the single segment variable follows the semantics of
+<a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a> Section 3.2.2 Simple String
+Expansion, the multi segment variable <strong>does not</strong> follow RFC 6570 Section
+3.2.3 Reserved Expansion. The reason is that the Reserved Expansion
 does not expand special characters like <code>?</code> and <code>#</code>, which would lead
-to invalid URLs.</p>
-<p>NOTE: the field paths in variables and in the <code>body</code> must not refer to
-repeated fields or map fields.</p>
+to invalid URLs. As the result, gRPC Transcoding uses a custom encoding
+for multi segment variables.</p>
+<p>The path variables <strong>must not</strong> refer to any repeated or mapped field,
+because client libraries are not capable of handling such variable expansion.</p>
+<p>The path variables <strong>must not</strong> capture the leading &quot;/&quot; character. The reason
+is that the most common use case &quot;{var}&quot; does not capture the leading &quot;/&quot;
+character. For consistency, all path variables must share the same behavior.</p>
+<p>Repeated message fields must not be mapped to URL query parameters, because
+no client library can support such complicated mapping.</p>
+<p>If an API needs to use a JSON array for request or response body, it can map
+the request or response body to a repeated field. However, some gRPC
+Transcoding implementations may not support this feature.</p>
 </section>
       <h4><a class="xref" href="Google.Api.LabelDescriptor.html">LabelDescriptor</a></h4>
       <section><p>A description of a label.</p>
@@ -680,6 +761,9 @@ repeated fields or map fields.</p>
 </section>
       <h4><a class="xref" href="Google.Api.LabelReflection.html">LabelReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/label.proto</p>
+</section>
+      <h4><a class="xref" href="Google.Api.LaunchStageReflection.html">LaunchStageReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/api/launch_stage.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.LogDescriptor.html">LogDescriptor</a></h4>
       <section><p>A description of a log type. Example in YAML format:</p>
@@ -760,14 +844,15 @@ existing data unusable.</p>
       <h4><a class="xref" href="Google.Api.MetricDescriptor.Types.html">MetricDescriptor.Types</a></h4>
       <section><p>Container for nested types declared in the MetricDescriptor message type.</p>
 </section>
+      <h4><a class="xref" href="Google.Api.MetricDescriptor.Types.MetricDescriptorMetadata.html">MetricDescriptor.Types.MetricDescriptorMetadata</a></h4>
+      <section><p>Additional annotations that can be used to guide the usage of a metric.</p>
+</section>
       <h4><a class="xref" href="Google.Api.MetricReflection.html">MetricReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/metric.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.MetricRule.html">MetricRule</a></h4>
       <section><p>Bind API methods to metrics. Binding a method to a metric causes that
-metric&apos;s configured quota, billing, and monitoring behaviors to apply to the
-method call.</p>
-<p>Used by metric-based quotas only.</p>
+metric&apos;s configured quota behaviors to apply to the method call.</p>
 </section>
       <h4><a class="xref" href="Google.Api.MonitoredResource.html">MonitoredResource</a></h4>
       <section><p>An object representing a resource that can be used for monitoring, logging,
@@ -797,8 +882,8 @@ by the API.</p>
       <section><p>Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
 [MonitoredResource][google.api.MonitoredResource] objects contain the minimum set of information to
 uniquely identify a monitored resource instance. There is some other useful
-auxiliary metadata. Google Stackdriver Monitoring &amp; Logging uses an ingestion
-pipeline to extract metadata for cloud resources of all types , and stores
+auxiliary metadata. Monitoring and Logging use an ingestion
+pipeline to extract metadata for cloud resources of all types, and store
 the metadata in this message.</p>
 </section>
       <h4><a class="xref" href="Google.Api.MonitoredResourceReflection.html">MonitoredResourceReflection</a></h4>
@@ -917,7 +1002,7 @@ define and set these properties.</p>
       <h4><a class="xref" href="Google.Api.Quota.html">Quota</a></h4>
       <section><p>Quota configuration helps to achieve fairness and budgeting in service
 usage.</p>
-<p>The quota configuration works this way:</p>
+<p>The metric based quota configuration works this way:</p>
 <ul>
 <li>The service configuration defines a set of metrics.</li>
 <li>For API calls, the quota.metric_rules maps methods to metrics with
@@ -973,6 +1058,43 @@ type combination defined within a <code>QuotaGroup</code>.</p>
 </section>
       <h4><a class="xref" href="Google.Api.QuotaReflection.html">QuotaReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/quota.proto</p>
+</section>
+      <h4><a class="xref" href="Google.Api.ResourceDescriptor.html">ResourceDescriptor</a></h4>
+      <section><p>A simple descriptor of a resource type.</p>
+<p>ResourceDescriptor annotates a resource message (either by means of a
+protobuf annotation or use in the service config), and associates the
+resource&apos;s schema, the resource type, and the pattern of the resource name.</p>
+<p>Example:</p>
+<p>message Topic {
+// Indicates this message defines a resource schema.
+// Declares the resource type in the format of {service}/{kind}.
+// For Kubernetes resources, the format is {api group}/{kind}.
+option (google.api.resource) = {
+ type: &quot;pubsub.googleapis.com/Topic&quot;
+ pattern: &quot;projects/{project}/topics/{topic}&quot;
+};
+}</p>
+<p>Sometimes, resources have multiple patterns, typically because they can
+live under multiple parents.</p>
+<p>Example:</p>
+<p>message LogEntry {
+option (google.api.resource) = {
+ type: &quot;logging.googleapis.com/LogEntry&quot;
+ pattern: &quot;projects/{project}/logs/{log}&quot;
+ pattern: &quot;organizations/{organization}/logs/{log}&quot;
+ pattern: &quot;folders/{folder}/logs/{log}&quot;
+ pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;
+};
+}</p>
+</section>
+      <h4><a class="xref" href="Google.Api.ResourceDescriptor.Types.html">ResourceDescriptor.Types</a></h4>
+      <section><p>Container for nested types declared in the ResourceDescriptor message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.ResourceReference.html">ResourceReference</a></h4>
+      <section><p>Defines a proto annotation that describes a field that refers to a resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.ResourceReflection.html">ResourceReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/api/resource.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.Service.html">Service</a></h4>
       <section><p><code>Service</code> is the root object of Google service configuration schema. It
@@ -1061,6 +1183,17 @@ allow_unregistered_calls: true</li>
 </section>
     <h3 id="enums">Enums
   </h3>
+      <h4><a class="xref" href="Google.Api.BackendRule.AuthenticationOneofCase.html">BackendRule.AuthenticationOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;authentication&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.BackendRule.Types.PathTranslation.html">BackendRule.Types.PathTranslation</a></h4>
+      <section><p>Path Translation specifies how to combine the backend address with the
+request path in order to produce the appropriate forwarding URL for the
+request.</p>
+<p>Path Translation is applicable only to HTTP-based backends. Backends which
+do not accept requests over HTTP/HTTPS should leave <code>path_translation</code>
+unspecified.</p>
+</section>
       <h4><a class="xref" href="Google.Api.ChangeType.html">ChangeType</a></h4>
       <section><p>Classifies set of possible modifications to an object in the service
 configuration.</p>
@@ -1068,11 +1201,22 @@ configuration.</p>
       <h4><a class="xref" href="Google.Api.Distribution.Types.BucketOptions.OptionsOneofCase.html">Distribution.Types.BucketOptions.OptionsOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;options&quot; oneof.</p>
 </section>
+      <h4><a class="xref" href="Google.Api.FieldBehavior.html">FieldBehavior</a></h4>
+      <section><p>An indicator of the behavior of a given field (for example, that a field
+is required in requests, or given as output but ignored as input).
+This <strong>does not</strong> change the behavior in protocol buffers itself; it only
+denotes the behavior and may affect how API tooling handles the field.</p>
+<p>Note: This enum <strong>may</strong> receive new values in the future.</p>
+</section>
       <h4><a class="xref" href="Google.Api.HttpRule.PatternOneofCase.html">HttpRule.PatternOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;pattern&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Api.LabelDescriptor.Types.ValueType.html">LabelDescriptor.Types.ValueType</a></h4>
       <section><p>Value types that can be used as label values.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.LaunchStage.html">LaunchStage</a></h4>
+      <section><p>The launch stage as defined by <a href="http://cloud.google.com/terms/launch-stages">Google Cloud Platform
+Launch Stages</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Api.MetricDescriptor.Types.MetricKind.html">MetricDescriptor.Types.MetricKind</a></h4>
       <section><p>The kind of measurement. It describes how the data is reported.</p>
@@ -1082,6 +1226,10 @@ configuration.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Property.Types.PropertyType.html">Property.Types.PropertyType</a></h4>
       <section><p>Supported data type of the property values</p>
+</section>
+      <h4><a class="xref" href="Google.Api.ResourceDescriptor.Types.History.html">ResourceDescriptor.Types.History</a></h4>
+      <section><p>A description of the historical or future-looking state of the
+resource pattern.</p>
 </section>
 </article>
           </div>
