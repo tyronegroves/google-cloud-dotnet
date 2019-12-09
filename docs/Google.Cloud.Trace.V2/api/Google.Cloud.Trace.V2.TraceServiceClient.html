@@ -107,7 +107,8 @@
   </h3>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_DefaultEndpoint_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.DefaultEndpoint*"></a>
   <h4 id="Google_Cloud_Trace_V2_TraceServiceClient_DefaultEndpoint" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.DefaultEndpoint">DefaultEndpoint</h4>
-  <div class="markdown level1 summary"><p>The default endpoint for the TraceService service, which is a host of &quot;cloudtrace.googleapis.com&quot; and a port of 443.</p>
+  <div class="markdown level1 summary"><p>The default endpoint for the TraceService service, which is a host of &quot;cloudtrace.googleapis.com&quot; and a port
+of 443.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -155,11 +156,11 @@
   </table>
   <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_DefaultScopes_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The default TraceService scopes are:
-<ul><li>&quot;<a href="https://www.googleapis.com/auth/cloud-platform&amp;quot">https://www.googleapis.com/auth/cloud-platform&quot</a>;</li><li>&quot;<a href="https://www.googleapis.com/auth/trace.append&amp;quot">https://www.googleapis.com/auth/trace.append&quot</a>;</li></ul></p>
+<ul><li><a href="https://www.googleapis.com/auth/cloud-platform">https://www.googleapis.com/auth/cloud-platform</a></li><li><a href="https://www.googleapis.com/auth/trace.append">https://www.googleapis.com/auth/trace.append</a></li></ul></p>
 </div>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_GrpcClient_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.GrpcClient*"></a>
   <h4 id="Google_Cloud_Trace_V2_TraceServiceClient_GrpcClient" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.GrpcClient">GrpcClient</h4>
-  <div class="markdown level1 summary"><p>The underlying gRPC TraceService client.</p>
+  <div class="markdown level1 summary"><p>The underlying gRPC TraceService client</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -213,7 +214,7 @@ existing spans.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</td>
         <td><span class="parametername">spans</span></td>
-        <td><p>A list of new spans. The span names must not match existing
+        <td><p>Required. A list of new spans. The span names must not match existing
 spans, or the results are undefined.</p>
 </td>
       </tr>
@@ -231,7 +232,7 @@ spans, or the results are undefined.</p>
 TraceServiceClient traceServiceClient = TraceServiceClient.Create();
 // Initialize request argument(s)
 ProjectName name = new ProjectName(&quot;[PROJECT]&quot;);
-IEnumerable&lt;apis::Span&gt; spans = new List&lt;apis::Span&gt;();
+IEnumerable&lt;Span&gt; spans = new Span[] { new Span(), };
 // Make the request
 traceServiceClient.BatchWriteSpans(name, spans);
 </code></pre></div>
@@ -278,7 +279,7 @@ TraceServiceClient traceServiceClient = TraceServiceClient.Create();
 BatchWriteSpansRequest request = new BatchWriteSpansRequest
 {
     ProjectName = new ProjectName(&quot;[PROJECT]&quot;),
-    Spans = { },
+    Spans = { new Span(), },
 };
 // Make the request
 traceServiceClient.BatchWriteSpans(request);
@@ -314,7 +315,7 @@ existing spans.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</td>
         <td><span class="parametername">spans</span></td>
-        <td><p>A list of new spans. The span names must not match existing
+        <td><p>Required. A list of new spans. The span names must not match existing
 spans, or the results are undefined.</p>
 </td>
       </tr>
@@ -326,6 +327,17 @@ spans, or the results are undefined.</p>
       </tr>
     </tbody>
   </table>
+  <div>
+  <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_BatchWriteSpans_System_String_System_Collections_Generic_IEnumerable_Google_Cloud_Trace_V2_Span__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TraceServiceClient traceServiceClient = TraceServiceClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]&quot;;
+IEnumerable&lt;Span&gt; spans = new Span[] { new Span(), };
+// Make the request
+traceServiceClient.BatchWriteSpans(name, spans);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_BatchWriteSpansAsync_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.BatchWriteSpansAsync*"></a>
   <h4 id="Google_Cloud_Trace_V2_TraceServiceClient_BatchWriteSpansAsync_Google_Api_Gax_ResourceNames_ProjectName_System_Collections_Generic_IEnumerable_Google_Cloud_Trace_V2_Span__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.BatchWriteSpansAsync(Google.Api.Gax.ResourceNames.ProjectName,System.Collections.Generic.IEnumerable{Google.Cloud.Trace.V2.Span},Google.Api.Gax.Grpc.CallSettings)">BatchWriteSpansAsync(ProjectName, IEnumerable&lt;Span&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Sends new spans to new or existing traces. You cannot update
@@ -356,7 +368,7 @@ existing spans.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</td>
         <td><span class="parametername">spans</span></td>
-        <td><p>A list of new spans. The span names must not match existing
+        <td><p>Required. A list of new spans. The span names must not match existing
 spans, or the results are undefined.</p>
 </td>
       </tr>
@@ -379,7 +391,7 @@ spans, or the results are undefined.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -390,7 +402,7 @@ spans, or the results are undefined.</p>
 TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
 // Initialize request argument(s)
 ProjectName name = new ProjectName(&quot;[PROJECT]&quot;);
-IEnumerable&lt;apis::Span&gt; spans = new List&lt;apis::Span&gt;();
+IEnumerable&lt;Span&gt; spans = new Span[] { new Span(), };
 // Make the request
 await traceServiceClient.BatchWriteSpansAsync(name, spans);
 </code></pre></div>
@@ -425,7 +437,7 @@ existing spans.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</td>
         <td><span class="parametername">spans</span></td>
-        <td><p>A list of new spans. The span names must not match existing
+        <td><p>Required. A list of new spans. The span names must not match existing
 spans, or the results are undefined.</p>
 </td>
       </tr>
@@ -448,7 +460,7 @@ spans, or the results are undefined.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -459,7 +471,7 @@ spans, or the results are undefined.</p>
 TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
 // Initialize request argument(s)
 ProjectName name = new ProjectName(&quot;[PROJECT]&quot;);
-IEnumerable&lt;apis::Span&gt; spans = new List&lt;apis::Span&gt;();
+IEnumerable&lt;Span&gt; spans = new Span[] { new Span(), };
 // Make the request
 await traceServiceClient.BatchWriteSpansAsync(name, spans);
 </code></pre></div>
@@ -509,7 +521,7 @@ existing spans.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -522,7 +534,7 @@ TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
 BatchWriteSpansRequest request = new BatchWriteSpansRequest
 {
     ProjectName = new ProjectName(&quot;[PROJECT]&quot;),
-    Spans = { },
+    Spans = { new Span(), },
 };
 // Make the request
 await traceServiceClient.BatchWriteSpansAsync(request);
@@ -573,7 +585,7 @@ existing spans.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -586,7 +598,7 @@ TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
 BatchWriteSpansRequest request = new BatchWriteSpansRequest
 {
     ProjectName = new ProjectName(&quot;[PROJECT]&quot;),
-    Spans = { },
+    Spans = { new Span(), },
 };
 // Make the request
 await traceServiceClient.BatchWriteSpansAsync(request);
@@ -622,7 +634,7 @@ existing spans.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</td>
         <td><span class="parametername">spans</span></td>
-        <td><p>A list of new spans. The span names must not match existing
+        <td><p>Required. A list of new spans. The span names must not match existing
 spans, or the results are undefined.</p>
 </td>
       </tr>
@@ -645,11 +657,22 @@ spans, or the results are undefined.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <div>
+  <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_BatchWriteSpansAsync_System_String_System_Collections_Generic_IEnumerable_Google_Cloud_Trace_V2_Span__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]&quot;;
+IEnumerable&lt;Span&gt; spans = new Span[] { new Span(), };
+// Make the request
+await traceServiceClient.BatchWriteSpansAsync(name, spans);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_BatchWriteSpansAsync_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.BatchWriteSpansAsync*"></a>
   <h4 id="Google_Cloud_Trace_V2_TraceServiceClient_BatchWriteSpansAsync_System_String_System_Collections_Generic_IEnumerable_Google_Cloud_Trace_V2_Span__System_Threading_CancellationToken_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.BatchWriteSpansAsync(System.String,System.Collections.Generic.IEnumerable{Google.Cloud.Trace.V2.Span},System.Threading.CancellationToken)">BatchWriteSpansAsync(String, IEnumerable&lt;Span&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Sends new spans to new or existing traces. You cannot update
@@ -680,7 +703,7 @@ existing spans.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</td>
         <td><span class="parametername">spans</span></td>
-        <td><p>A list of new spans. The span names must not match existing
+        <td><p>Required. A list of new spans. The span names must not match existing
 spans, or the results are undefined.</p>
 </td>
       </tr>
@@ -703,15 +726,26 @@ spans, or the results are undefined.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <div>
+  <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_BatchWriteSpansAsync_System_String_System_Collections_Generic_IEnumerable_Google_Cloud_Trace_V2_Span__System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]&quot;;
+IEnumerable&lt;Span&gt; spans = new Span[] { new Span(), };
+// Make the request
+await traceServiceClient.BatchWriteSpansAsync(name, spans);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_Create_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.Create*"></a>
   <h4 id="Google_Cloud_Trace_V2_TraceServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Trace.V2.TraceServiceSettings)">Create(ServiceEndpoint, TraceServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html">TraceServiceClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
+  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html">TraceServiceClient</a>, applying defaults for all unspecified settings, 
+and creating a channel connecting to the given endpoint with application default credentials where 
 necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -761,22 +795,22 @@ necessary. See the example for how to use custom credentials.</p>
   </table>
   <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings__examples">Examples</h5>
   <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Trace.V2;
+<pre><code>using Google.Cloud.Vision.V1;
 ...
 // When running on Google Cloud Platform this will use the project Compute Credential.
 // Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
 // credential file to use that credential.
-TraceServiceClient client = TraceServiceClient.Create();</code></pre>
+ImageAnnotatorClient client = ImageAnnotatorClient.Create();</code></pre>
 <p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Trace.V2;
+<pre><code>using Google.Cloud.Vision.V1;
 using Google.Apis.Auth.OAuth2;
 using Grpc.Auth;
 using Grpc.Core;
 ...
 GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
 Channel channel = new Channel(
-    TraceServiceClient.DefaultEndpoint.Host, TraceServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-TraceServiceClient client = TraceServiceClient.Create(channel);
+    ImageAnnotatorClient.DefaultEndpoint.Host, ImageAnnotatorClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ImageAnnotatorClient client = ImageAnnotatorClient.Create(channel);
 ...
 // Shutdown the channel when it is no longer required.
 channel.ShutdownAsync().Wait();</code></pre>
@@ -881,8 +915,8 @@ channel.ShutdownAsync().Wait();</code></pre>
   </table>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_CreateAsync_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.CreateAsync*"></a>
   <h4 id="Google_Cloud_Trace_V2_TraceServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Trace.V2.TraceServiceSettings)">CreateAsync(ServiceEndpoint, TraceServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html">TraceServiceClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
+  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html">TraceServiceClient</a>, applying defaults for all unspecified settings, 
+and creating a channel connecting to the given endpoint with application default credentials where 
 necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -932,22 +966,22 @@ necessary. See the example for how to use custom credentials.</p>
   </table>
   <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings__examples">Examples</h5>
   <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Trace.V2;
+<pre><code>using Google.Cloud.Vision.V1;
 ...
 // When running on Google Cloud Platform this will use the project Compute Credential.
 // Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
 // credential file to use that credential.
-TraceServiceClient client = await TraceServiceClient.CreateAsync();</code></pre>
+ImageAnnotatorClient client = await ImageAnnotatorClient.CreateAsync();</code></pre>
 <p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Trace.V2;
+<pre><code>using Google.Cloud.Vision.V1;
 using Google.Apis.Auth.OAuth2;
 using Grpc.Auth;
 using Grpc.Core;
 ...
 GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
 Channel channel = new Channel(
-    TraceServiceClient.DefaultEndpoint.Host, TraceServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-TraceServiceClient client = TraceServiceClient.Create(channel);
+    ImageAnnotatorClient.DefaultEndpoint.Host, ImageAnnotatorClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ImageAnnotatorClient client = ImageAnnotatorClient.Create(channel);
 ...
 // Shutdown the channel when it is no longer required.
 await channel.ShutdownAsync();</code></pre>
@@ -1006,16 +1040,24 @@ await channel.ShutdownAsync();</code></pre>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TraceServiceClient traceServiceClient = TraceServiceClient.Create();
 // Initialize request argument(s)
-apis::Span request = new apis::Span
+Span request = new Span
 {
     SpanName = new SpanName(&quot;[PROJECT]&quot;, &quot;[TRACE]&quot;, &quot;[SPAN]&quot;),
     SpanId = &quot;&quot;,
+    ParentSpanId = &quot;&quot;,
     DisplayName = new TruncatableString(),
     StartTime = new Timestamp(),
     EndTime = new Timestamp(),
+    Attributes = new Span.Types.Attributes(),
+    StackTrace = new StackTrace(),
+    TimeEvents = new Span.Types.TimeEvents(),
+    Links = new Span.Types.Links(),
+    Status = new Status(),
+    SameProcessAsParentSpan = new bool?(),
+    ChildSpanCount = new int?(),
 };
 // Make the request
-apis::Span response = traceServiceClient.CreateSpan(request);
+Span response = traceServiceClient.CreateSpan(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_CreateSpanAsync_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.CreateSpanAsync*"></a>
@@ -1072,16 +1114,24 @@ apis::Span response = traceServiceClient.CreateSpan(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
 // Initialize request argument(s)
-apis::Span request = new apis::Span
+Span request = new Span
 {
     SpanName = new SpanName(&quot;[PROJECT]&quot;, &quot;[TRACE]&quot;, &quot;[SPAN]&quot;),
     SpanId = &quot;&quot;,
+    ParentSpanId = &quot;&quot;,
     DisplayName = new TruncatableString(),
     StartTime = new Timestamp(),
     EndTime = new Timestamp(),
+    Attributes = new Span.Types.Attributes(),
+    StackTrace = new StackTrace(),
+    TimeEvents = new Span.Types.TimeEvents(),
+    Links = new Span.Types.Links(),
+    Status = new Status(),
+    SameProcessAsParentSpan = new bool?(),
+    ChildSpanCount = new int?(),
 };
 // Make the request
-apis::Span response = await traceServiceClient.CreateSpanAsync(request);
+Span response = await traceServiceClient.CreateSpanAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_CreateSpanAsync_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.CreateSpanAsync*"></a>
@@ -1138,23 +1188,32 @@ apis::Span response = await traceServiceClient.CreateSpanAsync(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TraceServiceClient traceServiceClient = await TraceServiceClient.CreateAsync();
 // Initialize request argument(s)
-apis::Span request = new apis::Span
+Span request = new Span
 {
     SpanName = new SpanName(&quot;[PROJECT]&quot;, &quot;[TRACE]&quot;, &quot;[SPAN]&quot;),
     SpanId = &quot;&quot;,
+    ParentSpanId = &quot;&quot;,
     DisplayName = new TruncatableString(),
     StartTime = new Timestamp(),
     EndTime = new Timestamp(),
+    Attributes = new Span.Types.Attributes(),
+    StackTrace = new StackTrace(),
+    TimeEvents = new Span.Types.TimeEvents(),
+    Links = new Span.Types.Links(),
+    Status = new Status(),
+    SameProcessAsParentSpan = new bool?(),
+    ChildSpanCount = new int?(),
 };
 // Make the request
-apis::Span response = await traceServiceClient.CreateSpanAsync(request);
+Span response = await traceServiceClient.CreateSpanAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_ShutdownDefaultChannelsAsync_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.ShutdownDefaultChannelsAsync*"></a>
   <h4 id="Google_Cloud_Trace_V2_TraceServiceClient_ShutdownDefaultChannelsAsync" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.ShutdownDefaultChannelsAsync">ShutdownDefaultChannelsAsync()</h4>
-  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_">Create(ServiceEndpoint, TraceServiceSettings)</a>
-and <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_">CreateAsync(ServiceEndpoint, TraceServiceSettings)</a>. Channels which weren&apos;t automatically
-created are not affected.</p>
+  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by
+<a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Trace_V2_TraceServiceSettings_">Create(CallInvoker, TraceServiceSettings)</a> and
+<a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_">CreateAsync(ServiceEndpoint, TraceServiceSettings)</a>. Channels which weren&apos;t
+automatically created are not affected.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1178,9 +1237,9 @@ created are not affected.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_ShutdownDefaultChannelsAsync_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_">Create(ServiceEndpoint, TraceServiceSettings)</a>
-and <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_">CreateAsync(ServiceEndpoint, TraceServiceSettings)</a> will create new channels, which could
-in turn be shut down by another call to this method.</p>
+  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Trace_V2_TraceServiceSettings_">Create(CallInvoker, TraceServiceSettings)</a>
+and <a class="xref" href="Google.Cloud.Trace.V2.TraceServiceClient.html#Google_Cloud_Trace_V2_TraceServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Trace_V2_TraceServiceSettings_">CreateAsync(ServiceEndpoint, TraceServiceSettings)</a> will create new channels, which
+could in turn be shut down by another call to this method.</p>
 </div>
 </article>
           </div>
