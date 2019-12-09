@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.VideoIntelligence.V1</code> is a.NET client library for the <a href="https://cloud.google.com/video-intelligence">Google Cloud Video Intelligence API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.2.0</code> of the library.
+This documentation is for version <code>1.3.0</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.VideoIntelligence.V1</code> package from NuGet. Add it to
@@ -77,9 +77,9 @@ download a service account JSON file then set the <code>GOOGLE_APPLICATION_CREDE
 The credentials will automatically be used to authenticate. See the <a href="https://cloud.google.com/docs/authentication/getting-started">Getting Started With
 Authentication</a> guide for more details.</p>
 <h1 id="getting-started">Getting started</h1>
-<p>All operations are performed through <a href="api/Google.Cloud.VideoIntelligence.V1.VideoIntelligenceServiceClient.html">VideoIntelligenceServiceClient</a>.</p>
+<p>FIXME</p>
 <p>Create a client instance by calling the static <code>Create</code> method. Alternatively,
-use the builder class associated with each client class (e.g. VideoIntelligenceServiceClientBuilder for VideoIntelligenceServiceClient)
+use the builder class associated with each client class (e.g. Builder for )
 as an easy way of specifying custom credentials, settings, or a custom endpoint.</p>
 <p>Perform an initial call to <code>AnnotateVideo</code> or <code>AnnotateVideoAsync</code>.
 This will return a long-running operation, which you can poll to
@@ -88,7 +88,7 @@ check for completion and the results.</p>
 <h2 id="annotate-labels-within-a-video">Annotate labels within a video</h2>
 <pre><code class="lang-cs">VideoIntelligenceServiceClient client = VideoIntelligenceServiceClient.Create();
 Operation&lt;AnnotateVideoResponse, AnnotateVideoProgress&gt; operation = client.AnnotateVideo(
-    &quot;gs://cloudmleap/video/next/gbikes_dinosaur.mp4&quot;,
+    &quot;gs://cloud-samples-data/video/gbikes_dinosaur.mp4&quot;,
     new[] { Feature.LabelDetection });
 Operation&lt;AnnotateVideoResponse, AnnotateVideoProgress&gt; resultOperation = operation.PollUntilCompleted();
 
@@ -106,7 +106,7 @@ foreach (LabelAnnotation label in result.ShotLabelAnnotations)
 <pre><code class="lang-cs">VideoIntelligenceServiceClient client = VideoIntelligenceServiceClient.Create();
 AnnotateVideoRequest request = new AnnotateVideoRequest
 {
-    InputUri = &quot;gs://bucket-name-123/google-next-17-videointelligence-short.mp4&quot;,
+    InputUri = &quot;gs://cloud-samples-data/video/googlework_short.mp4&quot;,
     Features = { Feature.SpeechTranscription },
     VideoContext = new VideoContext
     {
