@@ -282,9 +282,9 @@ For more information, including usage and the valid values, see:
   <a id="Google_Cloud_Container_V1_NodeConfig_LocalSsdCount_" data-uid="Google.Cloud.Container.V1.NodeConfig.LocalSsdCount*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_LocalSsdCount" data-uid="Google.Cloud.Container.V1.NodeConfig.LocalSsdCount">LocalSsdCount</h4>
   <div class="markdown level1 summary"><p>The number of local SSD disks to be attached to the node.</p>
-<p>The limit for this value is dependant upon the maximum number of
+<p>The limit for this value is dependent upon the maximum number of
 disks available on a machine per zone. See:
-<a href="https://cloud.google.com/compute/docs/disks/local-ssd#local_ssd_limits">https://cloud.google.com/compute/docs/disks/local-ssd#local_ssd_limits</a>
+<a href="https://cloud.google.com/compute/docs/disks/local-ssd">https://cloud.google.com/compute/docs/disks/local-ssd</a>
 for more information.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -309,7 +309,7 @@ for more information.</p>
   </table>
   <a id="Google_Cloud_Container_V1_NodeConfig_MachineType_" data-uid="Google.Cloud.Container.V1.NodeConfig.MachineType*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_MachineType" data-uid="Google.Cloud.Container.V1.NodeConfig.MachineType">MachineType</h4>
-  <div class="markdown level1 summary"><p>The name of a Google Compute Engine <a href="/compute/docs/machine-types">machine
+  <div class="markdown level1 summary"><p>The name of a Google Compute Engine <a href="https://cloud.google.com/compute/docs/machine-types">machine
 type</a> (e.g.
 <code>n1-standard-1</code>).</p>
 <p>If unspecified, the default machine type is
@@ -346,13 +346,21 @@ metadata keys for the project or be one of the reserved keys:
 &quot;cluster-name&quot;
 &quot;cluster-uid&quot;
 &quot;configure-sh&quot;
+&quot;containerd-configure-sh&quot;
 &quot;enable-os-login&quot;
 &quot;gci-update-strategy&quot;
 &quot;gci-ensure-gke-docker&quot;
 &quot;instance-template&quot;
 &quot;kube-env&quot;
 &quot;startup-script&quot;
-&quot;user-data&quot;</p>
+&quot;user-data&quot;
+&quot;disable-address-manager&quot;
+&quot;windows-startup-script-ps1&quot;
+&quot;common-psm1&quot;
+&quot;k8s-node-setup-psm1&quot;
+&quot;install-ssh-psm1&quot;
+&quot;user-profile-psm1&quot;
+&quot;serial-port-logging-enable&quot;</p>
 <p>Values are free-form strings, and only have meaning as interpreted by
 the image running in the instance. The only restriction placed on them is
 that each value&apos;s size must be less than or equal to 32 KB.</p>
@@ -419,7 +427,7 @@ not included:</p>
 persistent storage on your nodes.</li>
 <li><code>https://www.googleapis.com/auth/devstorage.read_only</code> is required for
 communicating with <strong>gcr.io</strong>
-(the <a href="/container-registry/">Google Container Registry</a>).</li>
+(the <a href="https://cloud.google.com/container-registry/">Google Container Registry</a>).</li>
 </ul>
 <p>If unspecified, no scopes are added, unless Cloud Logging or Cloud
 Monitoring are enabled, in which case their required scopes will be added.</p>
@@ -495,6 +503,30 @@ no Service Account is specified, the &quot;default&quot; service account is used
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_NodeConfig_ShieldedInstanceConfig_" data-uid="Google.Cloud.Container.V1.NodeConfig.ShieldedInstanceConfig*"></a>
+  <h4 id="Google_Cloud_Container_V1_NodeConfig_ShieldedInstanceConfig" data-uid="Google.Cloud.Container.V1.NodeConfig.ShieldedInstanceConfig">ShieldedInstanceConfig</h4>
+  <div class="markdown level1 summary"><p>Shielded Instance options.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShieldedInstanceConfig ShieldedInstanceConfig { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.ShieldedInstanceConfig.html">ShieldedInstanceConfig</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_NodeConfig_Tags_" data-uid="Google.Cloud.Container.V1.NodeConfig.Tags*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_Tags" data-uid="Google.Cloud.Container.V1.NodeConfig.Tags">Tags</h4>
   <div class="markdown level1 summary"><p>The list of instance tags applied to all nodes. Tags are used to identify
@@ -518,6 +550,32 @@ must comply with RFC1035.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Container_V1_NodeConfig_Taints_" data-uid="Google.Cloud.Container.V1.NodeConfig.Taints*"></a>
+  <h4 id="Google_Cloud_Container_V1_NodeConfig_Taints" data-uid="Google.Cloud.Container.V1.NodeConfig.Taints">Taints</h4>
+  <div class="markdown level1 summary"><p>List of kubernetes taints to be applied to each node.</p>
+<p>For more information, including usage and the valid values, see:
+<a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;NodeTaint&gt; Taints { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Container.V1.NodeTaint.html">NodeTaint</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

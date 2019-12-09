@@ -208,13 +208,13 @@ public abstract class ClusterManagerBase</code></pre>
   <div class="markdown level1 summary"><p>Creates a cluster, consisting of the specified number and type of Google
 Compute Engine instances.</p>
 <p>By default, the cluster is created in the project&apos;s
-<a href="/compute/docs/networks-and-firewalls#networks">default network</a>.</p>
+<a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">default network</a>.</p>
 <p>One firewall is added for the cluster. After cluster creation,
-the cluster creates routes for each node to allow the containers
+the Kubelet creates routes for each node to allow the containers
 on that node to communicate with all other instances in the
 cluster.</p>
 <p>Finally, an entry is added to the project&apos;s global metadata indicating
-which CIDR range is being used by the cluster.</p>
+which CIDR range the cluster is using.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -316,9 +316,9 @@ which CIDR range is being used by the cluster.</p>
 nodes.</p>
 <p>Firewalls and routes that were configured during cluster creation
 are also deleted.</p>
-<p>Other Google Compute Engine resources that might be in use by the cluster
-(e.g. load balancer resources) will not be deleted if they weren&apos;t present
-at the initial create time.</p>
+<p>Other Google Compute Engine resources that might be in use by the cluster,
+such as load balancer resources, are not deleted if they weren&apos;t present
+when the cluster was initially created.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -465,7 +465,7 @@ at the initial create time.</p>
   </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_GetNodePool_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.GetNodePool*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_GetNodePool_Google_Cloud_Container_V1_GetNodePoolRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.GetNodePool(Google.Cloud.Container.V1.GetNodePoolRequest,Grpc.Core.ServerCallContext)">GetNodePool(GetNodePoolRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Retrieves the node pool requested.</p>
+  <div class="markdown level1 summary"><p>Retrieves the requested node pool.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -563,7 +563,7 @@ at the initial create time.</p>
   </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_GetServerConfig_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.GetServerConfig*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_GetServerConfig_Google_Cloud_Container_V1_GetServerConfigRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.GetServerConfig(Google.Cloud.Container.V1.GetServerConfigRequest,Grpc.Core.ServerCallContext)">GetServerConfig(GetServerConfigRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Returns configuration info about the Kubernetes Engine service.</p>
+  <div class="markdown level1 summary"><p>Returns configuration info about the Google Kubernetes Engine service.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -758,10 +758,59 @@ zones.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_ListUsableSubnetworks_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.ListUsableSubnetworks*"></a>
+  <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_ListUsableSubnetworks_Google_Cloud_Container_V1_ListUsableSubnetworksRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.ListUsableSubnetworks(Google.Cloud.Container.V1.ListUsableSubnetworksRequest,Grpc.Core.ServerCallContext)">ListUsableSubnetworks(ListUsableSubnetworksRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists subnetworks that are usable for creating clusters in a project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListUsableSubnetworksResponse&gt; ListUsableSubnetworks(ListUsableSubnetworksRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.ListUsableSubnetworksRequest.html">ListUsableSubnetworksRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Container.V1.ListUsableSubnetworksResponse.html">ListUsableSubnetworksResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_RollbackNodePoolUpgrade_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.RollbackNodePoolUpgrade*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_RollbackNodePoolUpgrade_Google_Cloud_Container_V1_RollbackNodePoolUpgradeRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.RollbackNodePoolUpgrade(Google.Cloud.Container.V1.RollbackNodePoolUpgradeRequest,Grpc.Core.ServerCallContext)">RollbackNodePoolUpgrade(RollbackNodePoolUpgradeRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Roll back the previously Aborted or Failed NodePool upgrade.
-This will be an no-op if the last upgrade successfully completed.</p>
+  <div class="markdown level1 summary"><p>Rolls back a previously Aborted or Failed NodePool upgrade.
+This makes no changes if the last upgrade successfully completed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1104,9 +1153,9 @@ This will be an no-op if the last upgrade successfully completed.</p>
   </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_SetMasterAuth_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.SetMasterAuth*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_SetMasterAuth_Google_Cloud_Container_V1_SetMasterAuthRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.SetMasterAuth(Google.Cloud.Container.V1.SetMasterAuthRequest,Grpc.Core.ServerCallContext)">SetMasterAuth(SetMasterAuthRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Used to set master auth materials. Currently supports :-
-Changing the admin password for a specific cluster.
-This can be either via password generation or explicitly set the password.</p>
+  <div class="markdown level1 summary"><p>Sets master auth materials. Currently supports changing the admin password
+or a specific cluster, either via password generation or explicitly setting
+the password.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1204,7 +1253,7 @@ This can be either via password generation or explicitly set the password.</p>
   </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_SetNetworkPolicy_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.SetNetworkPolicy*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_SetNetworkPolicy_Google_Cloud_Container_V1_SetNetworkPolicyRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.SetNetworkPolicy(Google.Cloud.Container.V1.SetNetworkPolicyRequest,Grpc.Core.ServerCallContext)">SetNetworkPolicy(SetNetworkPolicyRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Enables/Disables Network Policy for a cluster.</p>
+  <div class="markdown level1 summary"><p>Enables or disables Network Policy for a cluster.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1253,7 +1302,7 @@ This can be either via password generation or explicitly set the password.</p>
   </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_SetNodePoolAutoscaling_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.SetNodePoolAutoscaling*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_SetNodePoolAutoscaling_Google_Cloud_Container_V1_SetNodePoolAutoscalingRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.SetNodePoolAutoscaling(Google.Cloud.Container.V1.SetNodePoolAutoscalingRequest,Grpc.Core.ServerCallContext)">SetNodePoolAutoscaling(SetNodePoolAutoscalingRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Sets the autoscaling settings for a specific node pool.</p>
+  <div class="markdown level1 summary"><p>Sets the autoscaling settings for the specified node pool.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1400,7 +1449,7 @@ This can be either via password generation or explicitly set the password.</p>
   </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_StartIPRotation_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.StartIPRotation*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_StartIPRotation_Google_Cloud_Container_V1_StartIPRotationRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.StartIPRotation(Google.Cloud.Container.V1.StartIPRotationRequest,Grpc.Core.ServerCallContext)">StartIPRotation(StartIPRotationRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Start master IP rotation.</p>
+  <div class="markdown level1 summary"><p>Starts master IP rotation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1547,7 +1596,7 @@ This can be either via password generation or explicitly set the password.</p>
   </table>
   <a id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_UpdateNodePool_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.UpdateNodePool*"></a>
   <h4 id="Google_Cloud_Container_V1_ClusterManager_ClusterManagerBase_UpdateNodePool_Google_Cloud_Container_V1_UpdateNodePoolRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Container.V1.ClusterManager.ClusterManagerBase.UpdateNodePool(Google.Cloud.Container.V1.UpdateNodePoolRequest,Grpc.Core.ServerCallContext)">UpdateNodePool(UpdateNodePoolRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Updates the version and/or image type for a specific node pool.</p>
+  <div class="markdown level1 summary"><p>Updates the version and/or image type for the specified node pool.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
