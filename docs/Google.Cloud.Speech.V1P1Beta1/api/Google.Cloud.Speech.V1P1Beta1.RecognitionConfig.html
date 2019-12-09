@@ -149,17 +149,17 @@ request.</p>
   </h3>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_AlternativeLanguageCodes_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.AlternativeLanguageCodes*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_AlternativeLanguageCodes" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.AlternativeLanguageCodes">AlternativeLanguageCodes</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> A list of up to 3 additional
+  <div class="markdown level1 summary"><p>A list of up to 3 additional
 <a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tags,
 listing possible alternative languages of the supplied audio.
-See <a href="/speech-to-text/docs/languages">Language Support</a>
-for a list of the currently supported language codes.
-If alternative languages are listed, recognition result will contain
-recognition in the most likely language detected including the main
-language_code. The recognition result will include the language tag
-of the language detected in the audio.
-Note: This feature is only supported for Voice Command and Voice Search
-use cases and performance may vary for other use cases (e.g., phone call
+See <a href="https://cloud.google.com/speech-to-text/docs/languages">Language
+Support</a> for a list
+of the currently supported language codes. If alternative languages are
+listed, recognition result will contain recognition in the most likely
+language detected including the main language_code. The recognition result
+will include the language tag of the language detected in the audio. Note:
+This feature is only supported for Voice Command and Voice Search use cases
+and performance may vary for other use cases (e.g., phone call
 transcription).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -184,7 +184,7 @@ transcription).</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_AudioChannelCount_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.AudioChannelCount*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_AudioChannelCount" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.AudioChannelCount">AudioChannelCount</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> The number of channels in the input audio data.
+  <div class="markdown level1 summary"><p>The number of channels in the input audio data.
 ONLY set this for MULTI-CHANNEL recognition.
 Valid values for LINEAR16 and FLAC are <code>1</code>-<code>8</code>.
 Valid values for OGG_OPUS are &apos;1&apos;-&apos;254&apos;.
@@ -214,17 +214,48 @@ To perform independent recognition on each channel set
       </tr>
     </tbody>
   </table>
-  <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_DiarizationSpeakerCount_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.DiarizationSpeakerCount*"></a>
-  <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_DiarizationSpeakerCount" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.DiarizationSpeakerCount">DiarizationSpeakerCount</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em>
-If set, specifies the estimated number of speakers in the conversation.
-If not set, defaults to &apos;2&apos;.
-Ignored unless enable_speaker_diarization is set to true.&quot;</p>
+  <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_DiarizationConfig_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.DiarizationConfig*"></a>
+  <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_DiarizationConfig" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.DiarizationConfig">DiarizationConfig</h4>
+  <div class="markdown level1 summary"><p>Config to enable speaker diarization and set additional
+parameters to make diarization better suited for your application.
+Note: When this is enabled, we send all the words from the beginning of the
+audio for the top alternative in every consecutive STREAMING responses.
+This is done in order to improve our speaker tags as our models learn to
+identify the speakers in the conversation over time.
+For non-streaming requests, the diarization results will be provided only
+in the top alternative of the FINAL SpeechRecognitionResult.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int DiarizationSpeakerCount { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public SpeakerDiarizationConfig DiarizationConfig { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Speech.V1P1Beta1.SpeakerDiarizationConfig.html">SpeakerDiarizationConfig</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_DiarizationSpeakerCount_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.DiarizationSpeakerCount*"></a>
+  <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_DiarizationSpeakerCount" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.DiarizationSpeakerCount">DiarizationSpeakerCount</h4>
+  <div class="markdown level1 summary"><p>If set, specifies the estimated number of speakers in the conversation.
+Defaults to &apos;2&apos;. Ignored unless enable_speaker_diarization is set to true.
+Note: Use diarization_config instead.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public int DiarizationSpeakerCount { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -243,7 +274,7 @@ Ignored unless enable_speaker_diarization is set to true.&quot;</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableAutomaticPunctuation_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableAutomaticPunctuation*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableAutomaticPunctuation" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableAutomaticPunctuation">EnableAutomaticPunctuation</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> If &apos;true&apos;, adds punctuation to recognition result hypotheses.
+  <div class="markdown level1 summary"><p>If &apos;true&apos;, adds punctuation to recognition result hypotheses.
 This feature is only available in select languages. Setting this for
 requests in other languages has no effect at all.
 The default &apos;false&apos; value does not add punctuation to result hypotheses.
@@ -273,7 +304,7 @@ premium feature.</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSeparateRecognitionPerChannel_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSeparateRecognitionPerChannel*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSeparateRecognitionPerChannel" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSeparateRecognitionPerChannel">EnableSeparateRecognitionPerChannel</h4>
-  <div class="markdown level1 summary"><p>This needs to be set to ‘true’ explicitly and <code>audio_channel_count</code> &gt; 1
+  <div class="markdown level1 summary"><p>This needs to be set to <code>true</code> explicitly and <code>audio_channel_count</code> &gt; 1
 to get each channel recognized separately. The recognition result will
 contain a <code>channel_tag</code> field to state which channel that result belongs
 to. If this is not true, we will only recognize the first channel. The
@@ -302,20 +333,16 @@ request is billed cumulatively for all channels recognized:
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSpeakerDiarization_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSpeakerDiarization*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSpeakerDiarization" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSpeakerDiarization">EnableSpeakerDiarization</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> If &apos;true&apos;, enables speaker detection for each recognized word in
+  <div class="markdown level1 summary"><p>If &apos;true&apos;, enables speaker detection for each recognized word in
 the top alternative of the recognition result using a speaker_tag provided
 in the WordInfo.
-Note: When this is true, we send all the words from the beginning of the
-audio for the top alternative in every consecutive STREAMING responses.
-This is done in order to improve our speaker tags as our models learn to
-identify the speakers in the conversation over time.
-For non-streaming requests, the diarization results will be provided only
-in the top alternative of the FINAL SpeechRecognitionResult.</p>
+Note: Use diarization_config instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool EnableSpeakerDiarization { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public bool EnableSpeakerDiarization { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -334,7 +361,7 @@ in the top alternative of the FINAL SpeechRecognitionResult.</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableWordConfidence_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableWordConfidence*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableWordConfidence" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableWordConfidence">EnableWordConfidence</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> If <code>true</code>, the top result includes a list of words and the
+  <div class="markdown level1 summary"><p>If <code>true</code>, the top result includes a list of words and the
 confidence for those words. If <code>false</code>, no word-level confidence
 information is returned. The default is <code>false</code>.</p>
 </div>
@@ -360,7 +387,7 @@ information is returned. The default is <code>false</code>.</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableWordTimeOffsets_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableWordTimeOffsets*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableWordTimeOffsets" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableWordTimeOffsets">EnableWordTimeOffsets</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> If <code>true</code>, the top result includes a list of words and
+  <div class="markdown level1 summary"><p>If <code>true</code>, the top result includes a list of words and
 the start and end time offsets (timestamps) for those words. If
 <code>false</code>, no word-level time offset information is returned. The default is
 <code>false</code>.</p>
@@ -389,8 +416,7 @@ the start and end time offsets (timestamps) for those words. If
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Encoding" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Encoding">Encoding</h4>
   <div class="markdown level1 summary"><p>Encoding of audio data sent in all <code>RecognitionAudio</code> messages.
 This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
-for all other audio formats. For details, see
-[AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
+for all other audio formats. For details, see [AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -414,11 +440,12 @@ for all other audio formats. For details, see
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_LanguageCode_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.LanguageCode*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_LanguageCode" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.LanguageCode">LanguageCode</h4>
-  <div class="markdown level1 summary"><p><em>Required</em> The language of the supplied audio as a
+  <div class="markdown level1 summary"><p>Required. The language of the supplied audio as a
 <a href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</a> language tag.
 Example: &quot;en-US&quot;.
-See <a href="/speech-to-text/docs/languages">Language Support</a>
-for a list of the currently supported language codes.</p>
+See <a href="https://cloud.google.com/speech-to-text/docs/languages">Language
+Support</a> for a list
+of the currently supported language codes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -442,7 +469,7 @@ for a list of the currently supported language codes.</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_MaxAlternatives_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.MaxAlternatives*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_MaxAlternatives" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.MaxAlternatives">MaxAlternatives</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> Maximum number of recognition hypotheses to be returned.
+  <div class="markdown level1 summary"><p>Maximum number of recognition hypotheses to be returned.
 Specifically, the maximum number of <code>SpeechRecognitionAlternative</code> messages
 within each <code>SpeechRecognitionResult</code>.
 The server may return fewer than <code>max_alternatives</code>.
@@ -471,7 +498,7 @@ one. If omitted, will return a maximum of one.</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Metadata_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Metadata*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Metadata" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Metadata">Metadata</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> Metadata regarding this request.</p>
+  <div class="markdown level1 summary"><p>Metadata regarding this request.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -495,7 +522,7 @@ one. If omitted, will return a maximum of one.</p>
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Model_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Model*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Model" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Model">Model</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> Which model to select for the given request. Select the model
+  <div class="markdown level1 summary"><p>Which model to select for the given request. Select the model
 best suited to your domain to get best results. If a model is not
 explicitly specified, then we auto-select a model based on the parameters
 in the RecognitionConfig.
@@ -550,7 +577,7 @@ recorded at an 8khz sampling rate).&lt;/td&gt;
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_ProfanityFilter_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.ProfanityFilter*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_ProfanityFilter" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.ProfanityFilter">ProfanityFilter</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> If set to <code>true</code>, the server will attempt to filter out
+  <div class="markdown level1 summary"><p>If set to <code>true</code>, the server will attempt to filter out
 profanities, replacing all but the initial character in each filtered word
 with asterisks, e.g. &quot;f***&quot;. If set to <code>false</code> or omitted, profanities
 won&apos;t be filtered out.</p>
@@ -582,9 +609,8 @@ won&apos;t be filtered out.</p>
 16000 is optimal. For best results, set the sampling rate of the audio
 source to 16000 Hz. If that&apos;s not possible, use the native sample rate of
 the audio source (instead of re-sampling).
-This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
-for all other audio formats. For details, see
-[AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
+This field is optional for FLAC and WAV audio files, but is
+required for all other audio formats. For details, see [AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -608,10 +634,11 @@ for all other audio formats. For details, see
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_SpeechContexts_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.SpeechContexts*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_SpeechContexts" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.SpeechContexts">SpeechContexts</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> array of
-[SpeechContext][google.cloud.speech.v1p1beta1.SpeechContext]. A means to
-provide context to assist the speech recognition. For more information, see
-<a href="/speech-to-text/docs/basics#phrase-hints">Phrase Hints</a>.</p>
+  <div class="markdown level1 summary"><p>Array of [SpeechContext][google.cloud.speech.v1p1beta1.SpeechContext].
+A means to provide context to assist the speech recognition. For more
+information, see
+<a href="https://cloud.google.com/speech-to-text/docs/context-strength">speech
+adaptation</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -635,21 +662,13 @@ provide context to assist the speech recognition. For more information, see
   </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_UseEnhanced_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.UseEnhanced*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_UseEnhanced" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.UseEnhanced">UseEnhanced</h4>
-  <div class="markdown level1 summary"><p><em>Optional</em> Set to true to use an enhanced model for speech recognition.
+  <div class="markdown level1 summary"><p>Set to true to use an enhanced model for speech recognition.
 If <code>use_enhanced</code> is set to true and the <code>model</code> field is not set, then
-an appropriate enhanced model is chosen if:</p>
-<ol>
-<li>project is eligible for requesting enhanced models</li>
-<li>an enhanced model exists for the audio</li>
-</ol>
+an appropriate enhanced model is chosen if an enhanced model exists for
+the audio.</p>
 <p>If <code>use_enhanced</code> is true and an enhanced version of the specified model
 does not exist, then the speech is recognized using the standard version
 of the specified model.</p>
-<p>Enhanced speech models require that you opt-in to data logging using
-instructions in the
-<a href="/speech-to-text/docs/enable-data-logging">documentation</a>. If you set
-<code>use_enhanced</code> to true and you have not enabled audio logging, then you
-will receive an error.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

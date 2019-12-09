@@ -297,45 +297,39 @@ to only change the values of the fields as specified in the mask
 and leave the others untouched. If a resource is passed in to
 describe the updated values, the API ignores the values of all
 fields not covered by the mask.</p>
-<p>If a repeated field is specified for an update operation, the existing
-repeated values in the target resource will be overwritten by the new values.
-Note that a repeated field is only allowed in the last position of a <code>paths</code>
-string.</p>
+<p>If a repeated field is specified for an update operation, new values will
+be appended to the existing repeated field in the target resource. Note that
+a repeated field is only allowed in the last position of a <code>paths</code> string.</p>
 <p>If a sub-message is specified in the last position of the field mask for an
-update operation, then the existing sub-message in the target resource is
-overwritten. Given the target message:</p>
+update operation, then new value will be merged into the existing sub-message
+in the target resource.</p>
+<p>For example, given the target message:</p>
 <p>f {
  b {
-   d : 1
-   x : 2
+   d: 1
+   x: 2
  }
- c : 1
+ c: [1]
 }</p>
 <p>And an update message:</p>
 <p>f {
  b {
-   d : 10
+   d: 10
  }
+ c: [2]
 }</p>
 <p>then if the field mask is:</p>
-<p>paths: &quot;f.b&quot;</p>
+<p>paths: [&quot;f.b&quot;, &quot;f.c&quot;]</p>
 <p>then the result will be:</p>
 <p>f {
  b {
-   d : 10
+   d: 10
+   x: 2
  }
- c : 1
+ c: [1, 2]
 }</p>
-<p>However, if the update mask was:</p>
-<p>paths: &quot;f.b.d&quot;</p>
-<p>then the result would be:</p>
-<p>f {
- b {
-   d : 10
-   x : 2
- }
- c : 1
-}</p>
+<p>An implementation may provide options to override this default behavior for
+repeated and message fields.</p>
 <p>In order to reset a field&apos;s value to the default, the field must
 be in the mask and set to the default value in the provided resource.
 Hence, in order to reset all fields of a resource, provide a default
@@ -401,6 +395,9 @@ paths.</p>
 <p>The implementation of any API method which has a FieldMask type field in the
 request should verify the included field paths, and return an
 <code>INVALID_ARGUMENT</code> error if any path is duplicated or unmappable.</p>
+</section>
+      <h4><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions.html">FieldMask.MergeOptions</a></h4>
+      <section><p>Options to customize merging behavior.</p>
 </section>
       <h4><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMaskReflection.html">FieldMaskReflection</a></h4>
       <section><p>Holder for reflection information generated from google/protobuf/field_mask.proto</p>
@@ -532,17 +529,17 @@ with the proto support for the language.</p>
       <section><p>Extension methods on BCL time-related types, converting to protobuf types.</p>
 </section>
       <h4><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></h4>
-      <section><p>A Timestamp represents a point in time independent of any time zone
-or calendar, represented as seconds and fractions of seconds at
-nanosecond resolution in UTC Epoch time. It is encoded using the
-Proleptic Gregorian Calendar which extends the Gregorian calendar
-backwards to year one. It is encoded assuming all minutes are 60
-seconds long, i.e. leap seconds are &quot;smeared&quot; so that no leap second
-table is needed for interpretation. Range is from
-0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.
-By restricting to that range, we ensure that we can convert to
-and from  RFC 3339 date strings.
-See <a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt</a>.</p>
+      <section><p>A Timestamp represents a point in time independent of any time zone or local
+calendar, encoded as a count of seconds and fractions of seconds at
+nanosecond resolution. The count is relative to an epoch at UTC midnight on
+January 1, 1970, in the proleptic Gregorian calendar which extends the
+Gregorian calendar backwards to year one.</p>
+<p>All minutes are 60 seconds long. Leap seconds are &quot;smeared&quot; so that no leap
+second table is needed for interpretation, using a <a href="https://developers.google.com/time/smear">24-hour linear
+smear</a>.</p>
+<p>The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+restricting to that range, we ensure that we can convert to and from <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC
+3339</a> date strings.</p>
 <h1 id="examples">Examples</h1>
 <p>Example 1: Compute Timestamp from POSIX <code>time()</code>.</p>
 <p>Timestamp timestamp;
@@ -584,11 +581,13 @@ able to accept both UTC and other timezones (as indicated by an offset).</p>
 <p>For example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past
 01:30 UTC on January 15, 2017.</p>
 <p>In JavaScript, one can convert a Date object to this format using the
-standard [toISOString()](<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString</a>]
+standard
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString">toISOString()</a>
 method. In Python, a standard <code>datetime.datetime</code> object can be converted
-to this format using <a href="https://docs.python.org/2/library/time.html#time.strftime"><code>strftime</code></a>
-with the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one
-can use the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--"><code>ISODateTimeFormat.dateTime()</code></a> to obtain a formatter capable of generating timestamps in this format.</p>
+to this format using
+<a href="https://docs.python.org/2/library/time.html#time.strftime"><code>strftime</code></a> with
+the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one can use
+the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D"><code>ISODateTimeFormat.dateTime()</code></a> to obtain a formatter capable of generating timestamps in this format.</p>
 </section>
       <h4><a class="xref" href="Google.Protobuf.WellKnownTypes.TimestampReflection.html">TimestampReflection</a></h4>
       <section><p>Holder for reflection information generated from google/protobuf/timestamp.proto</p>
