@@ -107,7 +107,8 @@
   </h3>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_DefaultEndpoint_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.DefaultEndpoint*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_DefaultEndpoint" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.DefaultEndpoint">DefaultEndpoint</h4>
-  <div class="markdown level1 summary"><p>The default endpoint for the LanguageService service, which is a host of &quot;language.googleapis.com&quot; and a port of 443.</p>
+  <div class="markdown level1 summary"><p>The default endpoint for the LanguageService service, which is a host of &quot;language.googleapis.com&quot; and a
+port of 443.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -155,11 +156,11 @@
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_DefaultScopes_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The default LanguageService scopes are:
-<ul><li>&quot;<a href="https://www.googleapis.com/auth/cloud-language&amp;quot">https://www.googleapis.com/auth/cloud-language&quot</a>;</li><li>&quot;<a href="https://www.googleapis.com/auth/cloud-platform&amp;quot">https://www.googleapis.com/auth/cloud-platform&quot</a>;</li></ul></p>
+<ul><li><a href="https://www.googleapis.com/auth/cloud-language">https://www.googleapis.com/auth/cloud-language</a></li><li><a href="https://www.googleapis.com/auth/cloud-platform">https://www.googleapis.com/auth/cloud-platform</a></li></ul></p>
 </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_GrpcClient_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.GrpcClient*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_GrpcClient" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.GrpcClient">GrpcClient</h4>
-  <div class="markdown level1 summary"><p>The underlying gRPC LanguageService client.</p>
+  <div class="markdown level1 summary"><p>The underlying gRPC LanguageService client</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -242,6 +243,7 @@ LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
 AnalyzeEntitiesRequest request = new AnalyzeEntitiesRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeEntitiesResponse response = languageServiceClient.AnalyzeEntities(request);
@@ -298,7 +300,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_Google_Cloud_Language_V1_Document_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntities(Document, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntities(Document, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -317,6 +319,74 @@ foreach (Entity entity in response.Entities)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntities*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntities(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntities(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Finds named entities (currently proper names and common nouns) in the text
+along with entity types, salience, mentions for each entity, and
+other properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AnalyzeEntitiesResponse AnalyzeEntities(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnalyzeEntitiesResponse.html">AnalyzeEntitiesResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeEntitiesResponse response = languageServiceClient.AnalyzeEntities(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntities*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntities(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntities(Document, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Finds named entities (currently proper names and common nouns) in the text
 along with entity types, salience, mentions for each entity, and
@@ -325,7 +395,8 @@ other properties.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual AnalyzeEntitiesResponse AnalyzeEntities(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual AnalyzeEntitiesResponse AnalyzeEntities(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -373,17 +444,6 @@ other properties.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntities_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeEntitiesResponse response = languageServiceClient.AnalyzeEntities(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_AnalyzeEntitiesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync(Google.Cloud.Language.V1.AnalyzeEntitiesRequest,Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitiesAsync(AnalyzeEntitiesRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Finds named entities (currently proper names and common nouns) in the text
@@ -443,6 +503,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeEntitiesRequest request = new AnalyzeEntitiesRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeEntitiesResponse response = await languageServiceClient.AnalyzeEntitiesAsync(request);
@@ -507,6 +568,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeEntitiesRequest request = new AnalyzeEntitiesRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeEntitiesResponse response = await languageServiceClient.AnalyzeEntitiesAsync(request);
@@ -563,7 +625,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntitiesAsync(Document, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntitiesAsync(Document, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -579,6 +641,142 @@ AnalyzeEntitiesResponse response = await languageServiceClient.AnalyzeEntitiesAs
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitiesAsync(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Finds named entities (currently proper names and common nouns) in the text
+along with entity types, salience, mentions for each entity, and
+other properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitiesResponse&gt; AnalyzeEntitiesAsync(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeEntitiesResponse.html">AnalyzeEntitiesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeEntitiesResponse response = await languageServiceClient.AnalyzeEntitiesAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,System.Threading.CancellationToken)">AnalyzeEntitiesAsync(Document, EncodingType, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Finds named entities (currently proper names and common nouns) in the text
+along with entity types, salience, mentions for each entity, and
+other properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitiesResponse&gt; AnalyzeEntitiesAsync(Document document, EncodingType encodingType, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeEntitiesResponse.html">AnalyzeEntitiesResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeEntitiesResponse response = await languageServiceClient.AnalyzeEntitiesAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitiesAsync(Document, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Finds named entities (currently proper names and common nouns) in the text
 along with entity types, salience, mentions for each entity, and
@@ -587,7 +785,8 @@ other properties.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitiesResponse&gt; AnalyzeEntitiesAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeEntitiesResponse&gt; AnalyzeEntitiesAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -635,17 +834,6 @@ other properties.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeEntitiesResponse response = await languageServiceClient.AnalyzeEntitiesAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},System.Threading.CancellationToken)">AnalyzeEntitiesAsync(Document, Nullable&lt;EncodingType&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Finds named entities (currently proper names and common nouns) in the text
@@ -655,7 +843,8 @@ other properties.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitiesResponse&gt; AnalyzeEntitiesAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeEntitiesResponse&gt; AnalyzeEntitiesAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -703,17 +892,6 @@ other properties.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeEntitiesResponse response = await languageServiceClient.AnalyzeEntitiesAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitiesAsync(Google.Cloud.Language.V1.Document,System.Threading.CancellationToken)">AnalyzeEntitiesAsync(Document, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Analyzes the entities in the given document asynchronously, specifying an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of
@@ -765,7 +943,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Threading_CancellationToken__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_">AnalyzeEntitiesAsync(Document, Nullable&lt;EncodingType&gt;, CancellationToken)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitiesAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_">AnalyzeEntitiesAsync(Document, EncodingType, CancellationToken)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -838,6 +1016,7 @@ LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
 AnalyzeEntitySentimentRequest request = new AnalyzeEntitySentimentRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeEntitySentimentResponse response = languageServiceClient.AnalyzeEntitySentiment(request);
@@ -894,7 +1073,7 @@ specifying an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_Google_Cloud_Language_V1_Document_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntitySentiment(Document, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntitySentiment(Document, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -912,6 +1091,73 @@ foreach (Entity entity in response.Entities)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentiment*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentiment(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitySentiment(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
+sentiment associated with each entity and its mentions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AnalyzeEntitySentimentResponse AnalyzeEntitySentiment(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnalyzeEntitySentimentResponse.html">AnalyzeEntitySentimentResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeEntitySentimentResponse response = languageServiceClient.AnalyzeEntitySentiment(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentiment*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentiment(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitySentiment(Document, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
 sentiment associated with each entity and its mentions.</p>
@@ -919,7 +1165,8 @@ sentiment associated with each entity and its mentions.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual AnalyzeEntitySentimentResponse AnalyzeEntitySentiment(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual AnalyzeEntitySentimentResponse AnalyzeEntitySentiment(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -967,17 +1214,6 @@ sentiment associated with each entity and its mentions.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentiment_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeEntitySentimentResponse response = languageServiceClient.AnalyzeEntitySentiment(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_AnalyzeEntitySentimentRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync(Google.Cloud.Language.V1.AnalyzeEntitySentimentRequest,Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitySentimentAsync(AnalyzeEntitySentimentRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
@@ -1036,6 +1272,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeEntitySentimentRequest request = new AnalyzeEntitySentimentRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeEntitySentimentResponse response = await languageServiceClient.AnalyzeEntitySentimentAsync(request);
@@ -1099,6 +1336,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeEntitySentimentRequest request = new AnalyzeEntitySentimentRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeEntitySentimentResponse response = await languageServiceClient.AnalyzeEntitySentimentAsync(request);
@@ -1155,7 +1393,7 @@ specifying an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntitySentimentAsync(Document, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnalyzeEntitySentimentAsync(Document, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -1171,6 +1409,140 @@ AnalyzeEntitySentimentResponse response = await languageServiceClient.AnalyzeEnt
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitySentimentAsync(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
+sentiment associated with each entity and its mentions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitySentimentResponse&gt; AnalyzeEntitySentimentAsync(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeEntitySentimentResponse.html">AnalyzeEntitySentimentResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeEntitySentimentResponse response = await languageServiceClient.AnalyzeEntitySentimentAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,System.Threading.CancellationToken)">AnalyzeEntitySentimentAsync(Document, EncodingType, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
+sentiment associated with each entity and its mentions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitySentimentResponse&gt; AnalyzeEntitySentimentAsync(Document document, EncodingType encodingType, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeEntitySentimentResponse.html">AnalyzeEntitySentimentResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeEntitySentimentResponse response = await languageServiceClient.AnalyzeEntitySentimentAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnalyzeEntitySentimentAsync(Document, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
 sentiment associated with each entity and its mentions.</p>
@@ -1178,7 +1550,8 @@ sentiment associated with each entity and its mentions.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitySentimentResponse&gt; AnalyzeEntitySentimentAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeEntitySentimentResponse&gt; AnalyzeEntitySentimentAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1226,17 +1599,6 @@ sentiment associated with each entity and its mentions.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeEntitySentimentResponse response = await languageServiceClient.AnalyzeEntitySentimentAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},System.Threading.CancellationToken)">AnalyzeEntitySentimentAsync(Document, Nullable&lt;EncodingType&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
@@ -1245,7 +1607,8 @@ sentiment associated with each entity and its mentions.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeEntitySentimentResponse&gt; AnalyzeEntitySentimentAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeEntitySentimentResponse&gt; AnalyzeEntitySentimentAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1293,17 +1656,6 @@ sentiment associated with each entity and its mentions.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeEntitySentimentResponse response = await languageServiceClient.AnalyzeEntitySentimentAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeEntitySentimentAsync(Google.Cloud.Language.V1.Document,System.Threading.CancellationToken)">AnalyzeEntitySentimentAsync(Document, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Analyzes the entities in the given document asynchronously and analyzes the sentiment associated with them,
@@ -1355,7 +1707,7 @@ specifying an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Threading_CancellationToken__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_">AnalyzeEntitySentimentAsync(Document, Nullable&lt;EncodingType&gt;, CancellationToken)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeEntitySentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_">AnalyzeEntitySentimentAsync(Document, EncodingType, CancellationToken)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -1427,6 +1779,7 @@ LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
 AnalyzeSentimentRequest request = new AnalyzeSentimentRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeSentimentResponse response = languageServiceClient.AnalyzeSentiment(request);
@@ -1492,13 +1845,80 @@ Console.WriteLine($&quot;Sentiment magnitude: {response.DocumentSentiment.Magnit
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentiment_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentiment*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentiment_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentiment(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeSentiment(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AnalyzeSentimentResponse AnalyzeSentiment(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate sentence offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnalyzeSentimentResponse.html">AnalyzeSentimentResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentiment_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeSentimentResponse response = languageServiceClient.AnalyzeSentiment(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentiment_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentiment*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentiment_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentiment(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnalyzeSentiment(Document, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual AnalyzeSentimentResponse AnalyzeSentiment(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual AnalyzeSentimentResponse AnalyzeSentiment(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1546,17 +1966,6 @@ Console.WriteLine($&quot;Sentiment magnitude: {response.DocumentSentiment.Magnit
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentiment_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeSentimentResponse response = languageServiceClient.AnalyzeSentiment(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_AnalyzeSentimentRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync(Google.Cloud.Language.V1.AnalyzeSentimentRequest,Google.Api.Gax.Grpc.CallSettings)">AnalyzeSentimentAsync(AnalyzeSentimentRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
@@ -1614,6 +2023,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeSentimentRequest request = new AnalyzeSentimentRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentimentAsync(request);
@@ -1676,6 +2086,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeSentimentRequest request = new AnalyzeSentimentRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentimentAsync(request);
@@ -1741,13 +2152,146 @@ AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentiment
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeSentimentAsync(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSentimentResponse&gt; AnalyzeSentimentAsync(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate sentence offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeSentimentResponse.html">AnalyzeSentimentResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentimentAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,System.Threading.CancellationToken)">AnalyzeSentimentAsync(Document, EncodingType, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSentimentResponse&gt; AnalyzeSentimentAsync(Document document, EncodingType encodingType, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate sentence offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeSentimentResponse.html">AnalyzeSentimentResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentimentAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnalyzeSentimentAsync(Document, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSentimentResponse&gt; AnalyzeSentimentAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeSentimentResponse&gt; AnalyzeSentimentAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1795,17 +2339,6 @@ AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentiment
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentimentAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},System.Threading.CancellationToken)">AnalyzeSentimentAsync(Document, Nullable&lt;EncodingType&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
@@ -1813,7 +2346,8 @@ AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentiment
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSentimentResponse&gt; AnalyzeSentimentAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeSentimentResponse&gt; AnalyzeSentimentAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1861,17 +2395,6 @@ AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentiment
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeSentimentResponse response = await languageServiceClient.AnalyzeSentimentAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSentimentAsync_Google_Cloud_Language_V1_Document_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSentimentAsync(Google.Cloud.Language.V1.Document,System.Threading.CancellationToken)">AnalyzeSentimentAsync(Document, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Analyzes the sentiment of the provided text.</p>
@@ -1990,6 +2513,7 @@ LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
 AnalyzeSyntaxRequest request = new AnalyzeSyntaxRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeSyntaxResponse response = languageServiceClient.AnalyzeSyntax(request);
@@ -2046,7 +2570,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_Google_Cloud_Language_V1_Document_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnalyzeSyntax(Document, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnalyzeSyntax(Document, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -2055,11 +2579,79 @@ such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</s
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_Google_Cloud_Language_V1_Document_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">LanguageServiceClient client = LanguageServiceClient.Create();
 Document document = Document.FromPlainText(
-    &quot;This is a simple sentence. This sentence, while not very complicated, is still more complicated than the first&quot;);
+    &quot;This is a simple sentence. This sentence, while not very complicated, is still more complicated than the first.&quot;);
 AnalyzeSyntaxResponse response = client.AnalyzeSyntax(document);
 Console.WriteLine($&quot;Detected language: {response.Language}&quot;);
 Console.WriteLine($&quot;Number of sentences: {response.Sentences.Count}&quot;);
 Console.WriteLine($&quot;Number of tokens: {response.Tokens.Count}&quot;);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntax*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntax(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeSyntax(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Analyzes the syntax of the text and provides sentence boundaries and
+tokenization along with part of speech tags, dependency trees, and other
+properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AnalyzeSyntaxResponse AnalyzeSyntax(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnalyzeSyntaxResponse.html">AnalyzeSyntaxResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeSyntaxResponse response = languageServiceClient.AnalyzeSyntax(document, encodingType);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntax*"></a>
@@ -2071,7 +2663,8 @@ properties.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual AnalyzeSyntaxResponse AnalyzeSyntax(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual AnalyzeSyntaxResponse AnalyzeSyntax(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2119,17 +2712,6 @@ properties.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntax_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeSyntaxResponse response = languageServiceClient.AnalyzeSyntax(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_AnalyzeSyntaxRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync(Google.Cloud.Language.V1.AnalyzeSyntaxRequest,Google.Api.Gax.Grpc.CallSettings)">AnalyzeSyntaxAsync(AnalyzeSyntaxRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Analyzes the syntax of the text and provides sentence boundaries and
@@ -2189,6 +2771,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeSyntaxRequest request = new AnalyzeSyntaxRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeSyntaxResponse response = await languageServiceClient.AnalyzeSyntaxAsync(request);
@@ -2253,6 +2836,7 @@ LanguageServiceClient languageServiceClient = await LanguageServiceClient.Create
 AnalyzeSyntaxRequest request = new AnalyzeSyntaxRequest
 {
     Document = new Document(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnalyzeSyntaxResponse response = await languageServiceClient.AnalyzeSyntaxAsync(request);
@@ -2309,7 +2893,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnalyzeSyntaxAsync(Document, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnalyzeSyntaxAsync(Document, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -2325,6 +2909,142 @@ AnalyzeSyntaxResponse response = await languageServiceClient.AnalyzeSyntaxAsync(
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnalyzeSyntaxAsync(Document, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Analyzes the syntax of the text and provides sentence boundaries and
+tokenization along with part of speech tags, dependency trees, and other
+properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSyntaxResponse&gt; AnalyzeSyntaxAsync(Document document, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeSyntaxResponse.html">AnalyzeSyntaxResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeSyntaxResponse response = await languageServiceClient.AnalyzeSyntaxAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.EncodingType,System.Threading.CancellationToken)">AnalyzeSyntaxAsync(Document, EncodingType, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Analyzes the syntax of the text and provides sentence boundaries and
+tokenization along with part of speech tags, dependency trees, and other
+properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSyntaxResponse&gt; AnalyzeSyntaxAsync(Document document, EncodingType encodingType, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnalyzeSyntaxResponse.html">AnalyzeSyntaxResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnalyzeSyntaxResponse response = await languageServiceClient.AnalyzeSyntaxAsync(document, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnalyzeSyntaxAsync(Document, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Analyzes the syntax of the text and provides sentence boundaries and
 tokenization along with part of speech tags, dependency trees, and other
@@ -2333,7 +3053,8 @@ properties.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSyntaxResponse&gt; AnalyzeSyntaxAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeSyntaxResponse&gt; AnalyzeSyntaxAsync(Document document, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2381,17 +3102,6 @@ properties.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeSyntaxResponse response = await languageServiceClient.AnalyzeSyntaxAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync(Google.Cloud.Language.V1.Document,System.Nullable{Google.Cloud.Language.V1.EncodingType},System.Threading.CancellationToken)">AnalyzeSyntaxAsync(Document, Nullable&lt;EncodingType&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Analyzes the syntax of the text and provides sentence boundaries and
@@ -2401,7 +3111,8 @@ properties.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnalyzeSyntaxResponse&gt; AnalyzeSyntaxAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnalyzeSyntaxResponse&gt; AnalyzeSyntaxAsync(Document document, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2449,17 +3160,6 @@ properties.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnalyzeSyntaxResponse response = await languageServiceClient.AnalyzeSyntaxAsync(document, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnalyzeSyntaxAsync(Google.Cloud.Language.V1.Document,System.Threading.CancellationToken)">AnalyzeSyntaxAsync(Document, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Analyzes the syntax in the given document asynchronously, specifying an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of
@@ -2511,7 +3211,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Threading_CancellationToken__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_">AnalyzeSyntaxAsync(Document, Nullable&lt;EncodingType&gt;, CancellationToken)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnalyzeSyntaxAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_">AnalyzeSyntaxAsync(Document, EncodingType, CancellationToken)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -2585,6 +3285,7 @@ AnnotateTextRequest request = new AnnotateTextRequest
 {
     Document = new Document(),
     Features = new AnnotateTextRequest.Types.Features(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnnotateTextResponse response = languageServiceClient.AnnotateText(request);
@@ -2647,7 +3348,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnnotateText(Document, AnnotateTextRequest.Types.Features, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnnotateText(Document, AnnotateTextRequest.Types.Features, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -2673,6 +3374,80 @@ foreach (Entity entity in response.Entities)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateText*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateText(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnnotateText(Document, AnnotateTextRequest.Types.Features, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>A convenience method that provides all the features that analyzeSentiment,
+analyzeEntities, and analyzeSyntax provide in one call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AnnotateTextResponse AnnotateText(Document document, AnnotateTextRequest.Types.Features features, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features.html">AnnotateTextRequest.Types.Features</a></td>
+        <td><span class="parametername">features</span></td>
+        <td><p>The enabled features.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnnotateTextResponse.html">AnnotateTextResponse</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
+// Initialize request argument(s)
+Document document = new Document();
+AnnotateTextRequest.Types.Features features = new AnnotateTextRequest.Types.Features();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnnotateTextResponse response = languageServiceClient.AnnotateText(document, features, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateText*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateText(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnnotateText(Document, AnnotateTextRequest.Types.Features, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>A convenience method that provides all the features that analyzeSentiment,
 analyzeEntities, and analyzeSyntax provide in one call.</p>
@@ -2680,7 +3455,8 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual AnnotateTextResponse AnnotateText(Document document, AnnotateTextRequest.Types.Features features, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual AnnotateTextResponse AnnotateText(Document document, AnnotateTextRequest.Types.Features features, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2734,18 +3510,6 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateText_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = LanguageServiceClient.Create();
-// Initialize request argument(s)
-Document document = new Document();
-AnnotateTextRequest.Types.Features features = new AnnotateTextRequest.Types.Features();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnnotateTextResponse response = languageServiceClient.AnnotateText(document, features, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_AnnotateTextRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync(Google.Cloud.Language.V1.AnnotateTextRequest,Google.Api.Gax.Grpc.CallSettings)">AnnotateTextAsync(AnnotateTextRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>A convenience method that provides all the features that analyzeSentiment,
@@ -2805,6 +3569,7 @@ AnnotateTextRequest request = new AnnotateTextRequest
 {
     Document = new Document(),
     Features = new AnnotateTextRequest.Types.Features(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnnotateTextResponse response = await languageServiceClient.AnnotateTextAsync(request);
@@ -2869,6 +3634,7 @@ AnnotateTextRequest request = new AnnotateTextRequest
 {
     Document = new Document(),
     Features = new AnnotateTextRequest.Types.Features(),
+    EncodingType = EncodingType.None,
 };
 // Make the request
 AnnotateTextResponse response = await languageServiceClient.AnnotateTextAsync(request);
@@ -2931,7 +3697,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Api_Gax_Grpc_CallSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, Nullable&lt;EncodingType&gt;, CallSettings)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, EncodingType, CallSettings)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -2948,6 +3714,154 @@ AnnotateTextResponse response = await languageServiceClient.AnnotateTextAsync(do
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features,Google.Cloud.Language.V1.EncodingType,Google.Api.Gax.Grpc.CallSettings)">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, EncodingType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>A convenience method that provides all the features that analyzeSentiment,
+analyzeEntities, and analyzeSyntax provide in one call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnnotateTextResponse&gt; AnnotateTextAsync(Document document, AnnotateTextRequest.Types.Features features, EncodingType encodingType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features.html">AnnotateTextRequest.Types.Features</a></td>
+        <td><span class="parametername">features</span></td>
+        <td><p>The enabled features.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnnotateTextResponse.html">AnnotateTextResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+AnnotateTextRequest.Types.Features features = new AnnotateTextRequest.Types.Features();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnnotateTextResponse response = await languageServiceClient.AnnotateTextAsync(document, features, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync*"></a>
+  <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features,Google.Cloud.Language.V1.EncodingType,System.Threading.CancellationToken)">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, EncodingType, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>A convenience method that provides all the features that analyzeSentiment,
+analyzeEntities, and analyzeSyntax provide in one call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnnotateTextResponse&gt; AnnotateTextAsync(Document document, AnnotateTextRequest.Types.Features features, EncodingType encodingType, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.Document.html">Document</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>Input document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features.html">AnnotateTextRequest.Types.Features</a></td>
+        <td><span class="parametername">features</span></td>
+        <td><p>The enabled features.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a></td>
+        <td><span class="parametername">encodingType</span></td>
+        <td><p>The encoding type used by the API to calculate offsets.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Language.V1.AnnotateTextResponse.html">AnnotateTextResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
+// Initialize request argument(s)
+Document document = new Document();
+AnnotateTextRequest.Types.Features features = new AnnotateTextRequest.Types.Features();
+EncodingType encodingType = EncodingType.None;
+// Make the request
+AnnotateTextResponse response = await languageServiceClient.AnnotateTextAsync(document, features, encodingType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features,System.Nullable{Google.Cloud.Language.V1.EncodingType},Google.Api.Gax.Grpc.CallSettings)">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, Nullable&lt;EncodingType&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>A convenience method that provides all the features that analyzeSentiment,
 analyzeEntities, and analyzeSyntax provide in one call.</p>
@@ -2955,7 +3869,8 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnnotateTextResponse&gt; AnnotateTextAsync(Document document, AnnotateTextRequest.Types.Features features, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnnotateTextResponse&gt; AnnotateTextAsync(Document document, AnnotateTextRequest.Types.Features features, EncodingType? encodingType, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3009,18 +3924,6 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-AnnotateTextRequest.Types.Features features = new AnnotateTextRequest.Types.Features();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnnotateTextResponse response = await languageServiceClient.AnnotateTextAsync(document, features, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features,System.Nullable{Google.Cloud.Language.V1.EncodingType},System.Threading.CancellationToken)">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, Nullable&lt;EncodingType&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>A convenience method that provides all the features that analyzeSentiment,
@@ -3029,7 +3932,8 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;AnnotateTextResponse&gt; AnnotateTextAsync(Document document, AnnotateTextRequest.Types.Features features, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This method is obsolete, and will be removed in the next major version. Please use the overload accepting a non-nullable EncodingType.&quot;)]
+public virtual Task&lt;AnnotateTextResponse&gt; AnnotateTextAsync(Document document, AnnotateTextRequest.Types.Features features, EncodingType? encodingType, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -3083,18 +3987,6 @@ analyzeEntities, and analyzeSyntax provide in one call.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-LanguageServiceClient languageServiceClient = await LanguageServiceClient.CreateAsync();
-// Initialize request argument(s)
-Document document = new Document();
-AnnotateTextRequest.Types.Features features = new AnnotateTextRequest.Types.Features();
-EncodingType encodingType = EncodingType.None;
-// Make the request
-AnnotateTextResponse response = await languageServiceClient.AnnotateTextAsync(document, features, encodingType);
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Threading_CancellationToken_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.AnnotateTextAsync(Google.Cloud.Language.V1.Document,Google.Cloud.Language.V1.AnnotateTextRequest.Types.Features,System.Threading.CancellationToken)">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Annotates the given document, specifying an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of
@@ -3152,7 +4044,7 @@ UTF-16 for offsets.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Threading_CancellationToken__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_System_Nullable_Google_Cloud_Language_V1_EncodingType__System_Threading_CancellationToken_">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, Nullable&lt;EncodingType&gt;, CancellationToken)</a>,
+  <div class="markdown level1 remarks"><p>This method simply calls <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_AnnotateTextAsync_Google_Cloud_Language_V1_Document_Google_Cloud_Language_V1_AnnotateTextRequest_Types_Features_Google_Cloud_Language_V1_EncodingType_System_Threading_CancellationToken_">AnnotateTextAsync(Document, AnnotateTextRequest.Types.Features, EncodingType, CancellationToken)</a>,
 passing an <a class="xref" href="Google.Cloud.Language.V1.EncodingType.html">EncodingType</a> of UTF-16. This is the encoding used internally by
 .NET strings, so the offsets returned by the analysis will be suitable for use in calls
 such as <span class="xref">System.String.Substring(System.Int32,System.Int32)</span>.</p>
@@ -3534,7 +4426,7 @@ ClassifyTextResponse response = await languageServiceClient.ClassifyTextAsync(do
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_Create_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.Create*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Language.V1.LanguageServiceSettings)">Create(ServiceEndpoint, LanguageServiceSettings)</h4>
   <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html">LanguageServiceClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
+and creating a channel connecting to the given endpoint with application default credentials where 
 necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3584,22 +4476,22 @@ necessary. See the example for how to use custom credentials.</p>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings__examples">Examples</h5>
   <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Language.V1;
+<pre><code>using Google.Cloud.Vision.V1;
 ...
 // When running on Google Cloud Platform this will use the project Compute Credential.
 // Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
 // credential file to use that credential.
-LanguageServiceClient client = LanguageServiceClient.Create();</code></pre>
+ImageAnnotatorClient client = ImageAnnotatorClient.Create();</code></pre>
 <p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Language.V1;
+<pre><code>using Google.Cloud.Vision.V1;
 using Google.Apis.Auth.OAuth2;
 using Grpc.Auth;
 using Grpc.Core;
 ...
 GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
 Channel channel = new Channel(
-    LanguageServiceClient.DefaultEndpoint.Host, LanguageServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-LanguageServiceClient client = LanguageServiceClient.Create(channel);
+    ImageAnnotatorClient.DefaultEndpoint.Host, ImageAnnotatorClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ImageAnnotatorClient client = ImageAnnotatorClient.Create(channel);
 ...
 // Shutdown the channel when it is no longer required.
 channel.ShutdownAsync().Wait();</code></pre>
@@ -3704,8 +4596,8 @@ channel.ShutdownAsync().Wait();</code></pre>
   </table>
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_CreateAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.CreateAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Language.V1.LanguageServiceSettings)">CreateAsync(ServiceEndpoint, LanguageServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html">LanguageServiceClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
+  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html">LanguageServiceClient</a>, applying defaults for all unspecified
+settings, and creating a channel connecting to the given endpoint with application default credentials where
 necessary. See the example for how to use custom credentials.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3755,31 +4647,32 @@ necessary. See the example for how to use custom credentials.</p>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings__examples">Examples</h5>
   <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Language.V1;
+<pre><code>using Google.Cloud.Vision.V1;
 ...
 // When running on Google Cloud Platform this will use the project Compute Credential.
 // Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
 // credential file to use that credential.
-LanguageServiceClient client = await LanguageServiceClient.CreateAsync();</code></pre>
+ImageAnnotatorClient client = await ImageAnnotatorClient.CreateAsync();</code></pre>
 <p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Language.V1;
+<pre><code>using Google.Cloud.Vision.V1;
 using Google.Apis.Auth.OAuth2;
 using Grpc.Auth;
 using Grpc.Core;
 ...
 GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
 Channel channel = new Channel(
-    LanguageServiceClient.DefaultEndpoint.Host, LanguageServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-LanguageServiceClient client = LanguageServiceClient.Create(channel);
+    ImageAnnotatorClient.DefaultEndpoint.Host, ImageAnnotatorClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
+ImageAnnotatorClient client = ImageAnnotatorClient.Create(channel);
 ...
 // Shutdown the channel when it is no longer required.
 await channel.ShutdownAsync();</code></pre>
 
   <a id="Google_Cloud_Language_V1_LanguageServiceClient_ShutdownDefaultChannelsAsync_" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.ShutdownDefaultChannelsAsync*"></a>
   <h4 id="Google_Cloud_Language_V1_LanguageServiceClient_ShutdownDefaultChannelsAsync" data-uid="Google.Cloud.Language.V1.LanguageServiceClient.ShutdownDefaultChannelsAsync">ShutdownDefaultChannelsAsync()</h4>
-  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_">Create(ServiceEndpoint, LanguageServiceSettings)</a>
-and <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_">CreateAsync(ServiceEndpoint, LanguageServiceSettings)</a>. Channels which weren&apos;t automatically
-created are not affected.</p>
+  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by
+<a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Language_V1_LanguageServiceSettings_">Create(CallInvoker, LanguageServiceSettings)</a> and
+<a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_">CreateAsync(ServiceEndpoint, LanguageServiceSettings)</a>. Channels which weren&apos;t
+automatically created are not affected.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3803,9 +4696,10 @@ created are not affected.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Language_V1_LanguageServiceClient_ShutdownDefaultChannelsAsync_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_">Create(ServiceEndpoint, LanguageServiceSettings)</a>
-and <a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_">CreateAsync(ServiceEndpoint, LanguageServiceSettings)</a> will create new channels, which could
-in turn be shut down by another call to this method.</p>
+  <div class="markdown level1 remarks"><p>After calling this method, further calls to
+<a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Language_V1_LanguageServiceSettings_">Create(CallInvoker, LanguageServiceSettings)</a> and
+<a class="xref" href="Google.Cloud.Language.V1.LanguageServiceClient.html#Google_Cloud_Language_V1_LanguageServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Language_V1_LanguageServiceSettings_">CreateAsync(ServiceEndpoint, LanguageServiceSettings)</a> will create new channels, which
+could in turn be shut down by another call to this method.</p>
 </div>
 </article>
           </div>
