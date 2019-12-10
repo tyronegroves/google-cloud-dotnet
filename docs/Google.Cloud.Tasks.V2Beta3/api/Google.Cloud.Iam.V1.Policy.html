@@ -75,25 +75,34 @@
   </h1>
   <div class="markdown level0 summary"><p>Defines an Identity and Access Management (IAM) policy. It is used to
 specify access control policies for Cloud Platform resources.</p>
-<p>A <code>Policy</code> consists of a list of <code>bindings</code>. A <code>binding</code> binds a list of
-<code>members</code> to a <code>role</code>, where the members can be user accounts, Google groups,
-Google domains, and service accounts. A <code>role</code> is a named list of permissions
-defined by IAM.</p>
+<p>A <code>Policy</code> is a collection of <code>bindings</code>. A <code>binding</code> binds one or more
+<code>members</code> to a single <code>role</code>. Members can be user accounts, service accounts,
+Google groups, and domains (such as G Suite). A <code>role</code> is a named list of
+permissions (defined by IAM or configured by users). A <code>binding</code> can
+optionally specify a <code>condition</code>, which is a logic expression that further
+constrains the role binding based on attributes about the request and/or
+target resource.</p>
 <p><strong>JSON Example</strong></p>
 <p>{
  &quot;bindings&quot;: [
    {
-     &quot;role&quot;: &quot;roles/owner&quot;,
+     &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,
      &quot;members&quot;: [
        &amp;quot;user:mike@example.com&quot;,
        &amp;quot;group:admins@example.com&quot;,
        &quot;domain:google.com&quot;,
-       &amp;quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;
+       &amp;quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;
      ]
    },
    {
-     &quot;role&quot;: &quot;roles/viewer&quot;,
-     &quot;members&quot;: [&amp;quot;user:sean@example.com&quot;]
+     &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,
+     &quot;members&quot;: [&amp;quot;user:eve@example.com&quot;],
+     &quot;condition&quot;: {
+       &quot;title&quot;: &quot;expirable access&quot;,
+       &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,
+       &quot;expression&quot;: &quot;request.time &lt;
+       timestamp(&apos;2020-10-01T00:00:00.000Z&apos;)&quot;,
+     }
    }
  ]
 }</p>
@@ -104,13 +113,17 @@ defined by IAM.</p>
 <li>user:mike@example.com</li>
 <li>group:admins@example.com</li>
 <li>domain:google.com</li>
-<li>serviceAccount:my-other-app@appspot.gserviceaccount.com
-role: roles/owner</li>
+<li>serviceAccount:my-project-id@appspot.gserviceaccount.com
+role: roles/resourcemanager.organizationAdmin</li>
 </ul>
 </li>
 <li>members:<ul>
-<li>user:sean@example.com
-role: roles/viewer</li>
+<li>user:eve@example.com
+role: roles/resourcemanager.organizationViewer
+condition:
+title: expirable access
+description: Does not grant access after Sep 2020
+expression: request.time &lt; timestamp(&apos;2020-10-01T00:00:00.000Z&apos;)</li>
 </ul>
 </li>
 </ul>
@@ -190,7 +203,8 @@ role: roles/viewer</li>
   </h3>
   <a id="Google_Cloud_Iam_V1_Policy_Bindings_" data-uid="Google.Cloud.Iam.V1.Policy.Bindings*"></a>
   <h4 id="Google_Cloud_Iam_V1_Policy_Bindings" data-uid="Google.Cloud.Iam.V1.Policy.Bindings">Bindings</h4>
-  <div class="markdown level1 summary"><p>Associates a list of <code>members</code> to a <code>role</code>.
+  <div class="markdown level1 summary"><p>Associates a list of <code>members</code> to a <code>role</code>. Optionally may specify a
+<code>condition</code> that determines when binding is in effect.
 <code>bindings</code> with no members will result in an error.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -223,7 +237,9 @@ conditions: An <code>etag</code> is returned in the response to <code>getIamPoli
 systems are expected to put that etag in the request to <code>setIamPolicy</code> to
 ensure that their change will be applied to the same version of the policy.</p>
 <p>If no <code>etag</code> is provided in the call to <code>setIamPolicy</code>, then the existing
-policy is overwritten blindly.</p>
+policy is overwritten. Due to blind-set semantics of an etag-less policy,
+&apos;setIamPolicy&apos; will not fail even if the incoming policy version does not
+meet the requirements for modifying the stored policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -247,7 +263,17 @@ policy is overwritten blindly.</p>
   </table>
   <a id="Google_Cloud_Iam_V1_Policy_Version_" data-uid="Google.Cloud.Iam.V1.Policy.Version*"></a>
   <h4 id="Google_Cloud_Iam_V1_Policy_Version" data-uid="Google.Cloud.Iam.V1.Policy.Version">Version</h4>
-  <div class="markdown level1 summary"><p>Deprecated.</p>
+  <div class="markdown level1 summary"><p>Specifies the format of the policy.</p>
+<p>Valid values are 0, 1, and 3. Requests specifying an invalid value will be
+rejected.</p>
+<p>Operations affecting conditional bindings must specify version 3. This can
+be either setting a conditional policy, modifying a conditional binding,
+or removing a binding (conditional or unconditional) from the stored
+conditional policy.
+Operations on non-conditional policies may specify any valid value or
+leave the field unset.</p>
+<p>If no etag is provided in the call to <code>setIamPolicy</code>, version compliance
+checks against the stored policy is skipped.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -274,7 +300,12 @@ policy is overwritten blindly.</p>
   <a id="Google_Cloud_Iam_V1_Policy_AddRoleMember_" data-uid="Google.Cloud.Iam.V1.Policy.AddRoleMember*"></a>
   <h4 id="Google_Cloud_Iam_V1_Policy_AddRoleMember_System_String_System_String_" data-uid="Google.Cloud.Iam.V1.Policy.AddRoleMember(System.String,System.String)">AddRoleMember(String, String)</h4>
   <div class="markdown level1 summary"><p>Adds the specified member to the specified role. If the role does
-not already exist, it is created.</p>
+not already exist, it is created.
+This method will fail with an <span class="xref">System.InvalidOperationException</span>
+if it is called on a Policy with a <a class="xref" href="Google.Cloud.Iam.V1.Policy.html#Google_Cloud_Iam_V1_Policy_Version">Version</a> greater than 1,
+or if any of the bindings contain conditions,
+as that indicates a more complicated policy than this method is prepared
+to handle. Changes to such policies must be made manually.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -321,10 +352,31 @@ not already exist, it is created.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>The <a class="xref" href="Google.Cloud.Iam.V1.Policy.html#Google_Cloud_Iam_V1_Policy_Version">Version</a> is greater than 1.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Iam_V1_Policy_RemoveRoleMember_" data-uid="Google.Cloud.Iam.V1.Policy.RemoveRoleMember*"></a>
   <h4 id="Google_Cloud_Iam_V1_Policy_RemoveRoleMember_System_String_System_String_" data-uid="Google.Cloud.Iam.V1.Policy.RemoveRoleMember(System.String,System.String)">RemoveRoleMember(String, String)</h4>
   <div class="markdown level1 summary"><p>Removes the specified member to the specified role, if they belong to it. If the role becomes empty after
-removing the member, it is removed from the policy.</p>
+removing the member, it is removed from the policy.
+This method will fail with an <span class="xref">System.InvalidOperationException</span>
+if it is called on a Policy with a <a class="xref" href="Google.Cloud.Iam.V1.Policy.html#Google_Cloud_Iam_V1_Policy_Version">Version</a> greater than 1,
+or if any of the bindings contain conditions,
+as that indicates a more complicated policy than this method is prepared
+to handle. Changes to such policies must be made manually.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -368,6 +420,22 @@ removing the member, it is removed from the policy.</p>
         <td><span class="xref">System.Boolean</span></td>
         <td><p><code>true</code> if the policy was changed; <code>false</code> if the member didn&apos;t exist in the role
     or the role didn&apos;t exist.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>The <a class="xref" href="Google.Cloud.Iam.V1.Policy.html#Google_Cloud_Iam_V1_Policy_Version">Version</a> is greater than 1.</p>
 </td>
       </tr>
     </tbody>

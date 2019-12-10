@@ -138,7 +138,7 @@ response code in the range [<code>200</code> - <code>299</code>]. The task attem
 the app&apos;s handler returns a non-2xx response code or Cloud Tasks does
 not receive response before the [deadline][google.cloud.tasks.v2beta3.Task.dispatch_deadline]. Failed
 tasks will be retried according to the
-[retry configuration][Queue.RetryConfig]. <code>503</code> (Service Unavailable) is
+[retry configuration][google.cloud.tasks.v2beta3.Queue.retry_config]. <code>503</code> (Service Unavailable) is
 considered an App Engine system error instead of an application error and
 will cause Cloud Tasks&apos; traffic congestion control to temporarily throttle
 the queue&apos;s dispatches. Unlike other types of task targets, a <code>429</code> (Too Many
@@ -182,7 +182,7 @@ work in their applications.</p>
       <section><p>CloudTasks client wrapper implementation, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasksSettings.html">CloudTasksSettings</a></h4>
-      <section><p>Settings for a <a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasksClient.html">CloudTasksClient</a>.</p>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.Tasks.V2Beta3.CloudTasksClient.html">CloudTasksClient</a> instances.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.CreateQueueRequest.html">CreateQueueRequest</a></h4>
       <section><p>Request message for [CreateQueue][google.cloud.tasks.v2beta3.CloudTasks.CreateQueue].</p>
@@ -207,12 +207,12 @@ work in their applications.</p>
       <section><p>HTTP request.</p>
 <p>The task will be pushed to the worker as an HTTP request. If the worker
 or the redirected worker acknowledges the task by returning a successful HTTP
-response code ([<code>200</code> - <code>299</code>]), the task will removed from the queue. If
+response code ([<code>200</code> - <code>299</code>]), the task will be removed from the queue. If
 any other HTTP response code is returned or no response is received, the
 task will be retried according to the following:</p>
 <ul>
-<li><p>User-specified throttling: [retry configuration][Queue.RetryConfig],
-[rate limits][Queue.RateLimits], and the [queue&apos;s state][google.cloud.tasks.v2beta3.Queue.state].</p>
+<li><p>User-specified throttling: [retry configuration][google.cloud.tasks.v2beta3.Queue.retry_config],
+[rate limits][google.cloud.tasks.v2beta3.Queue.rate_limits], and the [queue&apos;s state][google.cloud.tasks.v2beta3.Queue.state].</p>
 </li>
 <li><p>System throttling: To prevent the worker from overloading, Cloud Tasks may
 temporarily reduce the queue&apos;s effective rate. User-specified settings
@@ -221,13 +221,13 @@ will not be changed.</p>
 </ul>
 <p>System throttling happens because:</p>
 <ul>
-<li><p>Cloud Tasks backoffs on all errors. Normally the backoff specified in
-[rate limits][Queue.RateLimits] will be used. But if the worker returns
+<li><p>Cloud Tasks backs off on all errors. Normally the backoff specified in
+[rate limits][google.cloud.tasks.v2beta3.Queue.rate_limits] will be used. But if the worker returns
 <code>429</code> (Too Many Requests), <code>503</code> (Service Unavailable), or the rate of
 errors is high, Cloud Tasks will use a higher backoff rate. The retry
 specified in the <code>Retry-After</code> HTTP response header is considered.</p>
 </li>
-<li><p>To prevent traffic spikes and to smooth sudden large traffic spikes,
+<li><p>To prevent traffic spikes and to smooth sudden increases in traffic,
 dispatches ramp up slowly when the queue is newly created or idle and
 if large numbers of tasks suddenly become available to dispatch (due to
 spikes in create task rates, the queue being unpaused, or many tasks
@@ -246,9 +246,6 @@ that are scheduled at the same time).</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.ListTasksResponse.html">ListTasksResponse</a></h4>
       <section><p>Response message for listing tasks using [ListTasks][google.cloud.tasks.v2beta3.CloudTasks.ListTasks].</p>
-</section>
-      <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.LocationName.html">LocationName</a></h4>
-      <section><p>Resource name for the &apos;location&apos; resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.OAuthToken.html">OAuthToken</a></h4>
       <section><p>Contains information needed for generating an
@@ -279,7 +276,7 @@ retry options, queue types, and others.</p>
       <section><p>Container for nested types declared in the Queue message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.QueueName.html">QueueName</a></h4>
-      <section><p>Resource name for the &apos;queue&apos; resource.</p>
+      <section><p>Resource name for the <code>Queue</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.RateLimits.html">RateLimits</a></h4>
       <section><p>Rate limits.</p>
@@ -310,7 +307,7 @@ even if the queue has reached its [RateLimits][google.cloud.tasks.v2beta3.RateLi
       <section><p>Container for nested types declared in the Task message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.TaskName.html">TaskName</a></h4>
-      <section><p>Resource name for the &apos;task&apos; resource.</p>
+      <section><p>Resource name for the <code>Task</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Tasks.V2Beta3.UpdateQueueRequest.html">UpdateQueueRequest</a></h4>
       <section><p>Request message for [UpdateQueue][google.cloud.tasks.v2beta3.CloudTasks.UpdateQueue].</p>

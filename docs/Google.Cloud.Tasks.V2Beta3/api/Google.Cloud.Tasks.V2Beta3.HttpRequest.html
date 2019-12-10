@@ -76,12 +76,12 @@
   <div class="markdown level0 summary"><p>HTTP request.</p>
 <p>The task will be pushed to the worker as an HTTP request. If the worker
 or the redirected worker acknowledges the task by returning a successful HTTP
-response code ([<code>200</code> - <code>299</code>]), the task will removed from the queue. If
+response code ([<code>200</code> - <code>299</code>]), the task will be removed from the queue. If
 any other HTTP response code is returned or no response is received, the
 task will be retried according to the following:</p>
 <ul>
-<li><p>User-specified throttling: [retry configuration][Queue.RetryConfig],
-[rate limits][Queue.RateLimits], and the [queue&apos;s state][google.cloud.tasks.v2beta3.Queue.state].</p>
+<li><p>User-specified throttling: [retry configuration][google.cloud.tasks.v2beta3.Queue.retry_config],
+[rate limits][google.cloud.tasks.v2beta3.Queue.rate_limits], and the [queue&apos;s state][google.cloud.tasks.v2beta3.Queue.state].</p>
 </li>
 <li><p>System throttling: To prevent the worker from overloading, Cloud Tasks may
 temporarily reduce the queue&apos;s effective rate. User-specified settings
@@ -90,13 +90,13 @@ will not be changed.</p>
 </ul>
 <p>System throttling happens because:</p>
 <ul>
-<li><p>Cloud Tasks backoffs on all errors. Normally the backoff specified in
-[rate limits][Queue.RateLimits] will be used. But if the worker returns
+<li><p>Cloud Tasks backs off on all errors. Normally the backoff specified in
+[rate limits][google.cloud.tasks.v2beta3.Queue.rate_limits] will be used. But if the worker returns
 <code>429</code> (Too Many Requests), <code>503</code> (Service Unavailable), or the rate of
 errors is high, Cloud Tasks will use a higher backoff rate. The retry
 specified in the <code>Retry-After</code> HTTP response header is considered.</p>
 </li>
-<li><p>To prevent traffic spikes and to smooth sudden large traffic spikes,
+<li><p>To prevent traffic spikes and to smooth sudden increases in traffic,
 dispatches ramp up slowly when the queue is newly created or idle and
 if large numbers of tasks suddenly become available to dispatch (due to
 spikes in create task rates, the queue being unpaused, or many tasks
