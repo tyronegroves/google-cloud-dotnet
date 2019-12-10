@@ -221,18 +221,32 @@ defined in the Asset resource. Examples include:</p>
 <li>integer literals without quotes.</li>
 <li>boolean literals <code>true</code> and <code>false</code> without quotes.</li>
 </ul>
-<p>The following field and operator combinations are supported:
-name | &apos;=&apos;
-update_time | &apos;&gt;&apos;, &apos;&lt;&apos;, &apos;&gt;=&apos;, &apos;&lt;=&apos;, &apos;=&apos;
-create_time | &apos;&gt;&apos;, &apos;&lt;&apos;, &apos;&gt;=&apos;, &apos;&lt;=&apos;, &apos;=&apos;
-iam_policy.policy_blob | &apos;=&apos;, &apos;:&apos;
-resource_properties | &apos;=&apos;, &apos;:&apos;, &apos;&gt;&apos;, &apos;&lt;&apos;, &apos;&gt;=&apos;, &apos;&lt;=&apos;
-security_marks | &apos;=&apos;, &apos;:&apos;
-security_center_properties.resource_name | &apos;=&apos;, &apos;:&apos;
-security_center_properties.resource_type | &apos;=&apos;, &apos;:&apos;
-security_center_properties.resource_parent | &apos;=&apos;, &apos;:&apos;
-security_center_properties.resource_project | &apos;=&apos;, &apos;:&apos;
-security_center_properties.resource_owners | &apos;=&apos;, &apos;:&apos;</p>
+<p>The following field and operator combinations are supported:</p>
+<ul>
+<li>name: <code>=</code></li>
+<li>update_time: <code>=</code>, <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code></li>
+</ul>
+<p>Usage: This should be milliseconds since epoch or an RFC3339 string.
+Examples:
+&quot;update_time = &amp;quot;2019-06-10T16:07:18-07:00&amp;quot;&quot;
+&quot;update_time = 1560208038000&quot;</p>
+<ul>
+<li>create_time: <code>=</code>, <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code></li>
+</ul>
+<p>Usage: This should be milliseconds since epoch or an RFC3339 string.
+Examples:
+&quot;create_time = &amp;quot;2019-06-10T16:07:18-07:00&amp;quot;&quot;
+&quot;create_time = 1560208038000&quot;</p>
+<ul>
+<li>iam_policy.policy_blob: <code>=</code>, <code>:</code></li>
+<li>resource_properties: <code>=</code>, <code>:</code>, <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code></li>
+<li>security_marks.marks: <code>=</code>, <code>:</code></li>
+<li>security_center_properties.resource_name: <code>=</code>, <code>:</code></li>
+<li>security_center_properties.resource_type: <code>=</code>, <code>:</code></li>
+<li>security_center_properties.resource_parent: <code>=</code>, <code>:</code></li>
+<li>security_center_properties.resource_project: <code>=</code>, <code>:</code></li>
+<li>security_center_properties.resource_owners: <code>=</code>, <code>:</code></li>
+</ul>
 <p>For example, <code>resource_properties.size = 100</code> is a valid filter string.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -257,7 +271,7 @@ security_center_properties.resource_owners | &apos;=&apos;, &apos;:&apos;</p>
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_GroupAssetsRequest_GroupBy_" data-uid="Google.Cloud.SecurityCenter.V1.GroupAssetsRequest.GroupBy*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_GroupAssetsRequest_GroupBy" data-uid="Google.Cloud.SecurityCenter.V1.GroupAssetsRequest.GroupBy">GroupBy</h4>
-  <div class="markdown level1 summary"><p>Expression that defines what assets fields to use for grouping. The string
+  <div class="markdown level1 summary"><p>Required. Expression that defines what assets fields to use for grouping. The string
 value should follow SQL syntax: comma separated list of fields. For
 example:
 &quot;security_center_properties.resource_project,security_center_properties.project&quot;.</p>
@@ -349,7 +363,7 @@ system should return the next page of data.</p>
       <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageToken">IPageRequest.PageToken</a></div>
   <a id="Google_Cloud_SecurityCenter_V1_GroupAssetsRequest_Parent_" data-uid="Google.Cloud.SecurityCenter.V1.GroupAssetsRequest.Parent*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_GroupAssetsRequest_Parent" data-uid="Google.Cloud.SecurityCenter.V1.GroupAssetsRequest.Parent">Parent</h4>
-  <div class="markdown level1 summary"><p>Name of the organization to groupBy. Its format is
+  <div class="markdown level1 summary"><p>Required. Name of the organization to groupBy. Its format is
 &quot;organizations/[organization_id]&quot;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

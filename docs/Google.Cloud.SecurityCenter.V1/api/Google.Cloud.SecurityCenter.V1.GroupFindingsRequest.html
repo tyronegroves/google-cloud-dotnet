@@ -218,16 +218,24 @@ character in front of them to indicate negation. Examples include:</p>
 <li>integer literals without quotes.</li>
 <li>boolean literals <code>true</code> and <code>false</code> without quotes.</li>
 </ul>
-<p>The following field and operator combinations are supported:
-name | <code>=</code>
-parent | &apos;=&apos;, &apos;:&apos;
-resource_name | &apos;=&apos;, &apos;:&apos;
-state | &apos;=&apos;, &apos;:&apos;
-category | &apos;=&apos;, &apos;:&apos;
-external_uri | &apos;=&apos;, &apos;:&apos;
-event_time | <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code>
-security_marks | &apos;=&apos;, &apos;:&apos;
-source_properties | &apos;=&apos;, &apos;:&apos;, <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code></p>
+<p>The following field and operator combinations are supported:</p>
+<ul>
+<li>name: <code>=</code></li>
+<li>parent: <code>=</code>, <code>:</code></li>
+<li>resource_name: <code>=</code>, <code>:</code></li>
+<li>state: <code>=</code>, <code>:</code></li>
+<li>category: <code>=</code>, <code>:</code></li>
+<li>external_uri: <code>=</code>, <code>:</code></li>
+<li>event_time: <code>=</code>, <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code></li>
+</ul>
+<p>Usage: This should be milliseconds since epoch or an RFC3339 string.
+Examples:
+&quot;event_time = &amp;quot;2019-06-10T16:07:18-07:00&amp;quot;&quot;
+&quot;event_time = 1560208038000&quot;</p>
+<ul>
+<li>security_marks.marks: <code>=</code>, <code>:</code></li>
+<li>source_properties: <code>=</code>, <code>:</code>, <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code></li>
+</ul>
 <p>For example, <code>source_properties.size = 100</code> is a valid filter string.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -252,7 +260,7 @@ source_properties | &apos;=&apos;, &apos;:&apos;, <code>&gt;</code>, <code>&amp;
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_GroupBy_" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.GroupBy*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_GroupBy" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.GroupBy">GroupBy</h4>
-  <div class="markdown level1 summary"><p>Expression that defines what assets fields to use for grouping (including
+  <div class="markdown level1 summary"><p>Required. Expression that defines what assets fields to use for grouping (including
 <code>state_change</code>). The string value should follow SQL syntax: comma separated
 list of fields. For example: &quot;parent,resource_name&quot;.</p>
 <p>The following fields are supported:</p>
@@ -344,10 +352,10 @@ that the system should return the next page of data.</p>
       <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageToken">IPageRequest.PageToken</a></div>
   <a id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_Parent_" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.Parent*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_Parent" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.Parent">Parent</h4>
-  <div class="markdown level1 summary"><p>Name of the source to groupBy. Its format is
+  <div class="markdown level1 summary"><p>Required. Name of the source to groupBy. Its format is
 &quot;organizations/[organization_id]/sources/[source_id]&quot;. To groupBy across
 all sources provide a source_id of <code>-</code>. For example:
-organizations/123/sources/-</p>
+organizations/{organization_id}/sources/-</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

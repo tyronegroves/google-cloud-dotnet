@@ -129,25 +129,34 @@ attached.</p>
       <h4><a class="xref" href="Google.Cloud.Iam.V1.Policy.html">Policy</a></h4>
       <section><p>Defines an Identity and Access Management (IAM) policy. It is used to
 specify access control policies for Cloud Platform resources.</p>
-<p>A <code>Policy</code> consists of a list of <code>bindings</code>. A <code>binding</code> binds a list of
-<code>members</code> to a <code>role</code>, where the members can be user accounts, Google groups,
-Google domains, and service accounts. A <code>role</code> is a named list of permissions
-defined by IAM.</p>
+<p>A <code>Policy</code> is a collection of <code>bindings</code>. A <code>binding</code> binds one or more
+<code>members</code> to a single <code>role</code>. Members can be user accounts, service accounts,
+Google groups, and domains (such as G Suite). A <code>role</code> is a named list of
+permissions (defined by IAM or configured by users). A <code>binding</code> can
+optionally specify a <code>condition</code>, which is a logic expression that further
+constrains the role binding based on attributes about the request and/or
+target resource.</p>
 <p><strong>JSON Example</strong></p>
 <p>{
  &quot;bindings&quot;: [
    {
-     &quot;role&quot;: &quot;roles/owner&quot;,
+     &quot;role&quot;: &quot;roles/resourcemanager.organizationAdmin&quot;,
      &quot;members&quot;: [
        &amp;quot;user:mike@example.com&quot;,
        &amp;quot;group:admins@example.com&quot;,
        &quot;domain:google.com&quot;,
-       &amp;quot;serviceAccount:my-other-app@appspot.gserviceaccount.com&quot;
+       &amp;quot;serviceAccount:my-project-id@appspot.gserviceaccount.com&quot;
      ]
    },
    {
-     &quot;role&quot;: &quot;roles/viewer&quot;,
-     &quot;members&quot;: [&amp;quot;user:sean@example.com&quot;]
+     &quot;role&quot;: &quot;roles/resourcemanager.organizationViewer&quot;,
+     &quot;members&quot;: [&amp;quot;user:eve@example.com&quot;],
+     &quot;condition&quot;: {
+       &quot;title&quot;: &quot;expirable access&quot;,
+       &quot;description&quot;: &quot;Does not grant access after Sep 2020&quot;,
+       &quot;expression&quot;: &quot;request.time &lt;
+       timestamp(&apos;2020-10-01T00:00:00.000Z&apos;)&quot;,
+     }
    }
  ]
 }</p>
@@ -158,13 +167,17 @@ defined by IAM.</p>
 <li>user:mike@example.com</li>
 <li>group:admins@example.com</li>
 <li>domain:google.com</li>
-<li>serviceAccount:my-other-app@appspot.gserviceaccount.com
-role: roles/owner</li>
+<li>serviceAccount:my-project-id@appspot.gserviceaccount.com
+role: roles/resourcemanager.organizationAdmin</li>
 </ul>
 </li>
 <li>members:<ul>
-<li>user:sean@example.com
-role: roles/viewer</li>
+<li>user:eve@example.com
+role: roles/resourcemanager.organizationViewer
+condition:
+title: expirable access
+description: Does not grant access after Sep 2020
+expression: request.time &lt; timestamp(&apos;2020-10-01T00:00:00.000Z&apos;)</li>
 </ul>
 </li>
 </ul>

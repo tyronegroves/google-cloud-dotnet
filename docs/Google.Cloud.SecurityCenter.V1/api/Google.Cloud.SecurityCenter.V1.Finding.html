@@ -74,10 +74,11 @@
   <h1 id="Google_Cloud_SecurityCenter_V1_Finding" data-uid="Google.Cloud.SecurityCenter.V1.Finding" class="text-break">Class Finding
   </h1>
   <div class="markdown level0 summary"><p>Cloud Security Command Center (Cloud SCC) finding.</p>
-<p>A finding is a record of assessment data (security, risk, health or privacy)
-ingested into Cloud SCC for presentation, notification, analysis,
-policy testing, and enforcement. For example, an XSS vulnerability in an
-App Engine application is a finding.</p>
+<p>A finding is a record of assessment data like security, risk, health, or
+privacy, that is ingested into Cloud SCC for presentation, notification,
+analysis, policy testing, and enforcement. For example, a
+cross-site scripting (XSS) vulnerability in an App Engine application is a
+finding.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -203,8 +204,8 @@ Example: &quot;XSS_FLASH_INJECTION&quot;</p>
   <a id="Google_Cloud_SecurityCenter_V1_Finding_EventTime_" data-uid="Google.Cloud.SecurityCenter.V1.Finding.EventTime*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_Finding_EventTime" data-uid="Google.Cloud.SecurityCenter.V1.Finding.EventTime">EventTime</h4>
   <div class="markdown level1 summary"><p>The time at which the event took place. For example, if the finding
-represents an open firewall it would capture the time the open firewall was
-detected.</p>
+represents an open firewall it would capture the time the detector believes
+the firewall became open. The accuracy is determined by the detector.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -281,7 +282,7 @@ guaranteed to be either empty or a well formed URL.</p>
   <div class="markdown level1 summary"><p>The relative resource name of this finding. See:
 <a href="https://cloud.google.com/apis/design/resource_names#relative_resource_name">https://cloud.google.com/apis/design/resource_names#relative_resource_name</a>
 Example:
-&quot;organizations/123/sources/456/findings/789&quot;</p>
+&quot;organizations/{organization_id}/sources/{source_id}/findings/{finding_id}&quot;</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -309,7 +310,7 @@ Example:
 <a href="https://cloud.google.com/apis/design/resource_names#relative_resource_name">https://cloud.google.com/apis/design/resource_names#relative_resource_name</a>
 This field is immutable after creation time.
 For example:
-&quot;organizations/123/sources/456&quot;</p>
+&quot;organizations/{organization_id}/sources/{source_id}&quot;</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -333,9 +334,11 @@ For example:
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_Finding_ResourceName_" data-uid="Google.Cloud.SecurityCenter.V1.Finding.ResourceName*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_Finding_ResourceName" data-uid="Google.Cloud.SecurityCenter.V1.Finding.ResourceName">ResourceName</h4>
-  <div class="markdown level1 summary"><p>The full resource name of the Google Cloud Platform (GCP) resource this
-finding is for. See:
+  <div class="markdown level1 summary"><p>For findings on Google Cloud Platform (GCP) resources, the full resource
+name of the GCP resource this finding is for. See:
 <a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">https://cloud.google.com/apis/design/resource_names#full_resource_name</a>
+When the finding is for a non-GCP resource, the resourceName can be a
+customer or partner defined string.
 This field is immutable after creation time.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
