@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Timestamp
    | Google.Cloud.Logging.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -73,17 +73,17 @@
   
   <h1 id="Google_Protobuf_WellKnownTypes_Timestamp" data-uid="Google.Protobuf.WellKnownTypes.Timestamp" class="text-break">Class Timestamp
   </h1>
-  <div class="markdown level0 summary"><p>A Timestamp represents a point in time independent of any time zone
-or calendar, represented as seconds and fractions of seconds at
-nanosecond resolution in UTC Epoch time. It is encoded using the
-Proleptic Gregorian Calendar which extends the Gregorian calendar
-backwards to year one. It is encoded assuming all minutes are 60
-seconds long, i.e. leap seconds are &quot;smeared&quot; so that no leap second
-table is needed for interpretation. Range is from
-0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z.
-By restricting to that range, we ensure that we can convert to
-and from  RFC 3339 date strings.
-See <a href="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt</a>.</p>
+  <div class="markdown level0 summary"><p>A Timestamp represents a point in time independent of any time zone or local
+calendar, encoded as a count of seconds and fractions of seconds at
+nanosecond resolution. The count is relative to an epoch at UTC midnight on
+January 1, 1970, in the proleptic Gregorian calendar which extends the
+Gregorian calendar backwards to year one.</p>
+<p>All minutes are 60 seconds long. Leap seconds are &quot;smeared&quot; so that no leap
+second table is needed for interpretation, using a <a href="https://developers.google.com/time/smear">24-hour linear
+smear</a>.</p>
+<p>The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+restricting to that range, we ensure that we can convert to and from <a href="https://www.ietf.org/rfc/rfc3339.txt">RFC
+3339</a> date strings.</p>
 <h1 id="examples">Examples</h1>
 <p>Example 1: Compute Timestamp from POSIX <code>time()</code>.</p>
 <p>Timestamp timestamp;
@@ -125,11 +125,13 @@ able to accept both UTC and other timezones (as indicated by an offset).</p>
 <p>For example, &quot;2017-01-15T01:30:15.01Z&quot; encodes 15.01 seconds past
 01:30 UTC on January 15, 2017.</p>
 <p>In JavaScript, one can convert a Date object to this format using the
-standard [toISOString()](<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString</a>]
+standard
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString">toISOString()</a>
 method. In Python, a standard <code>datetime.datetime</code> object can be converted
-to this format using <a href="https://docs.python.org/2/library/time.html#time.strftime"><code>strftime</code></a>
-with the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one
-can use the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime--"><code>ISODateTimeFormat.dateTime()</code></a> to obtain a formatter capable of generating timestamps in this format.</p>
+to this format using
+<a href="https://docs.python.org/2/library/time.html#time.strftime"><code>strftime</code></a> with
+the time format spec &apos;%Y-%m-%dT%H:%M:%S.%fZ&apos;. Likewise, in Java, one can use
+the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D"><code>ISODateTimeFormat.dateTime()</code></a> to obtain a formatter capable of generating timestamps in this format.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -144,6 +146,7 @@ can use the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.ICustomDiagnosticMessage.html">ICustomDiagnosticMessage</a></div>
     <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">System.IComparable</span>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -164,7 +167,7 @@ can use the Joda Time&apos;s <a href="http://www.joda.org/joda-time/apidocs/org/
   <h6><strong>Assembly</strong>: Google.Protobuf.dll</h6>
   <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Timestamp : IMessage&lt;Timestamp&gt;, IEquatable&lt;Timestamp&gt;, IDeepCloneable&lt;Timestamp&gt;, ICustomDiagnosticMessage, IMessage</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Timestamp : IMessage&lt;Timestamp&gt;, IEquatable&lt;Timestamp&gt;, IDeepCloneable&lt;Timestamp&gt;, ICustomDiagnosticMessage, IMessage, IComparable&lt;Timestamp&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -402,6 +405,54 @@ inclusive.</p>
   </table>
   <h5 class="implements">Implements</h5>
       <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html#Google_Protobuf_IDeepCloneable_1_Clone">IDeepCloneable&lt;T&gt;.Clone()</a></div>
+  <a id="Google_Protobuf_WellKnownTypes_Timestamp_CompareTo_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.CompareTo*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_CompareTo_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.CompareTo(Google.Protobuf.WellKnownTypes.Timestamp)">CompareTo(Timestamp)</h4>
+  <div class="markdown level1 summary"><p>Given another timestamp, returns 0 if the timestamps are equivalent, -1 if this timestamp precedes the other, and 1 otherwise</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(Timestamp other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>Timestamp to compare</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>an integer indicating whether this timestamp precedes or follows the other</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><span class="xref">System.IComparable&lt;T&gt;.CompareTo(T)</span></div>
+  <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_CompareTo_Google_Protobuf_WellKnownTypes_Timestamp__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Make sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.</p>
+</div>
   <a id="Google_Protobuf_WellKnownTypes_Timestamp_Equals_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.Equals*"></a>
   <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_Equals_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.Equals(Google.Protobuf.WellKnownTypes.Timestamp)">Equals(Timestamp)</h4>
   <div class="markdown level1 summary"></div>
@@ -904,6 +955,306 @@ values.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Protobuf_WellKnownTypes_Timestamp_op_Equality_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_Equality*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_op_Equality_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_Equality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)">Equality(Timestamp, Timestamp)</h4>
+  <div class="markdown level1 summary"><p>Returns whether two timestamps are equivalent</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(Timestamp a, Timestamp b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if the two timestamps refer to the same nanosecond</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_op_Equality_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Make sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.</p>
+</div>
+  <a id="Google_Protobuf_WellKnownTypes_Timestamp_op_GreaterThan_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_op_GreaterThan_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)">GreaterThan(Timestamp, Timestamp)</h4>
+  <div class="markdown level1 summary"><p>Compares two timestamps and returns whether the first is greater than (chronologically follows) the second</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator&gt;(Timestamp a, Timestamp b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if a follows b</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_op_GreaterThan_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Make sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.</p>
+</div>
+  <a id="Google_Protobuf_WellKnownTypes_Timestamp_op_GreaterThanOrEqual_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_op_GreaterThanOrEqual_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_GreaterThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)">GreaterThanOrEqual(Timestamp, Timestamp)</h4>
+  <div class="markdown level1 summary"><p>Compares two timestamps and returns whether the first is greater than (chronologically follows) the second</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;=(Timestamp a, Timestamp b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if a follows b</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_op_GreaterThanOrEqual_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Make sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.</p>
+</div>
+  <a id="Google_Protobuf_WellKnownTypes_Timestamp_op_Inequality_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_op_Inequality_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_Inequality(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)">Inequality(Timestamp, Timestamp)</h4>
+  <div class="markdown level1 summary"><p>Returns whether two timestamps differ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(Timestamp a, Timestamp b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if the two timestamps differ</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_op_Inequality_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Make sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.</p>
+</div>
+  <a id="Google_Protobuf_WellKnownTypes_Timestamp_op_LessThan_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_op_LessThan_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_LessThan(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)">LessThan(Timestamp, Timestamp)</h4>
+  <div class="markdown level1 summary"><p>Compares two timestamps and returns whether the first is less than (chronologically precedes) the second</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(Timestamp a, Timestamp b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if a precedes b</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_op_LessThan_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Make sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.</p>
+</div>
+  <a id="Google_Protobuf_WellKnownTypes_Timestamp_op_LessThanOrEqual_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_op_LessThanOrEqual_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_LessThanOrEqual(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Timestamp)">LessThanOrEqual(Timestamp, Timestamp)</h4>
+  <div class="markdown level1 summary"><p>Compares two timestamps and returns whether the first is less than (chronologically precedes) the second</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;=(Timestamp a, Timestamp b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if a precedes b</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Protobuf_WellKnownTypes_Timestamp_op_LessThanOrEqual_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Timestamp__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Make sure the timestamps are normalized. Comparing non-normalized timestamps is not specified and may give unexpected results.</p>
+</div>
   <a id="Google_Protobuf_WellKnownTypes_Timestamp_op_Subtraction_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_Subtraction*"></a>
   <h4 id="Google_Protobuf_WellKnownTypes_Timestamp_op_Subtraction_Google_Protobuf_WellKnownTypes_Timestamp_Google_Protobuf_WellKnownTypes_Duration_" data-uid="Google.Protobuf.WellKnownTypes.Timestamp.op_Subtraction(Google.Protobuf.WellKnownTypes.Timestamp,Google.Protobuf.WellKnownTypes.Duration)">Subtraction(Timestamp, Duration)</h4>
   <div class="markdown level1 summary"><p>Subtracts a <a class="xref" href="Google.Protobuf.WellKnownTypes.Duration.html">Duration</a> from a <a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a>, to obtain another <code>Timestamp</code>.</p>
@@ -1056,6 +1407,9 @@ values.</p>
   </div>
   <div>
       <a class="xref" href="Google.Protobuf.MessageExtensions.html#Google_Protobuf_MessageExtensions_ToByteString_Google_Protobuf_IMessage_">MessageExtensions.ToByteString(IMessage)</a>
+  </div>
+  <div>
+      <a class="xref" href="Google.Protobuf.MessageExtensions.html#Google_Protobuf_MessageExtensions_IsInitialized_Google_Protobuf_IMessage_">MessageExtensions.IsInitialized(IMessage)</a>
   </div>
 </article>
           </div>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Context
    | Google.Cloud.Logging.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -90,6 +90,25 @@ requested:<ul>
 <code>google.rpc.context.OriginContext</code>.</p>
 <p>Available context types are defined in package
 <code>google.rpc.context</code>.</p>
+<p>This also provides mechanism to whitelist any protobuf message extension that
+can be sent in grpc metadata using “x-goog-ext-&lt;extension_id&gt;-bin” and
+“x-goog-ext-&lt;extension_id&gt;-jspb” format. For example, list any service
+specific protobuf types that can appear in grpc metadata as follows in your
+yaml file:</p>
+<p>Example:</p>
+<p>context:
+ rules:</p>
+<ul>
+<li>selector: &quot;google.example.library.v1.LibraryService.CreateBook&quot;
+allowed_request_extensions:<ul>
+<li>google.foo.v1.NewExtension
+allowed_response_extensions:</li>
+<li>google.foo.v1.NewExtension</li>
+</ul>
+</li>
+</ul>
+<p>You can also specify extension ID instead of fully qualified extension name
+here.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">

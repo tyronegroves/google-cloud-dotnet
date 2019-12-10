@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Distribution.Types.BucketOptions
    | Google.Cloud.Logging.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -73,25 +73,20 @@
   
   <h1 id="Google_Api_Distribution_Types_BucketOptions" data-uid="Google.Api.Distribution.Types.BucketOptions" class="text-break">Class Distribution.Types.BucketOptions
   </h1>
-  <div class="markdown level0 summary"><p>A Distribution may optionally contain a histogram of the values in the
-population.  The histogram is given in <code>bucket_counts</code> as counts of values
-that fall into one of a sequence of non-overlapping buckets.  The sequence
-of buckets is described by <code>bucket_options</code>.</p>
-<p>A bucket specifies an inclusive lower bound and exclusive upper bound for
-the values that are counted for that bucket.  The upper bound of a bucket
-is strictly greater than the lower bound.</p>
-<p>The sequence of N buckets for a Distribution consists of an underflow
-bucket (number 0), zero or more finite buckets (number 1 through N - 2) and
-an overflow bucket (number N - 1).  The buckets are contiguous:  the lower
-bound of bucket i (i &gt; 0) is the same as the upper bound of bucket i - 1.
-The buckets span the whole range of finite values: lower bound of the
-underflow bucket is -infinity and the upper bound of the overflow bucket is
-+infinity.  The finite buckets are so-called because both bounds are
-finite.</p>
-<p><code>BucketOptions</code> describes bucket boundaries in one of three ways.  Two
-describe the boundaries by giving parameters for a formula to generate
-boundaries and one gives the bucket boundaries explicitly.</p>
-<p>If <code>bucket_boundaries</code> is not given, then no <code>bucket_counts</code> may be given.</p>
+  <div class="markdown level0 summary"><p><code>BucketOptions</code> describes the bucket boundaries used to create a histogram
+for the distribution. The buckets can be in a linear sequence, an
+exponential sequence, or each bucket can be specified explicitly.
+<code>BucketOptions</code> does not include the number of values in each bucket.</p>
+<p>A bucket has an inclusive lower bound and exclusive upper bound for the
+values that are counted for that bucket. The upper bound of a bucket must
+be strictly greater than the lower bound. The sequence of N buckets for a
+distribution consists of an underflow bucket (number 0), zero or more
+finite buckets (number 1 through N - 2) and an overflow bucket (number N -
+1). The buckets are contiguous: the lower bound of bucket i (i &gt; 0) is the
+same as the upper bound of bucket i - 1. The buckets span the whole range
+of finite values: lower bound of the underflow bucket is -infinity and the
+upper bound of the overflow bucket is +infinity. The finite buckets are
+so-called because both bounds are finite.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">

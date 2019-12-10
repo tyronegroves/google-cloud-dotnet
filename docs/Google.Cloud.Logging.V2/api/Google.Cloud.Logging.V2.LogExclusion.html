@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class LogExclusion
    | Google.Cloud.Logging.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -73,12 +73,12 @@
   
   <h1 id="Google_Cloud_Logging_V2_LogExclusion" data-uid="Google.Cloud.Logging.V2.LogExclusion" class="text-break">Class LogExclusion
   </h1>
-  <div class="markdown level0 summary"><p>Specifies a set of log entries that are not to be stored in Stackdriver
-Logging. If your project receives a large volume of logs, you might be able
-to use exclusions to reduce your chargeable logs. Exclusions are processed
-after log sinks, so you can export log entries before they are excluded.
-Audit log entries and log entries from Amazon Web Services are never
-excluded.</p>
+  <div class="markdown level0 summary"><p>Specifies a set of log entries that are not to be stored in
+Logging. If your GCP resource receives a large volume of logs, you can
+use exclusions to reduce your chargeable logs. Exclusions are
+processed after log sinks, so you can export log entries before they are
+excluded. Note that organization-level and folder-level exclusions don&apos;t
+apply to child resources, and that you can&apos;t exclude audit log entries.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -151,6 +151,31 @@ excluded.</p>
   </table>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Logging_V2_LogExclusion_CreateTime_" data-uid="Google.Cloud.Logging.V2.LogExclusion.CreateTime*"></a>
+  <h4 id="Google_Cloud_Logging_V2_LogExclusion_CreateTime" data-uid="Google.Cloud.Logging.V2.LogExclusion.CreateTime">CreateTime</h4>
+  <div class="markdown level1 summary"><p>Output only. The creation timestamp of the exclusion.</p>
+<p>This field may not be present for older exclusions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp CreateTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Logging_V2_LogExclusion_Description_" data-uid="Google.Cloud.Logging.V2.LogExclusion.Description*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogExclusion_Description" data-uid="Google.Cloud.Logging.V2.LogExclusion.Description">Description</h4>
   <div class="markdown level1 summary"><p>Optional. A description of this exclusion.</p>
@@ -178,9 +203,9 @@ excluded.</p>
   <a id="Google_Cloud_Logging_V2_LogExclusion_Disabled_" data-uid="Google.Cloud.Logging.V2.LogExclusion.Disabled*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogExclusion_Disabled" data-uid="Google.Cloud.Logging.V2.LogExclusion.Disabled">Disabled</h4>
   <div class="markdown level1 summary"><p>Optional. If set to True, then this exclusion is disabled and it does not
-exclude any log entries. You can use
-<a href="/logging/docs/reference/v2/rest/v2/projects.exclusions/patch">exclusions.patch</a>
-to change the value of this field.</p>
+exclude any log entries. You can [update an
+exclusion][google.logging.v2.ConfigServiceV2.UpdateExclusion] to change the
+value of this field.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -204,14 +229,13 @@ to change the value of this field.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogExclusion_Filter_" data-uid="Google.Cloud.Logging.V2.LogExclusion.Filter*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogExclusion_Filter" data-uid="Google.Cloud.Logging.V2.LogExclusion.Filter">Filter</h4>
-  <div class="markdown level1 summary"><p>Required.
-An <a href="/logging/docs/view/advanced_filters">advanced logs filter</a>
+  <div class="markdown level1 summary"><p>Required. An <a href="/logging/docs/view/advanced-queries">advanced logs filter</a>
 that matches the log entries to be excluded. By using the
-<a href="/logging/docs/view/advanced_filters#sample">sample function</a>,
+<a href="/logging/docs/view/advanced-queries#sample">sample function</a>,
 you can exclude less than 100% of the matching log entries.
-For example, the following filter matches 99% of low-severity log
-entries from load balancers:</p>
-<p><code>&amp;quot;resource.type=http_load_balancer severity&amp;lt;ERROR sample(insertId, 0.99)&amp;quot;</code></p>
+For example, the following query matches 99% of low-severity log
+entries from Google Cloud Storage buckets:</p>
+<p><code>&amp;quot;resource.type=gcs_bucket severity&amp;lt;ERROR sample(insertId, 0.99)&amp;quot;</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -255,6 +279,31 @@ can include only letters, digits, underscores, hyphens, and periods.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Logging_V2_LogExclusion_UpdateTime_" data-uid="Google.Cloud.Logging.V2.LogExclusion.UpdateTime*"></a>
+  <h4 id="Google_Cloud_Logging_V2_LogExclusion_UpdateTime" data-uid="Google.Cloud.Logging.V2.LogExclusion.UpdateTime">UpdateTime</h4>
+  <div class="markdown level1 summary"><p>Output only. The last update timestamp of the exclusion.</p>
+<p>This field may not be present for older exclusions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Timestamp UpdateTime { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
         <td></td>
       </tr>
     </tbody>

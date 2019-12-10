@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class QuotaLimit
    | Google.Cloud.Logging.V2 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -580,7 +580,6 @@ indicating unlimited maximum quota.</p>
   <div class="markdown level1 summary"><p>The name of the metric this quota limit applies to. The quota limits with
 the same metric will be checked together during runtime. The metric must be
 defined within the service config.</p>
-<p>Used by metric-based quotas only.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -604,20 +603,10 @@ defined within the service config.</p>
   </table>
   <a id="Google_Api_QuotaLimit_Name_" data-uid="Google.Api.QuotaLimit.Name*"></a>
   <h4 id="Google_Api_QuotaLimit_Name" data-uid="Google.Api.QuotaLimit.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Name of the quota limit. The name is used to refer to the limit when
-overriding the default limit on per-consumer basis.</p>
-<p>For group-based quota limits, the name must be unique within the quota
-group. If a name is not provided, it will be generated from the limit_by
-and duration fields.</p>
-<p>For metric-based quota limits, the name must be provided, and it must be
-unique within the service. The name can only include alphanumeric
-characters as well as &apos;-&apos;.</p>
+  <div class="markdown level1 summary"><p>Name of the quota limit.</p>
+<p>The name must be provided, and it must be unique within the service. The
+name can only include alphanumeric characters as well as &apos;-&apos;.</p>
 <p>The maximum length of the limit name is 64 characters.</p>
-<p>The name of a limit is used as a unique identifier for this limit.
-Therefore, once a limit has been put into use, its name should be
-immutable. You can use the display_name field to provide a user-friendly
-name for the limit. The display name can be evolved over time without
-affecting the identity of the limit.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -667,34 +656,12 @@ affecting the identity of the limit.</p>
   <div class="markdown level1 summary"><p>Specify the unit of the quota limit. It uses the same syntax as
 [Metric.unit][]. The supported unit kinds are determined by the quota
 backend system.</p>
-<p>The <a href="https://cloud.google.com/service-control">Google Service Control</a>
-supports the following unit components:</p>
-<ul>
-<li>One of the time intevals:</li>
-<li>&quot;/min&quot;  for quota every minute.</li>
-<li>&quot;/d&quot;  for quota every 24 hours, starting 00:00 US Pacific Time.</li>
-<li>Otherwise the quota won&apos;t be reset by time, such as storage limit.</li>
-<li>One and only one of the granted containers:</li>
-<li>&quot;/{organization}&quot; quota for an organization.</li>
-<li>&quot;/{project}&quot; quota for a project.</li>
-<li>&quot;/{folder}&quot; quota for a folder.</li>
-<li>&quot;/{resource}&quot; quota for a universal resource.</li>
-<li>Zero or more quota segmentation dimension. Not all combos are valid.</li>
-<li>&quot;/{region}&quot; quota for every region. Not to be used with time intervals.</li>
-<li>Otherwise the resources granted on the target is not segmented.</li>
-<li>&quot;/{zone}&quot; quota for every zone. Not to be used with time intervals.</li>
-<li>Otherwise the resources granted on the target is not segmented.</li>
-<li>&quot;/{resource}&quot; quota for a resource associated with a project or org.</li>
-</ul>
 <p>Here are some examples:</p>
 <ul>
 <li>&quot;1/min/{project}&quot; for quota per minute per project.</li>
-<li>&quot;1/min/{user}&quot; for quota per minute per user.</li>
-<li>&quot;1/min/{organization}&quot; for quota per minute per organization.</li>
 </ul>
 <p>Note: the order of unit components is insignificant.
 The &quot;1&quot; at the beginning is required to follow the metric unit syntax.</p>
-<p>Used by metric-based quotas only.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -718,31 +685,9 @@ The &quot;1&quot; at the beginning is required to follow the metric unit syntax.
   </table>
   <a id="Google_Api_QuotaLimit_Values_" data-uid="Google.Api.QuotaLimit.Values*"></a>
   <h4 id="Google_Api_QuotaLimit_Values" data-uid="Google.Api.QuotaLimit.Values">Values</h4>
-  <div class="markdown level1 summary"><p>Tiered limit values. Also allows for regional or zone overrides for these
-values if &quot;/{region}&quot; or &quot;/{zone}&quot; is specified in the unit field.</p>
-<p>Currently supported tiers from low to high:
-VERY_LOW, LOW, STANDARD, HIGH, VERY_HIGH</p>
-<p>To apply different limit values for users according to their tiers, specify
-the values for the tiers you want to differentiate. For example:
-{LOW:100, STANDARD:500, HIGH:1000, VERY_HIGH:5000}</p>
-<p>The limit value for each tier is optional except for the tier STANDARD.
-The limit value for an unspecified tier falls to the value of its next
-tier towards tier STANDARD. For the above example, the limit value for tier
-STANDARD is 500.</p>
-<p>To apply the same limit value for all users, just specify limit value for
-tier STANDARD. For example: {STANDARD:500}.</p>
-<p>To apply a regional overide for a tier, add a map entry with key
-&quot;&lt;TIER&gt;/&lt;region&gt;&quot;, where &lt;region&gt; is a region name. Similarly, for a zone
-override, add a map entry with key &quot;&lt;TIER&gt;/{zone}&quot;.
-Further, a wildcard can be used at the end of a zone name in order to
-specify zone level overrides. For example:
-LOW: 10, STANDARD: 50, HIGH: 100,
-LOW/us-central1: 20, STANDARD/us-central1: 60, HIGH/us-central1: 200,
-LOW/us-central1-<em>: 10, STANDARD/us-central1-</em>: 20, HIGH/us-central1-*: 80</p>
-<p>The regional overrides tier set for each region must be the same as
-the tier set for default limit values. Same rule applies for zone overrides
-tier as well.</p>
-<p>Used by metric-based quotas only.</p>
+  <div class="markdown level1 summary"><p>Tiered limit values. You must specify this as a key:value pair, with an
+integer value that is the maximum number of requests allowed for the
+specified unit. Currently only STANDARD is supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
