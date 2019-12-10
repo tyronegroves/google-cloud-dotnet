@@ -99,6 +99,9 @@
       <a class="xref" href="Google.Protobuf.Reflection.DescriptorBase.html#Google_Protobuf_Reflection_DescriptorBase_File">DescriptorBase.File</a>
     </div>
     <div>
+      <a class="xref" href="Google.Protobuf.Reflection.DescriptorBase.html#Google_Protobuf_Reflection_DescriptorBase_Declaration">DescriptorBase.Declaration</a>
+    </div>
+    <div>
       <span class="xref">System.Object.ToString()</span>
     </div>
     <div>
@@ -159,12 +162,17 @@ any way of obtaining or changing the value of the field within a specific messag
 that is the responsibility of the accessor.
 </p>
 <p>
-The value returned by this property will be non-null for all regular fields. However,
-if a message containing a map field is introspected, the list of nested messages will include
+In descriptors for generated code, the value returned by this property will be non-null for all
+regular fields. However, if a message containing a map field is introspected, the list of nested messages will include
 an auto-generated nested key/value pair message for the field. This is not represented in any
 generated type, and the value of the map field itself is represented by a dictionary in the
 reflection API. There are never instances of those &quot;hidden&quot; messages, so no accessor is provided
 and this property will return null.
+</p>
+<p>
+In dynamically loaded descriptors, the value returned by this property will current be null;
+if and when dynamic messages are supported, it will return a suitable accessor to work with
+them.
 </p>
 </div>
   <a id="Google_Protobuf_Reflection_FieldDescriptor_ContainingOneof_" data-uid="Google.Protobuf.Reflection.FieldDescriptor.ContainingOneof*"></a>
@@ -367,6 +375,30 @@ and this property will return null.
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public bool IsRepeated { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_Reflection_FieldDescriptor_IsRequired_" data-uid="Google.Protobuf.Reflection.FieldDescriptor.IsRequired*"></a>
+  <h4 id="Google_Protobuf_Reflection_FieldDescriptor_IsRequired" data-uid="Google.Protobuf.Reflection.FieldDescriptor.IsRequired">IsRequired</h4>
+  <div class="markdown level1 summary"><p>Returns <code>true</code> if this field is a required field; <code>false</code> otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsRequired { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
