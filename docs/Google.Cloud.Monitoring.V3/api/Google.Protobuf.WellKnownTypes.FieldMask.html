@@ -126,45 +126,39 @@ to only change the values of the fields as specified in the mask
 and leave the others untouched. If a resource is passed in to
 describe the updated values, the API ignores the values of all
 fields not covered by the mask.</p>
-<p>If a repeated field is specified for an update operation, the existing
-repeated values in the target resource will be overwritten by the new values.
-Note that a repeated field is only allowed in the last position of a <code>paths</code>
-string.</p>
+<p>If a repeated field is specified for an update operation, new values will
+be appended to the existing repeated field in the target resource. Note that
+a repeated field is only allowed in the last position of a <code>paths</code> string.</p>
 <p>If a sub-message is specified in the last position of the field mask for an
-update operation, then the existing sub-message in the target resource is
-overwritten. Given the target message:</p>
+update operation, then new value will be merged into the existing sub-message
+in the target resource.</p>
+<p>For example, given the target message:</p>
 <p>f {
  b {
-   d : 1
-   x : 2
+   d: 1
+   x: 2
  }
- c : 1
+ c: [1]
 }</p>
 <p>And an update message:</p>
 <p>f {
  b {
-   d : 10
+   d: 10
  }
+ c: [2]
 }</p>
 <p>then if the field mask is:</p>
-<p>paths: &quot;f.b&quot;</p>
+<p>paths: [&quot;f.b&quot;, &quot;f.c&quot;]</p>
 <p>then the result will be:</p>
 <p>f {
  b {
-   d : 10
+   d: 10
+   x: 2
  }
- c : 1
+ c: [1, 2]
 }</p>
-<p>However, if the update mask was:</p>
-<p>paths: &quot;f.b.d&quot;</p>
-<p>then the result would be:</p>
-<p>f {
- b {
-   d : 10
-   x : 2
- }
- c : 1
-}</p>
+<p>An implementation may provide options to override this default behavior for
+repeated and message fields.</p>
 <p>In order to reset a field&apos;s value to the default, the field must
 be in the mask and set to the default value in the provided resource.
 Hence, in order to reset all fields of a resource, provide a default
@@ -534,6 +528,279 @@ request should verify the included field paths, and return an
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_FromFieldNumbers_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_FromFieldNumbers__1_System_Collections_Generic_IEnumerable_System_Int32__" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Collections.Generic.IEnumerable{System.Int32})">FromFieldNumbers&lt;T&gt;(IEnumerable&lt;Int32&gt;)</h4>
+  <div class="markdown level1 summary"><p>Constructs a FieldMask from the passed field numbers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FieldMask FromFieldNumbers&lt;T&gt;(IEnumerable&lt;int&gt; fieldNumbers)
+    where T : IMessage</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">fieldNumbers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to validate the field paths against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_FromFieldNumbers_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_FromFieldNumbers__1_System_Int32___" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromFieldNumbers``1(System.Int32[])">FromFieldNumbers&lt;T&gt;(Int32[])</h4>
+  <div class="markdown level1 summary"><p>Constructs a FieldMask from the passed field numbers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FieldMask FromFieldNumbers&lt;T&gt;(params int[] fieldNumbers)
+    where T : IMessage</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span>[]</td>
+        <td><span class="parametername">fieldNumbers</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to validate the field paths against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_FromString_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromString*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_FromString_System_String_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromString(System.String)">FromString(String)</h4>
+  <div class="markdown level1 summary"><p>Parses from a string to a FieldMask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FieldMask FromString(string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_FromString_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromString*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_FromString__1_System_String_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromString``1(System.String)">FromString&lt;T&gt;(String)</h4>
+  <div class="markdown level1 summary"><p>Parses from a string to a FieldMask and validates all field paths.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FieldMask FromString&lt;T&gt;(string value)
+    where T : IMessage</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to validate the field paths against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_FromStringEnumerable_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_FromStringEnumerable__1_System_Collections_Generic_IEnumerable_System_String__" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.FromStringEnumerable``1(System.Collections.Generic.IEnumerable{System.String})">FromStringEnumerable&lt;T&gt;(IEnumerable&lt;String&gt;)</h4>
+  <div class="markdown level1 summary"><p>Constructs a FieldMask for a list of field paths in a certain type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FieldMask FromStringEnumerable&lt;T&gt;(IEnumerable&lt;string&gt; paths)
+    where T : IMessage</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">paths</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to validate the field paths against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Protobuf_WellKnownTypes_FieldMask_GetHashCode_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.GetHashCode*"></a>
   <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_GetHashCode" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.GetHashCode">GetHashCode()</h4>
   <div class="markdown level1 summary"></div>
@@ -559,6 +826,323 @@ request should verify the included field paths, and return an
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_Intersection_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Intersection*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_Intersection_Google_Protobuf_WellKnownTypes_FieldMask_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Intersection(Google.Protobuf.WellKnownTypes.FieldMask)">Intersection(FieldMask)</h4>
+  <div class="markdown level1 summary"><p>Calculates the intersection of two FieldMasks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldMask Intersection(FieldMask additionalMask)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">additionalMask</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid_Google_Protobuf_Reflection_MessageDescriptor_Google_Protobuf_WellKnownTypes_FieldMask_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,Google.Protobuf.WellKnownTypes.FieldMask)">IsValid(MessageDescriptor, FieldMask)</h4>
+  <div class="markdown level1 summary"><p>Checks whether paths in a given fields mask are valid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsValid(MessageDescriptor descriptor, FieldMask fieldMask)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Reflection.MessageDescriptor.html">MessageDescriptor</a></td>
+        <td><span class="parametername">descriptor</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">fieldMask</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid_Google_Protobuf_Reflection_MessageDescriptor_System_String_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid(Google.Protobuf.Reflection.MessageDescriptor,System.String)">IsValid(MessageDescriptor, String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether paths in a given fields mask are valid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsValid(MessageDescriptor descriptor, string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Reflection.MessageDescriptor.html">MessageDescriptor</a></td>
+        <td><span class="parametername">descriptor</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid__1_Google_Protobuf_WellKnownTypes_FieldMask_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(Google.Protobuf.WellKnownTypes.FieldMask)">IsValid&lt;T&gt;(FieldMask)</h4>
+  <div class="markdown level1 summary"><p>Checks whether paths in a given fields mask are valid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsValid&lt;T&gt;(FieldMask fieldMask)
+    where T : IMessage</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">fieldMask</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to validate the field paths against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_IsValid__1_System_String_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.IsValid``1(System.String)">IsValid&lt;T&gt;(String)</h4>
+  <div class="markdown level1 summary"><p>Checks whether a given field path is valid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsValid&lt;T&gt;(string path)
+    where T : IMessage</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to validate the field paths against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_Merge_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Merge*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_Merge_Google_Protobuf_IMessage_Google_Protobuf_IMessage_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage)">Merge(IMessage, IMessage)</h4>
+  <div class="markdown level1 summary"><p>Merges fields specified by this FieldMask from one message to another.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Merge(IMessage source, IMessage destination)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">source</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_Merge_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Merge*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_Merge_Google_Protobuf_IMessage_Google_Protobuf_IMessage_Google_Protobuf_WellKnownTypes_FieldMask_MergeOptions_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Merge(Google.Protobuf.IMessage,Google.Protobuf.IMessage,Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions)">Merge(IMessage, IMessage, FieldMask.MergeOptions)</h4>
+  <div class="markdown level1 summary"><p>Merges fields specified by this FieldMask from one message to another with the
+specified merge options.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Merge(IMessage source, IMessage destination, FieldMask.MergeOptions options)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">source</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></td>
+        <td><span class="parametername">destination</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.MergeOptions.html">FieldMask.MergeOptions</a></td>
+        <td><span class="parametername">options</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Protobuf_WellKnownTypes_FieldMask_MergeFrom_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.MergeFrom*"></a>
   <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_MergeFrom_Google_Protobuf_CodedInputStream_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.MergeFrom(Google.Protobuf.CodedInputStream)">MergeFrom(CodedInputStream)</h4>
   <div class="markdown level1 summary"></div>
@@ -613,6 +1197,32 @@ request should verify the included field paths, and return an
   </table>
   <h5 class="implements">Implements</h5>
       <div><a class="xref" href="Google.Protobuf.IMessage-1.html#Google_Protobuf_IMessage_1_MergeFrom__0_">IMessage&lt;T&gt;.MergeFrom(T)</a></div>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_Normalize_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Normalize*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_Normalize" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Normalize">Normalize()</h4>
+  <div class="markdown level1 summary"><p>Converts this FieldMask to its canonical form. In the canonical form of a
+FieldMask, all field paths are sorted alphabetically and redundant field
+paths are removed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldMask Normalize()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Protobuf_WellKnownTypes_FieldMask_ToDiagnosticString_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.ToDiagnosticString*"></a>
   <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_ToDiagnosticString" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.ToDiagnosticString">ToDiagnosticString()</h4>
   <div class="markdown level1 summary"><p>Returns a string representation of this <a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a> for diagnostic purposes.</p>
@@ -672,6 +1282,47 @@ values.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Object.ToString()</span></div>
+  <a id="Google_Protobuf_WellKnownTypes_FieldMask_Union_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Union*"></a>
+  <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_Union_Google_Protobuf_WellKnownTypes_FieldMask___" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.Union(Google.Protobuf.WellKnownTypes.FieldMask[])">Union(FieldMask[])</h4>
+  <div class="markdown level1 summary"><p>Creates a union of two or more FieldMasks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldMask Union(params FieldMask[] otherMasks)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a>[]</td>
+        <td><span class="parametername">otherMasks</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Protobuf_WellKnownTypes_FieldMask_WriteTo_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.WriteTo*"></a>
   <h4 id="Google_Protobuf_WellKnownTypes_FieldMask_WriteTo_Google_Protobuf_CodedOutputStream_" data-uid="Google.Protobuf.WellKnownTypes.FieldMask.WriteTo(Google.Protobuf.CodedOutputStream)">WriteTo(CodedOutputStream)</h4>
   <div class="markdown level1 summary"></div>
@@ -753,6 +1404,9 @@ values.</p>
   </div>
   <div>
       <a class="xref" href="Google.Protobuf.MessageExtensions.html#Google_Protobuf_MessageExtensions_ToByteString_Google_Protobuf_IMessage_">MessageExtensions.ToByteString(IMessage)</a>
+  </div>
+  <div>
+      <a class="xref" href="Google.Protobuf.MessageExtensions.html#Google_Protobuf_MessageExtensions_IsInitialized_Google_Protobuf_IMessage_">MessageExtensions.IsInitialized(IMessage)</a>
   </div>
 </article>
           </div>
