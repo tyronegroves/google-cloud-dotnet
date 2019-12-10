@@ -238,8 +238,8 @@ systems are expected to put that etag in the request to <code>setIamPolicy</code
 ensure that their change will be applied to the same version of the policy.</p>
 <p>If no <code>etag</code> is provided in the call to <code>setIamPolicy</code>, then the existing
 policy is overwritten. Due to blind-set semantics of an etag-less policy,
-&apos;setIamPolicy&apos; will not fail even if either of incoming or stored policy
-does not meet the version requirements.</p>
+&apos;setIamPolicy&apos; will not fail even if the incoming policy version does not
+meet the requirements for modifying the stored policy.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -268,11 +268,12 @@ does not meet the version requirements.</p>
 rejected.</p>
 <p>Operations affecting conditional bindings must specify version 3. This can
 be either setting a conditional policy, modifying a conditional binding,
-or removing a conditional binding from the stored conditional policy.
+or removing a binding (conditional or unconditional) from the stored
+conditional policy.
 Operations on non-conditional policies may specify any valid value or
 leave the field unset.</p>
-<p>If no etag is provided in the call to <code>setIamPolicy</code>, any version
-compliance checks on the incoming and/or stored policy is skipped.</p>
+<p>If no etag is provided in the call to <code>setIamPolicy</code>, version compliance
+checks against the stored policy is skipped.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
