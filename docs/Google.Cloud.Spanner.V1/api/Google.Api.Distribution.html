@@ -73,15 +73,15 @@
   
   <h1 id="Google_Api_Distribution" data-uid="Google.Api.Distribution" class="text-break">Class Distribution
   </h1>
-  <div class="markdown level0 summary"><p>Distribution contains summary statistics for a population of values and,
-optionally, a histogram representing the distribution of those values across
-a specified set of histogram buckets.</p>
+  <div class="markdown level0 summary"><p><code>Distribution</code> contains summary statistics for a population of values. It
+optionally contains a histogram representing the distribution of those values
+across a set of buckets.</p>
 <p>The summary statistics are the count, mean, sum of the squared deviation from
-the mean, the minimum, and the maximum of the set of population of values.</p>
-<p>The histogram is based on a sequence of buckets and gives a count of values
-that fall into each bucket.  The boundaries of the buckets are given either
-explicitly or by specifying parameters for a method of computing them
-(buckets of fixed width or buckets of exponentially increasing width).</p>
+the mean, the minimum, and the maximum of the set of population of values.
+The histogram is based on a sequence of buckets and gives a count of values
+that fall into each bucket. The boundaries of the buckets are given either
+explicitly or by formulas for buckets of fixed or exponentially increasing
+widths.</p>
 <p>Although it is not forbidden, it is generally a bad idea to include
 non-finite values (infinities or NaNs) in the population of values, as this
 will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fields meaningless.</p>
@@ -226,6 +226,29 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
       </tr>
     </tbody>
   </table>
+  <h4 id="Google_Api_Distribution_ExemplarsFieldNumber" data-uid="Google.Api.Distribution.ExemplarsFieldNumber">ExemplarsFieldNumber</h4>
+  <div class="markdown level1 summary"><p>Field number for the &quot;exemplars&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int ExemplarsFieldNumber = 10</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h4 id="Google_Api_Distribution_MeanFieldNumber" data-uid="Google.Api.Distribution.MeanFieldNumber">MeanFieldNumber</h4>
   <div class="markdown level1 summary"><p>Field number for the &quot;mean&quot; field.</p>
 </div>
@@ -299,15 +322,19 @@ will render the <code>mean</code> and <code>sum_of_squared_deviation</code> fiel
   </h3>
   <a id="Google_Api_Distribution_BucketCounts_" data-uid="Google.Api.Distribution.BucketCounts*"></a>
   <h4 id="Google_Api_Distribution_BucketCounts" data-uid="Google.Api.Distribution.BucketCounts">BucketCounts</h4>
-  <div class="markdown level1 summary"><p>If <code>bucket_options</code> is given, then the sum of the values in <code>bucket_counts</code>
-must equal the value in <code>count</code>.  If <code>bucket_options</code> is not given, no
-<code>bucket_counts</code> fields may be given.</p>
-<p>Bucket counts are given in order under the numbering scheme described
-above (the underflow bucket has number 0; the finite buckets, if any,
-have numbers 1 through N-2; the overflow bucket has number N-1).</p>
-<p>The size of <code>bucket_counts</code> must be no greater than N as defined in
-<code>bucket_options</code>.</p>
-<p>Any suffix of trailing zero bucket_count fields may be omitted.</p>
+  <div class="markdown level1 summary"><p>The number of values in each bucket of the histogram, as described in
+<code>bucket_options</code>. If the distribution does not have a histogram, then omit
+this field. If there is a histogram, then the sum of the values in
+<code>bucket_counts</code> must equal the value in the <code>count</code> field of the
+distribution.</p>
+<p>If present, <code>bucket_counts</code> should contain N values, where N is the number
+of buckets specified in <code>bucket_options</code>. If you supply fewer than N
+values, the remaining values are assumed to be 0.</p>
+<p>The order of the values in <code>bucket_counts</code> follows the bucket numbering
+schemes described for the three bucket types. The first value must be the
+count for the underflow bucket (number 0). The next N-2 values are the
+counts for the finite buckets (number 1 through N-2). The N&apos;th value in
+<code>bucket_counts</code> is the count for the overflow bucket (number N-1).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -331,7 +358,8 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
   </table>
   <a id="Google_Api_Distribution_BucketOptions_" data-uid="Google.Api.Distribution.BucketOptions*"></a>
   <h4 id="Google_Api_Distribution_BucketOptions" data-uid="Google.Api.Distribution.BucketOptions">BucketOptions</h4>
-  <div class="markdown level1 summary"><p>Defines the histogram bucket boundaries.</p>
+  <div class="markdown level1 summary"><p>Defines the histogram bucket boundaries. If the distribution does not
+contain a histogram, then omit this field.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -355,7 +383,9 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
   </table>
   <a id="Google_Api_Distribution_Count_" data-uid="Google.Api.Distribution.Count*"></a>
   <h4 id="Google_Api_Distribution_Count" data-uid="Google.Api.Distribution.Count">Count</h4>
-  <div class="markdown level1 summary"><p>The number of values in the population. Must be non-negative.</p>
+  <div class="markdown level1 summary"><p>The number of values in the population. Must be non-negative. This value
+must equal the sum of the values in <code>bucket_counts</code> if a histogram is
+provided.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -396,6 +426,30 @@ have numbers 1 through N-2; the overflow bucket has number N-1).</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.Reflection.MessageDescriptor.html">MessageDescriptor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Api_Distribution_Exemplars_" data-uid="Google.Api.Distribution.Exemplars*"></a>
+  <h4 id="Google_Api_Distribution_Exemplars" data-uid="Google.Api.Distribution.Exemplars">Exemplars</h4>
+  <div class="markdown level1 summary"><p>Must be in increasing order of <code>value</code> field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;Distribution.Types.Exemplar&gt; Exemplars { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Api.Distribution.Types.Exemplar.html">Distribution.Types.Exemplar</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -476,7 +530,7 @@ must not be present if the <code>count</code> is zero.</p>
   <a id="Google_Api_Distribution_SumOfSquaredDeviation_" data-uid="Google.Api.Distribution.SumOfSquaredDeviation*"></a>
   <h4 id="Google_Api_Distribution_SumOfSquaredDeviation" data-uid="Google.Api.Distribution.SumOfSquaredDeviation">SumOfSquaredDeviation</h4>
   <div class="markdown level1 summary"><p>The sum of squared deviations from the mean of the values in the
-population.  For values x_i this is:</p>
+population. For values x_i this is:</p>
 <p>Sum[i=1..n]((x_i - mean)^2)</p>
 <p>Knuth, &quot;The Art of Computer Programming&quot;, Vol. 2, page 323, 3rd edition
 describes Welford&apos;s method for accumulating this sum in one pass.</p>

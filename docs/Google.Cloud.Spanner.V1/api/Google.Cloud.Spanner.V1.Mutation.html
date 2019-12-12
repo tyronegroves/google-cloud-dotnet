@@ -200,9 +200,9 @@ the write or transaction fails with error <code>ALREADY_EXISTS</code>.</p>
   </table>
   <a id="Google_Cloud_Spanner_V1_Mutation_InsertOrUpdate_" data-uid="Google.Cloud.Spanner.V1.Mutation.InsertOrUpdate*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Mutation_InsertOrUpdate" data-uid="Google.Cloud.Spanner.V1.Mutation.InsertOrUpdate">InsertOrUpdate</h4>
-  <div class="markdown level1 summary"><p>Like [insert][google.spanner.v1.Mutation.insert], except that if the row
-already exists, then its column values are overwritten with the ones
-provided. Any column values not explicitly written are preserved.</p>
+  <div class="markdown level1 summary"><p>Like [insert][google.spanner.v1.Mutation.insert], except that if the row already exists, then
+its column values are overwritten with the ones provided. Any
+column values not explicitly written are preserved.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -249,11 +249,14 @@ provided. Any column values not explicitly written are preserved.</p>
   </table>
   <a id="Google_Cloud_Spanner_V1_Mutation_Replace_" data-uid="Google.Cloud.Spanner.V1.Mutation.Replace*"></a>
   <h4 id="Google_Cloud_Spanner_V1_Mutation_Replace" data-uid="Google.Cloud.Spanner.V1.Mutation.Replace">Replace</h4>
-  <div class="markdown level1 summary"><p>Like [insert][google.spanner.v1.Mutation.insert], except that if the row
-already exists, it is deleted, and the column values provided are
-inserted instead. Unlike
-[insert_or_update][google.spanner.v1.Mutation.insert_or_update], this
-means any values not explicitly written become <code>NULL</code>.</p>
+  <div class="markdown level1 summary"><p>Like [insert][google.spanner.v1.Mutation.insert], except that if the row already exists, it is
+deleted, and the column values provided are inserted
+instead. Unlike [insert_or_update][google.spanner.v1.Mutation.insert_or_update], this means any values not
+explicitly written become <code>NULL</code>.</p>
+<p>In an interleaved table, if you create the child table with the
+<code>ON DELETE CASCADE</code> annotation, then replacing a parent row
+also deletes the child rows. Otherwise, you must delete the
+child rows before you replace the parent row.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

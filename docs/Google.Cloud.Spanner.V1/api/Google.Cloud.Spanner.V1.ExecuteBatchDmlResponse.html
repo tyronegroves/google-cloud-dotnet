@@ -73,24 +73,37 @@
   
   <h1 id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse" class="text-break">Class ExecuteBatchDmlResponse
   </h1>
-  <div class="markdown level0 summary"><p>The response for [ExecuteBatchDml][google.spanner.v1.Spanner.ExecuteBatchDml]. Contains a list
-of [ResultSet][google.spanner.v1.ResultSet], one for each DML statement that has successfully executed.
-If a statement fails, the error is returned as part of the response payload.
-Clients can determine whether all DML statements have run successfully, or if
-a statement failed, using one of the following approaches:</p>
+  <div class="markdown level0 summary"><p>The response for
+[ExecuteBatchDml][google.spanner.v1.Spanner.ExecuteBatchDml]. Contains a list
+of [ResultSet][google.spanner.v1.ResultSet] messages, one for each DML
+statement that has successfully executed, in the same order as the statements
+in the request. If a statement fails, the status in the response body
+identifies the cause of the failure.</p>
+<p>To check for DML statements that failed, use the following approach:</p>
 <ol>
-<li>Check if &apos;status&apos; field is OkStatus.</li>
-<li>Check if result_sets_size() equals the number of statements in
-[ExecuteBatchDmlRequest][Spanner.ExecuteBatchDmlRequest].</li>
+<li>Check the status in the response message. The
+[google.rpc.Code][google.rpc.Code] enum
+value <code>OK</code> indicates that all statements were executed successfully.</li>
+<li>If the status was not <code>OK</code>, check the number of result sets in the
+response. If the response contains <code>N</code>
+[ResultSet][google.spanner.v1.ResultSet] messages, then statement <code>N+1</code> in
+the request failed.</li>
 </ol>
-<p>Example 1: A request with 5 DML statements, all executed successfully.
-Result: A response with 5 ResultSets, one for each statement in the same
-order, and an OK status.</p>
-<p>Example 2: A request with 5 DML statements. The 3rd statement has a syntax
-error.
-Result: A response with 2 ResultSets, for the first 2 statements that
-run successfully, and a syntax error (INVALID_ARGUMENT) status. From
-result_set_size() client can determine that the 3rd statement has failed.</p>
+<p>Example 1:</p>
+<ul>
+<li>Request: 5 DML statements, all executed successfully.</li>
+<li>Response: 5 [ResultSet][google.spanner.v1.ResultSet] messages, with the
+status <code>OK</code>.</li>
+</ul>
+<p>Example 2:</p>
+<ul>
+<li>Request: 5 DML statements. The third statement has a syntax error.</li>
+<li>Response: 2 [ResultSet][google.spanner.v1.ResultSet] messages, and a syntax
+error (<code>INVALID_ARGUMENT</code>)
+status. The number of [ResultSet][google.spanner.v1.ResultSet] messages
+indicates that the third statement failed, and the fourth and fifth
+statements were not executed.</li>
+</ul>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -165,12 +178,14 @@ result_set_size() client can determine that the 3rd statement has failed.</p>
   </h3>
   <a id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse_ResultSets_" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.ResultSets*"></a>
   <h4 id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse_ResultSets" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.ResultSets">ResultSets</h4>
-  <div class="markdown level1 summary"><p>ResultSets, one for each statement in the request that ran successfully, in
-the same order as the statements in the request. Each [ResultSet][google.spanner.v1.ResultSet] will
-not contain any rows. The [ResultSetStats][google.spanner.v1.ResultSetStats] in each [ResultSet][google.spanner.v1.ResultSet] will
-contain the number of rows modified by the statement.</p>
-<p>Only the first ResultSet in the response contains a valid
-[ResultSetMetadata][google.spanner.v1.ResultSetMetadata].</p>
+  <div class="markdown level1 summary"><p>One [ResultSet][google.spanner.v1.ResultSet] for each statement in the
+request that ran successfully, in the same order as the statements in the
+request. Each [ResultSet][google.spanner.v1.ResultSet] does not contain any
+rows. The [ResultSetStats][google.spanner.v1.ResultSetStats] in each
+[ResultSet][google.spanner.v1.ResultSet] contain the number of rows
+modified by the statement.</p>
+<p>Only the first [ResultSet][google.spanner.v1.ResultSet] in the response
+contains valid [ResultSetMetadata][google.spanner.v1.ResultSetMetadata].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -194,7 +209,7 @@ contain the number of rows modified by the statement.</p>
   </table>
   <a id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse_Status_" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.Status*"></a>
   <h4 id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse_Status" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.Status">Status</h4>
-  <div class="markdown level1 summary"><p>If all DML statements are executed successfully, status will be OK.
+  <div class="markdown level1 summary"><p>If all DML statements are executed successfully, the status is <code>OK</code>.
 Otherwise, the error status of the first failed statement.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

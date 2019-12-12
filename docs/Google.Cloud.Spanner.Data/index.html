@@ -65,18 +65,14 @@
 <p><code>Google.Cloud.Spanner.Data</code> is the ADO.NET provider for Cloud Spanner. It is the recommended
 package for regular Cloud Spanner database access from .NET.</p>
 <p>Note:
-This documentation is for version <code>2.1.0-beta01</code> of the library.
+This documentation is for version <code>2.1.0</code> of the library.
 Some samples may not work with other versions.</p>
 <p>The <a href="../Google.Cloud.Spanner.Admin.Instance.V1/">Google.Cloud.Spanner.Admin.Instance.V1</a> package
 should be used for Cloud Spanner instance administration, such as creating or deleting instances.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Spanner.Data</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
-Please ensure you enable pre-release packages (for example, in the
-Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
-box). Some of the following samples might only work with the latest 
-pre-release version (<code>2.1.0-beta01</code>) of <code>Google.Cloud.Spanner.Data</code>.</p>
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -137,14 +133,28 @@ rows matching a query, or update rows to set the value of one column equal to an
 {
     await connection.OpenAsync();
 
-    SpannerCommand cmd = connection.CreateDmlCommand(
-        &quot;UPDATE TestTable SET StringValue=&#39;Updated&#39; WHERE Int64Value=@value&quot;);
-    cmd.Parameters.Add(&quot;value&quot;, SpannerDbType.Int64, 10);
-    int rowsAffected = await cmd.ExecuteNonQueryAsync();
-    Console.WriteLine($&quot;{rowsAffected} rows updated...&quot;);
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    // Please be aware that the whole unit of work needs to be prepared
+    // to be called more than once.
+    await connection.RunWithRetriableTransactionAsync(async transaction =&gt;
+    {
+        SpannerCommand cmd = connection.CreateDmlCommand(
+            &quot;UPDATE TestTable SET StringValue=&#39;Updated&#39; WHERE Int64Value=@value&quot;);
+        cmd.Parameters.Add(&quot;value&quot;, SpannerDbType.Int64, 10);
+        cmd.Transaction = transaction;
+        int rowsAffected = await cmd.ExecuteNonQueryAsync();
+        Console.WriteLine($&quot;{rowsAffected} rows updated...&quot;);
+    });
 }
-</code></pre><p>If you execute DML within a transaction, queries are able to observe the changes already made by DML statements,
-and later DML statements can use the values created or updated by earlier ones.</p>
+</code></pre><p>It is recommended that you execute DML statements within a retriable transaction.
+Queries within the same transaction are able to observe the changes already made by DML statements,
+and later DML statements can use the values created or updated by earlier ones.
+Also, if the transaction is aborted at any point, the whole unit of work will be retried automatically. 
+Note that the code executing within a retriable transaction needs to be prepared to be called more
+than once.
+Please read the <a href="https://cloud.google.com/spanner/docs/reference/rest/v1/TransactionOptions">Cloud Spanner user documentation</a>
+for details on when and why transactions can be aborted.</p>
 <p>Some DML statements can be executed in a <em>partitioned</em> manner, enabling an efficient
 update of large data sets. <code>ExecutePartitionedUpdate</code> or <code>ExecutePartitionedUpdateAsync</code>:</p>
 <pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
@@ -167,27 +177,40 @@ the restrictions.</p>
 {
     await connection.OpenAsync();
 
-    SpannerBatchCommand cmd = connection.CreateBatchDmlCommand();
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    // Please be aware that the whole unit of work needs to be prepared
+    // to be called more than once.
+    await connection.RunWithRetriableTransactionAsync(async (transaction) =&gt;
+    {
+        SpannerBatchCommand cmd = transaction.CreateBatchDmlCommand();
 
-    cmd.Add(
-        &quot;UPDATE TestTable SET StringValue=&#39;Updated&#39; WHERE Int64Value=@value&quot;,
-        new SpannerParameterCollection { { &quot;value&quot;, SpannerDbType.Int64, 5 } });
+        cmd.Add(
+            &quot;UPDATE TestTable SET StringValue=&#39;Updated&#39; WHERE Int64Value=@value&quot;,
+            new SpannerParameterCollection { { &quot;value&quot;, SpannerDbType.Int64, 5 } });
 
-    cmd.Add(
-        &quot;DELETE FROM TestTable WHERE Int64Value=@value&quot;,
-        new SpannerParameterCollection { { &quot;value&quot;, SpannerDbType.Int64, 250 } });
+        cmd.Add(
+            &quot;DELETE FROM TestTable WHERE Int64Value=@value&quot;,
+            new SpannerParameterCollection { { &quot;value&quot;, SpannerDbType.Int64, 250 } });
 
-    IEnumerable&lt;long&gt; rowsAffected = await cmd.ExecuteNonQueryAsync();
-    Console.WriteLine($&quot;{rowsAffected.ElementAt(0)} rows updated...&quot;);
-    Console.WriteLine($&quot;{rowsAffected.ElementAt(1)} rows deleted...&quot;);
+        IEnumerable&lt;long&gt; rowsAffected = await cmd.ExecuteNonQueryAsync();
+        Console.WriteLine($&quot;{rowsAffected.ElementAt(0)} rows updated...&quot;);
+        Console.WriteLine($&quot;{rowsAffected.ElementAt(1)} rows deleted...&quot;);
+    });
 }
 </code></pre><p>Statements are executed sequentally in the same order they are provided. Changes made by one statement are
 visible to all subsequent statements in the batch.</p>
 <p>When one of the statemens in the batch fails, execution is halted and all subsequent statements are not
 executed. A <code>SpannerBatchNonQueryException</code> will be thrown that contains both information about the error
 and the number of rows affected by each of the statements that executed before the failed one. If you are executing
-the batch DML command inside a transaction you can simply commit the transaction when <code>SpannerBatchNonQueryException</code>
-is thrown if partial success is acceptable in your application.</p>
+the batch DML command inside a non-retriable transaction you can simply commit the transaction when <code>SpannerBatchNonQueryException</code>
+is thrown if partial success is acceptable in your application.
+It is recommended to run Batch DML within a retriable transaction. If the transaction
+aborts the whole unit of work will be retried automatically.
+Note that the code executing within a retriable transaction needs to be prepared to be called more
+than once.
+Please read the <a href="https://cloud.google.com/spanner/docs/reference/rest/v1/TransactionOptions">Cloud Spanner user documentation</a>
+for details on when and why transactions can be aborted.</p>
 <h3 id="direct-row-modifications">Direct row modifications</h3>
 <p>The following operations are supported for direct row modification:</p>
 <ul>
@@ -204,20 +227,27 @@ The command can be reused to perform the same kind of operation for multiple row
 {
     await connection.OpenAsync();
 
-    SpannerCommand cmd = connection.CreateInsertCommand(&quot;TestTable&quot;);
-    SpannerParameter keyParameter = cmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String);
-    SpannerParameter stringValueParameter = cmd.Parameters.Add(&quot;StringValue&quot;, SpannerDbType.String);
-    SpannerParameter int64ValueParameter = cmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64);
-
-    // This executes 5 distinct transactions with one row written per transaction.
-    for (int i = 0; i &lt; 5; i++)
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    await connection.RunWithRetriableTransactionAsync(async transaction =&gt;
     {
-        keyParameter.Value = Guid.NewGuid().ToString(&quot;N&quot;);
-        stringValueParameter.Value = $&quot;StringValue{i}&quot;;
-        int64ValueParameter.Value = i;
-        int rowsAffected = await cmd.ExecuteNonQueryAsync();
-        Console.WriteLine($&quot;{rowsAffected} rows written...&quot;);
-    }
+        SpannerCommand cmd = connection.CreateInsertCommand(&quot;TestTable&quot;);
+        SpannerParameter keyParameter = cmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String);
+        SpannerParameter stringValueParameter = cmd.Parameters.Add(&quot;StringValue&quot;, SpannerDbType.String);
+        SpannerParameter int64ValueParameter = cmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64);
+        cmd.Transaction = transaction;
+
+        // This executes 5 distinct insert commands using the retriable transaction.
+        // The mutations will be effective once the transaction has committed successfully.
+        for (int i = 0; i &lt; 5; i++)
+        {
+            keyParameter.Value = Guid.NewGuid().ToString(&quot;N&quot;);
+            stringValueParameter.Value = $&quot;StringValue{i}&quot;;
+            int64ValueParameter.Value = i;
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            Console.WriteLine($&quot;{rowsAffected} rows written...&quot;);
+        }
+    });
 }
 </code></pre><p>This sample reads three keys using a <code>SELECT</code> command, updates a row using an <code>UPDATE</code> command, then
 deletes a row using a <code>DELETE</code> command:</p>
@@ -225,31 +255,44 @@ deletes a row using a <code>DELETE</code> command:</p>
 {
     await connection.OpenAsync();
 
-    // Read the first two keys in the database.
-    List&lt;string&gt; keys = new List&lt;string&gt;();
-    SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
-    using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    // Please be aware that the whole unit of work needs to be prepared
+    // to be called more than once.
+    await connection.RunWithRetriableTransactionAsync(async (transaction) =&gt;
     {
-        while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+
+        // Read the first two keys in the database.
+        List&lt;string&gt; keys = new List&lt;string&gt;();
+        SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
+        using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
         {
-            keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+            {
+                keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            }
         }
-    }
 
-    // Update the Int64Value of keys[0]
-    // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
-    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
-    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
-    await updateCmd.ExecuteNonQueryAsync();
+        // Update the Int64Value of keys[0]
+        // Include the primary key and update columns.
+        SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+        updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+        updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
+        await updateCmd.ExecuteNonQueryAsync();
 
-    // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
-    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
-    await deleteCmd.ExecuteNonQueryAsync();
-}
+        // Delete row for keys[1]
+        SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+        deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
+        await deleteCmd.ExecuteNonQueryAsync();
+    });
 </code></pre><p>When direct row modifications are performed in a transaction, they are only applied when the transaction is committed.
-Queries within the transaction will not observe any changes.</p>
+Queries within the transaction will not observe any changes.
+It is recommended to run direct row modifications within a retriable transaction. If the transaction
+aborts the whole unit of work will be retried automatically.
+Note that the code executing within a retriable transaction needs to be prepared to be called more
+than once.
+Please read the <a href="https://cloud.google.com/spanner/docs/reference/rest/v1/TransactionOptions">Cloud Spanner user documentation</a>
+for details on when and why transactions can be aborted.</p>
 <h3 id="using-a-commit-timestamp">Using a commit timestamp</h3>
 <p>Spanner allows you to write a commit timestamp for insert and update
 operations.</p>
@@ -268,25 +311,43 @@ parameter, as shown below.</p>
         Name STRING(MAX) NOT NULL,
         Email STRING(MAX),
         Deleted BOOL NOT NULL,
-      ) PRIMARY KEY(Id, CommitTs DESC)&quot;;
+        ) PRIMARY KEY(Id, CommitTs DESC)&quot;;
 
     await connection.CreateDdlCommand(createTableStatement).ExecuteNonQueryAsync();
 
-    // Insert a first row
+    // Create a command for inserting rows.
     SpannerCommand cmd = connection.CreateInsertCommand(&quot;UsersHistory&quot;,
         new SpannerParameterCollection
         {
-            { &quot;Id&quot;, SpannerDbType.Int64, 10L },
+            { &quot;Id&quot;, SpannerDbType.Int64 },
             { &quot;CommitTs&quot;, SpannerDbType.Timestamp, SpannerParameter.CommitTimestamp },
-            { &quot;Name&quot;, SpannerDbType.String, &quot;Demo 1&quot; },
-            { &quot;Deleted&quot;, SpannerDbType.Bool, false }
+            { &quot;Name&quot;, SpannerDbType.String },
+            { &quot;Deleted&quot;, SpannerDbType.Bool , false}
         });
-    int rowsAffected = await cmd.ExecuteNonQueryAsync();
 
-    // Insert a second row
-    cmd.Parameters[&quot;Id&quot;].Value = 11L;
-    cmd.Parameters[&quot;Name&quot;].Value = &quot;Demo 2&quot;;
-    rowsAffected += await cmd.ExecuteNonQueryAsync();
+    int rowsAffected = 0;
+
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    // Please be aware that the whole unit of work needs to be prepared
+    // to be called more than once.
+    await connection.RunWithRetriableTransactionAsync(async transaction =&gt;
+    {
+        // Insert a first row
+        cmd.Parameters[&quot;Id&quot;].Value = 10L;
+        cmd.Parameters[&quot;Name&quot;].Value = &quot;Demo 1&quot;;
+        cmd.Transaction = transaction;
+        rowsAffected += await cmd.ExecuteNonQueryAsync();
+    });
+
+    await connection.RunWithRetriableTransactionAsync(async transaction =&gt;
+    {
+        // Insert a second row
+        cmd.Parameters[&quot;Id&quot;].Value = 11L;
+        cmd.Parameters[&quot;Name&quot;].Value = &quot;Demo 2&quot;;
+        rowsAffected += await cmd.ExecuteNonQueryAsync();
+    });
+
     Console.WriteLine($&quot;{rowsAffected} rows written...&quot;);
 
     // Display the inserted values
@@ -311,91 +372,43 @@ for more information about commit timestamps.</p>
 <p>Cloud Spanner is fully ACID compliant.</p>
 <p>Retries should be implemented at the transaction level (as opposed to individual call level)
 because there is a chance in high stress situations that a Cloud Spanner session (transaction)
-can be canceled due to causing a deadlock. In this case, the entire transaction should be
-retried and run on a new session.</p>
-<p>Use the extension method IsTransientSpannerFault() on Exception to create your detection
-strategy for the TransientFaultApplication Block.</p>
-<pre><code class="lang-cs">private class SpannerFaultDetectionStrategy : ITransientErrorDetectionStrategy
+can be aborted due to causing a deadlock. In this case, the entire transaction should be
+retried. The methods <code>SpannerConnection.RunWithRetriableTransactionAsync(...)</code> will take care of
+automatically retrying the entire callback passed as a paremeter using a fresh transaction
+if previous attempts aborted.</p>
+<ul>
+<li>The callback doesn&#39;t need to handle the transaction lifecycle.</li>
+<li>The callback needs to set the transaction received on all the commands it creates.</li>
+<li>The callback might be called more than once, so the code should be written bearing this in mind.</li>
+</ul>
+<p>Please read the <a href="https://cloud.google.com/spanner/docs/reference/rest/v1/TransactionOptions">Cloud Spanner user documentation</a>
+for details on when and why transactions can be aborted.</p>
+<pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
 {
-    /// &lt;inheritdoc /&gt;
-    public bool IsTransient(Exception ex) =&gt; ex.IsTransientSpannerFault();
+    await connection.OpenAsync();
+
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    await connection.RunWithRetriableTransactionAsync(async transaction =&gt;
+    {
+        SpannerCommand cmd = connection.CreateInsertCommand(&quot;TestTable&quot;);
+        SpannerParameter keyParameter = cmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String);
+        SpannerParameter stringValueParameter = cmd.Parameters.Add(&quot;StringValue&quot;, SpannerDbType.String);
+        SpannerParameter int64ValueParameter = cmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64);
+        cmd.Transaction = transaction;
+
+        // This executes 5 distinct insert commands using the retriable transaction.
+        // The mutations will be effective once the transaction has committed successfully.
+        for (int i = 0; i &lt; 5; i++)
+        {
+            keyParameter.Value = Guid.NewGuid().ToString(&quot;N&quot;);
+            stringValueParameter.Value = $&quot;StringValue{i}&quot;;
+            int64ValueParameter.Value = i;
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            Console.WriteLine($&quot;{rowsAffected} rows written...&quot;);
+        }
+    });
 }
-</code></pre><p> You should execute the entire transaction within a RetryPolicy. Generally, we recommend
- using exponential backoff as shown below.</p>
-<pre><code class="lang-cs">RetryPolicy&lt;SpannerFaultDetectionStrategy&gt; retryPolicy =
-    new RetryPolicy&lt;SpannerFaultDetectionStrategy&gt;(RetryStrategy.DefaultExponential);
-
-await retryPolicy.ExecuteAsync(
-    async () =&gt;
-    {
-        using (SpannerConnection connection = new SpannerConnection(connectionString))
-        {
-            await connection.OpenAsync();
-
-            using (SpannerTransaction transaction = await connection.BeginTransactionAsync())
-            {
-                SpannerCommand cmd = connection.CreateInsertCommand(
-                    &quot;TestTable&quot;, new SpannerParameterCollection
-                    {
-                        {&quot;Key&quot;, SpannerDbType.String},
-                        {&quot;StringValue&quot;, SpannerDbType.String},
-                        {&quot;Int64Value&quot;, SpannerDbType.Int64}
-                    });
-                cmd.Transaction = transaction;
-
-                // This executes a single transactions with alls row written at once during CommitAsync().
-                // If a transient fault occurs, this entire method is re-run.
-                for (int i = 0; i &lt; 5; i++)
-                {
-                    cmd.Parameters[&quot;Key&quot;].Value = Guid.NewGuid().ToString(&quot;N&quot;);
-                    cmd.Parameters[&quot;StringValue&quot;].Value = $&quot;StringValue{i}&quot;;
-                    cmd.Parameters[&quot;Int64Value&quot;].Value = i;
-                    await cmd.ExecuteNonQueryAsync();
-                }
-
-                await transaction.CommitAsync();
-            }
-        }
-    });
-</code></pre><h2 id="transactionscope-support-net-45-single-resource-only">TransactionScope support (.NET 4.5+, Single resource only)</h2>
-<p>In addition to supporting setting Transaction on individual commands, Spanner also supports
-TransactionScope and implicit transactions given that only a single resource is involved.</p>
-<p>Spanner does not support public two phase commit to commit multiple resources in a
-single transaction.</p>
-<pre><code class="lang-cs">RetryPolicy&lt;SpannerFaultDetectionStrategy&gt; retryPolicy =
-    new RetryPolicy&lt;SpannerFaultDetectionStrategy&gt;(RetryStrategy.DefaultExponential);
-
-await retryPolicy.ExecuteAsync(
-    async () =&gt;
-    {
-        using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-        {
-            using (SpannerConnection connection = new SpannerConnection(connectionString))
-            {
-                await connection.OpenAsync();
-
-                SpannerCommand cmd = connection.CreateInsertCommand(
-                    &quot;TestTable&quot;, new SpannerParameterCollection
-                    {
-                        {&quot;Key&quot;, SpannerDbType.String},
-                        {&quot;StringValue&quot;, SpannerDbType.String},
-                        {&quot;Int64Value&quot;, SpannerDbType.Int64}
-                    });
-
-                // This executes a single transactions with alls row written at once during scope.Complete().
-                // If a transient fault occurs, this entire method is re-run.
-                for (int i = 0; i &lt; 5; i++)
-                {
-                    cmd.Parameters[&quot;Key&quot;].Value = Guid.NewGuid().ToString(&quot;N&quot;);
-                    cmd.Parameters[&quot;StringValue&quot;].Value = $&quot;StringValue{i}&quot;;
-                    cmd.Parameters[&quot;Int64Value&quot;].Value = i;
-                    await cmd.ExecuteNonQueryAsync();
-                }
-
-                scope.Complete();
-            }
-        }
-    });
 </code></pre><h2 id="session-pool-management">Session pool management</h2>
 <p><code>Google.Cloud.Spanner.Data</code> manages Spanner sessions for you via a
 session pool. The pool has various <a href="configuration.html">configuration

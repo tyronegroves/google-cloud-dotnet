@@ -83,7 +83,7 @@ appropriately.</p>
 <h2 id="session-pool-options-explained">Session pool options explained</h2>
 <p><code>SessionPoolOptions</code> exposes the following properties:</p>
 <p><strong>MaximumActiveSessions</strong></p>
-<p>Default value: 100</p>
+<p>Default value: 400</p>
 <p>The maximum number of sessions that can be active per database. An
 active session is one that has been acquired but not yet released
 back to the pool. Broadly speaking, this is equivalent to the number
@@ -92,7 +92,7 @@ to perform.</p>
 <p>Applications may wish to change this setting if they require high
 levels of concurrency.</p>
 <p><strong>MinimumPooledSessions</strong></p>
-<p>Default value: 10</p>
+<p>Default value: 100</p>
 <p>The minimum number of sessions to maintain in the pool of available
 sessions, on a per-database basis. If the number of pooled sessions
 falls below this number, more sessions are added automatically,
@@ -169,12 +169,20 @@ when the application is heavily loaded.</p>
 server, including retries. This setting is applied to calls to
 create, refresh and delete sessions, as well as beginning
 transactions.</p>
-<p>Applications rarely need to change this setting</p>
+<p>Applications rarely need to change this setting.</p>
+<p><strong>CreateSessionMaximumBatchSize</strong></p>
+<p>Default value: 5</p>
+<p>Sessions created are associated to the gRPC channel they are created on, so
+all sessions created in a batch are associated to the same gRPC channel.
+Batch size should be limited so as not to overload a given channel.
+If the sessions needing to be created at any given time are more than this value
+then multiple batches of this size or less will be created.</p>
+<p>Applications rarely need to change this setting.</p>
 <p><strong>MaximumConcurrentSessionCreates</strong></p>
-<p>Default value: 10</p>
+<p>Default value: 50</p>
 <p>Spanner has limits on the number of sessions that can be created
 concurrently without affecting performance. The session pool uses
-this setting to throttle the number of concurrent session creation
+this setting to throttle the number of concurrent sessions batch creation
 operations, across all databases.</p>
 <p>Applications rarely need to change this setting.</p>
 <p><strong>SessionLabels</strong></p>

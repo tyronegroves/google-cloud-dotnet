@@ -262,7 +262,7 @@ argument.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Grpc.Core.ChannelCredentials.html">ChannelCredentials</a></td>
+        <td><span class="xref">Grpc.Core.ChannelCredentials</span></td>
         <td><span class="parametername">credentials</span></td>
         <td><p>An optional credential for operations to be performed on the Spanner database.  May be null.</p>
 </td>
@@ -849,45 +849,6 @@ This method is thread safe.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_BeginTransactionAsync_System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">RetryPolicy&lt;SpannerFaultDetectionStrategy&gt; retryPolicy =
-    new RetryPolicy&lt;SpannerFaultDetectionStrategy&gt;(RetryStrategy.DefaultExponential);
-
-await retryPolicy.ExecuteAsync(
-    async () =&gt;
-    {
-        using (SpannerConnection connection = new SpannerConnection(connectionString))
-        {
-            await connection.OpenAsync();
-
-            using (SpannerTransaction transaction = await connection.BeginTransactionAsync())
-            {
-                SpannerCommand cmd = connection.CreateInsertCommand(
-                    &quot;TestTable&quot;, new SpannerParameterCollection
-                    {
-                        {&quot;Key&quot;, SpannerDbType.String},
-                        {&quot;StringValue&quot;, SpannerDbType.String},
-                        {&quot;Int64Value&quot;, SpannerDbType.Int64}
-                    });
-                cmd.Transaction = transaction;
-
-                // This executes a single transactions with alls row written at once during CommitAsync().
-                // If a transient fault occurs, this entire method is re-run.
-                for (int i = 0; i &lt; 5; i++)
-                {
-                    cmd.Parameters[&quot;Key&quot;].Value = Guid.NewGuid().ToString(&quot;N&quot;);
-                    cmd.Parameters[&quot;StringValue&quot;].Value = $&quot;StringValue{i}&quot;;
-                    cmd.Parameters[&quot;Int64Value&quot;].Value = i;
-                    await cmd.ExecuteNonQueryAsync();
-                }
-
-                await transaction.CommitAsync();
-            }
-        }
-    });
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_ChangeDatabase_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.ChangeDatabase*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_ChangeDatabase_System_String_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.ChangeDatabase(System.String)">ChangeDatabase(String)</h4>
   <div class="markdown level1 summary"></div>
@@ -1152,29 +1113,36 @@ This method is thread safe.</p>
 {
     await connection.OpenAsync();
 
-    // Read the first two keys in the database.
-    List&lt;string&gt; keys = new List&lt;string&gt;();
-    SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
-    using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    // Please be aware that the whole unit of work needs to be prepared
+    // to be called more than once.
+    await connection.RunWithRetriableTransactionAsync(async (transaction) =&gt;
     {
-        while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+
+        // Read the first two keys in the database.
+        List&lt;string&gt; keys = new List&lt;string&gt;();
+        SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
+        using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
         {
-            keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+            {
+                keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            }
         }
-    }
 
-    // Update the Int64Value of keys[0]
-    // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
-    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
-    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
-    await updateCmd.ExecuteNonQueryAsync();
+        // Update the Int64Value of keys[0]
+        // Include the primary key and update columns.
+        SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+        updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+        updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
+        await updateCmd.ExecuteNonQueryAsync();
 
-    // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
-    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
-    await deleteCmd.ExecuteNonQueryAsync();
-}
+        // Delete row for keys[1]
+        SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+        deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
+        await deleteCmd.ExecuteNonQueryAsync();
+    });
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateDmlCommand_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateDmlCommand*"></a>
@@ -1285,44 +1253,6 @@ May be null.</p>
       </tr>
     </tbody>
   </table>
-  <div>
-  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateInsertCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">RetryPolicy&lt;SpannerFaultDetectionStrategy&gt; retryPolicy =
-    new RetryPolicy&lt;SpannerFaultDetectionStrategy&gt;(RetryStrategy.DefaultExponential);
-
-await retryPolicy.ExecuteAsync(
-    async () =&gt;
-    {
-        using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-        {
-            using (SpannerConnection connection = new SpannerConnection(connectionString))
-            {
-                await connection.OpenAsync();
-
-                SpannerCommand cmd = connection.CreateInsertCommand(
-                    &quot;TestTable&quot;, new SpannerParameterCollection
-                    {
-                        {&quot;Key&quot;, SpannerDbType.String},
-                        {&quot;StringValue&quot;, SpannerDbType.String},
-                        {&quot;Int64Value&quot;, SpannerDbType.Int64}
-                    });
-
-                // This executes a single transactions with alls row written at once during scope.Complete().
-                // If a transient fault occurs, this entire method is re-run.
-                for (int i = 0; i &lt; 5; i++)
-                {
-                    cmd.Parameters[&quot;Key&quot;].Value = Guid.NewGuid().ToString(&quot;N&quot;);
-                    cmd.Parameters[&quot;StringValue&quot;].Value = $&quot;StringValue{i}&quot;;
-                    cmd.Parameters[&quot;Int64Value&quot;].Value = i;
-                    await cmd.ExecuteNonQueryAsync();
-                }
-
-                scope.Complete();
-            }
-        }
-    });
-</code></pre></div>
-  </div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateInsertOrUpdateCommand_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateInsertOrUpdateCommand*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_CreateInsertOrUpdateCommand_System_String_Google_Cloud_Spanner_Data_SpannerParameterCollection_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateInsertOrUpdateCommand(System.String,Google.Cloud.Spanner.Data.SpannerParameterCollection)">CreateInsertOrUpdateCommand(String, SpannerParameterCollection)</h4>
   <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerCommand.html">SpannerCommand</a> to insert or update rows into a Spanner database table.
@@ -1433,29 +1363,36 @@ that correspond to the parameters used in the SQL query. May be null.</p>
 {
     await connection.OpenAsync();
 
-    // Read the first two keys in the database.
-    List&lt;string&gt; keys = new List&lt;string&gt;();
-    SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
-    using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    // Please be aware that the whole unit of work needs to be prepared
+    // to be called more than once.
+    await connection.RunWithRetriableTransactionAsync(async (transaction) =&gt;
     {
-        while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+
+        // Read the first two keys in the database.
+        List&lt;string&gt; keys = new List&lt;string&gt;();
+        SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
+        using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
         {
-            keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+            {
+                keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            }
         }
-    }
 
-    // Update the Int64Value of keys[0]
-    // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
-    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
-    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
-    await updateCmd.ExecuteNonQueryAsync();
+        // Update the Int64Value of keys[0]
+        // Include the primary key and update columns.
+        SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+        updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+        updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
+        await updateCmd.ExecuteNonQueryAsync();
 
-    // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
-    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
-    await deleteCmd.ExecuteNonQueryAsync();
-}
+        // Delete row for keys[1]
+        SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+        deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
+        await deleteCmd.ExecuteNonQueryAsync();
+    });
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_CreateUpdateCommand_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.CreateUpdateCommand*"></a>
@@ -1517,29 +1454,36 @@ May be null.</p>
 {
     await connection.OpenAsync();
 
-    // Read the first two keys in the database.
-    List&lt;string&gt; keys = new List&lt;string&gt;();
-    SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
-    using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    // Please be aware that the whole unit of work needs to be prepared
+    // to be called more than once.
+    await connection.RunWithRetriableTransactionAsync(async (transaction) =&gt;
     {
-        while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+
+        // Read the first two keys in the database.
+        List&lt;string&gt; keys = new List&lt;string&gt;();
+        SpannerCommand selectCmd = connection.CreateSelectCommand(&quot;SELECT * FROM TestTable&quot;);
+        using (SpannerDataReader reader = await selectCmd.ExecuteReaderAsync())
         {
-            keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            while (keys.Count &lt; 3 &amp;&amp; await reader.ReadAsync())
+            {
+                keys.Add(reader.GetFieldValue&lt;string&gt;(&quot;Key&quot;));
+            }
         }
-    }
 
-    // Update the Int64Value of keys[0]
-    // Include the primary key and update columns.
-    SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
-    updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
-    updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
-    await updateCmd.ExecuteNonQueryAsync();
+        // Update the Int64Value of keys[0]
+        // Include the primary key and update columns.
+        SpannerCommand updateCmd = connection.CreateUpdateCommand(&quot;TestTable&quot;);
+        updateCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[0]);
+        updateCmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64, 0L);
+        await updateCmd.ExecuteNonQueryAsync();
 
-    // Delete row for keys[1]
-    SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
-    deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
-    await deleteCmd.ExecuteNonQueryAsync();
-}
+        // Delete row for keys[1]
+        SpannerCommand deleteCmd = connection.CreateDeleteCommand(&quot;TestTable&quot;);
+        deleteCmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String, keys[1]);
+        await deleteCmd.ExecuteNonQueryAsync();
+    });
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_Dispose_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.Dispose*"></a>
@@ -1803,6 +1747,278 @@ the created Cloud Spanner transaction to be a read-only transaction with the giv
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">System.Data.Common.DbConnection.OpenAsync(System.Threading.CancellationToken)</span></div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransaction*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransaction_System_Action_Google_Cloud_Spanner_Data_SpannerTransaction__" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransaction(System.Action{Google.Cloud.Spanner.Data.SpannerTransaction})">RunWithRetriableTransaction(Action&lt;SpannerTransaction&gt;)</h4>
+  <div class="markdown level1 summary"><p>Executes a read-write transaction, with retries as necessary.
+The work to perform in each transaction attempt is defined by <code data-dev-comment-type="paramref" class="paramref">work</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RunWithRetriableTransaction(Action&lt;SpannerTransaction&gt; work)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>&gt;</td>
+        <td><span class="parametername">work</span></td>
+        <td><p>The work to perform in each transaction attempt.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransaction_System_Action_Google_Cloud_Spanner_Data_SpannerTransaction___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code data-dev-comment-type="paramref" class="paramref">work</code> will be fully retried whenever the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>
+    that it receives as a parameter aborts. <code data-dev-comment-type="paramref" class="paramref">work</code> won&apos;t be retried if any other errors occur.
+<code data-dev-comment-type="paramref" class="paramref">work</code> must be prepared to be called more than once.
+A new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a> will be passed to <code data-dev-comment-type="paramref" class="paramref">work</code>
+each time it is rerun.
+<code data-dev-comment-type="paramref" class="paramref">work</code> doesn&apos;t need to handle the lifecycle of the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>,
+it will be automatically committed after <code data-dev-comment-type="paramref" class="paramref">work</code> has finished or rollbacked if an 
+<span class="xref">System.Exception</span> (other than because the transaction aborted) is thrown by <code data-dev-comment-type="paramref" class="paramref">work</code>.</p>
+</div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransaction_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransaction*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransaction__1_System_Func_Google_Cloud_Spanner_Data_SpannerTransaction___0__" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransaction``1(System.Func{Google.Cloud.Spanner.Data.SpannerTransaction,``0})">RunWithRetriableTransaction&lt;TResult&gt;(Func&lt;SpannerTransaction, TResult&gt;)</h4>
+  <div class="markdown level1 summary"><p>Executes a read-write transaction, with retries as necessary.
+The work to perform in each transaction attempt is defined by <code data-dev-comment-type="paramref" class="paramref">work</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TResult RunWithRetriableTransaction&lt;TResult&gt;(Func&lt;SpannerTransaction, TResult&gt; work)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>, TResult&gt;</td>
+        <td><span class="parametername">work</span></td>
+        <td><p>The work to perform in each transaction attempt.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TResult</span></td>
+        <td><p>The value returned by <code data-dev-comment-type="paramref" class="paramref">work</code> if the transaction commits successfully.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransaction__1_System_Func_Google_Cloud_Spanner_Data_SpannerTransaction___0___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code data-dev-comment-type="paramref" class="paramref">work</code> will be fully retried whenever the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>
+    that it receives as a parameter aborts. <code data-dev-comment-type="paramref" class="paramref">work</code> won&apos;t be retried if any other errors occur.
+<code data-dev-comment-type="paramref" class="paramref">work</code> must be prepared to be called more than once.
+A new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a> will be passed to <code data-dev-comment-type="paramref" class="paramref">work</code>
+each time it is rerun.
+<code data-dev-comment-type="paramref" class="paramref">work</code> doesn&apos;t need to handle the lifecycle of the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>,
+it will be automatically committed after <code data-dev-comment-type="paramref" class="paramref">work</code> has finished or rollbacked if an 
+<span class="xref">System.Exception</span> (other than because the transaction aborted) is thrown by <code data-dev-comment-type="paramref" class="paramref">work</code>.</p>
+</div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransactionAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransactionAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransactionAsync_System_Func_Google_Cloud_Spanner_Data_SpannerTransaction_System_Threading_Tasks_Task__System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransactionAsync(System.Func{Google.Cloud.Spanner.Data.SpannerTransaction,System.Threading.Tasks.Task},System.Threading.CancellationToken)">RunWithRetriableTransactionAsync(Func&lt;SpannerTransaction, Task&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Executes a read-write transaction, with retries as necessary.
+The work to perform in each transaction attempt is defined by <code data-dev-comment-type="paramref" class="paramref">asyncWork</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task RunWithRetriableTransactionAsync(Func&lt;SpannerTransaction, Task&gt; asyncWork, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>, <span class="xref">System.Threading.Tasks.Task</span>&gt;</td>
+        <td><span class="parametername">asyncWork</span></td>
+        <td><p>The work to perform in each transaction attempt.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>An optional token for canceling the call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A task that when completed will signal that the work is done.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransactionAsync_System_Func_Google_Cloud_Spanner_Data_SpannerTransaction_System_Threading_Tasks_Task__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code data-dev-comment-type="paramref" class="paramref">asyncWork</code> will be fully retried whenever the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>
+    that it receives as a parameter aborts. <code data-dev-comment-type="paramref" class="paramref">asyncWork</code> won&apos;t be retried if any other errors occur.
+<code data-dev-comment-type="paramref" class="paramref">asyncWork</code> must be prepared to be called more than once.
+A new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a> will be passed to <code data-dev-comment-type="paramref" class="paramref">asyncWork</code>
+each time it is rerun.
+<code data-dev-comment-type="paramref" class="paramref">asyncWork</code> doesn&apos;t need to handle the lifecycle of the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>,
+it will be automatically committed after <code data-dev-comment-type="paramref" class="paramref">asyncWork</code> has finished or rollbacked if an 
+<span class="xref">System.Exception</span> (other than because the transaction commit aborted) is thrown by <code data-dev-comment-type="paramref" class="paramref">asyncWork</code>.</p>
+</div>
+  <div>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransactionAsync_System_Func_Google_Cloud_Spanner_Data_SpannerTransaction_System_Threading_Tasks_Task__System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">using (SpannerConnection connection = new SpannerConnection(connectionString))
+{
+    await connection.OpenAsync();
+
+    // If the transaction is aborted, RunWithRetriableTransactionAsync will
+    // retry the whole unit of work with a fresh transaction each time.
+    await connection.RunWithRetriableTransactionAsync(async transaction =&gt;
+    {
+        SpannerCommand cmd = connection.CreateInsertCommand(&quot;TestTable&quot;);
+        SpannerParameter keyParameter = cmd.Parameters.Add(&quot;Key&quot;, SpannerDbType.String);
+        SpannerParameter stringValueParameter = cmd.Parameters.Add(&quot;StringValue&quot;, SpannerDbType.String);
+        SpannerParameter int64ValueParameter = cmd.Parameters.Add(&quot;Int64Value&quot;, SpannerDbType.Int64);
+        cmd.Transaction = transaction;
+
+        // This executes 5 distinct insert commands using the retriable transaction.
+        // The mutations will be effective once the transaction has committed successfully.
+        for (int i = 0; i &lt; 5; i++)
+        {
+            keyParameter.Value = Guid.NewGuid().ToString(&quot;N&quot;);
+            stringValueParameter.Value = $&quot;StringValue{i}&quot;;
+            int64ValueParameter.Value = i;
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            Console.WriteLine($&quot;{rowsAffected} rows written...&quot;);
+        }
+    });
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransactionAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransactionAsync*"></a>
+  <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransactionAsync__1_System_Func_Google_Cloud_Spanner_Data_SpannerTransaction_System_Threading_Tasks_Task___0___System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.RunWithRetriableTransactionAsync``1(System.Func{Google.Cloud.Spanner.Data.SpannerTransaction,System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)">RunWithRetriableTransactionAsync&lt;TResult&gt;(Func&lt;SpannerTransaction, Task&lt;TResult&gt;&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Executes a read-write transaction, with retries as necessary.
+The work to perform in each transaction attempt is defined by <code data-dev-comment-type="paramref" class="paramref">asyncWork</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;TResult&gt; RunWithRetriableTransactionAsync&lt;TResult&gt;(Func&lt;SpannerTransaction, Task&lt;TResult&gt;&gt; asyncWork, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>, <span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;&gt;</td>
+        <td><span class="parametername">asyncWork</span></td>
+        <td><p>The work to perform in each transaction attempt.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>An optional token for canceling the call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;TResult&gt;</td>
+        <td><p>The value returned by <code data-dev-comment-type="paramref" class="paramref">asyncWork</code> if the transaction commits successfully.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_RunWithRetriableTransactionAsync__1_System_Func_Google_Cloud_Spanner_Data_SpannerTransaction_System_Threading_Tasks_Task___0___System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><code data-dev-comment-type="paramref" class="paramref">asyncWork</code> will be fully retried whenever the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>
+    that it receives as a parameter aborts. <code data-dev-comment-type="paramref" class="paramref">asyncWork</code> won&apos;t be retried if any other errors occur.
+<code data-dev-comment-type="paramref" class="paramref">asyncWork</code> must be prepared to be called more than once.
+A new <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a> will be passed to <code data-dev-comment-type="paramref" class="paramref">asyncWork</code>
+each time it is rerun.
+<code data-dev-comment-type="paramref" class="paramref">asyncWork</code> doesn&apos;t need to handle the lifecycle of the <a class="xref" href="Google.Cloud.Spanner.Data.SpannerTransaction.html">SpannerTransaction</a>,
+it will be automatically committed after <code data-dev-comment-type="paramref" class="paramref">asyncWork</code> has finished or rollbacked if an 
+<span class="xref">System.Exception</span> (other than because the transaction commit aborted) is thrown by <code data-dev-comment-type="paramref" class="paramref">asyncWork</code>.</p>
+</div>
   <a id="Google_Cloud_Spanner_Data_SpannerConnection_ShutdownSessionPoolAsync_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.ShutdownSessionPoolAsync*"></a>
   <h4 id="Google_Cloud_Spanner_Data_SpannerConnection_ShutdownSessionPoolAsync_System_Threading_CancellationToken_" data-uid="Google.Cloud.Spanner.Data.SpannerConnection.ShutdownSessionPoolAsync(System.Threading.CancellationToken)">ShutdownSessionPoolAsync(CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Shuts down the session pool associated with the connection. Further attempts to acquire sessions will fail immediately.</p>
@@ -1905,7 +2121,7 @@ using (SpannerConnection connection = new SpannerConnection(connectionString))
   </table>
   <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_WhenSessionPoolReady_System_Threading_CancellationToken__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the pool is unhealthy or becomes unhealthy before it reaches its minimum size,
-the returned task will be faulted with an <a class="xref" href="Grpc.Core.RpcException.html">RpcException</a>.</p>
+the returned task will be faulted with an <span class="xref">Grpc.Core.RpcException</span>.</p>
 </div>
   <div>
   <h5 id="Google_Cloud_Spanner_Data_SpannerConnection_WhenSessionPoolReady_System_Threading_CancellationToken__snippet">Sample code</h5>
