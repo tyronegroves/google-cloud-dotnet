@@ -519,6 +519,103 @@ foreach (Service item in singlePage)
 string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServices_" data-uid="Google.Cloud.Billing.V1.CloudCatalogClient.ListServices*"></a>
+  <h4 id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServices_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Billing.V1.CloudCatalogClient.ListServices(System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListServices(String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists all public cloud services.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListServicesResponse, Service&gt; ListServices(string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Billing.V1.ListServicesResponse.html">ListServicesResponse</a>, <a class="xref" href="Google.Cloud.Billing.V1.Service.html">Service</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Billing.V1.Service.html">Service</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServices_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudCatalogClient cloudCatalogClient = CloudCatalogClient.Create();
+// Make the request
+PagedEnumerable&lt;ListServicesResponse, Service&gt; response = cloudCatalogClient.ListServices();
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Service item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListServicesResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Service item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Service&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Service item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServicesAsync_" data-uid="Google.Cloud.Billing.V1.CloudCatalogClient.ListServicesAsync*"></a>
   <h4 id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServicesAsync_Google_Cloud_Billing_V1_ListServicesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Billing.V1.CloudCatalogClient.ListServicesAsync(Google.Cloud.Billing.V1.ListServicesRequest,Google.Api.Gax.Grpc.CallSettings)">ListServicesAsync(ListServicesRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists all public cloud services.</p>
@@ -576,6 +673,103 @@ CloudCatalogClient cloudCatalogClient = await CloudCatalogClient.CreateAsync();
 ListServicesRequest request = new ListServicesRequest { };
 // Make the request
 PagedAsyncEnumerable&lt;ListServicesResponse, Service&gt; response = cloudCatalogClient.ListServicesAsync(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Service item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListServicesResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Service item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Service&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Service item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServicesAsync_" data-uid="Google.Cloud.Billing.V1.CloudCatalogClient.ListServicesAsync*"></a>
+  <h4 id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServicesAsync_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Billing.V1.CloudCatalogClient.ListServicesAsync(System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListServicesAsync(String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists all public cloud services.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListServicesResponse, Service&gt; ListServicesAsync(string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Billing.V1.ListServicesResponse.html">ListServicesResponse</a>, <a class="xref" href="Google.Cloud.Billing.V1.Service.html">Service</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Billing.V1.Service.html">Service</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Billing_V1_CloudCatalogClient_ListServicesAsync_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudCatalogClient cloudCatalogClient = await CloudCatalogClient.CreateAsync();
+// Make the request
+PagedAsyncEnumerable&lt;ListServicesResponse, Service&gt; response = cloudCatalogClient.ListServicesAsync();
 
 // Iterate over all response items, lazily performing RPCs as required
 await response.ForEachAsync((Service item) =&gt;
