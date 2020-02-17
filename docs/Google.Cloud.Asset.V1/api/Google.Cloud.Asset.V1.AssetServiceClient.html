@@ -107,12 +107,13 @@
   </h3>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_DefaultEndpoint_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DefaultEndpoint*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_DefaultEndpoint" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DefaultEndpoint">DefaultEndpoint</h4>
-  <div class="markdown level1 summary"><p>The default endpoint for the AssetService service, which is a host of &quot;cloudasset.googleapis.com&quot; and a port of 443.</p>
+  <div class="markdown level1 summary"><p>The default endpoint for the AssetService service, which is a host of &quot;cloudasset.googleapis.com&quot; and a port
+of 443.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ServiceEndpoint DefaultEndpoint { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static string DefaultEndpoint { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -124,7 +125,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -155,7 +156,7 @@
   </table>
   <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_DefaultScopes_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The default AssetService scopes are:
-<ul><li>&quot;<a href="https://www.googleapis.com/auth/cloud-platform&amp;quot">https://www.googleapis.com/auth/cloud-platform&quot</a>;</li></ul></p>
+<ul><li><a href="https://www.googleapis.com/auth/cloud-platform">https://www.googleapis.com/auth/cloud-platform</a></li></ul></p>
 </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_ExportAssetsOperationsClient_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ExportAssetsOperationsClient*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_ExportAssetsOperationsClient" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ExportAssetsOperationsClient">ExportAssetsOperationsClient</h4>
@@ -183,7 +184,7 @@
   </table>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_GrpcClient_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GrpcClient*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_GrpcClient" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GrpcClient">GrpcClient</h4>
-  <div class="markdown level1 summary"><p>The underlying gRPC AssetService client.</p>
+  <div class="markdown level1 summary"><p>The underlying gRPC AssetService client</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -239,7 +240,7 @@ error.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -269,7 +270,8 @@ AssetServiceClient assetServiceClient = AssetServiceClient.Create();
 // Initialize request argument(s)
 BatchGetAssetsHistoryRequest request = new BatchGetAssetsHistoryRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
+    AssetNames = { &quot;&quot;, },
     ContentType = ContentType.Unspecified,
     ReadTimeWindow = new TimeWindow(),
 };
@@ -309,7 +311,7 @@ error.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -339,7 +341,8 @@ AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
 BatchGetAssetsHistoryRequest request = new BatchGetAssetsHistoryRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
+    AssetNames = { &quot;&quot;, },
     ContentType = ContentType.Unspecified,
     ReadTimeWindow = new TimeWindow(),
 };
@@ -409,7 +412,8 @@ AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
 BatchGetAssetsHistoryRequest request = new BatchGetAssetsHistoryRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
+    AssetNames = { &quot;&quot;, },
     ContentType = ContentType.Unspecified,
     ReadTimeWindow = new TimeWindow(),
 };
@@ -418,160 +422,15 @@ BatchGetAssetsHistoryResponse response = await assetServiceClient.BatchGetAssets
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_Create_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.Create*"></a>
-  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Asset.V1.AssetServiceSettings)">Create(ServiceEndpoint, AssetServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
-necessary. See the example for how to use custom credentials.</p>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_Create" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.Create">Create()</h4>
+  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a> using the default credentials, endpoint and
+settings. To specify custom credentials or other settings, use <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClientBuilder.html">AssetServiceClientBuilder</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static AssetServiceClient Create(ServiceEndpoint endpoint = null, AssetServiceSettings settings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static AssetServiceClient Create()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
-        <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a></td>
-        <td><p>The created <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings__examples">Examples</h5>
-  <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Asset.V1;
-...
-// When running on Google Cloud Platform this will use the project Compute Credential.
-// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
-// credential file to use that credential.
-AssetServiceClient client = AssetServiceClient.Create();</code></pre>
-<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Asset.V1;
-using Google.Apis.Auth.OAuth2;
-using Grpc.Auth;
-using Grpc.Core;
-...
-GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
-Channel channel = new Channel(
-    AssetServiceClient.DefaultEndpoint.Host, AssetServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-AssetServiceClient client = AssetServiceClient.Create(channel);
-...
-// Shutdown the channel when it is no longer required.
-channel.ShutdownAsync().Wait();</code></pre>
-
-  <a id="Google_Cloud_Asset_V1_AssetServiceClient_Create_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.Create*"></a>
-  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Asset_V1_AssetServiceSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Asset.V1.AssetServiceSettings)">Create(CallInvoker, AssetServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a> which uses the specified call invoker for remote operations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static AssetServiceClient Create(CallInvoker callInvoker, AssetServiceSettings settings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
-        <td><span class="parametername">callInvoker</span></td>
-        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a></td>
-        <td><p>The created <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Asset_V1_AssetServiceClient_Create_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.Create*"></a>
-  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_Create_Grpc_Core_Channel_Google_Cloud_Asset_V1_AssetServiceSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.Create(Grpc.Core.Channel,Google.Cloud.Asset.V1.AssetServiceSettings)">Create(Channel, AssetServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a> which uses the specified channel for remote operations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static AssetServiceClient Create(Channel channel, AssetServiceSettings settings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Grpc.Core.Channel.html">Channel</a></td>
-        <td><span class="parametername">channel</span></td>
-        <td><p>The <a class="xref" href="Grpc.Core.Channel.html">Channel</a> for remote operations. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -589,15 +448,14 @@ channel.ShutdownAsync().Wait();</code></pre>
     </tbody>
   </table>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.CreateAsync*"></a>
-  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Asset.V1.AssetServiceSettings)">CreateAsync(ServiceEndpoint, AssetServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
-necessary. See the example for how to use custom credentials.</p>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.CreateAsync(System.Threading.CancellationToken)">CreateAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html">AssetServiceClient</a> using the default credentials, endpoint and
+settings. To specify custom credentials or other settings, use <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClientBuilder.html">AssetServiceClientBuilder</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;AssetServiceClient&gt; CreateAsync(ServiceEndpoint endpoint = null, AssetServiceSettings settings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;AssetServiceClient&gt; CreateAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -610,15 +468,9 @@ necessary. See the example for how to use custom credentials.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
-        <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceSettings.html">AssetServiceSettings</a>.</p>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The <span class="xref">System.Threading.CancellationToken</span> to use while creating the client.</p>
 </td>
       </tr>
     </tbody>
@@ -639,28 +491,6 @@ necessary. See the example for how to use custom credentials.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings__examples">Examples</h5>
-  <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Asset.V1;
-...
-// When running on Google Cloud Platform this will use the project Compute Credential.
-// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
-// credential file to use that credential.
-AssetServiceClient client = await AssetServiceClient.CreateAsync();</code></pre>
-<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Asset.V1;
-using Google.Apis.Auth.OAuth2;
-using Grpc.Auth;
-using Grpc.Core;
-...
-GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
-Channel channel = new Channel(
-    AssetServiceClient.DefaultEndpoint.Host, AssetServiceClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-AssetServiceClient client = AssetServiceClient.Create(channel);
-...
-// Shutdown the channel when it is no longer required.
-await channel.ShutdownAsync();</code></pre>
-
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_CreateFeed_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.CreateFeed*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_CreateFeed_Google_Cloud_Asset_V1_CreateFeedRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.CreateFeed(Google.Cloud.Asset.V1.CreateFeedRequest,Google.Api.Gax.Grpc.CallSettings)">CreateFeed(CreateFeedRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a feed in a parent project/folder/organization to listen to its
@@ -688,7 +518,7 @@ asset updates.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -757,7 +587,7 @@ should be created in. It can only be an organization number (such as
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -817,7 +647,7 @@ asset updates.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -951,7 +781,7 @@ should be created in. It can only be an organization number (such as
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1074,7 +904,7 @@ Feed response = await assetServiceClient.CreateFeedAsync(parent);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1088,10 +918,56 @@ AssetServiceClient assetServiceClient = AssetServiceClient.Create();
 // Initialize request argument(s)
 DeleteFeedRequest request = new DeleteFeedRequest
 {
-    Name = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString(),
+    FeedName = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;),
 };
 // Make the request
 assetServiceClient.DeleteFeed(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeed_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeed*"></a>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeed_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeed(Google.Cloud.Asset.V1.FeedName,Google.Api.Gax.Grpc.CallSettings)">DeleteFeed(FeedName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes an asset feed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void DeleteFeed(FeedName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.FeedName.html">FeedName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the feed and it must be in the format of:
+projects/project_number/feeds/feed_id
+folders/folder_number/feeds/feed_id
+organizations/organization_number/feeds/feed_id</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeed_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AssetServiceClient assetServiceClient = AssetServiceClient.Create();
+// Initialize request argument(s)
+FeedName name = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;);
+// Make the request
+assetServiceClient.DeleteFeed(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeed_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeed*"></a>
@@ -1123,7 +999,7 @@ organizations/organization_number/feeds/feed_id</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1135,9 +1011,9 @@ organizations/organization_number/feeds/feed_id</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = AssetServiceClient.Create();
 // Initialize request argument(s)
-string formattedName = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString();
+string name = &quot;projects/[PROJECT]/feeds/[FEED]&quot;;
 // Make the request
-assetServiceClient.DeleteFeed(formattedName);
+assetServiceClient.DeleteFeed(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeedAsync*"></a>
@@ -1166,7 +1042,7 @@ assetServiceClient.DeleteFeed(formattedName);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1184,7 +1060,7 @@ assetServiceClient.DeleteFeed(formattedName);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -1196,7 +1072,7 @@ AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
 DeleteFeedRequest request = new DeleteFeedRequest
 {
-    Name = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString(),
+    FeedName = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;),
 };
 // Make the request
 await assetServiceClient.DeleteFeedAsync(request);
@@ -1246,7 +1122,7 @@ await assetServiceClient.DeleteFeedAsync(request);
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -1258,10 +1134,134 @@ AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
 DeleteFeedRequest request = new DeleteFeedRequest
 {
-    Name = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString(),
+    FeedName = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;),
 };
 // Make the request
 await assetServiceClient.DeleteFeedAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeedAsync*"></a>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeedAsync(Google.Cloud.Asset.V1.FeedName,Google.Api.Gax.Grpc.CallSettings)">DeleteFeedAsync(FeedName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes an asset feed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteFeedAsync(FeedName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.FeedName.html">FeedName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the feed and it must be in the format of:
+projects/project_number/feeds/feed_id
+folders/folder_number/feeds/feed_id
+organizations/organization_number/feeds/feed_id</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
+// Initialize request argument(s)
+FeedName name = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;);
+// Make the request
+await assetServiceClient.DeleteFeedAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeedAsync*"></a>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_Google_Cloud_Asset_V1_FeedName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeedAsync(Google.Cloud.Asset.V1.FeedName,System.Threading.CancellationToken)">DeleteFeedAsync(FeedName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes an asset feed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteFeedAsync(FeedName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.FeedName.html">FeedName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the feed and it must be in the format of:
+projects/project_number/feeds/feed_id
+folders/folder_number/feeds/feed_id
+organizations/organization_number/feeds/feed_id</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_Google_Cloud_Asset_V1_FeedName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
+// Initialize request argument(s)
+FeedName name = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;);
+// Make the request
+await assetServiceClient.DeleteFeedAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeedAsync*"></a>
@@ -1293,7 +1293,7 @@ organizations/organization_number/feeds/feed_id</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1311,7 +1311,7 @@ organizations/organization_number/feeds/feed_id</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -1321,9 +1321,9 @@ organizations/organization_number/feeds/feed_id</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
-string formattedName = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString();
+string name = &quot;projects/[PROJECT]/feeds/[FEED]&quot;;
 // Make the request
-await assetServiceClient.DeleteFeedAsync(formattedName);
+await assetServiceClient.DeleteFeedAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_DeleteFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.DeleteFeedAsync*"></a>
@@ -1373,7 +1373,7 @@ organizations/organization_number/feeds/feed_id</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task that completes when the RPC has completed.</p>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -1383,9 +1383,9 @@ organizations/organization_number/feeds/feed_id</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
-string formattedName = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString();
+string name = &quot;projects/[PROJECT]/feeds/[FEED]&quot;;
 // Make the request
-await assetServiceClient.DeleteFeedAsync(formattedName);
+await assetServiceClient.DeleteFeedAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_ExportAssets_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ExportAssets*"></a>
@@ -1417,7 +1417,7 @@ to keep track of the export.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1447,24 +1447,24 @@ AssetServiceClient assetServiceClient = AssetServiceClient.Create();
 // Initialize request argument(s)
 ExportAssetsRequest request = new ExportAssetsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
+    ReadTime = new Timestamp(),
+    AssetTypes = { &quot;&quot;, },
+    ContentType = ContentType.Unspecified,
     OutputConfig = new OutputConfig(),
 };
 // Make the request
-Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; response =
-    assetServiceClient.ExportAssets(request);
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; response = assetServiceClient.ExportAssets(request);
 
 // Poll until the returned long-running operation is complete
-Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; completedResponse =
-    response.PollUntilCompleted();
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; completedResponse = response.PollUntilCompleted();
 // Retrieve the operation result
 ExportAssetsResponse result = completedResponse.Result;
 
 // Or get the name of the operation
 string operationName = response.Name;
 // This name can be stored, then the long-running operation retrieved later by name
-Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; retrievedResponse =
-    assetServiceClient.PollOnceExportAssets(operationName);
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; retrievedResponse = assetServiceClient.PollOnceExportAssets(operationName);
 // Check if the retrieved long-running operation has completed
 if (retrievedResponse.IsCompleted)
 {
@@ -1502,7 +1502,7 @@ to keep track of the export.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1532,30 +1532,177 @@ AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
 ExportAssetsRequest request = new ExportAssetsRequest
 {
-    ParentAsProjectName = new ProjectName(&quot;[PROJECT]&quot;),
+    ParentAsResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
+    ReadTime = new Timestamp(),
+    AssetTypes = { &quot;&quot;, },
+    ContentType = ContentType.Unspecified,
     OutputConfig = new OutputConfig(),
 };
 // Make the request
-Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; response =
-    await assetServiceClient.ExportAssetsAsync(request);
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; response = await assetServiceClient.ExportAssetsAsync(request);
 
 // Poll until the returned long-running operation is complete
-Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; completedResponse =
-    await response.PollUntilCompletedAsync();
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; completedResponse = await response.PollUntilCompletedAsync();
 // Retrieve the operation result
 ExportAssetsResponse result = completedResponse.Result;
 
 // Or get the name of the operation
 string operationName = response.Name;
 // This name can be stored, then the long-running operation retrieved later by name
-Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; retrievedResponse =
-    await assetServiceClient.PollOnceExportAssetsAsync(operationName);
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; retrievedResponse = await assetServiceClient.PollOnceExportAssetsAsync(operationName);
 // Check if the retrieved long-running operation has completed
 if (retrievedResponse.IsCompleted)
 {
     // If it has completed, then access the result
     ExportAssetsResponse retrievedResult = retrievedResponse.Result;
 }
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Asset_V1_AssetServiceClient_ExportAssetsAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ExportAssetsAsync*"></a>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_ExportAssetsAsync_Google_Cloud_Asset_V1_ExportAssetsRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ExportAssetsAsync(Google.Cloud.Asset.V1.ExportAssetsRequest,System.Threading.CancellationToken)">ExportAssetsAsync(ExportAssetsRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Exports assets with time and resource types to a given Cloud Storage
+location. The output format is newline-delimited JSON.
+This API implements the [google.longrunning.Operation][google.longrunning.Operation] API allowing you
+to keep track of the export.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt;&gt; ExportAssetsAsync(ExportAssetsRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.ExportAssetsRequest.html">ExportAssetsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Asset.V1.ExportAssetsResponse.html">ExportAssetsResponse</a>, <a class="xref" href="Google.Cloud.Asset.V1.ExportAssetsRequest.html">ExportAssetsRequest</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_ExportAssetsAsync_Google_Cloud_Asset_V1_ExportAssetsRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
+// Initialize request argument(s)
+ExportAssetsRequest request = new ExportAssetsRequest
+{
+    ParentAsResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
+    ReadTime = new Timestamp(),
+    AssetTypes = { &quot;&quot;, },
+    ContentType = ContentType.Unspecified,
+    OutputConfig = new OutputConfig(),
+};
+// Make the request
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; response = await assetServiceClient.ExportAssetsAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+ExportAssetsResponse result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;ExportAssetsResponse, ExportAssetsRequest&gt; retrievedResponse = await assetServiceClient.PollOnceExportAssetsAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    ExportAssetsResponse retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeed_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeed*"></a>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeed_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeed(Google.Cloud.Asset.V1.FeedName,Google.Api.Gax.Grpc.CallSettings)">GetFeed(FeedName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets details about an asset feed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Feed GetFeed(FeedName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.FeedName.html">FeedName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the Feed and it must be in the format of:
+projects/project_number/feeds/feed_id
+folders/folder_number/feeds/feed_id
+organizations/organization_number/feeds/feed_id</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.Feed.html">Feed</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeed_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AssetServiceClient assetServiceClient = AssetServiceClient.Create();
+// Initialize request argument(s)
+FeedName name = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;);
+// Make the request
+Feed response = assetServiceClient.GetFeed(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeed_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeed*"></a>
@@ -1584,7 +1731,7 @@ if (retrievedResponse.IsCompleted)
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1614,7 +1761,7 @@ AssetServiceClient assetServiceClient = AssetServiceClient.Create();
 // Initialize request argument(s)
 GetFeedRequest request = new GetFeedRequest
 {
-    Name = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString(),
+    FeedName = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;),
 };
 // Make the request
 Feed response = assetServiceClient.GetFeed(request);
@@ -1649,7 +1796,7 @@ organizations/organization_number/feeds/feed_id</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1677,9 +1824,133 @@ organizations/organization_number/feeds/feed_id</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = AssetServiceClient.Create();
 // Initialize request argument(s)
-string formattedName = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString();
+string name = &quot;projects/[PROJECT]/feeds/[FEED]&quot;;
 // Make the request
-Feed response = assetServiceClient.GetFeed(formattedName);
+Feed response = assetServiceClient.GetFeed(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeedAsync*"></a>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeedAsync(Google.Cloud.Asset.V1.FeedName,Google.Api.Gax.Grpc.CallSettings)">GetFeedAsync(FeedName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets details about an asset feed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Feed&gt; GetFeedAsync(FeedName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.FeedName.html">FeedName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the Feed and it must be in the format of:
+projects/project_number/feeds/feed_id
+folders/folder_number/feeds/feed_id
+organizations/organization_number/feeds/feed_id</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Asset.V1.Feed.html">Feed</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_Google_Cloud_Asset_V1_FeedName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
+// Initialize request argument(s)
+FeedName name = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;);
+// Make the request
+Feed response = await assetServiceClient.GetFeedAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeedAsync*"></a>
+  <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_Google_Cloud_Asset_V1_FeedName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeedAsync(Google.Cloud.Asset.V1.FeedName,System.Threading.CancellationToken)">GetFeedAsync(FeedName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets details about an asset feed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Feed&gt; GetFeedAsync(FeedName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Asset.V1.FeedName.html">FeedName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the Feed and it must be in the format of:
+projects/project_number/feeds/feed_id
+folders/folder_number/feeds/feed_id
+organizations/organization_number/feeds/feed_id</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Asset.V1.Feed.html">Feed</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_Google_Cloud_Asset_V1_FeedName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
+// Initialize request argument(s)
+FeedName name = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;);
+// Make the request
+Feed response = await assetServiceClient.GetFeedAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeedAsync*"></a>
@@ -1708,7 +1979,7 @@ Feed response = assetServiceClient.GetFeed(formattedName);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1738,7 +2009,7 @@ AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
 GetFeedRequest request = new GetFeedRequest
 {
-    Name = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString(),
+    FeedName = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;),
 };
 // Make the request
 Feed response = await assetServiceClient.GetFeedAsync(request);
@@ -1800,7 +2071,7 @@ AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
 GetFeedRequest request = new GetFeedRequest
 {
-    Name = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString(),
+    FeedName = FeedName.FromProjectFeed(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;),
 };
 // Make the request
 Feed response = await assetServiceClient.GetFeedAsync(request);
@@ -1835,7 +2106,7 @@ organizations/organization_number/feeds/feed_id</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1863,9 +2134,9 @@ organizations/organization_number/feeds/feed_id</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
-string formattedName = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString();
+string name = &quot;projects/[PROJECT]/feeds/[FEED]&quot;;
 // Make the request
-Feed response = await assetServiceClient.GetFeedAsync(formattedName);
+Feed response = await assetServiceClient.GetFeedAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_GetFeedAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.GetFeedAsync*"></a>
@@ -1925,9 +2196,9 @@ organizations/organization_number/feeds/feed_id</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
-string formattedName = new FeedName(&quot;[PROJECT]&quot;, &quot;[FEED]&quot;).ToString();
+string name = &quot;projects/[PROJECT]/feeds/[FEED]&quot;;
 // Make the request
-Feed response = await assetServiceClient.GetFeedAsync(formattedName);
+Feed response = await assetServiceClient.GetFeedAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_ListFeeds_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ListFeeds*"></a>
@@ -1956,7 +2227,7 @@ Feed response = await assetServiceClient.GetFeedAsync(formattedName);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1984,10 +2255,7 @@ Feed response = await assetServiceClient.GetFeedAsync(formattedName);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = AssetServiceClient.Create();
 // Initialize request argument(s)
-ListFeedsRequest request = new ListFeedsRequest
-{
-    Parent = &quot;&quot;,
-};
+ListFeedsRequest request = new ListFeedsRequest { Parent = &quot;&quot;, };
 // Make the request
 ListFeedsResponse response = assetServiceClient.ListFeeds(request);
 </code></pre></div>
@@ -2020,7 +2288,7 @@ listed. It can only be using project/folder/organization number (such as
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2079,7 +2347,7 @@ ListFeedsResponse response = assetServiceClient.ListFeeds(parent);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2107,10 +2375,7 @@ ListFeedsResponse response = assetServiceClient.ListFeeds(parent);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
-ListFeedsRequest request = new ListFeedsRequest
-{
-    Parent = &quot;&quot;,
-};
+ListFeedsRequest request = new ListFeedsRequest { Parent = &quot;&quot;, };
 // Make the request
 ListFeedsResponse response = await assetServiceClient.ListFeedsAsync(request);
 </code></pre></div>
@@ -2169,10 +2434,7 @@ ListFeedsResponse response = await assetServiceClient.ListFeedsAsync(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 AssetServiceClient assetServiceClient = await AssetServiceClient.CreateAsync();
 // Initialize request argument(s)
-ListFeedsRequest request = new ListFeedsRequest
-{
-    Parent = &quot;&quot;,
-};
+ListFeedsRequest request = new ListFeedsRequest { Parent = &quot;&quot;, };
 // Make the request
 ListFeedsResponse response = await assetServiceClient.ListFeedsAsync(request);
 </code></pre></div>
@@ -2205,7 +2467,7 @@ listed. It can only be using project/folder/organization number (such as
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2325,7 +2587,7 @@ ListFeedsResponse response = await assetServiceClient.ListFeedsAsync(parent);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2350,7 +2612,8 @@ ListFeedsResponse response = await assetServiceClient.ListFeedsAsync(parent);
   </table>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_PollOnceExportAssetsAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.PollOnceExportAssetsAsync*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_PollOnceExportAssetsAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.PollOnceExportAssetsAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceExportAssetsAsync(String, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of <code>ExportAssetsAsync</code>.</p>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of
+<code>ExportAssets</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2374,7 +2637,7 @@ ListFeedsResponse response = await assetServiceClient.ListFeedsAsync(parent);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2399,9 +2662,9 @@ ListFeedsResponse response = await assetServiceClient.ListFeedsAsync(parent);
   </table>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_ShutdownDefaultChannelsAsync_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ShutdownDefaultChannelsAsync*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_ShutdownDefaultChannelsAsync" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.ShutdownDefaultChannelsAsync">ShutdownDefaultChannelsAsync()</h4>
-  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings_">Create(ServiceEndpoint, AssetServiceSettings)</a>
-and <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings_">CreateAsync(ServiceEndpoint, AssetServiceSettings)</a>. Channels which weren&apos;t automatically
-created are not affected.</p>
+  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_Create">Create()</a> and
+<a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_System_Threading_CancellationToken_">CreateAsync(CancellationToken)</a>. Channels which weren&apos;t automatically created are not
+affected.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2425,9 +2688,9 @@ created are not affected.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Asset_V1_AssetServiceClient_ShutdownDefaultChannelsAsync_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings_">Create(ServiceEndpoint, AssetServiceSettings)</a>
-and <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Asset_V1_AssetServiceSettings_">CreateAsync(ServiceEndpoint, AssetServiceSettings)</a> will create new channels, which could
-in turn be shut down by another call to this method.</p>
+  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_Create">Create()</a> and
+<a class="xref" href="Google.Cloud.Asset.V1.AssetServiceClient.html#Google_Cloud_Asset_V1_AssetServiceClient_CreateAsync_System_Threading_CancellationToken_">CreateAsync(CancellationToken)</a> will create new channels, which could in turn be shut down
+by another call to this method.</p>
 </div>
   <a id="Google_Cloud_Asset_V1_AssetServiceClient_UpdateFeed_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.UpdateFeed*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetServiceClient_UpdateFeed_Google_Cloud_Asset_V1_Feed_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Asset.V1.AssetServiceClient.UpdateFeed(Google.Cloud.Asset.V1.Feed,Google.Api.Gax.Grpc.CallSettings)">UpdateFeed(Feed, CallSettings)</h4>
@@ -2459,7 +2722,7 @@ organizations/organization_number/feeds/feed_id.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2518,7 +2781,7 @@ Feed response = assetServiceClient.UpdateFeed(feed);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2585,7 +2848,7 @@ organizations/organization_number/feeds/feed_id.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2707,7 +2970,7 @@ Feed response = await assetServiceClient.UpdateFeedAsync(feed);
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
