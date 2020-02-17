@@ -106,16 +106,16 @@ PublisherServiceApiClient client = PublisherServiceApiClient.Create();
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
 // Create a CallSettings with a custom header.
-CallSettings callSettings = new CallSettings(null, null, null, metadata =&gt; metadata.Add(&quot;ClientVersion&quot;, &quot;1.0.0&quot;), null, null);
+CallSettings callSettings = CallSettings.FromHeader(&quot;ClientVersion&quot;, &quot;1.0.0&quot;);
 // This will cause the custom &#39;ClientVersion&#39; header to be included in the RPC call.
 Topic topic = client.CreateTopic(topicName, callSettings);
 </code></pre><h3 id="client-configuration-client-wide">Client configuration; client-wide</h3>
 <pre><code class="lang-cs">// Create a default PublisherServiceApiSettings, with a custom header for calls to all RPC methods.
 PublisherServiceApiSettings publisherSettings = new PublisherServiceApiSettings
 {
-    CallSettings = new CallSettings(null, null, null, metadata =&gt; metadata.Add(&quot;ClientVersion&quot;, &quot;1.0.0&quot;), null, null)
+    CallSettings = CallSettings.FromHeader(&quot;ClientVersion&quot;, &quot;1.0.0&quot;)
 };
-PublisherServiceApiClient client = PublisherServiceApiClient.Create(settings: publisherSettings);
+PublisherServiceApiClient client = new PublisherServiceApiClientBuilder { Settings = publisherSettings }.Build();
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
 // The custom &#39;ClientVersion&#39; header will be included in the RPC call, due to
@@ -126,7 +126,7 @@ Topic topic = client.CreateTopic(topicName);
 // to the CreateTopic RPC method.
 PublisherServiceApiSettings publisherSettings = new PublisherServiceApiSettings();
 publisherSettings.CreateTopicSettings = publisherSettings.CreateTopicSettings.WithHeader(&quot;ClientVersion&quot;, &quot;1.0.0&quot;);
-PublisherServiceApiClient client = PublisherServiceApiClient.Create(settings: publisherSettings);
+PublisherServiceApiClient client = new PublisherServiceApiClientBuilder { Settings = publisherSettings }.Build();
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
 // The custom &#39;ClientVersion&#39; header will be included in the RPC call, due to
@@ -140,17 +140,17 @@ Topic topic = client.CreateTopic(topicName);
 PublisherServiceApiSettings publisherSettings = new PublisherServiceApiSettings();
 publisherSettings.CreateTopicSettings = publisherSettings.CreateTopicSettings
     .WithCancellationToken(CancellationToken.None)
-    .WithCallTiming(CallTiming.FromTimeout(TimeSpan.FromSeconds(5)))
+    .WithTimeout(TimeSpan.FromSeconds(5))
     .WithHeader(&quot;ClientVersion&quot;, &quot;1.0.0&quot;);
 
 // Override the above Timing and CancellationToken in the client-wide CallSettings;
 // the Headers are not overridden.
 publisherSettings.CallSettings = CallSettings
-    .FromCallTiming(CallTiming.FromDeadline(deadline))
+    .FromExpiration(Expiration.FromDeadline(deadline))
     .WithCancellationToken(CancellationToken.None);
 
 // Create the client with the configured publisherSettings
-PublisherServiceApiClient client = PublisherServiceApiClient.Create(settings: publisherSettings);
+PublisherServiceApiClient client = new PublisherServiceApiClientBuilder { Settings = publisherSettings }.Build();
 
 // Create a topic name from the projectId and topicId.
 TopicName topicName = new TopicName(projectId, topicId);
@@ -205,26 +205,15 @@ a service very hard. This is exposed for testability, but is unlikely to need tw
 <p><code>TimeoutBackoff</code> and <code>RetryBackoff</code> are both expressed in terms of a <a href="../api/Google.Api.Gax.Grpc.BackoffSettings.html">BackoffSettings</a>, which consists of an initial timeout, a maximum timeout, and a multiplier.
 The multiplier is applied to the &quot;current&quot; timeout to determine the &quot;next&quot; timeout, capped at the maximum.</p>
 <p>All of this is probably best demonstrated with a worked example. Consider the following settings:</p>
-<pre><code class="lang-cs">// The overall operation mustn&#39;t take more than 30 seconds.
-Expiration totalExpiration = Expiration.FromTimeout(TimeSpan.FromSeconds(30));
-
-// The delay between one RPC finishing and when we make the next one.
-// Each delay is double the previous one, with a maximum of 5s.
+<pre><code class="lang-cs">// Each delay is double the previous one, with a maximum of 5s.
 // The first delay is 1s, then 2s, then 4s, then 5s, then 5s, etc.
-BackoffSettings retryBackoff = new BackoffSettings(
-    delay: TimeSpan.FromSeconds(1),
-    maxDelay: TimeSpan.FromSeconds(5),
-    delayMultiplier: 2.0);
-
-// How long each individual RPC is allowed to take.
-// Each timeout is 1.5x the previous one, with a maximum of 10s.
-// The first timeout is 4s, then 6s, then 9s, then 10s, then 10s etc.
-BackoffSettings timeoutBackoff = new BackoffSettings(
-    delay: TimeSpan.FromSeconds(4),
-    maxDelay: TimeSpan.FromSeconds(10),
-    delayMultiplier: 1.5);
-
-RetrySettings settings = new RetrySettings(retryBackoff, timeoutBackoff, totalExpiration);
+// Only aborted RPCs are retried in this example.
+RetrySettings settings = RetrySettings.FromExponentialBackoff(
+    maxAttempts: 10,
+    initialBackoff: TimeSpan.FromSeconds(1),
+    maxBackoff: TimeSpan.FromSeconds(5),
+    backoffMultiplier: 2.0,
+    retryFilter: RetrySettings.FilterForStatusCodes(StatusCode.Aborted));
 </code></pre><p>Here we&#39;re using the default RPC filter and jitter for simplicity. Suppose we have a server which returns a
 &quot;not found&quot; error (which is retriable) after 2 seconds each time we make an RPC. The timing with the above settings looks like this (assuming there&#39;s no actual jitter):</p>
 <ul>

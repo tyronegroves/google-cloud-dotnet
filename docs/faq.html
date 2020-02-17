@@ -168,8 +168,11 @@ credentials must be set to <code>ChannelCredentials.Insecure</code>.</p>
 <pre><code class="lang-cs">// For example, &quot;localhost:8615&quot;
 string emulatorHostAndPort = Environment.GetEnvironmentVariable(&quot;PUBSUB_EMULATOR_HOST&quot;);
 
-Channel channel = new Channel(emulatorHostAndPort, ChannelCredentials.Insecure);
-PublisherServiceApiClient client = PublisherServiceApiClient.Create(channel);
+PublisherServiceApiClient client = new PublisherServiceApiClientBuilder
+{
+    Endpoint = emulatorHostAndPort,
+    ChannelCredentials = ChannelCredentials.Insecure
+}.Build();
 client.CreateTopic(new TopicName(&quot;project&quot;, &quot;topic&quot;));
 foreach (var topic in client.ListTopics(new ProjectName(&quot;project&quot;)))
 {

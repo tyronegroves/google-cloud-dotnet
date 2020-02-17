@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Breaking changes (Feb 2020) | Google Cloud APIs </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Breaking changes (Feb 2020) | Google Cloud APIs ">
+    <meta name="generator" content="docfx 2.39.1.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="breaking-changes-feb-2020">Breaking changes (Feb 2020)</h1>
+
+<p>Prior to February 2020, all API client libraries targeted GAX
+(Google.Api.Gax and related packages) version 2.x. As part of
+supporting Grpc.Core 2.x and the <code>IAsyncEnumerable&lt;T&gt;</code> interface
+that&#39;s compatible with C# 8, a new major version of GAX was
+released, with the first beta in February 2020. This contains
+breaking changes, and we&#39;ve taken advantage of the opportunity this
+provides to make some separate breaking changes in code generation
+at the same time.</p>
+<p>This document provides a guide to these breaking changes, most of
+which apply to most or all API libraries. Any breaking changes which
+only affect a single API library are documented in the corresponding
+version history instead.</p>
+<h1 id="client-creation">Client creation</h1>
+<p>Creating a client with the default endpoint, credentials, settings
+etc is still supported via the static <code>Create</code> and <code>CreateAsync</code>
+methods on the client class. If you need any customization, please
+use the corresponding client builder class. For example:</p>
+<pre><code class="lang-csharp">// Synchronous creation with defaults
+var client1 = SpeechClient.Create();
+
+// Asynchronous creation with defaults
+var client2 = await SpeechClient.CreateAsync();
+
+// Customized synchronous creation
+var client3 = new SpeechClientBuilder
+{
+   UserAgent = &quot;custom-user-agent&quot;
+}.Build();
+
+# Endpoints
+
+The previous GAX `ServiceEndpoint` class has been removed. Endpoints
+are now specified as strings. For example:
+
+// Customized synchronous creation
+var client3 = new SpeechClientBuilder
+{
+    Endpoint = &quot;sandbox.speech.googleapis.com&quot;
+}.Build();
+
+# Retry settings
+
+## RetrySettings and BackoffSettings types
+
+The GAX v2 `RetrySettings` class contained two `BackoffSettings`
+members, one for timeouts and one for backoff between attempts. A
+separate `CallTiming` class contained the expiration and the retry
+settings.
+
+In GAX v3, `RetrySettings` is only about backoff, and contains the
+multiplier, filter etc directly. This is based on the retry
+specification from gRPC. The expiration is directly specified in
+`CallSettings`.
+
+## Generated methods in API libraries
+
+Previous versions exposed properties and methods for retry settings of
+grouped operations, e.g. `IdempotentRetryFilter`,
+`GetDefaultRetryBackoff()` and `GetDefaultTimeoutBackoff()`. These
+are not generated by the new generator, and there is no equivalent.
+Instead, use the settings applicable to individual RPCs.
+
+# Resource names
+
+## Multi-pattern resources
+
+When a resource name is represented by multiple patterns, the
+previous generator created multiple resource name types and a
+&quot;one-of&quot; type to represent &quot;one of those resource names&quot;. For
+example, in the Logging.V2 API, we had a `LogNameOneof` class which
+would be a `LogName`, `OrganizationLogName`, `FolderLogName`, or
+`BillingLogName`.
+
+The new generator generates a single `LogName` resource that can
+handle each of the patterns, with a static factory method for each
+one:
+
+- `FromProjectLog`
+- `FromOrganizationLog`
+- `FromFolderLog`
+- `FromBillingAccountLog`
+
+## Multi-resource methods
+
+Some RPCs accept multiple resource names. This is typically the
+case when specifying the parent of a resource name which itself has
+multiple patterns. Again, this was previously represented using a
+&quot;one-of&quot; type, but the new generator creates an overload for each
+resource type, as well as one accepting a string.
+
+## Common resource names
+
+In order to work with multiple APIs simply, some common resource
+names are in GAX. These are:
+
+- `ProjectName`
+- `LocationName`
+- `OrganizationName`
+- `FolderName`
+- `BillingAccountName`
+
+All of these are in the `Google.Api.Gax.ResourceNames` namespace.
+
+Some API libraries previously used some of these resource name
+patterns - particularly `LocationName` - but had their own types.
+For example, the Logging API library used to include its own
+`OrganizationName`, `BillingName`, `ProjectName` and `FolderName`
+types, all within `Google.Cloud.Logging.V2`. These were maintained
+across minor releases for backward compatibility, but have been
+removed in the new major version.
+
+Code broken by this change will normally just need to import the
+`Google.Api.Gax.ResourceNames` namespace.
+</code></pre></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>
