@@ -64,12 +64,16 @@
 
 <p><code>Google.Cloud.Bigtable.V2</code> is a.NET client library for the <a href="https://cloud.google.com/bigtable/">Google Bigtable API</a>.</p>
 <p>Note:
-This documentation is for version <code>1.1.0</code> of the library.
+This documentation is for version <code>2.0.0-beta01</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Bigtable.V2</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
+Please ensure you enable pre-release packages (for example, in the
+Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>2.0.0-beta01</code>) of <code>Google.Cloud.Bigtable.V2</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -137,24 +141,24 @@ BigtableClient.</p>
 // client2 and client4 will share a different GcpCallInvoker, since they both
 // use the same custom MaxChannels/PreferredMaxStreamsPerChannel settings.
 BigtableServiceApiSettings settings1 = BigtableServiceApiSettings.GetDefault();
-BigtableClient client1 = BigtableClient.Create(settings: settings1);
+BigtableClient client1 = new BigtableClientBuilder { Settings = settings1 }.Build();
 
 BigtableServiceApiSettings settings2 = new BigtableServiceApiSettings
 {
     MaxChannels = 10,
     PreferredMaxStreamsPerChannel = 4
 };
-BigtableClient client2 = BigtableClient.Create(settings: settings2);
+BigtableClient client2 = new BigtableClientBuilder { Settings = settings2 }.Build();
 
 BigtableServiceApiSettings settings3 = BigtableServiceApiSettings.GetDefault();
-BigtableClient client3 = BigtableClient.Create(settings: settings3);
+BigtableClient client3 = new BigtableClientBuilder { Settings = settings3 }.Build();
 
 BigtableServiceApiSettings settings4 = new BigtableServiceApiSettings
 {
     MaxChannels = 10,
     PreferredMaxStreamsPerChannel = 4
 };
-BigtableClient client4 = BigtableClient.Create(settings: settings4);
+BigtableClient client4 = new BigtableClientBuilder { Settings = settings4 }.Build();
 
 // client5 will not share a GcpCallInvoker with any of the other clients, since
 // its MaxChannels/PreferredMaxStreamsPerChannel settings differ from the others.
@@ -163,7 +167,7 @@ BigtableServiceApiSettings settings5 = new BigtableServiceApiSettings
     MaxChannels = 15,
     PreferredMaxStreamsPerChannel = 4
 };
-BigtableClient client5 = BigtableClient.Create(settings: settings5);
+BigtableClient client5 = new BigtableClientBuilder { Settings = settings5 }.Build();
 </code></pre><h1 id="non-default-credentials">Non-default credentials</h1>
 <p>If you would like to create clients which share a GcpCallInvoker but do not
 use the default credentials, this can easily be done by manually creating a
@@ -178,12 +182,21 @@ BigtableServiceApiSettings settings = new BigtableServiceApiSettings
     PreferredMaxStreamsPerChannel = 4
 };
 string endpoint = BigtableServiceApiClient.DefaultEndpoint.ToString();
-GcpCallInvoker callInvoker = new GcpCallInvoker(endpoint, credentials, settings.CreateChannelOptions());
+GcpCallInvoker callInvoker = new GcpCallInvoker(endpoint, credentials,
+    GrpcCoreAdapter.Instance.ConvertOptions(settings.CreateChannelOptions()));
 
 // These will share the same set of channels to the Bigtable service.
-BigtableClient client1 = BigtableClient.Create(callInvoker, settings);
+BigtableClient client1 = new BigtableClientBuilder
+{
+    CallInvoker = callInvoker,
+    Settings = settings
+}.Build();
 // ...
-BigtableClient client2 = BigtableClient.Create(callInvoker, settings);
+BigtableClient client2 = new BigtableClientBuilder
+{
+    CallInvoker = callInvoker,
+    Settings = settings
+}.Build();
 // ...
 
 await callInvoker.ShutdownAsync();
@@ -193,8 +206,13 @@ await callInvoker.ShutdownAsync();
 // Note that CreateChannelOptions() is an extension method which allows the receiver to be null,
 // and will just act as if the default settings were specified.
 settings = null;
-callInvoker = new GcpCallInvoker(endpoint, credentials, settings.CreateChannelOptions());
-BigtableClient client3 = BigtableClient.Create(callInvoker, settings);
+var channelOptions = settings.CreateChannelOptions();
+callInvoker = new GcpCallInvoker(endpoint, credentials, GrpcCoreAdapter.Instance.ConvertOptions(channelOptions));
+BigtableClient client3 = new BigtableClientBuilder
+{
+    CallInvoker = callInvoker,
+    Settings = settings
+}.Build();
 // ...
 
 await callInvoker.ShutdownAsync();
