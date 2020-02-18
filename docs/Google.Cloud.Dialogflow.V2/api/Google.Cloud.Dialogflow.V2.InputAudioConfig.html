@@ -83,10 +83,10 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.InputAudioConfig.html">InputAudioConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.InputAudioConfig.html">InputAudioConfig</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.InputAudioConfig.html">InputAudioConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.InputAudioConfig.html">InputAudioConfig</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.InputAudioConfig.html">InputAudioConfig</a>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -170,6 +170,33 @@
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Dialogflow_V2_InputAudioConfig_EnableWordInfo_" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.EnableWordInfo*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_InputAudioConfig_EnableWordInfo" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.EnableWordInfo">EnableWordInfo</h4>
+  <div class="markdown level1 summary"><p>Optional. If <code>true</code>, Dialogflow returns [SpeechWordInfo][google.cloud.dialogflow.v2.SpeechWordInfo] in
+[StreamingRecognitionResult][google.cloud.dialogflow.v2.StreamingRecognitionResult] with information about the recognized speech
+words, e.g. start and end time offsets. If false or unspecified, Speech
+doesn&apos;t return any word-level information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EnableWordInfo { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Dialogflow_V2_InputAudioConfig_LanguageCode_" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.LanguageCode*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_InputAudioConfig_LanguageCode" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.LanguageCode">LanguageCode</h4>
   <div class="markdown level1 summary"><p>Required. The language of the supplied audio. Dialogflow does not do
@@ -182,6 +209,40 @@ the same session do not necessarily need to specify the same language.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public string LanguageCode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Dialogflow_V2_InputAudioConfig_Model_" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.Model*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_InputAudioConfig_Model" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.Model">Model</h4>
+  <div class="markdown level1 summary"><p>Optional. Which Speech model to select for the given request. Select the
+model best suited to your domain to get best results. If a model is not
+explicitly specified, then we auto-select a model based on the parameters
+in the InputAudioConfig.
+If enhanced speech model is enabled for the agent and an enhanced
+version of the specified model for the language does not exist, then the
+speech is recognized using the standard version of the specified model.
+Refer to
+<a href="https://cloud.google.com/speech-to-text/docs/basics#select-model">Cloud Speech API
+documentation</a>
+for more details.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Model { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -229,11 +290,15 @@ recognizer should recognize with higher likelihood.</p>
 <p>See <a href="https://cloud.google.com/speech-to-text/docs/basics#phrase-hints">the Cloud Speech
 documentation</a>
 for more details.</p>
+<p>This field is deprecated. Please use <a href="">speech_contexts</a> instead. If you
+specify both <a href="">phrase_hints</a> and <a href="">speech_contexts</a>, Dialogflow will
+treat the <a href="">phrase_hints</a> as a single additional <a href="">SpeechContext</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;string&gt; PhraseHints { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public RepeatedField&lt;string&gt; PhraseHints { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -245,7 +310,7 @@ for more details.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -307,6 +372,33 @@ over StreamingDetectIntentRequest.single_utterance.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Dialogflow_V2_InputAudioConfig_SpeechContexts_" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.SpeechContexts*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_InputAudioConfig_SpeechContexts" data-uid="Google.Cloud.Dialogflow.V2.InputAudioConfig.SpeechContexts">SpeechContexts</h4>
+  <div class="markdown level1 summary"><p>Optional. Context information to assist speech recognition.</p>
+<p>See <a href="https://cloud.google.com/speech-to-text/docs/basics#phrase-hints">the Cloud Speech
+documentation</a>
+for more details.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;SpeechContext&gt; SpeechContexts { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SpeechContext.html">SpeechContext</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
