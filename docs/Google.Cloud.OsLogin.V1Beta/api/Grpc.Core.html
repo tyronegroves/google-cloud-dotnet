@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Grpc.Core
    | Google.Cloud.OsLogin.V1Beta ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -102,8 +102,19 @@ Note: experimental API that can change or be removed without any prior notice.</
       <section><p>A property of an <a class="xref" href="Grpc.Core.AuthContext.html">AuthContext</a>.
 Note: experimental API that can change or be removed without any prior notice.</p>
 </section>
+      <h4><a class="xref" href="Grpc.Core.BindServiceMethodAttribute.html">BindServiceMethodAttribute</a></h4>
+      <section><p>Specifies the location of the service bind method for a gRPC service.
+The bind method is typically generated code and is used to register a service&apos;s
+methods with the server on startup.</p>
+<p>The bind method signature takes a <a class="xref" href="Grpc.Core.ServiceBinderBase.html">ServiceBinderBase</a> and an optional
+instance of the service base class, e.g. <code>static void BindService(ServiceBinderBase, GreeterService)</code>.</p>
+</section>
       <h4><a class="xref" href="Grpc.Core.CallCredentials.html">CallCredentials</a></h4>
       <section><p>Client-side call credentials. Provide authorization with per-call granularity.</p>
+</section>
+      <h4><a class="xref" href="Grpc.Core.CallCredentialsConfiguratorBase.html">CallCredentialsConfiguratorBase</a></h4>
+      <section><p>Base class for objects that can consume configuration from <code>CallCredentials</code> objects.
+Note: experimental API that can change or be removed without any prior notice.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></h4>
       <section><p>Abstraction of client-side RPC invocation.</p>
@@ -124,10 +135,13 @@ a remote call so in general you should reuse a single channel for as many calls 
 </section>
       <h4><a class="xref" href="Grpc.Core.ChannelOption.html">ChannelOption</a></h4>
       <section><p>Channel option specified when creating a channel.
-Corresponds to grpc_channel_args from grpc/grpc.h.</p>
+Corresponds to grpc_channel_args from grpc/grpc.h.
+Commonly used channel option names are defined in <code>ChannelOptions</code>,
+but any of the GRPC_ARG_* channel options names defined in grpc_types.h can be used.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.ChannelOptions.html">ChannelOptions</a></h4>
-      <section><p>Defines names of supported channel options.</p>
+      <section><p>Defines names of most commonly used channel options.
+Other supported options names can be found in grpc_types.h (GRPC_ARG_* definitions)</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.ClientBase.html">ClientBase</a></h4>
       <section><p>Base class for client-side stubs.</p>
@@ -149,17 +163,27 @@ less likely.</p>
 In situations when a backend is making calls to another backend,
 it makes sense to propagate properties like deadline and cancellation 
 token of the server call to the child call.
-The gRPC native layer provides some other contexts (like tracing context) that
-are not accessible to explicitly C# layer, but this token still allows propagating them.</p>
+Underlying gRPC implementation may provide other &quot;opaque&quot; contexts (like tracing context) that
+are not explicitly accesible via the public C# API, but this token still allows propagating them.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.DefaultCallInvoker.html">DefaultCallInvoker</a></h4>
       <section><p>Invokes client RPCs using <a class="xref" href="Grpc.Core.Calls.html">Calls</a>.</p>
+</section>
+      <h4><a class="xref" href="Grpc.Core.DeserializationContext.html">DeserializationContext</a></h4>
+      <section><p>Provides access to the payload being deserialized when deserializing messages.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.GrpcEnvironment.html">GrpcEnvironment</a></h4>
       <section><p>Encapsulates initialization and shutdown of gRPC library.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.KeyCertificatePair.html">KeyCertificatePair</a></h4>
       <section><p>Key certificate pair (in PEM encoding).</p>
+</section>
+      <h4><a class="xref" href="Grpc.Core.LiteClientBase.html">LiteClientBase</a></h4>
+      <section><p>Base class for lightweight client-side stubs.
+All calls are invoked via a <code>CallInvoker</code>.
+Lite client stubs have no configuration knobs, all configuration
+is provided by decorating the call invoker.
+Note: experimental API that can change or be removed without any prior notice.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.Marshaller-1.html">Marshaller&lt;T&gt;</a></h4>
       <section><p>Encapsulates the logic for serializing and deserializing messages.</p>
@@ -181,8 +205,11 @@ gRPC supports these types of metadata:
       <h4><a class="xref" href="Grpc.Core.RpcException.html">RpcException</a></h4>
       <section><p>Thrown when remote procedure call fails. Every <code>RpcException</code> is associated with a resulting <a class="xref" href="Grpc.Core.RpcException.html#Grpc_Core_RpcException_Status">Status</a> of the call.</p>
 </section>
+      <h4><a class="xref" href="Grpc.Core.SerializationContext.html">SerializationContext</a></h4>
+      <section><p>Provides storage for payload when serializing a message.</p>
+</section>
       <h4><a class="xref" href="Grpc.Core.Server.html">Server</a></h4>
-      <section><p>gRPC server. A single server can server arbitrary number of services and can listen on more than one ports.</p>
+      <section><p>gRPC server. A single server can serve an arbitrary number of services and can listen on more than one port.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.Server.ServerPortCollection.html">Server.ServerPortCollection</a></h4>
       <section><p>Collection of server ports.</p>
@@ -200,18 +227,27 @@ gRPC supports these types of metadata:
       <section><p>A port exposed by a server.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.ServerServiceDefinition.html">ServerServiceDefinition</a></h4>
-      <section><p>Mapping of method names to server call handlers.
+      <section><p>Stores mapping of methods to server call handlers.
 Normally, the <code>ServerServiceDefinition</code> objects will be created by the <code>BindService</code> factory method 
 that is part of the autogenerated code for a protocol buffers service definition.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.ServerServiceDefinition.Builder.html">ServerServiceDefinition.Builder</a></h4>
       <section><p>Builder class for <a class="xref" href="Grpc.Core.ServerServiceDefinition.html">ServerServiceDefinition</a>.</p>
 </section>
+      <h4><a class="xref" href="Grpc.Core.ServiceBinderBase.html">ServiceBinderBase</a></h4>
+      <section><p>Allows binding server-side method implementations in alternative serving stacks.
+Instances of this class are usually populated by the <code>BindService</code> method
+that is part of the autogenerated code for a protocol buffers service definition.</p>
+</section>
       <h4><a class="xref" href="Grpc.Core.SslCredentials.html">SslCredentials</a></h4>
       <section><p>Client-side SSL credentials.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.SslServerCredentials.html">SslServerCredentials</a></h4>
       <section><p>Server-side SSL credentials.</p>
+</section>
+      <h4><a class="xref" href="Grpc.Core.VerifyPeerContext.html">VerifyPeerContext</a></h4>
+      <section><p>Verification context for VerifyPeerCallback.
+Note: experimental API that can change or be removed without any prior notice.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.VersionInfo.html">VersionInfo</a></h4>
       <section><p>Provides info about current version of gRPC.
@@ -230,7 +266,7 @@ for rationale about assembly versioning.</p>
       <section><p>Options for calls made by client.</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.Status.html">Status</a></h4>
-      <section><p>Represents RPC result, which consists of <a class="xref" href="Grpc.Core.Status.html#Grpc_Core_Status_StatusCode">StatusCode</a> and an optional detail string. </p>
+      <section><p>Represents RPC result, which consists of <a class="xref" href="Grpc.Core.Status.html#Grpc_Core_Status_StatusCode">StatusCode</a> and an optional detail string.</p>
 </section>
     <h3 id="interfaces">Interfaces
   </h3>
@@ -286,6 +322,10 @@ Based on grpc_connectivity_state from grpc/grpc.h</p>
       <h4><a class="xref" href="Grpc.Core.MethodType.html">MethodType</a></h4>
       <section><p>Method types supported by gRPC.</p>
 </section>
+      <h4><a class="xref" href="Grpc.Core.SslClientCertificateRequestType.html">SslClientCertificateRequestType</a></h4>
+      <section><p>Modes of requesting client&apos;s SSL certificate by the server.
+Corresponds to <code>grpc_ssl_client_certificate_request_type</code>.</p>
+</section>
       <h4><a class="xref" href="Grpc.Core.StatusCode.html">StatusCode</a></h4>
       <section><p>Result of a remote procedure call.
 Based on grpc_status_code from grpc/status.h</p>
@@ -309,6 +349,16 @@ Based on grpc_status_code from grpc/status.h</p>
 </section>
       <h4><a class="xref" href="Grpc.Core.UnaryServerMethod-2.html">UnaryServerMethod&lt;TRequest, TResponse&gt;</a></h4>
       <section><p>Server-side handler for unary call.</p>
+</section>
+      <h4><a class="xref" href="Grpc.Core.VerifyPeerCallback.html">VerifyPeerCallback</a></h4>
+      <section><p>Callback invoked with the expected targetHost and the peer&apos;s certificate.
+If false is returned by this callback then it is treated as a
+verification failure and the attempted connection will fail.
+Invocation of the callback is blocking, so any
+implementation should be light-weight.
+Note that the callback can potentially be invoked multiple times,
+concurrently from different threads (e.g. when multiple connections
+are being created for the same credentials).</p>
 </section>
 </article>
           </div>
