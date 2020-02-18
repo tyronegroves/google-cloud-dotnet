@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ReportedErrorEvent
    | Google.Cloud.ErrorReporting.V1Beta1 ">
-    <meta name="generator" content="docfx 2.32.1.0">
+    <meta name="generator" content="docfx 2.39.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -22,7 +22,7 @@
     
     
   </head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -83,10 +83,10 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.html">ReportedErrorEvent</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.html">ReportedErrorEvent</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.html">ReportedErrorEvent</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.html">ReportedErrorEvent</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.html">ReportedErrorEvent</a>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -148,7 +148,7 @@
   </h3>
   <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Context_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.Context*"></a>
   <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Context" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.Context">Context</h4>
-  <div class="markdown level1 summary"><p>[Optional] A description of the context in which the error occurred.</p>
+  <div class="markdown level1 summary"><p>Optional. A description of the context in which the error occurred.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -172,7 +172,7 @@
   </table>
   <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_EventTime_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.EventTime*"></a>
   <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_EventTime" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.EventTime">EventTime</h4>
-  <div class="markdown level1 summary"><p>[Optional] Time when the event occurred.
+  <div class="markdown level1 summary"><p>Optional. Time when the event occurred.
 If not provided, the time when the event was received by the
 Error Reporting system will be used.</p>
 </div>
@@ -191,17 +191,38 @@ Error Reporting system will be used.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="xref">Google.Protobuf.WellKnownTypes.Timestamp</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Message_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.Message*"></a>
   <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_Message" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.Message">Message</h4>
-  <div class="markdown level1 summary"><p>[Required] A message describing the error. The message can contain an
-exception stack in one of the supported programming languages and formats.
-In that case, the message is parsed and detailed exception information
-is returned when retrieving the error event again.</p>
+  <div class="markdown level1 summary"><p>Required. The error message.
+If no <code>context.reportLocation</code> is provided, the message must contain a
+header (typically consisting of the exception type name and an error
+message) and an exception stack trace in one of the supported programming
+languages and formats.
+Supported languages are Java, Python, JavaScript, Ruby, C#, PHP, and Go.
+Supported stack trace formats are:</p>
+<ul>
+<li><strong>Java</strong>: Must be the return value of
+<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#printStackTrace%28%29"><code>Throwable.printStackTrace()</code></a>.</li>
+<li><strong>Python</strong>: Must be the return value of
+<a href="https://docs.python.org/2/library/traceback.html#traceback.format_exc"><code>traceback.format_exc()</code></a>.</li>
+<li><strong>JavaScript</strong>: Must be the value of
+<a href="https://github.com/v8/v8/wiki/Stack-Trace-API"><code>error.stack</code></a> as returned
+by V8.</li>
+<li><strong>Ruby</strong>: Must contain frames returned by
+<a href="https://ruby-doc.org/core-2.2.0/Exception.html#method-i-backtrace"><code>Exception.backtrace</code></a>.</li>
+<li><strong>C#</strong>: Must be the return value of
+<a href="https://msdn.microsoft.com/en-us/library/system.exception.tostring.aspx"><code>Exception.ToString()</code></a>.</li>
+<li><strong>PHP</strong>: Must start with <code>PHP (Notice|Parse error|Fatal error|Warning)</code>
+and contain the result of
+<a href="http://php.net/manual/en/exception.tostring.php"><code>(string)$exception</code></a>.</li>
+<li><strong>Go</strong>: Must be the return value of
+<a href="https://golang.org/pkg/runtime/debug/#Stack"><code>runtime.Stack()</code></a>.</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -225,7 +246,7 @@ is returned when retrieving the error event again.</p>
   </table>
   <a id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_ServiceContext_" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.ServiceContext*"></a>
   <h4 id="Google_Cloud_ErrorReporting_V1Beta1_ReportedErrorEvent_ServiceContext" data-uid="Google.Cloud.ErrorReporting.V1Beta1.ReportedErrorEvent.ServiceContext">ServiceContext</h4>
-  <div class="markdown level1 summary"><p>[Required] The service context in which this error has occurred.</p>
+  <div class="markdown level1 summary"><p>Required. The service context in which this error has occurred.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
