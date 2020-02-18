@@ -112,7 +112,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ServiceEndpoint DefaultEndpoint { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static string DefaultEndpoint { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -124,7 +124,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -155,11 +155,11 @@
   </table>
   <h5 id="Google_Cloud_Talent_V4Beta1_CompletionClient_DefaultScopes_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The default Completion scopes are:
-<ul><li>&quot;<a href="https://www.googleapis.com/auth/cloud-platform&amp;quot">https://www.googleapis.com/auth/cloud-platform&quot</a>;</li><li>&quot;<a href="https://www.googleapis.com/auth/jobs&amp;quot">https://www.googleapis.com/auth/jobs&quot</a>;</li></ul></p>
+<ul><li><a href="https://www.googleapis.com/auth/cloud-platform">https://www.googleapis.com/auth/cloud-platform</a></li><li><a href="https://www.googleapis.com/auth/jobs">https://www.googleapis.com/auth/jobs</a></li></ul></p>
 </div>
   <a id="Google_Cloud_Talent_V4Beta1_CompletionClient_GrpcClient_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.GrpcClient*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_GrpcClient" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.GrpcClient">GrpcClient</h4>
-  <div class="markdown level1 summary"><p>The underlying gRPC Completion client.</p>
+  <div class="markdown level1 summary"><p>The underlying gRPC Completion client</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -210,7 +210,7 @@ Intended for use by a job search auto-complete search box.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -240,9 +240,13 @@ CompletionClient completionClient = CompletionClient.Create();
 // Initialize request argument(s)
 CompleteQueryRequest request = new CompleteQueryRequest
 {
-    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
+    ParentAsTenantOrProjectName = TenantOrProjectName.FromProjectTenant(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;),
     Query = &quot;&quot;,
+    LanguageCodes = { &quot;&quot;, },
     PageSize = 0,
+    CompanyAsCompanyName = CompanyName.FromProjectCompany(&quot;[PROJECT]&quot;, &quot;[COMPANY]&quot;),
+    Scope = CompleteQueryRequest.Types.CompletionScope.Unspecified,
+    Type = CompleteQueryRequest.Types.CompletionType.Unspecified,
 };
 // Make the request
 CompleteQueryResponse response = completionClient.CompleteQuery(request);
@@ -275,7 +279,7 @@ Intended for use by a job search auto-complete search box.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -305,9 +309,13 @@ CompletionClient completionClient = await CompletionClient.CreateAsync();
 // Initialize request argument(s)
 CompleteQueryRequest request = new CompleteQueryRequest
 {
-    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
+    ParentAsTenantOrProjectName = TenantOrProjectName.FromProjectTenant(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;),
     Query = &quot;&quot;,
+    LanguageCodes = { &quot;&quot;, },
     PageSize = 0,
+    CompanyAsCompanyName = CompanyName.FromProjectCompany(&quot;[PROJECT]&quot;, &quot;[COMPANY]&quot;),
+    Scope = CompleteQueryRequest.Types.CompletionScope.Unspecified,
+    Type = CompleteQueryRequest.Types.CompletionType.Unspecified,
 };
 // Make the request
 CompleteQueryResponse response = await completionClient.CompleteQueryAsync(request);
@@ -370,169 +378,28 @@ CompletionClient completionClient = await CompletionClient.CreateAsync();
 // Initialize request argument(s)
 CompleteQueryRequest request = new CompleteQueryRequest
 {
-    ParentAsTenantOrProjectNameOneof = TenantOrProjectNameOneof.From(new TenantName(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;)),
+    ParentAsTenantOrProjectName = TenantOrProjectName.FromProjectTenant(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;),
     Query = &quot;&quot;,
+    LanguageCodes = { &quot;&quot;, },
     PageSize = 0,
+    CompanyAsCompanyName = CompanyName.FromProjectCompany(&quot;[PROJECT]&quot;, &quot;[COMPANY]&quot;),
+    Scope = CompleteQueryRequest.Types.CompletionScope.Unspecified,
+    Type = CompleteQueryRequest.Types.CompletionType.Unspecified,
 };
 // Make the request
 CompleteQueryResponse response = await completionClient.CompleteQueryAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.Create*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Talent.V4Beta1.CompletionSettings)">Create(ServiceEndpoint, CompletionSettings)</h4>
-  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
-necessary. See the example for how to use custom credentials.</p>
+  <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.Create">Create()</h4>
+  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a> using the default credentials, endpoint and settings.
+To specify custom credentials or other settings, use <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClientBuilder.html">CompletionClientBuilder</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static CompletionClient Create(ServiceEndpoint endpoint = null, CompletionSettings settings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static CompletionClient Create()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
-        <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a></td>
-        <td><p>The created <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings__examples">Examples</h5>
-  <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Talent.V4Beta1;
-...
-// When running on Google Cloud Platform this will use the project Compute Credential.
-// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
-// credential file to use that credential.
-CompletionClient client = CompletionClient.Create();</code></pre>
-<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Talent.V4Beta1;
-using Google.Apis.Auth.OAuth2;
-using Grpc.Auth;
-using Grpc.Core;
-...
-GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
-Channel channel = new Channel(
-    CompletionClient.DefaultEndpoint.Host, CompletionClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-CompletionClient client = CompletionClient.Create(channel);
-...
-// Shutdown the channel when it is no longer required.
-channel.ShutdownAsync().Wait();</code></pre>
-
-  <a id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.Create*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Talent_V4Beta1_CompletionSettings_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Talent.V4Beta1.CompletionSettings)">Create(CallInvoker, CompletionSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a> which uses the specified call invoker for remote operations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static CompletionClient Create(CallInvoker callInvoker, CompletionSettings settings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
-        <td><span class="parametername">callInvoker</span></td>
-        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a></td>
-        <td><p>The created <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.Create*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_Create_Grpc_Core_Channel_Google_Cloud_Talent_V4Beta1_CompletionSettings_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.Create(Grpc.Core.Channel,Google.Cloud.Talent.V4Beta1.CompletionSettings)">Create(Channel, CompletionSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a> which uses the specified channel for remote operations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static CompletionClient Create(Channel channel, CompletionSettings settings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Grpc.Core.Channel.html">Channel</a></td>
-        <td><span class="parametername">channel</span></td>
-        <td><p>The <a class="xref" href="Grpc.Core.Channel.html">Channel</a> for remote operations. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -550,15 +417,14 @@ channel.ShutdownAsync().Wait();</code></pre>
     </tbody>
   </table>
   <a id="Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.CreateAsync*"></a>
-  <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Talent.V4Beta1.CompletionSettings)">CreateAsync(ServiceEndpoint, CompletionSettings)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a>, applying defaults for all unspecified settings,
-and creating a channel connecting to the given endpoint with application default credentials where
-necessary. See the example for how to use custom credentials.</p>
+  <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_System_Threading_CancellationToken_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.CreateAsync(System.Threading.CancellationToken)">CreateAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html">CompletionClient</a> using the default credentials, endpoint and
+settings. To specify custom credentials or other settings, use <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClientBuilder.html">CompletionClientBuilder</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;CompletionClient&gt; CreateAsync(ServiceEndpoint endpoint = null, CompletionSettings settings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;CompletionClient&gt; CreateAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -571,15 +437,9 @@ necessary. See the example for how to use custom credentials.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
-        <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionSettings.html">CompletionSettings</a>.</p>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The <span class="xref">System.Threading.CancellationToken</span> to use while creating the client.</p>
 </td>
       </tr>
     </tbody>
@@ -600,33 +460,11 @@ necessary. See the example for how to use custom credentials.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings__examples">Examples</h5>
-  <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Talent.V4Beta1;
-...
-// When running on Google Cloud Platform this will use the project Compute Credential.
-// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
-// credential file to use that credential.
-CompletionClient client = await CompletionClient.CreateAsync();</code></pre>
-<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Talent.V4Beta1;
-using Google.Apis.Auth.OAuth2;
-using Grpc.Auth;
-using Grpc.Core;
-...
-GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
-Channel channel = new Channel(
-    CompletionClient.DefaultEndpoint.Host, CompletionClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-CompletionClient client = CompletionClient.Create(channel);
-...
-// Shutdown the channel when it is no longer required.
-await channel.ShutdownAsync();</code></pre>
-
   <a id="Google_Cloud_Talent_V4Beta1_CompletionClient_ShutdownDefaultChannelsAsync_" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.ShutdownDefaultChannelsAsync*"></a>
   <h4 id="Google_Cloud_Talent_V4Beta1_CompletionClient_ShutdownDefaultChannelsAsync" data-uid="Google.Cloud.Talent.V4Beta1.CompletionClient.ShutdownDefaultChannelsAsync">ShutdownDefaultChannelsAsync()</h4>
-  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings_">Create(ServiceEndpoint, CompletionSettings)</a>
-and <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings_">CreateAsync(ServiceEndpoint, CompletionSettings)</a>. Channels which weren&apos;t automatically
-created are not affected.</p>
+  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_Create">Create()</a> and
+<a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_System_Threading_CancellationToken_">CreateAsync(CancellationToken)</a>. Channels which weren&apos;t automatically created are not
+affected.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -650,9 +488,9 @@ created are not affected.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Talent_V4Beta1_CompletionClient_ShutdownDefaultChannelsAsync_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings_">Create(ServiceEndpoint, CompletionSettings)</a>
-and <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Talent_V4Beta1_CompletionSettings_">CreateAsync(ServiceEndpoint, CompletionSettings)</a> will create new channels, which could
-in turn be shut down by another call to this method.</p>
+  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_Create">Create()</a> and
+<a class="xref" href="Google.Cloud.Talent.V4Beta1.CompletionClient.html#Google_Cloud_Talent_V4Beta1_CompletionClient_CreateAsync_System_Threading_CancellationToken_">CreateAsync(CancellationToken)</a> will create new channels, which could in turn be shut down
+by another call to this method.</p>
 </div>
 </article>
           </div>
