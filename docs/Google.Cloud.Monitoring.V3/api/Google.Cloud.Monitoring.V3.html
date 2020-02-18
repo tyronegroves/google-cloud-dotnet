@@ -78,12 +78,29 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.html">Aggregation</a></h4>
-      <section><p>Describes how to combine multiple time series to provide different views of
-the data.  Aggregation consists of an alignment step on individual time
-series (<code>alignment_period</code> and <code>per_series_aligner</code>) followed by an optional
-reduction step of the data across the aligned time series
-(<code>cross_series_reducer</code> and <code>group_by_fields</code>).  For more details, see
-<a href="/monitoring/api/learn_more#aggregation">Aggregation</a>.</p>
+      <section><p>Describes how to combine multiple time series to provide a different view of
+the data.  Aggregation of time series is done in two steps. First, each time
+series in the set is <em>aligned</em> to the same time interval boundaries, then the
+set of time series is optionally <em>reduced</em> in number.</p>
+<p>Alignment consists of applying the <code>per_series_aligner</code> operation
+to each time series after its data has been divided into regular
+<code>alignment_period</code> time intervals. This process takes <em>all</em> of the data
+points in an alignment period, applies a mathematical transformation such as
+averaging, minimum, maximum, delta, etc., and converts them into a single
+data point per period.</p>
+<p>Reduction is when the aligned and transformed time series can optionally be
+combined, reducing the number of time series through similar mathematical
+transformations. Reduction involves applying a <code>cross_series_reducer</code> to
+all the time series, optionally sorting the time series into subsets with
+<code>group_by_fields</code>, and applying the reducer to each subset.</p>
+<p>The raw time series data can contain a huge amount of information from
+multiple sources. Alignment and reduction transforms this mass of data into
+a more manageable and representative collection of data, for example &quot;the
+95% latency across the average of all tasks in a cluster&quot;. This
+representative data can be more easily graphed and comprehended, and the
+individual time series data is still available for later drilldown. For more
+details, see <a href="/monitoring/api/v3/metrics#aggregating_time_series">Aggregating Time
+Series</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.Types.html">Aggregation.Types</a></h4>
       <section><p>Container for nested types declared in the Aggregation message type.</p>
@@ -125,10 +142,10 @@ condition. If not specified, then a <code>{count: 1}</code> trigger is used.</p>
 format.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyConditionName.html">AlertPolicyConditionName</a></h4>
-      <section><p>Resource name for the &apos;alert_policy_condition&apos; resource.</p>
+      <section><p>Resource name for the <code>AlertPolicyCondition</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyName.html">AlertPolicyName</a></h4>
-      <section><p>Resource name for the &apos;alert_policy&apos; resource.</p>
+      <section><p>Resource name for the <code>AlertPolicy</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyService.html">AlertPolicyService</a></h4>
       <section><p>The AlertPolicyService API is used to manage (list, create, delete,
@@ -151,13 +168,14 @@ which can be reached by clicking the &quot;Monitoring&quot; tab in
       <section><p>AlertPolicyService client wrapper, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyServiceClientBuilder.html">AlertPolicyServiceClientBuilder</a></h4>
-      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyServiceClient.html">AlertPolicyServiceClient</a> to provide simple configuration of credentials, endpoint etc.</p>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyServiceClient.html">AlertPolicyServiceClient</a> to provide simple configuration of credentials,
+endpoint etc.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyServiceClientImpl.html">AlertPolicyServiceClientImpl</a></h4>
       <section><p>AlertPolicyService client wrapper implementation, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyServiceSettings.html">AlertPolicyServiceSettings</a></h4>
-      <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyServiceClient.html">AlertPolicyServiceClient</a>.</p>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyServiceClient.html">AlertPolicyServiceClient</a> instances.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.BasicSli.html">BasicSli</a></h4>
       <section><p>An SLI measuring performance on a well-known service type. Performance will
@@ -241,6 +259,21 @@ DISTRIBUTION</code> and <code>MetricKind = DELTA</code> or <code>MetricKind = CU
 computed <code>good_service</code> will be the count of values x in the <code>Distribution</code>
 such that <code>range.min &amp;lt;= x &amp;lt; range.max</code>.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.DroppedLabels.html">DroppedLabels</a></h4>
+      <section><p>A set of (label, value) pairs which were dropped during aggregation, attached
+to google.api.Distribution.Exemplars in google.api.Distribution values during
+aggregation.</p>
+<p>These values are used in combination with the label values that remain on the
+aggregated Distribution timeseries to construct the full label set for the
+exemplar values.  The resulting full label set may be used to identify the
+specific task/job/instance (for example) which may be contributing to a
+long-tail, while allowing the storage savings of only storing aggregated
+distribution values for a large group.</p>
+<p>Note that there are no guarantees on ordering of the labels from
+exemplar-to-exemplar and from distribution-to-distribution in the same
+stream, and there may be duplicates.  It is up to clients to resolve any
+ambiguities.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GetAlertPolicyRequest.html">GetAlertPolicyRequest</a></h4>
       <section><p>The protocol for the <code>GetAlertPolicy</code> request.</p>
 </section>
@@ -300,7 +333,7 @@ depending on what resources exist and what filters are associated with the
 group and its ancestors.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupName.html">GroupName</a></h4>
-      <section><p>Resource name for the &apos;group&apos; resource.</p>
+      <section><p>Resource name for the <code>Group</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupService.html">GroupService</a></h4>
       <section><p>The Group API lets you inspect and manage your
@@ -331,7 +364,7 @@ from the infrastructure.</p>
       <section><p>GroupService client wrapper implementation, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupServiceSettings.html">GroupServiceSettings</a></h4>
-      <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.GroupServiceClient.html">GroupServiceClient</a>.</p>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.Monitoring.V3.GroupServiceClient.html">GroupServiceClient</a> instances.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.InternalChecker.html">InternalChecker</a></h4>
       <section><p>An internal checker allows Uptime checks to run on private/internal GCP
@@ -416,7 +449,7 @@ resources.</p>
       <section><p>The protocol for the <code>ListUptimeCheckIps</code> response.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MetricDescriptorName.html">MetricDescriptorName</a></h4>
-      <section><p>Resource name for the &apos;metric_descriptor&apos; resource.</p>
+      <section><p>Resource name for the <code>MetricDescriptor</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MetricService.html">MetricService</a></h4>
       <section><p>Manages metric descriptors, monitored resource descriptors, and
@@ -432,16 +465,17 @@ time series data.</p>
       <section><p>MetricService client wrapper, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClientBuilder.html">MetricServiceClientBuilder</a></h4>
-      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a> to provide simple configuration of credentials, endpoint etc.</p>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a> to provide simple configuration of credentials, endpoint
+etc.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClientImpl.html">MetricServiceClientImpl</a></h4>
       <section><p>MetricService client wrapper implementation, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceSettings.html">MetricServiceSettings</a></h4>
-      <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a>.</p>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.Monitoring.V3.MetricServiceClient.html">MetricServiceClient</a> instances.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MonitoredResourceDescriptorName.html">MonitoredResourceDescriptorName</a></h4>
-      <section><p>Resource name for the &apos;monitored_resource_descriptor&apos; resource.</p>
+      <section><p>Resource name for the <code>MonitoredResourceDescriptor</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MutationRecord.html">MutationRecord</a></h4>
       <section><p>Describes a change made to a configuration.</p>
@@ -462,10 +496,10 @@ the properties of the channel and the set of labels or fields that
 must be specified to configure channels of a given type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelDescriptorName.html">NotificationChannelDescriptorName</a></h4>
-      <section><p>Resource name for the &apos;notification_channel_descriptor&apos; resource.</p>
+      <section><p>Resource name for the <code>NotificationChannelDescriptor</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelName.html">NotificationChannelName</a></h4>
-      <section><p>Resource name for the &apos;notification_channel&apos; resource.</p>
+      <section><p>Resource name for the <code>NotificationChannel</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelService.html">NotificationChannelService</a></h4>
       <section><p>The Notification Channel API provides access to configuration that
@@ -481,19 +515,17 @@ controls how messages related to incidents are sent.</p>
       <section><p>NotificationChannelService client wrapper, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClientBuilder.html">NotificationChannelServiceClientBuilder</a></h4>
-      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a> to provide simple configuration of credentials, endpoint etc.</p>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a> to provide simple configuration of credentials,
+endpoint etc.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClientImpl.html">NotificationChannelServiceClientImpl</a></h4>
       <section><p>NotificationChannelService client wrapper implementation, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceSettings.html">NotificationChannelServiceSettings</a></h4>
-      <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a>.</p>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelServiceClient.html">NotificationChannelServiceClient</a> instances.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.Point.html">Point</a></h4>
       <section><p>A single data point in a time series.</p>
-</section>
-      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ProjectName.html">ProjectName</a></h4>
-      <section><p>Resource name for the &apos;project&apos; resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.Range.html">Range</a></h4>
       <section><p>Range of numerical values, inclusive of <code>min</code> and exclusive of <code>max</code>. If the
@@ -560,7 +592,7 @@ use SLIs defined in a number of different manners. Typical SLOs might include
       <section><p>Container for nested types declared in the ServiceLevelObjective message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceLevelObjectiveName.html">ServiceLevelObjectiveName</a></h4>
-      <section><p>Resource name for the &apos;service_level_objective&apos; resource.</p>
+      <section><p>Resource name for the <code>ServiceLevelObjective</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringService.html">ServiceMonitoringService</a></h4>
       <section><p>The Stackdriver Monitoring Service-Oriented Monitoring API has endpoints for
@@ -578,16 +610,17 @@ of categorized Health Metrics.</p>
       <section><p>ServiceMonitoringService client wrapper, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringServiceClientBuilder.html">ServiceMonitoringServiceClientBuilder</a></h4>
-      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringServiceClient.html">ServiceMonitoringServiceClient</a> to provide simple configuration of credentials, endpoint etc.</p>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringServiceClient.html">ServiceMonitoringServiceClient</a> to provide simple configuration of credentials,
+endpoint etc.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringServiceClientImpl.html">ServiceMonitoringServiceClientImpl</a></h4>
       <section><p>ServiceMonitoringService client wrapper implementation, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringServiceSettings.html">ServiceMonitoringServiceSettings</a></h4>
-      <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringServiceClient.html">ServiceMonitoringServiceClient</a>.</p>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.Monitoring.V3.ServiceMonitoringServiceClient.html">ServiceMonitoringServiceClient</a> instances.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceName.html">ServiceName</a></h4>
-      <section><p>Resource name for the &apos;service&apos; resource.</p>
+      <section><p>Resource name for the <code>Service</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.SpanContext.html">SpanContext</a></h4>
       <section><p>The context of a span, attached to google.api.Distribution.Exemplars
@@ -689,7 +722,7 @@ monitored resource, when multiple resources are being monitored.</p>
       <section><p>Information required for a TCP Uptime check request.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfigName.html">UptimeCheckConfigName</a></h4>
-      <section><p>Resource name for the &apos;uptime_check_config&apos; resource.</p>
+      <section><p>Resource name for the <code>UptimeCheckConfig</code> resource.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckIp.html">UptimeCheckIp</a></h4>
       <section><p>Contains the region, location, and list of IP
@@ -714,13 +747,14 @@ and then clicking on &quot;Uptime&quot;.</p>
       <section><p>UptimeCheckService client wrapper, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClientBuilder.html">UptimeCheckServiceClientBuilder</a></h4>
-      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a> to provide simple configuration of credentials, endpoint etc.</p>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a> to provide simple configuration of credentials,
+endpoint etc.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClientImpl.html">UptimeCheckServiceClientImpl</a></h4>
       <section><p>UptimeCheckService client wrapper implementation, for convenient use.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceSettings.html">UptimeCheckServiceSettings</a></h4>
-      <section><p>Settings for a <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a>.</p>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckServiceClient.html">UptimeCheckServiceClient</a> instances.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.VerifyNotificationChannelRequest.html">VerifyNotificationChannelRequest</a></h4>
       <section><p>The <code>VerifyNotificationChannel</code> request.</p>
@@ -746,12 +780,23 @@ has a sufficiently high <code>performance</code>.</p>
     <h3 id="enums">Enums
   </h3>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.Types.Aligner.html">Aggregation.Types.Aligner</a></h4>
-      <section><p>The Aligner describes how to bring the data points in a single
-time series into temporal alignment.</p>
+      <section><p>The <code>Aligner</code> specifies the operation that will be applied to the data
+points in each alignment period in a time series. Except for
+<code>ALIGN_NONE</code>, which specifies that no operation be applied, each alignment
+operation replaces the set of data values in each alignment period with
+a single value: the result of applying the operation to the data values.
+An aligned time series has a single data value at the end of each
+<code>alignment_period</code>.</p>
+<p>An alignment operation can change the data type of the values, too. For
+example, if you apply a counting operation to boolean values, the data
+<code>value_type</code> in the original time series is <code>BOOLEAN</code>, but the <code>value_type</code>
+in the aligned result is <code>INT64</code>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.Types.Reducer.html">Aggregation.Types.Reducer</a></h4>
-      <section><p>A Reducer describes how to aggregate data points from multiple
-time series into a single time series.</p>
+      <section><p>A Reducer operation describes how to aggregate data points from multiple
+time series into a single time series, where the value of each data point
+in the resulting series is a function of all the already aligned values in
+the input time series.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.Types.Condition.ConditionOneofCase.html">AlertPolicy.Types.Condition.ConditionOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;condition&quot; oneof.</p>
@@ -762,12 +807,21 @@ time series into a single time series.</p>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.Types.ConditionCombinerType.html">AlertPolicy.Types.ConditionCombinerType</a></h4>
       <section><p>Operators for combining conditions.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyConditionName.ResourceNameType.html">AlertPolicyConditionName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyConditionName.html">AlertPolicyConditionName</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyName.ResourceNameType.html">AlertPolicyName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyName.html">AlertPolicyName</a>.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.BasicSli.SliCriteriaOneofCase.html">BasicSli.SliCriteriaOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;sli_criteria&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ComparisonType.html">ComparisonType</a></h4>
-      <section><p>Specifies an ordering relationship on two arguments, here called left and
-right.</p>
+      <section><p>Specifies an ordering relationship on two arguments, called <code>left</code> and
+<code>right</code>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupName.ResourceNameType.html">GroupName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.GroupName.html">GroupName</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.GroupResourceType.html">GroupResourceType</a></h4>
       <section><p>The supported resource types that can be used as values of
@@ -785,6 +839,12 @@ group checks on App Engine modules and URLs are not allowed.</p>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView.html">ListTimeSeriesRequest.Types.TimeSeriesView</a></h4>
       <section><p>Controls which fields are returned by <code>ListTimeSeries</code>.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MetricDescriptorName.ResourceNameType.html">MetricDescriptorName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.MetricDescriptorName.html">MetricDescriptorName</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.MonitoredResourceDescriptorName.ResourceNameType.html">MonitoredResourceDescriptorName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.MonitoredResourceDescriptorName.html">MonitoredResourceDescriptorName</a>.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannel.Types.VerificationStatus.html">NotificationChannel.Types.VerificationStatus</a></h4>
       <section><p>Indicates whether the channel has been verified or not. It is illegal
 to specify this field in a
@@ -792,6 +852,12 @@ to specify this field in a
 or an
 [<code>UpdateNotificationChannel</code>][google.monitoring.v3.NotificationChannelService.UpdateNotificationChannel]
 operation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelDescriptorName.ResourceNameType.html">NotificationChannelDescriptorName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelDescriptorName.html">NotificationChannelDescriptorName</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelName.ResourceNameType.html">NotificationChannelName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.NotificationChannelName.html">NotificationChannelName</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.RequestBasedSli.MethodOneofCase.html">RequestBasedSli.MethodOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;method&quot; oneof.</p>
@@ -810,6 +876,12 @@ operation.</p>
 <code>ServiceLevelObjective</code> is returned from <code>GetServiceLevelObjective</code>,
 <code>ListServiceLevelObjectives</code>, and <code>ListServiceLevelObjectiveVersions</code> RPCs.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceLevelObjectiveName.ResourceNameType.html">ServiceLevelObjectiveName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.ServiceLevelObjectiveName.html">ServiceLevelObjectiveName</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceName.ResourceNameType.html">ServiceName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.ServiceName.html">ServiceName</a>.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.ServiceTier.html">ServiceTier</a></h4>
       <section><p>The tier of service for a Workspace. Please see the
 <a href="https://cloud.google.com/monitoring/workspaces/tiers">service tiers
@@ -827,6 +899,9 @@ details.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.ContentMatcher.Types.ContentMatcherOption.html">UptimeCheckConfig.Types.ContentMatcher.Types.ContentMatcherOption</a></h4>
       <section><p>Options to perform content matching.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfigName.ResourceNameType.html">UptimeCheckConfigName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckConfigName.html">UptimeCheckConfigName</a>.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Monitoring.V3.UptimeCheckRegion.html">UptimeCheckRegion</a></h4>
       <section><p>The regions from which an Uptime check can be run.</p>

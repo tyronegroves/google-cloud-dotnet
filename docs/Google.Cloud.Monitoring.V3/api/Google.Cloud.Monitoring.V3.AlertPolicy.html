@@ -86,10 +86,10 @@ this state. For an overview of alert policies, see
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.html">AlertPolicy</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.html">AlertPolicy</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.html">AlertPolicy</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.html">AlertPolicy</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.html">AlertPolicy</a>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -149,10 +149,36 @@ this state. For an overview of alert policies, see
   </table>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Monitoring_V3_AlertPolicy_AlertPolicyName_" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.AlertPolicyName*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_AlertPolicy_AlertPolicyName" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.AlertPolicyName">AlertPolicyName</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyName.html">AlertPolicyName</a>-typed view over the <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.html#Google_Cloud_Monitoring_V3_AlertPolicy_Name">Name</a> resource name property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AlertPolicyName AlertPolicyName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicyName.html">AlertPolicyName</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Monitoring_V3_AlertPolicy_Combiner_" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.Combiner*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_AlertPolicy_Combiner" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.Combiner">Combiner</h4>
-  <div class="markdown level1 summary"><p>How to combine the results of multiple conditions
-to determine if an incident should be opened.</p>
+  <div class="markdown level1 summary"><p>How to combine the results of multiple conditions to determine if an
+incident should be opened.
+If <code>condition_time_series_query_language</code> is present, this must be
+<code>COMBINE_UNSPECIFIED</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -179,7 +205,9 @@ to determine if an incident should be opened.</p>
   <div class="markdown level1 summary"><p>A list of conditions for the policy. The conditions are combined by AND or
 OR according to the <code>combiner</code> field. If the combined conditions evaluate
 to true, then an incident is created. A policy can have from one to six
-conditions.</p>
+conditions.
+If <code>condition_time_series_query_language</code> is present, it must be the only
+<code>condition</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -196,7 +224,7 @@ conditions.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.Types.Condition.html">AlertPolicy.Types.Condition</a>&gt;</td>
+        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.Types.Condition.html">AlertPolicy.Types.Condition</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -337,8 +365,8 @@ provided in a call to create or update, this field will be ignored.</p>
   <a id="Google_Cloud_Monitoring_V3_AlertPolicy_Name_" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.Name*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_AlertPolicy_Name" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.Name">Name</h4>
   <div class="markdown level1 summary"><p>Required if the policy exists. The resource name for this policy. The
-syntax is:</p>
-<p>projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]</p>
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]</p>
 <p><code>[ALERT_POLICY_ID]</code> is assigned by Stackdriver Monitoring when the policy
 is created.  When calling the
 [alertPolicies.create][google.monitoring.v3.AlertPolicyService.CreateAlertPolicy]
@@ -374,8 +402,8 @@ the <code>name</code> field in each of the
 [<code>NotificationChannel</code>][google.monitoring.v3.NotificationChannel]
 objects that are returned from the [<code>ListNotificationChannels</code>]
 [google.monitoring.v3.NotificationChannelService.ListNotificationChannels]
-method. The syntax of the entries in this field is:</p>
-<p>projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]</p>
+method. The format of the entries in this field is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -392,7 +420,31 @@ method. The syntax of the entries in this field is:</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Monitoring_V3_AlertPolicy_ResourceName_" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.ResourceName*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_AlertPolicy_ResourceName" data-uid="Google.Cloud.Monitoring.V3.AlertPolicy.ResourceName">ResourceName</h4>
+  <div class="markdown level1 summary"><p><span class="xref">Google.Api.Gax.IResourceName</span>-typed view over the <a class="xref" href="Google.Cloud.Monitoring.V3.AlertPolicy.html#Google_Cloud_Monitoring_V3_AlertPolicy_Name">Name</a> resource name property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResourceName ResourceName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.IResourceName</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -421,7 +473,7 @@ dashes. Keys must begin with a letter.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.MapField-2.html">MapField</a>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Google.Protobuf.Collections.MapField</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -446,7 +498,7 @@ policy is valid. If not OK, the alert policy will not generate incidents.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Rpc.Status.html">Status</a></td>
+        <td><span class="xref">Google.Rpc.Status</span></td>
         <td></td>
       </tr>
     </tbody>

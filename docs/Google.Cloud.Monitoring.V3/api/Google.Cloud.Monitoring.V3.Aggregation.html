@@ -73,12 +73,29 @@
   
   <h1 id="Google_Cloud_Monitoring_V3_Aggregation" data-uid="Google.Cloud.Monitoring.V3.Aggregation" class="text-break">Class Aggregation
   </h1>
-  <div class="markdown level0 summary"><p>Describes how to combine multiple time series to provide different views of
-the data.  Aggregation consists of an alignment step on individual time
-series (<code>alignment_period</code> and <code>per_series_aligner</code>) followed by an optional
-reduction step of the data across the aligned time series
-(<code>cross_series_reducer</code> and <code>group_by_fields</code>).  For more details, see
-<a href="/monitoring/api/learn_more#aggregation">Aggregation</a>.</p>
+  <div class="markdown level0 summary"><p>Describes how to combine multiple time series to provide a different view of
+the data.  Aggregation of time series is done in two steps. First, each time
+series in the set is <em>aligned</em> to the same time interval boundaries, then the
+set of time series is optionally <em>reduced</em> in number.</p>
+<p>Alignment consists of applying the <code>per_series_aligner</code> operation
+to each time series after its data has been divided into regular
+<code>alignment_period</code> time intervals. This process takes <em>all</em> of the data
+points in an alignment period, applies a mathematical transformation such as
+averaging, minimum, maximum, delta, etc., and converts them into a single
+data point per period.</p>
+<p>Reduction is when the aligned and transformed time series can optionally be
+combined, reducing the number of time series through similar mathematical
+transformations. Reduction involves applying a <code>cross_series_reducer</code> to
+all the time series, optionally sorting the time series into subsets with
+<code>group_by_fields</code>, and applying the reducer to each subset.</p>
+<p>The raw time series data can contain a huge amount of information from
+multiple sources. Alignment and reduction transforms this mass of data into
+a more manageable and representative collection of data, for example &quot;the
+95% latency across the average of all tasks in a cluster&quot;. This
+representative data can be more easily graphed and comprehended, and the
+individual time series data is still available for later drilldown. For more
+details, see <a href="/monitoring/api/v3/metrics#aggregating_time_series">Aggregating Time
+Series</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -88,10 +105,10 @@ reduction step of the data across the aligned time series
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.html">Aggregation</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.html">Aggregation</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.html">Aggregation</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.html">Aggregation</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.Aggregation.html">Aggregation</a>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -153,14 +170,15 @@ reduction step of the data across the aligned time series
   </h3>
   <a id="Google_Cloud_Monitoring_V3_Aggregation_AlignmentPeriod_" data-uid="Google.Cloud.Monitoring.V3.Aggregation.AlignmentPeriod*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_Aggregation_AlignmentPeriod" data-uid="Google.Cloud.Monitoring.V3.Aggregation.AlignmentPeriod">AlignmentPeriod</h4>
-  <div class="markdown level1 summary"><p>The alignment period for per-[time series][google.monitoring.v3.TimeSeries]
-alignment. If present, <code>alignmentPeriod</code> must be at least 60
-seconds.  After per-time series alignment, each time series will
-contain data points only on the period boundaries. If
-<code>perSeriesAligner</code> is not specified or equals <code>ALIGN_NONE</code>, then
-this field is ignored. If <code>perSeriesAligner</code> is specified and
-does not equal <code>ALIGN_NONE</code>, then this field must be defined;
-otherwise an error is returned.</p>
+  <div class="markdown level1 summary"><p>The <code>alignment_period</code> specifies a time interval, in seconds, that is used
+to divide the data in all the
+[time series][google.monitoring.v3.TimeSeries] into consistent blocks of
+time. This will be done before the per-series aligner can be applied to
+the data.</p>
+<p>The value must be at least 60 seconds. If a per-series aligner other than
+<code>ALIGN_NONE</code> is specified, this field is required or an error is returned.
+If no per-series aligner is specified, or the aligner <code>ALIGN_NONE</code> is
+specified, then this field is ignored.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -177,23 +195,25 @@ otherwise an error is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Duration.html">Duration</a></td>
+        <td><span class="xref">Google.Protobuf.WellKnownTypes.Duration</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Monitoring_V3_Aggregation_CrossSeriesReducer_" data-uid="Google.Cloud.Monitoring.V3.Aggregation.CrossSeriesReducer*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_Aggregation_CrossSeriesReducer" data-uid="Google.Cloud.Monitoring.V3.Aggregation.CrossSeriesReducer">CrossSeriesReducer</h4>
-  <div class="markdown level1 summary"><p>The approach to be used to combine time series. Not all reducer
-functions may be applied to all time series, depending on the
-metric type and the value type of the original time
-series. Reduction may change the metric type of value type of the
-time series.</p>
-<p>Time series data must be aligned in order to perform cross-time
-series reduction. If <code>crossSeriesReducer</code> is specified, then
-<code>perSeriesAligner</code> must be specified and not equal <code>ALIGN_NONE</code>
-and <code>alignmentPeriod</code> must be specified; otherwise, an error is
-returned.</p>
+  <div class="markdown level1 summary"><p>The reduction operation to be used to combine time series into a single
+time series, where the value of each data point in the resulting series is
+a function of all the already aligned values in the input time series.</p>
+<p>Not all reducer operations can be applied to all time series. The valid
+choices depend on the <code>metric_kind</code> and the <code>value_type</code> of the original
+time series. Reduction can yield a time series with a different
+<code>metric_kind</code> or <code>value_type</code> than the input time series.</p>
+<p>Time series data must first be aligned (see <code>per_series_aligner</code>) in order
+to perform cross-time series reduction. If <code>cross_series_reducer</code> is
+specified, then <code>per_series_aligner</code> must be specified, and must not be
+<code>ALIGN_NONE</code>. An <code>alignment_period</code> must also be specified; otherwise, an
+error is returned.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -217,19 +237,19 @@ returned.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_Aggregation_GroupByFields_" data-uid="Google.Cloud.Monitoring.V3.Aggregation.GroupByFields*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_Aggregation_GroupByFields" data-uid="Google.Cloud.Monitoring.V3.Aggregation.GroupByFields">GroupByFields</h4>
-  <div class="markdown level1 summary"><p>The set of fields to preserve when <code>crossSeriesReducer</code> is
-specified. The <code>groupByFields</code> determine how the time series are
+  <div class="markdown level1 summary"><p>The set of fields to preserve when <code>cross_series_reducer</code> is
+specified. The <code>group_by_fields</code> determine how the time series are
 partitioned into subsets prior to applying the aggregation
-function. Each subset contains time series that have the same
+operation. Each subset contains time series that have the same
 value for each of the grouping fields. Each individual time
 series is a member of exactly one subset. The
-<code>crossSeriesReducer</code> is applied to each subset of time series.
+<code>cross_series_reducer</code> is applied to each subset of time series.
 It is not possible to reduce across different resource types, so
 this field implicitly contains <code>resource.type</code>.  Fields not
-specified in <code>groupByFields</code> are aggregated away.  If
-<code>groupByFields</code> is not specified and all the time series have
+specified in <code>group_by_fields</code> are aggregated away.  If
+<code>group_by_fields</code> is not specified and all the time series have
 the same resource type, then the time series are aggregated into
-a single output time series. If <code>crossSeriesReducer</code> is not
+a single output time series. If <code>cross_series_reducer</code> is not
 defined, this field is ignored.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -247,22 +267,26 @@ defined, this field is ignored.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <a id="Google_Cloud_Monitoring_V3_Aggregation_PerSeriesAligner_" data-uid="Google.Cloud.Monitoring.V3.Aggregation.PerSeriesAligner*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_Aggregation_PerSeriesAligner" data-uid="Google.Cloud.Monitoring.V3.Aggregation.PerSeriesAligner">PerSeriesAligner</h4>
-  <div class="markdown level1 summary"><p>The approach to be used to align individual time series. Not all
-alignment functions may be applied to all time series, depending
-on the metric type and value type of the original time
-series. Alignment may change the metric type or the value type of
+  <div class="markdown level1 summary"><p>An <code>Aligner</code> describes how to bring the data points in a single
+time series into temporal alignment. Except for <code>ALIGN_NONE</code>, all
+alignments cause all the data points in an <code>alignment_period</code> to be
+mathematically grouped together, resulting in a single data point for
+each <code>alignment_period</code> with end timestamp at the end of the period.</p>
+<p>Not all alignment operations may be applied to all time series. The valid
+choices depend on the <code>metric_kind</code> and <code>value_type</code> of the original time
+series. Alignment can change the <code>metric_kind</code> or the <code>value_type</code> of
 the time series.</p>
 <p>Time series data must be aligned in order to perform cross-time
-series reduction. If <code>crossSeriesReducer</code> is specified, then
-<code>perSeriesAligner</code> must be specified and not equal <code>ALIGN_NONE</code>
-and <code>alignmentPeriod</code> must be specified; otherwise, an error is
+series reduction. If <code>cross_series_reducer</code> is specified, then
+<code>per_series_aligner</code> must be specified and not equal to <code>ALIGN_NONE</code>
+and <code>alignment_period</code> must be specified; otherwise, an error is
 returned.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
