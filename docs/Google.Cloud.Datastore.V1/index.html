@@ -64,12 +64,16 @@
 
 <p><code>Google.Cloud.Datastore.V1</code> is a.NET client library for the <a href="https://cloud.google.com/datastore/docs/concepts/overview">Google Cloud Datastore API</a>.</p>
 <p>Note:
-This documentation is for version <code>2.2.0</code> of the library.
+This documentation is for version <code>3.0.0-beta01</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Datastore.V1</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
+Please ensure you enable pre-release packages (for example, in the
+Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>3.0.0-beta01</code>) of <code>Google.Cloud.Datastore.V1</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -87,54 +91,8 @@ structured query results.</p>
 <p>Several custom conversions, additional constructors,
 factory methods (particularly on <a href="api/Google.Cloud.Datastore.V1.Filter.html">Filter</a>
 are provided to simplify working with the protobuf messages.</p>
-<h1 id="using-the-datastore-emulator">Using the Datastore Emulator</h1>
-<p>The GA version of this package does not automatically connect to an
-emulator via environment variables. However, it is reasonably simple
-do so. If you wish to automatically connect to an emulator, simply
-include the following method in your code, and call that instead of
-<code>DatastoreDb.Create</code>.</p>
-<pre><code class="lang-cs">private const string EmulatorHostVariable = &quot;DATASTORE_EMULATOR_HOST&quot;;
-private const string ProjectIdVariable = &quot;DATASTORE_PROJECT_ID&quot;;
-
-/// &lt;summary&gt;
-/// Creates a &lt;see cref=&quot;DatastoreDb&quot;/&gt;, using environment variables to support
-/// the Datastore Emulator if they have been set.
-/// &lt;/summary&gt;
-/// &lt;remarks&gt;
-/// &lt;para&gt;
-/// If the DATASTORE_EMULATOR_HOST environment variable is set and not empty,
-/// this method will use the value to connect to the emulator. Otherwise, the default
-/// endpoint (and credentials) will be used.
-/// &lt;/para&gt;
-/// &lt;para&gt;
-/// If the DATASTORE_PROJECT_ID environment variable is set and not empty, this
-/// overrides the value of &lt;paramref name=&quot;projectId&quot;/&gt;.
-/// &lt;/para&gt;
-/// &lt;/remarks&gt;
-/// &lt;param name=&quot;projectId&quot;&gt;The project ID to use, unless overridden by DATASTORE_PROJECT_ID&lt;/param&gt;
-/// &lt;param name=&quot;namespaceId&quot;&gt;The namespace ID to use in operations requiring a partition.&lt;/param&gt;
-/// &lt;returns&gt;A &lt;see cref=&quot;DatastoreDb&quot;/&gt; connected to either an emulator or production servers.&lt;/returns&gt;
-public static DatastoreDb CreateDatastoreDb(string projectId, string namespaceId = &quot;&quot;)
-{
-    string emulatorHost = Environment.GetEnvironmentVariable(EmulatorHostVariable);
-    string projectIdOverride = Environment.GetEnvironmentVariable(ProjectIdVariable);
-    if (!string.IsNullOrEmpty(projectIdOverride))
-    {
-        projectId = projectIdOverride;
-    }
-    DatastoreClient client = string.IsNullOrEmpty(emulatorHost)
-        ? DatastoreClient.Create()
-        : DatastoreClient.Create(new Channel(emulatorHost, ChannelCredentials.Insecure));
-    return DatastoreDb.Create(projectId, namespaceId, client);
-}
-</code></pre><p>Note that if you use this technique for automated testing with large
-amounts of data, you may wish to write an alternative method that
-<em>only</em> connects to the emulator and fails if the emulator has not
-been configured. That avoids accidentally connecting to the
-production Datastore service and potentially incurring large bills
-due to forgetting to set an environment variable.</p>
-<h2 id="beta-support-for-emulator-detection">Beta support for emulator detection</h2>
-<p>As of 2.2.0-beta02, the library has support for detecting the
+<h2 id="support-for-emulator-detection">Support for emulator detection</h2>
+<p>As of 2.2.0-beta02 and 2.2.0, the library has support for detecting the
 emulator via environment variables, if requested. This is configured
 via <code>DatastoreDbBuilder</code>, which can also be used to configure custom
 credentials easily.</p>
@@ -144,11 +102,11 @@ otherwise connect to the production environment.</p>
 <pre><code class="lang-cs">DatastoreDb db = new DatastoreDbBuilder
 {
     ProjectId = projectId,
-    EmulatorDetection = EmulatorDetection.ProductionOrEmulator
+    EmulatorDetection = EmulatorDetection.EmulatorOrProduction
 }.Build();
 // Use db as normal
 </code></pre><p>See the
-<a href="api/Google.Cloud.Datastore.V1.EmulatorDetection.html">EmulatorDetection</a>
+<a href="obj/api/Google.Cloud.Datastore.V1.EmulatorDetection.yml">EmulatorDetection</a>
 enum for details of the other possible values.</p>
 <h1 id="sample-code">Sample code</h1>
 <h2 id="inserting-data">Inserting data</h2>
