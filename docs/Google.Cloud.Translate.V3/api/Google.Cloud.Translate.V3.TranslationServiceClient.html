@@ -161,7 +161,7 @@ port of 443.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ServiceEndpoint DefaultEndpoint { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static string DefaultEndpoint { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -173,7 +173,7 @@ port of 443.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -287,7 +287,7 @@ use google.longrunning.Operation.name to poll the status of the call.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -317,7 +317,7 @@ TranslationServiceClient translationServiceClient = TranslationServiceClient.Cre
 // Initialize request argument(s)
 BatchTranslateTextRequest request = new BatchTranslateTextRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     SourceLanguageCode = &quot;&quot;,
     TargetLanguageCodes = { &quot;&quot;, },
     Models = { { &quot;&quot;, &quot;&quot; }, },
@@ -383,7 +383,7 @@ use google.longrunning.Operation.name to poll the status of the call.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -413,7 +413,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 BatchTranslateTextRequest request = new BatchTranslateTextRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     SourceLanguageCode = &quot;&quot;,
     TargetLanguageCodes = { &quot;&quot;, },
     Models = { { &quot;&quot;, &quot;&quot; }, },
@@ -509,7 +509,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 BatchTranslateTextRequest request = new BatchTranslateTextRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     SourceLanguageCode = &quot;&quot;,
     TargetLanguageCodes = { &quot;&quot;, },
     Models = { { &quot;&quot;, &quot;&quot; }, },
@@ -545,161 +545,16 @@ if (retrievedResponse.IsCompleted)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Translate_V3_TranslationServiceClient_Create_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.Create*"></a>
-  <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Translate_V3_TranslationServiceSettings_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.Create(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Translate.V3.TranslationServiceSettings)">Create(ServiceEndpoint, TranslationServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a>, applying defaults for all unspecified
-settings, and creating a channel connecting to the given endpoint with application default credentials where
-necessary. See the example for how to use custom credentials.</p>
+  <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_Create" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.Create">Create()</h4>
+  <div class="markdown level1 summary"><p>Synchronously creates a <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a> using the default credentials, endpoint and
+settings. To specify custom credentials or other settings, use <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClientBuilder.html">TranslationServiceClientBuilder</a>
+.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TranslationServiceClient Create(ServiceEndpoint endpoint = null, TranslationServiceSettings settings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static TranslationServiceClient Create()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
-        <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a></td>
-        <td><p>The created <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Google_Cloud_Translate_V3_TranslationServiceClient_Create_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Translate_V3_TranslationServiceSettings__examples">Examples</h5>
-  <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Vision.V1;
-...
-// When running on Google Cloud Platform this will use the project Compute Credential.
-// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
-// credential file to use that credential.
-ImageAnnotatorClient client = ImageAnnotatorClient.Create();</code></pre>
-<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Vision.V1;
-using Google.Apis.Auth.OAuth2;
-using Grpc.Auth;
-using Grpc.Core;
-...
-GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
-Channel channel = new Channel(
-    ImageAnnotatorClient.DefaultEndpoint.Host, ImageAnnotatorClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-ImageAnnotatorClient client = ImageAnnotatorClient.Create(channel);
-...
-// Shutdown the channel when it is no longer required.
-channel.ShutdownAsync().Wait();</code></pre>
-
-  <a id="Google_Cloud_Translate_V3_TranslationServiceClient_Create_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.Create*"></a>
-  <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Translate_V3_TranslationServiceSettings_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.Create(Grpc.Core.CallInvoker,Google.Cloud.Translate.V3.TranslationServiceSettings)">Create(CallInvoker, TranslationServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a> which uses the specified call invoker for remote
-operations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TranslationServiceClient Create(CallInvoker callInvoker, TranslationServiceSettings settings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a></td>
-        <td><span class="parametername">callInvoker</span></td>
-        <td><p>The <a class="xref" href="Grpc.Core.CallInvoker.html">CallInvoker</a> for remote operations. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a></td>
-        <td><p>The created <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_Translate_V3_TranslationServiceClient_Create_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.Create*"></a>
-  <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_Create_Grpc_Core_Channel_Google_Cloud_Translate_V3_TranslationServiceSettings_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.Create(Grpc.Core.Channel,Google.Cloud.Translate.V3.TranslationServiceSettings)">Create(Channel, TranslationServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a> which uses the specified channel for remote operations.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TranslationServiceClient Create(Channel channel, TranslationServiceSettings settings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Grpc.Core.Channel.html">Channel</a></td>
-        <td><span class="parametername">channel</span></td>
-        <td><p>The <a class="xref" href="Grpc.Core.Channel.html">Channel</a> for remote operations. Must not be null.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -717,15 +572,15 @@ operations.</p>
     </tbody>
   </table>
   <a id="Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.CreateAsync*"></a>
-  <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Translate_V3_TranslationServiceSettings_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.CreateAsync(Google.Api.Gax.Grpc.ServiceEndpoint,Google.Cloud.Translate.V3.TranslationServiceSettings)">CreateAsync(ServiceEndpoint, TranslationServiceSettings)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a>, applying defaults for all unspecified
-settings, and creating a channel connecting to the given endpoint with application default credentials where
-necessary. See the example for how to use custom credentials.</p>
+  <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_System_Threading_CancellationToken_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.CreateAsync(System.Threading.CancellationToken)">CreateAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html">TranslationServiceClient</a> using the default credentials, endpoint and
+settings. To specify custom credentials or other settings, use <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClientBuilder.html">TranslationServiceClientBuilder</a>
+.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;TranslationServiceClient&gt; CreateAsync(ServiceEndpoint endpoint = null, TranslationServiceSettings settings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;TranslationServiceClient&gt; CreateAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -738,15 +593,9 @@ necessary. See the example for how to use custom credentials.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></td>
-        <td><span class="parametername">endpoint</span></td>
-        <td><p>Optional <a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>Optional <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceSettings.html">TranslationServiceSettings</a>.</p>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The <span class="xref">System.Threading.CancellationToken</span> to use while creating the client.</p>
 </td>
       </tr>
     </tbody>
@@ -767,28 +616,6 @@ necessary. See the example for how to use custom credentials.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Translate_V3_TranslationServiceSettings__examples">Examples</h5>
-  <p>This sample shows how to create a client using default credentials:</p>
-<pre><code>using Google.Cloud.Vision.V1;
-...
-// When running on Google Cloud Platform this will use the project Compute Credential.
-// Or set the GOOGLE_APPLICATION_CREDENTIALS environment variable to the path of a JSON
-// credential file to use that credential.
-ImageAnnotatorClient client = await ImageAnnotatorClient.CreateAsync();</code></pre>
-<p>This sample shows how to create a client using credentials loaded from a JSON file:</p>
-<pre><code>using Google.Cloud.Vision.V1;
-using Google.Apis.Auth.OAuth2;
-using Grpc.Auth;
-using Grpc.Core;
-...
-GoogleCredential cred = GoogleCredential.FromFile(&quot;/path/to/credentials.json&quot;);
-Channel channel = new Channel(
-    ImageAnnotatorClient.DefaultEndpoint.Host, ImageAnnotatorClient.DefaultEndpoint.Port, cred.ToChannelCredentials());
-ImageAnnotatorClient client = ImageAnnotatorClient.Create(channel);
-...
-// Shutdown the channel when it is no longer required.
-await channel.ShutdownAsync();</code></pre>
-
   <a id="Google_Cloud_Translate_V3_TranslationServiceClient_CreateGlossary_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.CreateGlossary*"></a>
   <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_CreateGlossary_Google_Api_Gax_ResourceNames_LocationName_Google_Cloud_Translate_V3_Glossary_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.CreateGlossary(Google.Api.Gax.ResourceNames.LocationName,Google.Cloud.Translate.V3.Glossary,Google.Api.Gax.Grpc.CallSettings)">CreateGlossary(LocationName, Glossary, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a glossary and returns the long-running operation. Returns
@@ -810,7 +637,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project name.</p>
 </td>
@@ -822,7 +649,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -850,7 +677,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 Glossary glossary = new Glossary();
 // Make the request
 Operation&lt;Glossary, CreateGlossaryMetadata&gt; response = translationServiceClient.CreateGlossary(parent, glossary);
@@ -899,7 +726,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -929,7 +756,7 @@ TranslationServiceClient translationServiceClient = TranslationServiceClient.Cre
 // Initialize request argument(s)
 CreateGlossaryRequest request = new CreateGlossaryRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Glossary = new Glossary(),
 };
 // Make the request
@@ -985,7 +812,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1056,7 +883,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project name.</p>
 </td>
@@ -1068,7 +895,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1096,7 +923,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 Glossary glossary = new Glossary();
 // Make the request
 Operation&lt;Glossary, CreateGlossaryMetadata&gt; response = await translationServiceClient.CreateGlossaryAsync(parent, glossary);
@@ -1139,7 +966,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The project name.</p>
 </td>
@@ -1179,7 +1006,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 Glossary glossary = new Glossary();
 // Make the request
 Operation&lt;Glossary, CreateGlossaryMetadata&gt; response = await translationServiceClient.CreateGlossaryAsync(parent, glossary);
@@ -1228,7 +1055,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1258,7 +1085,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 CreateGlossaryRequest request = new CreateGlossaryRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Glossary = new Glossary(),
 };
 // Make the request
@@ -1338,7 +1165,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 CreateGlossaryRequest request = new CreateGlossaryRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Glossary = new Glossary(),
 };
 // Make the request
@@ -1394,7 +1221,7 @@ NOT_FOUND, if the project doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1555,7 +1382,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1585,7 +1412,7 @@ TranslationServiceClient translationServiceClient = TranslationServiceClient.Cre
 // Initialize request argument(s)
 DeleteGlossaryRequest request = new DeleteGlossaryRequest
 {
-    GlossaryName = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
+    GlossaryName = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
 };
 // Make the request
 Operation&lt;DeleteGlossaryResponse, DeleteGlossaryMetadata&gt; response = translationServiceClient.DeleteGlossary(request);
@@ -1635,7 +1462,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1663,7 +1490,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-GlossaryName name = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
+GlossaryName name = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
 // Make the request
 Operation&lt;DeleteGlossaryResponse, DeleteGlossaryMetadata&gt; response = translationServiceClient.DeleteGlossary(name);
 
@@ -1712,7 +1539,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1789,7 +1616,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1819,7 +1646,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 DeleteGlossaryRequest request = new DeleteGlossaryRequest
 {
-    GlossaryName = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
+    GlossaryName = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
 };
 // Make the request
 Operation&lt;DeleteGlossaryResponse, DeleteGlossaryMetadata&gt; response = await translationServiceClient.DeleteGlossaryAsync(request);
@@ -1899,7 +1726,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 DeleteGlossaryRequest request = new DeleteGlossaryRequest
 {
-    GlossaryName = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
+    GlossaryName = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
 };
 // Make the request
 Operation&lt;DeleteGlossaryResponse, DeleteGlossaryMetadata&gt; response = await translationServiceClient.DeleteGlossaryAsync(request);
@@ -1949,7 +1776,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -1977,7 +1804,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-GlossaryName name = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
+GlossaryName name = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
 // Make the request
 Operation&lt;DeleteGlossaryResponse, DeleteGlossaryMetadata&gt; response = await translationServiceClient.DeleteGlossaryAsync(name);
 
@@ -2054,7 +1881,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-GlossaryName name = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
+GlossaryName name = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
 // Make the request
 Operation&lt;DeleteGlossaryResponse, DeleteGlossaryMetadata&gt; response = await translationServiceClient.DeleteGlossaryAsync(name);
 
@@ -2103,7 +1930,7 @@ Returns NOT_FOUND, if the glossary doesn&apos;t exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2249,7 +2076,7 @@ if (retrievedResponse.IsCompleted)
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -2286,7 +2113,7 @@ Otherwise an INVALID_ARGUMENT (400) error is returned.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2314,7 +2141,7 @@ Otherwise an INVALID_ARGUMENT (400) error is returned.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string mimeType = &quot;&quot;;
 string content = &quot;&quot;;
@@ -2348,7 +2175,7 @@ DetectLanguageResponse response = translationServiceClient.DetectLanguage(parent
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2381,7 +2208,7 @@ DetectLanguageRequest request = new DetectLanguageRequest
     Content = &quot;&quot;,
     MimeType = &quot;&quot;,
     Model = &quot;&quot;,
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Labels = { { &quot;&quot;, &quot;&quot; }, },
 };
 // Make the request
@@ -2445,7 +2272,7 @@ Otherwise an INVALID_ARGUMENT (400) error is returned.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2501,7 +2328,7 @@ DetectLanguageResponse response = translationServiceClient.DetectLanguage(parent
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -2538,7 +2365,7 @@ Otherwise an INVALID_ARGUMENT (400) error is returned.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2566,7 +2393,7 @@ Otherwise an INVALID_ARGUMENT (400) error is returned.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string mimeType = &quot;&quot;;
 string content = &quot;&quot;;
@@ -2594,7 +2421,7 @@ DetectLanguageResponse response = await translationServiceClient.DetectLanguageA
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -2659,7 +2486,7 @@ Otherwise an INVALID_ARGUMENT (400) error is returned.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string mimeType = &quot;&quot;;
 string content = &quot;&quot;;
@@ -2693,7 +2520,7 @@ DetectLanguageResponse response = await translationServiceClient.DetectLanguageA
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -2726,7 +2553,7 @@ DetectLanguageRequest request = new DetectLanguageRequest
     Content = &quot;&quot;,
     MimeType = &quot;&quot;,
     Model = &quot;&quot;,
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Labels = { { &quot;&quot;, &quot;&quot; }, },
 };
 // Make the request
@@ -2792,7 +2619,7 @@ DetectLanguageRequest request = new DetectLanguageRequest
     Content = &quot;&quot;,
     MimeType = &quot;&quot;,
     Model = &quot;&quot;,
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Labels = { { &quot;&quot;, &quot;&quot; }, },
 };
 // Make the request
@@ -2856,7 +2683,7 @@ Otherwise an INVALID_ARGUMENT (400) error is returned.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3012,7 +2839,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3042,7 +2869,7 @@ TranslationServiceClient translationServiceClient = TranslationServiceClient.Cre
 // Initialize request argument(s)
 GetGlossaryRequest request = new GetGlossaryRequest
 {
-    GlossaryName = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
+    GlossaryName = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
 };
 // Make the request
 Glossary response = translationServiceClient.GetGlossary(request);
@@ -3075,7 +2902,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3103,7 +2930,7 @@ exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-GlossaryName name = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
+GlossaryName name = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
 // Make the request
 Glossary response = translationServiceClient.GetGlossary(name);
 </code></pre></div>
@@ -3135,7 +2962,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3195,7 +3022,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3225,7 +3052,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 GetGlossaryRequest request = new GetGlossaryRequest
 {
-    GlossaryName = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
+    GlossaryName = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
 };
 // Make the request
 Glossary response = await translationServiceClient.GetGlossaryAsync(request);
@@ -3288,7 +3115,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 GetGlossaryRequest request = new GetGlossaryRequest
 {
-    GlossaryName = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
+    GlossaryName = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;),
 };
 // Make the request
 Glossary response = await translationServiceClient.GetGlossaryAsync(request);
@@ -3321,7 +3148,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3349,7 +3176,7 @@ exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-GlossaryName name = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
+GlossaryName name = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
 // Make the request
 Glossary response = await translationServiceClient.GetGlossaryAsync(name);
 </code></pre></div>
@@ -3409,7 +3236,7 @@ exist.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-GlossaryName name = new GlossaryName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
+GlossaryName name = GlossaryName.FromProjectLocationGlossary(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[GLOSSARY]&quot;);
 // Make the request
 Glossary response = await translationServiceClient.GetGlossaryAsync(name);
 </code></pre></div>
@@ -3441,7 +3268,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3554,7 +3381,7 @@ Glossary response = await translationServiceClient.GetGlossaryAsync(name);
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -3594,7 +3421,7 @@ in a response.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3622,7 +3449,7 @@ in a response.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string displayLanguageCode = &quot;&quot;;
 // Make the request
@@ -3655,7 +3482,7 @@ SupportedLanguages response = translationServiceClient.GetSupportedLanguages(par
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3687,7 +3514,7 @@ GetSupportedLanguagesRequest request = new GetSupportedLanguagesRequest
 {
     DisplayLanguageCode = &quot;&quot;,
     Model = &quot;&quot;,
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
 };
 // Make the request
 SupportedLanguages response = translationServiceClient.GetSupportedLanguages(request);
@@ -3753,7 +3580,7 @@ in a response.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3808,7 +3635,7 @@ SupportedLanguages response = translationServiceClient.GetSupportedLanguages(par
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -3848,7 +3675,7 @@ in a response.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -3876,7 +3703,7 @@ in a response.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string displayLanguageCode = &quot;&quot;;
 // Make the request
@@ -3903,7 +3730,7 @@ SupportedLanguages response = await translationServiceClient.GetSupportedLanguag
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -3971,7 +3798,7 @@ in a response.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string displayLanguageCode = &quot;&quot;;
 // Make the request
@@ -4004,7 +3831,7 @@ SupportedLanguages response = await translationServiceClient.GetSupportedLanguag
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4036,7 +3863,7 @@ GetSupportedLanguagesRequest request = new GetSupportedLanguagesRequest
 {
     DisplayLanguageCode = &quot;&quot;,
     Model = &quot;&quot;,
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
 };
 // Make the request
 SupportedLanguages response = await translationServiceClient.GetSupportedLanguagesAsync(request);
@@ -4100,7 +3927,7 @@ GetSupportedLanguagesRequest request = new GetSupportedLanguagesRequest
 {
     DisplayLanguageCode = &quot;&quot;,
     Model = &quot;&quot;,
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
 };
 // Make the request
 SupportedLanguages response = await translationServiceClient.GetSupportedLanguagesAsync(request);
@@ -4166,7 +3993,7 @@ in a response.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4317,7 +4144,7 @@ exist.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project from which to list all of the glossaries.</p>
 </td>
@@ -4337,7 +4164,7 @@ page.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4354,7 +4181,7 @@ page.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
+        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a> resources.</p>
 </td>
       </tr>
@@ -4365,7 +4192,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 // Make the request
 PagedEnumerable&lt;ListGlossariesResponse, Glossary&gt; response = translationServiceClient.ListGlossaries(parent);
 
@@ -4429,7 +4256,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4446,7 +4273,7 @@ exist.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
+        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a> resources.</p>
 </td>
       </tr>
@@ -4459,7 +4286,7 @@ TranslationServiceClient translationServiceClient = TranslationServiceClient.Cre
 // Initialize request argument(s)
 ListGlossariesRequest request = new ListGlossariesRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Filter = &quot;&quot;,
 };
 // Make the request
@@ -4539,7 +4366,7 @@ page.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4556,7 +4383,7 @@ page.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
+        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a> resources.</p>
 </td>
       </tr>
@@ -4625,7 +4452,7 @@ exist.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The name of the project from which to list all of the glossaries.</p>
 </td>
@@ -4645,7 +4472,7 @@ page.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4662,7 +4489,7 @@ page.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
+        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a> resources.</p>
 </td>
       </tr>
@@ -4673,7 +4500,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 // Make the request
 PagedAsyncEnumerable&lt;ListGlossariesResponse, Glossary&gt; response = translationServiceClient.ListGlossariesAsync(parent);
 
@@ -4737,7 +4564,7 @@ exist.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4754,7 +4581,7 @@ exist.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
+        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a> resources.</p>
 </td>
       </tr>
@@ -4767,7 +4594,7 @@ TranslationServiceClient translationServiceClient = await TranslationServiceClie
 // Initialize request argument(s)
 ListGlossariesRequest request = new ListGlossariesRequest
 {
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Filter = &quot;&quot;,
 };
 // Make the request
@@ -4847,7 +4674,7 @@ page.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4864,7 +4691,7 @@ page.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
+        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Translate.V3.ListGlossariesResponse.html">ListGlossariesResponse</a>, <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Translate.V3.Glossary.html">Glossary</a> resources.</p>
 </td>
       </tr>
@@ -4939,7 +4766,7 @@ string nextPageToken = singlePage.NextPageToken;
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -4989,7 +4816,7 @@ string nextPageToken = singlePage.NextPageToken;
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5038,7 +4865,7 @@ string nextPageToken = singlePage.NextPageToken;
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5088,7 +4915,7 @@ string nextPageToken = singlePage.NextPageToken;
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5137,7 +4964,7 @@ string nextPageToken = singlePage.NextPageToken;
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5187,7 +5014,7 @@ string nextPageToken = singlePage.NextPageToken;
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5212,10 +5039,9 @@ string nextPageToken = singlePage.NextPageToken;
   </table>
   <a id="Google_Cloud_Translate_V3_TranslationServiceClient_ShutdownDefaultChannelsAsync_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.ShutdownDefaultChannelsAsync*"></a>
   <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_ShutdownDefaultChannelsAsync" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.ShutdownDefaultChannelsAsync">ShutdownDefaultChannelsAsync()</h4>
-  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by
-<a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Translate_V3_TranslationServiceSettings_">Create(CallInvoker, TranslationServiceSettings)</a> and
-<a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Translate_V3_TranslationServiceSettings_">CreateAsync(ServiceEndpoint, TranslationServiceSettings)</a>. Channels which weren&apos;t
-automatically created are not affected.</p>
+  <div class="markdown level1 summary"><p>Shuts down any channels automatically created by <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_Create">Create()</a> and
+<a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_System_Threading_CancellationToken_">CreateAsync(CancellationToken)</a>. Channels which weren&apos;t automatically created are not
+affected.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5239,10 +5065,9 @@ automatically created are not affected.</p>
     </tbody>
   </table>
   <h5 id="Google_Cloud_Translate_V3_TranslationServiceClient_ShutdownDefaultChannelsAsync_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>After calling this method, further calls to
-<a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_Create_Grpc_Core_CallInvoker_Google_Cloud_Translate_V3_TranslationServiceSettings_">Create(CallInvoker, TranslationServiceSettings)</a> and
-<a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_Google_Api_Gax_Grpc_ServiceEndpoint_Google_Cloud_Translate_V3_TranslationServiceSettings_">CreateAsync(ServiceEndpoint, TranslationServiceSettings)</a> will create new channels,
-which could in turn be shut down by another call to this method.</p>
+  <div class="markdown level1 remarks"><p>After calling this method, further calls to <a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_Create">Create()</a> and
+<a class="xref" href="Google.Cloud.Translate.V3.TranslationServiceClient.html#Google_Cloud_Translate_V3_TranslationServiceClient_CreateAsync_System_Threading_CancellationToken_">CreateAsync(CancellationToken)</a> will create new channels, which could in turn be shut down
+by another call to this method.</p>
 </div>
   <a id="Google_Cloud_Translate_V3_TranslationServiceClient_TranslateText_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.TranslateText*"></a>
   <h4 id="Google_Cloud_Translate_V3_TranslationServiceClient_TranslateText_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Collections_Generic_IEnumerable_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Translate.V3.TranslationServiceClient.TranslateText(Google.Api.Gax.ResourceNames.LocationName,System.String,System.Collections.Generic.IEnumerable{System.String},Google.Api.Gax.Grpc.CallSettings)">TranslateText(LocationName, String, IEnumerable&lt;String&gt;, CallSettings)</h4>
@@ -5264,7 +5089,7 @@ which could in turn be shut down by another call to this method.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -5294,7 +5119,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5322,7 +5147,7 @@ Use BatchTranslateText for larger text.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string targetLanguageCode = &quot;&quot;;
 IEnumerable&lt;string&gt; contents = new string[] { &quot;&quot;, };
 // Make the request
@@ -5349,7 +5174,7 @@ TranslateTextResponse response = translationServiceClient.TranslateText(parent, 
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -5416,7 +5241,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5444,7 +5269,7 @@ Use BatchTranslateText for larger text.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = TranslationServiceClient.Create();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string mimeType = &quot;&quot;;
 string sourceLanguageCode = &quot;&quot;;
@@ -5480,7 +5305,7 @@ TranslateTextResponse response = translationServiceClient.TranslateText(parent, 
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5516,7 +5341,7 @@ TranslateTextRequest request = new TranslateTextRequest
     TargetLanguageCode = &quot;&quot;,
     Model = &quot;&quot;,
     GlossaryConfig = new TranslateTextGlossaryConfig(),
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Labels = { { &quot;&quot;, &quot;&quot; }, },
 };
 // Make the request
@@ -5573,7 +5398,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5695,7 +5520,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5753,7 +5578,7 @@ TranslateTextResponse response = translationServiceClient.TranslateText(parent, 
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -5783,7 +5608,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -5811,7 +5636,7 @@ Use BatchTranslateText for larger text.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string targetLanguageCode = &quot;&quot;;
 IEnumerable&lt;string&gt; contents = new string[] { &quot;&quot;, };
 // Make the request
@@ -5838,7 +5663,7 @@ TranslateTextResponse response = await translationServiceClient.TranslateTextAsy
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -5896,7 +5721,7 @@ Use BatchTranslateText for larger text.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string targetLanguageCode = &quot;&quot;;
 IEnumerable&lt;string&gt; contents = new string[] { &quot;&quot;, };
 // Make the request
@@ -5923,7 +5748,7 @@ TranslateTextResponse response = await translationServiceClient.TranslateTextAsy
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -5990,7 +5815,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -6018,7 +5843,7 @@ Use BatchTranslateText for larger text.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string mimeType = &quot;&quot;;
 string sourceLanguageCode = &quot;&quot;;
@@ -6048,7 +5873,7 @@ TranslateTextResponse response = await translationServiceClient.TranslateTextAsy
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="xref">Google.Api.Gax.ResourceNames.LocationName</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. Project or location to make a call. Must refer to a caller&apos;s
 project.</p>
@@ -6143,7 +5968,7 @@ Use BatchTranslateText for larger text.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TranslationServiceClient translationServiceClient = await TranslationServiceClient.CreateAsync();
 // Initialize request argument(s)
-LocationName parent = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
 string model = &quot;&quot;;
 string mimeType = &quot;&quot;;
 string sourceLanguageCode = &quot;&quot;;
@@ -6179,7 +6004,7 @@ TranslateTextResponse response = await translationServiceClient.TranslateTextAsy
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -6215,7 +6040,7 @@ TranslateTextRequest request = new TranslateTextRequest
     TargetLanguageCode = &quot;&quot;,
     Model = &quot;&quot;,
     GlossaryConfig = new TranslateTextGlossaryConfig(),
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Labels = { { &quot;&quot;, &quot;&quot; }, },
 };
 // Make the request
@@ -6284,7 +6109,7 @@ TranslateTextRequest request = new TranslateTextRequest
     TargetLanguageCode = &quot;&quot;,
     Model = &quot;&quot;,
     GlossaryConfig = new TranslateTextGlossaryConfig(),
-    ParentAsLocationName = new LocationName(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
+    ParentAsLocationName = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;),
     Labels = { { &quot;&quot;, &quot;&quot; }, },
 };
 // Make the request
@@ -6341,7 +6166,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -6548,7 +6373,7 @@ Use BatchTranslateText for larger text.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
