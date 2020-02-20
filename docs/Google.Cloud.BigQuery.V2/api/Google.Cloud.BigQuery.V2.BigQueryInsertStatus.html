@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class GetTableOptions
+    <title>Enum BigQueryInsertStatus
    | Google.Cloud.BigQuery.V2 </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class GetTableOptions
+    <meta name="title" content="Enum BigQueryInsertStatus
    | Google.Cloud.BigQuery.V2 ">
     <meta name="generator" content="docfx 2.39.1.0">
     
@@ -68,68 +68,61 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Google.Cloud.BigQuery.V2.GetTableOptions">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.BigQuery.V2.BigQueryInsertStatus">
   
   
-  <h1 id="Google_Cloud_BigQuery_V2_GetTableOptions" data-uid="Google.Cloud.BigQuery.V2.GetTableOptions" class="text-break">Class GetTableOptions
+  <h1 id="Google_Cloud_BigQuery_V2_BigQueryInsertStatus" data-uid="Google.Cloud.BigQuery.V2.BigQueryInsertStatus" class="text-break">Enum BigQueryInsertStatus
   </h1>
-  <div class="markdown level0 summary"><p>Options for <code>GetTable</code> operations.</p>
+  <div class="markdown level0 summary"><p>Specifies the status of an insert attempt depending on the validity of the rows.
+Note that the validity of a row is determined by whether <a class="xref" href="Google.Cloud.BigQuery.V2.InsertOptions.html#Google_Cloud_BigQuery_V2_InsertOptions_AllowUnknownFields">AllowUnknownFields</a>
+is set to true or not.
+If <a class="xref" href="Google.Cloud.BigQuery.V2.InsertOptions.html#Google_Cloud_BigQuery_V2_InsertOptions_AllowUnknownFields">AllowUnknownFields</a> is set to true, then rows containing fields
+that do not match any on the destination table will, otherwise, be considered valid rows.
+All matching fields in these rows will be inserted, while unmatching fields will be silently skipped.
+If <a class="xref" href="Google.Cloud.BigQuery.V2.InsertOptions.html#Google_Cloud_BigQuery_V2_InsertOptions_AllowUnknownFields">AllowUnknownFields</a> is not set to true, then rows containing fields
+that do not match any on the destination table will be considered invalid and won&apos;t be inserted.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">GetTableOptions</span></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.BigQuery.V2.html">Google.Cloud.BigQuery.V2</a></h6>
   <h6><strong>Assembly</strong>: Google.Cloud.BigQuery.V2.dll</h6>
-  <h5 id="Google_Cloud_BigQuery_V2_GetTableOptions_syntax">Syntax</h5>
+  <h5 id="Google_Cloud_BigQuery_V2_BigQueryInsertStatus_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class GetTableOptions</code></pre>
+    <pre><code class="lang-csharp hljs">public enum BigQueryInsertStatus</code></pre>
   </div>
-  <h3 id="properties">Properties
+  <h3 id="fields">Fields
   </h3>
-  <a id="Google_Cloud_BigQuery_V2_GetTableOptions_SelectedFields_" data-uid="Google.Cloud.BigQuery.V2.GetTableOptions.SelectedFields*"></a>
-  <h4 id="Google_Cloud_BigQuery_V2_GetTableOptions_SelectedFields" data-uid="Google.Cloud.BigQuery.V2.GetTableOptions.SelectedFields">SelectedFields</h4>
-  <div class="markdown level1 summary"><p>Comma separated list of schema fields to return.
-When set allows to obtain a partial table schema.
-When this property is null or empty the full table schema is returned.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SelectedFields { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
-        <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
-    </thead>
+    <thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
+        <td id="Google_Cloud_BigQuery_V2_BigQueryInsertStatus_AllRowsInserted">AllRowsInserted</td>
+        <td><p>All rows were inserted successfully.
+This only happens if all rows are valid rows.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Google_Cloud_BigQuery_V2_BigQueryInsertStatus_NoRowsInserted">NoRowsInserted</td>
+        <td><p>No rows were inserted. In that case the <a class="xref" href="Google.Cloud.BigQuery.V2.BigQueryInsertResults.html">BigQueryInsertResults</a>
+returned by the insert operation will contain error information about the invalid rows.
+This can happen when:
+<ul><li></li><li></li></ul></p>
+</td>
+      </tr>
+      <tr>
+        <td id="Google_Cloud_BigQuery_V2_BigQueryInsertStatus_SomeRowsInserted">SomeRowsInserted</td>
+        <td><p>Some rows were inserted but not others. In that case the <a class="xref" href="Google.Cloud.BigQuery.V2.BigQueryInsertResults.html">BigQueryInsertResults</a>
+returned by the insert operation will contain error information about the rows that were not inserted.
+This happens only when <a class="xref" href="Google.Cloud.BigQuery.V2.InsertOptions.html#Google_Cloud_BigQuery_V2_InsertOptions_SkipInvalidRows">SkipInvalidRows</a> is set to true and some, 
+but not all of the rows, are invalid.</p>
+</td>
       </tr>
     </tbody>
-  </table>
+  </thead></thead></table>
 </article>
           </div>
           
