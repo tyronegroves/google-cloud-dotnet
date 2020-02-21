@@ -5300,7 +5300,7 @@ CryptoKeyVersion response = await keyManagementServiceClient.DestroyCryptoKeyVer
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_Encrypt_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.Encrypt*"></a>
-  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_Encrypt_Google_Cloud_Kms_V1_CryptoKeyName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.Encrypt(Google.Cloud.Kms.V1.CryptoKeyName,Google.Protobuf.ByteString,Google.Api.Gax.Grpc.CallSettings)">Encrypt(CryptoKeyName, ByteString, CallSettings)</h4>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_Encrypt_Google_Api_Gax_IResourceName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.Encrypt(Google.Api.Gax.IResourceName,Google.Protobuf.ByteString,Google.Api.Gax.Grpc.CallSettings)">Encrypt(IResourceName, ByteString, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
 The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
 [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].</p>
@@ -5308,7 +5308,7 @@ The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual EncryptResponse Encrypt(CryptoKeyName name, ByteString plaintext, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual EncryptResponse Encrypt(IResourceName name, ByteString plaintext, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5321,7 +5321,7 @@ The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
+        <td><span class="xref">Google.Api.Gax.IResourceName</span></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] or [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
 to use for encryption.</p>
@@ -5366,11 +5366,11 @@ plaintext and additional_authenticated_data fields must be no larger than
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_Encrypt_Google_Cloud_Kms_V1_CryptoKeyName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_Encrypt_Google_Api_Gax_IResourceName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
 // Initialize request argument(s)
-CryptoKeyName name = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
+IResourceName name = new UnparsedResourceName(&quot;a/wildcard/resource&quot;);
 ByteString plaintext = ByteString.Empty;
 // Make the request
 EncryptResponse response = keyManagementServiceClient.Encrypt(name, plaintext);
@@ -5434,7 +5434,7 @@ KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClie
 // Initialize request argument(s)
 EncryptRequest request = new EncryptRequest
 {
-    CryptoKeyName = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;),
+    ResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
     Plaintext = ByteString.Empty,
     AdditionalAuthenticatedData = ByteString.Empty,
 };
@@ -5513,14 +5513,14 @@ plaintext and additional_authenticated_data fields must be no larger than
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
 // Initialize request argument(s)
-string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
+string name = &quot;a/wildcard/resource&quot;;
 ByteString plaintext = ByteString.Empty;
 // Make the request
 EncryptResponse response = keyManagementServiceClient.Encrypt(name, plaintext);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.EncryptAsync*"></a>
-  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Cloud_Kms_V1_CryptoKeyName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.EncryptAsync(Google.Cloud.Kms.V1.CryptoKeyName,Google.Protobuf.ByteString,Google.Api.Gax.Grpc.CallSettings)">EncryptAsync(CryptoKeyName, ByteString, CallSettings)</h4>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Api_Gax_IResourceName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.EncryptAsync(Google.Api.Gax.IResourceName,Google.Protobuf.ByteString,Google.Api.Gax.Grpc.CallSettings)">EncryptAsync(IResourceName, ByteString, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
 The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
 [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].</p>
@@ -5528,7 +5528,7 @@ The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;EncryptResponse&gt; EncryptAsync(CryptoKeyName name, ByteString plaintext, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;EncryptResponse&gt; EncryptAsync(IResourceName name, ByteString plaintext, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5541,7 +5541,7 @@ The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
+        <td><span class="xref">Google.Api.Gax.IResourceName</span></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] or [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
 to use for encryption.</p>
@@ -5586,18 +5586,18 @@ plaintext and additional_authenticated_data fields must be no larger than
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Cloud_Kms_V1_CryptoKeyName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Api_Gax_IResourceName_Google_Protobuf_ByteString_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
 // Initialize request argument(s)
-CryptoKeyName name = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
+IResourceName name = new UnparsedResourceName(&quot;a/wildcard/resource&quot;);
 ByteString plaintext = ByteString.Empty;
 // Make the request
 EncryptResponse response = await keyManagementServiceClient.EncryptAsync(name, plaintext);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.EncryptAsync*"></a>
-  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Cloud_Kms_V1_CryptoKeyName_Google_Protobuf_ByteString_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.EncryptAsync(Google.Cloud.Kms.V1.CryptoKeyName,Google.Protobuf.ByteString,System.Threading.CancellationToken)">EncryptAsync(CryptoKeyName, ByteString, CancellationToken)</h4>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Api_Gax_IResourceName_Google_Protobuf_ByteString_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.EncryptAsync(Google.Api.Gax.IResourceName,Google.Protobuf.ByteString,System.Threading.CancellationToken)">EncryptAsync(IResourceName, ByteString, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
 The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
 [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].</p>
@@ -5605,7 +5605,7 @@ The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task&lt;EncryptResponse&gt; EncryptAsync(CryptoKeyName name, ByteString plaintext, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;EncryptResponse&gt; EncryptAsync(IResourceName name, ByteString plaintext, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -5618,7 +5618,7 @@ The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
+        <td><span class="xref">Google.Api.Gax.IResourceName</span></td>
         <td><span class="parametername">name</span></td>
         <td><p>Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] or [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
 to use for encryption.</p>
@@ -5663,11 +5663,11 @@ plaintext and additional_authenticated_data fields must be no larger than
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Cloud_Kms_V1_CryptoKeyName_Google_Protobuf_ByteString_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_EncryptAsync_Google_Api_Gax_IResourceName_Google_Protobuf_ByteString_System_Threading_CancellationToken__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
 // Initialize request argument(s)
-CryptoKeyName name = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
+IResourceName name = new UnparsedResourceName(&quot;a/wildcard/resource&quot;);
 ByteString plaintext = ByteString.Empty;
 // Make the request
 EncryptResponse response = await keyManagementServiceClient.EncryptAsync(name, plaintext);
@@ -5731,7 +5731,7 @@ KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServi
 // Initialize request argument(s)
 EncryptRequest request = new EncryptRequest
 {
-    CryptoKeyName = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;),
+    ResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
     Plaintext = ByteString.Empty,
     AdditionalAuthenticatedData = ByteString.Empty,
 };
@@ -5797,7 +5797,7 @@ KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServi
 // Initialize request argument(s)
 EncryptRequest request = new EncryptRequest
 {
-    CryptoKeyName = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;),
+    ResourceName = new UnparsedResourceName(&quot;a/wildcard/resource&quot;),
     Plaintext = ByteString.Empty,
     AdditionalAuthenticatedData = ByteString.Empty,
 };
@@ -5876,7 +5876,7 @@ plaintext and additional_authenticated_data fields must be no larger than
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
+string name = &quot;a/wildcard/resource&quot;;
 ByteString plaintext = ByteString.Empty;
 // Make the request
 EncryptResponse response = await keyManagementServiceClient.EncryptAsync(name, plaintext);
@@ -5953,10 +5953,70 @@ plaintext and additional_authenticated_data fields must be no larger than
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
+string name = &quot;a/wildcard/resource&quot;;
 ByteString plaintext = ByteString.Empty;
 // Make the request
 EncryptResponse response = await keyManagementServiceClient.EncryptAsync(name, plaintext);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKey_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKey*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKey_Google_Cloud_Kms_V1_CryptoKeyName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKey(Google.Cloud.Kms.V1.CryptoKeyName,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKey(CryptoKeyName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
+[primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CryptoKey GetCryptoKey(CryptoKeyName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.html">CryptoKey</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKey_Google_Cloud_Kms_V1_CryptoKeyName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+CryptoKeyName name = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
+// Make the request
+CryptoKey response = keyManagementServiceClient.GetCryptoKey(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKey_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKey*"></a>
@@ -6020,6 +6080,186 @@ GetCryptoKeyRequest request = new GetCryptoKeyRequest
 };
 // Make the request
 CryptoKey response = keyManagementServiceClient.GetCryptoKey(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKey_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKey*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKey_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKey(System.String,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKey(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
+[primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CryptoKey GetCryptoKey(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.html">CryptoKey</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKey_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
+// Make the request
+CryptoKey response = keyManagementServiceClient.GetCryptoKey(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_Google_Cloud_Kms_V1_CryptoKeyName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync(Google.Cloud.Kms.V1.CryptoKeyName,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKeyAsync(CryptoKeyName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
+[primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKey&gt; GetCryptoKeyAsync(CryptoKeyName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.html">CryptoKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_Google_Cloud_Kms_V1_CryptoKeyName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+CryptoKeyName name = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
+// Make the request
+CryptoKey response = await keyManagementServiceClient.GetCryptoKeyAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_Google_Cloud_Kms_V1_CryptoKeyName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync(Google.Cloud.Kms.V1.CryptoKeyName,System.Threading.CancellationToken)">GetCryptoKeyAsync(CryptoKeyName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
+[primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKey&gt; GetCryptoKeyAsync(CryptoKeyName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.html">CryptoKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_Google_Cloud_Kms_V1_CryptoKeyName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+CryptoKeyName name = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
+// Make the request
+CryptoKey response = await keyManagementServiceClient.GetCryptoKeyAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync*"></a>
@@ -6148,6 +6388,185 @@ GetCryptoKeyRequest request = new GetCryptoKeyRequest
 CryptoKey response = await keyManagementServiceClient.GetCryptoKeyAsync(request);
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKeyAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
+[primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKey&gt; GetCryptoKeyAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.html">CryptoKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
+// Make the request
+CryptoKey response = await keyManagementServiceClient.GetCryptoKeyAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyAsync(System.String,System.Threading.CancellationToken)">GetCryptoKeyAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its
+[primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKey&gt; GetCryptoKeyAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKey.name] of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKey.html">CryptoKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
+// Make the request
+CryptoKey response = await keyManagementServiceClient.GetCryptoKeyAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersion*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersion(Google.Cloud.Kms.V1.CryptoKeyVersionName,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKeyVersion(CryptoKeyVersionName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CryptoKeyVersion GetCryptoKeyVersion(CryptoKeyVersionName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersionName.html">CryptoKeyVersionName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.html">CryptoKeyVersion</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+CryptoKeyVersionName name = CryptoKeyVersionName.FromProjectLocationKeyRingCryptoKeyCryptoKeyVersion(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;);
+// Make the request
+CryptoKeyVersion response = keyManagementServiceClient.GetCryptoKeyVersion(name);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersion*"></a>
   <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_Google_Cloud_Kms_V1_GetCryptoKeyVersionRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersion(Google.Cloud.Kms.V1.GetCryptoKeyVersionRequest,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKeyVersion(GetCryptoKeyVersionRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
@@ -6208,6 +6627,183 @@ GetCryptoKeyVersionRequest request = new GetCryptoKeyVersionRequest
 };
 // Make the request
 CryptoKeyVersion response = keyManagementServiceClient.GetCryptoKeyVersion(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersion*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersion(System.String,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKeyVersion(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CryptoKeyVersion GetCryptoKeyVersion(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.html">CryptoKeyVersion</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersion_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]/cryptoKeyVersions/[CRYPTO_KEY_VERSION]&quot;;
+// Make the request
+CryptoKeyVersion response = keyManagementServiceClient.GetCryptoKeyVersion(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync(Google.Cloud.Kms.V1.CryptoKeyVersionName,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKeyVersionAsync(CryptoKeyVersionName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKeyVersion&gt; GetCryptoKeyVersionAsync(CryptoKeyVersionName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersionName.html">CryptoKeyVersionName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.html">CryptoKeyVersion</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+CryptoKeyVersionName name = CryptoKeyVersionName.FromProjectLocationKeyRingCryptoKeyCryptoKeyVersion(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;);
+// Make the request
+CryptoKeyVersion response = await keyManagementServiceClient.GetCryptoKeyVersionAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync(Google.Cloud.Kms.V1.CryptoKeyVersionName,System.Threading.CancellationToken)">GetCryptoKeyVersionAsync(CryptoKeyVersionName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKeyVersion&gt; GetCryptoKeyVersionAsync(CryptoKeyVersionName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersionName.html">CryptoKeyVersionName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.html">CryptoKeyVersion</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+CryptoKeyVersionName name = CryptoKeyVersionName.FromProjectLocationKeyRingCryptoKeyCryptoKeyVersion(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;);
+// Make the request
+CryptoKeyVersion response = await keyManagementServiceClient.GetCryptoKeyVersionAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync*"></a>
@@ -6332,6 +6928,124 @@ GetCryptoKeyVersionRequest request = new GetCryptoKeyVersionRequest
 };
 // Make the request
 CryptoKeyVersion response = await keyManagementServiceClient.GetCryptoKeyVersionAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetCryptoKeyVersionAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKeyVersion&gt; GetCryptoKeyVersionAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.html">CryptoKeyVersion</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]/cryptoKeyVersions/[CRYPTO_KEY_VERSION]&quot;;
+// Make the request
+CryptoKeyVersion response = await keyManagementServiceClient.GetCryptoKeyVersionAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetCryptoKeyVersionAsync(System.String,System.Threading.CancellationToken)">GetCryptoKeyVersionAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CryptoKeyVersion&gt; GetCryptoKeyVersionAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersion.html">CryptoKeyVersion</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetCryptoKeyVersionAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]/cryptoKeyVersions/[CRYPTO_KEY_VERSION]&quot;;
+// Make the request
+CryptoKeyVersion response = await keyManagementServiceClient.GetCryptoKeyVersionAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetIamPolicy_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetIamPolicy*"></a>
@@ -6852,6 +7566,124 @@ GetImportJobRequest request = new GetImportJobRequest
 ImportJob response = keyManagementServiceClient.GetImportJob(request);
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJob_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJob*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJob_Google_Cloud_Kms_V1_ImportJobName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJob(Google.Cloud.Kms.V1.ImportJobName,Google.Api.Gax.Grpc.CallSettings)">GetImportJob(ImportJobName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ImportJob GetImportJob(ImportJobName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJobName.html">ImportJobName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJob_Google_Cloud_Kms_V1_ImportJobName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+ImportJobName name = ImportJobName.FromProjectLocationKeyRingImportJob(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[IMPORT_JOB]&quot;);
+// Make the request
+ImportJob response = keyManagementServiceClient.GetImportJob(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJob_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJob*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJob_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJob(System.String,Google.Api.Gax.Grpc.CallSettings)">GetImportJob(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ImportJob GetImportJob(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJob_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/importJobs/[IMPORT_JOB]&quot;;
+// Make the request
+ImportJob response = keyManagementServiceClient.GetImportJob(name);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync*"></a>
   <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_Google_Cloud_Kms_V1_GetImportJobRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync(Google.Cloud.Kms.V1.GetImportJobRequest,Google.Api.Gax.Grpc.CallSettings)">GetImportJobAsync(GetImportJobRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].</p>
@@ -6974,6 +7806,242 @@ GetImportJobRequest request = new GetImportJobRequest
 };
 // Make the request
 ImportJob response = await keyManagementServiceClient.GetImportJobAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_Google_Cloud_Kms_V1_ImportJobName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync(Google.Cloud.Kms.V1.ImportJobName,Google.Api.Gax.Grpc.CallSettings)">GetImportJobAsync(ImportJobName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ImportJob&gt; GetImportJobAsync(ImportJobName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJobName.html">ImportJobName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_Google_Cloud_Kms_V1_ImportJobName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+ImportJobName name = ImportJobName.FromProjectLocationKeyRingImportJob(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[IMPORT_JOB]&quot;);
+// Make the request
+ImportJob response = await keyManagementServiceClient.GetImportJobAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_Google_Cloud_Kms_V1_ImportJobName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync(Google.Cloud.Kms.V1.ImportJobName,System.Threading.CancellationToken)">GetImportJobAsync(ImportJobName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ImportJob&gt; GetImportJobAsync(ImportJobName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.ImportJobName.html">ImportJobName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_Google_Cloud_Kms_V1_ImportJobName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+ImportJobName name = ImportJobName.FromProjectLocationKeyRingImportJob(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[IMPORT_JOB]&quot;);
+// Make the request
+ImportJob response = await keyManagementServiceClient.GetImportJobAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetImportJobAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ImportJob&gt; GetImportJobAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/importJobs/[IMPORT_JOB]&quot;;
+// Make the request
+ImportJob response = await keyManagementServiceClient.GetImportJobAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetImportJobAsync(System.String,System.Threading.CancellationToken)">GetImportJobAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ImportJob&gt; GetImportJobAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.ImportJob.name] of the [ImportJob][google.cloud.kms.v1.ImportJob] to get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.ImportJob.html">ImportJob</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetImportJobAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/importJobs/[IMPORT_JOB]&quot;;
+// Make the request
+ImportJob response = await keyManagementServiceClient.GetImportJobAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetKeyRing_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetKeyRing*"></a>
@@ -7517,6 +8585,69 @@ KeyRing response = await keyManagementServiceClient.GetKeyRingAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKey*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKey(Google.Cloud.Kms.V1.CryptoKeyVersionName,Google.Api.Gax.Grpc.CallSettings)">GetPublicKey(CryptoKeyVersionName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
+[CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+[ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
+[ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PublicKey GetPublicKey(CryptoKeyVersionName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersionName.html">CryptoKeyVersionName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.PublicKey.html">PublicKey</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+CryptoKeyVersionName name = CryptoKeyVersionName.FromProjectLocationKeyRingCryptoKeyCryptoKeyVersion(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;);
+// Make the request
+PublicKey response = keyManagementServiceClient.GetPublicKey(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKey*"></a>
   <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_Google_Cloud_Kms_V1_GetPublicKeyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKey(Google.Cloud.Kms.V1.GetPublicKeyRequest,Google.Api.Gax.Grpc.CallSettings)">GetPublicKey(GetPublicKeyRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
 [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
@@ -7579,6 +8710,195 @@ GetPublicKeyRequest request = new GetPublicKeyRequest
 };
 // Make the request
 PublicKey response = keyManagementServiceClient.GetPublicKey(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKey*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKey(System.String,Google.Api.Gax.Grpc.CallSettings)">GetPublicKey(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
+[CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+[ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
+[ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PublicKey GetPublicKey(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.PublicKey.html">PublicKey</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKey_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]/cryptoKeyVersions/[CRYPTO_KEY_VERSION]&quot;;
+// Make the request
+PublicKey response = keyManagementServiceClient.GetPublicKey(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync(Google.Cloud.Kms.V1.CryptoKeyVersionName,Google.Api.Gax.Grpc.CallSettings)">GetPublicKeyAsync(CryptoKeyVersionName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
+[CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+[ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
+[ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PublicKey&gt; GetPublicKeyAsync(CryptoKeyVersionName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersionName.html">CryptoKeyVersionName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.PublicKey.html">PublicKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+CryptoKeyVersionName name = CryptoKeyVersionName.FromProjectLocationKeyRingCryptoKeyCryptoKeyVersion(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;);
+// Make the request
+PublicKey response = await keyManagementServiceClient.GetPublicKeyAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync(Google.Cloud.Kms.V1.CryptoKeyVersionName,System.Threading.CancellationToken)">GetPublicKeyAsync(CryptoKeyVersionName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
+[CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+[ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
+[ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PublicKey&gt; GetPublicKeyAsync(CryptoKeyVersionName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyVersionName.html">CryptoKeyVersionName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.PublicKey.html">PublicKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_Google_Cloud_Kms_V1_CryptoKeyVersionName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+CryptoKeyVersionName name = CryptoKeyVersionName.FromProjectLocationKeyRingCryptoKeyCryptoKeyVersion(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;, &quot;[CRYPTO_KEY_VERSION]&quot;);
+// Make the request
+PublicKey response = await keyManagementServiceClient.GetPublicKeyAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync*"></a>
@@ -7709,6 +9029,132 @@ GetPublicKeyRequest request = new GetPublicKeyRequest
 };
 // Make the request
 PublicKey response = await keyManagementServiceClient.GetPublicKeyAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetPublicKeyAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
+[CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+[ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
+[ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PublicKey&gt; GetPublicKeyAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.PublicKey.html">PublicKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]/cryptoKeyVersions/[CRYPTO_KEY_VERSION]&quot;;
+// Make the request
+PublicKey response = await keyManagementServiceClient.GetPublicKeyAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync*"></a>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.GetPublicKeyAsync(System.String,System.Threading.CancellationToken)">GetPublicKeyAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The
+[CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+[ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or
+[ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PublicKey&gt; GetPublicKeyAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key to
+get.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.PublicKey.html">PublicKey</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_GetPublicKeyAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]/cryptoKeyVersions/[CRYPTO_KEY_VERSION]&quot;;
+// Make the request
+PublicKey response = await keyManagementServiceClient.GetPublicKeyAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ImportCryptoKeyVersion_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.ImportCryptoKeyVersion*"></a>
@@ -8534,13 +9980,13 @@ string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersions_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.ListCryptoKeyVersions*"></a>
-  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersions_Google_Cloud_Kms_V1_KeyRingName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.ListCryptoKeyVersions(Google.Cloud.Kms.V1.KeyRingName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListCryptoKeyVersions(KeyRingName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersions_Google_Cloud_Kms_V1_CryptoKeyName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.ListCryptoKeyVersions(Google.Cloud.Kms.V1.CryptoKeyName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListCryptoKeyVersions(CryptoKeyName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; ListCryptoKeyVersions(KeyRingName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; ListCryptoKeyVersions(CryptoKeyName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -8553,7 +9999,7 @@ string nextPageToken = singlePage.NextPageToken;
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Kms.V1.KeyRingName.html">KeyRingName</a></td>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to list, in the format
 <code>projects/*/locations/*/keyRings/*/cryptoKeys/*</code>.</p>
@@ -8598,11 +10044,11 @@ page.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersions_Google_Cloud_Kms_V1_KeyRingName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersions_Google_Cloud_Kms_V1_CryptoKeyName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
 // Initialize request argument(s)
-KeyRingName parent = KeyRingName.FromProjectLocationKeyRing(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;);
+CryptoKeyName parent = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
 // Make the request
 PagedEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; response = keyManagementServiceClient.ListCryptoKeyVersions(parent);
 
@@ -8695,7 +10141,7 @@ KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClie
 // Initialize request argument(s)
 ListCryptoKeyVersionsRequest request = new ListCryptoKeyVersionsRequest
 {
-    ParentAsKeyRingName = KeyRingName.FromProjectLocationKeyRing(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;),
+    ParentAsCryptoKeyName = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;),
     View = CryptoKeyVersion.Types.CryptoKeyVersionView.Unspecified,
     Filter = &quot;&quot;,
     OrderBy = &quot;&quot;,
@@ -8805,7 +10251,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = KeyManagementServiceClient.Create();
 // Initialize request argument(s)
-string parent = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]&quot;;
+string parent = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
 // Make the request
 PagedEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; response = keyManagementServiceClient.ListCryptoKeyVersions(parent);
 
@@ -8843,13 +10289,13 @@ string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersionsAsync_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.ListCryptoKeyVersionsAsync*"></a>
-  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersionsAsync_Google_Cloud_Kms_V1_KeyRingName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.ListCryptoKeyVersionsAsync(Google.Cloud.Kms.V1.KeyRingName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListCryptoKeyVersionsAsync(KeyRingName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <h4 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersionsAsync_Google_Cloud_Kms_V1_CryptoKeyName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Kms.V1.KeyManagementServiceClient.ListCryptoKeyVersionsAsync(Google.Cloud.Kms.V1.CryptoKeyName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListCryptoKeyVersionsAsync(CryptoKeyName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; ListCryptoKeyVersionsAsync(KeyRingName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; ListCryptoKeyVersionsAsync(CryptoKeyName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -8862,7 +10308,7 @@ string nextPageToken = singlePage.NextPageToken;
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Cloud.Kms.V1.KeyRingName.html">KeyRingName</a></td>
+        <td><a class="xref" href="Google.Cloud.Kms.V1.CryptoKeyName.html">CryptoKeyName</a></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The resource name of the [CryptoKey][google.cloud.kms.v1.CryptoKey] to list, in the format
 <code>projects/*/locations/*/keyRings/*/cryptoKeys/*</code>.</p>
@@ -8907,11 +10353,11 @@ page.</p>
     </tbody>
   </table>
   <div>
-  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersionsAsync_Google_Cloud_Kms_V1_KeyRingName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <h5 id="Google_Cloud_Kms_V1_KeyManagementServiceClient_ListCryptoKeyVersionsAsync_Google_Cloud_Kms_V1_CryptoKeyName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
 // Initialize request argument(s)
-KeyRingName parent = KeyRingName.FromProjectLocationKeyRing(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;);
+CryptoKeyName parent = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;);
 // Make the request
 PagedAsyncEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; response = keyManagementServiceClient.ListCryptoKeyVersionsAsync(parent);
 
@@ -9004,7 +10450,7 @@ KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServi
 // Initialize request argument(s)
 ListCryptoKeyVersionsRequest request = new ListCryptoKeyVersionsRequest
 {
-    ParentAsKeyRingName = KeyRingName.FromProjectLocationKeyRing(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;),
+    ParentAsCryptoKeyName = CryptoKeyName.FromProjectLocationKeyRingCryptoKey(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[KEY_RING]&quot;, &quot;[CRYPTO_KEY]&quot;),
     View = CryptoKeyVersion.Types.CryptoKeyVersionView.Unspecified,
     Filter = &quot;&quot;,
     OrderBy = &quot;&quot;,
@@ -9114,7 +10560,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 KeyManagementServiceClient keyManagementServiceClient = await KeyManagementServiceClient.CreateAsync();
 // Initialize request argument(s)
-string parent = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]&quot;;
+string parent = &quot;projects/[PROJECT]/locations/[LOCATION]/keyRings/[KEY_RING]/cryptoKeys/[CRYPTO_KEY]&quot;;
 // Make the request
 PagedAsyncEnumerable&lt;ListCryptoKeyVersionsResponse, CryptoKeyVersion&gt; response = keyManagementServiceClient.ListCryptoKeyVersionsAsync(parent);
 
