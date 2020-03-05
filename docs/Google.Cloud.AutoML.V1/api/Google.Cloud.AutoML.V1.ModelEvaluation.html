@@ -81,33 +81,11 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ModelEvaluation</span></div>
   </div>
-  <div classs="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluation.html">ModelEvaluation</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
-    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluation.html">ModelEvaluation</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluation.html">ModelEvaluation</a>&gt;</div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.AutoML.V1.html">Google.Cloud.AutoML.V1</a></h6>
   <h6><strong>Assembly</strong>: Google.Cloud.AutoML.V1.dll</h6>
   <h5 id="Google_Cloud_AutoML_V1_ModelEvaluation_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class ModelEvaluation : IMessage&lt;ModelEvaluation&gt;, IMessage, IEquatable&lt;ModelEvaluation&gt;, IDeepCloneable&lt;ModelEvaluation&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class ModelEvaluation : Protobuf.IMessage&lt;ModelEvaluation&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -148,8 +126,14 @@
   </h3>
   <a id="Google_Cloud_AutoML_V1_ModelEvaluation_AnnotationSpecId_" data-uid="Google.Cloud.AutoML.V1.ModelEvaluation.AnnotationSpecId*"></a>
   <h4 id="Google_Cloud_AutoML_V1_ModelEvaluation_AnnotationSpecId" data-uid="Google.Cloud.AutoML.V1.ModelEvaluation.AnnotationSpecId">AnnotationSpecId</h4>
-  <div class="markdown level1 summary"><p>Output only. The ID of the annotation spec that the model evaluation
-applies to. The The ID is empty for the overall model evaluation.</p>
+  <div class="markdown level1 summary"><p>Output only. The ID of the annotation spec that the model evaluation applies to. The
+The ID is empty for the overall model evaluation.
+For Tables annotation specs in the dataset do not exist and this ID is
+always not set, but for CLASSIFICATION</p>
+<p>[prediction_type-s][google.cloud.automl.v1.TablesModelMetadata.prediction_type]
+the
+[display_name][google.cloud.automl.v1.ModelEvaluation.display_name]
+field is used.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -173,7 +157,10 @@ applies to. The The ID is empty for the overall model evaluation.</p>
   </table>
   <a id="Google_Cloud_AutoML_V1_ModelEvaluation_ClassificationEvaluationMetrics_" data-uid="Google.Cloud.AutoML.V1.ModelEvaluation.ClassificationEvaluationMetrics*"></a>
   <h4 id="Google_Cloud_AutoML_V1_ModelEvaluation_ClassificationEvaluationMetrics" data-uid="Google.Cloud.AutoML.V1.ModelEvaluation.ClassificationEvaluationMetrics">ClassificationEvaluationMetrics</h4>
-  <div class="markdown level1 summary"><p>Model evaluation metrics for image, text classification.</p>
+  <div class="markdown level1 summary"><p>Model evaluation metrics for image, text, video and tables
+classification.
+Tables problem is considered a classification when the target column
+is CATEGORY DataType.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -202,7 +189,7 @@ applies to. The The ID is empty for the overall model evaluation.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Timestamp CreateTime { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Protobuf.WellKnownTypes.Timestamp CreateTime { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -214,7 +201,7 @@ applies to. The The ID is empty for the overall model evaluation.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.Timestamp.html">Timestamp</a></td>
+        <td><span class="xref">Google.Protobuf.WellKnownTypes.Timestamp</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -226,7 +213,11 @@ applies to. The The ID is empty for the overall model evaluation.</p>
 at the moment when the model was trained. Because this field returns a
 value at model training time, for different models trained from the same
 dataset, the values may differ, since display names could had been changed
-between the two model&apos;s trainings.</p>
+between the two model&apos;s trainings. For Tables CLASSIFICATION</p>
+<p>[prediction_type-s][google.cloud.automl.v1.TablesModelMetadata.prediction_type]
+distinct values of the target column at the moment of the model evaluation
+are populated here.
+The display_name is empty for the overall model evaluation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -322,6 +313,30 @@ truth were annotated by the</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluation.MetricsOneofCase.html">ModelEvaluation.MetricsOneofCase</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_AutoML_V1_ModelEvaluation_ModelEvaluationName_" data-uid="Google.Cloud.AutoML.V1.ModelEvaluation.ModelEvaluationName*"></a>
+  <h4 id="Google_Cloud_AutoML_V1_ModelEvaluation_ModelEvaluationName" data-uid="Google.Cloud.AutoML.V1.ModelEvaluation.ModelEvaluationName">ModelEvaluationName</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluationName.html">ModelEvaluationName</a>-typed view over the <a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluation.html#Google_Cloud_AutoML_V1_ModelEvaluation_Name">Name</a> resource name property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ModelEvaluationName ModelEvaluationName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.AutoML.V1.ModelEvaluationName.html">ModelEvaluationName</a></td>
         <td></td>
       </tr>
     </tbody>

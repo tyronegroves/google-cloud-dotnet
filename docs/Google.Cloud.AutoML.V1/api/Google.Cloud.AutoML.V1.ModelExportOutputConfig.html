@@ -81,33 +81,11 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ModelExportOutputConfig</span></div>
   </div>
-  <div classs="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.ModelExportOutputConfig.html">ModelExportOutputConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
-    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.ModelExportOutputConfig.html">ModelExportOutputConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.ModelExportOutputConfig.html">ModelExportOutputConfig</a>&gt;</div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.AutoML.V1.html">Google.Cloud.AutoML.V1</a></h6>
   <h6><strong>Assembly</strong>: Google.Cloud.AutoML.V1.dll</h6>
   <h5 id="Google_Cloud_AutoML_V1_ModelExportOutputConfig_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class ModelExportOutputConfig : IMessage&lt;ModelExportOutputConfig&gt;, IMessage, IEquatable&lt;ModelExportOutputConfig&gt;, IDeepCloneable&lt;ModelExportOutputConfig&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class ModelExportOutputConfig : Protobuf.IMessage&lt;ModelExportOutputConfig&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -171,9 +149,8 @@
   </table>
   <a id="Google_Cloud_AutoML_V1_ModelExportOutputConfig_GcsDestination_" data-uid="Google.Cloud.AutoML.V1.ModelExportOutputConfig.GcsDestination*"></a>
   <h4 id="Google_Cloud_AutoML_V1_ModelExportOutputConfig_GcsDestination" data-uid="Google.Cloud.AutoML.V1.ModelExportOutputConfig.GcsDestination">GcsDestination</h4>
-  <div class="markdown level1 summary"><p>Required. The Google Cloud Storage location where the model is to be
-written to. This location may only be set for the following model
-formats:
+  <div class="markdown level1 summary"><p>Required. The Google Cloud Storage location where the model is to be written to.
+This location may only be set for the following model formats:
 &quot;tflite&quot;, &quot;edgetpu_tflite&quot;, &quot;tf_saved_model&quot;, &quot;tf_js&quot;, &quot;core_ml&quot;.</p>
 <p>Under the directory given as the destination a new one with name
 &quot;model-export-&lt;model-display-name&gt;-&lt;timestamp-of-export-call&gt;&quot;,
@@ -210,7 +187,8 @@ exportable):</p>
 <ul>
 <li><p>For Image Classification mobile-low-latency-1, mobile-versatile-1,
 mobile-high-accuracy-1:
-&quot;tflite&quot; (default), &quot;edgetpu_tflite&quot;, &quot;tf_saved_model&quot;, &quot;tf_js&quot;.</p>
+&quot;tflite&quot; (default), &quot;edgetpu_tflite&quot;, &quot;tf_saved_model&quot;, &quot;tf_js&quot;,
+&quot;docker&quot;.</p>
 </li>
 <li><p>For Image Classification mobile-core-ml-low-latency-1,
 mobile-core-ml-versatile-1, mobile-core-ml-high-accuracy-1:
@@ -227,7 +205,15 @@ Formats description:</p>
             devices.</li>
 <li>tf_saved_model - A tensorflow model in SavedModel format.</li>
 <li>tf_js - A <a href="https://www.tensorflow.org/js">TensorFlow.js</a> model that can
-   be used in the browser and in Node.js using JavaScript.x`</li>
+   be used in the browser and in Node.js using JavaScript.</li>
+<li>docker - Used for Docker containers. Use the params field to customize
+    the container. The container is verified to work correctly on
+    ubuntu 16.04 operating system. See more at
+    [containers</li>
+</ul>
+<p>quickstart](https:
+//cloud.google.com/vision/automl/docs/containers-gcs-quickstart)</p>
+<ul>
 <li>core_ml - Used for iOS mobile devices.</li>
 </ul>
 </div>
@@ -256,11 +242,16 @@ Formats description:</p>
   <div class="markdown level1 summary"><p>Additional model-type and format specific parameters describing the
 requirements for the to be exported model files, any string must be up to
 25000 characters long.</p>
+<ul>
+<li>For <code>docker</code> format:
+<code>cpu_architecture</code> - (string) &quot;x86_64&quot; (default).
+<code>gpu_architecture</code> - (string) &quot;none&quot; (default), &quot;nvidia&quot;.</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MapField&lt;string, string&gt; Params { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Protobuf.Collections.MapField&lt;string, string&gt; Params { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -272,7 +263,7 @@ requirements for the to be exported model files, any string must be up to
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Google.Protobuf.Collections.MapField-2.html">MapField</a>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Google.Protobuf.Collections.MapField</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>

@@ -81,25 +81,77 @@ is expected, unless specified otherwise.</p>
 <p>The formats are represented in EBNF with commas being literal and with
 non-terminal symbols defined near the end of this comment. The formats
 are:</p>
+<p>&lt;h4&gt;AutoML Vision&lt;/h4&gt;
+&lt;div class=&quot;ds-selector-tabs&quot;&gt;&lt;section&gt;&lt;h5&gt;Classification&lt;/h5&gt;</p>
+<p>One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH</p>
+<p>The Google Cloud Storage location of an image of up to
+30MB in size. Supported extensions: .JPEG, .GIF, .PNG.
+This path is treated as the ID in the batch predict output.</p>
+<p>Sample rows:</p>
+<p>gs://folder/image1.jpeg
+gs://folder/image2.gif
+gs://folder/image3.png</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Object Detection&lt;/h5&gt;</p>
+<p>One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH</p>
+<p>The Google Cloud Storage location of an image of up to
+30MB in size. Supported extensions: .JPEG, .GIF, .PNG.
+This path is treated as the ID in the batch predict output.</p>
+<p>Sample rows:</p>
+<p>gs://folder/image1.jpeg
+gs://folder/image2.gif
+gs://folder/image3.png
+&lt;/section&gt;
+&lt;/div&gt;</p>
+<p>&lt;h4&gt;AutoML Video Intelligence&lt;/h4&gt;
+&lt;div class=&quot;ds-selector-tabs&quot;&gt;&lt;section&gt;&lt;h5&gt;Classification&lt;/h5&gt;</p>
+<p>One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH,TIME_SEGMENT_START,TIME_SEGMENT_END</p>
+<p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of video up to 50GB in
+size and up to 3h in duration duration.
+Supported extensions: .MOV, .MPEG4, .MP4, .AVI.</p>
+<p><code>TIME_SEGMENT_START</code> and <code>TIME_SEGMENT_END</code> must be within the
+length of the video, and the end time must be after the start time.</p>
+<p>Sample rows:</p>
+<p>gs://folder/video1.mp4,10,40
+gs://folder/video1.mp4,20,60
+gs://folder/vid2.mov,0,inf</p>
+<p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Object Tracking&lt;/h5&gt;</p>
+<p>One or more CSV files where each line is a single column:</p>
+<p>GCS_FILE_PATH,TIME_SEGMENT_START,TIME_SEGMENT_END</p>
+<p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of video up to 50GB in
+size and up to 3h in duration duration.
+Supported extensions: .MOV, .MPEG4, .MP4, .AVI.</p>
+<p><code>TIME_SEGMENT_START</code> and <code>TIME_SEGMENT_END</code> must be within the
+length of the video, and the end time must be after the start time.</p>
+<p>Sample rows:</p>
+<p>gs://folder/video1.mp4,10,40
+gs://folder/video1.mp4,20,60
+gs://folder/vid2.mov,0,inf
+&lt;/section&gt;
+&lt;/div&gt;</p>
 <p>&lt;h4&gt;AutoML Natural Language&lt;/h4&gt;
 &lt;div class=&quot;ds-selector-tabs&quot;&gt;&lt;section&gt;&lt;h5&gt;Classification&lt;/h5&gt;</p>
 <p>One or more CSV files where each line is a single column:</p>
 <p>GCS_FILE_PATH</p>
 <p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of a text file.
-Supported file extensions: .TXT, .PDF
-Text files can be no larger than 10MB in size.</p>
+Supported file extensions: .TXT, .PDF, .TIF, .TIFF</p>
+<p>Text files can be no larger than 10MB in size.</p>
 <p>Sample rows:</p>
 <p>gs://folder/text1.txt
-gs://folder/text2.pdf</p>
+gs://folder/text2.pdf
+gs://folder/text3.tif</p>
 <p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Sentiment Analysis&lt;/h5&gt;
 One or more CSV files where each line is a single column:</p>
 <p>GCS_FILE_PATH</p>
 <p><code>GCS_FILE_PATH</code> is the Google Cloud Storage location of a text file.
-Supported file extensions: .TXT, .PDF
-Text files can be no larger than 128kB in size.</p>
+Supported file extensions: .TXT, .PDF, .TIF, .TIFF</p>
+<p>Text files can be no larger than 128kB in size.</p>
 <p>Sample rows:</p>
 <p>gs://folder/text1.txt
-gs://folder/text2.pdf</p>
+gs://folder/text2.pdf
+gs://folder/text3.tif</p>
 <p>&lt;/section&gt;&lt;section&gt;&lt;h5&gt;Entity Extraction&lt;/h5&gt;</p>
 <p>One or more JSONL (JSON Lines) files that either provide inline text or
 documents. You can only use one format, either inline text or documents,
@@ -111,9 +163,9 @@ JSON representation) and zero or more TextFeature protos. Any given
 text snippet content must have 30,000 characters or less, and also
 be UTF-8 NFC encoded (ASCII already is). The IDs provided should be
 unique.</p>
-<p>Each document JSONL file contains, per line, a proto that wraps a
-Document proto with <code>input_config</code> set. Only PDF documents are
-currently supported, and each PDF document cannot exceed 2MB in size.</p>
+<p>Each document JSONL file contains, per line, a proto that wraps a Document
+proto with <code>input_config</code> set. Each document cannot exceed 2MB in size.</p>
+<p>Supported document extensions: .PDF, .TIF, .TIFF</p>
 <p>Each JSONL file must not exceed 100MB in size, and no more than 20
 JSONL files may be passed.</p>
 <p>Sample inline JSONL file (Shown with artificial line
@@ -156,17 +208,71 @@ breaks. Actual line breaks are denoted by &quot;\n&quot;.):</p>
 {
   &quot;document&quot;: {
     &quot;input_config&quot;: {
-      &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document2.pdf&quot; ]
+      &quot;gcs_source&quot;: { &quot;input_uris&quot;: [ &quot;gs://folder/document2.tif&quot; ]
       }
     }
   }
 }
 &lt;/section&gt;
 &lt;/div&gt;</p>
+<p>&lt;h4&gt;AutoML Tables&lt;/h4&gt;&lt;div class=&quot;ui-datasection-main&quot;&gt;&lt;section
+class=&quot;selected&quot;&gt;</p>
+<p>See <a href="https://cloud.google.com/automl-tables/docs/predict-batch">Preparing your training
+data</a> for more
+information.</p>
+<p>You can use either
+[gcs_source][google.cloud.automl.v1.BatchPredictInputConfig.gcs_source]
+or
+[bigquery_source][BatchPredictInputConfig.bigquery_source].</p>
+<p><strong>For gcs_source:</strong></p>
+<p>CSV file(s), each by itself 10GB or smaller and total size must be
+100GB or smaller, where first file must have a header containing
+column names. If the first row of a subsequent file is the same as
+the header, then it is also treated as a header. All other rows
+contain values for the corresponding columns.</p>
+<p>The column names must contain the model&apos;s</p>
+<p>[input_feature_column_specs&apos;][google.cloud.automl.v1.TablesModelMetadata.input_feature_column_specs]
+[display_name-s][google.cloud.automl.v1.ColumnSpec.display_name]
+(order doesn&apos;t matter). The columns corresponding to the model&apos;s
+input feature column specs must contain values compatible with the
+column spec&apos;s data types. Prediction on all the rows, i.e. the CSV
+lines, will be attempted.</p>
+<p>Sample rows from a CSV file:
+&lt;pre&gt;
+&quot;First Name&quot;,&quot;Last Name&quot;,&quot;Dob&quot;,&quot;Addresses&quot;</p>
+<p>&quot;John&quot;,&quot;Doe&quot;,&quot;1968-01-22&quot;,&quot;[{&quot;status&quot;:&quot;current&quot;,&quot;address&quot;:&quot;123_First_Avenue&quot;,&quot;city&quot;:&quot;Seattle&quot;,&quot;state&quot;:&quot;WA&quot;,&quot;zip&quot;:&quot;11111&quot;,&quot;numberOfYears&quot;:&quot;1&quot;},{&quot;status&quot;:&quot;previous&quot;,&quot;address&quot;:&quot;456_Main_Street&quot;,&quot;city&quot;:&quot;Portland&quot;,&quot;state&quot;:&quot;OR&quot;,&quot;zip&quot;:&quot;22222&quot;,&quot;numberOfYears&quot;:&quot;5&quot;}]&quot;</p>
+<p>&quot;Jane&quot;,&quot;Doe&quot;,&quot;1980-10-16&quot;,&quot;[{&quot;status&quot;:&quot;current&quot;,&quot;address&quot;:&quot;789_Any_Avenue&quot;,&quot;city&quot;:&quot;Albany&quot;,&quot;state&quot;:&quot;NY&quot;,&quot;zip&quot;:&quot;33333&quot;,&quot;numberOfYears&quot;:&quot;2&quot;},{&quot;status&quot;:&quot;previous&quot;,&quot;address&quot;:&quot;321_Main_Street&quot;,&quot;city&quot;:&quot;Hoboken&quot;,&quot;state&quot;:&quot;NJ&quot;,&quot;zip&quot;:&quot;44444&quot;,&quot;numberOfYears&quot;:&quot;3&quot;}]}
+&lt;/pre&gt;
+<strong>For bigquery_source:</strong></p>
+<p>The URI of a BigQuery table. The user data size of the BigQuery
+table must be 100GB or smaller.</p>
+<p>The column names must contain the model&apos;s</p>
+<p>[input_feature_column_specs&apos;][google.cloud.automl.v1.TablesModelMetadata.input_feature_column_specs]
+[display_name-s][google.cloud.automl.v1.ColumnSpec.display_name]
+(order doesn&apos;t matter). The columns corresponding to the model&apos;s
+input feature column specs must contain values compatible with the
+column spec&apos;s data types. Prediction on all the rows of the table
+will be attempted.
+&lt;/section&gt;
+&lt;/div&gt;</p>
 <p><strong>Input field definitions:</strong></p>
 <p><code>GCS_FILE_PATH</code>
 : The path to a file on Google Cloud Storage. For example,
 &quot;gs://folder/video.avi&quot;.</p>
+<p><code>TIME_SEGMENT_START</code>
+: (<code>TIME_OFFSET</code>)
+Expresses a beginning, inclusive, of a time segment
+within an example that has a time dimension
+(e.g. video).</p>
+<p><code>TIME_SEGMENT_END</code>
+: (<code>TIME_OFFSET</code>)
+Expresses an end, exclusive, of a time segment within
+n example that has a time dimension (e.g. video).</p>
+<p><code>TIME_OFFSET</code>
+: A number of seconds as measured from the start of an
+example (e.g. video). Fractions are allowed, up to a
+microsecond precision. &quot;inf&quot; is allowed, and it means the end
+of the example.</p>
 <p><strong>Errors:</strong></p>
 <p>If any of the provided CSV files can&apos;t be parsed or if more than certain
 percent of CSV rows cannot be processed then the operation fails and
@@ -180,33 +286,11 @@ Operation.metadata.partial_failures.</p>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">BatchPredictInputConfig</span></div>
   </div>
-  <div classs="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
-    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.AutoML.V1.BatchPredictInputConfig.html">BatchPredictInputConfig</a>&gt;</div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.AutoML.V1.html">Google.Cloud.AutoML.V1</a></h6>
   <h6><strong>Assembly</strong>: Google.Cloud.AutoML.V1.dll</h6>
   <h5 id="Google_Cloud_AutoML_V1_BatchPredictInputConfig_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class BatchPredictInputConfig : IMessage&lt;BatchPredictInputConfig&gt;, IMessage, IEquatable&lt;BatchPredictInputConfig&gt;, IDeepCloneable&lt;BatchPredictInputConfig&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class BatchPredictInputConfig : Protobuf.IMessage&lt;BatchPredictInputConfig&gt;</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
