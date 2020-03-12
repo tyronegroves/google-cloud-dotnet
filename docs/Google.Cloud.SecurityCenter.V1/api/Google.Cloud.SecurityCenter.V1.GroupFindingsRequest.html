@@ -84,31 +84,12 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest</span></div>
-    <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.html">GroupFindingsRequest</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IMessage</span></div>
-    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.html">GroupFindingsRequest</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.html">GroupFindingsRequest</a>&gt;</div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.SecurityCenter.V1.html">Google.Cloud.SecurityCenter.V1</a></h6>
   <h6><strong>Assembly</strong>: Google.Cloud.SecurityCenter.V1.dll</h6>
   <h5 id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class GroupFindingsRequest : IPageRequest, IMessage&lt;GroupFindingsRequest&gt;, IMessage, IEquatable&lt;GroupFindingsRequest&gt;, IDeepCloneable&lt;GroupFindingsRequest&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class GroupFindingsRequest : Protobuf.IMessage&lt;GroupFindingsRequest&gt;, Api.Gax.Grpc.IPageRequest</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -160,12 +141,18 @@ two times don&apos;t affect the result. For example, the results aren&apos;t aff
 if the finding is made inactive and then active again.</p>
 <p>Possible &quot;state_change&quot; values when compare_duration is specified:</p>
 <ul>
-<li>&quot;CHANGED&quot;:   indicates that the finding was present at the start of
-          compare_duration, but changed its state at read_time.</li>
-<li>&quot;UNCHANGED&quot;: indicates that the finding was present at the start of
-          compare_duration and did not change state at read_time.</li>
-<li>&quot;ADDED&quot;:     indicates that the finding was not present at the start
-          of compare_duration, but was present at read_time.</li>
+<li>&quot;CHANGED&quot;:   indicates that the finding was present and matched the given
+          filter at the start of compare_duration, but changed its
+          state at read_time.</li>
+<li>&quot;UNCHANGED&quot;: indicates that the finding was present and matched the given
+          filter at the start of compare_duration and did not change
+          state at read_time.</li>
+<li>&quot;ADDED&quot;:     indicates that the finding did not match the given filter or
+          was not present at the start of compare_duration, but was
+          present at read_time.</li>
+<li>&quot;REMOVED&quot;:   indicates that the finding was present and matched the
+          filter at the start of compare_duration, but did not match
+          the filter at read_time.</li>
 </ul>
 <p>If compare_duration is not specified, then the only possible state_change
 is &quot;UNUSED&quot;,  which will be the state_change set for all findings present
@@ -176,7 +163,7 @@ at read_time.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Duration CompareDuration { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Protobuf.WellKnownTypes.Duration CompareDuration { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -260,9 +247,9 @@ Examples:
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_GroupBy_" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.GroupBy*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_GroupBy" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.GroupBy">GroupBy</h4>
-  <div class="markdown level1 summary"><p>Required. Expression that defines what assets fields to use for grouping (including
-<code>state_change</code>). The string value should follow SQL syntax: comma separated
-list of fields. For example: &quot;parent,resource_name&quot;.</p>
+  <div class="markdown level1 summary"><p>Required. Expression that defines what assets fields to use for grouping
+(including <code>state_change</code>). The string value should follow SQL syntax:
+comma separated list of fields. For example: &quot;parent,resource_name&quot;.</p>
 <p>The following fields are supported:</p>
 <ul>
 <li>resource_name</li>
@@ -320,8 +307,6 @@ list of fields. For example: &quot;parent,resource_name&quot;.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageSize</span></div>
   <a id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_PageToken_" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.PageToken*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_PageToken" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.PageToken">PageToken</h4>
   <div class="markdown level1 summary"><p>The value returned by the last <code>GroupFindingsResponse</code>; indicates
@@ -348,8 +333,6 @@ that the system should return the next page of data.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageToken</span></div>
   <a id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_Parent_" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.Parent*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_GroupFindingsRequest_Parent" data-uid="Google.Cloud.SecurityCenter.V1.GroupFindingsRequest.Parent">Parent</h4>
   <div class="markdown level1 summary"><p>Required. Name of the source to groupBy. Its format is
@@ -411,7 +394,7 @@ API&apos;s version of NOW.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Timestamp ReadTime { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Protobuf.WellKnownTypes.Timestamp ReadTime { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">

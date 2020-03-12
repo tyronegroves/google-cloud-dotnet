@@ -84,31 +84,12 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest</span></div>
-    <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.html">ListFindingsRequest</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IMessage</span></div>
-    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.html">ListFindingsRequest</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.html">ListFindingsRequest</a>&gt;</div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.SecurityCenter.V1.html">Google.Cloud.SecurityCenter.V1</a></h6>
   <h6><strong>Assembly</strong>: Google.Cloud.SecurityCenter.V1.dll</h6>
   <h5 id="Google_Cloud_SecurityCenter_V1_ListFindingsRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class ListFindingsRequest : IPageRequest, IMessage&lt;ListFindingsRequest&gt;, IMessage, IEquatable&lt;ListFindingsRequest&gt;, IDeepCloneable&lt;ListFindingsRequest&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class ListFindingsRequest : Protobuf.IMessage&lt;ListFindingsRequest&gt;, Api.Gax.Grpc.IPageRequest</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -161,12 +142,18 @@ two times don&apos;t affect the result. For example, the results aren&apos;t aff
 if the finding is made inactive and then active again.</p>
 <p>Possible &quot;state_change&quot; values when compare_duration is specified:</p>
 <ul>
-<li>&quot;CHANGED&quot;:   indicates that the finding was present at the start of
-          compare_duration, but changed its state at read_time.</li>
-<li>&quot;UNCHANGED&quot;: indicates that the finding was present at the start of
-          compare_duration and did not change state at read_time.</li>
-<li>&quot;ADDED&quot;:     indicates that the finding was not present at the start
-          of compare_duration, but was present at read_time.</li>
+<li>&quot;CHANGED&quot;:   indicates that the finding was present and matched the given
+          filter at the start of compare_duration, but changed its
+          state at read_time.</li>
+<li>&quot;UNCHANGED&quot;: indicates that the finding was present and matched the given
+          filter at the start of compare_duration and did not change
+          state at read_time.</li>
+<li>&quot;ADDED&quot;:     indicates that the finding did not match the given filter or
+          was not present at the start of compare_duration, but was
+          present at read_time.</li>
+<li>&quot;REMOVED&quot;:   indicates that the finding was present and matched the
+          filter at the start of compare_duration, but did not match
+          the filter at read_time.</li>
 </ul>
 <p>If compare_duration is not specified, then the only possible state_change
 is &quot;UNUSED&quot;, which will be the state_change set for all findings present at
@@ -175,7 +162,7 @@ read_time.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Duration CompareDuration { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Protobuf.WellKnownTypes.Duration CompareDuration { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -194,13 +181,13 @@ read_time.</p>
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_ListFindingsRequest_FieldMask_" data-uid="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.FieldMask*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_ListFindingsRequest_FieldMask" data-uid="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.FieldMask">FieldMask</h4>
-  <div class="markdown level1 summary"><p>Optional. A field mask to specify the Finding fields to be listed in the response.
-An empty field mask will list all fields.</p>
+  <div class="markdown level1 summary"><p>Optional. A field mask to specify the Finding fields to be listed in the
+response. An empty field mask will list all fields.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public FieldMask FieldMask { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Protobuf.WellKnownTypes.FieldMask FieldMask { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -343,8 +330,6 @@ security_marks.marks</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageSize</span></div>
   <a id="Google_Cloud_SecurityCenter_V1_ListFindingsRequest_PageToken_" data-uid="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.PageToken*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_ListFindingsRequest_PageToken" data-uid="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.PageToken">PageToken</h4>
   <div class="markdown level1 summary"><p>The value returned by the last <code>ListFindingsResponse</code>; indicates
@@ -371,8 +356,6 @@ that the system should return the next page of data.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageToken</span></div>
   <a id="Google_Cloud_SecurityCenter_V1_ListFindingsRequest_Parent_" data-uid="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.Parent*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_ListFindingsRequest_Parent" data-uid="Google.Cloud.SecurityCenter.V1.ListFindingsRequest.Parent">Parent</h4>
   <div class="markdown level1 summary"><p>Required. Name of the source the findings belong to. Its format is
@@ -434,7 +417,7 @@ API&apos;s version of NOW.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Timestamp ReadTime { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Protobuf.WellKnownTypes.Timestamp ReadTime { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
