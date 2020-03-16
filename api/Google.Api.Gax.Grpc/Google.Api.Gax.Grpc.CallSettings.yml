@@ -5,22 +5,24 @@ items:
   id: CallSettings
   parent: Google.Api.Gax.Grpc
   children:
-  - Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)
-  - Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})
+  - Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)
+  - Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})
   - Google.Api.Gax.Grpc.CallSettings.CancellationToken
   - Google.Api.Gax.Grpc.CallSettings.Credentials
+  - Google.Api.Gax.Grpc.CallSettings.Expiration
   - Google.Api.Gax.Grpc.CallSettings.FromCallCredentials(Grpc.Core.CallCredentials)
-  - Google.Api.Gax.Grpc.CallSettings.FromCallTiming(Google.Api.Gax.Grpc.CallTiming)
   - Google.Api.Gax.Grpc.CallSettings.FromCancellationToken(System.Threading.CancellationToken)
+  - Google.Api.Gax.Grpc.CallSettings.FromExpiration(Google.Api.Gax.Expiration)
   - Google.Api.Gax.Grpc.CallSettings.FromFieldMask(System.String)
   - Google.Api.Gax.Grpc.CallSettings.FromHeader(System.String,System.String)
   - Google.Api.Gax.Grpc.CallSettings.FromHeaderMutation(System.Action{Grpc.Core.Metadata})
   - Google.Api.Gax.Grpc.CallSettings.FromResponseMetadataHandler(System.Action{Grpc.Core.Metadata})
+  - Google.Api.Gax.Grpc.CallSettings.FromRetry(Google.Api.Gax.Grpc.RetrySettings)
   - Google.Api.Gax.Grpc.CallSettings.FromTrailingMetadataHandler(System.Action{Grpc.Core.Metadata})
   - Google.Api.Gax.Grpc.CallSettings.HeaderMutation
   - Google.Api.Gax.Grpc.CallSettings.PropagationToken
   - Google.Api.Gax.Grpc.CallSettings.ResponseMetadataHandler
-  - Google.Api.Gax.Grpc.CallSettings.Timing
+  - Google.Api.Gax.Grpc.CallSettings.Retry
   - Google.Api.Gax.Grpc.CallSettings.TrailingMetadataHandler
   - Google.Api.Gax.Grpc.CallSettings.WriteOptions
   langs:
@@ -60,12 +62,14 @@ items:
   - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.MergedWith(Google.Api.Gax.Grpc.CallSettings)
   - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithCancellationToken(System.Threading.CancellationToken)
   - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallCredentials(Grpc.Core.CallCredentials)
-  - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallTiming)
+  - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
+  - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.RetrySettings)
   - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithHeader(System.String,System.String)
   - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithResponseMetadataHandler(System.Action{Grpc.Core.Metadata})
   - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithTrailingMetadataHandler(System.Action{Grpc.Core.Metadata})
+  - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(System.DateTime)
+  - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(System.TimeSpan)
   - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithEarlierDeadline(System.Nullable{System.DateTime},Google.Api.Gax.IClock)
-  - Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
   modifiers.csharp:
   - public
   - sealed
@@ -74,16 +78,16 @@ items:
   - Public
   - NotInheritable
   - Class
-- uid: Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)
-  commentId: M:Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)
-  id: '#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)'
+- uid: Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)
+  commentId: M:Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)
+  id: '#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken)'
   parent: Google.Api.Gax.Grpc.CallSettings
   langs:
   - csharp
   - vb
-  name: CallSettings(Nullable<CancellationToken>, CallCredentials, CallTiming, Action<Metadata>, WriteOptions, ContextPropagationToken)
-  nameWithType: CallSettings.CallSettings(Nullable<CancellationToken>, CallCredentials, CallTiming, Action<Metadata>, WriteOptions, ContextPropagationToken)
-  fullName: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable<System.Threading.CancellationToken>, Grpc.Core.CallCredentials, Google.Api.Gax.Grpc.CallTiming, System.Action<Grpc.Core.Metadata>, Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken)
+  name: CallSettings(Nullable<CancellationToken>, CallCredentials, Expiration, RetrySettings, Action<Metadata>, WriteOptions, ContextPropagationToken)
+  nameWithType: CallSettings.CallSettings(Nullable<CancellationToken>, CallCredentials, Expiration, RetrySettings, Action<Metadata>, WriteOptions, ContextPropagationToken)
+  fullName: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable<System.Threading.CancellationToken>, Grpc.Core.CallCredentials, Google.Api.Gax.Expiration, Google.Api.Gax.Grpc.RetrySettings, System.Action<Grpc.Core.Metadata>, Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken)
   type: Constructor
   source:
     remote:
@@ -92,14 +96,14 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 32
+    startLine: 33
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
   summary: "\nConstructs an instance with the specified settings.\n"
   example: []
   syntax:
-    content: public CallSettings(CancellationToken? cancellationToken, CallCredentials credentials, CallTiming timing, Action<Metadata> headerMutation, WriteOptions writeOptions, ContextPropagationToken propagationToken)
+    content: public CallSettings(CancellationToken? cancellationToken, CallCredentials credentials, Expiration expiration, RetrySettings retry, Action<Metadata> headerMutation, WriteOptions writeOptions, ContextPropagationToken propagationToken)
     parameters:
     - id: cancellationToken
       type: System.Nullable{System.Threading.CancellationToken}
@@ -107,9 +111,12 @@ items:
     - id: credentials
       type: Grpc.Core.CallCredentials
       description: Credentials to use for the call.
-    - id: timing
-      type: Google.Api.Gax.Grpc.CallTiming
-      description: <xref href="Google.Api.Gax.Grpc.CallTiming" data-throw-if-not-resolved="false"></xref> to use, or null for default retry/expiration behavior.
+    - id: expiration
+      type: Google.Api.Gax.Expiration
+      description: <xref href="Google.Api.Gax.Grpc.CallSettings.Expiration" data-throw-if-not-resolved="false"></xref> to use, or null for default expiration behavior.
+    - id: retry
+      type: Google.Api.Gax.Grpc.RetrySettings
+      description: <xref href="Google.Api.Gax.Grpc.CallSettings.Retry" data-throw-if-not-resolved="false"></xref> to use, or null for default retry behavior.
     - id: headerMutation
       type: System.Action{Grpc.Core.Metadata}
       description: Action to modify the headers to send at the beginning of the call.
@@ -119,25 +126,25 @@ items:
     - id: propagationToken
       type: Grpc.Core.ContextPropagationToken
       description: <xref href="Grpc.Core.ContextPropagationToken" data-throw-if-not-resolved="false"></xref> for propagating settings from a parent call.
-    content.vb: Public Sub New(cancellationToken As CancellationToken?, credentials As CallCredentials, timing As CallTiming, headerMutation As Action(Of Metadata), writeOptions As WriteOptions, propagationToken As ContextPropagationToken)
+    content.vb: Public Sub New(cancellationToken As CancellationToken?, credentials As CallCredentials, expiration As Expiration, retry As RetrySettings, headerMutation As Action(Of Metadata), writeOptions As WriteOptions, propagationToken As ContextPropagationToken)
   overload: Google.Api.Gax.Grpc.CallSettings.#ctor*
-  nameWithType.vb: CallSettings.CallSettings(Nullable(Of CancellationToken), CallCredentials, CallTiming, Action(Of Metadata), WriteOptions, ContextPropagationToken)
+  nameWithType.vb: CallSettings.CallSettings(Nullable(Of CancellationToken), CallCredentials, Expiration, RetrySettings, Action(Of Metadata), WriteOptions, ContextPropagationToken)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable(Of System.Threading.CancellationToken), Grpc.Core.CallCredentials, Google.Api.Gax.Grpc.CallTiming, System.Action(Of Grpc.Core.Metadata), Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken)
-  name.vb: CallSettings(Nullable(Of CancellationToken), CallCredentials, CallTiming, Action(Of Metadata), WriteOptions, ContextPropagationToken)
-- uid: Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})
-  commentId: M:Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})
-  id: '#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Grpc.CallTiming,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})'
+  fullName.vb: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable(Of System.Threading.CancellationToken), Grpc.Core.CallCredentials, Google.Api.Gax.Expiration, Google.Api.Gax.Grpc.RetrySettings, System.Action(Of Grpc.Core.Metadata), Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken)
+  name.vb: CallSettings(Nullable(Of CancellationToken), CallCredentials, Expiration, RetrySettings, Action(Of Metadata), WriteOptions, ContextPropagationToken)
+- uid: Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})
+  commentId: M:Google.Api.Gax.Grpc.CallSettings.#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})
+  id: '#ctor(System.Nullable{System.Threading.CancellationToken},Grpc.Core.CallCredentials,Google.Api.Gax.Expiration,Google.Api.Gax.Grpc.RetrySettings,System.Action{Grpc.Core.Metadata},Grpc.Core.WriteOptions,Grpc.Core.ContextPropagationToken,System.Action{Grpc.Core.Metadata},System.Action{Grpc.Core.Metadata})'
   parent: Google.Api.Gax.Grpc.CallSettings
   langs:
   - csharp
   - vb
-  name: CallSettings(Nullable<CancellationToken>, CallCredentials, CallTiming, Action<Metadata>, WriteOptions, ContextPropagationToken, Action<Metadata>, Action<Metadata>)
-  nameWithType: CallSettings.CallSettings(Nullable<CancellationToken>, CallCredentials, CallTiming, Action<Metadata>, WriteOptions, ContextPropagationToken, Action<Metadata>, Action<Metadata>)
-  fullName: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable<System.Threading.CancellationToken>, Grpc.Core.CallCredentials, Google.Api.Gax.Grpc.CallTiming, System.Action<Grpc.Core.Metadata>, Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken, System.Action<Grpc.Core.Metadata>, System.Action<Grpc.Core.Metadata>)
+  name: CallSettings(Nullable<CancellationToken>, CallCredentials, Expiration, RetrySettings, Action<Metadata>, WriteOptions, ContextPropagationToken, Action<Metadata>, Action<Metadata>)
+  nameWithType: CallSettings.CallSettings(Nullable<CancellationToken>, CallCredentials, Expiration, RetrySettings, Action<Metadata>, WriteOptions, ContextPropagationToken, Action<Metadata>, Action<Metadata>)
+  fullName: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable<System.Threading.CancellationToken>, Grpc.Core.CallCredentials, Google.Api.Gax.Expiration, Google.Api.Gax.Grpc.RetrySettings, System.Action<Grpc.Core.Metadata>, Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken, System.Action<Grpc.Core.Metadata>, System.Action<Grpc.Core.Metadata>)
   type: Constructor
   source:
     remote:
@@ -146,14 +153,14 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 53
+    startLine: 56
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
   summary: "\nConstructs an instance with the specified settings.\n"
   example: []
   syntax:
-    content: public CallSettings(CancellationToken? cancellationToken, CallCredentials credentials, CallTiming timing, Action<Metadata> headerMutation, WriteOptions writeOptions, ContextPropagationToken propagationToken, Action<Metadata> responseMetadataHandler, Action<Metadata> trailingMetadataHandler)
+    content: public CallSettings(CancellationToken? cancellationToken, CallCredentials credentials, Expiration expiration, RetrySettings retry, Action<Metadata> headerMutation, WriteOptions writeOptions, ContextPropagationToken propagationToken, Action<Metadata> responseMetadataHandler, Action<Metadata> trailingMetadataHandler)
     parameters:
     - id: cancellationToken
       type: System.Nullable{System.Threading.CancellationToken}
@@ -161,9 +168,12 @@ items:
     - id: credentials
       type: Grpc.Core.CallCredentials
       description: Credentials to use for the call.
-    - id: timing
-      type: Google.Api.Gax.Grpc.CallTiming
-      description: <xref href="Google.Api.Gax.Grpc.CallTiming" data-throw-if-not-resolved="false"></xref> to use, or null for default retry/expiration behavior.
+    - id: expiration
+      type: Google.Api.Gax.Expiration
+      description: <xref href="Google.Api.Gax.Grpc.CallSettings.Expiration" data-throw-if-not-resolved="false"></xref> to use, or null for default expiration behavior.
+    - id: retry
+      type: Google.Api.Gax.Grpc.RetrySettings
+      description: <xref href="Google.Api.Gax.Grpc.CallSettings.Retry" data-throw-if-not-resolved="false"></xref> to use, or null for default retry behavior.
     - id: headerMutation
       type: System.Action{Grpc.Core.Metadata}
       description: Action to modify the headers to send at the beginning of the call.
@@ -179,15 +189,15 @@ items:
     - id: trailingMetadataHandler
       type: System.Action{Grpc.Core.Metadata}
       description: Action to invoke when trailing metadata is received.
-    content.vb: Public Sub New(cancellationToken As CancellationToken?, credentials As CallCredentials, timing As CallTiming, headerMutation As Action(Of Metadata), writeOptions As WriteOptions, propagationToken As ContextPropagationToken, responseMetadataHandler As Action(Of Metadata), trailingMetadataHandler As Action(Of Metadata))
+    content.vb: Public Sub New(cancellationToken As CancellationToken?, credentials As CallCredentials, expiration As Expiration, retry As RetrySettings, headerMutation As Action(Of Metadata), writeOptions As WriteOptions, propagationToken As ContextPropagationToken, responseMetadataHandler As Action(Of Metadata), trailingMetadataHandler As Action(Of Metadata))
   overload: Google.Api.Gax.Grpc.CallSettings.#ctor*
-  nameWithType.vb: CallSettings.CallSettings(Nullable(Of CancellationToken), CallCredentials, CallTiming, Action(Of Metadata), WriteOptions, ContextPropagationToken, Action(Of Metadata), Action(Of Metadata))
+  nameWithType.vb: CallSettings.CallSettings(Nullable(Of CancellationToken), CallCredentials, Expiration, RetrySettings, Action(Of Metadata), WriteOptions, ContextPropagationToken, Action(Of Metadata), Action(Of Metadata))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable(Of System.Threading.CancellationToken), Grpc.Core.CallCredentials, Google.Api.Gax.Grpc.CallTiming, System.Action(Of Grpc.Core.Metadata), Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken, System.Action(Of Grpc.Core.Metadata), System.Action(Of Grpc.Core.Metadata))
-  name.vb: CallSettings(Nullable(Of CancellationToken), CallCredentials, CallTiming, Action(Of Metadata), WriteOptions, ContextPropagationToken, Action(Of Metadata), Action(Of Metadata))
+  fullName.vb: Google.Api.Gax.Grpc.CallSettings.CallSettings(System.Nullable(Of System.Threading.CancellationToken), Grpc.Core.CallCredentials, Google.Api.Gax.Expiration, Google.Api.Gax.Grpc.RetrySettings, System.Action(Of Grpc.Core.Metadata), Grpc.Core.WriteOptions, Grpc.Core.ContextPropagationToken, System.Action(Of Grpc.Core.Metadata), System.Action(Of Grpc.Core.Metadata))
+  name.vb: CallSettings(Nullable(Of CancellationToken), CallCredentials, Expiration, RetrySettings, Action(Of Metadata), WriteOptions, ContextPropagationToken, Action(Of Metadata), Action(Of Metadata))
 - uid: Google.Api.Gax.Grpc.CallSettings.HeaderMutation
   commentId: P:Google.Api.Gax.Grpc.CallSettings.HeaderMutation
   id: HeaderMutation
@@ -206,7 +216,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: HeaderMutation
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 77
+    startLine: 82
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -243,7 +253,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CancellationToken
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 82
+    startLine: 87
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -280,7 +290,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: WriteOptions
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 87
+    startLine: 92
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -317,7 +327,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PropagationToken
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 92
+    startLine: 97
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -354,7 +364,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Credentials
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 97
+    startLine: 102
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -373,38 +383,74 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Google.Api.Gax.Grpc.CallSettings.Timing
-  commentId: P:Google.Api.Gax.Grpc.CallSettings.Timing
-  id: Timing
+- uid: Google.Api.Gax.Grpc.CallSettings.Expiration
+  commentId: P:Google.Api.Gax.Grpc.CallSettings.Expiration
+  id: Expiration
   parent: Google.Api.Gax.Grpc.CallSettings
   langs:
   - csharp
   - vb
-  name: Timing
-  nameWithType: CallSettings.Timing
-  fullName: Google.Api.Gax.Grpc.CallSettings.Timing
+  name: Expiration
+  nameWithType: CallSettings.Expiration
+  fullName: Google.Api.Gax.Grpc.CallSettings.Expiration
   type: Property
   source:
     remote:
       path: Google.Api.Gax.Grpc/CallSettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: Timing
+    id: Expiration
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 105
+    startLine: 107
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\n<xref href=\"Google.Api.Gax.Grpc.CallTiming\" data-throw-if-not-resolved=\"false\"></xref> to use, or null for default retry/expiration behavior.\n"
-  remarks: "\nAllows selecting between retry and simple expiration.\n"
+  summary: "\nThe expiration for the call (either a timeout or a deadline), or null for the default expiration.\n"
   example: []
   syntax:
-    content: public CallTiming Timing { get; }
+    content: public Expiration Expiration { get; }
     parameters: []
     return:
-      type: Google.Api.Gax.Grpc.CallTiming
-    content.vb: Public ReadOnly Property Timing As CallTiming
-  overload: Google.Api.Gax.Grpc.CallSettings.Timing*
+      type: Google.Api.Gax.Expiration
+    content.vb: Public ReadOnly Property Expiration As Expiration
+  overload: Google.Api.Gax.Grpc.CallSettings.Expiration*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.Grpc.CallSettings.Retry
+  commentId: P:Google.Api.Gax.Grpc.CallSettings.Retry
+  id: Retry
+  parent: Google.Api.Gax.Grpc.CallSettings
+  langs:
+  - csharp
+  - vb
+  name: Retry
+  nameWithType: CallSettings.Retry
+  fullName: Google.Api.Gax.Grpc.CallSettings.Retry
+  type: Property
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/CallSettings.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: Retry
+    path: Google.Api.Gax.Grpc/CallSettings.cs
+    startLine: 112
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\n<xref href=\"Google.Api.Gax.Grpc.RetrySettings\" data-throw-if-not-resolved=\"false\"></xref> to use, or null for default retry behavior.\n"
+  example: []
+  syntax:
+    content: public RetrySettings Retry { get; }
+    parameters: []
+    return:
+      type: Google.Api.Gax.Grpc.RetrySettings
+    content.vb: Public ReadOnly Property Retry As RetrySettings
+  overload: Google.Api.Gax.Grpc.CallSettings.Retry*
   modifiers.csharp:
   - public
   - get
@@ -429,7 +475,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ResponseMetadataHandler
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 110
+    startLine: 117
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -466,7 +512,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: TrailingMetadataHandler
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 115
+    startLine: 122
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -503,7 +549,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FromCancellationToken
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 156
+    startLine: 164
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -544,7 +590,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FromCallCredentials
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 165
+    startLine: 173
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -567,41 +613,82 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Google.Api.Gax.Grpc.CallSettings.FromCallTiming(Google.Api.Gax.Grpc.CallTiming)
-  commentId: M:Google.Api.Gax.Grpc.CallSettings.FromCallTiming(Google.Api.Gax.Grpc.CallTiming)
-  id: FromCallTiming(Google.Api.Gax.Grpc.CallTiming)
+- uid: Google.Api.Gax.Grpc.CallSettings.FromExpiration(Google.Api.Gax.Expiration)
+  commentId: M:Google.Api.Gax.Grpc.CallSettings.FromExpiration(Google.Api.Gax.Expiration)
+  id: FromExpiration(Google.Api.Gax.Expiration)
   parent: Google.Api.Gax.Grpc.CallSettings
   langs:
   - csharp
   - vb
-  name: FromCallTiming(CallTiming)
-  nameWithType: CallSettings.FromCallTiming(CallTiming)
-  fullName: Google.Api.Gax.Grpc.CallSettings.FromCallTiming(Google.Api.Gax.Grpc.CallTiming)
+  name: FromExpiration(Expiration)
+  nameWithType: CallSettings.FromExpiration(Expiration)
+  fullName: Google.Api.Gax.Grpc.CallSettings.FromExpiration(Google.Api.Gax.Expiration)
   type: Method
   source:
     remote:
       path: Google.Api.Gax.Grpc/CallSettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: FromCallTiming
+    id: FromExpiration
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 174
+    startLine: 182
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nCreates a <xref href=\"Google.Api.Gax.Grpc.CallSettings\" data-throw-if-not-resolved=\"false\"></xref> for the specified call timing, or returns null\nif <code data-dev-comment-type=\"paramref\" class=\"paramref\">timing</code> is null.\n"
+  summary: "\nCreates a <xref href=\"Google.Api.Gax.Grpc.CallSettings\" data-throw-if-not-resolved=\"false\"></xref> for the specified call expiration, or returns null\nif <code data-dev-comment-type=\"paramref\" class=\"paramref\">expiration</code> is null.\n"
   example: []
   syntax:
-    content: public static CallSettings FromCallTiming(CallTiming timing)
+    content: public static CallSettings FromExpiration(Expiration expiration)
     parameters:
-    - id: timing
-      type: Google.Api.Gax.Grpc.CallTiming
+    - id: expiration
+      type: Google.Api.Gax.Expiration
       description: The call timing for the new settings.
     return:
       type: Google.Api.Gax.Grpc.CallSettings
-      description: A new instance or null if <code data-dev-comment-type="paramref" class="paramref">timing</code> is null..
-    content.vb: Public Shared Function FromCallTiming(timing As CallTiming) As CallSettings
-  overload: Google.Api.Gax.Grpc.CallSettings.FromCallTiming*
+      description: A new instance or null if <code data-dev-comment-type="paramref" class="paramref">expiration</code> is null..
+    content.vb: Public Shared Function FromExpiration(expiration As Expiration) As CallSettings
+  overload: Google.Api.Gax.Grpc.CallSettings.FromExpiration*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Google.Api.Gax.Grpc.CallSettings.FromRetry(Google.Api.Gax.Grpc.RetrySettings)
+  commentId: M:Google.Api.Gax.Grpc.CallSettings.FromRetry(Google.Api.Gax.Grpc.RetrySettings)
+  id: FromRetry(Google.Api.Gax.Grpc.RetrySettings)
+  parent: Google.Api.Gax.Grpc.CallSettings
+  langs:
+  - csharp
+  - vb
+  name: FromRetry(RetrySettings)
+  nameWithType: CallSettings.FromRetry(RetrySettings)
+  fullName: Google.Api.Gax.Grpc.CallSettings.FromRetry(Google.Api.Gax.Grpc.RetrySettings)
+  type: Method
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/CallSettings.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: FromRetry
+    path: Google.Api.Gax.Grpc/CallSettings.cs
+    startLine: 191
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\nCreates a <xref href=\"Google.Api.Gax.Grpc.CallSettings\" data-throw-if-not-resolved=\"false\"></xref> for the specified retry settings, or returns null\nif <code data-dev-comment-type=\"paramref\" class=\"paramref\">retry</code> is null.\n"
+  example: []
+  syntax:
+    content: public static CallSettings FromRetry(RetrySettings retry)
+    parameters:
+    - id: retry
+      type: Google.Api.Gax.Grpc.RetrySettings
+      description: The call timing for the new settings.
+    return:
+      type: Google.Api.Gax.Grpc.CallSettings
+      description: A new instance or null if <code data-dev-comment-type="paramref" class="paramref">retry</code> is null..
+    content.vb: Public Shared Function FromRetry(retry As RetrySettings) As CallSettings
+  overload: Google.Api.Gax.Grpc.CallSettings.FromRetry*
   modifiers.csharp:
   - public
   - static
@@ -626,7 +713,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FromHeaderMutation
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 183
+    startLine: 200
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -670,7 +757,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FromResponseMetadataHandler
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 192
+    startLine: 209
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -714,7 +801,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FromTrailingMetadataHandler
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 201
+    startLine: 218
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -758,7 +845,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FromHeader
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 210
+    startLine: 227
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -802,7 +889,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FromFieldMask
     path: Google.Api.Gax.Grpc/CallSettings.cs
-    startLine: 227
+    startLine: 244
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -1233,40 +1320,77 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallTiming)
-  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.CallTiming)
+- uid: Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
   parent: Google.Api.Gax.Grpc.CallSettingsExtensions
-  definition: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.CallTiming)
-  name: WithCallTiming(CallTiming)
-  nameWithType: CallSettingsExtensions.WithCallTiming(CallTiming)
-  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallTiming)
+  definition: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
+  name: WithExpiration(Expiration)
+  nameWithType: CallSettingsExtensions.WithExpiration(Expiration)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
   spec.csharp:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallTiming)
-    name: WithCallTiming
-    nameWithType: CallSettingsExtensions.WithCallTiming
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
+    name: WithExpiration
+    nameWithType: CallSettingsExtensions.WithExpiration
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Google.Api.Gax.Grpc.CallTiming
-    name: CallTiming
-    nameWithType: CallTiming
-    fullName: Google.Api.Gax.Grpc.CallTiming
+  - uid: Google.Api.Gax.Expiration
+    name: Expiration
+    nameWithType: Expiration
+    fullName: Google.Api.Gax.Expiration
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallTiming)
-    name: WithCallTiming
-    nameWithType: CallSettingsExtensions.WithCallTiming
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
+    name: WithExpiration
+    nameWithType: CallSettingsExtensions.WithExpiration
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Google.Api.Gax.Grpc.CallTiming
-    name: CallTiming
-    nameWithType: CallTiming
-    fullName: Google.Api.Gax.Grpc.CallTiming
+  - uid: Google.Api.Gax.Expiration
+    name: Expiration
+    nameWithType: Expiration
+    fullName: Google.Api.Gax.Expiration
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.RetrySettings)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.RetrySettings)
+  parent: Google.Api.Gax.Grpc.CallSettingsExtensions
+  definition: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.RetrySettings)
+  name: WithRetry(RetrySettings)
+  nameWithType: CallSettingsExtensions.WithRetry(RetrySettings)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.RetrySettings)
+  spec.csharp:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.RetrySettings)
+    name: WithRetry
+    nameWithType: CallSettingsExtensions.WithRetry
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.RetrySettings
+    name: RetrySettings
+    nameWithType: RetrySettings
+    fullName: Google.Api.Gax.Grpc.RetrySettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.RetrySettings)
+    name: WithRetry
+    nameWithType: CallSettingsExtensions.WithRetry
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.RetrySettings
+    name: RetrySettings
+    nameWithType: RetrySettings
+    fullName: Google.Api.Gax.Grpc.RetrySettings
   - name: )
     nameWithType: )
     fullName: )
@@ -1453,6 +1577,84 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(System.DateTime)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(Google.Api.Gax.Grpc.CallSettings,System.DateTime)
+  parent: Google.Api.Gax.Grpc.CallSettingsExtensions
+  definition: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(Google.Api.Gax.Grpc.CallSettings,System.DateTime)
+  name: WithDeadline(DateTime)
+  nameWithType: CallSettingsExtensions.WithDeadline(DateTime)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(System.DateTime)
+  spec.csharp:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(System.DateTime)
+    name: WithDeadline
+    nameWithType: CallSettingsExtensions.WithDeadline
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.DateTime
+    name: DateTime
+    nameWithType: DateTime
+    fullName: System.DateTime
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(System.DateTime)
+    name: WithDeadline
+    nameWithType: CallSettingsExtensions.WithDeadline
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.DateTime
+    name: DateTime
+    nameWithType: DateTime
+    fullName: System.DateTime
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(System.TimeSpan)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(Google.Api.Gax.Grpc.CallSettings,System.TimeSpan)
+  parent: Google.Api.Gax.Grpc.CallSettingsExtensions
+  definition: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(Google.Api.Gax.Grpc.CallSettings,System.TimeSpan)
+  name: WithTimeout(TimeSpan)
+  nameWithType: CallSettingsExtensions.WithTimeout(TimeSpan)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(System.TimeSpan)
+  spec.csharp:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(System.TimeSpan)
+    name: WithTimeout
+    nameWithType: CallSettingsExtensions.WithTimeout
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(System.TimeSpan)
+    name: WithTimeout
+    nameWithType: CallSettingsExtensions.WithTimeout
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithEarlierDeadline(System.Nullable{System.DateTime},Google.Api.Gax.IClock)
   commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithEarlierDeadline(Google.Api.Gax.Grpc.CallSettings,System.Nullable{System.DateTime},Google.Api.Gax.IClock)
   parent: Google.Api.Gax.Grpc.CallSettingsExtensions
@@ -1528,43 +1730,6 @@ references:
     name: IClock
     nameWithType: IClock
     fullName: Google.Api.Gax.IClock
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Google.Api.Gax.Grpc.CallSettings.Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
-  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
-  parent: Google.Api.Gax.Grpc.CallSettingsExtensions
-  definition: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
-  name: WithExpiration(Expiration)
-  nameWithType: CallSettingsExtensions.WithExpiration(Expiration)
-  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
-  spec.csharp:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
-    name: WithExpiration
-    nameWithType: CallSettingsExtensions.WithExpiration
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Google.Api.Gax.Expiration
-    name: Expiration
-    nameWithType: Expiration
-    fullName: Google.Api.Gax.Expiration
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Expiration)
-    name: WithExpiration
-    nameWithType: CallSettingsExtensions.WithExpiration
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Google.Api.Gax.Expiration
-    name: Expiration
-    nameWithType: Expiration
-    fullName: Google.Api.Gax.Expiration
   - name: )
     nameWithType: )
     fullName: )
@@ -1733,16 +1898,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.CallTiming)
-  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.CallTiming)
-  name: WithCallTiming(CallSettings, CallTiming)
-  nameWithType: CallSettingsExtensions.WithCallTiming(CallSettings, CallTiming)
-  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallSettings, Google.Api.Gax.Grpc.CallTiming)
+- uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
+  name: WithExpiration(CallSettings, Expiration)
+  nameWithType: CallSettingsExtensions.WithExpiration(CallSettings, Expiration)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings, Google.Api.Gax.Expiration)
   spec.csharp:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.CallTiming)
-    name: WithCallTiming
-    nameWithType: CallSettingsExtensions.WithCallTiming
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
+    name: WithExpiration
+    nameWithType: CallSettingsExtensions.WithExpiration
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
   - name: (
     nameWithType: (
     fullName: (
@@ -1753,18 +1918,18 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Google.Api.Gax.Grpc.CallTiming
-    name: CallTiming
-    nameWithType: CallTiming
-    fullName: Google.Api.Gax.Grpc.CallTiming
+  - uid: Google.Api.Gax.Expiration
+    name: Expiration
+    nameWithType: Expiration
+    fullName: Google.Api.Gax.Expiration
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.CallTiming)
-    name: WithCallTiming
-    nameWithType: CallSettingsExtensions.WithCallTiming
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithCallTiming
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
+    name: WithExpiration
+    nameWithType: CallSettingsExtensions.WithExpiration
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
   - name: (
     nameWithType: (
     fullName: (
@@ -1775,10 +1940,59 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Google.Api.Gax.Grpc.CallTiming
-    name: CallTiming
-    nameWithType: CallTiming
-    fullName: Google.Api.Gax.Grpc.CallTiming
+  - uid: Google.Api.Gax.Expiration
+    name: Expiration
+    nameWithType: Expiration
+    fullName: Google.Api.Gax.Expiration
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.RetrySettings)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.RetrySettings)
+  name: WithRetry(CallSettings, RetrySettings)
+  nameWithType: CallSettingsExtensions.WithRetry(CallSettings, RetrySettings)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.CallSettings, Google.Api.Gax.Grpc.RetrySettings)
+  spec.csharp:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.RetrySettings)
+    name: WithRetry
+    nameWithType: CallSettingsExtensions.WithRetry
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.CallSettings
+    name: CallSettings
+    nameWithType: CallSettings
+    fullName: Google.Api.Gax.Grpc.CallSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Google.Api.Gax.Grpc.RetrySettings
+    name: RetrySettings
+    nameWithType: RetrySettings
+    fullName: Google.Api.Gax.Grpc.RetrySettings
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Grpc.RetrySettings)
+    name: WithRetry
+    nameWithType: CallSettingsExtensions.WithRetry
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithRetry
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.CallSettings
+    name: CallSettings
+    nameWithType: CallSettings
+    fullName: Google.Api.Gax.Grpc.CallSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Google.Api.Gax.Grpc.RetrySettings
+    name: RetrySettings
+    nameWithType: RetrySettings
+    fullName: Google.Api.Gax.Grpc.RetrySettings
   - name: )
     nameWithType: )
     fullName: )
@@ -2004,6 +2218,110 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(Google.Api.Gax.Grpc.CallSettings,System.DateTime)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(Google.Api.Gax.Grpc.CallSettings,System.DateTime)
+  isExternal: true
+  name: WithDeadline(CallSettings, DateTime)
+  nameWithType: CallSettingsExtensions.WithDeadline(CallSettings, DateTime)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(Google.Api.Gax.Grpc.CallSettings, System.DateTime)
+  spec.csharp:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(Google.Api.Gax.Grpc.CallSettings,System.DateTime)
+    name: WithDeadline
+    nameWithType: CallSettingsExtensions.WithDeadline
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.CallSettings
+    name: CallSettings
+    nameWithType: CallSettings
+    fullName: Google.Api.Gax.Grpc.CallSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.DateTime
+    name: DateTime
+    nameWithType: DateTime
+    fullName: System.DateTime
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline(Google.Api.Gax.Grpc.CallSettings,System.DateTime)
+    name: WithDeadline
+    nameWithType: CallSettingsExtensions.WithDeadline
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithDeadline
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.CallSettings
+    name: CallSettings
+    nameWithType: CallSettings
+    fullName: Google.Api.Gax.Grpc.CallSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.DateTime
+    name: DateTime
+    nameWithType: DateTime
+    fullName: System.DateTime
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(Google.Api.Gax.Grpc.CallSettings,System.TimeSpan)
+  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(Google.Api.Gax.Grpc.CallSettings,System.TimeSpan)
+  isExternal: true
+  name: WithTimeout(CallSettings, TimeSpan)
+  nameWithType: CallSettingsExtensions.WithTimeout(CallSettings, TimeSpan)
+  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(Google.Api.Gax.Grpc.CallSettings, System.TimeSpan)
+  spec.csharp:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(Google.Api.Gax.Grpc.CallSettings,System.TimeSpan)
+    name: WithTimeout
+    nameWithType: CallSettingsExtensions.WithTimeout
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.CallSettings
+    name: CallSettings
+    nameWithType: CallSettings
+    fullName: Google.Api.Gax.Grpc.CallSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout(Google.Api.Gax.Grpc.CallSettings,System.TimeSpan)
+    name: WithTimeout
+    nameWithType: CallSettingsExtensions.WithTimeout
+    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithTimeout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Google.Api.Gax.Grpc.CallSettings
+    name: CallSettings
+    nameWithType: CallSettings
+    fullName: Google.Api.Gax.Grpc.CallSettings
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.TimeSpan
+    name: TimeSpan
+    nameWithType: TimeSpan
+    fullName: System.TimeSpan
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithEarlierDeadline(Google.Api.Gax.Grpc.CallSettings,System.Nullable{System.DateTime},Google.Api.Gax.IClock)
   commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithEarlierDeadline(Google.Api.Gax.Grpc.CallSettings,System.Nullable{System.DateTime},Google.Api.Gax.IClock)
   isExternal: true
@@ -2095,61 +2413,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
-  commentId: M:Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
-  name: WithExpiration(CallSettings, Expiration)
-  nameWithType: CallSettingsExtensions.WithExpiration(CallSettings, Expiration)
-  fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings, Google.Api.Gax.Expiration)
-  spec.csharp:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
-    name: WithExpiration
-    nameWithType: CallSettingsExtensions.WithExpiration
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Google.Api.Gax.Grpc.CallSettings
-    name: CallSettings
-    nameWithType: CallSettings
-    fullName: Google.Api.Gax.Grpc.CallSettings
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Google.Api.Gax.Expiration
-    name: Expiration
-    nameWithType: Expiration
-    fullName: Google.Api.Gax.Expiration
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration(Google.Api.Gax.Grpc.CallSettings,Google.Api.Gax.Expiration)
-    name: WithExpiration
-    nameWithType: CallSettingsExtensions.WithExpiration
-    fullName: Google.Api.Gax.Grpc.CallSettingsExtensions.WithExpiration
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Google.Api.Gax.Grpc.CallSettings
-    name: CallSettings
-    nameWithType: CallSettings
-    fullName: Google.Api.Gax.Grpc.CallSettings
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Google.Api.Gax.Expiration
-    name: Expiration
-    nameWithType: Expiration
-    fullName: Google.Api.Gax.Expiration
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Google.Api.Gax.Grpc.CallTiming
-  commentId: T:Google.Api.Gax.Grpc.CallTiming
-  parent: Google.Api.Gax.Grpc
-  name: CallTiming
-  nameWithType: CallTiming
-  fullName: Google.Api.Gax.Grpc.CallTiming
+- uid: Google.Api.Gax.Grpc.CallSettings.Expiration
+  commentId: P:Google.Api.Gax.Grpc.CallSettings.Expiration
+  isExternal: true
+- uid: Google.Api.Gax.Grpc.CallSettings.Retry
+  commentId: P:Google.Api.Gax.Grpc.CallSettings.Retry
+  isExternal: true
 - uid: Grpc.Core.WriteOptions
   commentId: T:Grpc.Core.WriteOptions
   parent: Grpc.Core
@@ -2220,6 +2489,18 @@ references:
   name: CallCredentials
   nameWithType: CallCredentials
   fullName: Grpc.Core.CallCredentials
+- uid: Google.Api.Gax.Expiration
+  commentId: T:Google.Api.Gax.Expiration
+  parent: Google.Api.Gax
+  name: Expiration
+  nameWithType: Expiration
+  fullName: Google.Api.Gax.Expiration
+- uid: Google.Api.Gax.Grpc.RetrySettings
+  commentId: T:Google.Api.Gax.Grpc.RetrySettings
+  parent: Google.Api.Gax.Grpc
+  name: RetrySettings
+  nameWithType: RetrySettings
+  fullName: Google.Api.Gax.Grpc.RetrySettings
 - uid: System.Action{Grpc.Core.Metadata}
   commentId: T:System.Action{Grpc.Core.Metadata}
   parent: System
@@ -2309,6 +2590,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Google.Api.Gax
+  commentId: N:Google.Api.Gax
+  name: Google.Api.Gax
+  nameWithType: Google.Api.Gax
+  fullName: Google.Api.Gax
 - uid: System.Action`1
   commentId: T:System.Action`1
   isExternal: true
@@ -2373,11 +2659,16 @@ references:
   name: Credentials
   nameWithType: CallSettings.Credentials
   fullName: Google.Api.Gax.Grpc.CallSettings.Credentials
-- uid: Google.Api.Gax.Grpc.CallSettings.Timing*
-  commentId: Overload:Google.Api.Gax.Grpc.CallSettings.Timing
-  name: Timing
-  nameWithType: CallSettings.Timing
-  fullName: Google.Api.Gax.Grpc.CallSettings.Timing
+- uid: Google.Api.Gax.Grpc.CallSettings.Expiration*
+  commentId: Overload:Google.Api.Gax.Grpc.CallSettings.Expiration
+  name: Expiration
+  nameWithType: CallSettings.Expiration
+  fullName: Google.Api.Gax.Grpc.CallSettings.Expiration
+- uid: Google.Api.Gax.Grpc.CallSettings.Retry*
+  commentId: Overload:Google.Api.Gax.Grpc.CallSettings.Retry
+  name: Retry
+  nameWithType: CallSettings.Retry
+  fullName: Google.Api.Gax.Grpc.CallSettings.Retry
 - uid: Google.Api.Gax.Grpc.CallSettings.ResponseMetadataHandler*
   commentId: Overload:Google.Api.Gax.Grpc.CallSettings.ResponseMetadataHandler
   name: ResponseMetadataHandler
@@ -2417,11 +2708,16 @@ references:
   name: FromCallCredentials
   nameWithType: CallSettings.FromCallCredentials
   fullName: Google.Api.Gax.Grpc.CallSettings.FromCallCredentials
-- uid: Google.Api.Gax.Grpc.CallSettings.FromCallTiming*
-  commentId: Overload:Google.Api.Gax.Grpc.CallSettings.FromCallTiming
-  name: FromCallTiming
-  nameWithType: CallSettings.FromCallTiming
-  fullName: Google.Api.Gax.Grpc.CallSettings.FromCallTiming
+- uid: Google.Api.Gax.Grpc.CallSettings.FromExpiration*
+  commentId: Overload:Google.Api.Gax.Grpc.CallSettings.FromExpiration
+  name: FromExpiration
+  nameWithType: CallSettings.FromExpiration
+  fullName: Google.Api.Gax.Grpc.CallSettings.FromExpiration
+- uid: Google.Api.Gax.Grpc.CallSettings.FromRetry*
+  commentId: Overload:Google.Api.Gax.Grpc.CallSettings.FromRetry
+  name: FromRetry
+  nameWithType: CallSettings.FromRetry
+  fullName: Google.Api.Gax.Grpc.CallSettings.FromRetry
 - uid: Google.Api.Gax.Grpc.CallSettings.FromHeaderMutation*
   commentId: Overload:Google.Api.Gax.Grpc.CallSettings.FromHeaderMutation
   name: FromHeaderMutation

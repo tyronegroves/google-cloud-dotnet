@@ -5,20 +5,19 @@ items:
   id: RetrySettings
   parent: Google.Api.Gax.Grpc
   children:
-  - Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration)
-  - Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException})
-  - Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException},Google.Api.Gax.Grpc.RetrySettings.IJitter)
-  - Google.Api.Gax.Grpc.RetrySettings.DefaultFilter
-  - Google.Api.Gax.Grpc.RetrySettings.DelayJitter
+  - Google.Api.Gax.Grpc.RetrySettings.BackoffJitter
+  - Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier
   - Google.Api.Gax.Grpc.RetrySettings.FilterForStatusCodes(Grpc.Core.StatusCode[])
   - Google.Api.Gax.Grpc.RetrySettings.FilterForStatusCodes(System.Collections.Generic.IEnumerable{Grpc.Core.StatusCode})
+  - Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff(System.Int32,System.TimeSpan,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  - Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff(System.Int32,System.TimeSpan,System.TimeSpan,System.Double,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  - Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
+  - Google.Api.Gax.Grpc.RetrySettings.MaxAttempts
+  - Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
+  - Google.Api.Gax.Grpc.RetrySettings.NextBackoff(System.TimeSpan)
   - Google.Api.Gax.Grpc.RetrySettings.NoJitter
   - Google.Api.Gax.Grpc.RetrySettings.RandomJitter
-  - Google.Api.Gax.Grpc.RetrySettings.RetryBackoff
   - Google.Api.Gax.Grpc.RetrySettings.RetryFilter
-  - Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff
-  - Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
-  - Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration(Google.Api.Gax.Expiration)
   langs:
   - csharp
   - vb
@@ -33,7 +32,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: RetrySettings
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 17
+    startLine: 19
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -60,112 +59,149 @@ items:
   - Public
   - NotInheritable
   - Class
-- uid: Google.Api.Gax.Grpc.RetrySettings.RetryBackoff
-  commentId: P:Google.Api.Gax.Grpc.RetrySettings.RetryBackoff
-  id: RetryBackoff
+- uid: Google.Api.Gax.Grpc.RetrySettings.MaxAttempts
+  commentId: P:Google.Api.Gax.Grpc.RetrySettings.MaxAttempts
+  id: MaxAttempts
   parent: Google.Api.Gax.Grpc.RetrySettings
   langs:
   - csharp
   - vb
-  name: RetryBackoff
-  nameWithType: RetrySettings.RetryBackoff
-  fullName: Google.Api.Gax.Grpc.RetrySettings.RetryBackoff
+  name: MaxAttempts
+  nameWithType: RetrySettings.MaxAttempts
+  fullName: Google.Api.Gax.Grpc.RetrySettings.MaxAttempts
   type: Property
   source:
     remote:
       path: Google.Api.Gax.Grpc/RetrySettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: RetryBackoff
+    id: MaxAttempts
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 22
+    startLine: 24
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nThe backoff policy for the time between retries. This is never null.\n"
+  summary: "\nThe maximum number of attempts to make. Always greater than or equal to 1.\n"
   example: []
   syntax:
-    content: public BackoffSettings RetryBackoff { get; }
+    content: public int MaxAttempts { get; }
     parameters: []
     return:
-      type: Google.Api.Gax.Grpc.BackoffSettings
-    content.vb: Public ReadOnly Property RetryBackoff As BackoffSettings
-  overload: Google.Api.Gax.Grpc.RetrySettings.RetryBackoff*
+      type: System.Int32
+    content.vb: Public ReadOnly Property MaxAttempts As Integer
+  overload: Google.Api.Gax.Grpc.RetrySettings.MaxAttempts*
   modifiers.csharp:
   - public
   - get
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff
-  commentId: P:Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff
-  id: TimeoutBackoff
+- uid: Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
+  commentId: P:Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
+  id: InitialBackoff
   parent: Google.Api.Gax.Grpc.RetrySettings
   langs:
   - csharp
   - vb
-  name: TimeoutBackoff
-  nameWithType: RetrySettings.TimeoutBackoff
-  fullName: Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff
+  name: InitialBackoff
+  nameWithType: RetrySettings.InitialBackoff
+  fullName: Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
   type: Property
   source:
     remote:
       path: Google.Api.Gax.Grpc/RetrySettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: TimeoutBackoff
+    id: InitialBackoff
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 32
+    startLine: 29
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nThe backoff policy for timeouts of retries. This is never null.\n"
-  remarks: "\nThis allows an increasing timeout, initially requesting a fast call,\nthen allowing a bit more time, then a bit more, and so on. However,\nthe timeout will also be adjusted to accommodate <xref href=\"Google.Api.Gax.Grpc.RetrySettings.TotalExpiration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nThe backoff time between the first attempt and the first retry. Always non-negative.\n"
   example: []
   syntax:
-    content: public BackoffSettings TimeoutBackoff { get; }
+    content: public TimeSpan InitialBackoff { get; }
     parameters: []
     return:
-      type: Google.Api.Gax.Grpc.BackoffSettings
-    content.vb: Public ReadOnly Property TimeoutBackoff As BackoffSettings
-  overload: Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff*
+      type: System.TimeSpan
+    content.vb: Public ReadOnly Property InitialBackoff As TimeSpan
+  overload: Google.Api.Gax.Grpc.RetrySettings.InitialBackoff*
   modifiers.csharp:
   - public
   - get
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
-  commentId: P:Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
-  id: TotalExpiration
+- uid: Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
+  commentId: P:Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
+  id: MaxBackoff
   parent: Google.Api.Gax.Grpc.RetrySettings
   langs:
   - csharp
   - vb
-  name: TotalExpiration
-  nameWithType: RetrySettings.TotalExpiration
-  fullName: Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
+  name: MaxBackoff
+  nameWithType: RetrySettings.MaxBackoff
+  fullName: Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
   type: Property
   source:
     remote:
       path: Google.Api.Gax.Grpc/RetrySettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: TotalExpiration
+    id: MaxBackoff
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 37
+    startLine: 34
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nThe total expiration, across all retries. This is never null.\n"
+  summary: "\nThe maximum backoff time between retries. Always non-negative.\n"
   example: []
   syntax:
-    content: public Expiration TotalExpiration { get; }
+    content: public TimeSpan MaxBackoff { get; }
     parameters: []
     return:
-      type: Google.Api.Gax.Expiration
-    content.vb: Public ReadOnly Property TotalExpiration As Expiration
-  overload: Google.Api.Gax.Grpc.RetrySettings.TotalExpiration*
+      type: System.TimeSpan
+    content.vb: Public ReadOnly Property MaxBackoff As TimeSpan
+  overload: Google.Api.Gax.Grpc.RetrySettings.MaxBackoff*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier
+  commentId: P:Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier
+  id: BackoffMultiplier
+  parent: Google.Api.Gax.Grpc.RetrySettings
+  langs:
+  - csharp
+  - vb
+  name: BackoffMultiplier
+  nameWithType: RetrySettings.BackoffMultiplier
+  fullName: Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier
+  type: Property
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/RetrySettings.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: BackoffMultiplier
+    path: Google.Api.Gax.Grpc/RetrySettings.cs
+    startLine: 45
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\nThe multiplier to apply to the backoff on each iteration; always greater than or equal to 1.0.\n"
+  remarks: "\n<p>\nAs an example, a multiplier of 2.0 with an initial backoff of 0.1s on an RPC would then apply\na backoff of 0.2s, then 0.4s until it is capped by <xref href=\"Google.Api.Gax.Grpc.RetrySettings.MaxBackoff\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n"
+  example: []
+  syntax:
+    content: public double BackoffMultiplier { get; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public ReadOnly Property BackoffMultiplier As Double
+  overload: Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier*
   modifiers.csharp:
   - public
   - get
@@ -190,18 +226,18 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: RetryFilter
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 43
+    startLine: 51
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nA predicate to determine whether or not a particular exception should cause the operation to be retried.\nUsually this is simply a matter of checking the status codes.\n"
+  summary: "\nA predicate to determine whether or not a particular exception should cause the operation to be retried.\nUsually this is simply a matter of checking the status codes. This is never null.\n"
   example: []
   syntax:
-    content: public Predicate<RpcException> RetryFilter { get; }
+    content: public Predicate<Exception> RetryFilter { get; }
     parameters: []
     return:
-      type: System.Predicate{Grpc.Core.RpcException}
-    content.vb: Public ReadOnly Property RetryFilter As Predicate(Of RpcException)
+      type: System.Predicate{System.Exception}
+    content.vb: Public ReadOnly Property RetryFilter As Predicate(Of Exception)
   overload: Google.Api.Gax.Grpc.RetrySettings.RetryFilter*
   modifiers.csharp:
   - public
@@ -209,191 +245,156 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Google.Api.Gax.Grpc.RetrySettings.DelayJitter
-  commentId: P:Google.Api.Gax.Grpc.RetrySettings.DelayJitter
-  id: DelayJitter
+- uid: Google.Api.Gax.Grpc.RetrySettings.BackoffJitter
+  commentId: P:Google.Api.Gax.Grpc.RetrySettings.BackoffJitter
+  id: BackoffJitter
   parent: Google.Api.Gax.Grpc.RetrySettings
   langs:
   - csharp
   - vb
-  name: DelayJitter
-  nameWithType: RetrySettings.DelayJitter
-  fullName: Google.Api.Gax.Grpc.RetrySettings.DelayJitter
+  name: BackoffJitter
+  nameWithType: RetrySettings.BackoffJitter
+  fullName: Google.Api.Gax.Grpc.RetrySettings.BackoffJitter
   type: Property
   source:
     remote:
       path: Google.Api.Gax.Grpc/RetrySettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: DelayJitter
+    id: BackoffJitter
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 55
+    startLine: 63
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nThe delay jitter to apply for delays, defaulting to <xref href=\"Google.Api.Gax.Grpc.RetrySettings.RandomJitter\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nThe delay jitter to apply for delays, defaulting to <xref href=\"Google.Api.Gax.Grpc.RetrySettings.RandomJitter\" data-throw-if-not-resolved=\"false\"></xref>. This is never null.\n"
   remarks: "\n&quot;Jitter&quot; is used to introduce randomness into the pattern of delays. This is to avoid multiple\nclients performing the same delay pattern starting at the same point in time,\nleading to higher-than-necessary contention. The default jitter simply takes each maximum delay\nand returns an actual delay which is a uniformly random value between 0 and the maximum. This\nis good enough for most applications, but makes precise testing difficult.\n"
   example: []
   syntax:
-    content: public RetrySettings.IJitter DelayJitter { get; }
+    content: public RetrySettings.IJitter BackoffJitter { get; }
     parameters: []
     return:
       type: Google.Api.Gax.Grpc.RetrySettings.IJitter
-    content.vb: Public ReadOnly Property DelayJitter As RetrySettings.IJitter
-  overload: Google.Api.Gax.Grpc.RetrySettings.DelayJitter*
+    content.vb: Public ReadOnly Property BackoffJitter As RetrySettings.IJitter
+  overload: Google.Api.Gax.Grpc.RetrySettings.BackoffJitter*
   modifiers.csharp:
   - public
   - get
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration)
-  commentId: M:Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration)
-  id: '#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration)'
+- uid: Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff(System.Int32,System.TimeSpan,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  commentId: M:Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff(System.Int32,System.TimeSpan,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  id: FromConstantBackoff(System.Int32,System.TimeSpan,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
   parent: Google.Api.Gax.Grpc.RetrySettings
   langs:
   - csharp
   - vb
-  name: RetrySettings(BackoffSettings, BackoffSettings, Expiration)
-  nameWithType: RetrySettings.RetrySettings(BackoffSettings, BackoffSettings, Expiration)
-  fullName: Google.Api.Gax.Grpc.RetrySettings.RetrySettings(Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Expiration)
-  type: Constructor
+  name: FromConstantBackoff(Int32, TimeSpan, Predicate<Exception>, RetrySettings.IJitter)
+  nameWithType: RetrySettings.FromConstantBackoff(Int32, TimeSpan, Predicate<Exception>, RetrySettings.IJitter)
+  fullName: Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff(System.Int32, System.TimeSpan, System.Predicate<System.Exception>, Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  type: Method
   source:
     remote:
       path: Google.Api.Gax.Grpc/RetrySettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: .ctor
+    id: FromConstantBackoff
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 64
+    startLine: 100
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nConstructs an instance with the given backoff configuration, the default RPC filter and\njitter.\n"
+  summary: "\nReturns a <xref href=\"Google.Api.Gax.Grpc.RetrySettings\" data-throw-if-not-resolved=\"false\"></xref> using the specified maximum number of attempts and a constant backoff.\nJitter is still applied to each backoff, but the &quot;base&quot; value of the backoff is always <code data-dev-comment-type=\"paramref\" class=\"paramref\">backoff</code>.\n"
   example: []
   syntax:
-    content: public RetrySettings(BackoffSettings retryBackoff, BackoffSettings timeoutBackoff, Expiration totalExpiration)
+    content: public static RetrySettings FromConstantBackoff(int maxAttempts, TimeSpan backoff, Predicate<Exception> retryFilter, RetrySettings.IJitter backoffJitter = null)
     parameters:
-    - id: retryBackoff
-      type: Google.Api.Gax.Grpc.BackoffSettings
-      description: The backoff policy for the time between retries. Must not be null.
-    - id: timeoutBackoff
-      type: Google.Api.Gax.Grpc.BackoffSettings
-      description: The backoff policy for timeouts of retries. Must not be null.
-    - id: totalExpiration
-      type: Google.Api.Gax.Expiration
-      description: The total expiration, across all retries. Must not be null.
-    content.vb: Public Sub New(retryBackoff As BackoffSettings, timeoutBackoff As BackoffSettings, totalExpiration As Expiration)
-  overload: Google.Api.Gax.Grpc.RetrySettings.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException})
-  commentId: M:Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException})
-  id: '#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException})'
-  parent: Google.Api.Gax.Grpc.RetrySettings
-  langs:
-  - csharp
-  - vb
-  name: RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate<RpcException>)
-  nameWithType: RetrySettings.RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate<RpcException>)
-  fullName: Google.Api.Gax.Grpc.RetrySettings.RetrySettings(Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Expiration, System.Predicate<Grpc.Core.RpcException>)
-  type: Constructor
-  source:
-    remote:
-      path: Google.Api.Gax.Grpc/RetrySettings.cs
-      branch: master
-      repo: https://github.com/googleapis/gax-dotnet
-    id: .ctor
-    path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 79
-  assemblies:
-  - Google.Api.Gax.Grpc
-  namespace: Google.Api.Gax.Grpc
-  summary: "\nConstructs an instance with the given configuration, and the default jitter.\n"
-  example: []
-  syntax:
-    content: public RetrySettings(BackoffSettings retryBackoff, BackoffSettings timeoutBackoff, Expiration totalExpiration, Predicate<RpcException> retryFilter)
-    parameters:
-    - id: retryBackoff
-      type: Google.Api.Gax.Grpc.BackoffSettings
-      description: The backoff policy for the time between retries. Must not be null.
-    - id: timeoutBackoff
-      type: Google.Api.Gax.Grpc.BackoffSettings
-      description: The backoff policy for timeouts of retries. Must not be null.
-    - id: totalExpiration
-      type: Google.Api.Gax.Expiration
-      description: The total expiration, across all retries. Must not be null.
+    - id: maxAttempts
+      type: System.Int32
+      description: The maximum number of attempts to make. Must be positive.
+    - id: backoff
+      type: System.TimeSpan
+      description: The backoff after each failure. Must be non-negative.
     - id: retryFilter
-      type: System.Predicate{Grpc.Core.RpcException}
-      description: >-
-        A predicate to determine whether or not a particular exception should cause the operation to be retried,
-
-        or null for the default filter.
-    content.vb: Public Sub New(retryBackoff As BackoffSettings, timeoutBackoff As BackoffSettings, totalExpiration As Expiration, retryFilter As Predicate(Of RpcException))
-  overload: Google.Api.Gax.Grpc.RetrySettings.#ctor*
-  nameWithType.vb: RetrySettings.RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate(Of RpcException))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Google.Api.Gax.Grpc.RetrySettings.RetrySettings(Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Expiration, System.Predicate(Of Grpc.Core.RpcException))
-  name.vb: RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate(Of RpcException))
-- uid: Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException},Google.Api.Gax.Grpc.RetrySettings.IJitter)
-  commentId: M:Google.Api.Gax.Grpc.RetrySettings.#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException},Google.Api.Gax.Grpc.RetrySettings.IJitter)
-  id: '#ctor(Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Grpc.BackoffSettings,Google.Api.Gax.Expiration,System.Predicate{Grpc.Core.RpcException},Google.Api.Gax.Grpc.RetrySettings.IJitter)'
-  parent: Google.Api.Gax.Grpc.RetrySettings
-  langs:
-  - csharp
-  - vb
-  name: RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate<RpcException>, RetrySettings.IJitter)
-  nameWithType: RetrySettings.RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate<RpcException>, RetrySettings.IJitter)
-  fullName: Google.Api.Gax.Grpc.RetrySettings.RetrySettings(Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Expiration, System.Predicate<Grpc.Core.RpcException>, Google.Api.Gax.Grpc.RetrySettings.IJitter)
-  type: Constructor
-  source:
-    remote:
-      path: Google.Api.Gax.Grpc/RetrySettings.cs
-      branch: master
-      repo: https://github.com/googleapis/gax-dotnet
-    id: .ctor
-    path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 96
-  assemblies:
-  - Google.Api.Gax.Grpc
-  namespace: Google.Api.Gax.Grpc
-  summary: "\nConstructs an instance with the given configuration.\n"
-  example: []
-  syntax:
-    content: public RetrySettings(BackoffSettings retryBackoff, BackoffSettings timeoutBackoff, Expiration totalExpiration, Predicate<RpcException> retryFilter, RetrySettings.IJitter delayJitter)
-    parameters:
-    - id: retryBackoff
-      type: Google.Api.Gax.Grpc.BackoffSettings
-      description: The backoff policy for the time between retries. Must not be null.
-    - id: timeoutBackoff
-      type: Google.Api.Gax.Grpc.BackoffSettings
-      description: The backoff policy for timeouts of retries. Must not be null.
-    - id: totalExpiration
-      type: Google.Api.Gax.Expiration
-      description: The total expiration, across all retries. Must not be null.
-    - id: retryFilter
-      type: System.Predicate{Grpc.Core.RpcException}
-      description: >-
-        A predicate to determine whether or not a particular exception should cause the operation to be retried,
-
-        or null for the default filter.
-    - id: delayJitter
+      type: System.Predicate{System.Exception}
+      description: The predicate to use to check whether an error should be retried. Must not be null.
+    - id: backoffJitter
       type: Google.Api.Gax.Grpc.RetrySettings.IJitter
-      description: The delay jitter to apply for delays, or null for the defautl (random) jitter.
-    content.vb: Public Sub New(retryBackoff As BackoffSettings, timeoutBackoff As BackoffSettings, totalExpiration As Expiration, retryFilter As Predicate(Of RpcException), delayJitter As RetrySettings.IJitter)
-  overload: Google.Api.Gax.Grpc.RetrySettings.#ctor*
-  nameWithType.vb: RetrySettings.RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate(Of RpcException), RetrySettings.IJitter)
+      description: The jitter to use on each backoff. May be null, in which case <xref href="Google.Api.Gax.Grpc.RetrySettings.RandomJitter" data-throw-if-not-resolved="false"></xref> is used.
+    return:
+      type: Google.Api.Gax.Grpc.RetrySettings
+      description: A retry with constant backoff.
+    content.vb: Public Shared Function FromConstantBackoff(maxAttempts As Integer, backoff As TimeSpan, retryFilter As Predicate(Of Exception), backoffJitter As RetrySettings.IJitter = Nothing) As RetrySettings
+  overload: Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff*
+  nameWithType.vb: RetrySettings.FromConstantBackoff(Int32, TimeSpan, Predicate(Of Exception), RetrySettings.IJitter)
   modifiers.csharp:
   - public
+  - static
   modifiers.vb:
   - Public
-  fullName.vb: Google.Api.Gax.Grpc.RetrySettings.RetrySettings(Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Grpc.BackoffSettings, Google.Api.Gax.Expiration, System.Predicate(Of Grpc.Core.RpcException), Google.Api.Gax.Grpc.RetrySettings.IJitter)
-  name.vb: RetrySettings(BackoffSettings, BackoffSettings, Expiration, Predicate(Of RpcException), RetrySettings.IJitter)
+  - Shared
+  fullName.vb: Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff(System.Int32, System.TimeSpan, System.Predicate(Of System.Exception), Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  name.vb: FromConstantBackoff(Int32, TimeSpan, Predicate(Of Exception), RetrySettings.IJitter)
+- uid: Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff(System.Int32,System.TimeSpan,System.TimeSpan,System.Double,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  commentId: M:Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff(System.Int32,System.TimeSpan,System.TimeSpan,System.Double,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  id: FromExponentialBackoff(System.Int32,System.TimeSpan,System.TimeSpan,System.Double,System.Predicate{System.Exception},Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  parent: Google.Api.Gax.Grpc.RetrySettings
+  langs:
+  - csharp
+  - vb
+  name: FromExponentialBackoff(Int32, TimeSpan, TimeSpan, Double, Predicate<Exception>, RetrySettings.IJitter)
+  nameWithType: RetrySettings.FromExponentialBackoff(Int32, TimeSpan, TimeSpan, Double, Predicate<Exception>, RetrySettings.IJitter)
+  fullName: Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff(System.Int32, System.TimeSpan, System.TimeSpan, System.Double, System.Predicate<System.Exception>, Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  type: Method
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/RetrySettings.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: FromExponentialBackoff
+    path: Google.Api.Gax.Grpc/RetrySettings.cs
+    startLine: 113
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\nReturns a <xref href=\"Google.Api.Gax.Grpc.RetrySettings\" data-throw-if-not-resolved=\"false\"></xref> using the specified maximum number of attempts and an exponential backoff.\n"
+  example: []
+  syntax:
+    content: public static RetrySettings FromExponentialBackoff(int maxAttempts, TimeSpan initialBackoff, TimeSpan maxBackoff, double backoffMultiplier, Predicate<Exception> retryFilter, RetrySettings.IJitter backoffJitter = null)
+    parameters:
+    - id: maxAttempts
+      type: System.Int32
+      description: The maximum number of attempts to make. Must be positive.
+    - id: initialBackoff
+      type: System.TimeSpan
+      description: The backoff after the initial failure. Must be non-negative.
+    - id: maxBackoff
+      type: System.TimeSpan
+      description: The maximum backoff. Must be at least <code data-dev-comment-type="paramref" class="paramref">initialBackoff</code>.
+    - id: backoffMultiplier
+      type: System.Double
+      description: The multiplier to apply to backoff times. Must be at least 1.0.
+    - id: retryFilter
+      type: System.Predicate{System.Exception}
+      description: The predicate to use to check whether an error should be retried. Must not be null.
+    - id: backoffJitter
+      type: Google.Api.Gax.Grpc.RetrySettings.IJitter
+      description: The jitter to use on each backoff. May be null, in which case <xref href="Google.Api.Gax.Grpc.RetrySettings.RandomJitter" data-throw-if-not-resolved="false"></xref> is used.
+    return:
+      type: Google.Api.Gax.Grpc.RetrySettings
+      description: A retry with exponential backoff.
+    content.vb: Public Shared Function FromExponentialBackoff(maxAttempts As Integer, initialBackoff As TimeSpan, maxBackoff As TimeSpan, backoffMultiplier As Double, retryFilter As Predicate(Of Exception), backoffJitter As RetrySettings.IJitter = Nothing) As RetrySettings
+  overload: Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff*
+  nameWithType.vb: RetrySettings.FromExponentialBackoff(Int32, TimeSpan, TimeSpan, Double, Predicate(Of Exception), RetrySettings.IJitter)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff(System.Int32, System.TimeSpan, System.TimeSpan, System.Double, System.Predicate(Of System.Exception), Google.Api.Gax.Grpc.RetrySettings.IJitter)
+  name.vb: FromExponentialBackoff(Int32, TimeSpan, TimeSpan, Double, Predicate(Of Exception), RetrySettings.IJitter)
 - uid: Google.Api.Gax.Grpc.RetrySettings.RandomJitter
   commentId: P:Google.Api.Gax.Grpc.RetrySettings.RandomJitter
   id: RandomJitter
@@ -412,7 +413,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: RandomJitter
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 128
+    startLine: 139
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -451,7 +452,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: NoJitter
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 133
+    startLine: 144
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -464,45 +465,6 @@ items:
       type: Google.Api.Gax.Grpc.RetrySettings.IJitter
     content.vb: Public Shared ReadOnly Property NoJitter As RetrySettings.IJitter
   overload: Google.Api.Gax.Grpc.RetrySettings.NoJitter*
-  modifiers.csharp:
-  - public
-  - static
-  - get
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: Google.Api.Gax.Grpc.RetrySettings.DefaultFilter
-  commentId: P:Google.Api.Gax.Grpc.RetrySettings.DefaultFilter
-  id: DefaultFilter
-  parent: Google.Api.Gax.Grpc.RetrySettings
-  langs:
-  - csharp
-  - vb
-  name: DefaultFilter
-  nameWithType: RetrySettings.DefaultFilter
-  fullName: Google.Api.Gax.Grpc.RetrySettings.DefaultFilter
-  type: Property
-  source:
-    remote:
-      path: Google.Api.Gax.Grpc/RetrySettings.cs
-      branch: master
-      repo: https://github.com/googleapis/gax-dotnet
-    id: DefaultFilter
-    path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 140
-  assemblies:
-  - Google.Api.Gax.Grpc
-  namespace: Google.Api.Gax.Grpc
-  summary: "\nThe default retry filter, which retries operations which fail due to a status code of &quot;not found&quot;.\n"
-  example: []
-  syntax:
-    content: public static Predicate<RpcException> DefaultFilter { get; }
-    parameters: []
-    return:
-      type: System.Predicate{Grpc.Core.RpcException}
-    content.vb: Public Shared ReadOnly Property DefaultFilter As Predicate(Of RpcException)
-  overload: Google.Api.Gax.Grpc.RetrySettings.DefaultFilter*
   modifiers.csharp:
   - public
   - static
@@ -529,22 +491,22 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FilterForStatusCodes
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 147
+    startLine: 151
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
   summary: "\nCreates a retry filter based on status codes.\n"
   example: []
   syntax:
-    content: public static Predicate<RpcException> FilterForStatusCodes(params StatusCode[] statusCodes)
+    content: public static Predicate<Exception> FilterForStatusCodes(params StatusCode[] statusCodes)
     parameters:
     - id: statusCodes
       type: Grpc.Core.StatusCode[]
       description: The status codes to retry. Must not be null.
     return:
-      type: System.Predicate{Grpc.Core.RpcException}
+      type: System.Predicate{System.Exception}
       description: A retry filter based on status codes.
-    content.vb: Public Shared Function FilterForStatusCodes(ParamArray statusCodes As StatusCode()) As Predicate(Of RpcException)
+    content.vb: Public Shared Function FilterForStatusCodes(ParamArray statusCodes As StatusCode()) As Predicate(Of Exception)
   overload: Google.Api.Gax.Grpc.RetrySettings.FilterForStatusCodes*
   nameWithType.vb: RetrySettings.FilterForStatusCodes(StatusCode())
   modifiers.csharp:
@@ -573,22 +535,22 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: FilterForStatusCodes
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 155
+    startLine: 159
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
   summary: "\nCreates a retry filter based on status codes.\n"
   example: []
   syntax:
-    content: public static Predicate<RpcException> FilterForStatusCodes(IEnumerable<StatusCode> statusCodes)
+    content: public static Predicate<Exception> FilterForStatusCodes(IEnumerable<StatusCode> statusCodes)
     parameters:
     - id: statusCodes
       type: System.Collections.Generic.IEnumerable{Grpc.Core.StatusCode}
       description: The status codes to retry. Must not be null.
     return:
-      type: System.Predicate{Grpc.Core.RpcException}
+      type: System.Predicate{System.Exception}
       description: A retry filter based on status codes.
-    content.vb: Public Shared Function FilterForStatusCodes(statusCodes As IEnumerable(Of StatusCode)) As Predicate(Of RpcException)
+    content.vb: Public Shared Function FilterForStatusCodes(statusCodes As IEnumerable(Of StatusCode)) As Predicate(Of Exception)
   overload: Google.Api.Gax.Grpc.RetrySettings.FilterForStatusCodes*
   nameWithType.vb: RetrySettings.FilterForStatusCodes(IEnumerable(Of StatusCode))
   modifiers.csharp:
@@ -599,40 +561,41 @@ items:
   - Shared
   fullName.vb: Google.Api.Gax.Grpc.RetrySettings.FilterForStatusCodes(System.Collections.Generic.IEnumerable(Of Grpc.Core.StatusCode))
   name.vb: FilterForStatusCodes(IEnumerable(Of StatusCode))
-- uid: Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration(Google.Api.Gax.Expiration)
-  commentId: M:Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration(Google.Api.Gax.Expiration)
-  id: WithTotalExpiration(Google.Api.Gax.Expiration)
+- uid: Google.Api.Gax.Grpc.RetrySettings.NextBackoff(System.TimeSpan)
+  commentId: M:Google.Api.Gax.Grpc.RetrySettings.NextBackoff(System.TimeSpan)
+  id: NextBackoff(System.TimeSpan)
   parent: Google.Api.Gax.Grpc.RetrySettings
   langs:
   - csharp
   - vb
-  name: WithTotalExpiration(Expiration)
-  nameWithType: RetrySettings.WithTotalExpiration(Expiration)
-  fullName: Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration(Google.Api.Gax.Expiration)
+  name: NextBackoff(TimeSpan)
+  nameWithType: RetrySettings.NextBackoff(TimeSpan)
+  fullName: Google.Api.Gax.Grpc.RetrySettings.NextBackoff(System.TimeSpan)
   type: Method
   source:
     remote:
       path: Google.Api.Gax.Grpc/RetrySettings.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: WithTotalExpiration
+    id: NextBackoff
     path: Google.Api.Gax.Grpc/RetrySettings.cs
-    startLine: 166
+    startLine: 171
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nBuilds a new RetrySettings which is identical to this one, but with the given expiration.\n"
+  summary: "\nWorks out the next backoff from the current one, based on the multiplier and maximum.\n"
   example: []
   syntax:
-    content: public RetrySettings WithTotalExpiration(Expiration expiration)
+    content: public TimeSpan NextBackoff(TimeSpan currentBackoff)
     parameters:
-    - id: expiration
-      type: Google.Api.Gax.Expiration
-      description: New expiration
+    - id: currentBackoff
+      type: System.TimeSpan
+      description: The current backoff to use as a basis for the next one.
     return:
-      type: Google.Api.Gax.Grpc.RetrySettings
-    content.vb: Public Function WithTotalExpiration(expiration As Expiration) As RetrySettings
-  overload: Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration*
+      type: System.TimeSpan
+      description: The next backoff to use, which is always at least <xref href="Google.Api.Gax.Grpc.RetrySettings.InitialBackoff" data-throw-if-not-resolved="false"></xref> and at most <xref href="Google.Api.Gax.Grpc.RetrySettings.MaxBackoff" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function NextBackoff(currentBackoff As TimeSpan) As TimeSpan
+  overload: Google.Api.Gax.Grpc.RetrySettings.NextBackoff*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -935,56 +898,65 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Google.Api.Gax.Grpc.RetrySettings.RetryBackoff*
-  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.RetryBackoff
-  name: RetryBackoff
-  nameWithType: RetrySettings.RetryBackoff
-  fullName: Google.Api.Gax.Grpc.RetrySettings.RetryBackoff
-- uid: Google.Api.Gax.Grpc.BackoffSettings
-  commentId: T:Google.Api.Gax.Grpc.BackoffSettings
-  parent: Google.Api.Gax.Grpc
-  name: BackoffSettings
-  nameWithType: BackoffSettings
-  fullName: Google.Api.Gax.Grpc.BackoffSettings
-- uid: Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
-  commentId: P:Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
+- uid: Google.Api.Gax.Grpc.RetrySettings.MaxAttempts*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.MaxAttempts
+  name: MaxAttempts
+  nameWithType: RetrySettings.MaxAttempts
+  fullName: Google.Api.Gax.Grpc.RetrySettings.MaxAttempts
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
-- uid: Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff*
-  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff
-  name: TimeoutBackoff
-  nameWithType: RetrySettings.TimeoutBackoff
-  fullName: Google.Api.Gax.Grpc.RetrySettings.TimeoutBackoff
-- uid: Google.Api.Gax.Grpc.RetrySettings.TotalExpiration*
-  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
-  name: TotalExpiration
-  nameWithType: RetrySettings.TotalExpiration
-  fullName: Google.Api.Gax.Grpc.RetrySettings.TotalExpiration
-- uid: Google.Api.Gax.Expiration
-  commentId: T:Google.Api.Gax.Expiration
-  parent: Google.Api.Gax
-  name: Expiration
-  nameWithType: Expiration
-  fullName: Google.Api.Gax.Expiration
-- uid: Google.Api.Gax
-  commentId: N:Google.Api.Gax
-  name: Google.Api.Gax
-  nameWithType: Google.Api.Gax
-  fullName: Google.Api.Gax
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Google.Api.Gax.Grpc.RetrySettings.InitialBackoff*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
+  name: InitialBackoff
+  nameWithType: RetrySettings.InitialBackoff
+  fullName: Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
+- uid: Google.Api.Gax.Grpc.RetrySettings.MaxBackoff*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
+  name: MaxBackoff
+  nameWithType: RetrySettings.MaxBackoff
+  fullName: Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
+- uid: Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
+  commentId: P:Google.Api.Gax.Grpc.RetrySettings.MaxBackoff
+  isExternal: true
+- uid: Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier
+  name: BackoffMultiplier
+  nameWithType: RetrySettings.BackoffMultiplier
+  fullName: Google.Api.Gax.Grpc.RetrySettings.BackoffMultiplier
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
 - uid: Google.Api.Gax.Grpc.RetrySettings.RetryFilter*
   commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.RetryFilter
   name: RetryFilter
   nameWithType: RetrySettings.RetryFilter
   fullName: Google.Api.Gax.Grpc.RetrySettings.RetryFilter
-- uid: System.Predicate{Grpc.Core.RpcException}
-  commentId: T:System.Predicate{Grpc.Core.RpcException}
+- uid: System.Predicate{System.Exception}
+  commentId: T:System.Predicate{System.Exception}
   parent: System
   definition: System.Predicate`1
-  name: Predicate<RpcException>
-  nameWithType: Predicate<RpcException>
-  fullName: System.Predicate<Grpc.Core.RpcException>
-  nameWithType.vb: Predicate(Of RpcException)
-  fullName.vb: System.Predicate(Of Grpc.Core.RpcException)
-  name.vb: Predicate(Of RpcException)
+  name: Predicate<Exception>
+  nameWithType: Predicate<Exception>
+  fullName: System.Predicate<System.Exception>
+  nameWithType.vb: Predicate(Of Exception)
+  fullName.vb: System.Predicate(Of System.Exception)
+  name.vb: Predicate(Of Exception)
   spec.csharp:
   - uid: System.Predicate`1
     name: Predicate
@@ -994,10 +966,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Grpc.Core.RpcException
-    name: RpcException
-    nameWithType: RpcException
-    fullName: Grpc.Core.RpcException
+  - uid: System.Exception
+    name: Exception
+    nameWithType: Exception
+    fullName: System.Exception
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1011,10 +983,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Grpc.Core.RpcException
-    name: RpcException
-    nameWithType: RpcException
-    fullName: Grpc.Core.RpcException
+  - uid: System.Exception
+    name: Exception
+    nameWithType: Exception
+    fullName: System.Exception
     isExternal: true
   - name: )
     nameWithType: )
@@ -1061,22 +1033,33 @@ references:
 - uid: Google.Api.Gax.Grpc.RetrySettings.RandomJitter
   commentId: P:Google.Api.Gax.Grpc.RetrySettings.RandomJitter
   isExternal: true
-- uid: Google.Api.Gax.Grpc.RetrySettings.DelayJitter*
-  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.DelayJitter
-  name: DelayJitter
-  nameWithType: RetrySettings.DelayJitter
-  fullName: Google.Api.Gax.Grpc.RetrySettings.DelayJitter
+- uid: Google.Api.Gax.Grpc.RetrySettings.BackoffJitter*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.BackoffJitter
+  name: BackoffJitter
+  nameWithType: RetrySettings.BackoffJitter
+  fullName: Google.Api.Gax.Grpc.RetrySettings.BackoffJitter
 - uid: Google.Api.Gax.Grpc.RetrySettings.IJitter
   commentId: T:Google.Api.Gax.Grpc.RetrySettings.IJitter
   parent: Google.Api.Gax.Grpc
   name: RetrySettings.IJitter
   nameWithType: RetrySettings.IJitter
   fullName: Google.Api.Gax.Grpc.RetrySettings.IJitter
-- uid: Google.Api.Gax.Grpc.RetrySettings.#ctor*
-  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.#ctor
+- uid: Google.Api.Gax.Grpc.RetrySettings
+  commentId: T:Google.Api.Gax.Grpc.RetrySettings
+  parent: Google.Api.Gax.Grpc
   name: RetrySettings
-  nameWithType: RetrySettings.RetrySettings
-  fullName: Google.Api.Gax.Grpc.RetrySettings.RetrySettings
+  nameWithType: RetrySettings
+  fullName: Google.Api.Gax.Grpc.RetrySettings
+- uid: Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff
+  name: FromConstantBackoff
+  nameWithType: RetrySettings.FromConstantBackoff
+  fullName: Google.Api.Gax.Grpc.RetrySettings.FromConstantBackoff
+- uid: Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff
+  name: FromExponentialBackoff
+  nameWithType: RetrySettings.FromExponentialBackoff
+  fullName: Google.Api.Gax.Grpc.RetrySettings.FromExponentialBackoff
 - uid: Google.Api.Gax.Grpc.RetrySettings.RandomJitter*
   commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.RandomJitter
   name: RandomJitter
@@ -1087,11 +1070,6 @@ references:
   name: NoJitter
   nameWithType: RetrySettings.NoJitter
   fullName: Google.Api.Gax.Grpc.RetrySettings.NoJitter
-- uid: Google.Api.Gax.Grpc.RetrySettings.DefaultFilter*
-  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.DefaultFilter
-  name: DefaultFilter
-  nameWithType: RetrySettings.DefaultFilter
-  fullName: Google.Api.Gax.Grpc.RetrySettings.DefaultFilter
 - uid: Google.Api.Gax.Grpc.RetrySettings.FilterForStatusCodes*
   commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.FilterForStatusCodes
   name: FilterForStatusCodes
@@ -1212,14 +1190,11 @@ references:
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
-- uid: Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration*
-  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration
-  name: WithTotalExpiration
-  nameWithType: RetrySettings.WithTotalExpiration
-  fullName: Google.Api.Gax.Grpc.RetrySettings.WithTotalExpiration
-- uid: Google.Api.Gax.Grpc.RetrySettings
-  commentId: T:Google.Api.Gax.Grpc.RetrySettings
-  parent: Google.Api.Gax.Grpc
-  name: RetrySettings
-  nameWithType: RetrySettings
-  fullName: Google.Api.Gax.Grpc.RetrySettings
+- uid: Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
+  commentId: P:Google.Api.Gax.Grpc.RetrySettings.InitialBackoff
+  isExternal: true
+- uid: Google.Api.Gax.Grpc.RetrySettings.NextBackoff*
+  commentId: Overload:Google.Api.Gax.Grpc.RetrySettings.NextBackoff
+  name: NextBackoff
+  nameWithType: RetrySettings.NextBackoff
+  fullName: Google.Api.Gax.Grpc.RetrySettings.NextBackoff

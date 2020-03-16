@@ -15,6 +15,8 @@ items:
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.CreateCallInvoker
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.CreateCallInvokerAsync(System.Threading.CancellationToken)
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.CredentialsPath
+  - Google.Api.Gax.Grpc.ClientBuilderBase`1.DefaultGrpcAdapter
+  - Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.Endpoint
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelCredentials
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelCredentialsAsync(System.Threading.CancellationToken)
@@ -22,6 +24,8 @@ items:
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelPool
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.GetDefaultEndpoint
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.GetDefaultScopes
+  - Google.Api.Gax.Grpc.ClientBuilderBase`1.GetEmulatorEnvironment(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Func{System.String,System.String})
+  - Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.JsonCredentials
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.Scopes
   - Google.Api.Gax.Grpc.ClientBuilderBase`1.TokenAccessMethod
@@ -94,18 +98,18 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Endpoint
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 33
+    startLine: 31
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
   summary: "\nThe endpoint to connect to, or null to use the default endpoint.\n"
   example: []
   syntax:
-    content: public ServiceEndpoint Endpoint { get; set; }
+    content: public string Endpoint { get; set; }
     parameters: []
     return:
-      type: Google.Api.Gax.Grpc.ServiceEndpoint
-    content.vb: Public Property Endpoint As ServiceEndpoint
+      type: System.String
+    content.vb: Public Property Endpoint As String
   overload: Google.Api.Gax.Grpc.ClientBuilderBase`1.Endpoint*
   nameWithType.vb: ClientBuilderBase(Of TClient).Endpoint
   modifiers.csharp:
@@ -133,7 +137,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Scopes
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 38
+    startLine: 36
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -172,7 +176,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ChannelCredentials
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 43
+    startLine: 41
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -211,7 +215,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CredentialsPath
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 48
+    startLine: 46
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -250,7 +254,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: JsonCredentials
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 53
+    startLine: 51
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -289,7 +293,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: TokenAccessMethod
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 64
+    startLine: 62
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -329,7 +333,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CallInvoker
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 69
+    startLine: 67
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -368,7 +372,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: UserAgent
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 74
+    startLine: 72
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -389,6 +393,84 @@ items:
   modifiers.vb:
   - Public
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).UserAgent
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter
+  commentId: P:Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter
+  id: GrpcAdapter
+  parent: Google.Api.Gax.Grpc.ClientBuilderBase`1
+  langs:
+  - csharp
+  - vb
+  name: GrpcAdapter
+  nameWithType: ClientBuilderBase<TClient>.GrpcAdapter
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.GrpcAdapter
+  type: Property
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: GrpcAdapter
+    path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+    startLine: 77
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\nThe gRPC implementation to use, or null to use the default implementation.\n"
+  example: []
+  syntax:
+    content: public GrpcAdapter GrpcAdapter { get; set; }
+    parameters: []
+    return:
+      type: Google.Api.Gax.Grpc.GrpcAdapter
+    content.vb: Public Property GrpcAdapter As GrpcAdapter
+  overload: Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter*
+  nameWithType.vb: ClientBuilderBase(Of TClient).GrpcAdapter
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).GrpcAdapter
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection
+  commentId: P:Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection
+  id: EmulatorDetection
+  parent: Google.Api.Gax.Grpc.ClientBuilderBase`1
+  langs:
+  - csharp
+  - vb
+  name: EmulatorDetection
+  nameWithType: ClientBuilderBase<TClient>.EmulatorDetection
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.EmulatorDetection
+  type: Property
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: EmulatorDetection
+    path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+    startLine: 85
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\nThe emulator detection policy to apply when building a client. Derived classes which support\nemulators should create public properties which delegate to this one. The default value is\n<xref href=\"Google.Api.Gax.EmulatorDetection.None\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: protected EmulatorDetection EmulatorDetection { get; set; }
+    parameters: []
+    return:
+      type: Google.Api.Gax.EmulatorDetection
+    content.vb: Protected Property EmulatorDetection As EmulatorDetection
+  overload: Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection*
+  nameWithType.vb: ClientBuilderBase(Of TClient).EmulatorDetection
+  modifiers.csharp:
+  - protected
+  - get
+  - set
+  modifiers.vb:
+  - Protected
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).EmulatorDetection
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.#ctor
   commentId: M:Google.Api.Gax.Grpc.ClientBuilderBase`1.#ctor
   id: '#ctor'
@@ -407,7 +489,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 81
+    startLine: 96
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -441,7 +523,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CopyCommonSettings
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 90
+    startLine: 105
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -483,7 +565,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Validate
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 108
+    startLine: 130
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -505,6 +587,65 @@ items:
   - Protected
   - Overridable
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).Validate()
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.GetEmulatorEnvironment(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Func{System.String,System.String})
+  commentId: M:Google.Api.Gax.Grpc.ClientBuilderBase`1.GetEmulatorEnvironment(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Func{System.String,System.String})
+  id: GetEmulatorEnvironment(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Func{System.String,System.String})
+  parent: Google.Api.Gax.Grpc.ClientBuilderBase`1
+  langs:
+  - csharp
+  - vb
+  name: GetEmulatorEnvironment(IEnumerable<String>, IEnumerable<String>, Func<String, String>)
+  nameWithType: ClientBuilderBase<TClient>.GetEmulatorEnvironment(IEnumerable<String>, IEnumerable<String>, Func<String, String>)
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.GetEmulatorEnvironment(System.Collections.Generic.IEnumerable<System.String>, System.Collections.Generic.IEnumerable<System.String>, System.Func<System.String, System.String>)
+  type: Method
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: GetEmulatorEnvironment
+    path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+    startLine: 166
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\nPerforms basic emulator detection and validation based on the given environment variables.\nThis method is expected to be called by a derived class that supports emulators, in order to perform the common\nwork of checking whether the emulator is configured in the environment.\n"
+  remarks: "\n<p>\nIf the emulator should not be used, either due to being disabled in <xref href=\"Google.Api.Gax.Grpc.ClientBuilderBase%601.EmulatorDetection\" data-throw-if-not-resolved=\"false\"></xref> or\nthe appropriate environment variables not being set, this method returns null.\n</p>\n<p>\nOtherwise, a dictionary is returned mapping every value in <code data-dev-comment-type=\"paramref\" class=\"paramref\">allEmulatorEnvironmentVariables</code> to the value in\nthe environment. Any missing, empty or whitespace-only values are mapped to a null reference in the returned dictionary, but\nthe entry will still be present (so callers can use an indexer with the returned dictionary for every environment variable passed in).\n</p>\n"
+  example: []
+  syntax:
+    content: protected Dictionary<string, string> GetEmulatorEnvironment(IEnumerable<string> requiredEmulatorEnvironmentVariables, IEnumerable<string> allEmulatorEnvironmentVariables, Func<string, string> environmentVariableProvider = null)
+    parameters:
+    - id: requiredEmulatorEnvironmentVariables
+      type: System.Collections.Generic.IEnumerable{System.String}
+      description: Required emulator environment variables.
+    - id: allEmulatorEnvironmentVariables
+      type: System.Collections.Generic.IEnumerable{System.String}
+      description: All emulator environment variables.
+    - id: environmentVariableProvider
+      type: System.Func{System.String,System.String}
+      description: >-
+        The provider used to retrieve environment variables. This is used to faciliate testing, and defaults
+
+        to using <xref href="System.Environment.GetEnvironmentVariable(System.String)" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,System.String}
+      description: A key/value mapping of the emulator environment variables to their values, or null if the emulator should not be used.
+    content.vb: Protected Function GetEmulatorEnvironment(requiredEmulatorEnvironmentVariables As IEnumerable(Of String), allEmulatorEnvironmentVariables As IEnumerable(Of String), environmentVariableProvider As Func(Of String, String) = Nothing) As Dictionary(Of String, String)
+  overload: Google.Api.Gax.Grpc.ClientBuilderBase`1.GetEmulatorEnvironment*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: >-
+      The configuration is inconsistent, e.g. due to some environment variables
+
+      being set but not all the required ones, or any environment variables being set in a production-only environment.
+  nameWithType.vb: ClientBuilderBase(Of TClient).GetEmulatorEnvironment(IEnumerable(Of String), IEnumerable(Of String), Func(Of String, String))
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).GetEmulatorEnvironment(System.Collections.Generic.IEnumerable(Of System.String), System.Collections.Generic.IEnumerable(Of System.String), System.Func(Of System.String, System.String))
+  name.vb: GetEmulatorEnvironment(IEnumerable(Of String), IEnumerable(Of String), Func(Of String, String))
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.ValidateAtMostOneNotNull(System.String,System.Object[])
   commentId: M:Google.Api.Gax.Grpc.ClientBuilderBase`1.ValidateAtMostOneNotNull(System.String,System.Object[])
   id: ValidateAtMostOneNotNull(System.String,System.Object[])
@@ -523,7 +664,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ValidateAtMostOneNotNull
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 127
+    startLine: 247
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -569,7 +710,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ValidateOptionExcludesOthers
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 139
+    startLine: 259
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -614,7 +755,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CreateCallInvoker
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 149
+    startLine: 269
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -652,7 +793,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CreateCallInvokerAsync
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 175
+    startLine: 295
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -693,7 +834,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetChannelCredentials
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 199
+    startLine: 321
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -731,7 +872,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetChannelCredentialsAsync
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 220
+    startLine: 342
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -772,7 +913,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetDefaultScopes
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 240
+    startLine: 362
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -810,17 +951,17 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetDefaultEndpoint
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 245
+    startLine: 367
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
   summary: "\nReturns the endpoint for this builder type, used if no endpoint is otherwise specified.\n"
   example: []
   syntax:
-    content: protected abstract ServiceEndpoint GetDefaultEndpoint()
+    content: protected abstract string GetDefaultEndpoint()
     return:
-      type: Google.Api.Gax.Grpc.ServiceEndpoint
-    content.vb: Protected MustOverride Function GetDefaultEndpoint As ServiceEndpoint
+      type: System.String
+    content.vb: Protected MustOverride Function GetDefaultEndpoint As String
   overload: Google.Api.Gax.Grpc.ClientBuilderBase`1.GetDefaultEndpoint*
   nameWithType.vb: ClientBuilderBase(Of TClient).GetDefaultEndpoint()
   modifiers.csharp:
@@ -848,7 +989,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetChannelPool
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 252
+    startLine: 374
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -868,6 +1009,47 @@ items:
   - Protected
   - MustOverride
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).GetChannelPool()
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.DefaultGrpcAdapter
+  commentId: P:Google.Api.Gax.Grpc.ClientBuilderBase`1.DefaultGrpcAdapter
+  id: DefaultGrpcAdapter
+  parent: Google.Api.Gax.Grpc.ClientBuilderBase`1
+  langs:
+  - csharp
+  - vb
+  name: DefaultGrpcAdapter
+  nameWithType: ClientBuilderBase<TClient>.DefaultGrpcAdapter
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.DefaultGrpcAdapter
+  type: Property
+  source:
+    remote:
+      path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: DefaultGrpcAdapter
+    path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
+    startLine: 380
+  assemblies:
+  - Google.Api.Gax.Grpc
+  namespace: Google.Api.Gax.Grpc
+  summary: "\nReturns the default <xref href=\"Google.Api.Gax.Grpc.ClientBuilderBase%601.GrpcAdapter\" data-throw-if-not-resolved=\"false\"></xref> to use if\n<xref href=\"Google.Api.Gax.Grpc.ClientBuilderBase%601.GrpcAdapter\" data-throw-if-not-resolved=\"false\"></xref> is not set.\n"
+  example: []
+  syntax:
+    content: protected abstract GrpcAdapter DefaultGrpcAdapter { get; }
+    parameters: []
+    return:
+      type: Google.Api.Gax.Grpc.GrpcAdapter
+    content.vb: Protected MustOverride ReadOnly Property DefaultGrpcAdapter As GrpcAdapter
+  overload: Google.Api.Gax.Grpc.ClientBuilderBase`1.DefaultGrpcAdapter*
+  nameWithType.vb: ClientBuilderBase(Of TClient).DefaultGrpcAdapter
+  modifiers.csharp:
+  - protected
+  - abstract
+  - get
+  modifiers.vb:
+  - Protected
+  - MustOverride
+  - ReadOnly
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).DefaultGrpcAdapter
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelOptions
   commentId: M:Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelOptions
   id: GetChannelOptions
@@ -886,18 +1068,18 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetChannelOptions
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 258
+    startLine: 388
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
   summary: "\nReturns the options to use when creating a channel.\n"
   example: []
   syntax:
-    content: protected virtual IReadOnlyList<ChannelOption> GetChannelOptions()
+    content: protected virtual GrpcChannelOptions GetChannelOptions()
     return:
-      type: System.Collections.Generic.IReadOnlyList{Grpc.Core.ChannelOption}
+      type: Google.Api.Gax.Grpc.GrpcChannelOptions
       description: The options to use when creating a channel.
-    content.vb: Protected Overridable Function GetChannelOptions As IReadOnlyList(Of ChannelOption)
+    content.vb: Protected Overridable Function GetChannelOptions As GrpcChannelOptions
   overload: Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelOptions*
   nameWithType.vb: ClientBuilderBase(Of TClient).GetChannelOptions()
   modifiers.csharp:
@@ -925,7 +1107,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CanUseChannelPool
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 268
+    startLine: 398
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -966,7 +1148,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Build
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 281
+    startLine: 411
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -1004,7 +1186,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: BuildAsync
     path: Google.Api.Gax.Grpc/ClientBuilderBase.cs
-    startLine: 289
+    startLine: 419
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -1332,12 +1514,13 @@ references:
   fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.Endpoint
   nameWithType.vb: ClientBuilderBase(Of TClient).Endpoint
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).Endpoint
-- uid: Google.Api.Gax.Grpc.ServiceEndpoint
-  commentId: T:Google.Api.Gax.Grpc.ServiceEndpoint
-  parent: Google.Api.Gax.Grpc
-  name: ServiceEndpoint
-  nameWithType: ServiceEndpoint
-  fullName: Google.Api.Gax.Grpc.ServiceEndpoint
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.Scopes*
   commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.Scopes
   name: Scopes
@@ -1461,13 +1644,6 @@ references:
   fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.CredentialsPath
   nameWithType.vb: ClientBuilderBase(Of TClient).CredentialsPath
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).CredentialsPath
-- uid: System.String
-  commentId: T:System.String
-  parent: System
-  isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.JsonCredentials*
   commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.JsonCredentials
   name: JsonCredentials
@@ -1664,6 +1840,40 @@ references:
   fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.UserAgent
   nameWithType.vb: ClientBuilderBase(Of TClient).UserAgent
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).UserAgent
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter*
+  commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter
+  name: GrpcAdapter
+  nameWithType: ClientBuilderBase<TClient>.GrpcAdapter
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.GrpcAdapter
+  nameWithType.vb: ClientBuilderBase(Of TClient).GrpcAdapter
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).GrpcAdapter
+- uid: Google.Api.Gax.Grpc.GrpcAdapter
+  commentId: T:Google.Api.Gax.Grpc.GrpcAdapter
+  parent: Google.Api.Gax.Grpc
+  name: GrpcAdapter
+  nameWithType: GrpcAdapter
+  fullName: Google.Api.Gax.Grpc.GrpcAdapter
+- uid: Google.Api.Gax.EmulatorDetection.None
+  commentId: F:Google.Api.Gax.EmulatorDetection.None
+  isExternal: true
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection*
+  commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection
+  name: EmulatorDetection
+  nameWithType: ClientBuilderBase<TClient>.EmulatorDetection
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.EmulatorDetection
+  nameWithType.vb: ClientBuilderBase(Of TClient).EmulatorDetection
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).EmulatorDetection
+- uid: Google.Api.Gax.EmulatorDetection
+  commentId: T:Google.Api.Gax.EmulatorDetection
+  parent: Google.Api.Gax
+  name: EmulatorDetection
+  nameWithType: EmulatorDetection
+  fullName: Google.Api.Gax.EmulatorDetection
+- uid: Google.Api.Gax
+  commentId: N:Google.Api.Gax
+  name: Google.Api.Gax
+  nameWithType: Google.Api.Gax
+  fullName: Google.Api.Gax
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.#ctor*
   commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.#ctor
   name: ClientBuilderBase
@@ -1765,6 +1975,324 @@ references:
   fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.Validate
   nameWithType.vb: ClientBuilderBase(Of TClient).Validate
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).Validate
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection
+  commentId: P:Google.Api.Gax.Grpc.ClientBuilderBase`1.EmulatorDetection
+  isExternal: true
+- uid: System.Environment.GetEnvironmentVariable(System.String)
+  commentId: M:System.Environment.GetEnvironmentVariable(System.String)
+  isExternal: true
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.GetEmulatorEnvironment*
+  commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.GetEmulatorEnvironment
+  name: GetEmulatorEnvironment
+  nameWithType: ClientBuilderBase<TClient>.GetEmulatorEnvironment
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.GetEmulatorEnvironment
+  nameWithType.vb: ClientBuilderBase(Of TClient).GetEmulatorEnvironment
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).GetEmulatorEnvironment
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<String>
+  nameWithType: IEnumerable<String>
+  fullName: System.Collections.Generic.IEnumerable<System.String>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func{System.String,System.String}
+  commentId: T:System.Func{System.String,System.String}
+  parent: System
+  definition: System.Func`2
+  name: Func<String, String>
+  nameWithType: Func<String, String>
+  fullName: System.Func<System.String, System.String>
+  nameWithType.vb: Func(Of String, String)
+  fullName.vb: System.Func(Of System.String, System.String)
+  name.vb: Func(Of String, String)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary{System.String,System.String}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, String>
+  nameWithType: Dictionary<String, String>
+  fullName: System.Collections.Generic.Dictionary<System.String, System.String>
+  nameWithType.vb: Dictionary(Of String, String)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, System.String)
+  name.vb: Dictionary(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.ValidateAtMostOneNotNull*
   commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.ValidateAtMostOneNotNull
   name: ValidateAtMostOneNotNull
@@ -2015,6 +2543,16 @@ references:
   name: ChannelPool
   nameWithType: ChannelPool
   fullName: Google.Api.Gax.Grpc.ChannelPool
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter
+  commentId: P:Google.Api.Gax.Grpc.ClientBuilderBase`1.GrpcAdapter
+  isExternal: true
+- uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.DefaultGrpcAdapter*
+  commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.DefaultGrpcAdapter
+  name: DefaultGrpcAdapter
+  nameWithType: ClientBuilderBase<TClient>.DefaultGrpcAdapter
+  fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.DefaultGrpcAdapter
+  nameWithType.vb: ClientBuilderBase(Of TClient).DefaultGrpcAdapter
+  fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).DefaultGrpcAdapter
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelOptions*
   commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.GetChannelOptions
   name: GetChannelOptions
@@ -2022,50 +2560,12 @@ references:
   fullName: Google.Api.Gax.Grpc.ClientBuilderBase<TClient>.GetChannelOptions
   nameWithType.vb: ClientBuilderBase(Of TClient).GetChannelOptions
   fullName.vb: Google.Api.Gax.Grpc.ClientBuilderBase(Of TClient).GetChannelOptions
-- uid: System.Collections.Generic.IReadOnlyList{Grpc.Core.ChannelOption}
-  commentId: T:System.Collections.Generic.IReadOnlyList{Grpc.Core.ChannelOption}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IReadOnlyList`1
-  name: IReadOnlyList<ChannelOption>
-  nameWithType: IReadOnlyList<ChannelOption>
-  fullName: System.Collections.Generic.IReadOnlyList<Grpc.Core.ChannelOption>
-  nameWithType.vb: IReadOnlyList(Of ChannelOption)
-  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Grpc.Core.ChannelOption)
-  name.vb: IReadOnlyList(Of ChannelOption)
-  spec.csharp:
-  - uid: System.Collections.Generic.IReadOnlyList`1
-    name: IReadOnlyList
-    nameWithType: IReadOnlyList
-    fullName: System.Collections.Generic.IReadOnlyList
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Grpc.Core.ChannelOption
-    name: ChannelOption
-    nameWithType: ChannelOption
-    fullName: Grpc.Core.ChannelOption
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IReadOnlyList`1
-    name: IReadOnlyList
-    nameWithType: IReadOnlyList
-    fullName: System.Collections.Generic.IReadOnlyList
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Grpc.Core.ChannelOption
-    name: ChannelOption
-    nameWithType: ChannelOption
-    fullName: Grpc.Core.ChannelOption
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+- uid: Google.Api.Gax.Grpc.GrpcChannelOptions
+  commentId: T:Google.Api.Gax.Grpc.GrpcChannelOptions
+  parent: Google.Api.Gax.Grpc
+  name: GrpcChannelOptions
+  nameWithType: GrpcChannelOptions
+  fullName: Google.Api.Gax.Grpc.GrpcChannelOptions
 - uid: Google.Api.Gax.Grpc.ClientBuilderBase`1.CanUseChannelPool*
   commentId: Overload:Google.Api.Gax.Grpc.ClientBuilderBase`1.CanUseChannelPool
   name: CanUseChannelPool

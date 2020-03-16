@@ -4,7 +4,9 @@ items:
   commentId: T:Grpc.Core.IAsyncStreamReader`1
   id: IAsyncStreamReader`1
   parent: Grpc.Core
-  children: []
+  children:
+  - Grpc.Core.IAsyncStreamReader`1.Current
+  - Grpc.Core.IAsyncStreamReader`1.MoveNext(System.Threading.CancellationToken)
   langs:
   - csharp
   - vb
@@ -15,24 +17,22 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core.Api/IAsyncStreamReader.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: IAsyncStreamReader
     path: src/csharp/Grpc.Core.Api/IAsyncStreamReader.cs
-    startLine: 52
+    startLine: 49
   assemblies:
   - Grpc.Core.Api
   namespace: Grpc.Core
   summary: "\nA stream of messages to be read.\nMessages can be awaited <code>await reader.MoveNext()</code>, that returns <code>true</code>\nif there is a message available and <code>false</code> if there are no more messages\n(i.e. the stream has been closed).\n<p>\nOn the client side, the last invocation of <code>MoveNext()</code> either returns <code>false</code>\nif the call has finished successfully or throws <code>RpcException</code> if call finished\nwith an error. Once the call finishes, subsequent invocations of <code>MoveNext()</code> will\ncontinue yielding the same result (returning <code>false</code> or throwing an exception).\n</p>\n<p>\nOn the server side, <code>MoveNext()</code> does not throw exceptions.\nIn case of a failure, the request stream will appear to be finished\n(<code>MoveNext</code> will return <code>false</code>) and the <code>CancellationToken</code>\nassociated with the call will be cancelled to signal the failure.\n</p>\n<p>\n<code>MoveNext()</code> operations can be cancelled via a cancellation token. Cancelling\nan individual read operation has the same effect as cancelling the entire call\n(which will also result in the read operation returning prematurely), but the per-read cancellation\ntokens passed to MoveNext() only result in cancelling the call if the read operation haven&apos;t finished\nyet.\n</p>\n"
   example: []
   syntax:
-    content: 'public interface IAsyncStreamReader<T> : IAsyncEnumerator<T>'
+    content: public interface IAsyncStreamReader<out T>
     typeParameters:
     - id: T
       description: The message type.
-    content.vb: >-
-      Public Interface IAsyncStreamReader(Of T)
-          Inherits IAsyncEnumerator(Of T)
+    content.vb: Public Interface IAsyncStreamReader(Of Out T)
   nameWithType.vb: IAsyncStreamReader(Of T)
   modifiers.csharp:
   - public
@@ -42,9 +42,209 @@ items:
   - Interface
   fullName.vb: Grpc.Core.IAsyncStreamReader(Of T)
   name.vb: IAsyncStreamReader(Of T)
+- uid: Grpc.Core.IAsyncStreamReader`1.Current
+  commentId: P:Grpc.Core.IAsyncStreamReader`1.Current
+  id: Current
+  parent: Grpc.Core.IAsyncStreamReader`1
+  langs:
+  - csharp
+  - vb
+  name: Current
+  nameWithType: IAsyncStreamReader<T>.Current
+  fullName: Grpc.Core.IAsyncStreamReader<T>.Current
+  type: Property
+  source:
+    remote:
+      path: src/csharp/Grpc.Core.Api/IAsyncStreamReader.cs
+      branch: v1.27.x
+      repo: https://github.com/grpc/grpc
+    id: Current
+    path: src/csharp/Grpc.Core.Api/IAsyncStreamReader.cs
+    startLine: 54
+  assemblies:
+  - Grpc.Core.Api
+  namespace: Grpc.Core
+  summary: "\nGets the current element in the iteration.\n"
+  example: []
+  syntax:
+    content: T Current { get; }
+    parameters: []
+    return:
+      type: '{T}'
+    content.vb: ReadOnly Property Current As T
+  overload: Grpc.Core.IAsyncStreamReader`1.Current*
+  nameWithType.vb: IAsyncStreamReader(Of T).Current
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+  fullName.vb: Grpc.Core.IAsyncStreamReader(Of T).Current
+- uid: Grpc.Core.IAsyncStreamReader`1.MoveNext(System.Threading.CancellationToken)
+  commentId: M:Grpc.Core.IAsyncStreamReader`1.MoveNext(System.Threading.CancellationToken)
+  id: MoveNext(System.Threading.CancellationToken)
+  parent: Grpc.Core.IAsyncStreamReader`1
+  langs:
+  - csharp
+  - vb
+  name: MoveNext(CancellationToken)
+  nameWithType: IAsyncStreamReader<T>.MoveNext(CancellationToken)
+  fullName: Grpc.Core.IAsyncStreamReader<T>.MoveNext(System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core.Api/IAsyncStreamReader.cs
+      branch: v1.27.x
+      repo: https://github.com/grpc/grpc
+    id: MoveNext
+    path: src/csharp/Grpc.Core.Api/IAsyncStreamReader.cs
+    startLine: 63
+  assemblies:
+  - Grpc.Core.Api
+  namespace: Grpc.Core
+  summary: "\nAdvances the reader to the next element in the sequence, returning the result asynchronously.\n"
+  example: []
+  syntax:
+    content: Task<bool> MoveNext(CancellationToken cancellationToken)
+    parameters:
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+      description: Cancellation token that can be used to cancel the operation.
+    return:
+      type: System.Threading.Tasks.Task{System.Boolean}
+      description: "\nTask containing the result of the operation: true if the reader was successfully advanced\nto the next element; false if the reader has passed the end of the sequence."
+    content.vb: Function MoveNext(cancellationToken As CancellationToken) As Task(Of Boolean)
+  overload: Grpc.Core.IAsyncStreamReader`1.MoveNext*
+  nameWithType.vb: IAsyncStreamReader(Of T).MoveNext(CancellationToken)
+  fullName.vb: Grpc.Core.IAsyncStreamReader(Of T).MoveNext(System.Threading.CancellationToken)
 references:
 - uid: Grpc.Core
   commentId: N:Grpc.Core
   name: Grpc.Core
   nameWithType: Grpc.Core
   fullName: Grpc.Core
+- uid: Grpc.Core.IAsyncStreamReader`1.Current*
+  commentId: Overload:Grpc.Core.IAsyncStreamReader`1.Current
+  name: Current
+  nameWithType: IAsyncStreamReader<T>.Current
+  fullName: Grpc.Core.IAsyncStreamReader<T>.Current
+  nameWithType.vb: IAsyncStreamReader(Of T).Current
+  fullName.vb: Grpc.Core.IAsyncStreamReader(Of T).Current
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Grpc.Core.IAsyncStreamReader`1.MoveNext*
+  commentId: Overload:Grpc.Core.IAsyncStreamReader`1.MoveNext
+  name: MoveNext
+  nameWithType: IAsyncStreamReader<T>.MoveNext
+  fullName: Grpc.Core.IAsyncStreamReader<T>.MoveNext
+  nameWithType.vb: IAsyncStreamReader(Of T).MoveNext
+  fullName.vb: Grpc.Core.IAsyncStreamReader(Of T).MoveNext
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task{System.Boolean}
+  commentId: T:System.Threading.Tasks.Task{System.Boolean}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<Boolean>
+  nameWithType: Task<Boolean>
+  fullName: System.Threading.Tasks.Task<System.Boolean>
+  nameWithType.vb: Task(Of Boolean)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Boolean)
+  name.vb: Task(Of Boolean)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks

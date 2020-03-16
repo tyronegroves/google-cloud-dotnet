@@ -16,6 +16,8 @@ items:
   - Google.Api.BackendRule.Deadline
   - Google.Api.BackendRule.DeadlineFieldNumber
   - Google.Api.BackendRule.Descriptor
+  - Google.Api.BackendRule.DisableAuth
+  - Google.Api.BackendRule.DisableAuthFieldNumber
   - Google.Api.BackendRule.Equals(Google.Api.BackendRule)
   - Google.Api.BackendRule.Equals(System.Object)
   - Google.Api.BackendRule.GetHashCode
@@ -31,6 +33,8 @@ items:
   - Google.Api.BackendRule.Parser
   - Google.Api.BackendRule.PathTranslation
   - Google.Api.BackendRule.PathTranslationFieldNumber
+  - Google.Api.BackendRule.Protocol
+  - Google.Api.BackendRule.ProtocolFieldNumber
   - Google.Api.BackendRule.Selector
   - Google.Api.BackendRule.SelectorFieldNumber
   - Google.Api.BackendRule.ToString
@@ -49,7 +53,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: BackendRule
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 188
+    startLine: 189
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -98,7 +102,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Parser
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 191
+    startLine: 192
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -135,7 +139,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Descriptor
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 194
+    startLine: 195
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -173,7 +177,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 199
+    startLine: 200
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -211,7 +215,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 204
+    startLine: 205
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -241,7 +245,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 211
+    startLine: 212
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -274,7 +278,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Clone
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 228
+    startLine: 233
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -308,7 +312,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: SelectorFieldNumber
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 234
+    startLine: 239
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -343,7 +347,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Selector
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 241
+    startLine: 246
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -380,7 +384,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AddressFieldNumber
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 250
+    startLine: 255
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -415,11 +419,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Address
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 255
+    startLine: 279
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nThe address of the API backend.\n"
+  summary: "\nThe address of the API backend.\n\nThe scheme is used to determine the backend protocol and security.\nThe following schemes are accepted:\n\nSCHEME        PROTOCOL    SECURITY\nhttp://       HTTP        None\nhttps://      HTTP        TLS\ngrpc://       gRPC        None\ngrpcs://      gRPC        TLS\n\nIt is recommended to explicitly include a scheme. Leaving out the scheme\nmay cause constrasting behaviors across platforms.\n\nIf the port is unspecified, the default is:\n- 80 for schemes without TLS\n- 443 for schemes with TLS\n\nFor HTTP backends, use [protocol][google.api.BackendRule.protocol]\nto specify the protocol version.\n"
   example: []
   syntax:
     content: public string Address { get; set; }
@@ -452,7 +456,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: DeadlineFieldNumber
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 264
+    startLine: 288
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -487,11 +491,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Deadline
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 270
+    startLine: 294
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nThe number of seconds to wait for a response from a request.  The default\ndeadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.\n"
+  summary: "\nThe number of seconds to wait for a response from a request. The default\nvaries based on the request protocol and deployment environment.\n"
   example: []
   syntax:
     content: public double Deadline { get; set; }
@@ -524,7 +528,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MinDeadlineFieldNumber
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 279
+    startLine: 303
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -559,7 +563,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MinDeadline
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 285
+    startLine: 309
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -596,7 +600,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: OperationDeadlineFieldNumber
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 294
+    startLine: 318
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -631,7 +635,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: OperationDeadline
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 300
+    startLine: 324
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -668,7 +672,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PathTranslationFieldNumber
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 309
+    startLine: 333
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -703,7 +707,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PathTranslation
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 311
+    startLine: 335
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -738,7 +742,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: JwtAudienceFieldNumber
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 320
+    startLine: 344
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -773,11 +777,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: JwtAudience
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 324
+    startLine: 350
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nThe JWT audience is used when generating a JWT id token for the backend.\n"
+  summary: "\nThe JWT audience is used when generating a JWT ID token for the backend.\nThis ID token will be added in the HTTP &quot;authorization&quot; header, and sent\nto the backend.\n"
   example: []
   syntax:
     content: public string JwtAudience { get; set; }
@@ -786,6 +790,150 @@ items:
       type: System.String
     content.vb: Public Property JwtAudience As String
   overload: Google.Api.BackendRule.JwtAudience*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Google.Api.BackendRule.DisableAuthFieldNumber
+  commentId: F:Google.Api.BackendRule.DisableAuthFieldNumber
+  id: DisableAuthFieldNumber
+  parent: Google.Api.BackendRule
+  langs:
+  - csharp
+  - vb
+  name: DisableAuthFieldNumber
+  nameWithType: BackendRule.DisableAuthFieldNumber
+  fullName: Google.Api.BackendRule.DisableAuthFieldNumber
+  type: Field
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Backend.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: DisableAuthFieldNumber
+    path: Google.Api.CommonProtos/Api/Backend.cs
+    startLine: 360
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: Field number for the &quot;disable_auth&quot; field.
+  example: []
+  syntax:
+    content: public const int DisableAuthFieldNumber = 8
+    return:
+      type: System.Int32
+    content.vb: Public Const DisableAuthFieldNumber As Integer = 8
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Google.Api.BackendRule.DisableAuth
+  commentId: P:Google.Api.BackendRule.DisableAuth
+  id: DisableAuth
+  parent: Google.Api.BackendRule
+  langs:
+  - csharp
+  - vb
+  name: DisableAuth
+  nameWithType: BackendRule.DisableAuth
+  fullName: Google.Api.BackendRule.DisableAuth
+  type: Property
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Backend.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: DisableAuth
+    path: Google.Api.CommonProtos/Api/Backend.cs
+    startLine: 367
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: "\nWhen disable_auth is true, a JWT ID token won&apos;t be generated and the\noriginal &quot;Authorization&quot; HTTP header will be preserved. If the header is\nused to carry the original token and is expected by the backend, this\nfield must be set to true to preserve the header.\n"
+  example: []
+  syntax:
+    content: public bool DisableAuth { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property DisableAuth As Boolean
+  overload: Google.Api.BackendRule.DisableAuth*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Google.Api.BackendRule.ProtocolFieldNumber
+  commentId: F:Google.Api.BackendRule.ProtocolFieldNumber
+  id: ProtocolFieldNumber
+  parent: Google.Api.BackendRule
+  langs:
+  - csharp
+  - vb
+  name: ProtocolFieldNumber
+  nameWithType: BackendRule.ProtocolFieldNumber
+  fullName: Google.Api.BackendRule.ProtocolFieldNumber
+  type: Field
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Backend.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: ProtocolFieldNumber
+    path: Google.Api.CommonProtos/Api/Backend.cs
+    startLine: 377
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: Field number for the &quot;protocol&quot; field.
+  example: []
+  syntax:
+    content: public const int ProtocolFieldNumber = 9
+    return:
+      type: System.Int32
+    content.vb: Public Const ProtocolFieldNumber As Integer = 9
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Google.Api.BackendRule.Protocol
+  commentId: P:Google.Api.BackendRule.Protocol
+  id: Protocol
+  parent: Google.Api.BackendRule
+  langs:
+  - csharp
+  - vb
+  name: Protocol
+  nameWithType: BackendRule.Protocol
+  fullName: Google.Api.BackendRule.Protocol
+  type: Property
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Backend.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: Protocol
+    path: Google.Api.CommonProtos/Api/Backend.cs
+    startLine: 402
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: "\nThe protocol used for sending a request to the backend.\nThe supported values are &quot;http/1.1&quot; and &quot;h2&quot;.\n\nThe default value is inferred from the scheme in the\n[address][google.api.BackendRule.address] field:\n\nSCHEME        PROTOCOL\nhttp://       http/1.1\nhttps://      http/1.1\ngrpc://       h2\ngrpcs://      h2\n\nFor secure HTTP backends (https://) that support HTTP/2, set this field\nto &quot;h2&quot; for improved performance.\n\nConfiguring this field to non-default values is only supported for secure\nHTTP backends. This field will be ignored for all other backends.\n\nSee\nhttps://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids\nfor more details on the supported values.\n"
+  example: []
+  syntax:
+    content: public string Protocol { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Protocol As String
+  overload: Google.Api.BackendRule.Protocol*
   modifiers.csharp:
   - public
   - get
@@ -810,7 +958,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: AuthenticationCase
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 340
+    startLine: 418
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -845,7 +993,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ClearAuthentication
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 345
+    startLine: 423
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -875,7 +1023,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 351
+    startLine: 429
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -913,7 +1061,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 356
+    startLine: 434
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -950,7 +1098,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetHashCode
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 375
+    startLine: 455
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -985,7 +1133,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 392
+    startLine: 474
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1020,7 +1168,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: WriteTo
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 397
+    startLine: 479
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1055,7 +1203,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CalculateSize
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 432
+    startLine: 522
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1089,7 +1237,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 462
+    startLine: 558
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1124,7 +1272,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: Google.Api.CommonProtos/Api/Backend.cs
-    startLine: 494
+    startLine: 596
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1854,6 +2002,23 @@ references:
   name: JwtAudience
   nameWithType: BackendRule.JwtAudience
   fullName: Google.Api.BackendRule.JwtAudience
+- uid: Google.Api.BackendRule.DisableAuth*
+  commentId: Overload:Google.Api.BackendRule.DisableAuth
+  name: DisableAuth
+  nameWithType: BackendRule.DisableAuth
+  fullName: Google.Api.BackendRule.DisableAuth
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Google.Api.BackendRule.Protocol*
+  commentId: Overload:Google.Api.BackendRule.Protocol
+  name: Protocol
+  nameWithType: BackendRule.Protocol
+  fullName: Google.Api.BackendRule.Protocol
 - uid: Google.Api.BackendRule.AuthenticationCase*
   commentId: Overload:Google.Api.BackendRule.AuthenticationCase
   name: AuthenticationCase
@@ -1916,13 +2081,6 @@ references:
   name: Equals
   nameWithType: BackendRule.Equals
   fullName: Google.Api.BackendRule.Equals
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
 - uid: System.IEquatable{Google.Api.BackendRule}.Equals(Google.Api.BackendRule)
   commentId: M:System.IEquatable{Google.Api.BackendRule}.Equals(Google.Api.BackendRule)
   parent: System.IEquatable{Google.Api.BackendRule}

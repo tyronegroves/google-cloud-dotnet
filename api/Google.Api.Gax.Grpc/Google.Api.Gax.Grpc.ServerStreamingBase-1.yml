@@ -5,8 +5,8 @@ items:
   id: ServerStreamingBase`1
   parent: Google.Api.Gax.Grpc
   children:
+  - Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream
   - Google.Api.Gax.Grpc.ServerStreamingBase`1.GrpcCall
-  - Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream
   langs:
   - csharp
   - vb
@@ -21,7 +21,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ServerStreamingBase
     path: Google.Api.Gax.Grpc/ServerStreamingBase.cs
-    startLine: 17
+    startLine: 19
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -70,7 +70,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GrpcCall
     path: Google.Api.Gax.Grpc/ServerStreamingBase.cs
-    startLine: 22
+    startLine: 24
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
@@ -93,47 +93,45 @@ items:
   - Overridable
   - ReadOnly
   fullName.vb: Google.Api.Gax.Grpc.ServerStreamingBase(Of TResponse).GrpcCall
-- uid: Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream
-  commentId: P:Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream
-  id: ResponseStream
+- uid: Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream
+  commentId: M:Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream
+  id: GetResponseStream
   parent: Google.Api.Gax.Grpc.ServerStreamingBase`1
   langs:
   - csharp
   - vb
-  name: ResponseStream
-  nameWithType: ServerStreamingBase<TResponse>.ResponseStream
-  fullName: Google.Api.Gax.Grpc.ServerStreamingBase<TResponse>.ResponseStream
-  type: Property
+  name: GetResponseStream()
+  nameWithType: ServerStreamingBase<TResponse>.GetResponseStream()
+  fullName: Google.Api.Gax.Grpc.ServerStreamingBase<TResponse>.GetResponseStream()
+  type: Method
   source:
     remote:
       path: Google.Api.Gax.Grpc/ServerStreamingBase.cs
       branch: master
       repo: https://github.com/googleapis/gax-dotnet
-    id: ResponseStream
+    id: GetResponseStream
     path: Google.Api.Gax.Grpc/ServerStreamingBase.cs
-    startLine: 30
+    startLine: 40
   assemblies:
   - Google.Api.Gax.Grpc
   namespace: Google.Api.Gax.Grpc
-  summary: "\nAsync stream to read streaming responses.\n"
+  summary: "\nAsync stream to read streaming responses, exposed as an async sequence.\nThe default implementation will use <xref href=\"Google.Api.Gax.Grpc.ServerStreamingBase%601.GrpcCall\" data-throw-if-not-resolved=\"false\"></xref> to extract a response\nstream, and adapt it to <xref href=\"Google.Api.Gax.Grpc.AsyncResponseStream%601\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nIf this method is called more than once, all the returned enumerators will be enumerating over the\nsame underlying response stream, which may cause confusion. Additionally, the sequence returned by\nthis method can only be iterated over a single time. Attempting to iterate more than once will cause\nan <xref href=\"System.InvalidOperationException\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: public virtual IAsyncEnumerator<TResponse> ResponseStream { get; }
-    parameters: []
+    content: public virtual AsyncResponseStream<TResponse> GetResponseStream()
     return:
-      type: System.Collections.Generic.IAsyncEnumerator{{TResponse}}
-    content.vb: Public Overridable ReadOnly Property ResponseStream As IAsyncEnumerator(Of TResponse)
-  overload: Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream*
-  nameWithType.vb: ServerStreamingBase(Of TResponse).ResponseStream
+      type: Google.Api.Gax.Grpc.AsyncResponseStream{{TResponse}}
+    content.vb: Public Overridable Function GetResponseStream As AsyncResponseStream(Of TResponse)
+  overload: Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream*
+  nameWithType.vb: ServerStreamingBase(Of TResponse).GetResponseStream()
   modifiers.csharp:
   - public
   - virtual
-  - get
   modifiers.vb:
   - Public
   - Overridable
-  - ReadOnly
-  fullName.vb: Google.Api.Gax.Grpc.ServerStreamingBase(Of TResponse).ResponseStream
+  fullName.vb: Google.Api.Gax.Grpc.ServerStreamingBase(Of TResponse).GetResponseStream()
 references:
 - uid: Google.Api.Gax.Grpc
   commentId: N:Google.Api.Gax.Grpc
@@ -524,29 +522,22 @@ references:
   name: Grpc.Core
   nameWithType: Grpc.Core
   fullName: Grpc.Core
-- uid: Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream*
-  commentId: Overload:Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream
-  name: ResponseStream
-  nameWithType: ServerStreamingBase<TResponse>.ResponseStream
-  fullName: Google.Api.Gax.Grpc.ServerStreamingBase<TResponse>.ResponseStream
-  nameWithType.vb: ServerStreamingBase(Of TResponse).ResponseStream
-  fullName.vb: Google.Api.Gax.Grpc.ServerStreamingBase(Of TResponse).ResponseStream
-- uid: System.Collections.Generic.IAsyncEnumerator{{TResponse}}
-  commentId: T:System.Collections.Generic.IAsyncEnumerator{`1}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IAsyncEnumerator`1
-  name: IAsyncEnumerator<TResponse>
-  nameWithType: IAsyncEnumerator<TResponse>
-  fullName: System.Collections.Generic.IAsyncEnumerator<TResponse>
-  nameWithType.vb: IAsyncEnumerator(Of TResponse)
-  fullName.vb: System.Collections.Generic.IAsyncEnumerator(Of TResponse)
-  name.vb: IAsyncEnumerator(Of TResponse)
+- uid: Google.Api.Gax.Grpc.ServerStreamingBase`1.GrpcCall
+  commentId: P:Google.Api.Gax.Grpc.ServerStreamingBase`1.GrpcCall
+  isExternal: true
+- uid: Google.Api.Gax.Grpc.AsyncResponseStream`1
+  commentId: T:Google.Api.Gax.Grpc.AsyncResponseStream`1
+  name: AsyncResponseStream<TResponse>
+  nameWithType: AsyncResponseStream<TResponse>
+  fullName: Google.Api.Gax.Grpc.AsyncResponseStream<TResponse>
+  nameWithType.vb: AsyncResponseStream(Of TResponse)
+  fullName.vb: Google.Api.Gax.Grpc.AsyncResponseStream(Of TResponse)
+  name.vb: AsyncResponseStream(Of TResponse)
   spec.csharp:
-  - uid: System.Collections.Generic.IAsyncEnumerator`1
-    name: IAsyncEnumerator
-    nameWithType: IAsyncEnumerator
-    fullName: System.Collections.Generic.IAsyncEnumerator
-    isExternal: true
+  - uid: Google.Api.Gax.Grpc.AsyncResponseStream`1
+    name: AsyncResponseStream
+    nameWithType: AsyncResponseStream
+    fullName: Google.Api.Gax.Grpc.AsyncResponseStream
   - name: <
     nameWithType: <
     fullName: <
@@ -557,11 +548,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IAsyncEnumerator`1
-    name: IAsyncEnumerator
-    nameWithType: IAsyncEnumerator
-    fullName: System.Collections.Generic.IAsyncEnumerator
-    isExternal: true
+  - uid: Google.Api.Gax.Grpc.AsyncResponseStream`1
+    name: AsyncResponseStream
+    nameWithType: AsyncResponseStream
+    fullName: Google.Api.Gax.Grpc.AsyncResponseStream
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -571,48 +561,51 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IAsyncEnumerator`1
-  commentId: T:System.Collections.Generic.IAsyncEnumerator`1
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
   isExternal: true
-  name: IAsyncEnumerator<T>
-  nameWithType: IAsyncEnumerator<T>
-  fullName: System.Collections.Generic.IAsyncEnumerator<T>
-  nameWithType.vb: IAsyncEnumerator(Of T)
-  fullName.vb: System.Collections.Generic.IAsyncEnumerator(Of T)
-  name.vb: IAsyncEnumerator(Of T)
+- uid: Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream*
+  commentId: Overload:Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream
+  name: GetResponseStream
+  nameWithType: ServerStreamingBase<TResponse>.GetResponseStream
+  fullName: Google.Api.Gax.Grpc.ServerStreamingBase<TResponse>.GetResponseStream
+  nameWithType.vb: ServerStreamingBase(Of TResponse).GetResponseStream
+  fullName.vb: Google.Api.Gax.Grpc.ServerStreamingBase(Of TResponse).GetResponseStream
+- uid: Google.Api.Gax.Grpc.AsyncResponseStream{{TResponse}}
+  commentId: T:Google.Api.Gax.Grpc.AsyncResponseStream{`1}
+  parent: Google.Api.Gax.Grpc
+  definition: Google.Api.Gax.Grpc.AsyncResponseStream`1
+  name: AsyncResponseStream<TResponse>
+  nameWithType: AsyncResponseStream<TResponse>
+  fullName: Google.Api.Gax.Grpc.AsyncResponseStream<TResponse>
+  nameWithType.vb: AsyncResponseStream(Of TResponse)
+  fullName.vb: Google.Api.Gax.Grpc.AsyncResponseStream(Of TResponse)
+  name.vb: AsyncResponseStream(Of TResponse)
   spec.csharp:
-  - uid: System.Collections.Generic.IAsyncEnumerator`1
-    name: IAsyncEnumerator
-    nameWithType: IAsyncEnumerator
-    fullName: System.Collections.Generic.IAsyncEnumerator
-    isExternal: true
+  - uid: Google.Api.Gax.Grpc.AsyncResponseStream`1
+    name: AsyncResponseStream
+    nameWithType: AsyncResponseStream
+    fullName: Google.Api.Gax.Grpc.AsyncResponseStream
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IAsyncEnumerator`1
-    name: IAsyncEnumerator
-    nameWithType: IAsyncEnumerator
-    fullName: System.Collections.Generic.IAsyncEnumerator
-    isExternal: true
+  - uid: Google.Api.Gax.Grpc.AsyncResponseStream`1
+    name: AsyncResponseStream
+    nameWithType: AsyncResponseStream
+    fullName: Google.Api.Gax.Grpc.AsyncResponseStream
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: TResponse
+    nameWithType: TResponse
+    fullName: TResponse
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: true
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic

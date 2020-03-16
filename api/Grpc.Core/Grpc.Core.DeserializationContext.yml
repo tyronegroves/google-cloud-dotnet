@@ -6,6 +6,7 @@ items:
   parent: Grpc.Core
   children:
   - Grpc.Core.DeserializationContext.PayloadAsNewBuffer
+  - Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence
   - Grpc.Core.DeserializationContext.PayloadLength
   langs:
   - csharp
@@ -17,7 +18,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: DeserializationContext
     path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
@@ -62,7 +63,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: PayloadLength
     path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
@@ -101,7 +102,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: PayloadAsNewBuffer
     path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
@@ -118,6 +119,43 @@ items:
       description: byte array containing the entire payload.
     content.vb: Public Overridable Function PayloadAsNewBuffer As Byte()
   overload: Grpc.Core.DeserializationContext.PayloadAsNewBuffer*
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence
+  commentId: M:Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence
+  id: PayloadAsReadOnlySequence
+  parent: Grpc.Core.DeserializationContext
+  langs:
+  - csharp
+  - vb
+  name: PayloadAsReadOnlySequence()
+  nameWithType: DeserializationContext.PayloadAsReadOnlySequence()
+  fullName: Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence()
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
+      branch: v1.27.x
+      repo: https://github.com/grpc/grpc
+    id: PayloadAsReadOnlySequence
+    path: src/csharp/Grpc.Core.Api/DeserializationContext.cs
+    startLine: 60
+  assemblies:
+  - Grpc.Core.Api
+  namespace: Grpc.Core
+  summary: "\nGets the entire payload as a ReadOnlySequence.\nThe ReadOnlySequence is only valid for the duration of the deserializer routine and the caller must not access it after the deserializer returns.\nUsing the read only sequence is the most efficient way to access the message payload. Where possible it allows directly\naccessing the received payload without needing to perform any buffer copying or buffer allocations.\nNOTE: When using this method, it is recommended to use C# 7.2 compiler to make it more useful (using Span type directly from your code requires C# 7.2).&quot;\nNOTE: Deserializers are expected not to call this method (or other payload accessor methods) more than once per received message\n(as there is no practical reason for doing so) and <code>DeserializationContext</code> implementations are free to assume so.\n"
+  example: []
+  syntax:
+    content: public virtual Buffers.ReadOnlySequence<byte> PayloadAsReadOnlySequence()
+    return:
+      type: System.Buffers.ReadOnlySequence{System.Byte}
+      description: read only sequence containing the entire payload.
+    content.vb: Public Overridable Function PayloadAsReadOnlySequence As Buffers.ReadOnlySequence(Of Byte)
+  overload: Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence*
   modifiers.csharp:
   - public
   - virtual
@@ -465,3 +503,90 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
+- uid: Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence*
+  commentId: Overload:Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence
+  name: PayloadAsReadOnlySequence
+  nameWithType: DeserializationContext.PayloadAsReadOnlySequence
+  fullName: Grpc.Core.DeserializationContext.PayloadAsReadOnlySequence
+- uid: System.Buffers.ReadOnlySequence{System.Byte}
+  commentId: '!:System.Buffers.ReadOnlySequence{System.Byte}'
+  definition: System.Buffers.ReadOnlySequence`1
+  name: Buffers.ReadOnlySequence<Byte>
+  nameWithType: Buffers.ReadOnlySequence<Byte>
+  fullName: System.Buffers.ReadOnlySequence<System.Byte>
+  nameWithType.vb: Buffers.ReadOnlySequence(Of Byte)
+  fullName.vb: System.Buffers.ReadOnlySequence(Of System.Byte)
+  name.vb: Buffers.ReadOnlySequence(Of Byte)
+  spec.csharp:
+  - uid: System.Buffers.ReadOnlySequence`1
+    name: Buffers.ReadOnlySequence
+    nameWithType: Buffers.ReadOnlySequence
+    fullName: System.Buffers.ReadOnlySequence
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Buffers.ReadOnlySequence`1
+    name: Buffers.ReadOnlySequence
+    nameWithType: Buffers.ReadOnlySequence
+    fullName: System.Buffers.ReadOnlySequence
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Buffers.ReadOnlySequence`1
+  commentId: '!:System.Buffers.ReadOnlySequence`1'
+  isExternal: true
+  name: Buffers.ReadOnlySequence<>
+  nameWithType: Buffers.ReadOnlySequence<>
+  fullName: System.Buffers.ReadOnlySequence<>
+  nameWithType.vb: Buffers.ReadOnlySequence(Of )
+  fullName.vb: System.Buffers.ReadOnlySequence(Of )
+  name.vb: Buffers.ReadOnlySequence(Of )
+  spec.csharp:
+  - uid: System.Buffers.ReadOnlySequence`1
+    name: Buffers.ReadOnlySequence
+    nameWithType: Buffers.ReadOnlySequence
+    fullName: System.Buffers.ReadOnlySequence
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: ''
+    nameWithType: ''
+    fullName: ''
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Buffers.ReadOnlySequence`1
+    name: Buffers.ReadOnlySequence
+    nameWithType: Buffers.ReadOnlySequence
+    fullName: System.Buffers.ReadOnlySequence
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: ''
+    nameWithType: ''
+    fullName: ''
+  - name: )
+    nameWithType: )
+    fullName: )

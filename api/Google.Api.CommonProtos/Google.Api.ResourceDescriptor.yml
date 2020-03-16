@@ -23,6 +23,10 @@ items:
   - Google.Api.ResourceDescriptor.Parser
   - Google.Api.ResourceDescriptor.Pattern
   - Google.Api.ResourceDescriptor.PatternFieldNumber
+  - Google.Api.ResourceDescriptor.Plural
+  - Google.Api.ResourceDescriptor.PluralFieldNumber
+  - Google.Api.ResourceDescriptor.Singular
+  - Google.Api.ResourceDescriptor.SingularFieldNumber
   - Google.Api.ResourceDescriptor.ToString
   - Google.Api.ResourceDescriptor.Type
   - Google.Api.ResourceDescriptor.TypeFieldNumber
@@ -41,11 +45,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ResourceDescriptor
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 93
+    startLine: 194
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nA simple descriptor of a resource type.\n\nResourceDescriptor annotates a resource message (either by means of a\nprotobuf annotation or use in the service config), and associates the\nresource&apos;s schema, the resource type, and the pattern of the resource name.\n\nExample:\n\nmessage Topic {\n// Indicates this message defines a resource schema.\n// Declares the resource type in the format of {service}/{kind}.\n// For Kubernetes resources, the format is {api group}/{kind}.\noption (google.api.resource) = {\n type: &quot;pubsub.googleapis.com/Topic&quot;\n pattern: &quot;projects/{project}/topics/{topic}&quot;\n};\n}\n\nSometimes, resources have multiple patterns, typically because they can\nlive under multiple parents.\n\nExample:\n\nmessage LogEntry {\noption (google.api.resource) = {\n type: &quot;logging.googleapis.com/LogEntry&quot;\n pattern: &quot;projects/{project}/logs/{log}&quot;\n pattern: &quot;organizations/{organization}/logs/{log}&quot;\n pattern: &quot;folders/{folder}/logs/{log}&quot;\n pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;\n};\n}\n"
+  summary: "\nA simple descriptor of a resource type.\n\nResourceDescriptor annotates a resource message (either by means of a\nprotobuf annotation or use in the service config), and associates the\nresource&apos;s schema, the resource type, and the pattern of the resource name.\n\nExample:\n\nmessage Topic {\n // Indicates this message defines a resource schema.\n // Declares the resource type in the format of {service}/{kind}.\n // For Kubernetes resources, the format is {api group}/{kind}.\n option (google.api.resource) = {\n   type: &quot;pubsub.googleapis.com/Topic&quot;\n   name_descriptor: {\n     pattern: &quot;projects/{project}/topics/{topic}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;\n     parent_name_extractor: &quot;projects/{project}&quot;\n   }\n };\n}\n\nThe ResourceDescriptor Yaml config will look like:\n\nresources:\n- type: &quot;pubsub.googleapis.com/Topic&quot;\nname_descriptor:\n  - pattern: &quot;projects/{project}/topics/{topic}&quot;\n    parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;\n    parent_name_extractor: &quot;projects/{project}&quot;\n\nSometimes, resources have multiple patterns, typically because they can\nlive under multiple parents.\n\nExample:\n\nmessage LogEntry {\n option (google.api.resource) = {\n   type: &quot;logging.googleapis.com/LogEntry&quot;\n   name_descriptor: {\n     pattern: &quot;projects/{project}/logs/{log}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;\n     parent_name_extractor: &quot;projects/{project}&quot;\n   }\n   name_descriptor: {\n     pattern: &quot;folders/{folder}/logs/{log}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;\n     parent_name_extractor: &quot;folders/{folder}&quot;\n   }\n   name_descriptor: {\n     pattern: &quot;organizations/{organization}/logs/{log}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Organization&quot;\n     parent_name_extractor: &quot;organizations/{organization}&quot;\n   }\n   name_descriptor: {\n     pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;\n     parent_type: &quot;billing.googleapis.com/BillingAccount&quot;\n     parent_name_extractor: &quot;billingAccounts/{billing_account}&quot;\n   }\n };\n}\n\nThe ResourceDescriptor Yaml config will look like:\n\nresources:\n- type: &apos;logging.googleapis.com/LogEntry&apos;\n name_descriptor:\n   - pattern: &quot;projects/{project}/logs/{log}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;\n     parent_name_extractor: &quot;projects/{project}&quot;\n   - pattern: &quot;folders/{folder}/logs/{log}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;\n     parent_name_extractor: &quot;folders/{folder}&quot;\n   - pattern: &quot;organizations/{organization}/logs/{log}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Organization&quot;\n     parent_name_extractor: &quot;organizations/{organization}&quot;\n   - pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;\n     parent_type: &quot;billing.googleapis.com/BillingAccount&quot;\n     parent_name_extractor: &quot;billingAccounts/{billing_account}&quot;\n\nFor flexible resources, the resource name doesn&apos;t contain parent names, but\nthe resource itself has parents for policy evaluation.\n\nExample:\n\nmessage Shelf {\n option (google.api.resource) = {\n   type: &quot;library.googleapis.com/Shelf&quot;\n   name_descriptor: {\n     pattern: &quot;shelves/{shelf}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;\n   }\n   name_descriptor: {\n     pattern: &quot;shelves/{shelf}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;\n   }\n };\n}\n\nThe ResourceDescriptor Yaml config will look like:\n\nresources:\n- type: &apos;library.googleapis.com/Shelf&apos;\n name_descriptor:\n   - pattern: &quot;shelves/{shelf}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;\n   - pattern: &quot;shelves/{shelf}&quot;\n     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;\n"
   example: []
   syntax:
     content: 'public sealed class ResourceDescriptor : IMessage<ResourceDescriptor>, IMessage, IEquatable<ResourceDescriptor>, IDeepCloneable<ResourceDescriptor>'
@@ -90,7 +94,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Parser
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 96
+    startLine: 197
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -127,7 +131,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Descriptor
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 99
+    startLine: 200
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -165,7 +169,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 104
+    startLine: 205
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -203,7 +207,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 109
+    startLine: 210
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -233,7 +237,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: .ctor
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 116
+    startLine: 217
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -266,7 +270,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Clone
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 125
+    startLine: 228
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -300,7 +304,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: TypeFieldNumber
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 131
+    startLine: 234
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -335,7 +339,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Type
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 145
+    startLine: 248
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -372,7 +376,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: PatternFieldNumber
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 154
+    startLine: 257
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -407,11 +411,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Pattern
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 170
+    startLine: 282
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nOptional. The valid resource name pattern(s) for this resource type.\n\nExamples:\n- &quot;projects/{project}/topics/{topic}&quot;\n- &quot;projects/{project}/knowledgeBases/{knowledge_base}&quot;\n\nThe components in braces correspond to the IDs for each resource in the\nhierarchy. It is expected that, if multiple patterns are provided,\nthe same component name (e.g. &quot;project&quot;) refers to IDs of the same\ntype of resource.\n"
+  summary: "\nOptional. The relative resource name pattern associated with this resource\ntype. The DNS prefix of the full resource name shouldn&apos;t be specified here.\n\nThe path pattern must follow the syntax, which aligns with HTTP binding\nsyntax:\n\nTemplate = Segment { &quot;/&quot; Segment } ;\nSegment = LITERAL | Variable ;\nVariable = &quot;{&quot; LITERAL &quot;}&quot; ;\n\nExamples:\n\n- &quot;projects/{project}/topics/{topic}&quot;\n- &quot;projects/{project}/knowledgeBases/{knowledge_base}&quot;\n\nThe components in braces correspond to the IDs for each resource in the\nhierarchy. It is expected that, if multiple patterns are provided,\nthe same component name (e.g. &quot;project&quot;) refers to IDs of the same\ntype of resource.\n"
   example: []
   syntax:
     content: public RepeatedField<string> Pattern { get; }
@@ -444,7 +448,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: NameFieldFieldNumber
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 176
+    startLine: 288
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -479,7 +483,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: NameField
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 182
+    startLine: 294
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -516,7 +520,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: HistoryFieldNumber
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 191
+    startLine: 303
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -551,11 +555,11 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: History
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 209
+    startLine: 322
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
-  summary: "\nOptional. The historical or future-looking state of the resource pattern.\n\nExample:\n// The InspectTemplate message originally only supported resource\n// names with organization, and project was added later.\nmessage InspectTemplate {\noption (google.api.resource) = {\n type: &quot;dlp.googleapis.com/InspectTemplate&quot;\n pattern:\n &quot;organizations/{organization}/inspectTemplates/{inspect_template}&quot;\n pattern: &quot;projects/{project}/inspectTemplates/{inspect_template}&quot;\n history: ORIGINALLY_SINGLE_PATTERN\n};\n}\n"
+  summary: "\nOptional. The historical or future-looking state of the resource pattern.\n\nExample:\n\n// The InspectTemplate message originally only supported resource\n// names with organization, and project was added later.\nmessage InspectTemplate {\n option (google.api.resource) = {\n   type: &quot;dlp.googleapis.com/InspectTemplate&quot;\n   pattern:\n   &quot;organizations/{organization}/inspectTemplates/{inspect_template}&quot;\n   pattern: &quot;projects/{project}/inspectTemplates/{inspect_template}&quot;\n   history: ORIGINALLY_SINGLE_PATTERN\n };\n}\n"
   example: []
   syntax:
     content: public ResourceDescriptor.Types.History History { get; set; }
@@ -564,6 +568,150 @@ items:
       type: Google.Api.ResourceDescriptor.Types.History
     content.vb: Public Property History As ResourceDescriptor.Types.History
   overload: Google.Api.ResourceDescriptor.History*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Google.Api.ResourceDescriptor.PluralFieldNumber
+  commentId: F:Google.Api.ResourceDescriptor.PluralFieldNumber
+  id: PluralFieldNumber
+  parent: Google.Api.ResourceDescriptor
+  langs:
+  - csharp
+  - vb
+  name: PluralFieldNumber
+  nameWithType: ResourceDescriptor.PluralFieldNumber
+  fullName: Google.Api.ResourceDescriptor.PluralFieldNumber
+  type: Field
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Resource.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: PluralFieldNumber
+    path: Google.Api.CommonProtos/Api/Resource.cs
+    startLine: 331
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: Field number for the &quot;plural&quot; field.
+  example: []
+  syntax:
+    content: public const int PluralFieldNumber = 5
+    return:
+      type: System.Int32
+    content.vb: Public Const PluralFieldNumber As Integer = 5
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Google.Api.ResourceDescriptor.Plural
+  commentId: P:Google.Api.ResourceDescriptor.Plural
+  id: Plural
+  parent: Google.Api.ResourceDescriptor
+  langs:
+  - csharp
+  - vb
+  name: Plural
+  nameWithType: ResourceDescriptor.Plural
+  fullName: Google.Api.ResourceDescriptor.Plural
+  type: Property
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Resource.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: Plural
+    path: Google.Api.CommonProtos/Api/Resource.cs
+    startLine: 339
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: "\nThe plural name used in the resource name, such as &apos;projects&apos; for\nthe name of &apos;projects/{project}&apos;. It is the same concept of the `plural`\nfield in k8s CRD spec\nhttps://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/\n"
+  example: []
+  syntax:
+    content: public string Plural { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Plural As String
+  overload: Google.Api.ResourceDescriptor.Plural*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Google.Api.ResourceDescriptor.SingularFieldNumber
+  commentId: F:Google.Api.ResourceDescriptor.SingularFieldNumber
+  id: SingularFieldNumber
+  parent: Google.Api.ResourceDescriptor
+  langs:
+  - csharp
+  - vb
+  name: SingularFieldNumber
+  nameWithType: ResourceDescriptor.SingularFieldNumber
+  fullName: Google.Api.ResourceDescriptor.SingularFieldNumber
+  type: Field
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Resource.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: SingularFieldNumber
+    path: Google.Api.CommonProtos/Api/Resource.cs
+    startLine: 348
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: Field number for the &quot;singular&quot; field.
+  example: []
+  syntax:
+    content: public const int SingularFieldNumber = 6
+    return:
+      type: System.Int32
+    content.vb: Public Const SingularFieldNumber As Integer = 6
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Google.Api.ResourceDescriptor.Singular
+  commentId: P:Google.Api.ResourceDescriptor.Singular
+  id: Singular
+  parent: Google.Api.ResourceDescriptor
+  langs:
+  - csharp
+  - vb
+  name: Singular
+  nameWithType: ResourceDescriptor.Singular
+  fullName: Google.Api.ResourceDescriptor.Singular
+  type: Property
+  source:
+    remote:
+      path: Google.Api.CommonProtos/Api/Resource.cs
+      branch: master
+      repo: https://github.com/googleapis/gax-dotnet
+    id: Singular
+    path: Google.Api.CommonProtos/Api/Resource.cs
+    startLine: 355
+  assemblies:
+  - Google.Api.CommonProtos
+  namespace: Google.Api
+  summary: "\nThe same concept of the `singular` field in k8s CRD spec\nhttps://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/\nSuch as &quot;project&quot; for the `resourcemanager.googleapis.com/Project` type.\n"
+  example: []
+  syntax:
+    content: public string Singular { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Singular As String
+  overload: Google.Api.ResourceDescriptor.Singular*
   modifiers.csharp:
   - public
   - get
@@ -588,7 +736,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 217
+    startLine: 363
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -626,7 +774,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: Equals
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 222
+    startLine: 368
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -663,7 +811,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: GetHashCode
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 237
+    startLine: 385
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -698,7 +846,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: ToString
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 250
+    startLine: 400
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -733,7 +881,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: WriteTo
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 255
+    startLine: 405
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -768,7 +916,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: CalculateSize
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 275
+    startLine: 433
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -802,7 +950,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 294
+    startLine: 458
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -837,7 +985,7 @@ items:
       repo: https://github.com/googleapis/gax-dotnet
     id: MergeFrom
     path: Google.Api.CommonProtos/Api/Resource.cs
-    startLine: 312
+    startLine: 482
   assemblies:
   - Google.Api.CommonProtos
   namespace: Google.Api
@@ -1634,6 +1782,16 @@ references:
   name: ResourceDescriptor.Types.History
   nameWithType: ResourceDescriptor.Types.History
   fullName: Google.Api.ResourceDescriptor.Types.History
+- uid: Google.Api.ResourceDescriptor.Plural*
+  commentId: Overload:Google.Api.ResourceDescriptor.Plural
+  name: Plural
+  nameWithType: ResourceDescriptor.Plural
+  fullName: Google.Api.ResourceDescriptor.Plural
+- uid: Google.Api.ResourceDescriptor.Singular*
+  commentId: Overload:Google.Api.ResourceDescriptor.Singular
+  name: Singular
+  nameWithType: ResourceDescriptor.Singular
+  fullName: Google.Api.ResourceDescriptor.Singular
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object

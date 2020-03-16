@@ -7,6 +7,8 @@ items:
   children:
   - Google.Protobuf.Reflection.ServiceDescriptor.CustomOptions
   - Google.Protobuf.Reflection.ServiceDescriptor.FindMethodByName(System.String)
+  - Google.Protobuf.Reflection.ServiceDescriptor.GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.ServiceOptions,``0})
+  - Google.Protobuf.Reflection.ServiceDescriptor.GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.ServiceOptions,``0})
   - Google.Protobuf.Reflection.ServiceDescriptor.Methods
   - Google.Protobuf.Reflection.ServiceDescriptor.Name
   langs:
@@ -19,11 +21,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: ServiceDescriptor
     path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-    startLine: 41
+    startLine: 42
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -74,11 +76,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Name
     path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-    startLine: 59
+    startLine: 60
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -114,11 +116,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Methods
     path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-    startLine: 77
+    startLine: 78
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -151,11 +153,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FindMethodByName
     path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-    startLine: 87
+    startLine: 88
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -190,29 +192,125 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: CustomOptions
     path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
-    startLine: 95
+    startLine: 96
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
   summary: "\nThe (possibly empty) set of custom options for this service.\n"
   example: []
   syntax:
-    content: public CustomOptions CustomOptions { get; }
+    content: >-
+      [Obsolete("CustomOptions are obsolete. Use GetOption")]
+
+      public CustomOptions CustomOptions { get; }
     parameters: []
     return:
       type: Google.Protobuf.Reflection.CustomOptions
-    content.vb: Public ReadOnly Property CustomOptions As CustomOptions
+    content.vb: >-
+      <Obsolete("CustomOptions are obsolete. Use GetOption")>
+
+      Public ReadOnly Property CustomOptions As CustomOptions
   overload: Google.Protobuf.Reflection.ServiceDescriptor.CustomOptions*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: CustomOptions are obsolete. Use GetOption
   modifiers.csharp:
   - public
   - get
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Google.Protobuf.Reflection.ServiceDescriptor.GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.ServiceOptions,``0})
+  commentId: M:Google.Protobuf.Reflection.ServiceDescriptor.GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.ServiceOptions,``0})
+  id: GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.ServiceOptions,``0})
+  parent: Google.Protobuf.Reflection.ServiceDescriptor
+  langs:
+  - csharp
+  - vb
+  name: GetOption<T>(Extension<ServiceOptions, T>)
+  nameWithType: ServiceDescriptor.GetOption<T>(Extension<ServiceOptions, T>)
+  fullName: Google.Protobuf.Reflection.ServiceDescriptor.GetOption<T>(Google.Protobuf.Extension<Google.Protobuf.Reflection.ServiceOptions, T>)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
+      branch: 3.11.x
+      repo: https://github.com/google/protobuf
+    id: GetOption
+    path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
+    startLine: 102
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.Reflection
+  summary: "\nGets a single value service option for this descriptor\n"
+  example: []
+  syntax:
+    content: public T GetOption<T>(Extension<ServiceOptions, T> extension)
+    parameters:
+    - id: extension
+      type: Google.Protobuf.Extension{Google.Protobuf.Reflection.ServiceOptions,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: Public Function GetOption(Of T)(extension As Extension(Of ServiceOptions, T)) As T
+  overload: Google.Protobuf.Reflection.ServiceDescriptor.GetOption*
+  nameWithType.vb: ServiceDescriptor.GetOption(Of T)(Extension(Of ServiceOptions, T))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Google.Protobuf.Reflection.ServiceDescriptor.GetOption(Of T)(Google.Protobuf.Extension(Of Google.Protobuf.Reflection.ServiceOptions, T))
+  name.vb: GetOption(Of T)(Extension(Of ServiceOptions, T))
+- uid: Google.Protobuf.Reflection.ServiceDescriptor.GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.ServiceOptions,``0})
+  commentId: M:Google.Protobuf.Reflection.ServiceDescriptor.GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.ServiceOptions,``0})
+  id: GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.ServiceOptions,``0})
+  parent: Google.Protobuf.Reflection.ServiceDescriptor
+  langs:
+  - csharp
+  - vb
+  name: GetOption<T>(RepeatedExtension<ServiceOptions, T>)
+  nameWithType: ServiceDescriptor.GetOption<T>(RepeatedExtension<ServiceOptions, T>)
+  fullName: Google.Protobuf.Reflection.ServiceDescriptor.GetOption<T>(Google.Protobuf.RepeatedExtension<Google.Protobuf.Reflection.ServiceOptions, T>)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
+      branch: 3.11.x
+      repo: https://github.com/google/protobuf
+    id: GetOption
+    path: csharp/src/Google.Protobuf/Reflection/ServiceDescriptor.cs
+    startLine: 111
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.Reflection
+  summary: "\nGets a repeated value service option for this descriptor\n"
+  example: []
+  syntax:
+    content: public RepeatedField<T> GetOption<T>(RepeatedExtension<ServiceOptions, T> extension)
+    parameters:
+    - id: extension
+      type: Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.ServiceOptions,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: Google.Protobuf.Collections.RepeatedField{{T}}
+    content.vb: Public Function GetOption(Of T)(extension As RepeatedExtension(Of ServiceOptions, T)) As RepeatedField(Of T)
+  overload: Google.Protobuf.Reflection.ServiceDescriptor.GetOption*
+  nameWithType.vb: ServiceDescriptor.GetOption(Of T)(RepeatedExtension(Of ServiceOptions, T))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Google.Protobuf.Reflection.ServiceDescriptor.GetOption(Of T)(Google.Protobuf.RepeatedExtension(Of Google.Protobuf.Reflection.ServiceOptions, T))
+  name.vb: GetOption(Of T)(RepeatedExtension(Of ServiceOptions, T))
 references:
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
@@ -679,3 +777,303 @@ references:
   name: CustomOptions
   nameWithType: CustomOptions
   fullName: Google.Protobuf.Reflection.CustomOptions
+- uid: Google.Protobuf.Reflection.ServiceDescriptor.GetOption*
+  commentId: Overload:Google.Protobuf.Reflection.ServiceDescriptor.GetOption
+  name: GetOption
+  nameWithType: ServiceDescriptor.GetOption
+  fullName: Google.Protobuf.Reflection.ServiceDescriptor.GetOption
+- uid: Google.Protobuf.Extension{Google.Protobuf.Reflection.ServiceOptions,{T}}
+  commentId: T:Google.Protobuf.Extension{Google.Protobuf.Reflection.ServiceOptions,``0}
+  parent: Google.Protobuf
+  definition: Google.Protobuf.Extension`2
+  name: Extension<ServiceOptions, T>
+  nameWithType: Extension<ServiceOptions, T>
+  fullName: Google.Protobuf.Extension<Google.Protobuf.Reflection.ServiceOptions, T>
+  nameWithType.vb: Extension(Of ServiceOptions, T)
+  fullName.vb: Google.Protobuf.Extension(Of Google.Protobuf.Reflection.ServiceOptions, T)
+  name.vb: Extension(Of ServiceOptions, T)
+  spec.csharp:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Google.Protobuf.Reflection.ServiceOptions
+    name: ServiceOptions
+    nameWithType: ServiceOptions
+    fullName: Google.Protobuf.Reflection.ServiceOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Google.Protobuf.Reflection.ServiceOptions
+    name: ServiceOptions
+    nameWithType: ServiceOptions
+    fullName: Google.Protobuf.Reflection.ServiceOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Google.Protobuf.Extension`2
+  commentId: T:Google.Protobuf.Extension`2
+  name: Extension<TTarget, TValue>
+  nameWithType: Extension<TTarget, TValue>
+  fullName: Google.Protobuf.Extension<TTarget, TValue>
+  nameWithType.vb: Extension(Of TTarget, TValue)
+  fullName.vb: Google.Protobuf.Extension(Of TTarget, TValue)
+  name.vb: Extension(Of TTarget, TValue)
+  spec.csharp:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf
+  commentId: N:Google.Protobuf
+  name: Google.Protobuf
+  nameWithType: Google.Protobuf
+  fullName: Google.Protobuf
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.ServiceOptions,{T}}
+  commentId: T:Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.ServiceOptions,``0}
+  parent: Google.Protobuf
+  definition: Google.Protobuf.RepeatedExtension`2
+  name: RepeatedExtension<ServiceOptions, T>
+  nameWithType: RepeatedExtension<ServiceOptions, T>
+  fullName: Google.Protobuf.RepeatedExtension<Google.Protobuf.Reflection.ServiceOptions, T>
+  nameWithType.vb: RepeatedExtension(Of ServiceOptions, T)
+  fullName.vb: Google.Protobuf.RepeatedExtension(Of Google.Protobuf.Reflection.ServiceOptions, T)
+  name.vb: RepeatedExtension(Of ServiceOptions, T)
+  spec.csharp:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Google.Protobuf.Reflection.ServiceOptions
+    name: ServiceOptions
+    nameWithType: ServiceOptions
+    fullName: Google.Protobuf.Reflection.ServiceOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Google.Protobuf.Reflection.ServiceOptions
+    name: ServiceOptions
+    nameWithType: ServiceOptions
+    fullName: Google.Protobuf.Reflection.ServiceOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.Collections.RepeatedField{{T}}
+  commentId: T:Google.Protobuf.Collections.RepeatedField{``0}
+  parent: Google.Protobuf.Collections
+  definition: Google.Protobuf.Collections.RepeatedField`1
+  name: RepeatedField<T>
+  nameWithType: RepeatedField<T>
+  fullName: Google.Protobuf.Collections.RepeatedField<T>
+  nameWithType.vb: RepeatedField(Of T)
+  fullName.vb: Google.Protobuf.Collections.RepeatedField(Of T)
+  name.vb: RepeatedField(Of T)
+  spec.csharp:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.RepeatedExtension`2
+  commentId: T:Google.Protobuf.RepeatedExtension`2
+  name: RepeatedExtension<TTarget, TValue>
+  nameWithType: RepeatedExtension<TTarget, TValue>
+  fullName: Google.Protobuf.RepeatedExtension<TTarget, TValue>
+  nameWithType.vb: RepeatedExtension(Of TTarget, TValue)
+  fullName.vb: Google.Protobuf.RepeatedExtension(Of TTarget, TValue)
+  name.vb: RepeatedExtension(Of TTarget, TValue)
+  spec.csharp:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.Collections.RepeatedField`1
+  commentId: T:Google.Protobuf.Collections.RepeatedField`1
+  parent: Google.Protobuf.Collections
+  name: RepeatedField<T>
+  nameWithType: RepeatedField<T>
+  fullName: Google.Protobuf.Collections.RepeatedField<T>
+  nameWithType.vb: RepeatedField(Of T)
+  fullName.vb: Google.Protobuf.Collections.RepeatedField(Of T)
+  name.vb: RepeatedField(Of T)
+  spec.csharp:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.Collections
+  commentId: N:Google.Protobuf.Collections
+  name: Google.Protobuf.Collections
+  nameWithType: Google.Protobuf.Collections
+  fullName: Google.Protobuf.Collections

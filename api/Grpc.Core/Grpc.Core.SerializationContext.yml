@@ -5,7 +5,10 @@ items:
   id: SerializationContext
   parent: Grpc.Core
   children:
+  - Grpc.Core.SerializationContext.Complete
   - Grpc.Core.SerializationContext.Complete(System.Byte[])
+  - Grpc.Core.SerializationContext.GetBufferWriter
+  - Grpc.Core.SerializationContext.SetPayloadLength(System.Int32)
   langs:
   - csharp
   - vb
@@ -16,11 +19,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core.Api/SerializationContext.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: SerializationContext
     path: src/csharp/Grpc.Core.Api/SerializationContext.cs
-    startLine: 25
+    startLine: 26
   assemblies:
   - Grpc.Core.Api
   namespace: Grpc.Core
@@ -61,15 +64,15 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core.Api/SerializationContext.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: Complete
     path: src/csharp/Grpc.Core.Api/SerializationContext.cs
-    startLine: 33
+    startLine: 34
   assemblies:
   - Grpc.Core.Api
   namespace: Grpc.Core
-  summary: "\nUse the byte array as serialized form of current message and mark serialization process as complete.\nComplete() can only be called once. By calling this method the caller gives up the ownership of the\npayload which must not be accessed afterwards.\n"
+  summary: "\nUse the byte array as serialized form of current message and mark serialization process as complete.\n<code>Complete(byte[])</code> can only be called once. By calling this method the caller gives up the ownership of the\npayload which must not be accessed afterwards.\n"
   example: []
   syntax:
     content: public virtual void Complete(byte[] payload)
@@ -88,6 +91,114 @@ items:
   - Overridable
   fullName.vb: Grpc.Core.SerializationContext.Complete(System.Byte())
   name.vb: Complete(Byte())
+- uid: Grpc.Core.SerializationContext.GetBufferWriter
+  commentId: M:Grpc.Core.SerializationContext.GetBufferWriter
+  id: GetBufferWriter
+  parent: Grpc.Core.SerializationContext
+  langs:
+  - csharp
+  - vb
+  name: GetBufferWriter()
+  nameWithType: SerializationContext.GetBufferWriter()
+  fullName: Grpc.Core.SerializationContext.GetBufferWriter()
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core.Api/SerializationContext.cs
+      branch: v1.27.x
+      repo: https://github.com/grpc/grpc
+    id: GetBufferWriter
+    path: src/csharp/Grpc.Core.Api/SerializationContext.cs
+    startLine: 43
+  assemblies:
+  - Grpc.Core.Api
+  namespace: Grpc.Core
+  summary: "\nGets buffer writer that can be used to write the serialized data. Once serialization is finished,\n<code>Complete()</code> needs to be called.\n"
+  example: []
+  syntax:
+    content: public virtual IBufferWriter<byte> GetBufferWriter()
+    return:
+      type: IBufferWriter{System.Byte}
+    content.vb: Public Overridable Function GetBufferWriter As IBufferWriter(Of Byte)
+  overload: Grpc.Core.SerializationContext.GetBufferWriter*
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Grpc.Core.SerializationContext.SetPayloadLength(System.Int32)
+  commentId: M:Grpc.Core.SerializationContext.SetPayloadLength(System.Int32)
+  id: SetPayloadLength(System.Int32)
+  parent: Grpc.Core.SerializationContext
+  langs:
+  - csharp
+  - vb
+  name: SetPayloadLength(Int32)
+  nameWithType: SerializationContext.SetPayloadLength(Int32)
+  fullName: Grpc.Core.SerializationContext.SetPayloadLength(System.Int32)
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core.Api/SerializationContext.cs
+      branch: v1.27.x
+      repo: https://github.com/grpc/grpc
+    id: SetPayloadLength
+    path: src/csharp/Grpc.Core.Api/SerializationContext.cs
+    startLine: 56
+  assemblies:
+  - Grpc.Core.Api
+  namespace: Grpc.Core
+  summary: "\nSets the payload length when writing serialized data into a buffer writer. If the serializer knows the full payload\nlength in advance, providing that information before obtaining the buffer writer using <code>GetBufferWriter()</code> can improve\nserialization efficiency by avoiding copies. The provided payload length must be the same as the data written to the writer.\nCalling this method is optional. If the payload length is not set then the length is calculated using the data written to\nthe buffer writer when <code>Complete()</code> is called.\n"
+  example: []
+  syntax:
+    content: public virtual void SetPayloadLength(int payloadLength)
+    parameters:
+    - id: payloadLength
+      type: System.Int32
+      description: The total length of the payload in bytes.
+    content.vb: Public Overridable Sub SetPayloadLength(payloadLength As Integer)
+  overload: Grpc.Core.SerializationContext.SetPayloadLength*
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Grpc.Core.SerializationContext.Complete
+  commentId: M:Grpc.Core.SerializationContext.Complete
+  id: Complete
+  parent: Grpc.Core.SerializationContext
+  langs:
+  - csharp
+  - vb
+  name: Complete()
+  nameWithType: SerializationContext.Complete()
+  fullName: Grpc.Core.SerializationContext.Complete()
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core.Api/SerializationContext.cs
+      branch: v1.27.x
+      repo: https://github.com/grpc/grpc
+    id: Complete
+    path: src/csharp/Grpc.Core.Api/SerializationContext.cs
+    startLine: 63
+  assemblies:
+  - Grpc.Core.Api
+  namespace: Grpc.Core
+  summary: "\nComplete the payload written to the buffer writer. <code>Complete()</code> can only be called once.\n"
+  example: []
+  syntax:
+    content: public virtual void Complete()
+    content.vb: Public Overridable Sub Complete
+  overload: Grpc.Core.SerializationContext.Complete*
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
 references:
 - uid: Grpc.Core
   commentId: N:Grpc.Core
@@ -417,3 +528,102 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
+- uid: Grpc.Core.SerializationContext.GetBufferWriter*
+  commentId: Overload:Grpc.Core.SerializationContext.GetBufferWriter
+  name: GetBufferWriter
+  nameWithType: SerializationContext.GetBufferWriter
+  fullName: Grpc.Core.SerializationContext.GetBufferWriter
+- uid: IBufferWriter{System.Byte}
+  commentId: '!:IBufferWriter{System.Byte}'
+  definition: IBufferWriter`1
+  name: IBufferWriter<Byte>
+  nameWithType: IBufferWriter<Byte>
+  fullName: IBufferWriter<System.Byte>
+  nameWithType.vb: IBufferWriter(Of Byte)
+  fullName.vb: IBufferWriter(Of System.Byte)
+  name.vb: IBufferWriter(Of Byte)
+  spec.csharp:
+  - uid: IBufferWriter`1
+    name: IBufferWriter
+    nameWithType: IBufferWriter
+    fullName: IBufferWriter
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: IBufferWriter`1
+    name: IBufferWriter
+    nameWithType: IBufferWriter
+    fullName: IBufferWriter
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: IBufferWriter`1
+  commentId: '!:IBufferWriter`1'
+  isExternal: true
+  name: IBufferWriter<>
+  nameWithType: IBufferWriter<>
+  fullName: IBufferWriter<>
+  nameWithType.vb: IBufferWriter(Of )
+  fullName.vb: IBufferWriter(Of )
+  name.vb: IBufferWriter(Of )
+  spec.csharp:
+  - uid: IBufferWriter`1
+    name: IBufferWriter
+    nameWithType: IBufferWriter
+    fullName: IBufferWriter
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: ''
+    nameWithType: ''
+    fullName: ''
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: IBufferWriter`1
+    name: IBufferWriter
+    nameWithType: IBufferWriter
+    fullName: IBufferWriter
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: ''
+    nameWithType: ''
+    fullName: ''
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Grpc.Core.SerializationContext.SetPayloadLength*
+  commentId: Overload:Grpc.Core.SerializationContext.SetPayloadLength
+  name: SetPayloadLength
+  nameWithType: SerializationContext.SetPayloadLength
+  fullName: Grpc.Core.SerializationContext.SetPayloadLength
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

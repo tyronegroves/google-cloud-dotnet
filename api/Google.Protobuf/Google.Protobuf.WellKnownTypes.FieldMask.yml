@@ -46,7 +46,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FieldMask
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -54,7 +54,7 @@ items:
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.WellKnownTypes
-  summary: "\n`FieldMask` represents a set of symbolic field paths, for example:\n\npaths: &quot;f.a&quot;\npaths: &quot;f.b.d&quot;\n\nHere `f` represents a field in some root message, `a` and `b`\nfields in the message found in `f`, and `d` a field found in the\nmessage in `f.b`.\n\nField masks are used to specify a subset of fields that should be\nreturned by a get operation or modified by an update operation.\nField masks also have a custom JSON encoding (see below).\n\n# Field Masks in Projections\n\nWhen used in the context of a projection, a response message or\nsub-message is filtered by the API to only contain those fields as\nspecified in the mask. For example, if the mask in the previous\nexample is applied to a response message as follows:\n\nf {\n a : 22\n b {\n   d : 1\n   x : 2\n }\n y : 13\n}\nz: 8\n\nThe result will not contain specific values for fields x,y and z\n(their value will be set to the default, and omitted in proto text\noutput):\n\nf {\n a : 22\n b {\n   d : 1\n }\n}\n\nA repeated field is not allowed except at the last position of a\npaths string.\n\nIf a FieldMask object is not present in a get operation, the\noperation applies to all fields (as if a FieldMask of all fields\nhad been specified).\n\nNote that a field mask does not necessarily apply to the\ntop-level response message. In case of a REST get operation, the\nfield mask applies directly to the response, but in case of a REST\nlist operation, the mask instead applies to each individual message\nin the returned resource list. In case of a REST custom method,\nother definitions may be used. Where the mask applies will be\nclearly documented together with its declaration in the API.  In\nany case, the effect on the returned resource/resources is required\nbehavior for APIs.\n\n# Field Masks in Update Operations\n\nA field mask in update operations specifies which fields of the\ntargeted resource are going to be updated. The API is required\nto only change the values of the fields as specified in the mask\nand leave the others untouched. If a resource is passed in to\ndescribe the updated values, the API ignores the values of all\nfields not covered by the mask.\n\nIf a repeated field is specified for an update operation, new values will\nbe appended to the existing repeated field in the target resource. Note that\na repeated field is only allowed in the last position of a `paths` string.\n\nIf a sub-message is specified in the last position of the field mask for an\nupdate operation, then new value will be merged into the existing sub-message\nin the target resource.\n\nFor example, given the target message:\n\nf {\n b {\n   d: 1\n   x: 2\n }\n c: [1]\n}\n\nAnd an update message:\n\nf {\n b {\n   d: 10\n }\n c: [2]\n}\n\nthen if the field mask is:\n\npaths: [&quot;f.b&quot;, &quot;f.c&quot;]\n\nthen the result will be:\n\nf {\n b {\n   d: 10\n   x: 2\n }\n c: [1, 2]\n}\n\nAn implementation may provide options to override this default behavior for\nrepeated and message fields.\n\nIn order to reset a field&apos;s value to the default, the field must\nbe in the mask and set to the default value in the provided resource.\nHence, in order to reset all fields of a resource, provide a default\ninstance of the resource and set all fields in the mask, or do\nnot provide a mask as described below.\n\nIf a field mask is not present on update, the operation applies to\nall fields (as if a field mask of all fields has been specified).\nNote that in the presence of schema evolution, this may mean that\nfields the client does not know and has therefore not filled into\nthe request will be reset to their default. If this is unwanted\nbehavior, a specific service may require a client to always specify\na field mask, producing an error if not.\n\nAs with get operations, the location of the resource which\ndescribes the updated values in the request message depends on the\noperation kind. In any case, the effect of the field mask is\nrequired to be honored by the API.\n\n## Considerations for HTTP REST\n\nThe HTTP kind of an update operation which uses a field mask must\nbe set to PATCH instead of PUT in order to satisfy HTTP semantics\n(PUT must only be used for full updates).\n\n# JSON Encoding of Field Masks\n\nIn JSON, a field mask is encoded as a single string where paths are\nseparated by a comma. Fields name in each path are converted\nto/from lower-camel naming conventions.\n\nAs an example, consider the following message declarations:\n\nmessage Profile {\n User user = 1;\n Photo photo = 2;\n}\nmessage User {\n string display_name = 1;\n string address = 2;\n}\n\nIn proto a field mask for `Profile` may look as such:\n\nmask {\n paths: &quot;user.display_name&quot;\n paths: &quot;photo&quot;\n}\n\nIn JSON, the same mask is represented as below:\n\n{\n mask: &quot;user.displayName,photo&quot;\n}\n\n# Field Masks and Oneof Fields\n\nField masks treat fields in oneofs just as regular fields. Consider the\nfollowing message:\n\nmessage SampleMessage {\n oneof test_oneof {\n   string name = 4;\n   SubMessage sub_message = 9;\n }\n}\n\nThe field mask can be:\n\nmask {\n paths: &quot;name&quot;\n}\n\nOr:\n\nmask {\n paths: &quot;sub_message&quot;\n}\n\nNote that oneof type names (&quot;test_oneof&quot; in this case) cannot be used in\npaths.\n\n## Field Mask Verification\n\nThe implementation of any API method which has a FieldMask type field in the\nrequest should verify the included field paths, and return an\n`INVALID_ARGUMENT` error if any path is duplicated or unmappable.\n"
+  summary: "\n`FieldMask` represents a set of symbolic field paths, for example:\n\npaths: &quot;f.a&quot;\npaths: &quot;f.b.d&quot;\n\nHere `f` represents a field in some root message, `a` and `b`\nfields in the message found in `f`, and `d` a field found in the\nmessage in `f.b`.\n\nField masks are used to specify a subset of fields that should be\nreturned by a get operation or modified by an update operation.\nField masks also have a custom JSON encoding (see below).\n\n# Field Masks in Projections\n\nWhen used in the context of a projection, a response message or\nsub-message is filtered by the API to only contain those fields as\nspecified in the mask. For example, if the mask in the previous\nexample is applied to a response message as follows:\n\nf {\n a : 22\n b {\n   d : 1\n   x : 2\n }\n y : 13\n}\nz: 8\n\nThe result will not contain specific values for fields x,y and z\n(their value will be set to the default, and omitted in proto text\noutput):\n\nf {\n a : 22\n b {\n   d : 1\n }\n}\n\nA repeated field is not allowed except at the last position of a\npaths string.\n\nIf a FieldMask object is not present in a get operation, the\noperation applies to all fields (as if a FieldMask of all fields\nhad been specified).\n\nNote that a field mask does not necessarily apply to the\ntop-level response message. In case of a REST get operation, the\nfield mask applies directly to the response, but in case of a REST\nlist operation, the mask instead applies to each individual message\nin the returned resource list. In case of a REST custom method,\nother definitions may be used. Where the mask applies will be\nclearly documented together with its declaration in the API.  In\nany case, the effect on the returned resource/resources is required\nbehavior for APIs.\n\n# Field Masks in Update Operations\n\nA field mask in update operations specifies which fields of the\ntargeted resource are going to be updated. The API is required\nto only change the values of the fields as specified in the mask\nand leave the others untouched. If a resource is passed in to\ndescribe the updated values, the API ignores the values of all\nfields not covered by the mask.\n\nIf a repeated field is specified for an update operation, new values will\nbe appended to the existing repeated field in the target resource. Note that\na repeated field is only allowed in the last position of a `paths` string.\n\nIf a sub-message is specified in the last position of the field mask for an\nupdate operation, then new value will be merged into the existing sub-message\nin the target resource.\n\nFor example, given the target message:\n\nf {\n b {\n   d: 1\n   x: 2\n }\n c: [1]\n}\n\nAnd an update message:\n\nf {\n b {\n   d: 10\n }\n c: [2]\n}\n\nthen if the field mask is:\n\npaths: [&quot;f.b&quot;, &quot;f.c&quot;]\n\nthen the result will be:\n\nf {\n b {\n   d: 10\n   x: 2\n }\n c: [1, 2]\n}\n\nAn implementation may provide options to override this default behavior for\nrepeated and message fields.\n\nIn order to reset a field&apos;s value to the default, the field must\nbe in the mask and set to the default value in the provided resource.\nHence, in order to reset all fields of a resource, provide a default\ninstance of the resource and set all fields in the mask, or do\nnot provide a mask as described below.\n\nIf a field mask is not present on update, the operation applies to\nall fields (as if a field mask of all fields has been specified).\nNote that in the presence of schema evolution, this may mean that\nfields the client does not know and has therefore not filled into\nthe request will be reset to their default. If this is unwanted\nbehavior, a specific service may require a client to always specify\na field mask, producing an error if not.\n\nAs with get operations, the location of the resource which\ndescribes the updated values in the request message depends on the\noperation kind. In any case, the effect of the field mask is\nrequired to be honored by the API.\n\n## Considerations for HTTP REST\n\nThe HTTP kind of an update operation which uses a field mask must\nbe set to PATCH instead of PUT in order to satisfy HTTP semantics\n(PUT must only be used for full updates).\n\n# JSON Encoding of Field Masks\n\nIn JSON, a field mask is encoded as a single string where paths are\nseparated by a comma. Fields name in each path are converted\nto/from lower-camel naming conventions.\n\nAs an example, consider the following message declarations:\n\nmessage Profile {\n User user = 1;\n Photo photo = 2;\n}\nmessage User {\n string display_name = 1;\n string address = 2;\n}\n\nIn proto a field mask for `Profile` may look as such:\n\nmask {\n paths: &quot;user.display_name&quot;\n paths: &quot;photo&quot;\n}\n\nIn JSON, the same mask is represented as below:\n\n{\n mask: &quot;user.displayName,photo&quot;\n}\n\n# Field Masks and Oneof Fields\n\nField masks treat fields in oneofs just as regular fields. Consider the\nfollowing message:\n\nmessage SampleMessage {\n oneof test_oneof {\n   string name = 4;\n   SubMessage sub_message = 9;\n }\n}\n\nThe field mask can be:\n\nmask {\n paths: &quot;name&quot;\n}\n\nOr:\n\nmask {\n paths: &quot;sub_message&quot;\n}\n\nNote that oneof type names (&quot;test_oneof&quot; in this case) cannot be used in\npaths.\n\n## Field Mask Verification\n\nThe implementation of any API method which has a FieldMask type field in the\nrequest should verify the included field paths, and return an\n`INVALID_ARGUMENT` error if any path is unmappable.\n"
   example: []
   syntax:
     content: 'public sealed class FieldMask : IMessage<FieldMask>, IEquatable<FieldMask>, IDeepCloneable<FieldMask>, ICustomDiagnosticMessage, IMessage'
@@ -107,7 +107,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Parser
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -144,7 +144,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -182,7 +182,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: pb::Google.Protobuf.IMessage.Descriptor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -220,7 +220,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -250,7 +250,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: .ctor
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -283,7 +283,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Clone
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -317,7 +317,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: PathsFieldNumber
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -352,7 +352,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Paths
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -389,7 +389,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -427,7 +427,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Equals
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -464,7 +464,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: GetHashCode
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -499,7 +499,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: ToString
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -534,7 +534,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: WriteTo
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -569,7 +569,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: CalculateSize
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -603,7 +603,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -638,7 +638,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: MergeFrom
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMask.cs
@@ -673,7 +673,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: ToDiagnosticString
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -711,7 +711,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FromString
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -750,7 +750,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FromString
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -797,7 +797,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FromStringEnumerable
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -844,7 +844,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FromFieldNumbers
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -891,7 +891,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FromFieldNumbers
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -938,7 +938,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: IsValid
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -985,7 +985,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: IsValid
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -1026,7 +1026,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: IsValid
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -1073,7 +1073,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: IsValid
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -1114,7 +1114,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Normalize
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -1148,7 +1148,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Union
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -1188,7 +1188,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Intersection
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -1225,7 +1225,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Merge
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
@@ -1264,7 +1264,7 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Merge
     path: csharp/src/Google.Protobuf/WellKnownTypes/FieldMaskPartial.cs

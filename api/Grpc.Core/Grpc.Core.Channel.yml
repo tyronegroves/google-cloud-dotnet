@@ -10,11 +10,11 @@ items:
   - Grpc.Core.Channel.#ctor(System.String,System.Int32,Grpc.Core.ChannelCredentials)
   - Grpc.Core.Channel.#ctor(System.String,System.Int32,Grpc.Core.ChannelCredentials,System.Collections.Generic.IEnumerable{Grpc.Core.ChannelOption})
   - Grpc.Core.Channel.ConnectAsync(System.Nullable{System.DateTime})
+  - Grpc.Core.Channel.CreateCallInvoker
   - Grpc.Core.Channel.ResolvedTarget
-  - Grpc.Core.Channel.ShutdownAsync
+  - Grpc.Core.Channel.ShutdownAsyncCore
   - Grpc.Core.Channel.ShutdownToken
   - Grpc.Core.Channel.State
-  - Grpc.Core.Channel.Target
   - Grpc.Core.Channel.TryWaitForStateChangedAsync(Grpc.Core.ChannelState,System.Nullable{System.DateTime})
   - Grpc.Core.Channel.WaitForStateChangedAsync(Grpc.Core.ChannelState,System.Nullable{System.DateTime})
   langs:
@@ -27,7 +27,7 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: Channel
     path: src/csharp/Grpc.Core/Channel.cs
@@ -38,11 +38,16 @@ items:
   summary: "\nRepresents a gRPC channel. Channels are an abstraction of long-lived connections to remote servers.\nMore client objects can reuse the same channel. Creating a channel is an expensive operation compared to invoking\na remote call so in general you should reuse a single channel for as many calls as possible.\n"
   example: []
   syntax:
-    content: public class Channel
-    content.vb: Public Class Channel
+    content: 'public class Channel : ChannelBase'
+    content.vb: >-
+      Public Class Channel
+          Inherits ChannelBase
   inheritance:
   - System.Object
+  - Grpc.Core.ChannelBase
   inheritedMembers:
+  - Grpc.Core.ChannelBase.Target
+  - Grpc.Core.ChannelBase.ShutdownAsync
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -50,10 +55,6 @@ items:
   - System.Object.GetHashCode
   - System.Object.GetType
   - System.Object.MemberwiseClone
-  extensionMethods:
-  - Grpc.Core.Channel.Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-  - Grpc.Core.Channel.Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-  - Grpc.Core.Channel.Grpc.Core.Interceptors.ChannelExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
   modifiers.csharp:
   - public
   - class
@@ -74,11 +75,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: .ctor
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 54
+    startLine: 53
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -113,11 +114,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: .ctor
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 66
+    startLine: 65
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -158,11 +159,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: .ctor
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 95
+    startLine: 93
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -200,11 +201,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: .ctor
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 107
+    startLine: 105
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -248,11 +249,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: State
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 116
+    startLine: 114
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -285,11 +286,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: WaitForStateChangedAsync
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 136
+    startLine: 134
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -327,11 +328,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: TryWaitForStateChangedAsync
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 149
+    startLine: 147
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -369,11 +370,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: ResolvedTarget
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 173
+    startLine: 171
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -386,43 +387,6 @@ items:
       type: System.String
     content.vb: Public ReadOnly Property ResolvedTarget As String
   overload: Grpc.Core.Channel.ResolvedTarget*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Grpc.Core.Channel.Target
-  commentId: P:Grpc.Core.Channel.Target
-  id: Target
-  parent: Grpc.Core.Channel
-  langs:
-  - csharp
-  - vb
-  name: Target
-  nameWithType: Channel.Target
-  fullName: Grpc.Core.Channel.Target
-  type: Property
-  source:
-    remote:
-      path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
-      repo: https://github.com/grpc/grpc
-    id: Target
-    path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 182
-  assemblies:
-  - Grpc.Core
-  namespace: Grpc.Core
-  summary: The original target used to create the channel.
-  example: []
-  syntax:
-    content: public string Target { get; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public ReadOnly Property Target As String
-  overload: Grpc.Core.Channel.Target*
   modifiers.csharp:
   - public
   - get
@@ -443,11 +407,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: ShutdownToken
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 193
+    startLine: 182
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -480,11 +444,11 @@ items:
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
     id: ConnectAsync
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 209
+    startLine: 198
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
@@ -507,41 +471,81 @@ items:
   - Public
   fullName.vb: Grpc.Core.Channel.ConnectAsync(System.Nullable(Of System.DateTime))
   name.vb: ConnectAsync(Nullable(Of DateTime))
-- uid: Grpc.Core.Channel.ShutdownAsync
-  commentId: M:Grpc.Core.Channel.ShutdownAsync
-  id: ShutdownAsync
+- uid: Grpc.Core.Channel.ShutdownAsyncCore
+  commentId: M:Grpc.Core.Channel.ShutdownAsyncCore
+  id: ShutdownAsyncCore
   parent: Grpc.Core.Channel
   langs:
   - csharp
   - vb
-  name: ShutdownAsync()
-  nameWithType: Channel.ShutdownAsync()
-  fullName: Grpc.Core.Channel.ShutdownAsync()
+  name: ShutdownAsyncCore()
+  nameWithType: Channel.ShutdownAsyncCore()
+  fullName: Grpc.Core.Channel.ShutdownAsyncCore()
   type: Method
   source:
     remote:
       path: src/csharp/Grpc.Core/Channel.cs
-      branch: v1.22.x
+      branch: v1.27.x
       repo: https://github.com/grpc/grpc
-    id: ShutdownAsync
+    id: ShutdownAsyncCore
     path: src/csharp/Grpc.Core/Channel.cs
-    startLine: 234
+    startLine: 213
   assemblies:
   - Grpc.Core
   namespace: Grpc.Core
-  summary: "\nShuts down the channel cleanly. It is strongly recommended to shutdown\nall previously created channels before exiting from the process.\n"
-  remarks: "\nThis method doesn&apos;t wait for all calls on this channel to finish (nor does\nit explicitly cancel all outstanding calls). It is user&apos;s responsibility to make sure\nall the calls on this channel have finished (successfully or with an error)\nbefore shutting down the channel to ensure channel shutdown won&apos;t impact\nthe outcome of those remote calls.\n"
+  summary: Provides implementation of a non-virtual public member.
   example: []
   syntax:
-    content: public Task ShutdownAsync()
+    content: protected override Task ShutdownAsyncCore()
     return:
       type: System.Threading.Tasks.Task
-    content.vb: Public Function ShutdownAsync As Task
-  overload: Grpc.Core.Channel.ShutdownAsync*
+    content.vb: Protected Overrides Function ShutdownAsyncCore As Task
+  overridden: Grpc.Core.ChannelBase.ShutdownAsyncCore
+  overload: Grpc.Core.Channel.ShutdownAsyncCore*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: Grpc.Core.Channel.CreateCallInvoker
+  commentId: M:Grpc.Core.Channel.CreateCallInvoker
+  id: CreateCallInvoker
+  parent: Grpc.Core.Channel
+  langs:
+  - csharp
+  - vb
+  name: CreateCallInvoker()
+  nameWithType: Channel.CreateCallInvoker()
+  fullName: Grpc.Core.Channel.CreateCallInvoker()
+  type: Method
+  source:
+    remote:
+      path: src/csharp/Grpc.Core/Channel.cs
+      branch: v1.27.x
+      repo: https://github.com/grpc/grpc
+    id: CreateCallInvoker
+    path: src/csharp/Grpc.Core/Channel.cs
+    startLine: 242
+  assemblies:
+  - Grpc.Core
+  namespace: Grpc.Core
+  summary: "\nCreate a new <xref href=\"Grpc.Core.CallInvoker\" data-throw-if-not-resolved=\"false\"></xref> for the channel.\n"
+  example: []
+  syntax:
+    content: public override CallInvoker CreateCallInvoker()
+    return:
+      type: Grpc.Core.CallInvoker
+      description: A new <xref href="Grpc.Core.CallInvoker" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Overrides Function CreateCallInvoker As CallInvoker
+  overridden: Grpc.Core.ChannelBase.CreateCallInvoker
+  overload: Grpc.Core.Channel.CreateCallInvoker*
   modifiers.csharp:
   - public
+  - override
   modifiers.vb:
   - Public
+  - Overrides
 references:
 - uid: Grpc.Core
   commentId: N:Grpc.Core
@@ -555,6 +559,46 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Grpc.Core.ChannelBase
+  commentId: T:Grpc.Core.ChannelBase
+  parent: Grpc.Core
+  name: ChannelBase
+  nameWithType: ChannelBase
+  fullName: Grpc.Core.ChannelBase
+- uid: Grpc.Core.ChannelBase.Target
+  commentId: P:Grpc.Core.ChannelBase.Target
+  parent: Grpc.Core.ChannelBase
+  name: Target
+  nameWithType: ChannelBase.Target
+  fullName: Grpc.Core.ChannelBase.Target
+- uid: Grpc.Core.ChannelBase.ShutdownAsync
+  commentId: M:Grpc.Core.ChannelBase.ShutdownAsync
+  parent: Grpc.Core.ChannelBase
+  name: ShutdownAsync()
+  nameWithType: ChannelBase.ShutdownAsync()
+  fullName: Grpc.Core.ChannelBase.ShutdownAsync()
+  spec.csharp:
+  - uid: Grpc.Core.ChannelBase.ShutdownAsync
+    name: ShutdownAsync
+    nameWithType: ChannelBase.ShutdownAsync
+    fullName: Grpc.Core.ChannelBase.ShutdownAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Grpc.Core.ChannelBase.ShutdownAsync
+    name: ShutdownAsync
+    nameWithType: ChannelBase.ShutdownAsync
+    fullName: Grpc.Core.ChannelBase.ShutdownAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -834,378 +878,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Grpc.Core.Channel.Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-  parent: Grpc.Core.Interceptors.ChannelExtensions
-  definition: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-  name: Intercept(Interceptor)
-  nameWithType: ChannelExtensions.Intercept(Interceptor)
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Channel.Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-  parent: Grpc.Core.Interceptors.ChannelExtensions
-  definition: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-  name: Intercept(Interceptor[])
-  nameWithType: ChannelExtensions.Intercept(Interceptor[])
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-  nameWithType.vb: ChannelExtensions.Intercept(Interceptor())
-  fullName.vb: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor())
-  name.vb: Intercept(Interceptor())
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Channel.Grpc.Core.Interceptors.ChannelExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  parent: Grpc.Core.Interceptors.ChannelExtensions
-  definition: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  name: Intercept(Func<Metadata, Metadata>)
-  nameWithType: ChannelExtensions.Intercept(Func<Metadata, Metadata>)
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(System.Func<Grpc.Core.Metadata, Grpc.Core.Metadata>)
-  nameWithType.vb: ChannelExtensions.Intercept(Func(Of Metadata, Metadata))
-  fullName.vb: Grpc.Core.Interceptors.ChannelExtensions.Intercept(System.Func(Of Grpc.Core.Metadata, Grpc.Core.Metadata))
-  name.vb: Intercept(Func(Of Metadata, Metadata))
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: true
   name: System
   nameWithType: System
   fullName: System
-- uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-  name: Intercept(Channel, Interceptor)
-  nameWithType: ChannelExtensions.Intercept(Channel, Interceptor)
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, Grpc.Core.Interceptors.Interceptor)
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Channel
-    name: Channel
-    nameWithType: Channel
-    fullName: Grpc.Core.Channel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor)
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Channel
-    name: Channel
-    nameWithType: Channel
-    fullName: Grpc.Core.Channel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Interceptors.ChannelExtensions
-  commentId: T:Grpc.Core.Interceptors.ChannelExtensions
-  parent: Grpc.Core.Interceptors
-  name: ChannelExtensions
-  nameWithType: ChannelExtensions
-  fullName: Grpc.Core.Interceptors.ChannelExtensions
-- uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-  name: Intercept(Channel, Interceptor[])
-  nameWithType: ChannelExtensions.Intercept(Channel, Interceptor[])
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, Grpc.Core.Interceptors.Interceptor[])
-  nameWithType.vb: ChannelExtensions.Intercept(Channel, Interceptor())
-  fullName.vb: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, Grpc.Core.Interceptors.Interceptor())
-  name.vb: Intercept(Channel, Interceptor())
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Channel
-    name: Channel
-    nameWithType: Channel
-    fullName: Grpc.Core.Channel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,Grpc.Core.Interceptors.Interceptor[])
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Channel
-    name: Channel
-    nameWithType: Channel
-    fullName: Grpc.Core.Channel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Interceptors.Interceptor
-    name: Interceptor
-    nameWithType: Interceptor
-    fullName: Grpc.Core.Interceptors.Interceptor
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  commentId: M:Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-  isExternal: true
-  name: Intercept(Channel, Func<Metadata, Metadata>)
-  nameWithType: ChannelExtensions.Intercept(Channel, Func<Metadata, Metadata>)
-  fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, System.Func<Grpc.Core.Metadata, Grpc.Core.Metadata>)
-  nameWithType.vb: ChannelExtensions.Intercept(Channel, Func(Of Metadata, Metadata))
-  fullName.vb: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel, System.Func(Of Grpc.Core.Metadata, Grpc.Core.Metadata))
-  name.vb: Intercept(Channel, Func(Of Metadata, Metadata))
-  spec.csharp:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Channel
-    name: Channel
-    nameWithType: Channel
-    fullName: Grpc.Core.Channel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Grpc.Core.Interceptors.ChannelExtensions.Intercept(Grpc.Core.Channel,System.Func{Grpc.Core.Metadata,Grpc.Core.Metadata})
-    name: Intercept
-    nameWithType: ChannelExtensions.Intercept
-    fullName: Grpc.Core.Interceptors.ChannelExtensions.Intercept
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Grpc.Core.Channel
-    name: Channel
-    nameWithType: Channel
-    fullName: Grpc.Core.Channel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Grpc.Core.Metadata
-    name: Metadata
-    nameWithType: Metadata
-    fullName: Grpc.Core.Metadata
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Grpc.Core.Interceptors
-  commentId: N:Grpc.Core.Interceptors
-  name: Grpc.Core.Interceptors
-  nameWithType: Grpc.Core.Interceptors
-  fullName: Grpc.Core.Interceptors
 - uid: Grpc.Core.Channel.#ctor*
   commentId: Overload:Grpc.Core.Channel.#ctor
   name: Channel
@@ -1523,11 +1201,6 @@ references:
   name: ResolvedTarget
   nameWithType: Channel.ResolvedTarget
   fullName: Grpc.Core.Channel.ResolvedTarget
-- uid: Grpc.Core.Channel.Target*
-  commentId: Overload:Grpc.Core.Channel.Target
-  name: Target
-  nameWithType: Channel.Target
-  fullName: Grpc.Core.Channel.Target
 - uid: Grpc.Core.Channel.ShutdownToken*
   commentId: Overload:Grpc.Core.Channel.ShutdownToken
   name: ShutdownToken
@@ -1551,8 +1224,75 @@ references:
   name: ConnectAsync
   nameWithType: Channel.ConnectAsync
   fullName: Grpc.Core.Channel.ConnectAsync
-- uid: Grpc.Core.Channel.ShutdownAsync*
-  commentId: Overload:Grpc.Core.Channel.ShutdownAsync
-  name: ShutdownAsync
-  nameWithType: Channel.ShutdownAsync
-  fullName: Grpc.Core.Channel.ShutdownAsync
+- uid: Grpc.Core.ChannelBase.ShutdownAsyncCore
+  commentId: M:Grpc.Core.ChannelBase.ShutdownAsyncCore
+  parent: Grpc.Core.ChannelBase
+  name: ShutdownAsyncCore()
+  nameWithType: ChannelBase.ShutdownAsyncCore()
+  fullName: Grpc.Core.ChannelBase.ShutdownAsyncCore()
+  spec.csharp:
+  - uid: Grpc.Core.ChannelBase.ShutdownAsyncCore
+    name: ShutdownAsyncCore
+    nameWithType: ChannelBase.ShutdownAsyncCore
+    fullName: Grpc.Core.ChannelBase.ShutdownAsyncCore
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Grpc.Core.ChannelBase.ShutdownAsyncCore
+    name: ShutdownAsyncCore
+    nameWithType: ChannelBase.ShutdownAsyncCore
+    fullName: Grpc.Core.ChannelBase.ShutdownAsyncCore
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Grpc.Core.Channel.ShutdownAsyncCore*
+  commentId: Overload:Grpc.Core.Channel.ShutdownAsyncCore
+  name: ShutdownAsyncCore
+  nameWithType: Channel.ShutdownAsyncCore
+  fullName: Grpc.Core.Channel.ShutdownAsyncCore
+- uid: Grpc.Core.CallInvoker
+  commentId: T:Grpc.Core.CallInvoker
+  parent: Grpc.Core
+  name: CallInvoker
+  nameWithType: CallInvoker
+  fullName: Grpc.Core.CallInvoker
+- uid: Grpc.Core.ChannelBase.CreateCallInvoker
+  commentId: M:Grpc.Core.ChannelBase.CreateCallInvoker
+  parent: Grpc.Core.ChannelBase
+  name: CreateCallInvoker()
+  nameWithType: ChannelBase.CreateCallInvoker()
+  fullName: Grpc.Core.ChannelBase.CreateCallInvoker()
+  spec.csharp:
+  - uid: Grpc.Core.ChannelBase.CreateCallInvoker
+    name: CreateCallInvoker
+    nameWithType: ChannelBase.CreateCallInvoker
+    fullName: Grpc.Core.ChannelBase.CreateCallInvoker
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Grpc.Core.ChannelBase.CreateCallInvoker
+    name: CreateCallInvoker
+    nameWithType: ChannelBase.CreateCallInvoker
+    fullName: Grpc.Core.ChannelBase.CreateCallInvoker
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Grpc.Core.Channel.CreateCallInvoker*
+  commentId: Overload:Grpc.Core.Channel.CreateCallInvoker
+  name: CreateCallInvoker
+  nameWithType: Channel.CreateCallInvoker
+  fullName: Grpc.Core.Channel.CreateCallInvoker

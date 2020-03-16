@@ -10,6 +10,8 @@ items:
   - Google.Protobuf.Reflection.EnumDescriptor.CustomOptions
   - Google.Protobuf.Reflection.EnumDescriptor.FindValueByName(System.String)
   - Google.Protobuf.Reflection.EnumDescriptor.FindValueByNumber(System.Int32)
+  - Google.Protobuf.Reflection.EnumDescriptor.GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.EnumOptions,``0})
+  - Google.Protobuf.Reflection.EnumDescriptor.GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.EnumOptions,``0})
   - Google.Protobuf.Reflection.EnumDescriptor.Name
   - Google.Protobuf.Reflection.EnumDescriptor.Values
   langs:
@@ -22,11 +24,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: EnumDescriptor
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 40
+    startLine: 41
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -77,11 +79,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Name
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 72
+    startLine: 73
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -117,11 +119,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: ClrType
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 88
+    startLine: 89
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -154,11 +156,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: ContainingType
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 93
+    startLine: 94
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -191,11 +193,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: Values
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 101
+    startLine: 102
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -228,11 +230,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FindValueByNumber
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 111
+    startLine: 112
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -265,11 +267,11 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: FindValueByName
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 121
+    startLine: 122
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
@@ -304,29 +306,125 @@ items:
   source:
     remote:
       path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-      branch: 3.8.x
+      branch: 3.11.x
       repo: https://github.com/google/protobuf
     id: CustomOptions
     path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
-    startLine: 129
+    startLine: 130
   assemblies:
   - Google.Protobuf
   namespace: Google.Protobuf.Reflection
   summary: "\nThe (possibly empty) set of custom options for this enum.\n"
   example: []
   syntax:
-    content: public CustomOptions CustomOptions { get; }
+    content: >-
+      [Obsolete("CustomOptions are obsolete. Use GetOption")]
+
+      public CustomOptions CustomOptions { get; }
     parameters: []
     return:
       type: Google.Protobuf.Reflection.CustomOptions
-    content.vb: Public ReadOnly Property CustomOptions As CustomOptions
+    content.vb: >-
+      <Obsolete("CustomOptions are obsolete. Use GetOption")>
+
+      Public ReadOnly Property CustomOptions As CustomOptions
   overload: Google.Protobuf.Reflection.EnumDescriptor.CustomOptions*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: CustomOptions are obsolete. Use GetOption
   modifiers.csharp:
   - public
   - get
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: Google.Protobuf.Reflection.EnumDescriptor.GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.EnumOptions,``0})
+  commentId: M:Google.Protobuf.Reflection.EnumDescriptor.GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.EnumOptions,``0})
+  id: GetOption``1(Google.Protobuf.Extension{Google.Protobuf.Reflection.EnumOptions,``0})
+  parent: Google.Protobuf.Reflection.EnumDescriptor
+  langs:
+  - csharp
+  - vb
+  name: GetOption<T>(Extension<EnumOptions, T>)
+  nameWithType: EnumDescriptor.GetOption<T>(Extension<EnumOptions, T>)
+  fullName: Google.Protobuf.Reflection.EnumDescriptor.GetOption<T>(Google.Protobuf.Extension<Google.Protobuf.Reflection.EnumOptions, T>)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
+      branch: 3.11.x
+      repo: https://github.com/google/protobuf
+    id: GetOption
+    path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
+    startLine: 136
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.Reflection
+  summary: "\nGets a single value enum option for this descriptor\n"
+  example: []
+  syntax:
+    content: public T GetOption<T>(Extension<EnumOptions, T> extension)
+    parameters:
+    - id: extension
+      type: Google.Protobuf.Extension{Google.Protobuf.Reflection.EnumOptions,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: Public Function GetOption(Of T)(extension As Extension(Of EnumOptions, T)) As T
+  overload: Google.Protobuf.Reflection.EnumDescriptor.GetOption*
+  nameWithType.vb: EnumDescriptor.GetOption(Of T)(Extension(Of EnumOptions, T))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Google.Protobuf.Reflection.EnumDescriptor.GetOption(Of T)(Google.Protobuf.Extension(Of Google.Protobuf.Reflection.EnumOptions, T))
+  name.vb: GetOption(Of T)(Extension(Of EnumOptions, T))
+- uid: Google.Protobuf.Reflection.EnumDescriptor.GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.EnumOptions,``0})
+  commentId: M:Google.Protobuf.Reflection.EnumDescriptor.GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.EnumOptions,``0})
+  id: GetOption``1(Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.EnumOptions,``0})
+  parent: Google.Protobuf.Reflection.EnumDescriptor
+  langs:
+  - csharp
+  - vb
+  name: GetOption<T>(RepeatedExtension<EnumOptions, T>)
+  nameWithType: EnumDescriptor.GetOption<T>(RepeatedExtension<EnumOptions, T>)
+  fullName: Google.Protobuf.Reflection.EnumDescriptor.GetOption<T>(Google.Protobuf.RepeatedExtension<Google.Protobuf.Reflection.EnumOptions, T>)
+  type: Method
+  source:
+    remote:
+      path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
+      branch: 3.11.x
+      repo: https://github.com/google/protobuf
+    id: GetOption
+    path: csharp/src/Google.Protobuf/Reflection/EnumDescriptor.cs
+    startLine: 145
+  assemblies:
+  - Google.Protobuf
+  namespace: Google.Protobuf.Reflection
+  summary: "\nGets a repeated value enum option for this descriptor\n"
+  example: []
+  syntax:
+    content: public RepeatedField<T> GetOption<T>(RepeatedExtension<EnumOptions, T> extension)
+    parameters:
+    - id: extension
+      type: Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.EnumOptions,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: Google.Protobuf.Collections.RepeatedField{{T}}
+    content.vb: Public Function GetOption(Of T)(extension As RepeatedExtension(Of EnumOptions, T)) As RepeatedField(Of T)
+  overload: Google.Protobuf.Reflection.EnumDescriptor.GetOption*
+  nameWithType.vb: EnumDescriptor.GetOption(Of T)(RepeatedExtension(Of EnumOptions, T))
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Google.Protobuf.Reflection.EnumDescriptor.GetOption(Of T)(Google.Protobuf.RepeatedExtension(Of Google.Protobuf.Reflection.EnumOptions, T))
+  name.vb: GetOption(Of T)(RepeatedExtension(Of EnumOptions, T))
 references:
 - uid: Google.Protobuf.Reflection
   commentId: N:Google.Protobuf.Reflection
@@ -828,3 +926,303 @@ references:
   name: CustomOptions
   nameWithType: CustomOptions
   fullName: Google.Protobuf.Reflection.CustomOptions
+- uid: Google.Protobuf.Reflection.EnumDescriptor.GetOption*
+  commentId: Overload:Google.Protobuf.Reflection.EnumDescriptor.GetOption
+  name: GetOption
+  nameWithType: EnumDescriptor.GetOption
+  fullName: Google.Protobuf.Reflection.EnumDescriptor.GetOption
+- uid: Google.Protobuf.Extension{Google.Protobuf.Reflection.EnumOptions,{T}}
+  commentId: T:Google.Protobuf.Extension{Google.Protobuf.Reflection.EnumOptions,``0}
+  parent: Google.Protobuf
+  definition: Google.Protobuf.Extension`2
+  name: Extension<EnumOptions, T>
+  nameWithType: Extension<EnumOptions, T>
+  fullName: Google.Protobuf.Extension<Google.Protobuf.Reflection.EnumOptions, T>
+  nameWithType.vb: Extension(Of EnumOptions, T)
+  fullName.vb: Google.Protobuf.Extension(Of Google.Protobuf.Reflection.EnumOptions, T)
+  name.vb: Extension(Of EnumOptions, T)
+  spec.csharp:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Google.Protobuf.Reflection.EnumOptions
+    name: EnumOptions
+    nameWithType: EnumOptions
+    fullName: Google.Protobuf.Reflection.EnumOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Google.Protobuf.Reflection.EnumOptions
+    name: EnumOptions
+    nameWithType: EnumOptions
+    fullName: Google.Protobuf.Reflection.EnumOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Google.Protobuf.Extension`2
+  commentId: T:Google.Protobuf.Extension`2
+  name: Extension<TTarget, TValue>
+  nameWithType: Extension<TTarget, TValue>
+  fullName: Google.Protobuf.Extension<TTarget, TValue>
+  nameWithType.vb: Extension(Of TTarget, TValue)
+  fullName.vb: Google.Protobuf.Extension(Of TTarget, TValue)
+  name.vb: Extension(Of TTarget, TValue)
+  spec.csharp:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Extension`2
+    name: Extension
+    nameWithType: Extension
+    fullName: Google.Protobuf.Extension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf
+  commentId: N:Google.Protobuf
+  name: Google.Protobuf
+  nameWithType: Google.Protobuf
+  fullName: Google.Protobuf
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.EnumOptions,{T}}
+  commentId: T:Google.Protobuf.RepeatedExtension{Google.Protobuf.Reflection.EnumOptions,``0}
+  parent: Google.Protobuf
+  definition: Google.Protobuf.RepeatedExtension`2
+  name: RepeatedExtension<EnumOptions, T>
+  nameWithType: RepeatedExtension<EnumOptions, T>
+  fullName: Google.Protobuf.RepeatedExtension<Google.Protobuf.Reflection.EnumOptions, T>
+  nameWithType.vb: RepeatedExtension(Of EnumOptions, T)
+  fullName.vb: Google.Protobuf.RepeatedExtension(Of Google.Protobuf.Reflection.EnumOptions, T)
+  name.vb: RepeatedExtension(Of EnumOptions, T)
+  spec.csharp:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Google.Protobuf.Reflection.EnumOptions
+    name: EnumOptions
+    nameWithType: EnumOptions
+    fullName: Google.Protobuf.Reflection.EnumOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Google.Protobuf.Reflection.EnumOptions
+    name: EnumOptions
+    nameWithType: EnumOptions
+    fullName: Google.Protobuf.Reflection.EnumOptions
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.Collections.RepeatedField{{T}}
+  commentId: T:Google.Protobuf.Collections.RepeatedField{``0}
+  parent: Google.Protobuf.Collections
+  definition: Google.Protobuf.Collections.RepeatedField`1
+  name: RepeatedField<T>
+  nameWithType: RepeatedField<T>
+  fullName: Google.Protobuf.Collections.RepeatedField<T>
+  nameWithType.vb: RepeatedField(Of T)
+  fullName.vb: Google.Protobuf.Collections.RepeatedField(Of T)
+  name.vb: RepeatedField(Of T)
+  spec.csharp:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.RepeatedExtension`2
+  commentId: T:Google.Protobuf.RepeatedExtension`2
+  name: RepeatedExtension<TTarget, TValue>
+  nameWithType: RepeatedExtension<TTarget, TValue>
+  fullName: Google.Protobuf.RepeatedExtension<TTarget, TValue>
+  nameWithType.vb: RepeatedExtension(Of TTarget, TValue)
+  fullName.vb: Google.Protobuf.RepeatedExtension(Of TTarget, TValue)
+  name.vb: RepeatedExtension(Of TTarget, TValue)
+  spec.csharp:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.RepeatedExtension`2
+    name: RepeatedExtension
+    nameWithType: RepeatedExtension
+    fullName: Google.Protobuf.RepeatedExtension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TTarget
+    nameWithType: TTarget
+    fullName: TTarget
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.Collections.RepeatedField`1
+  commentId: T:Google.Protobuf.Collections.RepeatedField`1
+  parent: Google.Protobuf.Collections
+  name: RepeatedField<T>
+  nameWithType: RepeatedField<T>
+  fullName: Google.Protobuf.Collections.RepeatedField<T>
+  nameWithType.vb: RepeatedField(Of T)
+  fullName.vb: Google.Protobuf.Collections.RepeatedField(Of T)
+  name.vb: RepeatedField(Of T)
+  spec.csharp:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Google.Protobuf.Collections.RepeatedField`1
+    name: RepeatedField
+    nameWithType: RepeatedField
+    fullName: Google.Protobuf.Collections.RepeatedField
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Google.Protobuf.Collections
+  commentId: N:Google.Protobuf.Collections
+  name: Google.Protobuf.Collections
+  nameWithType: Google.Protobuf.Collections
+  fullName: Google.Protobuf.Collections
