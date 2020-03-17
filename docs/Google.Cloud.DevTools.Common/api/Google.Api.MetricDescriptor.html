@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MetricDescriptor
    | Google.Cloud.DevTools.Common ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -635,9 +635,23 @@ use a natural hierarchical grouping. For example:</p>
   </table>
   <a id="Google_Api_MetricDescriptor_Unit_" data-uid="Google.Api.MetricDescriptor.Unit*"></a>
   <h4 id="Google_Api_MetricDescriptor_Unit" data-uid="Google.Api.MetricDescriptor.Unit">Unit</h4>
-  <div class="markdown level1 summary"><p>The unit in which the metric value is reported. It is only applicable
-if the <code>value_type</code> is <code>INT64</code>, <code>DOUBLE</code>, or <code>DISTRIBUTION</code>. The
-supported units are a subset of <a href="http://unitsofmeasure.org/ucum.html">The Unified Code for Units of
+  <div class="markdown level1 summary"><p>The units in which the metric value is reported. It is only applicable
+if the <code>value_type</code> is <code>INT64</code>, <code>DOUBLE</code>, or <code>DISTRIBUTION</code>. The <code>unit</code>
+defines the representation of the stored metric values.</p>
+<p>Different systems may scale the values to be more easily displayed (so a
+value of <code>0.02KBy</code> <em>might</em> be displayed as <code>20By</code>, and a value of
+<code>3523KBy</code> <em>might</em> be displayed as <code>3.5MBy</code>). However, if the <code>unit</code> is
+<code>KBy</code>, then the value of the metric is always in thousands of bytes, no
+matter how it may be displayed..</p>
+<p>If you want a custom metric to record the exact number of CPU-seconds used
+by a job, you can create an <code>INT64 CUMULATIVE</code> metric whose <code>unit</code> is
+<code>s{CPU}</code> (or equivalently <code>1s{CPU}</code> or just <code>s</code>). If the job uses 12,005
+CPU-seconds, then the value is written as <code>12005</code>.</p>
+<p>Alternatively, if you want a custome metric to record data in a more
+granular way, you can create a <code>DOUBLE CUMULATIVE</code> metric whose <code>unit</code> is
+<code>ks{CPU}</code>, and then write the value <code>12.005</code> (which is <code>12005/1000</code>),
+or use <code>Kis{CPU}</code> and write <code>11.723</code> (which is <code>12005/1024</code>).</p>
+<p>The supported units are a subset of <a href="http://unitsofmeasure.org/ucum.html">The Unified Code for Units of
 Measure</a> standard:</p>
 <p><strong>Basic units (UNIT)</strong></p>
 <ul>
@@ -650,32 +664,41 @@ Measure</a> standard:</p>
 </ul>
 <p><strong>Prefixes (PREFIX)</strong></p>
 <ul>
-<li><code>k</code>     kilo    (10**3)</li>
-<li><code>M</code>     mega    (10**6)</li>
-<li><code>G</code>     giga    (10**9)</li>
-<li><code>T</code>     tera    (10**12)</li>
-<li><code>P</code>     peta    (10**15)</li>
-<li><code>E</code>     exa     (10**18)</li>
-<li><code>Z</code>     zetta   (10**21)</li>
-<li><code>Y</code>     yotta   (10**24)</li>
-<li><code>m</code>     milli   (10**-3)</li>
-<li><code>u</code>     micro   (10**-6)</li>
-<li><code>n</code>     nano    (10**-9)</li>
-<li><code>p</code>     pico    (10**-12)</li>
-<li><code>f</code>     femto   (10**-15)</li>
-<li><code>a</code>     atto    (10**-18)</li>
-<li><code>z</code>     zepto   (10**-21)</li>
-<li><code>y</code>     yocto   (10**-24)</li>
-<li><code>Ki</code>    kibi    (2**10)</li>
-<li><code>Mi</code>    mebi    (2**20)</li>
-<li><code>Gi</code>    gibi    (2**30)</li>
-<li><code>Ti</code>    tebi    (2**40)</li>
+<li><code>k</code>     kilo    (10^3)</li>
+<li><code>M</code>     mega    (10^6)</li>
+<li><code>G</code>     giga    (10^9)</li>
+<li><code>T</code>     tera    (10^12)</li>
+<li><code>P</code>     peta    (10^15)</li>
+<li><code>E</code>     exa     (10^18)</li>
+<li><code>Z</code>     zetta   (10^21)</li>
+<li><p><code>Y</code>     yotta   (10^24)</p>
+</li>
+<li><p><code>m</code>     milli   (10^-3)</p>
+</li>
+<li><code>u</code>     micro   (10^-6)</li>
+<li><code>n</code>     nano    (10^-9)</li>
+<li><code>p</code>     pico    (10^-12)</li>
+<li><code>f</code>     femto   (10^-15)</li>
+<li><code>a</code>     atto    (10^-18)</li>
+<li><code>z</code>     zepto   (10^-21)</li>
+<li><p><code>y</code>     yocto   (10^-24)</p>
+</li>
+<li><p><code>Ki</code>    kibi    (2^10)</p>
+</li>
+<li><code>Mi</code>    mebi    (2^20)</li>
+<li><code>Gi</code>    gibi    (2^30)</li>
+<li><code>Ti</code>    tebi    (2^40)</li>
+<li><code>Pi</code>    pebi    (2^50)</li>
 </ul>
 <p><strong>Grammar</strong></p>
 <p>The grammar also includes these connectors:</p>
 <ul>
-<li><code>/</code>    division (as an infix operator, e.g. <code>1/s</code>).</li>
-<li><code>.</code>    multiplication (as an infix operator, e.g. <code>GBy.d</code>)</li>
+<li><code>/</code>    division or ratio (as an infix operator). For examples,
+  <code>kBy/{email}</code> or <code>MiBy/10ms</code> (although you should almost never
+  have <code>/s</code> in a metric <code>unit</code>; rates should always be computed at
+  query time from the underlying cumulative or delta value).</li>
+<li><code>.</code>    multiplication or composition (as an infix operator). For
+  examples, <code>GBy.d</code> or <code>k{watt}.h</code>.</li>
 </ul>
 <p>The grammar for a unit is as follows:</p>
 <p>Expression = Component { &quot;.&quot; Component } { &quot;/&quot; Component } ;</p>
@@ -686,14 +709,25 @@ Measure</a> standard:</p>
 <p>Annotation = &quot;{&quot; NAME &quot;}&quot; ;</p>
 <p>Notes:</p>
 <ul>
-<li><code>Annotation</code> is just a comment if it follows a <code>UNIT</code> and is
-equivalent to <code>1</code> if it is used alone. For examples,
-<code>{requests}/s == 1/s</code>, <code>By{transmitted}/s == By/s</code>.</li>
+<li><code>Annotation</code> is just a comment if it follows a <code>UNIT</code>. If the annotation
+is used alone, then the unit is equivalent to <code>1</code>. For examples,
+<code>{request}/s == 1/s</code>, <code>By{transmitted}/s == By/s</code>.</li>
 <li><code>NAME</code> is a sequence of non-blank printable ASCII characters not
-containing &apos;{&apos; or &apos;}&apos;.</li>
-<li><code>1</code> represents dimensionless value 1, such as in <code>1/s</code>.</li>
-<li><code>%</code> represents dimensionless value 1/100, and annotates values giving
-a percentage.</li>
+containing <code>{</code> or <code>}</code>.</li>
+<li><code>1</code> represents a unitary <a href="https://en.wikipedia.org/wiki/Dimensionless_quantity">dimensionless
+unit</a> of 1, such
+as in <code>1/s</code>. It is typically used when none of the basic units are
+appropriate. For example, &quot;new users per day&quot; can be represented as
+<code>1/d</code> or <code>{new-users}/d</code> (and a metric value <code>5</code> would mean &quot;5 new
+users). Alternatively, &quot;thousands of page views per day&quot; would be
+represented as <code>1000/d</code> or <code>k1/d</code> or <code>k{page_views}/d</code> (and a metric
+value of <code>5.3</code> would mean &quot;5300 page views per day&quot;).</li>
+<li><code>%</code> represents dimensionless value of 1/100, and annotates values giving
+a percentage (so the metric values are typically in the range of 0..100,
+and a metric value <code>3</code> means &quot;3 percent&quot;).</li>
+<li><code>10^2.%</code> indicates a metric contains a ratio, typically in the range
+0..1, that will be multiplied by 100 and displayed as a percentage
+(so a metric value <code>0.03</code> means &quot;3 percent&quot;).</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ResourceDescriptor
    | Google.Cloud.DevTools.Common ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -79,26 +79,105 @@ protobuf annotation or use in the service config), and associates the
 resource&apos;s schema, the resource type, and the pattern of the resource name.</p>
 <p>Example:</p>
 <p>message Topic {
-// Indicates this message defines a resource schema.
-// Declares the resource type in the format of {service}/{kind}.
-// For Kubernetes resources, the format is {api group}/{kind}.
-option (google.api.resource) = {
- type: &quot;pubsub.googleapis.com/Topic&quot;
- pattern: &quot;projects/{project}/topics/{topic}&quot;
-};
+ // Indicates this message defines a resource schema.
+ // Declares the resource type in the format of {service}/{kind}.
+ // For Kubernetes resources, the format is {api group}/{kind}.
+ option (google.api.resource) = {
+   type: &quot;pubsub.googleapis.com/Topic&quot;
+   name_descriptor: {
+     pattern: &quot;projects/{project}/topics/{topic}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+     parent_name_extractor: &quot;projects/{project}&quot;
+   }
+ };
 }</p>
+<p>The ResourceDescriptor Yaml config will look like:</p>
+<p>resources:</p>
+<ul>
+<li>type: &quot;pubsub.googleapis.com/Topic&quot;
+name_descriptor:<ul>
+<li>pattern: &quot;projects/{project}/topics/{topic}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+parent_name_extractor: &quot;projects/{project}&quot;</li>
+</ul>
+</li>
+</ul>
 <p>Sometimes, resources have multiple patterns, typically because they can
 live under multiple parents.</p>
 <p>Example:</p>
 <p>message LogEntry {
-option (google.api.resource) = {
- type: &quot;logging.googleapis.com/LogEntry&quot;
- pattern: &quot;projects/{project}/logs/{log}&quot;
- pattern: &quot;organizations/{organization}/logs/{log}&quot;
- pattern: &quot;folders/{folder}/logs/{log}&quot;
- pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;
-};
+ option (google.api.resource) = {
+   type: &quot;logging.googleapis.com/LogEntry&quot;
+   name_descriptor: {
+     pattern: &quot;projects/{project}/logs/{log}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+     parent_name_extractor: &quot;projects/{project}&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;folders/{folder}/logs/{log}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;
+     parent_name_extractor: &quot;folders/{folder}&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;organizations/{organization}/logs/{log}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Organization&quot;
+     parent_name_extractor: &quot;organizations/{organization}&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;
+     parent_type: &quot;billing.googleapis.com/BillingAccount&quot;
+     parent_name_extractor: &quot;billingAccounts/{billing_account}&quot;
+   }
+ };
 }</p>
+<p>The ResourceDescriptor Yaml config will look like:</p>
+<p>resources:</p>
+<ul>
+<li>type: &apos;logging.googleapis.com/LogEntry&apos;
+name_descriptor:<ul>
+<li>pattern: &quot;projects/{project}/logs/{log}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+parent_name_extractor: &quot;projects/{project}&quot;</li>
+<li>pattern: &quot;folders/{folder}/logs/{log}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;
+parent_name_extractor: &quot;folders/{folder}&quot;</li>
+<li>pattern: &quot;organizations/{organization}/logs/{log}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Organization&quot;
+parent_name_extractor: &quot;organizations/{organization}&quot;</li>
+<li>pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;
+parent_type: &quot;billing.googleapis.com/BillingAccount&quot;
+parent_name_extractor: &quot;billingAccounts/{billing_account}&quot;</li>
+</ul>
+</li>
+</ul>
+<p>For flexible resources, the resource name doesn&apos;t contain parent names, but
+the resource itself has parents for policy evaluation.</p>
+<p>Example:</p>
+<p>message Shelf {
+ option (google.api.resource) = {
+   type: &quot;library.googleapis.com/Shelf&quot;
+   name_descriptor: {
+     pattern: &quot;shelves/{shelf}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;shelves/{shelf}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;
+   }
+ };
+}</p>
+<p>The ResourceDescriptor Yaml config will look like:</p>
+<p>resources:</p>
+<ul>
+<li>type: &apos;library.googleapis.com/Shelf&apos;
+name_descriptor:<ul>
+<li>pattern: &quot;shelves/{shelf}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;</li>
+<li>pattern: &quot;shelves/{shelf}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;</li>
+</ul>
+</li>
+</ul>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -240,6 +319,52 @@ option (google.api.resource) = {
       </tr>
     </tbody>
   </table>
+  <h4 id="Google_Api_ResourceDescriptor_PluralFieldNumber" data-uid="Google.Api.ResourceDescriptor.PluralFieldNumber">PluralFieldNumber</h4>
+  <div class="markdown level1 summary"><p>Field number for the &quot;plural&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int PluralFieldNumber = 5</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 id="Google_Api_ResourceDescriptor_SingularFieldNumber" data-uid="Google.Api.ResourceDescriptor.SingularFieldNumber">SingularFieldNumber</h4>
+  <div class="markdown level1 summary"><p>Field number for the &quot;singular&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int SingularFieldNumber = 6</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h4 id="Google_Api_ResourceDescriptor_TypeFieldNumber" data-uid="Google.Api.ResourceDescriptor.TypeFieldNumber">TypeFieldNumber</h4>
   <div class="markdown level1 summary"><p>Field number for the &quot;type&quot; field.</p>
 </div>
@@ -291,17 +416,17 @@ option (google.api.resource) = {
   <a id="Google_Api_ResourceDescriptor_History_" data-uid="Google.Api.ResourceDescriptor.History*"></a>
   <h4 id="Google_Api_ResourceDescriptor_History" data-uid="Google.Api.ResourceDescriptor.History">History</h4>
   <div class="markdown level1 summary"><p>Optional. The historical or future-looking state of the resource pattern.</p>
-<p>Example:
-// The InspectTemplate message originally only supported resource
+<p>Example:</p>
+<p>// The InspectTemplate message originally only supported resource
 // names with organization, and project was added later.
 message InspectTemplate {
-option (google.api.resource) = {
- type: &quot;dlp.googleapis.com/InspectTemplate&quot;
- pattern:
- &quot;organizations/{organization}/inspectTemplates/{inspect_template}&quot;
- pattern: &quot;projects/{project}/inspectTemplates/{inspect_template}&quot;
- history: ORIGINALLY_SINGLE_PATTERN
-};
+ option (google.api.resource) = {
+   type: &quot;dlp.googleapis.com/InspectTemplate&quot;
+   pattern:
+   &quot;organizations/{organization}/inspectTemplates/{inspect_template}&quot;
+   pattern: &quot;projects/{project}/inspectTemplates/{inspect_template}&quot;
+   history: ORIGINALLY_SINGLE_PATTERN
+ };
 }</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -374,7 +499,13 @@ field. If omitted, this is assumed to be &quot;name&quot;.</p>
   </table>
   <a id="Google_Api_ResourceDescriptor_Pattern_" data-uid="Google.Api.ResourceDescriptor.Pattern*"></a>
   <h4 id="Google_Api_ResourceDescriptor_Pattern" data-uid="Google.Api.ResourceDescriptor.Pattern">Pattern</h4>
-  <div class="markdown level1 summary"><p>Optional. The valid resource name pattern(s) for this resource type.</p>
+  <div class="markdown level1 summary"><p>Optional. The relative resource name pattern associated with this resource
+type. The DNS prefix of the full resource name shouldn&apos;t be specified here.</p>
+<p>The path pattern must follow the syntax, which aligns with HTTP binding
+syntax:</p>
+<p>Template = Segment { &quot;/&quot; Segment } ;
+Segment = LITERAL | Variable ;
+Variable = &quot;{&quot; LITERAL &quot;}&quot; ;</p>
 <p>Examples:</p>
 <ul>
 <li>&quot;projects/{project}/topics/{topic}&quot;</li>
@@ -401,6 +532,59 @@ type of resource.</p>
     <tbody>
       <tr>
         <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Api_ResourceDescriptor_Plural_" data-uid="Google.Api.ResourceDescriptor.Plural*"></a>
+  <h4 id="Google_Api_ResourceDescriptor_Plural" data-uid="Google.Api.ResourceDescriptor.Plural">Plural</h4>
+  <div class="markdown level1 summary"><p>The plural name used in the resource name, such as &apos;projects&apos; for
+the name of &apos;projects/{project}&apos;. It is the same concept of the <code>plural</code>
+field in k8s CRD spec
+<a href="https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/">https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Plural { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Api_ResourceDescriptor_Singular_" data-uid="Google.Api.ResourceDescriptor.Singular*"></a>
+  <h4 id="Google_Api_ResourceDescriptor_Singular" data-uid="Google.Api.ResourceDescriptor.Singular">Singular</h4>
+  <div class="markdown level1 summary"><p>The same concept of the <code>singular</code> field in k8s CRD spec
+<a href="https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/">https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/</a>
+Such as &quot;project&quot; for the <code>resourcemanager.googleapis.com/Project</code> type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Singular { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>

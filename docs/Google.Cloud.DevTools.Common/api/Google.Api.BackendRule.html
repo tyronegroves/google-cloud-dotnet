@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BackendRule
    | Google.Cloud.DevTools.Common ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -192,6 +192,29 @@
       </tr>
     </tbody>
   </table>
+  <h4 id="Google_Api_BackendRule_DisableAuthFieldNumber" data-uid="Google.Api.BackendRule.DisableAuthFieldNumber">DisableAuthFieldNumber</h4>
+  <div class="markdown level1 summary"><p>Field number for the &quot;disable_auth&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int DisableAuthFieldNumber = 8</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h4 id="Google_Api_BackendRule_JwtAudienceFieldNumber" data-uid="Google.Api.BackendRule.JwtAudienceFieldNumber">JwtAudienceFieldNumber</h4>
   <div class="markdown level1 summary"><p>Field number for the &quot;jwt_audience&quot; field.</p>
 </div>
@@ -284,6 +307,29 @@
       </tr>
     </tbody>
   </table>
+  <h4 id="Google_Api_BackendRule_ProtocolFieldNumber" data-uid="Google.Api.BackendRule.ProtocolFieldNumber">ProtocolFieldNumber</h4>
+  <div class="markdown level1 summary"><p>Field number for the &quot;protocol&quot; field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int ProtocolFieldNumber = 9</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h4 id="Google_Api_BackendRule_SelectorFieldNumber" data-uid="Google.Api.BackendRule.SelectorFieldNumber">SelectorFieldNumber</h4>
   <div class="markdown level1 summary"><p>Field number for the &quot;selector&quot; field.</p>
 </div>
@@ -312,6 +358,22 @@
   <a id="Google_Api_BackendRule_Address_" data-uid="Google.Api.BackendRule.Address*"></a>
   <h4 id="Google_Api_BackendRule_Address" data-uid="Google.Api.BackendRule.Address">Address</h4>
   <div class="markdown level1 summary"><p>The address of the API backend.</p>
+<p>The scheme is used to determine the backend protocol and security.
+The following schemes are accepted:</p>
+<p>SCHEME        PROTOCOL    SECURITY
+http://       HTTP        None
+https://      HTTP        TLS
+grpc://       gRPC        None
+grpcs://      gRPC        TLS</p>
+<p>It is recommended to explicitly include a scheme. Leaving out the scheme
+may cause constrasting behaviors across platforms.</p>
+<p>If the port is unspecified, the default is:</p>
+<ul>
+<li>80 for schemes without TLS</li>
+<li>443 for schemes with TLS</li>
+</ul>
+<p>For HTTP backends, use [protocol][google.api.BackendRule.protocol]
+to specify the protocol version.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -358,8 +420,8 @@
   </table>
   <a id="Google_Api_BackendRule_Deadline_" data-uid="Google.Api.BackendRule.Deadline*"></a>
   <h4 id="Google_Api_BackendRule_Deadline" data-uid="Google.Api.BackendRule.Deadline">Deadline</h4>
-  <div class="markdown level1 summary"><p>The number of seconds to wait for a response from a request.  The default
-deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.</p>
+  <div class="markdown level1 summary"><p>The number of seconds to wait for a response from a request. The default
+varies based on the request protocol and deployment environment.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -404,9 +466,38 @@ deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Api_BackendRule_DisableAuth_" data-uid="Google.Api.BackendRule.DisableAuth*"></a>
+  <h4 id="Google_Api_BackendRule_DisableAuth" data-uid="Google.Api.BackendRule.DisableAuth">DisableAuth</h4>
+  <div class="markdown level1 summary"><p>When disable_auth is true, a JWT ID token won&apos;t be generated and the
+original &quot;Authorization&quot; HTTP header will be preserved. If the header is
+used to carry the original token and is expected by the backend, this
+field must be set to true to preserve the header.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DisableAuth { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Api_BackendRule_JwtAudience_" data-uid="Google.Api.BackendRule.JwtAudience*"></a>
   <h4 id="Google_Api_BackendRule_JwtAudience" data-uid="Google.Api.BackendRule.JwtAudience">JwtAudience</h4>
-  <div class="markdown level1 summary"><p>The JWT audience is used when generating a JWT id token for the backend.</p>
+  <div class="markdown level1 summary"><p>The JWT audience is used when generating a JWT ID token for the backend.
+This ID token will be added in the HTTP &quot;authorization&quot; header, and sent
+to the backend.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -520,6 +611,45 @@ operation. The default is no deadline.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Api.BackendRule.Types.PathTranslation.html">BackendRule.Types.PathTranslation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Api_BackendRule_Protocol_" data-uid="Google.Api.BackendRule.Protocol*"></a>
+  <h4 id="Google_Api_BackendRule_Protocol" data-uid="Google.Api.BackendRule.Protocol">Protocol</h4>
+  <div class="markdown level1 summary"><p>The protocol used for sending a request to the backend.
+The supported values are &quot;http/1.1&quot; and &quot;h2&quot;.</p>
+<p>The default value is inferred from the scheme in the
+[address][google.api.BackendRule.address] field:</p>
+<p>SCHEME        PROTOCOL
+http://       http/1.1
+https://      http/1.1
+grpc://       h2
+grpcs://      h2</p>
+<p>For secure HTTP backends (https://) that support HTTP/2, set this field
+to &quot;h2&quot; for improved performance.</p>
+<p>Configuring this field to non-default values is only supported for secure
+HTTP backends. This field will be ignored for all other backends.</p>
+<p>See
+<a href="https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids">https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids</a>
+for more details on the supported values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Protocol { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
