@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Google.Type
    | Google.Cloud.Logging.Type ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -206,6 +206,25 @@ is relative to the Proleptic Gregorian Calendar. This can represent:</p>
       <h4><a class="xref" href="Google.Type.DateReflection.html">DateReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/date.proto</p>
 </section>
+      <h4><a class="xref" href="Google.Type.DateTime.html">DateTime</a></h4>
+      <section><p>Represents civil time in one of a few possible ways:</p>
+<ul>
+<li>When utc_offset is set and time_zone is unset: a civil time on a calendar
+day with a particular offset from UTC.</li>
+<li>When time_zone is set and utc_offset is unset: a civil time on a calendar
+day in a particular time zone.</li>
+<li>When neither time_zone nor utc_offset is set: a civil time on a calendar
+day in local time.</li>
+</ul>
+<p>The date is relative to the Proleptic Gregorian Calendar.</p>
+<p>If year is 0, the DateTime is considered not to have a specific year. month
+and day must have valid, non-zero values.</p>
+<p>This type is more flexible than some applications may want. Make sure to
+document and validate your application&apos;s limitations.</p>
+</section>
+      <h4><a class="xref" href="Google.Type.DatetimeReflection.html">DatetimeReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/type/datetime.proto</p>
+</section>
       <h4><a class="xref" href="Google.Type.DayofweekReflection.html">DayofweekReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/dayofweek.proto</p>
 </section>
@@ -239,6 +258,9 @@ standard&lt;/a&gt;. Values must be within normalized ranges.</p>
 </section>
       <h4><a class="xref" href="Google.Type.MoneyReflection.html">MoneyReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/money.proto</p>
+</section>
+      <h4><a class="xref" href="Google.Type.MonthReflection.html">MonthReflection</a></h4>
+      <section><p>Holder for reflection information generated from google/type/month.proto</p>
 </section>
       <h4><a class="xref" href="Google.Type.PostalAddress.html">PostalAddress</a></h4>
       <section><p>Represents a postal address, e.g. for postal delivery or payments addresses.
@@ -274,14 +296,14 @@ problems that can be encountered when using Euler angles
 <p>w + xi + yj + zk</p>
 <p>where x, y, z, and w are real numbers, and i, j, and k are three imaginary
 numbers.</p>
-<p>Our naming choice (x, y, z, w) comes from the desire to avoid confusion for
+<p>Our naming choice <code>(x, y, z, w)</code> comes from the desire to avoid confusion for
 those interested in the geometric properties of the quaternion in the 3D
 Cartesian space. Other texts often use alternative names or subscripts, such
-as (a, b, c, d), (1, i, j, k), or (0, 1, 2, 3), which are perhaps better
-suited for mathematical interpretations.</p>
+as <code>(a, b, c, d)</code>, <code>(1, i, j, k)</code>, or <code>(0, 1, 2, 3)</code>, which are perhaps
+better suited for mathematical interpretations.</p>
 <p>To avoid any confusion, as well as to maintain compatibility with a large
 number of software libraries, the quaternions represented using the protocol
-buffer below <em>must</em> follow the Hamilton convention, which defines ij = k
+buffer below <em>must</em> follow the Hamilton convention, which defines <code>ij = k</code>
 (i.e. a right-handed algebra), and therefore:</p>
 <p>i^2 = j^2 = k^2 = ijk = −1
 ij = −ji = k
@@ -291,9 +313,9 @@ ki = −ik = j</p>
 convention, or any of the other quaternion flavors out there.</p>
 <p>Definitions:</p>
 <ul>
-<li>Quaternion norm (or magnitude): sqrt(x^2 + y^2 + z^2 + w^2).</li>
+<li>Quaternion norm (or magnitude): <code>sqrt(x^2 + y^2 + z^2 + w^2)</code>.</li>
 <li>Unit (or normalized) quaternion: a quaternion whose norm is 1.</li>
-<li>Pure quaternion: a quaternion whose scalar component (w) is 0.</li>
+<li>Pure quaternion: a quaternion whose scalar component (<code>w</code>) is 0.</li>
 <li>Rotation quaternion: a unit quaternion used to represent rotation.</li>
 <li>Orientation quaternion: a unit quaternion used to represent orientation.</li>
 </ul>
@@ -302,11 +324,11 @@ quaternion maintains the same direction, but has a norm of 1, i.e. it moves
 on the unit sphere. This is generally necessary for rotation and orientation
 quaternions, to avoid rounding errors:
 <a href="https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions">https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions</a></p>
-<p>Note that (x, y, z, w) and (-x, -y, -z, -w) represent the same rotation, but
-normalization would be even more useful, e.g. for comparison purposes, if it
-would produce a unique representation. It is thus recommended that w be kept
-positive, which can be achieved by changing all the signs when w is negative.</p>
-<p>Next available tag: 5</p>
+<p>Note that <code>(x, y, z, w)</code> and <code>(-x, -y, -z, -w)</code> represent the same rotation,
+but normalization would be even more useful, e.g. for comparison purposes, if
+it would produce a unique representation. It is thus recommended that <code>w</code> be
+kept positive, which can be achieved by changing all the signs when <code>w</code> is
+negative.</p>
 </section>
       <h4><a class="xref" href="Google.Type.QuaternionReflection.html">QuaternionReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/quaternion.proto</p>
@@ -319,6 +341,10 @@ types are [google.type.Date][google.type.Date] and <code>google.protobuf.Timesta
       <h4><a class="xref" href="Google.Type.TimeofdayReflection.html">TimeofdayReflection</a></h4>
       <section><p>Holder for reflection information generated from google/type/timeofday.proto</p>
 </section>
+      <h4><a class="xref" href="Google.Type.TimeZone.html">TimeZone</a></h4>
+      <section><p>Represents a time zone from the
+<a href="https://www.iana.org/time-zones">IANA Time Zone Database</a>.</p>
+</section>
     <h3 id="enums">Enums
   </h3>
       <h4><a class="xref" href="Google.Type.CalendarPeriod.html">CalendarPeriod</a></h4>
@@ -326,8 +352,14 @@ types are [google.type.Date][google.type.Date] and <code>google.protobuf.Timesta
 a canonical start. Grammatically, &quot;the start of the current
 <code>CalendarPeriod</code>.&quot; All calendar times begin at midnight UTC.</p>
 </section>
+      <h4><a class="xref" href="Google.Type.DateTime.TimeOffsetOneofCase.html">DateTime.TimeOffsetOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;time_offset&quot; oneof.</p>
+</section>
       <h4><a class="xref" href="Google.Type.DayOfWeek.html">DayOfWeek</a></h4>
       <section><p>Represents a day of week.</p>
+</section>
+      <h4><a class="xref" href="Google.Type.Month.html">Month</a></h4>
+      <section><p>Represents a month in the Gregorian calendar.</p>
 </section>
 </article>
           </div>
