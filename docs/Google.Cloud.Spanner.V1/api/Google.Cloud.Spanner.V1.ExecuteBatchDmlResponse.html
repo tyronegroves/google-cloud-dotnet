@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ExecuteBatchDmlResponse
    | Google.Cloud.Spanner.V1 ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,36 +73,29 @@
   
   <h1 id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse" class="text-break">Class ExecuteBatchDmlResponse
   </h1>
-  <div class="markdown level0 summary"><p>The response for
-[ExecuteBatchDml][google.spanner.v1.Spanner.ExecuteBatchDml]. Contains a list
-of [ResultSet][google.spanner.v1.ResultSet] messages, one for each DML
-statement that has successfully executed, in the same order as the statements
-in the request. If a statement fails, the status in the response body
-identifies the cause of the failure.</p>
+  <div class="markdown level0 summary"><p>The response for [ExecuteBatchDml][google.spanner.v1.Spanner.ExecuteBatchDml]. Contains a list
+of [ResultSet][google.spanner.v1.ResultSet] messages, one for each DML statement that has successfully
+executed, in the same order as the statements in the request. If a statement
+fails, the status in the response body identifies the cause of the failure.</p>
 <p>To check for DML statements that failed, use the following approach:</p>
 <ol>
-<li>Check the status in the response message. The
-[google.rpc.Code][google.rpc.Code] enum
+<li>Check the status in the response message. The [google.rpc.Code][google.rpc.Code] enum
 value <code>OK</code> indicates that all statements were executed successfully.</li>
 <li>If the status was not <code>OK</code>, check the number of result sets in the
-response. If the response contains <code>N</code>
-[ResultSet][google.spanner.v1.ResultSet] messages, then statement <code>N+1</code> in
-the request failed.</li>
+response. If the response contains <code>N</code> [ResultSet][google.spanner.v1.ResultSet] messages, then
+statement <code>N+1</code> in the request failed.</li>
 </ol>
 <p>Example 1:</p>
 <ul>
 <li>Request: 5 DML statements, all executed successfully.</li>
-<li>Response: 5 [ResultSet][google.spanner.v1.ResultSet] messages, with the
-status <code>OK</code>.</li>
+<li>Response: 5 [ResultSet][google.spanner.v1.ResultSet] messages, with the status <code>OK</code>.</li>
 </ul>
 <p>Example 2:</p>
 <ul>
 <li>Request: 5 DML statements. The third statement has a syntax error.</li>
-<li>Response: 2 [ResultSet][google.spanner.v1.ResultSet] messages, and a syntax
-error (<code>INVALID_ARGUMENT</code>)
-status. The number of [ResultSet][google.spanner.v1.ResultSet] messages
-indicates that the third statement failed, and the fourth and fifth
-statements were not executed.</li>
+<li>Response: 2 [ResultSet][google.spanner.v1.ResultSet] messages, and a syntax error (<code>INVALID_ARGUMENT</code>)
+status. The number of [ResultSet][google.spanner.v1.ResultSet] messages indicates that the third
+statement failed, and the fourth and fifth statements were not executed.</li>
 </ul>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -113,10 +106,10 @@ statements were not executed.</li>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a>&gt;</div>
+    <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.html">ExecuteBatchDmlResponse</a>&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -178,14 +171,12 @@ statements were not executed.</li>
   </h3>
   <a id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse_ResultSets_" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.ResultSets*"></a>
   <h4 id="Google_Cloud_Spanner_V1_ExecuteBatchDmlResponse_ResultSets" data-uid="Google.Cloud.Spanner.V1.ExecuteBatchDmlResponse.ResultSets">ResultSets</h4>
-  <div class="markdown level1 summary"><p>One [ResultSet][google.spanner.v1.ResultSet] for each statement in the
-request that ran successfully, in the same order as the statements in the
-request. Each [ResultSet][google.spanner.v1.ResultSet] does not contain any
-rows. The [ResultSetStats][google.spanner.v1.ResultSetStats] in each
-[ResultSet][google.spanner.v1.ResultSet] contain the number of rows
-modified by the statement.</p>
-<p>Only the first [ResultSet][google.spanner.v1.ResultSet] in the response
-contains valid [ResultSetMetadata][google.spanner.v1.ResultSetMetadata].</p>
+  <div class="markdown level1 summary"><p>One [ResultSet][google.spanner.v1.ResultSet] for each statement in the request that ran successfully,
+in the same order as the statements in the request. Each [ResultSet][google.spanner.v1.ResultSet] does
+not contain any rows. The [ResultSetStats][google.spanner.v1.ResultSetStats] in each [ResultSet][google.spanner.v1.ResultSet] contain
+the number of rows modified by the statement.</p>
+<p>Only the first [ResultSet][google.spanner.v1.ResultSet] in the response contains valid
+[ResultSetMetadata][google.spanner.v1.ResultSetMetadata].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -202,7 +193,7 @@ contains valid [ResultSetMetadata][google.spanner.v1.ResultSetMetadata].</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ResultSet.html">ResultSet</a>&gt;</td>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Spanner.V1.ResultSet.html">ResultSet</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -227,7 +218,7 @@ Otherwise, the error status of the first failed statement.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Rpc.Status</span></td>
+        <td><a class="xref" href="Google.Rpc.Status.html">Status</a></td>
         <td></td>
       </tr>
     </tbody>

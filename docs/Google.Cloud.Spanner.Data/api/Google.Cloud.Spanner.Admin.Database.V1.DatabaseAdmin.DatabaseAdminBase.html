@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class DatabaseAdmin.DatabaseAdminBase
    | Google.Cloud.Spanner.Data ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -105,6 +105,66 @@ public abstract class DatabaseAdminBase</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_CreateBackup_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.CreateBackup*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_CreateBackup_Google_Cloud_Spanner_Admin_Database_V1_CreateBackupRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.CreateBackup(Google.Cloud.Spanner.Admin.Database.V1.CreateBackupRequest,Grpc.Core.ServerCallContext)">CreateBackup(CreateBackupRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Starts creating a new Cloud Spanner Backup.
+The returned backup [long-running operation][google.longrunning.Operation]
+will have a name of the format
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;/backups/&amp;lt;backup&gt;/operations/&amp;lt;operation_id&gt;</code>
+and can be used to track creation of the backup. The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateBackupMetadata][google.spanner.admin.database.v1.CreateBackupMetadata]. The
+[response][google.longrunning.Operation.response] field type is
+[Backup][google.spanner.admin.database.v1.Backup], if successful. Cancelling the returned operation will stop the
+creation and delete the backup.
+There can be only one pending backup creation per database. Backup creation
+of different databases can run concurrently.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateBackup(CreateBackupRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.CreateBackupRequest.html">CreateBackupRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Google.LongRunning.Operation</span>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_CreateDatabase_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.CreateDatabase*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_CreateDatabase_Google_Cloud_Spanner_Admin_Database_V1_CreateDatabaseRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.CreateDatabase(Google.Cloud.Spanner.Admin.Database.V1.CreateDatabaseRequest,Grpc.Core.ServerCallContext)">CreateDatabase(CreateDatabaseRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Creates a new Cloud Spanner database and starts to prepare it for serving.
@@ -112,8 +172,8 @@ The returned [long-running operation][google.longrunning.Operation] will
 have a name of the format <code>&amp;lt;database_name&gt;/operations/&amp;lt;operation_id&gt;</code> and
 can be used to track preparation of the database. The
 [metadata][google.longrunning.Operation.metadata] field type is
-[CreateDatabaseMetadata][google.spanner.admin.database.v1.CreateDatabaseMetadata].
-The [response][google.longrunning.Operation.response] field type is
+[CreateDatabaseMetadata][google.spanner.admin.database.v1.CreateDatabaseMetadata]. The
+[response][google.longrunning.Operation.response] field type is
 [Database][google.spanner.admin.database.v1.Database], if successful.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -161,9 +221,60 @@ The [response][google.longrunning.Operation.response] field type is
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_DeleteBackup_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.DeleteBackup*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_DeleteBackup_Google_Cloud_Spanner_Admin_Database_V1_DeleteBackupRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.DeleteBackup(Google.Cloud.Spanner.Admin.Database.V1.DeleteBackupRequest,Grpc.Core.ServerCallContext)">DeleteBackup(DeleteBackupRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Deletes a pending or completed [Backup][google.spanner.admin.database.v1.Backup].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Empty&gt; DeleteBackup(DeleteBackupRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.DeleteBackupRequest.html">DeleteBackupRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Google.Protobuf.WellKnownTypes.Empty</span>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_DropDatabase_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.DropDatabase*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_DropDatabase_Google_Cloud_Spanner_Admin_Database_V1_DropDatabaseRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.DropDatabase(Google.Cloud.Spanner.Admin.Database.V1.DropDatabaseRequest,Grpc.Core.ServerCallContext)">DropDatabase(DropDatabaseRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Drops (aka deletes) a Cloud Spanner database.</p>
+  <div class="markdown level1 summary"><p>Drops (aka deletes) a Cloud Spanner database.
+Completed backups for the database will be retained according to their
+<code>expire_time</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -205,6 +316,55 @@ The [response][google.longrunning.Operation.response] field type is
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Google.Protobuf.WellKnownTypes.Empty</span>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_GetBackup_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.GetBackup*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_GetBackup_Google_Cloud_Spanner_Admin_Database_V1_GetBackupRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.GetBackup(Google.Cloud.Spanner.Admin.Database.V1.GetBackupRequest,Grpc.Core.ServerCallContext)">GetBackup(GetBackupRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata on a pending or completed [Backup][google.spanner.admin.database.v1.Backup].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; GetBackup(GetBackupRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.GetBackupRequest.html">GetBackupRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.Backup.html">Backup</a>&gt;</td>
         <td><p>The response to send back to the client (wrapped by a task).</p>
 </td>
       </tr>
@@ -312,11 +472,13 @@ be queried using the [Operations][google.longrunning.Operations] API.</p>
   </table>
   <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_GetIamPolicy_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.GetIamPolicy*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_GetIamPolicy_Google_Cloud_Iam_V1_GetIamPolicyRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.GetIamPolicy(Google.Cloud.Iam.V1.GetIamPolicyRequest,Grpc.Core.ServerCallContext)">GetIamPolicy(GetIamPolicyRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Gets the access control policy for a database resource.
-Returns an empty policy if a database exists but does
-not have a policy set.</p>
+  <div class="markdown level1 summary"><p>Gets the access control policy for a database or backup resource.
+Returns an empty policy if a database or backup exists but does not have a
+policy set.</p>
 <p>Authorization requires <code>spanner.databases.getIamPolicy</code> permission on
-[resource][google.iam.v1.GetIamPolicyRequest.resource].</p>
+[resource][google.iam.v1.GetIamPolicyRequest.resource].
+For backups, authorization requires <code>spanner.backups.getIamPolicy</code>
+permission on [resource][google.iam.v1.GetIamPolicyRequest.resource].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -358,6 +520,171 @@ not have a policy set.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Google.Cloud.Iam.V1.Policy</span>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_ListBackupOperations_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.ListBackupOperations*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_ListBackupOperations_Google_Cloud_Spanner_Admin_Database_V1_ListBackupOperationsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.ListBackupOperations(Google.Cloud.Spanner.Admin.Database.V1.ListBackupOperationsRequest,Grpc.Core.ServerCallContext)">ListBackupOperations(ListBackupOperationsRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists the backup [long-running operations][google.longrunning.Operation] in
+the given instance. A backup operation has a name of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;/backups/&amp;lt;backup&gt;/operations/&amp;lt;operation&gt;</code>.
+The long-running operation
+[metadata][google.longrunning.Operation.metadata] field type
+<code>metadata.type_url</code> describes the type of the metadata. Operations returned
+include those that have completed/failed/canceled within the last 7 days,
+and pending operations. Operations returned are ordered by
+<code>operation.metadata.value.progress.start_time</code> in descending order starting
+from the most recently started operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListBackupOperationsResponse&gt; ListBackupOperations(ListBackupOperationsRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.ListBackupOperationsRequest.html">ListBackupOperationsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.ListBackupOperationsResponse.html">ListBackupOperationsResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_ListBackups_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.ListBackups*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_ListBackups_Google_Cloud_Spanner_Admin_Database_V1_ListBackupsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.ListBackups(Google.Cloud.Spanner.Admin.Database.V1.ListBackupsRequest,Grpc.Core.ServerCallContext)">ListBackups(ListBackupsRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists completed and pending backups.
+Backups returned are ordered by <code>create_time</code> in descending order,
+starting from the most recent <code>create_time</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListBackupsResponse&gt; ListBackups(ListBackupsRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.ListBackupsRequest.html">ListBackupsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.ListBackupsResponse.html">ListBackupsResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_ListDatabaseOperations_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.ListDatabaseOperations*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_ListDatabaseOperations_Google_Cloud_Spanner_Admin_Database_V1_ListDatabaseOperationsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.ListDatabaseOperations(Google.Cloud.Spanner.Admin.Database.V1.ListDatabaseOperationsRequest,Grpc.Core.ServerCallContext)">ListDatabaseOperations(ListDatabaseOperationsRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists database [longrunning-operations][google.longrunning.Operation].
+A database operation has a name of the form
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;/databases/&amp;lt;database&gt;/operations/&amp;lt;operation&gt;</code>.
+The long-running operation
+[metadata][google.longrunning.Operation.metadata] field type
+<code>metadata.type_url</code> describes the type of the metadata. Operations returned
+include those that have completed/failed/canceled within the last 7 days,
+and pending operations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListDatabaseOperationsResponse&gt; ListDatabaseOperations(ListDatabaseOperationsRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.ListDatabaseOperationsRequest.html">ListDatabaseOperationsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.ListDatabaseOperationsResponse.html">ListDatabaseOperationsResponse</a>&gt;</td>
         <td><p>The response to send back to the client (wrapped by a task).</p>
 </td>
       </tr>
@@ -412,11 +739,78 @@ not have a policy set.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_RestoreDatabase_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.RestoreDatabase*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_RestoreDatabase_Google_Cloud_Spanner_Admin_Database_V1_RestoreDatabaseRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.RestoreDatabase(Google.Cloud.Spanner.Admin.Database.V1.RestoreDatabaseRequest,Grpc.Core.ServerCallContext)">RestoreDatabase(RestoreDatabaseRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Create a new database by restoring from a completed backup. The new
+database must be in the same project and in an instance with the same
+instance configuration as the instance containing
+the backup. The returned database [long-running
+operation][google.longrunning.Operation] has a name of the format
+<code>projects/&amp;lt;project&gt;/instances/&amp;lt;instance&gt;/databases/&amp;lt;database&gt;/operations/&amp;lt;operation_id&gt;</code>,
+and can be used to track the progress of the operation, and to cancel it.
+The [metadata][google.longrunning.Operation.metadata] field type is
+[RestoreDatabaseMetadata][google.spanner.admin.database.v1.RestoreDatabaseMetadata].
+The [response][google.longrunning.Operation.response] type
+is [Database][google.spanner.admin.database.v1.Database], if
+successful. Cancelling the returned operation will stop the restore and
+delete the database.
+There can be only one database being restored into an instance at a time.
+Once the restore operation completes, a new restore operation can be
+initiated, without waiting for the optimize operation associated with the
+first restore to complete.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; RestoreDatabase(RestoreDatabaseRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.RestoreDatabaseRequest.html">RestoreDatabaseRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Google.LongRunning.Operation</span>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_SetIamPolicy_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.SetIamPolicy*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_SetIamPolicy_Google_Cloud_Iam_V1_SetIamPolicyRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.SetIamPolicy(Google.Cloud.Iam.V1.SetIamPolicyRequest,Grpc.Core.ServerCallContext)">SetIamPolicy(SetIamPolicyRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Sets the access control policy on a database resource.
+  <div class="markdown level1 summary"><p>Sets the access control policy on a database or backup resource.
 Replaces any existing policy.</p>
 <p>Authorization requires <code>spanner.databases.setIamPolicy</code>
+permission on [resource][google.iam.v1.SetIamPolicyRequest.resource].
+For backups, authorization requires <code>spanner.backups.setIamPolicy</code>
 permission on [resource][google.iam.v1.SetIamPolicyRequest.resource].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -466,11 +860,15 @@ permission on [resource][google.iam.v1.SetIamPolicyRequest.resource].</p>
   </table>
   <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_TestIamPermissions_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.TestIamPermissions*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_TestIamPermissions_Google_Cloud_Iam_V1_TestIamPermissionsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.TestIamPermissions(Google.Cloud.Iam.V1.TestIamPermissionsRequest,Grpc.Core.ServerCallContext)">TestIamPermissions(TestIamPermissionsRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified database resource.</p>
+  <div class="markdown level1 summary"><p>Returns permissions that the caller has on the specified database or backup
+resource.</p>
 <p>Attempting this RPC on a non-existent Cloud Spanner database will
 result in a NOT_FOUND error if the user has
 <code>spanner.databases.list</code> permission on the containing Cloud
-Spanner instance. Otherwise returns an empty set of permissions.</p>
+Spanner instance. Otherwise returns an empty set of permissions.
+Calling this method on a backup that does not exist will
+result in a NOT_FOUND error if the user has
+<code>spanner.backups.list</code> permission on the containing instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -517,6 +915,55 @@ Spanner instance. Otherwise returns an empty set of permissions.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_UpdateBackup_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.UpdateBackup*"></a>
+  <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_UpdateBackup_Google_Cloud_Spanner_Admin_Database_V1_UpdateBackupRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.UpdateBackup(Google.Cloud.Spanner.Admin.Database.V1.UpdateBackupRequest,Grpc.Core.ServerCallContext)">UpdateBackup(UpdateBackupRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Updates a pending or completed [Backup][google.spanner.admin.database.v1.Backup].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; UpdateBackup(UpdateBackupRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.UpdateBackupRequest.html">UpdateBackupRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Spanner.Admin.Database.V1.Backup.html">Backup</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_UpdateDatabaseDdl_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.UpdateDatabaseDdl*"></a>
   <h4 id="Google_Cloud_Spanner_Admin_Database_V1_DatabaseAdmin_DatabaseAdminBase_UpdateDatabaseDdl_Google_Cloud_Spanner_Admin_Database_V1_UpdateDatabaseDdlRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Spanner.Admin.Database.V1.DatabaseAdmin.DatabaseAdminBase.UpdateDatabaseDdl(Google.Cloud.Spanner.Admin.Database.V1.UpdateDatabaseDdlRequest,Grpc.Core.ServerCallContext)">UpdateDatabaseDdl(UpdateDatabaseDdlRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Updates the schema of a Cloud Spanner database by
@@ -525,8 +972,7 @@ creating/altering/dropping tables, columns, indexes, etc. The returned
 the format <code>&amp;lt;database_name&gt;/operations/&amp;lt;operation_id&gt;</code> and can be used to
 track execution of the schema change(s). The
 [metadata][google.longrunning.Operation.metadata] field type is
-[UpdateDatabaseDdlMetadata][google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata].
-The operation has no response.</p>
+[UpdateDatabaseDdlMetadata][google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata].  The operation has no response.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
