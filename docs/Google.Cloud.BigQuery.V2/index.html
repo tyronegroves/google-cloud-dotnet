@@ -8,7 +8,7 @@
     <title>Google.Cloud.BigQuery.V2 | Google.Cloud.BigQuery.V2 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.BigQuery.V2 | Google.Cloud.BigQuery.V2 ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.BigQuery.V2</code> is a.NET client library for the <a href="https://cloud.google.com/bigquery/">Google BigQuery API</a>.
 It wraps the <code>Google.Apis.Bigquery.v2</code> generated library, providing a higher-level API to make it easier to use.</p>
 <p>Note:
-This documentation is for version <code>2.0.0-beta01</code> of the library.
+This documentation is for version <code>2.0.0-beta02</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.BigQuery.V2</code> package from NuGet. Add it to
@@ -74,7 +74,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>2.0.0-beta01</code>) of <code>Google.Cloud.BigQuery.V2</code>.</p>
+pre-release version (<code>2.0.0-beta02</code>) of <code>Google.Cloud.BigQuery.V2</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -224,8 +224,12 @@ TableSchema schema = new TableSchemaBuilder
 {
     { &quot;message&quot;, BigQueryDbType.String }
 }.Build();
-CreateTableOptions options = new CreateTableOptions { TimePartitioning = TimePartition.CreateDailyPartitioning(expiration: null) };
-BigQueryTable table = client.CreateTable(datasetId, tableId, schema, options);
+Table tableToCreate = new Table 
+{ 
+    TimePartitioning = TimePartition.CreateDailyPartitioning(expiration: null),
+    Schema = schema
+};
+BigQueryTable table = client.CreateTable(datasetId, tableId, tableToCreate);
 // Upload a single row to the table, using JSON rather than the streaming buffer, as
 // the _PARTITIONTIME column will be null while it&#39;s being served from the streaming buffer.
 // This code assumes the upload succeeds; normally, you should check the job results.
@@ -252,15 +256,16 @@ TableSchema schema = new TableSchemaBuilder
     { &quot;name&quot;, BigQueryDbType.String },
     { &quot;score&quot;, BigQueryDbType.Int64 }
 }.Build();
-CreateTableOptions options = new CreateTableOptions
+Table tableToCreate = new Table
 {
     ExternalDataConfiguration = new ExternalDataConfiguration
     {
         SourceFormat = &quot;CSV&quot;,
         SourceUris = new[] { $&quot;gs://{bucket}/{objectName}&quot; }
-    }
+    },
+    Schema = schema
 };
-BigQueryTable table = client.CreateTable(datasetId, tableId, schema, options);
+BigQueryTable table = client.CreateTable(datasetId, tableId, tableToCreate);
 BigQueryParameter[] parameters = null;
 List&lt;BigQueryRow&gt; rows = client.ExecuteQuery($&quot;SELECT name, score FROM {table} ORDER BY score&quot;, parameters).ToList();
 foreach (BigQueryRow row in rows)
