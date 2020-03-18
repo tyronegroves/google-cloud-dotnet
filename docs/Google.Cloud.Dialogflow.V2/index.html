@@ -8,7 +8,7 @@
     <title>Google.Cloud.Dialogflow.V2 | Google.Cloud.Dialogflow.V2 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Dialogflow.V2 | Google.Cloud.Dialogflow.V2 ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -64,16 +64,12 @@
 
 <p><code>Google.Cloud.Dialogflow.V2</code> is a.NET client library for the <a href="https://cloud.google.com/dialogflow-enterprise/">Google Cloud Dialogflow API</a>.</p>
 <p>Note:
-This documentation is for version <code>2.0.0-beta01</code> of the library.
+This documentation is for version <code>2.0.0</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Dialogflow.V2</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
-Please ensure you enable pre-release packages (for example, in the
-Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
-box). Some of the following samples might only work with the latest 
-pre-release version (<code>2.0.0-beta01</code>) of <code>Google.Cloud.Dialogflow.V2</code>.</p>
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -113,8 +109,50 @@ documentation</a> for more
 details around authentication, and the schema of requests and
 responses.</p>
 <p>The samples below provide a starting point for ASP.NET Core and
-ASP.NET.</p>
-<h3 id="web-hook-template-code-for-aspnet-core">Web hook template code for ASP.NET Core</h3>
+ASP.NET. Note that by default, ASP.NET Core 3.x does not allow
+synchronous IO, and the Google.Protobuf library does not yet support
+asynchronous parsing from a reader, so you need to asynchronously
+read the JSON directly as a string first, then parse the string.
+It&#39;s likely that in the future, Google.Protobuf will allow
+asynchronous parsing.</p>
+<h3 id="web-hook-template-code-for-aspnet-core-asynchronous-only">Web hook template code for ASP.NET Core (asynchronous-only)</h3>
+<pre><code class="lang-cs">public class DialogflowController : ControllerBase
+{
+    // A Protobuf JSON parser configured to ignore unknown fields. This makes
+    // the action robust against new fields being introduced by Dialogflow.
+    private static readonly JsonParser jsonParser =
+        new JsonParser(JsonParser.Settings.Default.WithIgnoreUnknownFields(true));
+
+    public async Task&lt;ContentResult&gt; DialogAction()
+    {
+        // Read the request JSON asynchronously, as the Google.Protobuf library
+        // doesn&#39;t (yet) support asynchronous parsing.
+        string requestJson;
+        using (TextReader reader = new StreamReader(Request.Body))
+        {
+            requestJson = await reader.ReadToEndAsync();
+        }
+
+        // Parse the body of the request using the Protobuf JSON parser,
+        // *not* Json.NET.
+        WebhookRequest request = jsonParser.Parse&lt;WebhookRequest&gt;(requestJson);
+
+        // Note: you should authenticate the request here.
+
+        // Populate the response
+        WebhookResponse response = new WebhookResponse
+        {
+            // ...
+        };
+
+        // Ask Protobuf to format the JSON to return.
+        // Again, we don&#39;t want to use Json.NET - it doesn&#39;t know how to handle Struct
+        // values etc.
+        string responseJson = response.ToString();
+        return Content(responseJson, &quot;application/json&quot;);
+    }
+}
+</code></pre><h3 id="web-hook-template-code-for-aspnet-core-synchronous-parsing">Web hook template code for ASP.NET Core (synchronous parsing)</h3>
 <pre><code class="lang-cs">public class DialogflowController : ControllerBase
 {
     // A Protobuf JSON parser configured to ignore unknown fields. This makes
@@ -127,7 +165,7 @@ ASP.NET.</p>
         // Parse the body of the request using the Protobuf JSON parser,
         // *not* Json.NET.
         WebhookRequest request;
-        using (var reader = new StreamReader(Request.Body))
+        using (TextReader reader = new StreamReader(Request.Body))
         {
             request = jsonParser.Parse&lt;WebhookRequest&gt;(reader);
         }
