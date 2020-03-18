@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Google.Api
    | Google.Cloud.OsLogin.Common ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -81,6 +81,9 @@
       <section><p>Generated advice about this change, used for providing more
 information about how a change will affect the existing service.</p>
 </section>
+      <h4><a class="xref" href="Google.Api.AnnotationsExtensions.html">AnnotationsExtensions</a></h4>
+      <section><p>Holder for extension identifiers generated from the top level of google/api/annotations.proto</p>
+</section>
       <h4><a class="xref" href="Google.Api.AnnotationsReflection.html">AnnotationsReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/annotations.proto</p>
 </section>
@@ -108,18 +111,6 @@ It&apos;s an error to include more than one kind of credential in a single
 request.</p>
 <p>If a method doesn&apos;t have any auth requirements, request credentials will be
 ignored.</p>
-</section>
-      <h4><a class="xref" href="Google.Api.AuthorizationConfig.html">AuthorizationConfig</a></h4>
-      <section><p>Configuration of authorization.</p>
-<p>This section determines the authorization provider, if unspecified, then no
-authorization check will be done.</p>
-<p>Example:</p>
-<p>experimental:
- authorization:
-   provider: firebaserules.googleapis.com</p>
-</section>
-      <h4><a class="xref" href="Google.Api.AuthorizationConfigReflection.html">AuthorizationConfigReflection</a></h4>
-      <section><p>Holder for reflection information generated from google/api/experimental/authorization_config.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.AuthProvider.html">AuthProvider</a></h4>
       <section><p>Configuration for an authentication provider, including support for
@@ -184,6 +175,9 @@ bill against consumer project).</p>
 </section>
       <h4><a class="xref" href="Google.Api.BillingReflection.html">BillingReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/billing.proto</p>
+</section>
+      <h4><a class="xref" href="Google.Api.ClientExtensions.html">ClientExtensions</a></h4>
+      <section><p>Holder for extension identifiers generated from the top level of google/api/client.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.ClientReflection.html">ClientReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/client.proto</p>
@@ -415,12 +409,8 @@ allow_cors: true</li>
       <h4><a class="xref" href="Google.Api.EndpointReflection.html">EndpointReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/endpoint.proto</p>
 </section>
-      <h4><a class="xref" href="Google.Api.Experimental.html">Experimental</a></h4>
-      <section><p>Experimental service configuration. These configuration options can
-only be used by whitelisted users.</p>
-</section>
-      <h4><a class="xref" href="Google.Api.ExperimentalReflection.html">ExperimentalReflection</a></h4>
-      <section><p>Holder for reflection information generated from google/api/experimental/experimental.proto</p>
+      <h4><a class="xref" href="Google.Api.FieldBehaviorExtensions.html">FieldBehaviorExtensions</a></h4>
+      <section><p>Holder for extension identifiers generated from the top level of google/api/field_behavior.proto</p>
 </section>
       <h4><a class="xref" href="Google.Api.FieldBehaviorReflection.html">FieldBehaviorReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/field_behavior.proto</p>
@@ -1066,32 +1056,115 @@ protobuf annotation or use in the service config), and associates the
 resource&apos;s schema, the resource type, and the pattern of the resource name.</p>
 <p>Example:</p>
 <p>message Topic {
-// Indicates this message defines a resource schema.
-// Declares the resource type in the format of {service}/{kind}.
-// For Kubernetes resources, the format is {api group}/{kind}.
-option (google.api.resource) = {
- type: &quot;pubsub.googleapis.com/Topic&quot;
- pattern: &quot;projects/{project}/topics/{topic}&quot;
-};
+ // Indicates this message defines a resource schema.
+ // Declares the resource type in the format of {service}/{kind}.
+ // For Kubernetes resources, the format is {api group}/{kind}.
+ option (google.api.resource) = {
+   type: &quot;pubsub.googleapis.com/Topic&quot;
+   name_descriptor: {
+     pattern: &quot;projects/{project}/topics/{topic}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+     parent_name_extractor: &quot;projects/{project}&quot;
+   }
+ };
 }</p>
+<p>The ResourceDescriptor Yaml config will look like:</p>
+<p>resources:</p>
+<ul>
+<li>type: &quot;pubsub.googleapis.com/Topic&quot;
+name_descriptor:<ul>
+<li>pattern: &quot;projects/{project}/topics/{topic}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+parent_name_extractor: &quot;projects/{project}&quot;</li>
+</ul>
+</li>
+</ul>
 <p>Sometimes, resources have multiple patterns, typically because they can
 live under multiple parents.</p>
 <p>Example:</p>
 <p>message LogEntry {
-option (google.api.resource) = {
- type: &quot;logging.googleapis.com/LogEntry&quot;
- pattern: &quot;projects/{project}/logs/{log}&quot;
- pattern: &quot;organizations/{organization}/logs/{log}&quot;
- pattern: &quot;folders/{folder}/logs/{log}&quot;
- pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;
-};
+ option (google.api.resource) = {
+   type: &quot;logging.googleapis.com/LogEntry&quot;
+   name_descriptor: {
+     pattern: &quot;projects/{project}/logs/{log}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+     parent_name_extractor: &quot;projects/{project}&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;folders/{folder}/logs/{log}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;
+     parent_name_extractor: &quot;folders/{folder}&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;organizations/{organization}/logs/{log}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Organization&quot;
+     parent_name_extractor: &quot;organizations/{organization}&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;
+     parent_type: &quot;billing.googleapis.com/BillingAccount&quot;
+     parent_name_extractor: &quot;billingAccounts/{billing_account}&quot;
+   }
+ };
 }</p>
+<p>The ResourceDescriptor Yaml config will look like:</p>
+<p>resources:</p>
+<ul>
+<li>type: &apos;logging.googleapis.com/LogEntry&apos;
+name_descriptor:<ul>
+<li>pattern: &quot;projects/{project}/logs/{log}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+parent_name_extractor: &quot;projects/{project}&quot;</li>
+<li>pattern: &quot;folders/{folder}/logs/{log}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;
+parent_name_extractor: &quot;folders/{folder}&quot;</li>
+<li>pattern: &quot;organizations/{organization}/logs/{log}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Organization&quot;
+parent_name_extractor: &quot;organizations/{organization}&quot;</li>
+<li>pattern: &quot;billingAccounts/{billing_account}/logs/{log}&quot;
+parent_type: &quot;billing.googleapis.com/BillingAccount&quot;
+parent_name_extractor: &quot;billingAccounts/{billing_account}&quot;</li>
+</ul>
+</li>
+</ul>
+<p>For flexible resources, the resource name doesn&apos;t contain parent names, but
+the resource itself has parents for policy evaluation.</p>
+<p>Example:</p>
+<p>message Shelf {
+ option (google.api.resource) = {
+   type: &quot;library.googleapis.com/Shelf&quot;
+   name_descriptor: {
+     pattern: &quot;shelves/{shelf}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;
+   }
+   name_descriptor: {
+     pattern: &quot;shelves/{shelf}&quot;
+     parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;
+   }
+ };
+}</p>
+<p>The ResourceDescriptor Yaml config will look like:</p>
+<p>resources:</p>
+<ul>
+<li>type: &apos;library.googleapis.com/Shelf&apos;
+name_descriptor:<ul>
+<li>pattern: &quot;shelves/{shelf}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Project&quot;</li>
+<li>pattern: &quot;shelves/{shelf}&quot;
+parent_type: &quot;cloudresourcemanager.googleapis.com/Folder&quot;</li>
+</ul>
+</li>
+</ul>
 </section>
       <h4><a class="xref" href="Google.Api.ResourceDescriptor.Types.html">ResourceDescriptor.Types</a></h4>
       <section><p>Container for nested types declared in the ResourceDescriptor message type.</p>
 </section>
+      <h4><a class="xref" href="Google.Api.ResourceExtensions.html">ResourceExtensions</a></h4>
+      <section><p>Holder for extension identifiers generated from the top level of google/api/resource.proto</p>
+</section>
       <h4><a class="xref" href="Google.Api.ResourceReference.html">ResourceReference</a></h4>
-      <section><p>Defines a proto annotation that describes a field that refers to a resource.</p>
+      <section><p>Defines a proto annotation that describes a string field that refers to
+an API resource.</p>
 </section>
       <h4><a class="xref" href="Google.Api.ResourceReflection.html">ResourceReflection</a></h4>
       <section><p>Holder for reflection information generated from google/api/resource.proto</p>
