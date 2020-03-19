@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum ExpirationType
+    <title>Enum EmulatorDetection
    | Google.Cloud.Translation.V2 </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum ExpirationType
+    <meta name="title" content="Enum EmulatorDetection
    | Google.Cloud.Translation.V2 ">
     <meta name="generator" content="docfx 2.50.0.0">
     
@@ -68,19 +68,21 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Google.Api.Gax.ExpirationType">
+            <article class="content wrap" id="_content" data-uid="Google.Api.Gax.EmulatorDetection">
   
   
-  <h1 id="Google_Api_Gax_ExpirationType" data-uid="Google.Api.Gax.ExpirationType" class="text-break">Enum ExpirationType
+  <h1 id="Google_Api_Gax_EmulatorDetection" data-uid="Google.Api.Gax.EmulatorDetection" class="text-break">Enum EmulatorDetection
   </h1>
-  <div class="markdown level0 summary"><p>The type of <a class="xref" href="Google.Api.Gax.Expiration.html">Expiration</a>; none, timeout or deadline.</p>
+  <div class="markdown level0 summary"><p>Specifies whether or not an emulator configuration should be present and 
+whether or not it should be used. Emulator configuration is usually specified
+through environment variables.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Api.Gax.html">Google.Api.Gax</a></h6>
   <h6><strong>Assembly</strong>: Google.Api.Gax.dll</h6>
-  <h5 id="Google_Api_Gax_ExpirationType_syntax">Syntax</h5>
+  <h5 id="Google_Api_Gax_EmulatorDetection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum ExpirationType</code></pre>
+    <pre><code class="lang-csharp hljs">public enum EmulatorDetection</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -93,18 +95,31 @@
     <thead>
     <tbody>
       <tr>
-        <td id="Google_Api_Gax_ExpirationType_Deadline">Deadline</td>
-        <td><p>Expiration is an absolute deadline, represented by a <span class="xref">System.DateTime</span>.</p>
+        <td id="Google_Api_Gax_EmulatorDetection_EmulatorOnly">EmulatorOnly</td>
+        <td><p>Always connect to the emulator, throwing an exception if no emulator
+configuration is detected.</p>
 </td>
       </tr>
       <tr>
-        <td id="Google_Api_Gax_ExpirationType_None">None</td>
-        <td><p>No expiration; an infinite timeout.</p>
+        <td id="Google_Api_Gax_EmulatorDetection_EmulatorOrProduction">EmulatorOrProduction</td>
+        <td><p>Connect to the emulator if an emulator configuration is detected,
+or production otherwise. This is a convenient option, but risks damage to
+production databases or running up unexpected bills if tests are accidentally
+run in production due to the emulator configuration being absent unexpectedly.
+(Using separate projects for production and testing is a best practice for
+preventing the first issue, but may be unrealistic for small or hobby projects.)</p>
 </td>
       </tr>
       <tr>
-        <td id="Google_Api_Gax_ExpirationType_Timeout">Timeout</td>
-        <td><p>Expiration is a relative timeout, represented by a <span class="xref">System.TimeSpan</span>.</p>
+        <td id="Google_Api_Gax_EmulatorDetection_None">None</td>
+        <td><p>Ignores the presence or absence of emulator configuration.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Google_Api_Gax_EmulatorDetection_ProductionOnly">ProductionOnly</td>
+        <td><p>Always connect to the production servers, but throw an exception if
+an emulator configuration is detected that would suggest connecting to
+an emulator is expected.</p>
 </td>
       </tr>
     </tbody>
