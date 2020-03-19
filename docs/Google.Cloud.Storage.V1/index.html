@@ -8,7 +8,7 @@
     <title>Google.Cloud.Storage.V1 | Google.Cloud.Storage.V1 </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Google.Cloud.Storage.V1 | Google.Cloud.Storage.V1 ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.Storage.V1</code> is a.NET client library for the <a href="https://cloud.google.com/storage/">Google Cloud Storage API</a>.
 It wraps the <code>Google.Apis.Storage.v1</code> generated library, providing a higher-level API to make it easier to use.</p>
 <p>Note:
-This documentation is for version <code>3.0.0-beta01</code> of the library.
+This documentation is for version <code>3.0.0-beta02</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Storage.V1</code> package from NuGet. Add it to
@@ -74,7 +74,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>3.0.0-beta01</code>) of <code>Google.Cloud.Storage.V1</code>.</p>
+pre-release version (<code>3.0.0-beta02</code>) of <code>Google.Cloud.Storage.V1</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -124,27 +124,27 @@ a Google account.</p>
 existing objects:</p>
 <pre><code class="lang-cs">// Create a signed URL which can be used to get a specific object for one hour.
 UrlSigner urlSigner = UrlSigner.FromServiceAccountCredential(credential);
-string url = urlSigner.Sign(
-    bucketName,
-    objectName,
-    TimeSpan.FromHours(1),
-    HttpMethod.Get);
+string url = urlSigner.Sign(bucketName, objectName, TimeSpan.FromHours(1));
 
 // Get the content at the created URL.
 HttpResponseMessage response = await httpClient.GetAsync(url);
 string content = await response.Content.ReadAsStringAsync();
 </code></pre><p>Or write-only access to put specific object content into a bucket:</p>
-<pre><code class="lang-cs">// Create a signed URL which allows the requester to PUT data with the text/plain content-type.
-UrlSigner urlSigner = UrlSigner.FromServiceAccountCredential(credential);
+<pre><code class="lang-cs">// Create a request template that will be used to create the signed URL.
 var destination = &quot;places/world.txt&quot;;
-string url = urlSigner.Sign(
-    bucketName,
-    destination,
-    TimeSpan.FromHours(1),
-    HttpMethod.Put,
-    contentHeaders: new Dictionary&lt;string, IEnumerable&lt;string&gt;&gt; {
+UrlSigner.RequestTemplate requestTemplate = UrlSigner.RequestTemplate
+    .FromBucket(bucketName)
+    .WithObjectName(destination)
+    .WithHttpMethod(HttpMethod.Put)
+    .WithContentHeaders(new Dictionary&lt;string, IEnumerable&lt;string&gt;&gt; 
+    {
         { &quot;Content-Type&quot;, new[] { &quot;text/plain&quot; } }
     });
+// Create options specifying for how long the signer URL will be valid.
+UrlSigner.Options options = UrlSigner.Options.FromDuration(TimeSpan.FromHours(1));
+// Create a signed URL which allows the requester to PUT data with the text/plain content-type.
+UrlSigner urlSigner = UrlSigner.FromServiceAccountCredential(credential);
+string url = urlSigner.Sign(requestTemplate, options);
 
 // Upload the content into the bucket using the signed URL.
 string source = &quot;world.txt&quot;;
@@ -229,6 +229,14 @@ IamService iamService = new IamService(new BaseClientService.Initializer
     HttpClientInitializer = iamCredential
 });
 
+// Create a request template that will be used to create the signed URL.
+UrlSigner.RequestTemplate requestTemplate = UrlSigner.RequestTemplate
+    .FromBucket(bucketName)
+    .WithObjectName(objectName)
+    .WithHttpMethod(HttpMethod.Get);
+// Create options specifying for how long the signer URL will be valid.
+UrlSigner.Options options = UrlSigner.Options.FromDuration(TimeSpan.FromHours(1));
+
 // Create a URL signer that will use the IAM service for signing. This signer is thread-safe,
 // and would typically occur as a dependency, e.g. in an ASP.NET Core controller, where the
 // same instance can be reused for each request.
@@ -236,11 +244,7 @@ IamServiceBlobSigner blobSigner = new IamServiceBlobSigner(iamService, serviceAc
 UrlSigner urlSigner = UrlSigner.FromBlobSigner(blobSigner);
 
 // Use the URL signer to sign a request for the test object for the next hour.
-string url = await urlSigner.SignAsync(
-    bucketName,
-    objectName,
-    TimeSpan.FromHours(1),
-    HttpMethod.Get);
+string url = await urlSigner.SignAsync(requestTemplate, options);
 
 // Prove we can fetch the content of the test object with a simple unauthenticated GET request.
 HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -260,13 +264,8 @@ for at most 7 days.</p>
 <pre><code class="lang-cs">// Create a signed URL which can be used to get a specific object for one hour,
 // using the V4 signing process.
 UrlSigner urlSigner = UrlSigner
-    .FromServiceAccountCredential(credential)
-    .WithSigningVersion(SigningVersion.V4);
-string url = urlSigner.Sign(
-    bucketName,
-    objectName,
-    TimeSpan.FromHours(1),
-    HttpMethod.Get);
+    .FromServiceAccountCredential(credential);
+string url = urlSigner.Sign(bucketName, objectName, TimeSpan.FromHours(1), signingVersion: SigningVersion.V4);
 
 // Get the content at the created URL.
 HttpResponseMessage response = await httpClient.GetAsync(url);
