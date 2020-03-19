@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ProfileServiceClient
    | Google.Cloud.Talent.V4Beta1 ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -1980,7 +1980,7 @@ Profile response = await profileServiceClient.GetProfileAsync(name);
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a> resources.</p>
 </td>
       </tr>
@@ -1993,12 +1993,119 @@ ProfileServiceClient profileServiceClient = ProfileServiceClient.Create();
 // Initialize request argument(s)
 ListProfilesRequest request = new ListProfilesRequest
 {
-    Parent = &quot;&quot;,
+    ParentAsTenantName = TenantName.FromProjectTenant(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;),
     ReadMask = new FieldMask(),
     Filter = &quot;&quot;,
 };
 // Make the request
 PagedEnumerable&lt;ListProfilesResponse, Profile&gt; response = profileServiceClient.ListProfiles(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Profile item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListProfilesResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Profile item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Profile&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Profile item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Talent_V4Beta1_ProfileServiceClient_ListProfiles_" data-uid="Google.Cloud.Talent.V4Beta1.ProfileServiceClient.ListProfiles*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_ProfileServiceClient_ListProfiles_Google_Cloud_Talent_V4Beta1_TenantName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.ProfileServiceClient.ListProfiles(Google.Cloud.Talent.V4Beta1.TenantName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListProfiles(TenantName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists profiles by filter. The order is unspecified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListProfilesResponse, Profile&gt; ListProfiles(TenantName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantName.html">TenantName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The resource name of the tenant under which the profile is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;. For example,
+&quot;projects/foo/tenants/bar&quot;.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Talent_V4Beta1_ProfileServiceClient_ListProfiles_Google_Cloud_Talent_V4Beta1_TenantName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ProfileServiceClient profileServiceClient = ProfileServiceClient.Create();
+// Initialize request argument(s)
+TenantName parent = TenantName.FromProjectTenant(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;);
+// Make the request
+PagedEnumerable&lt;ListProfilesResponse, Profile&gt; response = profileServiceClient.ListProfiles(parent);
 
 // Iterate over all response items, lazily performing RPCs as required
 foreach (Profile item in response)
@@ -2092,7 +2199,7 @@ page.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
         <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a> resources.</p>
 </td>
       </tr>
@@ -2103,7 +2210,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ProfileServiceClient profileServiceClient = ProfileServiceClient.Create();
 // Initialize request argument(s)
-string parent = &quot;&quot;;
+string parent = &quot;projects/[PROJECT]/tenants/[TENANT]&quot;;
 // Make the request
 PagedEnumerable&lt;ListProfilesResponse, Profile&gt; response = profileServiceClient.ListProfiles(parent);
 
@@ -2183,7 +2290,7 @@ string nextPageToken = singlePage.NextPageToken;
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a> resources.</p>
 </td>
       </tr>
@@ -2196,12 +2303,119 @@ ProfileServiceClient profileServiceClient = await ProfileServiceClient.CreateAsy
 // Initialize request argument(s)
 ListProfilesRequest request = new ListProfilesRequest
 {
-    Parent = &quot;&quot;,
+    ParentAsTenantName = TenantName.FromProjectTenant(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;),
     ReadMask = new FieldMask(),
     Filter = &quot;&quot;,
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListProfilesResponse, Profile&gt; response = profileServiceClient.ListProfilesAsync(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Profile item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListProfilesResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Profile item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Profile&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Profile item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Talent_V4Beta1_ProfileServiceClient_ListProfilesAsync_" data-uid="Google.Cloud.Talent.V4Beta1.ProfileServiceClient.ListProfilesAsync*"></a>
+  <h4 id="Google_Cloud_Talent_V4Beta1_ProfileServiceClient_ListProfilesAsync_Google_Cloud_Talent_V4Beta1_TenantName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Talent.V4Beta1.ProfileServiceClient.ListProfilesAsync(Google.Cloud.Talent.V4Beta1.TenantName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListProfilesAsync(TenantName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists profiles by filter. The order is unspecified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListProfilesResponse, Profile&gt; ListProfilesAsync(TenantName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Talent.V4Beta1.TenantName.html">TenantName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The resource name of the tenant under which the profile is created.</p>
+<p>The format is &quot;projects/{project_id}/tenants/{tenant_id}&quot;. For example,
+&quot;projects/foo/tenants/bar&quot;.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Talent_V4Beta1_ProfileServiceClient_ListProfilesAsync_Google_Cloud_Talent_V4Beta1_TenantName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ProfileServiceClient profileServiceClient = await ProfileServiceClient.CreateAsync();
+// Initialize request argument(s)
+TenantName parent = TenantName.FromProjectTenant(&quot;[PROJECT]&quot;, &quot;[TENANT]&quot;);
+// Make the request
+PagedAsyncEnumerable&lt;ListProfilesResponse, Profile&gt; response = profileServiceClient.ListProfilesAsync(parent);
 
 // Iterate over all response items, lazily performing RPCs as required
 await response.ForEachAsync((Profile item) =&gt;
@@ -2295,7 +2509,7 @@ page.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Talent.V4Beta1.ListProfilesResponse.html">ListProfilesResponse</a>, <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a>&gt;</td>
         <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Talent.V4Beta1.Profile.html">Profile</a> resources.</p>
 </td>
       </tr>
@@ -2306,7 +2520,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 ProfileServiceClient profileServiceClient = await ProfileServiceClient.CreateAsync();
 // Initialize request argument(s)
-string parent = &quot;&quot;;
+string parent = &quot;projects/[PROJECT]/tenants/[TENANT]&quot;;
 // Make the request
 PagedAsyncEnumerable&lt;ListProfilesResponse, Profile&gt; response = profileServiceClient.ListProfilesAsync(parent);
 
