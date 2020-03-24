@@ -8,7 +8,7 @@
     <title>Call settings | Google Cloud APIs </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Call settings | Google Cloud APIs ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -79,8 +79,8 @@ for descriptions of the available properties.</p>
 <p>The underlying gRPC API uses
 <a href="http://www.grpc.io/grpc/csharp/html/T_Grpc_Core_CallOptions.htm">CallOptions</a>,
 which provides a slightly reduced feature set compared to <code>CallSettings</code>.
-Client libraries automatically construct a <code>CallOptions</code> from <code>Callsettings</code>
-to <code>CallOptions</code> as required.</p>
+Client libraries automatically construct a <code>CallOptions</code> from <code>CallSettings</code>
+as required.</p>
 <p>There are three distinct places where <code>CallSettings</code> may optionally be provided:</p>
 <ul>
 <li>When calling an RPC method <em>(highest priority)</em>.</li>
@@ -97,7 +97,7 @@ because it is often useful to be able to easily specify common properties to use
 for all RPC invocations. For example, a common set of
 <a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_HeaderMutation">headers</a>;
 or a common
-<a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_Timing">deadline</a>
+<a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_Expiration">expiration (deadline)</a>
 for multiple RPC invocations.</p>
 <h2 id="examples">Examples</h2>
 <h3 id="per-rpc-highest-priority">Per-RPC (highest priority)</h3>
@@ -164,76 +164,53 @@ Topic topic = client.CreateTopic(topicName, CallSettings.FromCancellationToken(c
 </code></pre><h2 id="defaults">Defaults</h2>
 <p>By default there is a per-RPC-method client configuration that specifies a sensible
 retry policy for every method. See, for example,
-<a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherServiceApiSettings.html#Google_Cloud_PubSub_V1_PublisherServiceApiSettings_CreateTopicSettings">PublisherServiceApiSettings.CreateTopicSettings</a></p>
-<h2 id="timing-settings">Timing settings</h2>
-<p>The timing settings for an RPC are specified using <a href="../api/Google.Api.Gax.Grpc.CallTiming.html">CallTiming</a>.
-This is either a simple <a href="../api/Google.Api.Gax.Expiration.html">Expiration</a>,
-or a <a href="../api/Google.Api.Gax.Grpc.RetrySettings.html">RetrySettings</a>. <code>RetrySettings</code> uses an <code>Expiration</code> as well,
-so let&#39;s look at <code>Expiration</code> first.</p>
-<h3 id="expiration">Expiration</h3>
-<p>An expiration specifies the latest point at which you&#39;re willing for an operation to complete. It can be either
-a <em>timeout</em> (relative to the start time, e.g. &quot;it can&#39;t take more than 5 seconds&quot;) or a <em>deadline</em> (which is
+<a href="../Google.Cloud.PubSub.V1/api/Google.Cloud.PubSub.V1.PublisherServiceApiSettings.html#Google_Cloud_PubSub_V1_PublisherServiceApiSettings_CreateTopicSettings">PublisherServiceApiSettings.CreateTopicSettings</a>.</p>
+<h2 id="expiration">Expiration</h2>
+<p>CallSettings has an <a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_Expiration">Expiration</a> property,
+of type <a href="../api/Google.Api.Gax.Expiration.html">Expiration</a> which defines when an operation will fail due to timing out.
+This can be either a <em>timeout</em> (relative to the start time, e.g. &quot;it can&#39;t take more than 5 seconds&quot;) or a <em>deadline</em> (which is
 absolute, e.g. &quot;it must finish by 2016-12-07 14:55:00Z&quot;). You create an <code>Expiration</code> by specifying that timeout
-or deadline, with the <code>Expiration.FromTimeout(TimeSpan)</code> and <code>Expiration.FromDeadline(DateTime)</code> methods.
-Alternatively, you can use <code>Expiration.None</code>, which is an infinite timeout. A timeout is always relative to the
+or deadline, with the <a href="../api/Google.Api.Gax.Expiration.html#Google_Api_Gax_Expiration_FromTimeout_System_TimeSpan_">Expiration.FromTimeout(TimeSpan)</a>
+and <a href="../api/Google.Api.Gax.Expiration.html#Google_Api_Gax_Expiration_FromDeadline_System_DateTime_">Expiration.FromDeadline(DateTime)</a> methods.
+Alternatively, you can use <a href="../api/Google.Api.Gax.Expiration.html#Google_Api_Gax_Expiration_None">Expiration.None</a>, which is an infinite timeout.</p>
+<p>A timeout is always relative to the
 start of an operation, not the time the expiration is created. So for example, if you create an expiration of
 5 seconds, you can use that as often as you like, and it will always mean that the operation you&#39;re applying
 the expiration to has 5 seconds to complete.</p>
 <p>Note that deadline expirations are most commonly used when the same deadline is passed to multiple calls:
-if you have to perform 5 different RPCs, and you know your total work needs to finish at a particular
-point but you don&#39;t care how those 5 RPCs use up your time budget between them, passing in the same
+if you have to perform 5 different operations, and you know your total work needs to finish at a particular
+point but you don&#39;t care how those 5 operations use up your time budget between them, passing in the same
 deadline to all 5 works well. This is restricted to one unit of work, however - you&#39;d need to calculate a new
 deadline for the next unit of work, whereas a relative timeout may be valid for all calls. You should think
 carefully about your own requirements - and please file a feature request if we don&#39;t provide enough functionality
 for you to meet them.</p>
-<h3 id="retrysettings">RetrySettings</h3>
-<p>Retry is inherently complicated. There will be potentially multiple RPCs made, each with its own expiration, some
-back-off between RPCs, and the situations under which it&#39;s reasonable to retry. The <a href="../api/Google.Api.Gax.Grpc.RetrySettings.html">RetrySettings</a> exposes this via the following properties (all set by the constructor):</p>
+<p>Note that the expiration applies to the operation as a whole. This might involve making multiple RPCs, due to retry
+which is discussed below.</p>
+<h3 id="retry">Retry</h3>
+<p>The client libraries can transparently retry operations if it is deemed safe to do so (typically read operations),
+based on the <a href="../api/Google.Api.Gax.Grpc.CallSettings.html#Google_Api_Gax_Grpc_CallSettings_Retry">CallSettings.Retry</a> property,
+of type <a href="../api/Google.Api.Gax.Grpc.RetrySettings.html">RetrySettings</a>.</p>
+<p>RetrySettings configure three aspects of retry:</p>
 <ul>
-<li><code>TimeoutBackoff</code>: how the expiration for each individual RPC varies
-(for example, the first RPC might have a timeout
-of 1s, then the second RPC might have 2s etc)</li>
-<li><code>RetryBackoff</code>: how the <em>delay</em> between each failed RPC varies
-(for example, we might wait for 0.5s after the first RPC, then 0.75s after the second, etc)</li>
-<li><code>RetryFilter</code>: a predicate which is consulted after each failed RPC to see whether that failure
-suggests we should retry. For example, we might retry on timeouts but not on a &quot;resource not found&quot; failure.</li>
-<li><code>TotalExpiration</code>: the overall expiration for the whole operation. For example, we might allow multiple RPCs
-to attempt an operation, but the whole operation must have completed within 10 seconds or we&#39;ll fail with a timeout.</li>
-<li><p><code>DelayJitter</code>: This allows the precise amount of delay (broadly specified by <code>RetryBackoff</code>) to vary randomly
-a little. This avoids multiple clients accidentally synchronizing their retries and periodically hitting
-a service very hard. This is exposed for testability, but is unlikely to need tweaking in production use.</p>
-<p><code>TimeoutBackoff</code> and <code>RetryBackoff</code> are both expressed in terms of a <a href="../api/Google.Api.Gax.Grpc.BackoffSettings.html">BackoffSettings</a>, which consists of an initial timeout, a maximum timeout, and a multiplier.
-The multiplier is applied to the &quot;current&quot; timeout to determine the &quot;next&quot; timeout, capped at the maximum.</p>
-<p>All of this is probably best demonstrated with a worked example. Consider the following settings:</p>
-<pre><code class="lang-cs">// Each delay is double the previous one, with a maximum of 5s.
-// The first delay is 1s, then 2s, then 4s, then 5s, then 5s, etc.
-// Only aborted RPCs are retried in this example.
-RetrySettings settings = RetrySettings.FromExponentialBackoff(
-    maxAttempts: 10,
-    initialBackoff: TimeSpan.FromSeconds(1),
-    maxBackoff: TimeSpan.FromSeconds(5),
-    backoffMultiplier: 2.0,
-    retryFilter: RetrySettings.FilterForStatusCodes(StatusCode.Aborted));
-</code></pre><p>Here we&#39;re using the default RPC filter and jitter for simplicity. Suppose we have a server which returns a
-&quot;not found&quot; error (which is retriable) after 2 seconds each time we make an RPC. The timing with the above settings looks like this (assuming there&#39;s no actual jitter):</p>
-<ul>
-<li>t=0s: Send RPC 1, timeout=4s (the inital value in `timeoutBackoff)</li>
-<li>t=2s: RPC 1 completes with &quot;not found&quot;: we need to retry. Delay for 1s (the initial value in <code>retryBackoff</code>)</li>
-<li>t=3s: Send RPC 2, timeout=6s (1.5x the previous timeout backoff)</li>
-<li>t=5s: RPC 2 completes with &quot;not found&quot;: we need to retry. Delay for 2s (doubling the previous retry backoff)</li>
-<li>t=7s: Send RPC 3, timeout=9s (1.5x the previous timeout backoff)</li>
-<li>t=9s: RPC 3 completes with &quot;not found&quot;: we need to retry. Delay for 4s (doubling the previous retry backoff)</li>
-<li>t=13s: Send RPC 4, timeout=10s (1.5x the previous timeout backoff, but capped at 10s)</li>
-<li>t=15s: RPC 4 completes with &quot;not found&quot;: we need to retry. Delay for 5s (doubling the previous retry backoff, but capped at 5s)</li>
-<li>t=20s: Send RPC 5, timeout=10s (we&#39;ve hit the timeout backoff cap)</li>
-<li>t=22s: RPC 5 completes with &quot;not found&quot;: we need to retry. Delay for 5s (we&#39;ve hit the retry backoff cap)</li>
-<li>t=27s: Send RPC 6, timeout=<strong>3s</strong> (it would be 10s, but we know our overall expiration is 30s, so it&#39;s limited by that)</li>
-<li>t=29s: RPC 6 completes with &quot;not found&quot;: we <em>would</em> delay by 5s and retry, but with an overall expiration of 30s, we know
-we won&#39;t complete in time, so immediately throw an exception</li>
+<li>When retry can be attempted, which is conditional on the exception thrown by a failed attempt</li>
+<li>A maximum number of attempts to perform</li>
+<li>How long to wait between retries (the backoff)</li>
 </ul>
-<p>Currently there&#39;s no simple way of limiting to a <em>number</em> of retries - it&#39;s only governed by time. We&#39;ll consider adding
-a count limit in a future version.</p>
-</li>
+<p>The first two of these, represented by the <code>RetryFilter</code>
+and <code>MaxAttempts</code> properties, are reasonably simple.</p>
+<p>The backoff between retries is more complex. It consists of:</p>
+<ul>
+<li>An initial backoff to be used after the first attempt</li>
+<li>A multiplier for the backoff (e.g. 2.0 to double the backoff each time, or 1.0 for a constant backoff)</li>
+<li>A maximum backoff</li>
+<li>A jitter to apply to each backoff to determine the actual amount of time to delay. This avoids multiple client
+accidentally synchronizing their retries and periodically hitting
+a service very hard. This is exposed for testability, but is unlikely to need tweaking in production use.</li>
+</ul>
+<p><code>RetrySettings</code> instances are created through two factory methods:</p>
+<ul>
+<li><a href="../api/Google.Api.Gax.Grpc.RetrySettings.html#Google_Api_Gax_Grpc_RetrySettings_FromConstantBackoff_System_Int32_System_TimeSpan_System_Predicate_System_Exception__Google_Api_Gax_Grpc_RetrySettings_IJitter_">RetrySettings.FromConstantBackoff</a> which uses a multiplier of 1 and no maximum (because it&#39;s constant)</li>
+<li><a href="../api/Google.Api.Gax.Grpc.RetrySettings.html#Google_Api_Gax_Grpc_RetrySettings_FromExponentialBackoff_System_Int32_System_TimeSpan_System_TimeSpan_System_Double_System_Predicate_System_Exception__Google_Api_Gax_Grpc_RetrySettings_IJitter_">RetrySettings.FromExponentialBackoff</a> which allows every aspect to be specified</li>
 </ul>
 </article>
           </div>

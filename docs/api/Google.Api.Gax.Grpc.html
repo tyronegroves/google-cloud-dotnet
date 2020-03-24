@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace Google.Api.Gax.Grpc
    | Google Cloud APIs ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -89,9 +89,10 @@ abstractions, applying call settings as required.</p>
       <section><p>Bridge between a server streaming RPC method and higher level
 abstractions, applying call settings as required.</p>
 </section>
-      <h4><a class="xref" href="Google.Api.Gax.Grpc.BackoffSettings.html">BackoffSettings</a></h4>
-      <section><p>Backoff settings used within <a class="xref" href="Google.Api.Gax.Grpc.RetrySettings.html">RetrySettings</a> to implement
-exponential backoff.</p>
+      <h4><a class="xref" href="Google.Api.Gax.Grpc.AsyncResponseStream-1.html">AsyncResponseStream&lt;TResponse&gt;</a></h4>
+      <section><p>An adapter from the gRPC stream representation (<span class="xref">Grpc.Core.IAsyncStreamReader`1</span>) to <span class="xref">System.Collections.Generic.IAsyncEnumerable&lt;T&gt;</span>
+and <span class="xref">System.Collections.Generic.IAsyncEnumerator&lt;T&gt;</span>. Note that <a class="xref" href="Google.Api.Gax.Grpc.AsyncResponseStream-1.html#Google_Api_Gax_Grpc_AsyncResponseStream_1_GetAsyncEnumerator_System_Threading_CancellationToken_">GetAsyncEnumerator(CancellationToken)</a> can only
+be called once per instance due to the &quot;only iterate once&quot; nature of the response stream.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.BidirectionalStreamingBase-2.html">BidirectionalStreamingBase&lt;TRequest, TResponse&gt;</a></h4>
       <section><p>Base class for bidirectional streaming RPC methods.</p>
@@ -110,16 +111,25 @@ restriction by buffering messages (and the completion signal) up to a given capa
       <section><p>Extension methods for <a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a>.
 All methods accept a null first parameter as valid unless stated otherwise.</p>
 </section>
-      <h4><a class="xref" href="Google.Api.Gax.Grpc.CallTiming.html">CallTiming</a></h4>
-      <section><p>An RPC simple expiration; or retry settings.</p>
-</section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.ChannelPool.html">ChannelPool</a></h4>
       <section><p>A pool of channels for the same service, but with potentially different endpoints. Each endpoint
 has a single channel. All channels created by this pool use default application credentials.
 This class is thread-safe.</p>
 </section>
+      <h4><a class="xref" href="Google.Api.Gax.Grpc.ClientBuilderBase-1.html">ClientBuilderBase&lt;TClient&gt;</a></h4>
+      <section><p>Base class for API-specific builders.</p>
+</section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.ClientHelper.html">ClientHelper</a></h4>
       <section><p>Common helper code shared by clients.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.Gax.Grpc.GrpcAdapter.html">GrpcAdapter</a></h4>
+      <section><p>Interoperability layer for the aspects of gRPC that aren&apos;t covered by Grpc.Core.Api.</p>
+</section>
+      <h4><a class="xref" href="Google.Api.Gax.Grpc.GrpcChannelOptions.html">GrpcChannelOptions</a></h4>
+      <section><p>Portable abstraction of channel options</p>
+</section>
+      <h4><a class="xref" href="Google.Api.Gax.Grpc.GrpcChannelOptions.CustomOption.html">GrpcChannelOptions.CustomOption</a></h4>
+      <section><p>A custom option, with a name and a value of either a 32-bit integer or a string.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.GrpcPagedAsyncEnumerable-3.html">GrpcPagedAsyncEnumerable&lt;TRequest, TResponse, TResource&gt;</a></h4>
       <section><p>An asynchronous sequence of resources, obtained lazily via API operations which retrieve a page at a time.</p>
@@ -132,15 +142,15 @@ This class is thread-safe.</p>
 See the <a href="https://cloud.google.com/logging/docs/api/v2/resource-list">
 Monitored Resource List</a> for details.</p>
 </section>
+      <h4><a class="xref" href="Google.Api.Gax.Grpc.RetryAttempt.html">RetryAttempt</a></h4>
+      <section><p>An attempt at a retriable operation. Use <a class="xref" href="Google.Api.Gax.Grpc.RetryAttempt.html#Google_Api_Gax_Grpc_RetryAttempt_CreateRetrySequence_Google_Api_Gax_Grpc_RetrySettings_Google_Api_Gax_IScheduler_System_Nullable_System_DateTime__Google_Api_Gax_IClock_System_Nullable_System_TimeSpan__">CreateRetrySequence(RetrySettings, IScheduler, Nullable&lt;DateTime&gt;, IClock, Nullable&lt;TimeSpan&gt;)</a>
+or <a class="xref" href="Google.Api.Gax.Grpc.RetryAttempt.html#Google_Api_Gax_Grpc_RetryAttempt_CreateRetrySequence_Google_Api_Gax_Grpc_RetrySettings_Google_Api_Gax_IScheduler_System_Nullable_System_TimeSpan__">CreateRetrySequence(RetrySettings, IScheduler, Nullable&lt;TimeSpan&gt;)</a> to create a sequence of attempts that follow the specified settings.</p>
+</section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.RetrySettings.html">RetrySettings</a></h4>
       <section><p>Settings for retrying RPCs.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.ServerStreamingBase-1.html">ServerStreamingBase&lt;TResponse&gt;</a></h4>
       <section><p>Base class for server streaming RPC methods.</p>
-</section>
-      <h4><a class="xref" href="Google.Api.Gax.Grpc.ServiceEndpoint.html">ServiceEndpoint</a></h4>
-      <section><p>Settings specifying a service endpoint in the form of a host name and port.
-This class is immutable and thread-safe.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.ServiceSettingsBase.html">ServiceSettingsBase</a></h4>
       <section><p>Common settings for all services.</p>
@@ -155,12 +165,12 @@ This class is immutable and thread-safe.</p>
 </section>
       <h4><a class="xref" href="Google.Api.Gax.Grpc.RetrySettings.IJitter.html">RetrySettings.IJitter</a></h4>
       <section><p>Provides a mechanism for applying jitter to delays between retries.
-See the <a class="xref" href="Google.Api.Gax.Grpc.RetrySettings.html#Google_Api_Gax_Grpc_RetrySettings_DelayJitter">DelayJitter</a> property for more information.</p>
+See the <a class="xref" href="Google.Api.Gax.Grpc.RetrySettings.html#Google_Api_Gax_Grpc_RetrySettings_BackoffJitter">BackoffJitter</a> property for more information.</p>
 </section>
     <h3 id="enums">Enums
   </h3>
-      <h4><a class="xref" href="Google.Api.Gax.Grpc.CallTimingType.html">CallTimingType</a></h4>
-      <section><p>The type of <a class="xref" href="Google.Api.Gax.Grpc.CallTiming.html">CallTiming</a>; retry or expiration (no retry).</p>
+      <h4><a class="xref" href="Google.Api.Gax.Grpc.GrpcChannelOptions.CustomOption.OptionType.html">GrpcChannelOptions.CustomOption.OptionType</a></h4>
+      <section><p>Possible types of value within a custom option.</p>
 </section>
 </article>
           </div>

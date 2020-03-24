@@ -8,7 +8,7 @@
     <title>Frequently Asked Questions | Google Cloud APIs </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Frequently Asked Questions | Google Cloud APIs ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -63,10 +63,7 @@
 <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
 
 <h2 id="how-can-i-use-non-default-credentials-for-grpc-based-apis">How can I use non-default credentials for gRPC-based APIs?</h2>
-<p>One option - and an option that has worked for these APIs since the
-start - is to create your own channel based on gRPC channel
-credentials, and pass that to the <code>Create</code> method.</p>
-<p>However, the libraries now implement a <em>client builder</em> pattern to make
+<p>The libraries implement a <em>client builder</em> pattern to make
 life considerably simpler when you wish to specify different
 credentials or a different API endpoint.</p>
 <p>The general pattern is to create a builder (using the same name as
@@ -305,35 +302,13 @@ target.Headers[&quot;X-Custom-Header1&quot;] = &quot;Value1&quot;;
 target.Headers[&quot;X-Custom-Header2&quot;] = &quot;Value2&quot;;
 </code></pre><h2 id="why-is-systementrypointnotfoundexception-being-thrown">Why is System.EntryPointNotFoundException being thrown?</h2>
 <p>While there are various <em>potential</em> causes for this, the most likely
-(as of summer 2019) is that you have a dependency on Grpc.Core 2.x,
-but our libraries still depend on Grpc.Core 1.x.</p>
-<p>In August 2019, Grpc.Core 2.23.0 was released. The previous version
-of Grpc.Core was 1.22.0, which is what the Google Cloud client
-libraries depend on. As SemVer would suggest, versions 1.x and 2.x
-of Grpc.Core are not compatible with each other. The incompatibility
-is around how streaming operations are consumed, and is a side-effect
-of C# 8 gaining the ability to iterate over asynchronous sequences.
-Obviously a breaking change is never pleasant, but this was thoroughly
-discussed, and this was the result.</p>
-<p>While the Google Cloud client libraries depend on Grpc.Core 1.x, if
-your project takes a dependency on Grpc.Core 2.x, you will see this
-exception if you use streaming operations. (If you don&#39;t use any
-streaming operations you <em>may</em> not see a problem, but we still
-strongly discourage you from trying.)</p>
-<p>Our plan to mitigate this issue is:</p>
-<ul>
-<li>Use version ranges for Grpc.Core so that the break is at build time
-rather than execution time, until the next steps are ready. (Done)</li>
-<li>Migrate to depend on Grpc.Core 2.x within the Google Cloud client
-libraries.</li>
-<li>Rerelease all libraries with a major version bump, as taking a major
-dependency version bump is a transitive breaking change.</li>
-<li>Update this FAQ entry to explain why the major bump occurred.</li>
-</ul>
-<p>We&#39;re collecting a few breaking changes to make, all at the same
-time, so that we can get away with a single major version bump.</p>
-<p>See <a href="major-version.html">the major version planning document</a> for more
-details.</p>
+cause is that you have a dependency on Grpc.Core 2.x, but you&#39;re
+still depending on Google Cloud libraries that depend on Grpc.Core
+1.x.</p>
+<p>We have now released client libraries (some of them still in beta,
+but most GA) which use GAX 3.x, which depends on Grpc.Core 2.x. If
+you update to the latest version of the client library, that should
+fix the issue.</p>
 </article>
           </div>
           

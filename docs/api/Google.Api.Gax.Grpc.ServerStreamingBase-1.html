@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ServerStreamingBase&lt;TResponse&gt;
    | Google Cloud APIs ">
-    <meta name="generator" content="docfx 2.39.1.0">
+    <meta name="generator" content="docfx 2.50.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -153,16 +153,20 @@
       </tr>
     </tbody>
   </table>
-  <a id="Google_Api_Gax_Grpc_ServerStreamingBase_1_ResponseStream_" data-uid="Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream*"></a>
-  <h4 id="Google_Api_Gax_Grpc_ServerStreamingBase_1_ResponseStream" data-uid="Google.Api.Gax.Grpc.ServerStreamingBase`1.ResponseStream">ResponseStream</h4>
-  <div class="markdown level1 summary"><p>Async stream to read streaming responses.</p>
+  <h3 id="methods">Methods
+  </h3>
+  <a id="Google_Api_Gax_Grpc_ServerStreamingBase_1_GetResponseStream_" data-uid="Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream*"></a>
+  <h4 id="Google_Api_Gax_Grpc_ServerStreamingBase_1_GetResponseStream" data-uid="Google.Api.Gax.Grpc.ServerStreamingBase`1.GetResponseStream">GetResponseStream()</h4>
+  <div class="markdown level1 summary"><p>Async stream to read streaming responses, exposed as an async sequence.
+The default implementation will use <a class="xref" href="Google.Api.Gax.Grpc.ServerStreamingBase-1.html#Google_Api_Gax_Grpc_ServerStreamingBase_1_GrpcCall">GrpcCall</a> to extract a response
+stream, and adapt it to <a class="xref" href="Google.Api.Gax.Grpc.AsyncResponseStream-1.html">AsyncResponseStream&lt;TResponse&gt;</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual IAsyncEnumerator&lt;TResponse&gt; ResponseStream { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual AsyncResponseStream&lt;TResponse&gt; GetResponseStream()</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -172,11 +176,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IAsyncEnumerator</span>&lt;TResponse&gt;</td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.AsyncResponseStream-1.html">AsyncResponseStream</a>&lt;TResponse&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Google_Api_Gax_Grpc_ServerStreamingBase_1_GetResponseStream_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If this method is called more than once, all the returned enumerators will be enumerating over the
+same underlying response stream, which may cause confusion. Additionally, the sequence returned by
+this method can only be iterated over a single time. Attempting to iterate more than once will cause
+an <span class="xref">System.InvalidOperationException</span>.</p>
+</div>
 </article>
           </div>
           
