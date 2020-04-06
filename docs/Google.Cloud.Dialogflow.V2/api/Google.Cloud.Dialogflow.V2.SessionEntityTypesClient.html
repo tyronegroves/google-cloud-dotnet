@@ -317,11 +317,87 @@ SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Cre
 // Initialize request argument(s)
 CreateSessionEntityTypeRequest request = new CreateSessionEntityTypeRequest
 {
-    Parent = &quot;&quot;,
+    ParentAsSessionName = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;),
     SessionEntityType = new SessionEntityType(),
 };
 // Make the request
 SessionEntityType response = sessionEntityTypesClient.CreateSessionEntityType(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityType*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityType_Google_Cloud_Dialogflow_V2_SessionName_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityType(Google.Cloud.Dialogflow.V2.SessionName,Google.Cloud.Dialogflow.V2.SessionEntityType,Google.Api.Gax.Grpc.CallSettings)">CreateSessionEntityType(SessionName, SessionEntityType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a session entity type.</p>
+<p>If the specified session entity type already exists, overrides the session
+entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SessionEntityType CreateSessionEntityType(SessionName parent, SessionEntityType sessionEntityType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionName.html">SessionName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The session to create a session entity type for.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><span class="parametername">sessionEntityType</span></td>
+        <td><p>Required. The session entity type to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityType_Google_Cloud_Dialogflow_V2_SessionName_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
+// Initialize request argument(s)
+SessionName parent = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;);
+SessionEntityType sessionEntityType = new SessionEntityType();
+// Make the request
+SessionEntityType response = sessionEntityTypesClient.CreateSessionEntityType(parent, sessionEntityType);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityType*"></a>
@@ -352,7 +428,11 @@ with Google Assistant integration.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The session to create a session entity type for.
-Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.</p>
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -390,7 +470,7 @@ Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;am
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
 // Initialize request argument(s)
-string parent = &quot;&quot;;
+string parent = &quot;projects/[PROJECT]/agent/sessions/[SESSION]&quot;;
 SessionEntityType sessionEntityType = new SessionEntityType();
 // Make the request
 SessionEntityType response = sessionEntityTypesClient.CreateSessionEntityType(parent, sessionEntityType);
@@ -457,7 +537,7 @@ SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClie
 // Initialize request argument(s)
 CreateSessionEntityTypeRequest request = new CreateSessionEntityTypeRequest
 {
-    Parent = &quot;&quot;,
+    ParentAsSessionName = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;),
     SessionEntityType = new SessionEntityType(),
 };
 // Make the request
@@ -525,11 +605,163 @@ SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClie
 // Initialize request argument(s)
 CreateSessionEntityTypeRequest request = new CreateSessionEntityTypeRequest
 {
-    Parent = &quot;&quot;,
+    ParentAsSessionName = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;),
     SessionEntityType = new SessionEntityType(),
 };
 // Make the request
 SessionEntityType response = await sessionEntityTypesClient.CreateSessionEntityTypeAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionName_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionName,Google.Cloud.Dialogflow.V2.SessionEntityType,Google.Api.Gax.Grpc.CallSettings)">CreateSessionEntityTypeAsync(SessionName, SessionEntityType, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a session entity type.</p>
+<p>If the specified session entity type already exists, overrides the session
+entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; CreateSessionEntityTypeAsync(SessionName parent, SessionEntityType sessionEntityType, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionName.html">SessionName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The session to create a session entity type for.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><span class="parametername">sessionEntityType</span></td>
+        <td><p>Required. The session entity type to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionName_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionName parent = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;);
+SessionEntityType sessionEntityType = new SessionEntityType();
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.CreateSessionEntityTypeAsync(parent, sessionEntityType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionName_Google_Cloud_Dialogflow_V2_SessionEntityType_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionName,Google.Cloud.Dialogflow.V2.SessionEntityType,System.Threading.CancellationToken)">CreateSessionEntityTypeAsync(SessionName, SessionEntityType, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates a session entity type.</p>
+<p>If the specified session entity type already exists, overrides the session
+entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; CreateSessionEntityTypeAsync(SessionName parent, SessionEntityType sessionEntityType, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionName.html">SessionName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The session to create a session entity type for.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><span class="parametername">sessionEntityType</span></td>
+        <td><p>Required. The session entity type to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionName_Google_Cloud_Dialogflow_V2_SessionEntityType_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionName parent = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;);
+SessionEntityType sessionEntityType = new SessionEntityType();
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.CreateSessionEntityTypeAsync(parent, sessionEntityType);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_CreateSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.CreateSessionEntityTypeAsync*"></a>
@@ -560,7 +792,11 @@ with Google Assistant integration.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The session to create a session entity type for.
-Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.</p>
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -598,7 +834,7 @@ Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;am
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
 // Initialize request argument(s)
-string parent = &quot;&quot;;
+string parent = &quot;projects/[PROJECT]/agent/sessions/[SESSION]&quot;;
 SessionEntityType sessionEntityType = new SessionEntityType();
 // Make the request
 SessionEntityType response = await sessionEntityTypesClient.CreateSessionEntityTypeAsync(parent, sessionEntityType);
@@ -632,7 +868,11 @@ with Google Assistant integration.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The session to create a session entity type for.
-Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.</p>
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -670,58 +910,10 @@ Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;am
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
 // Initialize request argument(s)
-string parent = &quot;&quot;;
+string parent = &quot;projects/[PROJECT]/agent/sessions/[SESSION]&quot;;
 SessionEntityType sessionEntityType = new SessionEntityType();
 // Make the request
 SessionEntityType response = await sessionEntityTypesClient.CreateSessionEntityTypeAsync(parent, sessionEntityType);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityType*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_Google_Cloud_Dialogflow_V2_ContextName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityType(Google.Cloud.Dialogflow.V2.ContextName,Google.Api.Gax.Grpc.CallSettings)">DeleteSessionEntityType(ContextName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Deletes the specified session entity type.</p>
-<p>This method doesn&apos;t work with Google Assistant integration.
-Contact Dialogflow support if you need to use session entities
-with Google Assistant integration.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void DeleteSessionEntityType(ContextName name, CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ContextName.html">ContextName</a></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>Required. The name of the entity type to delete. Format:
-<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_Google_Cloud_Dialogflow_V2_ContextName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
-// Initialize request argument(s)
-ContextName name = ContextName.FromProjectSessionContext(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[CONTEXT]&quot;);
-// Make the request
-sessionEntityTypesClient.DeleteSessionEntityType(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityType*"></a>
@@ -767,10 +959,62 @@ SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Cre
 // Initialize request argument(s)
 DeleteSessionEntityTypeRequest request = new DeleteSessionEntityTypeRequest
 {
-    ContextName = ContextName.FromProjectSessionContext(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[CONTEXT]&quot;),
+    SessionEntityTypeName = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;),
 };
 // Make the request
 sessionEntityTypesClient.DeleteSessionEntityType(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityType*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityType(Google.Cloud.Dialogflow.V2.SessionEntityTypeName,Google.Api.Gax.Grpc.CallSettings)">DeleteSessionEntityType(SessionEntityTypeName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void DeleteSessionEntityType(SessionEntityTypeName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityTypeName.html">SessionEntityTypeName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the entity type to delete. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
+// Initialize request argument(s)
+SessionEntityTypeName name = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;);
+// Make the request
+sessionEntityTypesClient.DeleteSessionEntityType(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityType*"></a>
@@ -800,7 +1044,11 @@ with Google Assistant integration.</p>
         <td><span class="parametername">name</span></td>
         <td><p>Required. The name of the entity type to delete. Format:
 <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -816,137 +1064,9 @@ Display Name&amp;amp;gt;</code>.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
 // Initialize request argument(s)
-string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/contexts/[CONTEXT]&quot;;
+string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/entityTypes/[ENTITY_TYPE]&quot;;
 // Make the request
 sessionEntityTypesClient.DeleteSessionEntityType(name);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_ContextName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.ContextName,Google.Api.Gax.Grpc.CallSettings)">DeleteSessionEntityTypeAsync(ContextName, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Deletes the specified session entity type.</p>
-<p>This method doesn&apos;t work with Google Assistant integration.
-Contact Dialogflow support if you need to use session entities
-with Google Assistant integration.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task DeleteSessionEntityTypeAsync(ContextName name, CallSettings callSettings = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ContextName.html">ContextName</a></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>Required. The name of the entity type to delete. Format:
-<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
-        <td><span class="parametername">callSettings</span></td>
-        <td><p>If not null, applies overrides to this RPC call.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_ContextName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
-// Initialize request argument(s)
-ContextName name = ContextName.FromProjectSessionContext(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[CONTEXT]&quot;);
-// Make the request
-await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(name);
-</code></pre></div>
-  </div>
-  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync*"></a>
-  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_ContextName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.ContextName,System.Threading.CancellationToken)">DeleteSessionEntityTypeAsync(ContextName, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Deletes the specified session entity type.</p>
-<p>This method doesn&apos;t work with Google Assistant integration.
-Contact Dialogflow support if you need to use session entities
-with Google Assistant integration.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual Task DeleteSessionEntityTypeAsync(ContextName name, CancellationToken cancellationToken)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.ContextName.html">ContextName</a></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>Required. The name of the entity type to delete. Format:
-<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Threading.CancellationToken</span></td>
-        <td><span class="parametername">cancellationToken</span></td>
-        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
-        <td><p>A Task containing the RPC response.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_ContextName_System_Threading_CancellationToken__snippet">Sample code</h5>
-  <div class="markdown level1"><pre><code class="lang-cs">// Create client
-SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
-// Initialize request argument(s)
-ContextName name = ContextName.FromProjectSessionContext(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[CONTEXT]&quot;);
-// Make the request
-await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync*"></a>
@@ -1008,7 +1128,7 @@ SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClie
 // Initialize request argument(s)
 DeleteSessionEntityTypeRequest request = new DeleteSessionEntityTypeRequest
 {
-    ContextName = ContextName.FromProjectSessionContext(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[CONTEXT]&quot;),
+    SessionEntityTypeName = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;),
 };
 // Make the request
 await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(request);
@@ -1073,10 +1193,146 @@ SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClie
 // Initialize request argument(s)
 DeleteSessionEntityTypeRequest request = new DeleteSessionEntityTypeRequest
 {
-    ContextName = ContextName.FromProjectSessionContext(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[CONTEXT]&quot;),
+    SessionEntityTypeName = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;),
 };
 // Make the request
 await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionEntityTypeName,Google.Api.Gax.Grpc.CallSettings)">DeleteSessionEntityTypeAsync(SessionEntityTypeName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteSessionEntityTypeAsync(SessionEntityTypeName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityTypeName.html">SessionEntityTypeName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the entity type to delete. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionEntityTypeName name = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;);
+// Make the request
+await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionEntityTypeName,System.Threading.CancellationToken)">DeleteSessionEntityTypeAsync(SessionEntityTypeName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteSessionEntityTypeAsync(SessionEntityTypeName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityTypeName.html">SessionEntityTypeName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the entity type to delete. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionEntityTypeName name = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;);
+// Make the request
+await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_DeleteSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.DeleteSessionEntityTypeAsync*"></a>
@@ -1106,7 +1362,11 @@ with Google Assistant integration.</p>
         <td><span class="parametername">name</span></td>
         <td><p>Required. The name of the entity type to delete. Format:
 <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -1138,7 +1398,7 @@ Display Name&amp;amp;gt;</code>.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/contexts/[CONTEXT]&quot;;
+string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/entityTypes/[ENTITY_TYPE]&quot;;
 // Make the request
 await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(name);
 </code></pre></div>
@@ -1170,7 +1430,11 @@ with Google Assistant integration.</p>
         <td><span class="parametername">name</span></td>
         <td><p>Required. The name of the entity type to delete. Format:
 <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -1202,7 +1466,7 @@ Display Name&amp;amp;gt;</code>.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/contexts/[CONTEXT]&quot;;
+string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/entityTypes/[ENTITY_TYPE]&quot;;
 // Make the request
 await sessionEntityTypesClient.DeleteSessionEntityTypeAsync(name);
 </code></pre></div>
@@ -1270,6 +1534,142 @@ GetSessionEntityTypeRequest request = new GetSessionEntityTypeRequest
 };
 // Make the request
 SessionEntityType response = sessionEntityTypesClient.GetSessionEntityType(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityType*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityType_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityType(Google.Cloud.Dialogflow.V2.SessionEntityTypeName,Google.Api.Gax.Grpc.CallSettings)">GetSessionEntityType(SessionEntityTypeName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SessionEntityType GetSessionEntityType(SessionEntityTypeName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityTypeName.html">SessionEntityTypeName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the session entity type. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityType_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
+// Initialize request argument(s)
+SessionEntityTypeName name = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;);
+// Make the request
+SessionEntityType response = sessionEntityTypesClient.GetSessionEntityType(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityType*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityType_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityType(System.String,Google.Api.Gax.Grpc.CallSettings)">GetSessionEntityType(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SessionEntityType GetSessionEntityType(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the session entity type. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityType_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/entityTypes/[ENTITY_TYPE]&quot;;
+// Make the request
+SessionEntityType response = sessionEntityTypesClient.GetSessionEntityType(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync*"></a>
@@ -1402,6 +1802,278 @@ GetSessionEntityTypeRequest request = new GetSessionEntityTypeRequest
 SessionEntityType response = await sessionEntityTypesClient.GetSessionEntityTypeAsync(request);
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionEntityTypeName,Google.Api.Gax.Grpc.CallSettings)">GetSessionEntityTypeAsync(SessionEntityTypeName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; GetSessionEntityTypeAsync(SessionEntityTypeName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityTypeName.html">SessionEntityTypeName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the session entity type. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionEntityTypeName name = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;);
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.GetSessionEntityTypeAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionEntityTypeName,System.Threading.CancellationToken)">GetSessionEntityTypeAsync(SessionEntityTypeName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; GetSessionEntityTypeAsync(SessionEntityTypeName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityTypeName.html">SessionEntityTypeName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the session entity type. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityTypeName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionEntityTypeName name = SessionEntityTypeName.FromProjectSessionEntityType(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;, &quot;[ENTITY_TYPE]&quot;);
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.GetSessionEntityTypeAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetSessionEntityTypeAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; GetSessionEntityTypeAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the session entity type. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/entityTypes/[ENTITY_TYPE]&quot;;
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.GetSessionEntityTypeAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.GetSessionEntityTypeAsync(System.String,System.Threading.CancellationToken)">GetSessionEntityTypeAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; GetSessionEntityTypeAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the session entity type. Format:
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
+Display Name&amp;amp;gt;</code> or <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment
+ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type Display
+Name&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_GetSessionEntityTypeAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/agent/sessions/[SESSION]/entityTypes/[ENTITY_TYPE]&quot;;
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.GetSessionEntityTypeAsync(name);
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypes_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.ListSessionEntityTypes*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypes_Google_Cloud_Dialogflow_V2_ListSessionEntityTypesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.ListSessionEntityTypes(Google.Cloud.Dialogflow.V2.ListSessionEntityTypesRequest,Google.Api.Gax.Grpc.CallSettings)">ListSessionEntityTypes(ListSessionEntityTypesRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns the list of all session entity types in the specified session.</p>
@@ -1459,9 +2131,125 @@ with Google Assistant integration.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
 // Initialize request argument(s)
-ListSessionEntityTypesRequest request = new ListSessionEntityTypesRequest { Parent = &quot;&quot;, };
+ListSessionEntityTypesRequest request = new ListSessionEntityTypesRequest
+{
+    ParentAsSessionName = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;),
+};
 // Make the request
 PagedEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; response = sessionEntityTypesClient.ListSessionEntityTypes(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (SessionEntityType item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListSessionEntityTypesResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (SessionEntityType item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;SessionEntityType&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (SessionEntityType item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypes_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.ListSessionEntityTypes*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypes_Google_Cloud_Dialogflow_V2_SessionName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.ListSessionEntityTypes(Google.Cloud.Dialogflow.V2.SessionName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListSessionEntityTypes(SessionName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns the list of all session entity types in the specified session.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; ListSessionEntityTypes(SessionName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionName.html">SessionName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The session to list all session entity types from.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ListSessionEntityTypesResponse.html">ListSessionEntityTypesResponse</a>, <a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypes_Google_Cloud_Dialogflow_V2_SessionName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
+// Initialize request argument(s)
+SessionName parent = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;);
+// Make the request
+PagedEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; response = sessionEntityTypesClient.ListSessionEntityTypes(parent);
 
 // Iterate over all response items, lazily performing RPCs as required
 foreach (SessionEntityType item in response)
@@ -1522,7 +2310,11 @@ with Google Assistant integration.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The session to list all session entity types from.
-Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.</p>
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -1568,7 +2360,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
 // Initialize request argument(s)
-string parent = &quot;&quot;;
+string parent = &quot;projects/[PROJECT]/agent/sessions/[SESSION]&quot;;
 // Make the request
 PagedEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; response = sessionEntityTypesClient.ListSessionEntityTypes(parent);
 
@@ -1662,9 +2454,125 @@ with Google Assistant integration.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
 // Initialize request argument(s)
-ListSessionEntityTypesRequest request = new ListSessionEntityTypesRequest { Parent = &quot;&quot;, };
+ListSessionEntityTypesRequest request = new ListSessionEntityTypesRequest
+{
+    ParentAsSessionName = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;),
+};
 // Make the request
 PagedAsyncEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; response = sessionEntityTypesClient.ListSessionEntityTypesAsync(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((SessionEntityType item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListSessionEntityTypesResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (SessionEntityType item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;SessionEntityType&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (SessionEntityType item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypesAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.ListSessionEntityTypesAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypesAsync_Google_Cloud_Dialogflow_V2_SessionName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.ListSessionEntityTypesAsync(Google.Cloud.Dialogflow.V2.SessionName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListSessionEntityTypesAsync(SessionName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns the list of all session entity types in the specified session.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; ListSessionEntityTypesAsync(SessionName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionName.html">SessionName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The session to list all session entity types from.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.ListSessionEntityTypesResponse.html">ListSessionEntityTypesResponse</a>, <a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_ListSessionEntityTypesAsync_Google_Cloud_Dialogflow_V2_SessionName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionName parent = SessionName.FromProjectSession(&quot;[PROJECT]&quot;, &quot;[SESSION]&quot;);
+// Make the request
+PagedAsyncEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; response = sessionEntityTypesClient.ListSessionEntityTypesAsync(parent);
 
 // Iterate over all response items, lazily performing RPCs as required
 await response.ForEachAsync((SessionEntityType item) =&gt;
@@ -1725,7 +2633,11 @@ with Google Assistant integration.</p>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">parent</span></td>
         <td><p>Required. The session to list all session entity types from.
-Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.</p>
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code> or
+<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/environments/&amp;amp;lt;Environment ID&amp;amp;gt;/users/&amp;amp;lt;User ID&amp;amp;gt;/
+sessions/&amp;amp;lt;Session ID&amp;amp;gt;</code>.
+If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 </td>
       </tr>
       <tr>
@@ -1771,7 +2683,7 @@ page.</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
 // Initialize request argument(s)
-string parent = &quot;&quot;;
+string parent = &quot;projects/[PROJECT]/agent/sessions/[SESSION]&quot;;
 // Make the request
 PagedAsyncEnumerable&lt;ListSessionEntityTypesResponse, SessionEntityType&gt; response = sessionEntityTypesClient.ListSessionEntityTypesAsync(parent);
 
@@ -1865,9 +2777,7 @@ with Google Assistant integration.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
         <td><span class="parametername">sessionEntityType</span></td>
-        <td><p>Required. The entity type to update. Format:
-<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
+        <td><p>Required. The session entity type to update.</p>
 </td>
       </tr>
       <tr>
@@ -1902,6 +2812,75 @@ SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Cre
 SessionEntityType sessionEntityType = new SessionEntityType();
 // Make the request
 SessionEntityType response = sessionEntityTypesClient.UpdateSessionEntityType(sessionEntityType);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityType*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityType_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityType(Google.Cloud.Dialogflow.V2.SessionEntityType,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateSessionEntityType(SessionEntityType, FieldMask, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SessionEntityType UpdateSessionEntityType(SessionEntityType sessionEntityType, FieldMask updateMask, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><span class="parametername">sessionEntityType</span></td>
+        <td><p>Required. The session entity type to update.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Optional. The mask to control which fields get updated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityType_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = SessionEntityTypesClient.Create();
+// Initialize request argument(s)
+SessionEntityType sessionEntityType = new SessionEntityType();
+FieldMask updateMask = new FieldMask();
+// Make the request
+SessionEntityType response = sessionEntityTypesClient.UpdateSessionEntityType(sessionEntityType, updateMask);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityType_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityType*"></a>
@@ -1995,9 +2974,7 @@ with Google Assistant integration.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
         <td><span class="parametername">sessionEntityType</span></td>
-        <td><p>Required. The entity type to update. Format:
-<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
+        <td><p>Required. The session entity type to update.</p>
 </td>
       </tr>
       <tr>
@@ -2035,6 +3012,144 @@ SessionEntityType response = await sessionEntityTypesClient.UpdateSessionEntityT
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionEntityType,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateSessionEntityTypeAsync(SessionEntityType, FieldMask, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; UpdateSessionEntityTypeAsync(SessionEntityType sessionEntityType, FieldMask updateMask, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><span class="parametername">sessionEntityType</span></td>
+        <td><p>Required. The session entity type to update.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Optional. The mask to control which fields get updated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionEntityType sessionEntityType = new SessionEntityType();
+FieldMask updateMask = new FieldMask();
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.UpdateSessionEntityTypeAsync(sessionEntityType, updateMask);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityTypeAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionEntityType,Google.Protobuf.WellKnownTypes.FieldMask,System.Threading.CancellationToken)">UpdateSessionEntityTypeAsync(SessionEntityType, FieldMask, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates the specified session entity type.</p>
+<p>This method doesn&apos;t work with Google Assistant integration.
+Contact Dialogflow support if you need to use session entities
+with Google Assistant integration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SessionEntityType&gt; UpdateSessionEntityTypeAsync(SessionEntityType sessionEntityType, FieldMask updateMask, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
+        <td><span class="parametername">sessionEntityType</span></td>
+        <td><p>Required. The session entity type to update.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Optional. The mask to control which fields get updated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityType_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+SessionEntityTypesClient sessionEntityTypesClient = await SessionEntityTypesClient.CreateAsync();
+// Initialize request argument(s)
+SessionEntityType sessionEntityType = new SessionEntityType();
+FieldMask updateMask = new FieldMask();
+// Make the request
+SessionEntityType response = await sessionEntityTypesClient.UpdateSessionEntityTypeAsync(sessionEntityType, updateMask);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityTypeAsync*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_SessionEntityTypesClient_UpdateSessionEntityTypeAsync_Google_Cloud_Dialogflow_V2_SessionEntityType_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.V2.SessionEntityTypesClient.UpdateSessionEntityTypeAsync(Google.Cloud.Dialogflow.V2.SessionEntityType,System.Threading.CancellationToken)">UpdateSessionEntityTypeAsync(SessionEntityType, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Updates the specified session entity type.</p>
 <p>This method doesn&apos;t work with Google Assistant integration.
@@ -2059,9 +3174,7 @@ with Google Assistant integration.</p>
       <tr>
         <td><a class="xref" href="Google.Cloud.Dialogflow.V2.SessionEntityType.html">SessionEntityType</a></td>
         <td><span class="parametername">sessionEntityType</span></td>
-        <td><p>Required. The entity type to update. Format:
-<code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/agent/sessions/&amp;amp;lt;Session ID&amp;amp;gt;/entityTypes/&amp;amp;lt;Entity Type
-Display Name&amp;amp;gt;</code>.</p>
+        <td><p>Required. The session entity type to update.</p>
 </td>
       </tr>
       <tr>

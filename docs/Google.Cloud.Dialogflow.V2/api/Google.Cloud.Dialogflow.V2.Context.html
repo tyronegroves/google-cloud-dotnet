@@ -173,7 +173,7 @@
   <a id="Google_Cloud_Dialogflow_V2_Context_LifespanCount_" data-uid="Google.Cloud.Dialogflow.V2.Context.LifespanCount*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Context_LifespanCount" data-uid="Google.Cloud.Dialogflow.V2.Context.LifespanCount">LifespanCount</h4>
   <div class="markdown level1 summary"><p>Optional. The number of conversational query requests after which the
-context expires. If set to <code>0</code> (the default) the context expires
+context expires. The default is <code>0</code>. If set to <code>0</code>, the context expires
 immediately. Contexts expire automatically after 20 minutes if there
 are no matching queries.</p>
 </div>
@@ -200,9 +200,13 @@ are no matching queries.</p>
   <a id="Google_Cloud_Dialogflow_V2_Context_Name_" data-uid="Google.Cloud.Dialogflow.V2.Context.Name*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Context_Name" data-uid="Google.Cloud.Dialogflow.V2.Context.Name">Name</h4>
   <div class="markdown level1 summary"><p>Required. The unique identifier of the context. Format:
-<code>projects/&amp;lt;Project ID&gt;/agent/sessions/&amp;lt;Session ID&gt;/contexts/&amp;lt;Context ID&gt;</code>.</p>
+<code>projects/&amp;lt;Project ID&gt;/agent/sessions/&amp;lt;Session ID&gt;/contexts/&amp;lt;Context ID&gt;</code>,
+or <code>projects/&amp;lt;Project ID&gt;/agent/environments/&amp;lt;Environment ID&gt;/users/&amp;lt;User
+ID&gt;/sessions/&amp;lt;Session ID&gt;/contexts/&amp;lt;Context ID&gt;</code>.</p>
 <p>The <code>Context ID</code> is always converted to lowercase, may only contain
-characters in [a-zA-Z0-9_-%] and may be at most 250 bytes long.</p>
+characters in a-zA-Z0-9_-% and may be at most 250 bytes long.</p>
+<p>If <code>Environment ID</code> is not specified, we assume default &apos;draft&apos;
+environment. If <code>User ID</code> is not specified, we assume default &apos;-&apos; user.</p>
 <p>The following context names are reserved for internal use by Dialogflow.
 You should not use these contexts or create contexts with these names:</p>
 <ul>
@@ -233,10 +237,21 @@ You should not use these contexts or create contexts with these names:</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_Context_Parameters_" data-uid="Google.Cloud.Dialogflow.V2.Context.Parameters*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Context_Parameters" data-uid="Google.Cloud.Dialogflow.V2.Context.Parameters">Parameters</h4>
-  <div class="markdown level1 summary"><p>Optional. The collection of parameters associated with this context.
-Refer to <a href="https://cloud.google.com/dialogflow/docs/intents-actions-parameters">this
-doc</a>
-for syntax.</p>
+  <div class="markdown level1 summary"><p>Optional. The collection of parameters associated with this context.</p>
+<p>Depending on your protocol or client library language, this is a
+map, associative array, symbol table, dictionary, or JSON object
+composed of a collection of (MapKey, MapValue) pairs:</p>
+<ul>
+<li>MapKey type: string</li>
+<li>MapKey value: parameter name</li>
+<li>MapValue type:</li>
+<li>If parameter&apos;s entity type is a composite entity: map</li>
+<li>Else: string</li>
+<li>MapValue value:</li>
+<li>If parameter&apos;s entity type is a composite entity:
+map from composite entity property names to property values</li>
+<li>Else: parameter value</li>
+</ul>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
