@@ -160,8 +160,7 @@ Guide</a>.</p>
   </h3>
   <a id="Google_Cloud_Dialogflow_V2_WebhookResponse_FollowupEventInput_" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.FollowupEventInput*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_WebhookResponse_FollowupEventInput" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.FollowupEventInput">FollowupEventInput</h4>
-  <div class="markdown level1 summary"><p>Optional. Makes the platform immediately invoke another <code>DetectIntent</code> call
-internally with the specified event as input.
+  <div class="markdown level1 summary"><p>Optional. Invokes the supplied events.
 When this field is set, Dialogflow ignores the <code>fulfillment_text</code>,
 <code>fulfillment_messages</code>, and <code>payload</code> fields.</p>
 </div>
@@ -187,8 +186,9 @@ When this field is set, Dialogflow ignores the <code>fulfillment_text</code>,
   </table>
   <a id="Google_Cloud_Dialogflow_V2_WebhookResponse_FulfillmentMessages_" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.FulfillmentMessages*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_WebhookResponse_FulfillmentMessages" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.FulfillmentMessages">FulfillmentMessages</h4>
-  <div class="markdown level1 summary"><p>Optional. The collection of rich messages to present to the user. This
-value is passed directly to <code>QueryResult.fulfillment_messages</code>.</p>
+  <div class="markdown level1 summary"><p>Optional. The rich response messages intended for the end-user.
+When provided, Dialogflow uses this field to populate
+[QueryResult.fulfillment_messages][google.cloud.dialogflow.v2.QueryResult.fulfillment_messages] sent to the integration or API caller.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -212,8 +212,10 @@ value is passed directly to <code>QueryResult.fulfillment_messages</code>.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_WebhookResponse_FulfillmentText_" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.FulfillmentText*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_WebhookResponse_FulfillmentText" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.FulfillmentText">FulfillmentText</h4>
-  <div class="markdown level1 summary"><p>Optional. The text to be shown on the screen. This value is passed directly
-to <code>QueryResult.fulfillment_text</code>.</p>
+  <div class="markdown level1 summary"><p>Optional. The text response message intended for the end-user.
+It is recommended to use <code>fulfillment_messages.text.text[0]</code> instead.
+When provided, Dialogflow uses this field to populate
+[QueryResult.fulfillment_text][google.cloud.dialogflow.v2.QueryResult.fulfillment_text] sent to the integration or API caller.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -237,8 +239,10 @@ to <code>QueryResult.fulfillment_text</code>.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_WebhookResponse_OutputContexts_" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.OutputContexts*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_WebhookResponse_OutputContexts" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.OutputContexts">OutputContexts</h4>
-  <div class="markdown level1 summary"><p>Optional. The collection of output contexts. This value is passed directly
-to <code>QueryResult.output_contexts</code>.</p>
+  <div class="markdown level1 summary"><p>Optional. The collection of output contexts that will overwrite currently
+active contexts for the session and reset their lifespans.
+When provided, Dialogflow uses this field to populate
+[QueryResult.output_contexts][google.cloud.dialogflow.v2.QueryResult.output_contexts] sent to the integration or API caller.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -262,10 +266,10 @@ to <code>QueryResult.output_contexts</code>.</p>
   </table>
   <a id="Google_Cloud_Dialogflow_V2_WebhookResponse_Payload_" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.Payload*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_WebhookResponse_Payload" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.Payload">Payload</h4>
-  <div class="markdown level1 summary"><p>Optional. This field can be used to pass custom data from your webhook to the API
-caller. Arbitrary JSON objects are supported.
+  <div class="markdown level1 summary"><p>Optional. This field can be used to pass custom data from your webhook to the
+integration or API caller. Arbitrary JSON objects are supported.
 When provided, Dialogflow uses this field to populate
-<code>QueryResult.webhook_payload</code> sent to the API caller.
+[QueryResult.webhook_payload][google.cloud.dialogflow.v2.QueryResult.webhook_payload] sent to the integration or API caller.
 This field is also used by the
 <a href="https://cloud.google.com/dialogflow/docs/integrations/aog">Google Assistant
 integration</a>
@@ -297,9 +301,9 @@ format</a></p>
   <h4 id="Google_Cloud_Dialogflow_V2_WebhookResponse_SessionEntityTypes" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.SessionEntityTypes">SessionEntityTypes</h4>
   <div class="markdown level1 summary"><p>Optional. Additional session entity types to replace or extend developer
 entity types with. The entity synonyms apply to all languages and persist
-for the session of this query. Setting the session entity types inside
-webhook overwrites the session entity types that have been set through
-<code>DetectIntentRequest.query_params.session_entity_types</code>.</p>
+for the session. Setting this data from a webhook overwrites
+the session entity types that have been set using <code>detectIntent</code>,
+<code>streamingDetectIntent</code> or [SessionEntityType][google.cloud.dialogflow.v2.SessionEntityType] management methods.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -323,7 +327,10 @@ webhook overwrites the session entity types that have been set through
   </table>
   <a id="Google_Cloud_Dialogflow_V2_WebhookResponse_Source_" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.Source*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_WebhookResponse_Source" data-uid="Google.Cloud.Dialogflow.V2.WebhookResponse.Source">Source</h4>
-  <div class="markdown level1 summary"><p>Optional. This value is passed directly to <code>QueryResult.webhook_source</code>.</p>
+  <div class="markdown level1 summary"><p>Optional. A custom field used to identify the webhook source.
+Arbitrary strings are supported.
+When provided, Dialogflow uses this field to populate
+[QueryResult.webhook_source][google.cloud.dialogflow.v2.QueryResult.webhook_source] sent to the integration or API caller.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
