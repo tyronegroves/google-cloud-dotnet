@@ -992,6 +992,109 @@ settings. To specify custom credentials or other settings, use <a class="xref" h
     </tbody>
   </table>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackup*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackup(Google.Cloud.Bigtable.Admin.V2.ClusterName,System.String,Google.Cloud.Bigtable.Admin.V2.Backup,Google.Api.Gax.Grpc.CallSettings)">CreateBackup(ClusterName, String, Backup, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Starts creating a new Cloud Bigtable Backup. The returned backup
+[long-running operation][google.longrunning.Operation] can be used to
+track creation of the backup. The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
+[response][google.longrunning.Operation.response] field type is
+[Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+returned operation will stop the creation and delete the backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Backup, CreateBackupMetadata&gt; CreateBackup(ClusterName parent, string backupId, Backup backup, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ClusterName.html">ClusterName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. This must be one of the clusters in the instance in which this
+table is located. The backup will be stored in this cluster. Values are
+of the form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">backupId</span></td>
+        <td><p>Required. The id of the backup to be created. The <code>backup_id</code> along with
+the parent <code>parent</code> are combined as {parent}/backups/{backup_id} to create
+the full backup name, of the form:
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}</code>.
+This string must be between 1 and 50 characters in length and match the
+regex [<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateBackupMetadata.html">CreateBackupMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+ClusterName parent = ClusterName.FromProjectInstanceCluster(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;);
+string backupId = &quot;&quot;;
+Backup backup = new Backup();
+// Make the request
+Operation&lt;Backup, CreateBackupMetadata&gt; response = bigtableTableAdminClient.CreateBackup(parent, backupId, backup);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Backup, CreateBackupMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+Backup result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Backup, CreateBackupMetadata&gt; retrievedResponse = bigtableTableAdminClient.PollOnceCreateBackup(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Backup retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackup*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_Google_Cloud_Bigtable_Admin_V2_CreateBackupRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackup(Google.Cloud.Bigtable.Admin.V2.CreateBackupRequest,Google.Api.Gax.Grpc.CallSettings)">CreateBackup(CreateBackupRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Starts creating a new Cloud Bigtable Backup. The returned backup
 [long-running operation][google.longrunning.Operation] can be used to
@@ -1070,6 +1173,315 @@ Backup result = completedResponse.Result;
 string operationName = response.Name;
 // This name can be stored, then the long-running operation retrieved later by name
 Operation&lt;Backup, CreateBackupMetadata&gt; retrievedResponse = bigtableTableAdminClient.PollOnceCreateBackup(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Backup retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackup*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_System_String_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackup(System.String,System.String,Google.Cloud.Bigtable.Admin.V2.Backup,Google.Api.Gax.Grpc.CallSettings)">CreateBackup(String, String, Backup, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Starts creating a new Cloud Bigtable Backup. The returned backup
+[long-running operation][google.longrunning.Operation] can be used to
+track creation of the backup. The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
+[response][google.longrunning.Operation.response] field type is
+[Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+returned operation will stop the creation and delete the backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Backup, CreateBackupMetadata&gt; CreateBackup(string parent, string backupId, Backup backup, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. This must be one of the clusters in the instance in which this
+table is located. The backup will be stored in this cluster. Values are
+of the form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">backupId</span></td>
+        <td><p>Required. The id of the backup to be created. The <code>backup_id</code> along with
+the parent <code>parent</code> are combined as {parent}/backups/{backup_id} to create
+the full backup name, of the form:
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}</code>.
+This string must be between 1 and 50 characters in length and match the
+regex [<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateBackupMetadata.html">CreateBackupMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackup_System_String_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+string parent = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]&quot;;
+string backupId = &quot;&quot;;
+Backup backup = new Backup();
+// Make the request
+Operation&lt;Backup, CreateBackupMetadata&gt; response = bigtableTableAdminClient.CreateBackup(parent, backupId, backup);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Backup, CreateBackupMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+Backup result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Backup, CreateBackupMetadata&gt; retrievedResponse = bigtableTableAdminClient.PollOnceCreateBackup(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Backup retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync(Google.Cloud.Bigtable.Admin.V2.ClusterName,System.String,Google.Cloud.Bigtable.Admin.V2.Backup,Google.Api.Gax.Grpc.CallSettings)">CreateBackupAsync(ClusterName, String, Backup, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Starts creating a new Cloud Bigtable Backup. The returned backup
+[long-running operation][google.longrunning.Operation] can be used to
+track creation of the backup. The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
+[response][google.longrunning.Operation.response] field type is
+[Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+returned operation will stop the creation and delete the backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Backup, CreateBackupMetadata&gt;&gt; CreateBackupAsync(ClusterName parent, string backupId, Backup backup, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ClusterName.html">ClusterName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. This must be one of the clusters in the instance in which this
+table is located. The backup will be stored in this cluster. Values are
+of the form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">backupId</span></td>
+        <td><p>Required. The id of the backup to be created. The <code>backup_id</code> along with
+the parent <code>parent</code> are combined as {parent}/backups/{backup_id} to create
+the full backup name, of the form:
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}</code>.
+This string must be between 1 and 50 characters in length and match the
+regex [<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateBackupMetadata.html">CreateBackupMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+ClusterName parent = ClusterName.FromProjectInstanceCluster(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;);
+string backupId = &quot;&quot;;
+Backup backup = new Backup();
+// Make the request
+Operation&lt;Backup, CreateBackupMetadata&gt; response = await bigtableTableAdminClient.CreateBackupAsync(parent, backupId, backup);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Backup, CreateBackupMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Backup result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Backup, CreateBackupMetadata&gt; retrievedResponse = await bigtableTableAdminClient.PollOnceCreateBackupAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Backup retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync(Google.Cloud.Bigtable.Admin.V2.ClusterName,System.String,Google.Cloud.Bigtable.Admin.V2.Backup,System.Threading.CancellationToken)">CreateBackupAsync(ClusterName, String, Backup, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Starts creating a new Cloud Bigtable Backup. The returned backup
+[long-running operation][google.longrunning.Operation] can be used to
+track creation of the backup. The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
+[response][google.longrunning.Operation.response] field type is
+[Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+returned operation will stop the creation and delete the backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Backup, CreateBackupMetadata&gt;&gt; CreateBackupAsync(ClusterName parent, string backupId, Backup backup, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ClusterName.html">ClusterName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. This must be one of the clusters in the instance in which this
+table is located. The backup will be stored in this cluster. Values are
+of the form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">backupId</span></td>
+        <td><p>Required. The id of the backup to be created. The <code>backup_id</code> along with
+the parent <code>parent</code> are combined as {parent}/backups/{backup_id} to create
+the full backup name, of the form:
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}</code>.
+This string must be between 1 and 50 characters in length and match the
+regex [<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateBackupMetadata.html">CreateBackupMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+ClusterName parent = ClusterName.FromProjectInstanceCluster(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;);
+string backupId = &quot;&quot;;
+Backup backup = new Backup();
+// Make the request
+Operation&lt;Backup, CreateBackupMetadata&gt; response = await bigtableTableAdminClient.CreateBackupAsync(parent, backupId, backup);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Backup, CreateBackupMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Backup result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Backup, CreateBackupMetadata&gt; retrievedResponse = await bigtableTableAdminClient.PollOnceCreateBackupAsync(operationName);
 // Check if the retrieved long-running operation has completed
 if (retrievedResponse.IsCompleted)
 {
@@ -1234,6 +1646,212 @@ CreateBackupRequest request = new CreateBackupRequest
 };
 // Make the request
 Operation&lt;Backup, CreateBackupMetadata&gt; response = await bigtableTableAdminClient.CreateBackupAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Backup, CreateBackupMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Backup result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Backup, CreateBackupMetadata&gt; retrievedResponse = await bigtableTableAdminClient.PollOnceCreateBackupAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Backup retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_System_String_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync(System.String,System.String,Google.Cloud.Bigtable.Admin.V2.Backup,Google.Api.Gax.Grpc.CallSettings)">CreateBackupAsync(String, String, Backup, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Starts creating a new Cloud Bigtable Backup. The returned backup
+[long-running operation][google.longrunning.Operation] can be used to
+track creation of the backup. The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
+[response][google.longrunning.Operation.response] field type is
+[Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+returned operation will stop the creation and delete the backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Backup, CreateBackupMetadata&gt;&gt; CreateBackupAsync(string parent, string backupId, Backup backup, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. This must be one of the clusters in the instance in which this
+table is located. The backup will be stored in this cluster. Values are
+of the form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">backupId</span></td>
+        <td><p>Required. The id of the backup to be created. The <code>backup_id</code> along with
+the parent <code>parent</code> are combined as {parent}/backups/{backup_id} to create
+the full backup name, of the form:
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}</code>.
+This string must be between 1 and 50 characters in length and match the
+regex [<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateBackupMetadata.html">CreateBackupMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_System_String_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+string parent = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]&quot;;
+string backupId = &quot;&quot;;
+Backup backup = new Backup();
+// Make the request
+Operation&lt;Backup, CreateBackupMetadata&gt; response = await bigtableTableAdminClient.CreateBackupAsync(parent, backupId, backup);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Backup, CreateBackupMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Backup result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Backup, CreateBackupMetadata&gt; retrievedResponse = await bigtableTableAdminClient.PollOnceCreateBackupAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Backup retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_System_String_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.CreateBackupAsync(System.String,System.String,Google.Cloud.Bigtable.Admin.V2.Backup,System.Threading.CancellationToken)">CreateBackupAsync(String, String, Backup, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Starts creating a new Cloud Bigtable Backup. The returned backup
+[long-running operation][google.longrunning.Operation] can be used to
+track creation of the backup. The
+[metadata][google.longrunning.Operation.metadata] field type is
+[CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
+[response][google.longrunning.Operation.response] field type is
+[Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+returned operation will stop the creation and delete the backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Backup, CreateBackupMetadata&gt;&gt; CreateBackupAsync(string parent, string backupId, Backup backup, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. This must be one of the clusters in the instance in which this
+table is located. The backup will be stored in this cluster. Values are
+of the form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">backupId</span></td>
+        <td><p>Required. The id of the backup to be created. The <code>backup_id</code> along with
+the parent <code>parent</code> are combined as {parent}/backups/{backup_id} to create
+the full backup name, of the form:
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}</code>.
+This string must be between 1 and 50 characters in length and match the
+regex [<em>a-zA-Z0-9][-</em>.a-zA-Z0-9]*.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to create.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.CreateBackupMetadata.html">CreateBackupMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_CreateBackupAsync_System_String_System_String_Google_Cloud_Bigtable_Admin_V2_Backup_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+string parent = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]&quot;;
+string backupId = &quot;&quot;;
+Backup backup = new Backup();
+// Make the request
+Operation&lt;Backup, CreateBackupMetadata&gt; response = await bigtableTableAdminClient.CreateBackupAsync(parent, backupId, backup);
 
 // Poll until the returned long-running operation is complete
 Operation&lt;Backup, CreateBackupMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
@@ -2789,6 +3407,51 @@ if (retrievedResponse.IsCompleted)
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackup*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackup(Google.Cloud.Bigtable.Admin.V2.BackupName,Google.Api.Gax.Grpc.CallSettings)">DeleteBackup(BackupName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes a pending or completed Cloud Bigtable backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void DeleteBackup(BackupName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BackupName.html">BackupName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup to delete.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+BackupName name = BackupName.FromProjectInstanceClusterBackup(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;, &quot;[BACKUP]&quot;);
+// Make the request
+bigtableTableAdminClient.DeleteBackup(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackup*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_Google_Cloud_Bigtable_Admin_V2_DeleteBackupRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackup(Google.Cloud.Bigtable.Admin.V2.DeleteBackupRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteBackup(DeleteBackupRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes a pending or completed Cloud Bigtable backup.</p>
 </div>
@@ -2832,6 +3495,173 @@ DeleteBackupRequest request = new DeleteBackupRequest
 };
 // Make the request
 bigtableTableAdminClient.DeleteBackup(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackup*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackup(System.String,Google.Api.Gax.Grpc.CallSettings)">DeleteBackup(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes a pending or completed Cloud Bigtable backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void DeleteBackup(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup to delete.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackup_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]/backups/[BACKUP]&quot;;
+// Make the request
+bigtableTableAdminClient.DeleteBackup(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync(Google.Cloud.Bigtable.Admin.V2.BackupName,Google.Api.Gax.Grpc.CallSettings)">DeleteBackupAsync(BackupName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes a pending or completed Cloud Bigtable backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteBackupAsync(BackupName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BackupName.html">BackupName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup to delete.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+BackupName name = BackupName.FromProjectInstanceClusterBackup(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;, &quot;[BACKUP]&quot;);
+// Make the request
+await bigtableTableAdminClient.DeleteBackupAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync(Google.Cloud.Bigtable.Admin.V2.BackupName,System.Threading.CancellationToken)">DeleteBackupAsync(BackupName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a pending or completed Cloud Bigtable backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteBackupAsync(BackupName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BackupName.html">BackupName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup to delete.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+BackupName name = BackupName.FromProjectInstanceClusterBackup(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;, &quot;[BACKUP]&quot;);
+// Make the request
+await bigtableTableAdminClient.DeleteBackupAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync*"></a>
@@ -2956,6 +3786,128 @@ DeleteBackupRequest request = new DeleteBackupRequest
 };
 // Make the request
 await bigtableTableAdminClient.DeleteBackupAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">DeleteBackupAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes a pending or completed Cloud Bigtable backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteBackupAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup to delete.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]/backups/[BACKUP]&quot;;
+// Make the request
+await bigtableTableAdminClient.DeleteBackupAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteBackupAsync(System.String,System.Threading.CancellationToken)">DeleteBackupAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a pending or completed Cloud Bigtable backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task DeleteBackupAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup to delete.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteBackupAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]/backups/[BACKUP]&quot;;
+// Make the request
+await bigtableTableAdminClient.DeleteBackupAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_DeleteSnapshot_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.DeleteSnapshot*"></a>
@@ -5120,6 +6072,67 @@ GenerateConsistencyTokenResponse response = await bigtableTableAdminClient.Gener
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackup*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackup(Google.Cloud.Bigtable.Admin.V2.BackupName,Google.Api.Gax.Grpc.CallSettings)">GetBackup(BackupName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata on a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Backup GetBackup(BackupName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BackupName.html">BackupName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+BackupName name = BackupName.FromProjectInstanceClusterBackup(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;, &quot;[BACKUP]&quot;);
+// Make the request
+Backup response = bigtableTableAdminClient.GetBackup(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackup*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_Google_Cloud_Bigtable_Admin_V2_GetBackupRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackup(Google.Cloud.Bigtable.Admin.V2.GetBackupRequest,Google.Api.Gax.Grpc.CallSettings)">GetBackup(GetBackupRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Gets metadata on a pending or completed Cloud Bigtable Backup.</p>
 </div>
@@ -5179,6 +6192,189 @@ GetBackupRequest request = new GetBackupRequest
 };
 // Make the request
 Backup response = bigtableTableAdminClient.GetBackup(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackup*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackup(System.String,Google.Api.Gax.Grpc.CallSettings)">GetBackup(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata on a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Backup GetBackup(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackup_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]/backups/[BACKUP]&quot;;
+// Make the request
+Backup response = bigtableTableAdminClient.GetBackup(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync(Google.Cloud.Bigtable.Admin.V2.BackupName,Google.Api.Gax.Grpc.CallSettings)">GetBackupAsync(BackupName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata on a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; GetBackupAsync(BackupName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BackupName.html">BackupName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+BackupName name = BackupName.FromProjectInstanceClusterBackup(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;, &quot;[BACKUP]&quot;);
+// Make the request
+Backup response = await bigtableTableAdminClient.GetBackupAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync(Google.Cloud.Bigtable.Admin.V2.BackupName,System.Threading.CancellationToken)">GetBackupAsync(BackupName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata on a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; GetBackupAsync(BackupName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.BackupName.html">BackupName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_Google_Cloud_Bigtable_Admin_V2_BackupName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+BackupName name = BackupName.FromProjectInstanceClusterBackup(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;, &quot;[BACKUP]&quot;);
+// Make the request
+Backup response = await bigtableTableAdminClient.GetBackupAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync*"></a>
@@ -5303,6 +6499,128 @@ GetBackupRequest request = new GetBackupRequest
 };
 // Make the request
 Backup response = await bigtableTableAdminClient.GetBackupAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetBackupAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata on a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; GetBackupAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]/backups/[BACKUP]&quot;;
+// Make the request
+Backup response = await bigtableTableAdminClient.GetBackupAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetBackupAsync(System.String,System.Threading.CancellationToken)">GetBackupAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets metadata on a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; GetBackupAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Name of the backup.
+Values are of the form
+<code>projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetBackupAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]/backups/[BACKUP]&quot;;
+// Make the request
+Backup response = await bigtableTableAdminClient.GetBackupAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_GetIamPolicy_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.GetIamPolicy*"></a>
@@ -7025,6 +8343,115 @@ Table response = await bigtableTableAdminClient.GetTableAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackups*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackups(Google.Cloud.Bigtable.Admin.V2.ClusterName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListBackups(ClusterName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists Cloud Bigtable backups. Returns both completed and pending
+backups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListBackupsResponse, Backup&gt; ListBackups(ClusterName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ClusterName.html">ClusterName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The cluster to list backups from. Values are of the
+form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.
+Use <code>{cluster} = &amp;apos;-&amp;apos;</code> to list backups for all clusters in an instance,
+e.g., <code>projects/{project}/instances/{instance}/clusters/-</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListBackupsResponse.html">ListBackupsResponse</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+ClusterName parent = ClusterName.FromProjectInstanceCluster(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;);
+// Make the request
+PagedEnumerable&lt;ListBackupsResponse, Backup&gt; response = bigtableTableAdminClient.ListBackups(parent);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Backup item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListBackupsResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Backup item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Backup&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Backup item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackups*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_Google_Cloud_Bigtable_Admin_V2_ListBackupsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackups(Google.Cloud.Bigtable.Admin.V2.ListBackupsRequest,Google.Api.Gax.Grpc.CallSettings)">ListBackups(ListBackupsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists Cloud Bigtable backups. Returns both completed and pending
 backups.</p>
@@ -7121,6 +8548,224 @@ foreach (Backup item in singlePage)
 string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackups*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackups(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListBackups(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists Cloud Bigtable backups. Returns both completed and pending
+backups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListBackupsResponse, Backup&gt; ListBackups(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The cluster to list backups from. Values are of the
+form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.
+Use <code>{cluster} = &amp;apos;-&amp;apos;</code> to list backups for all clusters in an instance,
+e.g., <code>projects/{project}/instances/{instance}/clusters/-</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListBackupsResponse.html">ListBackupsResponse</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackups_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+string parent = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]&quot;;
+// Make the request
+PagedEnumerable&lt;ListBackupsResponse, Backup&gt; response = bigtableTableAdminClient.ListBackups(parent);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Backup item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListBackupsResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Backup item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Backup&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Backup item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackupsAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackupsAsync(Google.Cloud.Bigtable.Admin.V2.ClusterName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListBackupsAsync(ClusterName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists Cloud Bigtable backups. Returns both completed and pending
+backups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListBackupsResponse, Backup&gt; ListBackupsAsync(ClusterName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ClusterName.html">ClusterName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The cluster to list backups from. Values are of the
+form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.
+Use <code>{cluster} = &amp;apos;-&amp;apos;</code> to list backups for all clusters in an instance,
+e.g., <code>projects/{project}/instances/{instance}/clusters/-</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListBackupsResponse.html">ListBackupsResponse</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_Google_Cloud_Bigtable_Admin_V2_ClusterName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+ClusterName parent = ClusterName.FromProjectInstanceCluster(&quot;[PROJECT]&quot;, &quot;[INSTANCE]&quot;, &quot;[CLUSTER]&quot;);
+// Make the request
+PagedAsyncEnumerable&lt;ListBackupsResponse, Backup&gt; response = bigtableTableAdminClient.ListBackupsAsync(parent);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Backup item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListBackupsResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Backup item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Backup&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Backup item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackupsAsync*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_Google_Cloud_Bigtable_Admin_V2_ListBackupsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackupsAsync(Google.Cloud.Bigtable.Admin.V2.ListBackupsRequest,Google.Api.Gax.Grpc.CallSettings)">ListBackupsAsync(ListBackupsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists Cloud Bigtable backups. Returns both completed and pending
@@ -7184,6 +8829,115 @@ ListBackupsRequest request = new ListBackupsRequest
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListBackupsResponse, Backup&gt; response = bigtableTableAdminClient.ListBackupsAsync(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Backup item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListBackupsResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Backup item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Backup&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Backup item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackupsAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.ListBackupsAsync(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListBackupsAsync(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists Cloud Bigtable backups. Returns both completed and pending
+backups.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListBackupsResponse, Backup&gt; ListBackupsAsync(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. The cluster to list backups from. Values are of the
+form <code>projects/{project}/instances/{instance}/clusters/{cluster}</code>.
+Use <code>{cluster} = &amp;apos;-&amp;apos;</code> to list backups for all clusters in an instance,
+e.g., <code>projects/{project}/instances/{instance}/clusters/-</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.ListBackupsResponse.html">ListBackupsResponse</a>, <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_ListBackupsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+string parent = &quot;projects/[PROJECT]/instances/[INSTANCE]/clusters/[CLUSTER]&quot;;
+// Make the request
+PagedAsyncEnumerable&lt;ListBackupsResponse, Backup&gt; response = bigtableTableAdminClient.ListBackupsAsync(parent);
 
 // Iterate over all response items, lazily performing RPCs as required
 await response.ForEachAsync((Backup item) =&gt;
@@ -11991,6 +13745,81 @@ TestIamPermissionsResponse response = await bigtableTableAdminClient.TestIamPerm
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackup*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackup_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackup(Google.Cloud.Bigtable.Admin.V2.Backup,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateBackup(Backup, FieldMask, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Backup UpdateBackup(Backup backup, FieldMask updateMask, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to update. <code>backup.name</code>, and the fields to be updated
+as specified by <code>update_mask</code> are required. Other fields are ignored.
+Update is only supported for the following fields:</p>
+<ul>
+<li><code>backup.expire_time</code>.</li>
+</ul>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Required. A mask specifying which fields (e.g. <code>expire_time</code>) in the
+Backup resource should be updated. This mask is relative to the Backup
+resource, not to the request message. The field mask must always be
+specified; this prevents any future fields from being erased accidentally
+by clients that do not know about them.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackup_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = BigtableTableAdminClient.Create();
+// Initialize request argument(s)
+Backup backup = new Backup();
+FieldMask updateMask = new FieldMask();
+// Make the request
+Backup response = bigtableTableAdminClient.UpdateBackup(backup, updateMask);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackup_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackup*"></a>
   <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackup_Google_Cloud_Bigtable_Admin_V2_UpdateBackupRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackup(Google.Cloud.Bigtable.Admin.V2.UpdateBackupRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateBackup(UpdateBackupRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates a pending or completed Cloud Bigtable Backup.</p>
 </div>
@@ -12051,6 +13880,156 @@ UpdateBackupRequest request = new UpdateBackupRequest
 };
 // Make the request
 Backup response = bigtableTableAdminClient.UpdateBackup(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackupAsync_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackupAsync(Google.Cloud.Bigtable.Admin.V2.Backup,Google.Protobuf.WellKnownTypes.FieldMask,Google.Api.Gax.Grpc.CallSettings)">UpdateBackupAsync(Backup, FieldMask, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; UpdateBackupAsync(Backup backup, FieldMask updateMask, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to update. <code>backup.name</code>, and the fields to be updated
+as specified by <code>update_mask</code> are required. Other fields are ignored.
+Update is only supported for the following fields:</p>
+<ul>
+<li><code>backup.expire_time</code>.</li>
+</ul>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Required. A mask specifying which fields (e.g. <code>expire_time</code>) in the
+Backup resource should be updated. This mask is relative to the Backup
+resource, not to the request message. The field mask must always be
+specified; this prevents any future fields from being erased accidentally
+by clients that do not know about them.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackupAsync_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Protobuf_WellKnownTypes_FieldMask_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+Backup backup = new Backup();
+FieldMask updateMask = new FieldMask();
+// Make the request
+Backup response = await bigtableTableAdminClient.UpdateBackupAsync(backup, updateMask);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackupAsync*"></a>
+  <h4 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackupAsync_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackupAsync(Google.Cloud.Bigtable.Admin.V2.Backup,Google.Protobuf.WellKnownTypes.FieldMask,System.Threading.CancellationToken)">UpdateBackupAsync(Backup, FieldMask, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates a pending or completed Cloud Bigtable Backup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Backup&gt; UpdateBackupAsync(Backup backup, FieldMask updateMask, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a></td>
+        <td><span class="parametername">backup</span></td>
+        <td><p>Required. The backup to update. <code>backup.name</code>, and the fields to be updated
+as specified by <code>update_mask</code> are required. Other fields are ignored.
+Update is only supported for the following fields:</p>
+<ul>
+<li><code>backup.expire_time</code>.</li>
+</ul>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.WellKnownTypes.FieldMask.html">FieldMask</a></td>
+        <td><span class="parametername">updateMask</span></td>
+        <td><p>Required. A mask specifying which fields (e.g. <code>expire_time</code>) in the
+Backup resource should be updated. This mask is relative to the Backup
+resource, not to the request message. The field mask must always be
+specified; this prevents any future fields from being erased accidentally
+by clients that do not know about them.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Bigtable.Admin.V2.Backup.html">Backup</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackupAsync_Google_Cloud_Bigtable_Admin_V2_Backup_Google_Protobuf_WellKnownTypes_FieldMask_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BigtableTableAdminClient bigtableTableAdminClient = await BigtableTableAdminClient.CreateAsync();
+// Initialize request argument(s)
+Backup backup = new Backup();
+FieldMask updateMask = new FieldMask();
+// Make the request
+Backup response = await bigtableTableAdminClient.UpdateBackupAsync(backup, updateMask);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Bigtable_Admin_V2_BigtableTableAdminClient_UpdateBackupAsync_" data-uid="Google.Cloud.Bigtable.Admin.V2.BigtableTableAdminClient.UpdateBackupAsync*"></a>
