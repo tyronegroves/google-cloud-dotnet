@@ -438,6 +438,59 @@ query. The order of the field values must match the order of the order-by clause
   <h5 id="Google_Cloud_Firestore_Query_Limit_System_Int32__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This call replaces any previously-specified limit in the query.</p>
 </div>
+  <a id="Google_Cloud_Firestore_Query_LimitToLast_" data-uid="Google.Cloud.Firestore.Query.LimitToLast*"></a>
+  <h4 id="Google_Cloud_Firestore_Query_LimitToLast_System_Int32_" data-uid="Google.Cloud.Firestore.Query.LimitToLast(System.Int32)">LimitToLast(Int32)</h4>
+  <div class="markdown level1 summary"><p>Creates and returns a new query that only returns the last <code data-dev-comment-type="paramref" class="paramref">limit</code> matching documents.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Query LimitToLast(int limit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">limit</span></td>
+        <td><p>The maximum number of results to return. Must be greater than or equal to 0.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Firestore.Query.html">Query</a></td>
+        <td><p>A new query based on the current one, but with the specified limit applied.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Firestore_Query_LimitToLast_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+You must specify at least one <a class="xref" href="Google.Cloud.Firestore.Query.html#Google_Cloud_Firestore_Query_OrderBy_System_String_">OrderBy(String)</a> clause for limit-to-last queries. Otherwise,
+an <span class="xref">System.InvalidOperationException</span> is thrown during execution.
+</p>
+<p>
+Results for limit-to-last queries are only available once all documents are received, which means
+that these queries cannot be streamed using the <a class="xref" href="Google.Cloud.Firestore.Query.html#Google_Cloud_Firestore_Query_StreamAsync_System_Threading_CancellationToken_">StreamAsync(CancellationToken)</a> method.
+</p>
+</div>
   <a id="Google_Cloud_Firestore_Query_Listen_" data-uid="Google.Cloud.Firestore.Query.Listen*"></a>
   <h4 id="Google_Cloud_Firestore_Query_Listen_System_Action_Google_Cloud_Firestore_QuerySnapshot__System_Threading_CancellationToken_" data-uid="Google.Cloud.Firestore.Query.Listen(System.Action{Google.Cloud.Firestore.QuerySnapshot},System.Threading.CancellationToken)">Listen(Action&lt;QuerySnapshot&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Listen to this query for changes. This method is a convenience method over <a class="xref" href="Google.Cloud.Firestore.Query.html#Google_Cloud_Firestore_Query_Listen_System_Func_Google_Cloud_Firestore_QuerySnapshot_System_Threading_CancellationToken_System_Threading_Tasks_Task__System_Threading_CancellationToken_">Listen(Func&lt;QuerySnapshot, CancellationToken, Task&gt;, CancellationToken)</a>,
