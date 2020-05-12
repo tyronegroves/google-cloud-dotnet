@@ -65,16 +65,12 @@
 <p><code>Google.Cloud.Storage.V1</code> is a.NET client library for the <a href="https://cloud.google.com/storage/">Google Cloud Storage API</a>.
 It wraps the <code>Google.Apis.Storage.v1</code> generated library, providing a higher-level API to make it easier to use.</p>
 <p>Note:
-This documentation is for version <code>3.0.0-beta03</code> of the library.
+This documentation is for version <code>3.0.0</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Storage.V1</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
-Please ensure you enable pre-release packages (for example, in the
-Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
-box). Some of the following samples might only work with the latest 
-pre-release version (<code>3.0.0-beta03</code>) of <code>Google.Cloud.Storage.V1</code>.</p>
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -270,6 +266,139 @@ string url = urlSigner.Sign(bucketName, objectName, TimeSpan.FromHours(1), signi
 // Get the content at the created URL.
 HttpResponseMessage response = await httpClient.GetAsync(url);
 string content = await response.Content.ReadAsStringAsync();
+</code></pre><h2 id="uploading-objects-by-using-html-forms">Uploading objects by using HTML forms</h2>
+<p>In some cases, you might need to allow your users to upload objects via HTML forms.
+You can create signed POST policies that specify what is and is not allowed in such
+scenarios.
+You can read the <a href="https://cloud.google.com/storage/docs/authentication/signatures#policy-document">Policy Document</a>
+documentation to get more information on how a POST policy document should be built.
+You can read the <a href="https://cloud.google.com/storage/docs/xml-api/post-object">POST object</a>
+documentation to get more details on how the forms should be built.</p>
+<p>Below you will find some samples on how to create a signed POST policy.</p>
+<p>Simplest approach, where you restrict the upload to a specific bucket and a 
+specific object name.</p>
+<pre><code class="lang-cs">// Create a signed post policy which can be used to upload a specific object and
+// expires in 1 hour after creation.
+UrlSigner urlSigner = UrlSigner
+    .FromServiceAccountCredential(credential);
+UrlSigner.Options options = UrlSigner.Options
+    .FromDuration(TimeSpan.FromHours(1))
+    .WithSigningVersion(SigningVersion.V4)
+    .WithScheme(&quot;https&quot;);
+UrlSigner.PostPolicy postPolicy = UrlSigner.PostPolicy.ForBucketAndKey(bucketName, objectName);
+
+UrlSigner.SignedPostPolicy signedPostPolicy = await urlSigner.SignAsync(postPolicy, options);
+
+// Create an HTML form including all the fields in the signed post policy.
+StringBuilder form = new StringBuilder();
+form.AppendLine($&quot;&lt;form action=\&quot;{signedPostPolicy.PostUrl}\&quot; method=\&quot;post\&quot; enctype=\&quot;multipart/form-data\&quot;&gt;&quot;);
+foreach (var field in signedPostPolicy.Fields)
+{
+    form.AppendLine($&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;{field.Key}\&quot; value=\&quot;{field.Value}\&quot;&gt;&quot;);
+}
+// Include the file element. It should always be the last element in the form.
+form.AppendLine(&quot;&lt;input name=\&quot;file\&quot; type=\&quot;file\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;input type=\&quot;submit\&quot; value=\&quot;Upload\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;/form&gt;&quot;);
+
+// You can now save the form to file and serve it as static content
+// or send it as the response to a request made to your application.
+File.WriteAllText(&quot;PostPolicySimple.html&quot;, form.ToString());
+</code></pre><p>Enforce how browser&#39;s cache will treat the uploaded object.</p>
+<pre><code class="lang-cs">// Create a signed post policy which can be used to upload a specific object with a
+// specific cache-control value and expires in 1 hour after creation.
+UrlSigner urlSigner = UrlSigner
+    .FromServiceAccountCredential(credential);
+UrlSigner.Options options = UrlSigner.Options
+    .FromDuration(TimeSpan.FromHours(1))
+    .WithSigningVersion(SigningVersion.V4)
+    .WithScheme(&quot;https&quot;);
+UrlSigner.PostPolicy postPolicy = UrlSigner.PostPolicy.ForBucketAndKey(bucketName, objectName);
+postPolicy.SetField(UrlSigner.PostPolicyStandardElement.Acl, &quot;public-read&quot;);
+postPolicy.SetField(UrlSigner.PostPolicyStandardElement.CacheControl, &quot;public,max-age=86400&quot;);
+
+UrlSigner.SignedPostPolicy signedPostPolicy = await urlSigner.SignAsync(postPolicy, options);
+
+// Create an HTML form including all the fields in the signed post policy.
+StringBuilder form = new StringBuilder();
+form.AppendLine($&quot;&lt;form action=\&quot;{signedPostPolicy.PostUrl}\&quot; method=\&quot;post\&quot; enctype=\&quot;multipart/form-data\&quot;&gt;&quot;);
+foreach (var field in signedPostPolicy.Fields)
+{
+    form.AppendLine($&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;{field.Key}\&quot; value=\&quot;{field.Value}\&quot;&gt;&quot;);
+}
+// Include the file element. It should always be the last element in the form.
+form.AppendLine(&quot;&lt;input name=\&quot;file\&quot; type=\&quot;file\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;input type=\&quot;submit\&quot; value=\&quot;Upload\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;/form&gt;&quot;);
+
+// You can now save the form to file and serve it as static content
+// or send it as the response to a request made to your application.
+File.WriteAllText(&quot;PostPolicyCacheControl.html&quot;, form.ToString());
+</code></pre><p>You can also set starts-with conditions for some form elements. This means that the
+posting form should contain that element with a value that matches the condition.</p>
+<pre><code class="lang-cs">// Create a signed post policy which can be used to upload a specific object and
+// expires in 10 seconds after creation.
+// It also sets a starts-with condition on the acl form element, that should be met
+// by the actual form used for posting.
+UrlSigner urlSigner = UrlSigner
+    .FromServiceAccountCredential(credential);
+UrlSigner.Options options = UrlSigner.Options
+    .FromDuration(TimeSpan.FromHours(1))
+    .WithSigningVersion(SigningVersion.V4)
+    .WithScheme(&quot;https&quot;);
+UrlSigner.PostPolicy postPolicy = UrlSigner.PostPolicy.ForBucketAndKey(bucketName, objectName);
+postPolicy.SetStartsWith(UrlSigner.PostPolicyStandardElement.Acl, &quot;public&quot;);
+
+UrlSigner.SignedPostPolicy signedPostPolicy = await urlSigner.SignAsync(postPolicy, options);
+
+// Create an HTML form including all the fields in the signed post policy.
+StringBuilder form = new StringBuilder();
+form.AppendLine($&quot;&lt;form action=\&quot;{signedPostPolicy.PostUrl}\&quot; method=\&quot;post\&quot; enctype=\&quot;multipart/form-data\&quot;&gt;&quot;);
+foreach (var field in signedPostPolicy.Fields)
+{
+    form.AppendLine($&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;{field.Key}\&quot; value=\&quot;{field.Value}\&quot;&gt;&quot;);
+}
+// Include also an acl element with a value that meets the condition set in the policy.
+form.AppendLine(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;acl\&quot; value=\&quot;public-read\&quot;&gt;&quot;);
+// Include the file element. It should always be the last element in the form.
+form.AppendLine(&quot;&lt;input name=\&quot;file\&quot; type=\&quot;file\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;input type=\&quot;submit\&quot; value=\&quot;Upload\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;/form&gt;&quot;);
+
+// You can now save the form to file and serve it as static content
+// or send it as the response to a request made to your application.
+File.WriteAllText(&quot;PostPolicyAcl.html&quot;, form.ToString());
+</code></pre><p>Tell the server which HTTP status code you want it to return on succes.</p>
+<pre><code class="lang-cs">// Create a signed post policy which can be used to upload a specific object and
+// expires in 1 hour after creation.
+// It also sets a specific HTTP success satus code that should be returned.
+// Only 200, 201 and 204 are allowed.
+UrlSigner urlSigner = UrlSigner
+    .FromServiceAccountCredential(credential);
+UrlSigner.Options options = UrlSigner.Options
+    .FromDuration(TimeSpan.FromHours(1))
+    .WithSigningVersion(SigningVersion.V4)
+    .WithScheme(&quot;https&quot;);
+UrlSigner.PostPolicy postPolicy = UrlSigner.PostPolicy.ForBucketAndKey(bucketName, objectName);
+postPolicy.SetField(UrlSigner.PostPolicyStandardElement.SuccessActionStatus, HttpStatusCode.OK);
+
+UrlSigner.SignedPostPolicy signedPostPolicy = await urlSigner.SignAsync(postPolicy, options);
+
+// Create an HTML form including all the fields in the signed post policy.
+StringBuilder form = new StringBuilder();
+form.AppendLine($&quot;&lt;form action=\&quot;{signedPostPolicy.PostUrl}\&quot; method=\&quot;post\&quot; enctype=\&quot;multipart/form-data\&quot;&gt;&quot;);
+foreach (var field in signedPostPolicy.Fields)
+{
+    form.AppendLine($&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;{field.Key}\&quot; value=\&quot;{field.Value}\&quot;&gt;&quot;);
+}
+// Include the file element. It should always be the last element in the form.
+form.AppendLine(&quot;&lt;input name=\&quot;file\&quot; type=\&quot;file\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;input type=\&quot;submit\&quot; value=\&quot;Upload\&quot;&gt;&quot;);
+form.AppendLine(&quot;&lt;/form&gt;&quot;);
+
+// You can now save the form to file and serve it as static content
+// or send it as the response to a request made to your application.
+File.WriteAllText(&quot;PostPolicySuccessStatus.html&quot;, form.ToString());
 </code></pre><h2 id="upload-uris">Upload URIs</h2>
 <p>In some cases, it may not make sense for client applications to have permissions
 to begin an upload for an object, but an authenticated service may choose to grant

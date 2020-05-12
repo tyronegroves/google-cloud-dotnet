@@ -346,6 +346,72 @@ for testing or to use the IAM service&apos;s blob signing capabilities.</p>
     </tbody>
   </table>
   <a id="Google_Cloud_Storage_V1_UrlSigner_Sign_" data-uid="Google.Cloud.Storage.V1.UrlSigner.Sign*"></a>
+  <h4 id="Google_Cloud_Storage_V1_UrlSigner_Sign_Google_Cloud_Storage_V1_UrlSigner_PostPolicy_Google_Cloud_Storage_V1_UrlSigner_Options_" data-uid="Google.Cloud.Storage.V1.UrlSigner.Sign(Google.Cloud.Storage.V1.UrlSigner.PostPolicy,Google.Cloud.Storage.V1.UrlSigner.Options)">Sign(UrlSigner.PostPolicy, UrlSigner.Options)</h4>
+  <div class="markdown level1 summary"><p>Signs the given post policy. The result can be used to make form posting requests matching the conditions
+set in the post policy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UrlSigner.SignedPostPolicy Sign(UrlSigner.PostPolicy postPolicy, UrlSigner.Options options)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.PostPolicy.html">UrlSigner.PostPolicy</a></td>
+        <td><span class="parametername">postPolicy</span></td>
+        <td><p>The post policy to signed and that will be enforced when making the post request.
+Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.Options.html">UrlSigner.Options</a></td>
+        <td><span class="parametername">options</span></td>
+        <td><p>The options used to generate the signed post policy. Must not be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.SignedPostPolicy.html">UrlSigner.SignedPostPolicy</a></td>
+        <td><p>The signed post policy, which contains all the fields that should be including in the form to post.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Storage_V1_UrlSigner_Sign_Google_Cloud_Storage_V1_UrlSigner_PostPolicy_Google_Cloud_Storage_V1_UrlSigner_Options__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Signing post policies is not supported by <a class="xref" href="Google.Cloud.Storage.V1.SigningVersion.html#Google_Cloud_Storage_V1_SigningVersion_V2">V2</a>. A <span class="xref">System.NotSupportedException</span>
+will be thrown if an attempt is made to sign a post policy using <a class="xref" href="Google.Cloud.Storage.V1.SigningVersion.html#Google_Cloud_Storage_V1_SigningVersion_V2">V2</a>.
+</p>
+<p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
+See <a href="https://cloud.google.com/storage/docs/xml-api/post-object">https://cloud.google.com/storage/docs/xml-api/post-object</a> for more information on signed post policies.
+</p>
+</div>
+  <a id="Google_Cloud_Storage_V1_UrlSigner_Sign_" data-uid="Google.Cloud.Storage.V1.UrlSigner.Sign*"></a>
   <h4 id="Google_Cloud_Storage_V1_UrlSigner_Sign_Google_Cloud_Storage_V1_UrlSigner_RequestTemplate_Google_Cloud_Storage_V1_UrlSigner_Options_" data-uid="Google.Cloud.Storage.V1.UrlSigner.Sign(Google.Cloud.Storage.V1.UrlSigner.RequestTemplate,Google.Cloud.Storage.V1.UrlSigner.Options)">Sign(UrlSigner.RequestTemplate, UrlSigner.Options)</h4>
   <div class="markdown level1 summary"><p>Creates a signed URL which can be used to provide limited access to specific buckets and objects to anyone
 in possession of the URL, regardless of whether they have a Google account.</p>
@@ -508,6 +574,78 @@ HttpResponseMessage response = await httpClient.GetAsync(url);
 string content = await response.Content.ReadAsStringAsync();
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync*"></a>
+  <h4 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_Google_Cloud_Storage_V1_UrlSigner_PostPolicy_Google_Cloud_Storage_V1_UrlSigner_Options_System_Threading_CancellationToken_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync(Google.Cloud.Storage.V1.UrlSigner.PostPolicy,Google.Cloud.Storage.V1.UrlSigner.Options,System.Threading.CancellationToken)">SignAsync(UrlSigner.PostPolicy, UrlSigner.Options, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Signs the given post policy. The result can be used to make form posting requests matching the conditions
+set in the post policy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;UrlSigner.SignedPostPolicy&gt; SignAsync(UrlSigner.PostPolicy postPolicy, UrlSigner.Options options, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.PostPolicy.html">UrlSigner.PostPolicy</a></td>
+        <td><span class="parametername">postPolicy</span></td>
+        <td><p>The post policy to signed and that will be enforced when making the post request.
+Most not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.Options.html">UrlSigner.Options</a></td>
+        <td><span class="parametername">options</span></td>
+        <td><p>The options used to generate the signed post policy. Must not be null.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The token to monitor for cancellation requests.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.SignedPostPolicy.html">UrlSigner.SignedPostPolicy</a>&gt;</td>
+        <td><p>The signed post policy, which contains all the fields that should be including in the form to post.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_Google_Cloud_Storage_V1_UrlSigner_PostPolicy_Google_Cloud_Storage_V1_UrlSigner_Options_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Signing post policies is not supported by <a class="xref" href="Google.Cloud.Storage.V1.SigningVersion.html#Google_Cloud_Storage_V1_SigningVersion_V2">V2</a>. A <span class="xref">System.NotSupportedException</span>
+will be thrown if an attempt is made to sign a post policy using <a class="xref" href="Google.Cloud.Storage.V1.SigningVersion.html#Google_Cloud_Storage_V1_SigningVersion_V2">V2</a>.
+</p>
+<p>
+When a <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.html">UrlSigner</a> is created with a service account credential, the signing can be performed
+with no network access. When it is created with an implementation of <a class="xref" href="Google.Cloud.Storage.V1.UrlSigner.IBlobSigner.html">UrlSigner.IBlobSigner</a>, that may require
+network access or other IO. In that case, one of the asynchronous methods should be used when the caller is
+in a context that should not block.
+</p>
+<p>
+See <a href="https://cloud.google.com/storage/docs/xml-api/post-object">https://cloud.google.com/storage/docs/xml-api/post-object</a> for more information on signed post policies.
+</p>
+</div>
   <a id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync*"></a>
   <h4 id="Google_Cloud_Storage_V1_UrlSigner_SignAsync_Google_Cloud_Storage_V1_UrlSigner_RequestTemplate_Google_Cloud_Storage_V1_UrlSigner_Options_System_Threading_CancellationToken_" data-uid="Google.Cloud.Storage.V1.UrlSigner.SignAsync(Google.Cloud.Storage.V1.UrlSigner.RequestTemplate,Google.Cloud.Storage.V1.UrlSigner.Options,System.Threading.CancellationToken)">SignAsync(UrlSigner.RequestTemplate, UrlSigner.Options, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Asynchronously creates a signed URL which can be used to provide limited access to specific buckets and objects to anyone
