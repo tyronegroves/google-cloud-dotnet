@@ -2550,6 +2550,112 @@ Policy response = await connectionServiceClient.GetIamPolicyAsync(resource, opti
 </code></pre></div>
   </div>
   <a id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnections*"></a>
+  <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnections(Google.Api.Gax.ResourceNames.LocationName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListConnections(LocationName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns a list of connections in the given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListConnectionsResponse, Connection&gt; ListConnections(LocationName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. Parent resource name.
+Must be in the form: <code>projects/{project_id}/locations/{location_id}</code></p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.BigQuery.Connection.V1.ListConnectionsResponse.html">ListConnectionsResponse</a>, <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConnectionServiceClient connectionServiceClient = ConnectionServiceClient.Create();
+// Initialize request argument(s)
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+// Make the request
+PagedEnumerable&lt;ListConnectionsResponse, Connection&gt; response = connectionServiceClient.ListConnections(parent);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Connection item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListConnectionsResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Connection item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Connection&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Connection item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnections*"></a>
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_Google_Cloud_BigQuery_Connection_V1_ListConnectionsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnections(Google.Cloud.BigQuery.Connection.V1.ListConnectionsRequest,Google.Api.Gax.Grpc.CallSettings)">ListConnections(ListConnectionsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns a list of connections in the given project.</p>
 </div>
@@ -2632,6 +2738,218 @@ foreach (ListConnectionsResponse page in response.AsRawResponses())
 // Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
 int pageSize = 10;
 Page&lt;Connection&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Connection item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnections*"></a>
+  <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnections(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListConnections(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns a list of connections in the given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListConnectionsResponse, Connection&gt; ListConnections(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. Parent resource name.
+Must be in the form: <code>projects/{project_id}/locations/{location_id}</code></p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.BigQuery.Connection.V1.ListConnectionsResponse.html">ListConnectionsResponse</a>, <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnections_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConnectionServiceClient connectionServiceClient = ConnectionServiceClient.Create();
+// Initialize request argument(s)
+string parent = &quot;projects/[PROJECT]/locations/[LOCATION]&quot;;
+// Make the request
+PagedEnumerable&lt;ListConnectionsResponse, Connection&gt; response = connectionServiceClient.ListConnections(parent);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Connection item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListConnectionsResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Connection item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Connection&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Connection item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnectionsAsync_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnectionsAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnectionsAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnectionsAsync(Google.Api.Gax.ResourceNames.LocationName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListConnectionsAsync(LocationName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns a list of connections in the given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListConnectionsResponse, Connection&gt; ListConnectionsAsync(LocationName parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.LocationName.html">LocationName</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. Parent resource name.
+Must be in the form: <code>projects/{project_id}/locations/{location_id}</code></p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.BigQuery.Connection.V1.ListConnectionsResponse.html">ListConnectionsResponse</a>, <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnectionsAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConnectionServiceClient connectionServiceClient = await ConnectionServiceClient.CreateAsync();
+// Initialize request argument(s)
+LocationName parent = LocationName.FromProjectLocation(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;);
+// Make the request
+PagedAsyncEnumerable&lt;ListConnectionsResponse, Connection&gt; response = connectionServiceClient.ListConnectionsAsync(parent);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Connection item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListConnectionsResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Connection item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Connection&gt; singlePage = await response.ReadPageAsync(pageSize);
 // Do something with the page of items
 Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
 foreach (Connection item in singlePage)
@@ -2737,11 +3055,117 @@ foreach (Connection item in singlePage)
 string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnectionsAsync_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnectionsAsync*"></a>
+  <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnectionsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.ListConnectionsAsync(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListConnectionsAsync(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Returns a list of connections in the given project.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListConnectionsResponse, Connection&gt; ListConnectionsAsync(string parent, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">parent</span></td>
+        <td><p>Required. Parent resource name.
+Must be in the form: <code>projects/{project_id}/locations/{location_id}</code></p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.BigQuery.Connection.V1.ListConnectionsResponse.html">ListConnectionsResponse</a>, <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.BigQuery.Connection.V1.Connection.html">Connection</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_ListConnectionsAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+ConnectionServiceClient connectionServiceClient = await ConnectionServiceClient.CreateAsync();
+// Initialize request argument(s)
+string parent = &quot;projects/[PROJECT]/locations/[LOCATION]&quot;;
+// Make the request
+PagedAsyncEnumerable&lt;ListConnectionsResponse, Connection&gt; response = connectionServiceClient.ListConnectionsAsync(parent);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Connection item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListConnectionsResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Connection item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Connection&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Connection item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicy_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicy*"></a>
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicy_Google_Api_Gax_IResourceName_Google_Cloud_Iam_V1_Policy_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicy(Google.Api.Gax.IResourceName,Google.Cloud.Iam.V1.Policy,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicy(IResourceName, Policy, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2813,7 +3237,7 @@ Policy response = connectionServiceClient.SetIamPolicy(resource, policy);
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicy_Google_Cloud_Iam_V1_SetIamPolicyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicy(Google.Cloud.Iam.V1.SetIamPolicyRequest,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicy(SetIamPolicyRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2878,7 +3302,7 @@ Policy response = connectionServiceClient.SetIamPolicy(request);
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicy_System_String_Google_Cloud_Iam_V1_Policy_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicy(System.String,Google.Cloud.Iam.V1.Policy,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicy(String, Policy, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2950,7 +3374,7 @@ Policy response = connectionServiceClient.SetIamPolicy(resource, policy);
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicyAsync_Google_Api_Gax_IResourceName_Google_Cloud_Iam_V1_Policy_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicyAsync(Google.Api.Gax.IResourceName,Google.Cloud.Iam.V1.Policy,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicyAsync(IResourceName, Policy, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3022,7 +3446,7 @@ Policy response = await connectionServiceClient.SetIamPolicyAsync(resource, poli
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicyAsync_Google_Api_Gax_IResourceName_Google_Cloud_Iam_V1_Policy_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicyAsync(Google.Api.Gax.IResourceName,Google.Cloud.Iam.V1.Policy,System.Threading.CancellationToken)">SetIamPolicyAsync(IResourceName, Policy, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3094,7 +3518,7 @@ Policy response = await connectionServiceClient.SetIamPolicyAsync(resource, poli
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicyAsync_Google_Cloud_Iam_V1_SetIamPolicyRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicyAsync(Google.Cloud.Iam.V1.SetIamPolicyRequest,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicyAsync(SetIamPolicyRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3159,7 +3583,7 @@ Policy response = await connectionServiceClient.SetIamPolicyAsync(request);
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicyAsync_Google_Cloud_Iam_V1_SetIamPolicyRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicyAsync(Google.Cloud.Iam.V1.SetIamPolicyRequest,System.Threading.CancellationToken)">SetIamPolicyAsync(SetIamPolicyRequest, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3224,7 +3648,7 @@ Policy response = await connectionServiceClient.SetIamPolicyAsync(request);
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicyAsync_System_String_Google_Cloud_Iam_V1_Policy_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicyAsync(System.String,Google.Cloud.Iam.V1.Policy,Google.Api.Gax.Grpc.CallSettings)">SetIamPolicyAsync(String, Policy, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3296,7 +3720,7 @@ Policy response = await connectionServiceClient.SetIamPolicyAsync(resource, poli
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_SetIamPolicyAsync_System_String_Google_Cloud_Iam_V1_Policy_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.SetIamPolicyAsync(System.String,Google.Cloud.Iam.V1.Policy,System.Threading.CancellationToken)">SetIamPolicyAsync(String, Policy, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Sets the access control policy on the specified resource. Replaces any
 existing policy.</p>
-<p>Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED</p>
+<p>Can return <code>NOT_FOUND</code>, <code>INVALID_ARGUMENT</code>, and <code>PERMISSION_DENIED</code> errors.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3400,7 +3824,7 @@ by another call to this method.</p>
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissions_Google_Api_Gax_IResourceName_System_Collections_Generic_IEnumerable_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissions(Google.Api.Gax.IResourceName,System.Collections.Generic.IEnumerable{System.String},Google.Api.Gax.Grpc.CallSettings)">TestIamPermissions(IResourceName, IEnumerable&lt;String&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3475,7 +3899,7 @@ TestIamPermissionsResponse response = connectionServiceClient.TestIamPermissions
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissions_Google_Cloud_Iam_V1_TestIamPermissionsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissions(Google.Cloud.Iam.V1.TestIamPermissionsRequest,Google.Api.Gax.Grpc.CallSettings)">TestIamPermissions(TestIamPermissionsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3543,7 +3967,7 @@ TestIamPermissionsResponse response = connectionServiceClient.TestIamPermissions
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissions_System_String_System_Collections_Generic_IEnumerable_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissions(System.String,System.Collections.Generic.IEnumerable{System.String},Google.Api.Gax.Grpc.CallSettings)">TestIamPermissions(String, IEnumerable&lt;String&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3618,7 +4042,7 @@ TestIamPermissionsResponse response = connectionServiceClient.TestIamPermissions
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissionsAsync_Google_Api_Gax_IResourceName_System_Collections_Generic_IEnumerable_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissionsAsync(Google.Api.Gax.IResourceName,System.Collections.Generic.IEnumerable{System.String},Google.Api.Gax.Grpc.CallSettings)">TestIamPermissionsAsync(IResourceName, IEnumerable&lt;String&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3693,7 +4117,7 @@ TestIamPermissionsResponse response = await connectionServiceClient.TestIamPermi
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissionsAsync_Google_Api_Gax_IResourceName_System_Collections_Generic_IEnumerable_System_String__System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissionsAsync(Google.Api.Gax.IResourceName,System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">TestIamPermissionsAsync(IResourceName, IEnumerable&lt;String&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3768,7 +4192,7 @@ TestIamPermissionsResponse response = await connectionServiceClient.TestIamPermi
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissionsAsync_Google_Cloud_Iam_V1_TestIamPermissionsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissionsAsync(Google.Cloud.Iam.V1.TestIamPermissionsRequest,Google.Api.Gax.Grpc.CallSettings)">TestIamPermissionsAsync(TestIamPermissionsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3836,7 +4260,7 @@ TestIamPermissionsResponse response = await connectionServiceClient.TestIamPermi
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissionsAsync_Google_Cloud_Iam_V1_TestIamPermissionsRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissionsAsync(Google.Cloud.Iam.V1.TestIamPermissionsRequest,System.Threading.CancellationToken)">TestIamPermissionsAsync(TestIamPermissionsRequest, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3904,7 +4328,7 @@ TestIamPermissionsResponse response = await connectionServiceClient.TestIamPermi
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissionsAsync_System_String_System_Collections_Generic_IEnumerable_System_String__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissionsAsync(System.String,System.Collections.Generic.IEnumerable{System.String},Google.Api.Gax.Grpc.CallSettings)">TestIamPermissionsAsync(String, IEnumerable&lt;String&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
@@ -3979,7 +4403,7 @@ TestIamPermissionsResponse response = await connectionServiceClient.TestIamPermi
   <h4 id="Google_Cloud_BigQuery_Connection_V1_ConnectionServiceClient_TestIamPermissionsAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Threading_CancellationToken_" data-uid="Google.Cloud.BigQuery.Connection.V1.ConnectionServiceClient.TestIamPermissionsAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">TestIamPermissionsAsync(String, IEnumerable&lt;String&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Returns permissions that a caller has on the specified resource.
 If the resource does not exist, this will return an empty set of
-permissions, not a NOT_FOUND error.</p>
+permissions, not a <code>NOT_FOUND</code> error.</p>
 <p>Note: This operation is designed to be used for building permission-aware
 UIs and command-line tools, not for authorization checking. This operation
 may &quot;fail open&quot; without warning.</p>
