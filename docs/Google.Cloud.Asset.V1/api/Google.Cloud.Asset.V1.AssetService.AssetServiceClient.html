@@ -207,10 +207,10 @@
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistory_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistory*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistory_Google_Cloud_Asset_V1_BatchGetAssetsHistoryRequest_Grpc_Core_CallOptions_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistory(Google.Cloud.Asset.V1.BatchGetAssetsHistoryRequest,Grpc.Core.CallOptions)">BatchGetAssetsHistory(BatchGetAssetsHistoryRequest, CallOptions)</h4>
   <div class="markdown level1 summary"><p>Batch gets the update history of assets that overlap a time window.
-For RESOURCE content, this API outputs history with asset in both
-non-delete or deleted status.
 For IAM_POLICY content, this API outputs history when the asset and its
 attached IAM POLICY both exist. This can create gaps in the output history.
+Otherwise, this API outputs history with asset in both non-delete or
+deleted status.
 If a specified asset does not exist, this API returns an INVALID_ARGUMENT
 error.</p>
 </div>
@@ -262,10 +262,10 @@ error.</p>
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistory_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistory*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistory_Google_Cloud_Asset_V1_BatchGetAssetsHistoryRequest_Grpc_Core_Metadata_System_Nullable_System_DateTime__System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistory(Google.Cloud.Asset.V1.BatchGetAssetsHistoryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">BatchGetAssetsHistory(BatchGetAssetsHistoryRequest, Metadata, Nullable&lt;DateTime&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Batch gets the update history of assets that overlap a time window.
-For RESOURCE content, this API outputs history with asset in both
-non-delete or deleted status.
 For IAM_POLICY content, this API outputs history when the asset and its
 attached IAM POLICY both exist. This can create gaps in the output history.
+Otherwise, this API outputs history with asset in both non-delete or
+deleted status.
 If a specified asset does not exist, this API returns an INVALID_ARGUMENT
 error.</p>
 </div>
@@ -329,10 +329,10 @@ error.</p>
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistoryAsync_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistoryAsync*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistoryAsync_Google_Cloud_Asset_V1_BatchGetAssetsHistoryRequest_Grpc_Core_CallOptions_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistoryAsync(Google.Cloud.Asset.V1.BatchGetAssetsHistoryRequest,Grpc.Core.CallOptions)">BatchGetAssetsHistoryAsync(BatchGetAssetsHistoryRequest, CallOptions)</h4>
   <div class="markdown level1 summary"><p>Batch gets the update history of assets that overlap a time window.
-For RESOURCE content, this API outputs history with asset in both
-non-delete or deleted status.
 For IAM_POLICY content, this API outputs history when the asset and its
 attached IAM POLICY both exist. This can create gaps in the output history.
+Otherwise, this API outputs history with asset in both non-delete or
+deleted status.
 If a specified asset does not exist, this API returns an INVALID_ARGUMENT
 error.</p>
 </div>
@@ -384,10 +384,10 @@ error.</p>
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistoryAsync_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistoryAsync*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_BatchGetAssetsHistoryAsync_Google_Cloud_Asset_V1_BatchGetAssetsHistoryRequest_Grpc_Core_Metadata_System_Nullable_System_DateTime__System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.BatchGetAssetsHistoryAsync(Google.Cloud.Asset.V1.BatchGetAssetsHistoryRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">BatchGetAssetsHistoryAsync(BatchGetAssetsHistoryRequest, Metadata, Nullable&lt;DateTime&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Batch gets the update history of assets that overlap a time window.
-For RESOURCE content, this API outputs history with asset in both
-non-delete or deleted status.
 For IAM_POLICY content, this API outputs history when the asset and its
 attached IAM POLICY both exist. This can create gaps in the output history.
+Otherwise, this API outputs history with asset in both non-delete or
+deleted status.
 If a specified asset does not exist, this API returns an INVALID_ARGUMENT
 error.</p>
 </div>
@@ -921,10 +921,16 @@ this client.</p>
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssets_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssets*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssets_Google_Cloud_Asset_V1_ExportAssetsRequest_Grpc_Core_CallOptions_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssets(Google.Cloud.Asset.V1.ExportAssetsRequest,Grpc.Core.CallOptions)">ExportAssets(ExportAssetsRequest, CallOptions)</h4>
   <div class="markdown level1 summary"><p>Exports assets with time and resource types to a given Cloud Storage
-location. The output format is newline-delimited JSON.
-This API implements the
-[google.longrunning.Operation][google.longrunning.Operation] API allowing
-you to keep track of the export.</p>
+location/BigQuery table. For Cloud Storage location destinations, the
+output format is newline-delimited JSON. Each line represents a
+[google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON
+format; for BigQuery table destinations, the output table stores the fields
+in asset proto as columns. This API implements the
+[google.longrunning.Operation][google.longrunning.Operation] API , which
+allows you to keep track of the export. We recommend intervals of at least
+2 seconds with exponential retry to poll the export operation result. For
+regular-size resource parent, the export operation usually finishes within
+5 minutes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -974,10 +980,16 @@ you to keep track of the export.</p>
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssets_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssets*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssets_Google_Cloud_Asset_V1_ExportAssetsRequest_Grpc_Core_Metadata_System_Nullable_System_DateTime__System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssets(Google.Cloud.Asset.V1.ExportAssetsRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">ExportAssets(ExportAssetsRequest, Metadata, Nullable&lt;DateTime&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Exports assets with time and resource types to a given Cloud Storage
-location. The output format is newline-delimited JSON.
-This API implements the
-[google.longrunning.Operation][google.longrunning.Operation] API allowing
-you to keep track of the export.</p>
+location/BigQuery table. For Cloud Storage location destinations, the
+output format is newline-delimited JSON. Each line represents a
+[google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON
+format; for BigQuery table destinations, the output table stores the fields
+in asset proto as columns. This API implements the
+[google.longrunning.Operation][google.longrunning.Operation] API , which
+allows you to keep track of the export. We recommend intervals of at least
+2 seconds with exponential retry to poll the export operation result. For
+regular-size resource parent, the export operation usually finishes within
+5 minutes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1039,10 +1051,16 @@ you to keep track of the export.</p>
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssetsAsync_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssetsAsync*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssetsAsync_Google_Cloud_Asset_V1_ExportAssetsRequest_Grpc_Core_CallOptions_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssetsAsync(Google.Cloud.Asset.V1.ExportAssetsRequest,Grpc.Core.CallOptions)">ExportAssetsAsync(ExportAssetsRequest, CallOptions)</h4>
   <div class="markdown level1 summary"><p>Exports assets with time and resource types to a given Cloud Storage
-location. The output format is newline-delimited JSON.
-This API implements the
-[google.longrunning.Operation][google.longrunning.Operation] API allowing
-you to keep track of the export.</p>
+location/BigQuery table. For Cloud Storage location destinations, the
+output format is newline-delimited JSON. Each line represents a
+[google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON
+format; for BigQuery table destinations, the output table stores the fields
+in asset proto as columns. This API implements the
+[google.longrunning.Operation][google.longrunning.Operation] API , which
+allows you to keep track of the export. We recommend intervals of at least
+2 seconds with exponential retry to poll the export operation result. For
+regular-size resource parent, the export operation usually finishes within
+5 minutes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1092,10 +1110,16 @@ you to keep track of the export.</p>
   <a id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssetsAsync_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssetsAsync*"></a>
   <h4 id="Google_Cloud_Asset_V1_AssetService_AssetServiceClient_ExportAssetsAsync_Google_Cloud_Asset_V1_ExportAssetsRequest_Grpc_Core_Metadata_System_Nullable_System_DateTime__System_Threading_CancellationToken_" data-uid="Google.Cloud.Asset.V1.AssetService.AssetServiceClient.ExportAssetsAsync(Google.Cloud.Asset.V1.ExportAssetsRequest,Grpc.Core.Metadata,System.Nullable{System.DateTime},System.Threading.CancellationToken)">ExportAssetsAsync(ExportAssetsRequest, Metadata, Nullable&lt;DateTime&gt;, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Exports assets with time and resource types to a given Cloud Storage
-location. The output format is newline-delimited JSON.
-This API implements the
-[google.longrunning.Operation][google.longrunning.Operation] API allowing
-you to keep track of the export.</p>
+location/BigQuery table. For Cloud Storage location destinations, the
+output format is newline-delimited JSON. Each line represents a
+[google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in the JSON
+format; for BigQuery table destinations, the output table stores the fields
+in asset proto as columns. This API implements the
+[google.longrunning.Operation][google.longrunning.Operation] API , which
+allows you to keep track of the export. We recommend intervals of at least
+2 seconds with exponential retry to poll the export operation result. For
+regular-size resource parent, the export operation usually finishes within
+5 minutes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
