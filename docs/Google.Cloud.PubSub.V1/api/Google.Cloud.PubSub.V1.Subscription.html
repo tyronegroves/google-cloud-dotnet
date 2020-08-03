@@ -194,10 +194,7 @@ is disabled.</p>
 <p>The Cloud Pub/Sub service account associated with this subscriptions&apos;s
 parent project (i.e.,
 service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
-permission to Acknowledge() messages on this subscription.
-&lt;b&gt;EXPERIMENTAL:&lt;/b&gt; This feature is part of a closed alpha release. This
-API might be changed in backward-incompatible ways and is not recommended
-for production use. It is not subject to any SLA or deprecation policy.</p>
+permission to Acknowledge() messages on this subscription.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -219,15 +216,40 @@ for production use. It is not subject to any SLA or deprecation policy.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_PubSub_V1_Subscription_Detached_" data-uid="Google.Cloud.PubSub.V1.Subscription.Detached*"></a>
+  <h4 id="Google_Cloud_PubSub_V1_Subscription_Detached" data-uid="Google.Cloud.PubSub.V1.Subscription.Detached">Detached</h4>
+  <div class="markdown level1 summary"><p>Indicates whether the subscription is detached from its topic. Detached
+subscriptions don&apos;t receive messages from their topic and don&apos;t retain any
+backlog. <code>Pull</code> and <code>StreamingPull</code> requests will return
+FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
+the endpoint will not be made.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Detached { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_PubSub_V1_Subscription_EnableMessageOrdering_" data-uid="Google.Cloud.PubSub.V1.Subscription.EnableMessageOrdering*"></a>
   <h4 id="Google_Cloud_PubSub_V1_Subscription_EnableMessageOrdering" data-uid="Google.Cloud.PubSub.V1.Subscription.EnableMessageOrdering">EnableMessageOrdering</h4>
   <div class="markdown level1 summary"><p>If true, messages published with the same <code>ordering_key</code> in <code>PubsubMessage</code>
 will be delivered to the subscribers in the order in which they
 are received by the Pub/Sub system. Otherwise, they may be delivered in
-any order.
-&lt;b&gt;EXPERIMENTAL:&lt;/b&gt; This feature is part of a closed alpha release. This
-API might be changed in backward-incompatible ways and is not recommended
-for production use. It is not subject to any SLA or deprecation policy.</p>
+any order.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -280,13 +302,11 @@ value for <code>expiration_policy.ttl</code> is 1 day.</p>
   </table>
   <a id="Google_Cloud_PubSub_V1_Subscription_Filter_" data-uid="Google.Cloud.PubSub.V1.Subscription.Filter*"></a>
   <h4 id="Google_Cloud_PubSub_V1_Subscription_Filter" data-uid="Google.Cloud.PubSub.V1.Subscription.Filter">Filter</h4>
-  <div class="markdown level1 summary"><p>An expression written in the Cloud Pub/Sub filter language. If non-empty,
+  <div class="markdown level1 summary"><p>An expression written in the Pub/Sub <a href="https://cloud.google.com/pubsub/docs/filtering">filter
+language</a>. If non-empty,
 then only <code>PubsubMessage</code>s whose <code>attributes</code> field matches the filter are
 delivered on this subscription. If empty, then no messages are filtered
-out.
-&lt;b&gt;EXPERIMENTAL:&lt;/b&gt; This feature is part of a closed alpha release. This
-API might be changed in backward-incompatible ways and is not recommended
-for production use. It is not subject to any SLA or deprecation policy.</p>
+out.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -422,10 +442,7 @@ will pull and ack messages using API methods.</p>
   <div class="markdown level1 summary"><p>Indicates whether to retain acknowledged messages. If true, then
 messages are not expunged from the subscription&apos;s backlog, even if they are
 acknowledged, until they fall out of the <code>message_retention_duration</code>
-window. This must be true if you would like to
-&lt;a
-href=&quot;<a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time&quot;&gt;">https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time&quot;></a>
-Seek to a timestamp&lt;/a&gt;.</p>
+window. This must be true if you would like to <a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">Seek to a timestamp</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -449,15 +466,12 @@ Seek to a timestamp&lt;/a&gt;.</p>
   </table>
   <a id="Google_Cloud_PubSub_V1_Subscription_RetryPolicy_" data-uid="Google.Cloud.PubSub.V1.Subscription.RetryPolicy*"></a>
   <h4 id="Google_Cloud_PubSub_V1_Subscription_RetryPolicy" data-uid="Google.Cloud.PubSub.V1.Subscription.RetryPolicy">RetryPolicy</h4>
-  <div class="markdown level1 summary"><p>A policy that specifies how Cloud Pub/Sub retries message delivery for this
+  <div class="markdown level1 summary"><p>A policy that specifies how Pub/Sub retries message delivery for this
 subscription.</p>
 <p>If not set, the default retry policy is applied. This generally implies
 that messages will be retried as soon as possible for healthy subscribers.
 RetryPolicy will be triggered on NACKs or acknowledgement deadline
-exceeded events for a given message.
-&lt;b&gt;EXPERIMENTAL:&lt;/b&gt; This API might be changed in backward-incompatible
-ways and is not recommended for production use. It is not subject to any
-SLA or deprecation policy.</p>
+exceeded events for a given message.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
