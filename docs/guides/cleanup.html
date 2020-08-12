@@ -70,12 +70,17 @@
 <h1 id="unmanaged-resource-clean-up">Unmanaged resource clean-up</h1>
 
 <h2 id="grpc-based-apis-and-channels">gRPC-based APIs and channels</h2>
+<p>Clients are thread-safe, and in general we recommend using a single
+instance across a whole application unless you particularly need
+different settings for some clients.</p>
 <p>gRPC uses the concept of a <em>channel</em> between your application
 and the service implementing an API. This consists of a network
 connection and some unmanaged resources which handle its status and
 multiplex the requests and responses on it.</p>
 <p>Most of the time, you don&#39;t need to worry about cleaning up the
-unmanaged resources from the C# client libraries.</p>
+unmanaged resources from the C# client libraries. If you use
+multiple client instances created in an entirely-default way, a
+single gRPC channel will be shared between all instances.</p>
 <p>If you want to handle this explicitly, you can do so by creating
 channels yourself and shutting them down in an orderly fashion. For
 slightly less control (but a simpler life) you can let the client
@@ -92,9 +97,10 @@ when either the application domain is unloaded, or the process exits. For most a
 perfectly adequate; explicit shutdown is only required when your application needs to ensure that
 it has handled all requests appropriately before exiting.</p>
 <h2 id="rest-based-apis">REST-based APIs</h2>
-<p>Summary: Use a single client if you can; if you have to create
-multiple clients at a high frequency, dispose of them when you&#39;re
-done.</p>
+<p>Summary: Use a single client if you can. Clients are threads-safe,
+so in most situations you can use a single client for the whole
+application. If you have to create multiple clients at a high
+frequency, dispose of them when you&#39;re done.</p>
 <p>Just as a reminder, Google Cloud Client Libraries for .NET has three
 libraries for REST-based APIs:</p>
 <ul>
