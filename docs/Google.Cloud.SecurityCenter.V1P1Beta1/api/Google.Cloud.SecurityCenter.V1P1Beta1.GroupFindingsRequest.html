@@ -83,7 +83,7 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest</span></div>
+    <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html">IPageRequest</a></div>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.html">GroupFindingsRequest</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.html">GroupFindingsRequest</a>&gt;</div>
@@ -160,12 +160,18 @@ two times don&apos;t affect the result. For example, the results aren&apos;t aff
 if the finding is made inactive and then active again.</p>
 <p>Possible &quot;state_change&quot; values when compare_duration is specified:</p>
 <ul>
-<li>&quot;CHANGED&quot;:   indicates that the finding was present at the start of
-          compare_duration, but changed its state at read_time.</li>
-<li>&quot;UNCHANGED&quot;: indicates that the finding was present at the start of
-          compare_duration and did not change state at read_time.</li>
-<li>&quot;ADDED&quot;:     indicates that the finding was not present at the start
-          of compare_duration, but was present at read_time.</li>
+<li>&quot;CHANGED&quot;:   indicates that the finding was present and matched the given
+          filter at the start of compare_duration, but changed its
+          state at read_time.</li>
+<li>&quot;UNCHANGED&quot;: indicates that the finding was present and matched the given
+          filter at the start of compare_duration and did not change
+          state at read_time.</li>
+<li>&quot;ADDED&quot;:     indicates that the finding did not match the given filter or
+          was not present at the start of compare_duration, but was
+          present at read_time.</li>
+<li>&quot;REMOVED&quot;:   indicates that the finding was present and matched the
+          filter at the start of compare_duration, but did not match
+          the filter at read_time.</li>
 </ul>
 <p>If compare_duration is not specified, then the only possible state_change
 is &quot;UNUSED&quot;,  which will be the state_change set for all findings present
@@ -230,13 +236,17 @@ character in front of them to indicate negation. Examples include:</p>
 </ul>
 <p>Usage: This should be milliseconds since epoch or an RFC3339 string.
 Examples:
-&quot;event_time = &amp;quot;2019-06-10T16:07:18-07:00&amp;quot;&quot;
-&quot;event_time = 1560208038000&quot;</p>
+<code>event_time = &amp;quot;2019-06-10T16:07:18-07:00&amp;quot;</code>
+<code>event_time = 1560208038000</code></p>
 <ul>
 <li>security_marks.marks: <code>=</code>, <code>:</code></li>
 <li>source_properties: <code>=</code>, <code>:</code>, <code>&gt;</code>, <code>&amp;lt;</code>, <code>&gt;=</code>, <code>&amp;lt;=</code></li>
 </ul>
 <p>For example, <code>source_properties.size = 100</code> is a valid filter string.</p>
+<p>Use a partial match on the empty string to filter based on a property
+existing: <code>source_properties.my_property : &amp;quot;&amp;quot;</code></p>
+<p>Use a negated partial match on the empty string to filter based on a
+property not existing: <code>-source_properties.my_property : &amp;quot;&amp;quot;</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -260,9 +270,9 @@ Examples:
   </table>
   <a id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_GroupBy_" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.GroupBy*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_GroupBy" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.GroupBy">GroupBy</h4>
-  <div class="markdown level1 summary"><p>Required. Expression that defines what assets fields to use for grouping
-(including <code>state_change</code>). The string value should follow SQL syntax:
-comma separated list of fields. For example: &quot;parent,resource_name&quot;.</p>
+  <div class="markdown level1 summary"><p>Required. Expression that defines what assets fields to use for grouping (including
+<code>state_change</code>). The string value should follow SQL syntax: comma separated
+list of fields. For example: &quot;parent,resource_name&quot;.</p>
 <p>The following fields are supported:</p>
 <ul>
 <li>resource_name</li>
@@ -279,32 +289,6 @@ comma separated list of fields. For example: &quot;parent,resource_name&quot;.</
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public string GroupBy { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <a id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_Having_" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.Having*"></a>
-  <h4 id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_Having" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.Having">Having</h4>
-  <div class="markdown level1 summary"><p>Filter that specifies what fields to further filter on <em>after</em> the query
-filter has been executed. Currently only <code>finding.state</code> and <code>state_change</code>
-are supported and requires compare_duration to be specified.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Having { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -347,7 +331,7 @@ are supported and requires compare_duration to be specified.</p>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageSize</span></div>
+      <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageSize">IPageRequest.PageSize</a></div>
   <a id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_PageToken_" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.PageToken*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_PageToken" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.PageToken">PageToken</h4>
   <div class="markdown level1 summary"><p>The value returned by the last <code>GroupFindingsResponse</code>; indicates
@@ -375,7 +359,7 @@ that the system should return the next page of data.</p>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageToken</span></div>
+      <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageToken">IPageRequest.PageToken</a></div>
   <a id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_Parent_" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.Parent*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1P1Beta1_GroupFindingsRequest_Parent" data-uid="Google.Cloud.SecurityCenter.V1P1Beta1.GroupFindingsRequest.Parent">Parent</h4>
   <div class="markdown level1 summary"><p>Required. Name of the source to groupBy. Its format is
