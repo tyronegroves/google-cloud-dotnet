@@ -149,11 +149,10 @@
   </h3>
   <a id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_PageSize_" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.PageSize*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_PageSize" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.PageSize">PageSize</h4>
-  <div class="markdown level1 summary"><p>Optional. The page size for search result pagination. Page size is capped
-at 500 even if a larger value is given. If set to zero, server will pick an
-appropriate default. Returned results may be fewer than requested. When
-this happens, there could be more results as long as <code>next_page_token</code> is
-returned.</p>
+  <div class="markdown level1 summary"><p>Optional. The page size for search result pagination. Page size is capped at 500 even
+if a larger value is given. If set to zero, server will pick an appropriate
+default. Returned results may be fewer than requested. When this happens,
+there could be more results as long as <code>next_page_token</code> is returned.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -179,10 +178,10 @@ returned.</p>
       <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageSize">IPageRequest.PageSize</a></div>
   <a id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_PageToken_" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.PageToken*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_PageToken" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.PageToken">PageToken</h4>
-  <div class="markdown level1 summary"><p>Optional. If present, retrieve the next batch of results from the preceding
-call to this method. <code>page_token</code> must be the value of <code>next_page_token</code>
-from the previous response. The values of all other method parameters must
-be identical to those in the previous call.</p>
+  <div class="markdown level1 summary"><p>Optional. If present, retrieve the next batch of results from the preceding call to
+this method. <code>page_token</code> must be the value of <code>next_page_token</code> from the
+previous response. The values of all other method parameters must be
+identical to those in the previous call.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -208,26 +207,32 @@ be identical to those in the previous call.</p>
       <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageToken">IPageRequest.PageToken</a></div>
   <a id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_Query_" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.Query*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_Query" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.Query">Query</h4>
-  <div class="markdown level1 summary"><p>Optional. The query statement. An empty query can be specified to search
-all the IAM policies within the given <code>scope</code>.</p>
+  <div class="markdown level1 summary"><p>Optional. The query statement. See <a href="https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query">how to construct a
+query</a>
+for more information. If not specified or empty, it will search all the
+IAM policies within the specified <code>scope</code>.</p>
 <p>Examples:</p>
 <ul>
-<li><code>policy : &amp;quot;amy@gmail.com&amp;quot;</code> to find Cloud IAM policy bindings that
-specify user &amp;quot;amy@gmail.com&quot;.</li>
-<li><code>policy : &amp;quot;roles/compute.admin&amp;quot;</code> to find Cloud IAM policy bindings that
-specify the Compute Admin role.</li>
-<li><code>policy.role.permissions : &amp;quot;storage.buckets.update&amp;quot;</code> to find Cloud IAM
-policy bindings that specify a role containing &quot;storage.buckets.update&quot;
-permission.</li>
-<li><code>resource : &amp;quot;organizations/123&amp;quot;</code> to find Cloud IAM policy bindings that
-are set on &quot;organizations/123&quot;.</li>
-<li><code>(resource : (&amp;quot;organizations/123&amp;quot; OR &amp;quot;folders/1234&amp;quot;) AND policy : &amp;quot;amy&amp;quot;)</code>
-to find Cloud IAM policy bindings that are set on &quot;organizations/123&quot; or
-&quot;folders/1234&quot;, and also specify user &quot;amy&quot;.</li>
+<li><code>policy:amy@gmail.com</code> to find IAM policy bindings that specify user
+&amp;quot;amy@gmail.com&quot;.</li>
+<li><code>policy:roles/compute.admin</code> to find IAM policy bindings that specify
+the Compute Admin role.</li>
+<li><code>policy.role.permissions:storage.buckets.update</code> to find IAM policy
+bindings that specify a role containing &quot;storage.buckets.update&quot;
+permission. Note that if callers don&apos;t have <code>iam.roles.get</code> access to a
+role&apos;s included permissions, policy bindings that specify this role will
+be dropped from the search results.</li>
+<li><code>resource:organizations/123456</code> to find IAM policy bindings
+that are set on &quot;organizations/123456&quot;.</li>
+<li><code>Important</code> to find IAM policy bindings that contain &quot;Important&quot; as a
+word in any of the searchable fields (except for the included
+permissions).</li>
+<li><code>*por*</code> to find IAM policy bindings that contain &quot;por&quot; as a substring
+in any of the searchable fields (except for the included permissions).</li>
+<li><code>resource:(instance1 OR instance2) policy:amy</code> to find
+IAM policy bindings that are set on resources &quot;instance1&quot; or
+&quot;instance2&quot; and also specify user &quot;amy&quot;.</li>
 </ul>
-<p>See <a href="https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query">how to construct a
-query</a>
-for more details.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -251,14 +256,17 @@ for more details.</p>
   </table>
   <a id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_Scope_" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.Scope*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllIamPoliciesRequest_Scope" data-uid="Google.Cloud.Asset.V1.SearchAllIamPoliciesRequest.Scope">Scope</h4>
-  <div class="markdown level1 summary"><p>Required. A scope can be a project, a folder or an organization. The search
-is limited to the IAM policies within the <code>scope</code>.</p>
+  <div class="markdown level1 summary"><p>Required. A scope can be a project, a folder, or an organization. The search is
+limited to the IAM policies within the <code>scope</code>. The caller must be granted
+the
+<a href="http://cloud.google.com/asset-inventory/docs/access-control#required_permissions"><code>cloudasset.assets.searchAllIamPolicies</code></a>
+permission on the desired scope.</p>
 <p>The allowed values are:</p>
 <ul>
-<li>projects/{PROJECT_ID}</li>
-<li>projects/{PROJECT_NUMBER}</li>
-<li>folders/{FOLDER_NUMBER}</li>
-<li>organizations/{ORGANIZATION_NUMBER}</li>
+<li>projects/{PROJECT_ID} (e.g., &quot;projects/foo-bar&quot;)</li>
+<li>projects/{PROJECT_NUMBER} (e.g., &quot;projects/12345678&quot;)</li>
+<li>folders/{FOLDER_NUMBER} (e.g., &quot;folders/1234567&quot;)</li>
+<li>organizations/{ORGANIZATION_NUMBER} (e.g., &quot;organizations/123456&quot;)</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>

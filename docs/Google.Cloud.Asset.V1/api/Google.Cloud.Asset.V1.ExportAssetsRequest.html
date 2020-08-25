@@ -148,9 +148,20 @@
   </h3>
   <a id="Google_Cloud_Asset_V1_ExportAssetsRequest_AssetTypes_" data-uid="Google.Cloud.Asset.V1.ExportAssetsRequest.AssetTypes*"></a>
   <h4 id="Google_Cloud_Asset_V1_ExportAssetsRequest_AssetTypes" data-uid="Google.Cloud.Asset.V1.ExportAssetsRequest.AssetTypes">AssetTypes</h4>
-  <div class="markdown level1 summary"><p>A list of asset types of which to take a snapshot for. Example:
-&quot;compute.googleapis.com/Disk&quot;. If specified, only matching assets will be
-returned. See <a href="https://cloud.google.com/asset-inventory/docs/overview">Introduction to Cloud Asset
+  <div class="markdown level1 summary"><p>A list of asset types to take a snapshot for. For example:
+&quot;compute.googleapis.com/Disk&quot;.</p>
+<p>Regular expressions are also supported. For example:</p>
+<ul>
+<li>&quot;compute.googleapis.com.*&quot; snapshots resources whose asset type starts
+with &quot;compute.googleapis.com&quot;.</li>
+<li>&quot;.*Instance&quot; snapshots resources whose asset type ends with &quot;Instance&quot;.</li>
+<li>&quot;.<em>Instance.</em>&quot; snapshots resources whose asset type contains &quot;Instance&quot;.</li>
+</ul>
+<p>See <a href="https://github.com/google/re2/wiki/Syntax">RE2</a> for all supported
+regular expression syntax. If the regular expression does not match any
+supported asset type, an INVALID_ARGUMENT error will be returned.</p>
+<p>If specified, only matching assets will be returned, otherwise, it will
+snapshot all asset types. See <a href="https://cloud.google.com/asset-inventory/docs/overview">Introduction to Cloud Asset
 Inventory</a>
 for all supported asset types.</p>
 </div>
@@ -201,8 +212,7 @@ returned.</p>
   </table>
   <a id="Google_Cloud_Asset_V1_ExportAssetsRequest_OutputConfig_" data-uid="Google.Cloud.Asset.V1.ExportAssetsRequest.OutputConfig*"></a>
   <h4 id="Google_Cloud_Asset_V1_ExportAssetsRequest_OutputConfig" data-uid="Google.Cloud.Asset.V1.ExportAssetsRequest.OutputConfig">OutputConfig</h4>
-  <div class="markdown level1 summary"><p>Required. Output configuration indicating where the results will be output
-to.</p>
+  <div class="markdown level1 summary"><p>Required. Output configuration indicating where the results will be output to.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

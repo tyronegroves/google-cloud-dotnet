@@ -73,7 +73,7 @@
   
   <h1 id="Google_Cloud_Asset_V1_ResourceSearchResult" data-uid="Google.Cloud.Asset.V1.ResourceSearchResult" class="text-break">Class ResourceSearchResult
   </h1>
-  <div class="markdown level0 summary"><p>A result of Resource Search, containing information of a cloud resoure.</p>
+  <div class="markdown level0 summary"><p>A result of Resource Search, containing information of a cloud resource.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -148,14 +148,23 @@
   </h3>
   <a id="Google_Cloud_Asset_V1_ResourceSearchResult_AdditionalAttributes_" data-uid="Google.Cloud.Asset.V1.ResourceSearchResult.AdditionalAttributes*"></a>
   <h4 id="Google_Cloud_Asset_V1_ResourceSearchResult_AdditionalAttributes" data-uid="Google.Cloud.Asset.V1.ResourceSearchResult.AdditionalAttributes">AdditionalAttributes</h4>
-  <div class="markdown level1 summary"><p>The additional attributes of this resource. The attributes may vary from
-one resource type to another. Examples: <code>projectId</code> for Project,
-<code>dnsName</code> for DNS ManagedZone.</p>
+  <div class="markdown level1 summary"><p>The additional searchable attributes of this resource. The attributes may
+vary from one resource type to another. Examples: <code>projectId</code> for Project,
+<code>dnsName</code> for DNS ManagedZone. This field contains a subset of the resource
+metadata fields that are returned by the List or Get APIs provided by the
+corresponding GCP service (e.g., Compute Engine). see <a href="https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types">API references and
+supported searchable
+attributes</a>
+for more information.</p>
+<p>You can search values of these fields through free text search. However,
+you should not consume the field programically as the field names and
+values may change as the GCP service updates to a new incompatible API
+version.</p>
 <p>To search against the <code>additional_attributes</code>:</p>
 <ul>
 <li>use a free text query to match the attributes values. Example: to search
 <code>additional_attributes = { dnsName: &amp;quot;foobar&amp;quot; }</code>, you can issue a query
-<code>&amp;quot;foobar&amp;quot;</code>.</li>
+<code>foobar</code>.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -212,7 +221,7 @@ one resource type to another. Examples: <code>projectId</code> for Project,
 could be up to 1M bytes.</p>
 <p>To search against the <code>description</code>:</p>
 <ul>
-<li>use a field query. Example: <code>description : &amp;quot;*important instance*&amp;quot;</code></li>
+<li>use a field query. Example: <code>description:&amp;quot;*important instance*&amp;quot;</code></li>
 <li>use a free text query. Example: <code>&amp;quot;*important instance*&amp;quot;</code></li>
 </ul>
 </div>
@@ -241,7 +250,7 @@ could be up to 1M bytes.</p>
   <div class="markdown level1 summary"><p>The display name of this resource.</p>
 <p>To search against the <code>display_name</code>:</p>
 <ul>
-<li>use a field query. Example: <code>displayName : &amp;quot;My Instance&amp;quot;</code></li>
+<li>use a field query. Example: <code>displayName:&amp;quot;My Instance&amp;quot;</code></li>
 <li>use a free text query. Example: <code>&amp;quot;My Instance&amp;quot;</code></li>
 </ul>
 </div>
@@ -272,11 +281,11 @@ resources</a>
 for more information.</p>
 <p>To search against the <code>labels</code>:</p>
 <ul>
-<li>use a field query, as following:</li>
-<li>query on any label&apos;s key or value. Example: <code>labels : &amp;quot;prod&amp;quot;</code></li>
-<li>query by a given label. Example: <code>labels.env : &amp;quot;prod&amp;quot;</code></li>
-<li>query by a given label&apos;sexistence. Example: <code>labels.env : *</code></li>
-<li>use a free text query. Example: <code>&amp;quot;prod&amp;quot;</code></li>
+<li>use a field query:</li>
+<li>query on any label&apos;s key or value. Example: <code>labels:prod</code></li>
+<li>query by a given label. Example: <code>labels.env:prod</code></li>
+<li>query by a given label&apos;s existence. Example: <code>labels.env:*</code></li>
+<li>use a free text query. Example: <code>prod</code></li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -305,8 +314,8 @@ for more information.</p>
 <code>us-west1-b</code>.</p>
 <p>To search against the <code>location</code>:</p>
 <ul>
-<li>use a field query. Example: <code>location : &amp;quot;us-west*&amp;quot;</code></li>
-<li>use a free text query. Example: <code>&amp;quot;us-west*&amp;quot;</code></li>
+<li>use a field query. Example: <code>location:us-west*</code></li>
+<li>use a free text query. Example: <code>us-west*</code></li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -338,8 +347,8 @@ Format</a>
 for more information.</p>
 <p>To search against the <code>name</code>:</p>
 <ul>
-<li>use a field query. Example: <code>name : &amp;quot;instance1&amp;quot;</code></li>
-<li>use a free text query. Example: <code>&amp;quot;instance1&amp;quot;</code></li>
+<li>use a field query. Example: <code>name:instance1</code></li>
+<li>use a free text query. Example: <code>instance1</code></li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -370,8 +379,8 @@ resources</a>
 for more information.</p>
 <p>To search against the <code>network_tags</code>:</p>
 <ul>
-<li>use a field query. Example: <code>networkTags : &amp;quot;internal&amp;quot;</code></li>
-<li>use a free text query. Example: <code>&amp;quot;internal&amp;quot;</code></li>
+<li>use a field query. Example: <code>networkTags:internal</code></li>
+<li>use a free text query. Example: <code>internal</code></li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>

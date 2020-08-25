@@ -149,8 +149,8 @@
   </h3>
   <a id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_AssetTypes_" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.AssetTypes*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_AssetTypes" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.AssetTypes">AssetTypes</h4>
-  <div class="markdown level1 summary"><p>Optional. A list of asset types that this request searches for. If empty,
-it will search all the <a href="https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types">searchable asset
+  <div class="markdown level1 summary"><p>Optional. A list of asset types that this request searches for. If empty, it will
+search all the <a href="https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types">searchable asset
 types</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -175,12 +175,14 @@ types</a>.</p>
   </table>
   <a id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_OrderBy_" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.OrderBy*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_OrderBy" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.OrderBy">OrderBy</h4>
-  <div class="markdown level1 summary"><p>Optional. A comma separated list of fields specifying the sorting order of
-the results. The default order is ascending. Add &quot; DESC&quot; after the field
-name to indicate descending order. Redundant space characters are ignored.
-Example: &quot;location DESC, name&quot;. See <a href="https://cloud.google.com/asset-inventory/docs/searching-resources#query_on_resource_metadata_fields">supported resource metadata
-fields</a>
-for more details.</p>
+  <div class="markdown level1 summary"><p>Optional. A comma separated list of fields specifying the sorting order of the
+results. The default order is ascending. Add &quot; DESC&quot; after the field name
+to indicate descending order. Redundant space characters are ignored.
+Example: &quot;location DESC, name&quot;. Only string fields in the response are
+sortable, including <code>name</code>, <code>displayName</code>, <code>description</code>, <code>location</code>. All
+the other fields such as repeated fields (e.g., <code>networkTags</code>), map
+fields (e.g., <code>labels</code>) and struct fields (e.g., <code>additionalAttributes</code>)
+are not supported.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -204,11 +206,10 @@ for more details.</p>
   </table>
   <a id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_PageSize_" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.PageSize*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_PageSize" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.PageSize">PageSize</h4>
-  <div class="markdown level1 summary"><p>Optional. The page size for search result pagination. Page size is capped
-at 500 even if a larger value is given. If set to zero, server will pick an
-appropriate default. Returned results may be fewer than requested. When
-this happens, there could be more results as long as <code>next_page_token</code> is
-returned.</p>
+  <div class="markdown level1 summary"><p>Optional. The page size for search result pagination. Page size is capped at 500 even
+if a larger value is given. If set to zero, server will pick an appropriate
+default. Returned results may be fewer than requested. When this happens,
+there could be more results as long as <code>next_page_token</code> is returned.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -234,10 +235,10 @@ returned.</p>
       <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageSize">IPageRequest.PageSize</a></div>
   <a id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_PageToken_" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.PageToken*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_PageToken" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.PageToken">PageToken</h4>
-  <div class="markdown level1 summary"><p>Optional. If present, then retrieve the next batch of results from the
-preceding call to this method. <code>page_token</code> must be the value of
-<code>next_page_token</code> from the previous response. The values of all other
-method parameters, must be identical to those in the previous call.</p>
+  <div class="markdown level1 summary"><p>Optional. If present, then retrieve the next batch of results from the preceding call
+to this method. <code>page_token</code> must be the value of <code>next_page_token</code> from
+the previous response. The values of all other method parameters, must be
+identical to those in the previous call.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -263,37 +264,41 @@ method parameters, must be identical to those in the previous call.</p>
       <div><a class="xref" href="Google.Api.Gax.Grpc.IPageRequest.html#Google_Api_Gax_Grpc_IPageRequest_PageToken">IPageRequest.PageToken</a></div>
   <a id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_Query_" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.Query*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_Query" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.Query">Query</h4>
-  <div class="markdown level1 summary"><p>Optional. The query statement. An empty query can be specified to search
-all the resources of certain <code>asset_types</code> within the given <code>scope</code>.</p>
+  <div class="markdown level1 summary"><p>Optional. The query statement. See <a href="http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query">how to construct a
+query</a>
+for more information. If not specified or empty, it will search all the
+resources within the specified <code>scope</code>. Note that the query string is
+compared against each Cloud IAM policy binding, including its members,
+roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+contain the bindings that match your query. To learn more about the IAM
+policy structure, see <a href="https://cloud.google.com/iam/docs/policies#structure">IAM policy
+doc</a>.</p>
 <p>Examples:</p>
 <ul>
-<li><code>name : &amp;quot;Important&amp;quot;</code> to find Cloud resources whose name contains
+<li><code>name:Important</code> to find Cloud resources whose name contains
 &quot;Important&quot; as a word.</li>
-<li><code>displayName : &amp;quot;Impor*&amp;quot;</code> to find Cloud resources whose display name
-contains &quot;Impor&quot; as a word prefix.</li>
-<li><code>description : &amp;quot;*por*&amp;quot;</code> to find Cloud resources whose description
+<li><code>displayName:Impor*</code> to find Cloud resources whose display name
+contains &quot;Impor&quot; as a prefix.</li>
+<li><code>description:*por*</code> to find Cloud resources whose description
 contains &quot;por&quot; as a substring.</li>
-<li><code>location : &amp;quot;us-west*&amp;quot;</code> to find Cloud resources whose location is
+<li><code>location:us-west*</code> to find Cloud resources whose location is
 prefixed with &quot;us-west&quot;.</li>
-<li><code>labels : &amp;quot;prod&amp;quot;</code> to find Cloud resources whose labels contain &quot;prod&quot; as
+<li><code>labels:prod</code> to find Cloud resources whose labels contain &quot;prod&quot; as
 a key or value.</li>
-<li><code>labels.env : &amp;quot;prod&amp;quot;</code> to find Cloud resources which have a label &quot;env&quot;
+<li><code>labels.env:prod</code> to find Cloud resources that have a label &quot;env&quot;
 and its value is &quot;prod&quot;.</li>
-<li><code>labels.env : *</code> to find Cloud resources which have a label &quot;env&quot;.</li>
-<li><code>&amp;quot;Important&amp;quot;</code> to find Cloud resources which contain &quot;Important&quot; as a word
+<li><code>labels.env:*</code> to find Cloud resources that have a label &quot;env&quot;.</li>
+<li><code>Important</code> to find Cloud resources that contain &quot;Important&quot; as a word
 in any of the searchable fields.</li>
-<li><code>&amp;quot;Impor*&amp;quot;</code> to find Cloud resources which contain &quot;Impor&quot; as a word prefix
+<li><code>Impor*</code> to find Cloud resources that contain &quot;Impor&quot; as a prefix
 in any of the searchable fields.</li>
-<li><code>&amp;quot;*por*&amp;quot;</code> to find Cloud resources which contain &quot;por&quot; as a substring in
+<li><code>*por*</code> to find Cloud resources that contain &quot;por&quot; as a substring in
 any of the searchable fields.</li>
-<li><code>(&amp;quot;Important&amp;quot; AND location : (&amp;quot;us-west1&amp;quot; OR &amp;quot;global&amp;quot;))</code> to find Cloud
-resources which contain &quot;Important&quot; as a word in any of the searchable
+<li><code>Important location:(us-west1 OR global)</code> to find Cloud
+resources that contain &quot;Important&quot; as a word in any of the searchable
 fields and are also located in the &quot;us-west1&quot; region or the &quot;global&quot;
 location.</li>
 </ul>
-<p>See <a href="https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query">how to construct a
-query</a>
-for more details.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -317,14 +322,16 @@ for more details.</p>
   </table>
   <a id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_Scope_" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.Scope*"></a>
   <h4 id="Google_Cloud_Asset_V1_SearchAllResourcesRequest_Scope" data-uid="Google.Cloud.Asset.V1.SearchAllResourcesRequest.Scope">Scope</h4>
-  <div class="markdown level1 summary"><p>Required. A scope can be a project, a folder or an organization. The search
-is limited to the resources within the <code>scope</code>.</p>
+  <div class="markdown level1 summary"><p>Required. A scope can be a project, a folder, or an organization. The search is
+limited to the resources within the <code>scope</code>. The caller must be granted the
+<a href="http://cloud.google.com/asset-inventory/docs/access-control#required_permissions"><code>cloudasset.assets.searchAllResources</code></a>
+permission on the desired scope.</p>
 <p>The allowed values are:</p>
 <ul>
-<li>projects/{PROJECT_ID}</li>
-<li>projects/{PROJECT_NUMBER}</li>
-<li>folders/{FOLDER_NUMBER}</li>
-<li>organizations/{ORGANIZATION_NUMBER}</li>
+<li>projects/{PROJECT_ID} (e.g., &quot;projects/foo-bar&quot;)</li>
+<li>projects/{PROJECT_NUMBER} (e.g., &quot;projects/12345678&quot;)</li>
+<li>folders/{FOLDER_NUMBER} (e.g., &quot;folders/1234567&quot;)</li>
+<li>organizations/{ORGANIZATION_NUMBER} (e.g., &quot;organizations/123456&quot;)</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
