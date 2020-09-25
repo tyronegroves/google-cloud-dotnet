@@ -309,6 +309,33 @@ still depending on Google Cloud libraries that depend on Grpc.Core
 but most GA) which use GAX 3.x, which depends on Grpc.Core 2.x. If
 you update to the latest version of the client library, that should
 fix the issue.</p>
+<h2 id="why-have-the-generated-grpc-client-constructors-changed">Why have the generated gRPC client constructors changed?</h2>
+<p>Between gRPC 1.x and 2.x, the gRPC protoc plugin changed from
+generating raw gRPC client constructors accepting <code>Channel</code> to ones
+accepting its base class of <code>ChannelBase</code>. This is a good thing, as
+while <code>Channel</code> is part of the <code>Grpc.Core</code> package, <code>ChannelBase</code> is
+in the (much smaller) <code>Grpc.Core.Api</code> package.</p>
+<p>Unfortunately when upgrading the Google Cloud Libraries for .NET
+from gRPC 1.x to 2.x as package dependencies, we didn&#39;t change the
+generator version we were using.</p>
+<p>In terms of whether this counts as a breaking change or not, this is
+in a gray area. As far as we can determine, through pure C# code you
+shouldn&#39;t see any changes: code that worked before should work in
+exactly the same way now. While parameter changes can usually be
+breaking due to method group conversions to delegate types, those
+aren&#39;t available for constructors anyway. It <em>can</em> lead to a
+breaking change via reflection - which is potentially noticeable via
+dependency injection.</p>
+<p>We believe this to be <em>very, very</em> unlikely to affect customers, as
+it would only affect you if you&#39;re using the raw gRPC client instead
+of the &quot;wrapper&quot; provided by libraries <em>and</em> doing so by injecting a
+<code>Channel</code>, expecting that to be passed as a constructor argument. If
+you run into this situation, changing the <code>Channel</code> to <code>ChannelBase</code>
+is likely to fix the problem, but we would also like to hear from you:
+we&#39;d be grateful if you&#39;d <a href="https://github.com/googleapis/google-cloud-dotnet/issues/new/choose">open a new
+issue</a>
+with the details so we can understand the situation better. (Aside
+from anything else, this will help us in future similar decisions.)</p>
 </article>
           </div>
           
