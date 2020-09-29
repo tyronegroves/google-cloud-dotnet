@@ -68,22 +68,38 @@ It allows for simple integration of Stackdriver into ASP.NET applications with m
 Logging and Stackdriver Trace, and integrates with ASP.NET Core 2.1
 (which is the long-term support release of ASP.NET Core 2.x) and above.</p>
 <p>Note:
-This documentation is for version <code>4.1.0</code> of the library.
+This documentation is for version <code>4.2.0-beta01</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Diagnostics.AspNetCore</code> package from NuGet. Add it to
 your project in the normal way (for example by right-clicking on the
-project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).</p>
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
+Please ensure you enable pre-release packages (for example, in the
+Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>4.2.0-beta01</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
 download a service account JSON file then set the <code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable to refer to it.
 The credentials will automatically be used to authenticate. See the <a href="https://cloud.google.com/docs/authentication/getting-started">Getting Started With
 Authentication</a> guide for more details.</p>
+<p>See <a href="https://cloud.google.com/logging/docs/access-control#api-permissions">API Permissions for <code>entries.write</code></a>
+for the permissions needed for Logging and Error Reporting.</p>
+<p>See <a href="https://cloud.google.com/trace/docs/iam#api_permissions">API Permissions for PatchTraces</a>
+for the permissions needed for Tracing.</p>
 <h1 id="note">Note</h1>
 <p>The Google.Cloud.Diagnostics.AspNetCore package attempts to collect the filename and line number when
 entries are collected. However, to be able to collect this information PDBs must be included with
 the deployed code.</p>
+<h1 id="note-1">Note</h1>
+<p>When running on environments that limit or disable CPU usage for background activities, for instance
+<a href="https://cloud.google.com/run/docs/tips/general#avoiding_background_activities">Google Cloud Run</a>, take care
+not to use the timed buffer options for any of Logging, Tracing or Error Reporting. Take into account
+that the timed buffer is used for all of these components by default so you will need to explicitly
+configure the buffers by using the <code>Google.Cloud.Diagnostics.AspNetCore.LoggerOptions</code>,
+<code>Google.Cloud.Diagnostics.Common.TraceOptions</code> and <code>Google.Cloud.Diagnostics.Common.ErrorReportingOptions</code> classes.
+Below you&#39;ll find examples of how to configure the buffers.</p>
 <h1 id="getting-started">Getting started</h1>
 <h2 id="initializing-google-diagnostics">Initializing Google Diagnostics</h2>
 <p>The easiest way to initialize Google Diagnostics services is using
