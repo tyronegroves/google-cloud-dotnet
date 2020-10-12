@@ -62,13 +62,11 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="googleclouddiagnosticsaspnetcore">Google.Cloud.Diagnostics.AspNetCore</h1>
 
-<p><code>Google.Cloud.Diagnostics.AspNetCore</code> is an ASP.NET Core instrumentation library for Google Stackdriver.
-It allows for simple integration of Stackdriver into ASP.NET applications with minimal code changes.</p>
-<p>This package supports Stackdriver Error Reporting, Stackdriver
-Logging and Stackdriver Trace, and integrates with ASP.NET Core 2.1
-(which is the long-term support release of ASP.NET Core 2.x) and above.</p>
+<p><code>Google.Cloud.Diagnostics.AspNetCore</code> is an ASP.NET Core instrumentation library for Google Logging, Error Reporting and Tracing.
+It allows for simple integration of Google observability components into ASP.NET Core 2.1+ applications with minimal code changes.</p>
+<p>Note: ASP.NET Core 2.1 is the long-term support release of ASP.NET Core 2.x.</p>
 <p>Note:
-This documentation is for version <code>4.2.0-beta01</code> of the library.
+This documentation is for version <code>4.2.0-beta02</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Diagnostics.AspNetCore</code> package from NuGet. Add it to
@@ -77,7 +75,7 @@ project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
 Please ensure you enable pre-release packages (for example, in the
 Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
 box). Some of the following samples might only work with the latest 
-pre-release version (<code>4.2.0-beta01</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
+pre-release version (<code>4.2.0-beta02</code>) of <code>Google.Cloud.Diagnostics.AspNetCore</code>.</p>
 <h1 id="authentication">Authentication</h1>
 <p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
 <p>Otherwise, the simplest way of authenticating your API calls is to
@@ -107,17 +105,17 @@ the <code>UseGoogleDiagnostics</code> extentension method on <code>IWebHostBuild
 This configures Logging, Tracing and Error Reporting middleware.</p>
 <p>If your application is runnng on Google App Engine, Google
 Kubernetes Engine, Google Cloud Run or Google Compute Engine, you
-don&#39;t need to provide a value for <code>ProjectID</code>, <code>Service</code> and
+don&#39;t need to provide a value for <code>ProjectId</code>, <code>Service</code> and
 <code>Version</code> since they can be automatically obtained by the
 <code>UseGoogleDiagnostics</code> method as far as they make sense for the
 environment. (Not every environment has the concept of a &quot;service&quot;
 or &quot;version&quot;.) The values used will be the ones associated with the running application.</p>
 <p>If your application is running outside of GCP, including when it
-runs locally, then you&#39;ll need to provide the <code>ProjectID</code> of the
+runs locally, then you&#39;ll need to provide the <code>ProjectId</code> of the
 Google Cloud Project in which to store the diagnostic information as
 well as the <code>Service</code> and <code>Version</code> with which to identify your
 application.</p>
-<pre><code class="lang-cs">var webHostBuilder = new WebHostBuilder()
+<pre><code class="lang-cs">var hostBuilder = new WebHostBuilder()
     // Replace ProjectId with your Google Cloud Project ID.
     // Replace Service with a name or identifier for the service.
     // Replace Version with a version for the service.
@@ -125,13 +123,11 @@ application.</p>
     .UseStartup&lt;Startup&gt;();
 </code></pre><p>You can still initialize the separate components using the extension
 methods below. This can be useful if you only need to use some of
-the components or, for instance, if you need to access the
-<code>Configuration</code> property on the <code>Startup</code> class to obtain values for
-<code>ProjectID</code>, <code>Service</code> or <code>Version</code>.</p>
+the observability components.</p>
 <p>Optional parameters on <code>UseGoogleDiagnostics</code> are also available to
 specify options for each of the components (logging, tracing and
 error reporting). This is typically useful for diagnosing problems,
-as described below</p>
+as described below.</p>
 <h1 id="error-reporting">Error Reporting</h1>
 <h2 id="registering-error-reporting">Registering Error Reporting</h2>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
@@ -146,9 +142,13 @@ as described below</p>
         options.Version = Version;
     });
 
-    // ...any other services your application requires.
+    // Add any other services your application requires, for instance,
+    // depending on the version of ASP.NET Core you are using, you may
+    // need one of the following:
 
-    services.AddMvc();
+    // services.AddMvc();
+
+    // services.AddControllersWithViews();
 }
 
 public void Configure(IApplicationBuilder app)
@@ -156,14 +156,25 @@ public void Configure(IApplicationBuilder app)
     // Use before handling any requests to ensure all unhandled exceptions are reported.
     app.UseGoogleExceptionLogging();
 
-    // ...any other configuration your application requires.
+    // Add any other configuration your application requires, for instance,
+    // depending on the verson of ASP.NET Core you are using, you may
+    // need one of the following:
 
-    app.UseMvc(routes =&gt;
-    {
-        routes.MapRoute(
-            name: &quot;default&quot;,
-            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
-    });
+    //app.UseMvc(routes =&gt;
+    //{
+    //    routes.MapRoute(
+    //        name: &quot;default&quot;,
+    //        template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //});
+
+    //app.UseRouting();
+    //app.UseEndpoints(endpoints =&gt;
+    //{
+    //    endpoints.MapControllerRoute(
+    //        name: &quot;default&quot;,
+    //        pattern: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //    endpoints.MapRazorPages();
+    //});
 }
 </code></pre><h2 id="log-exceptions">Log Exceptions</h2>
 <pre><code class="lang-cs">/// &lt;summary&gt;
@@ -186,8 +197,9 @@ public void CatchesAndLogsException(string id, [FromServices]IExceptionLogger ex
 }
 </code></pre><h1 id="logging">Logging</h1>
 <h2 id="initializing-logging">Initializing Logging</h2>
-<p>Logging can be initialized using <code>ConfigureServices</code> when
-constructing a <code>WebHostBuilder()</code>:</p>
+<p>When configuring an <code>IWebHostBuilder</code> Logging can be initialized in
+two different ways:</p>
+<p>Using <code>ConfigureServices</code>:</p>
 <pre><code class="lang-cs">return new WebHostBuilder()
     .ConfigureServices(services =&gt;
     {
@@ -195,7 +207,7 @@ constructing a <code>WebHostBuilder()</code>:</p>
         services.AddSingleton&lt;ILoggerProvider&gt;(sp =&gt; GoogleLoggerProvider.Create(sp, projectId));
     })
     .UseStartup&lt;Startup&gt;();
-</code></pre><p>Or using <code>ConfigureLogging</code> when constructing a <code>WebHostBuilder()</code>:</p>
+</code></pre><p>Or using <code>ConfigureLogging</code>:</p>
 <pre><code class="lang-cs">return new WebHostBuilder()
     .ConfigureLogging(builder =&gt; builder.AddProvider(GoogleLoggerProvider.Create(serviceProvider: null, projectId)))
     .UseStartup&lt;Startup&gt;();
@@ -203,10 +215,18 @@ constructing a <code>WebHostBuilder()</code>:</p>
 log entry label providers) being used as the service provider is
 not available within <code>ConfigureLogging</code>.</p>
 <p>Alternatively, logging can be configured within the application&#39;s
-<code>ConfigureServices</code> method:</p>
+<code>Startup.Configure</code> method:</p>
 <pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
-    services.AddMvc();
+    // No specific services are needed to use Google Logging.
+
+    // Add any services your application requires, for instance,
+    // depending on the version of ASP.NET Core you are using, you may
+    // need one of the following:
+
+    // services.AddMvc();
+
+    // services.AddControllersWithViews();
 }
 
 public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
@@ -214,14 +234,25 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
     // Replace ProjectId with your Google Cloud Project ID.
     loggerFactory.AddGoogle(app.ApplicationServices, ProjectId);
 
-    // ...any other configuration your application requires.
+    // Add any other configuration your application requires, for instance,
+    // depending on the verson of ASP.NET Core you are using, you may
+    // need one of the following:
 
-    app.UseMvc(routes =&gt;
-    {
-        routes.MapRoute(
-            name: &quot;default&quot;,
-            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
-    });
+    //app.UseMvc(routes =&gt;
+    //{
+    //    routes.MapRoute(
+    //        name: &quot;default&quot;,
+    //        template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //});
+
+    //app.UseRouting();
+    //app.UseEndpoints(endpoints =&gt;
+    //{
+    //    endpoints.MapControllerRoute(
+    //        name: &quot;default&quot;,
+    //        pattern: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //    endpoints.MapRazorPages();
+    //});
 }
 </code></pre><h2 id="log">Log</h2>
 <pre><code class="lang-cs">public class LoggingSamplesController : Controller
@@ -292,7 +323,13 @@ Logger.</p>
         options.ProjectId = ProjectId;
     });
 
-    services.AddMvc();
+    // Add any other services your application requires, for instance,
+    // depending on the version of ASP.NET Core you are using, you may
+    // need one of the following:
+
+    // services.AddMvc();
+
+    // services.AddControllersWithViews();
 }
 
 public void Configure(IApplicationBuilder app)
@@ -300,14 +337,25 @@ public void Configure(IApplicationBuilder app)
     // Use at the start of the request pipeline to ensure the entire request is traced.
     app.UseGoogleTrace();
 
-    // ...any other configuration your application requires.
+    // Add any other configuration your application requires, for instance,
+    // depending on the verson of ASP.NET Core you are using, you may
+    // need one of the following:
 
-    app.UseMvc(routes =&gt;
-    {
-        routes.MapRoute(
-            name: &quot;default&quot;,
-            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
-    });
+    //app.UseMvc(routes =&gt;
+    //{
+    //    routes.MapRoute(
+    //        name: &quot;default&quot;,
+    //        template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //});
+
+    //app.UseRouting();
+    //app.UseEndpoints(endpoints =&gt;
+    //{
+    //    endpoints.MapControllerRoute(
+    //        name: &quot;default&quot;,
+    //        pattern: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //    endpoints.MapRazorPages();
+    //});
 }
 </code></pre><h2 id="troubleshooting-tracing">Troubleshooting Tracing</h2>
 <p>Just as with logging, trace is most easily diagnosed by removing
@@ -318,10 +366,10 @@ RetryOptions retryOptions = RetryOptions.NoRetry(ExceptionHandling.Propagate);
 BufferOptions bufferOptions = BufferOptions.NoBuffer();
 TraceOptions traceOptions = TraceOptions.Create(bufferOptions: bufferOptions, retryOptions: retryOptions);
 </code></pre><p>The options can be specified wherever you are configuring tracing.</p>
-<h2 id="tracing-in-mvc-controllers">Tracing in MVC Controllers</h2>
-<p>To use the <code>IManagedTracer</code> in MVC controllers you can either inject the singleton instance of 
+<h2 id="tracing-in-controllers">Tracing in Controllers</h2>
+<p>To use the <code>IManagedTracer</code> in controllers you can either inject the singleton instance of 
 <code>IManagedTracer</code> into the controller&#39;s constructor (see <code>TraceSamplesConstructorController</code>) or you
-can in inject the <code>IManagedTracer</code> into the action method using the <code>[FromServices]</code> attribute
+can inject the <code>IManagedTracer</code> into the action method using the <code>[FromServices]</code> attribute
 (see <code>TraceSamplesMethodController</code>).</p>
 <pre><code class="lang-cs">public class TraceSamplesConstructorController : Controller
 {
@@ -417,7 +465,13 @@ outgoing requests.</p>
         // requests that are already being traced.
         .AddOutgoingGoogleTraceHandler();
 
-    services.AddMvc();
+    // Add any other services your application requires, for instance,
+    // depending on the version of ASP.NET Core you are using, you may
+    // need one of the following:
+
+    // services.AddMvc();
+
+    // services.AddControllersWithViews();
 }
 
 public void Configure(IApplicationBuilder app)
@@ -425,14 +479,25 @@ public void Configure(IApplicationBuilder app)
     // Use at the start of the request pipeline to ensure the entire request is traced.
     app.UseGoogleTrace();
 
-    // ...any other configuration your application requires.
+    // Add any other configuration your application requires, for instance,
+    // depending on the verson of ASP.NET Core you are using, you may
+    // need one of the following:
 
-    app.UseMvc(routes =&gt;
-    {
-        routes.MapRoute(
-            name: &quot;default&quot;,
-            template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
-    });
+    //app.UseMvc(routes =&gt;
+    //{
+    //    routes.MapRoute(
+    //        name: &quot;default&quot;,
+    //        template: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //});
+
+    //app.UseRouting();
+    //app.UseEndpoints(endpoints =&gt;
+    //{
+    //    endpoints.MapControllerRoute(
+    //        name: &quot;default&quot;,
+    //        pattern: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+    //    endpoints.MapRazorPages();
+    //});
 }
 </code></pre><h3 id="usage">Usage</h3>
 <pre><code class="lang-cs">/// &lt;summary&gt;
@@ -458,11 +523,9 @@ headers:</p>
 /// &lt;/summary&gt;
 public async Task&lt;HttpResponseMessage&gt; TraceOutgoing([FromServices] TraceHeaderPropagatingHandler traceHeaderHandler)
 {
-    using (var httpClient = new HttpClient(traceHeaderHandler))
-    {
-        // Any code that makes outgoing requests.
-        return await httpClient.GetAsync(&quot;https://weather.com/&quot;);
-    }
+    using var httpClient = new HttpClient(traceHeaderHandler);
+    // Any code that makes outgoing requests.
+    return await httpClient.GetAsync(&quot;https://weather.com/&quot;);
 }
 </code></pre></article>
           </div>

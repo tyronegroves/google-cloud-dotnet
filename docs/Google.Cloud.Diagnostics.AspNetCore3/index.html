@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Google.Cloud.Diagnostics.AspNetCore3 | Google.Cloud.Diagnostics.AspNetCore3 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Google.Cloud.Diagnostics.AspNetCore3 | Google.Cloud.Diagnostics.AspNetCore3 ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="googleclouddiagnosticsaspnetcore3">Google.Cloud.Diagnostics.AspNetCore3</h1>
+
+<p><code>Google.Cloud.Diagnostics.AspNetCore3</code> is an ASP.NET Core instrumentation library for Google Logging, Error Reporting and Tracing.
+It allows for simple integration of Google observability components into ASP.NET Core 3.1+ applications with minimal code changes.</p>
+<p>Note: ASP.NET Core 3.1 is the long-term support release of ASP.NET Core 3.x.</p>
+<p>Note:
+This documentation is for version <code>4.0.0-beta01</code> of the library.
+Some samples may not work with other versions.</p>
+<h1 id="installation">Installation</h1>
+<p>Install the <code>Google.Cloud.Diagnostics.AspNetCore3</code> package from NuGet. Add it to
+your project in the normal way (for example by right-clicking on the
+project in Visual Studio and choosing &quot;Manage NuGet Packages...&quot;).
+Please ensure you enable pre-release packages (for example, in the
+Visual Studio NuGet user interface, check the &quot;Include prerelease&quot;
+box). Some of the following samples might only work with the latest 
+pre-release version (<code>4.0.0-beta01</code>) of <code>Google.Cloud.Diagnostics.AspNetCore3</code>.</p>
+<h1 id="authentication">Authentication</h1>
+<p>When running on Google Cloud Platform, no action needs to be taken to authenticate.</p>
+<p>Otherwise, the simplest way of authenticating your API calls is to
+download a service account JSON file then set the <code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable to refer to it.
+The credentials will automatically be used to authenticate. See the <a href="https://cloud.google.com/docs/authentication/getting-started">Getting Started With
+Authentication</a> guide for more details.</p>
+<p>See <a href="https://cloud.google.com/logging/docs/access-control#api-permissions">API Permissions for <code>entries.write</code></a>
+for the permissions needed for Logging and Error Reporting.</p>
+<p>See <a href="https://cloud.google.com/trace/docs/iam#api_permissions">API Permissions for PatchTraces</a>
+for the permissions needed for Tracing.</p>
+<h1 id="note">Note</h1>
+<p>The Google.Cloud.Diagnostics.AspNetCore3 package attempts to collect the filename and line number when
+entries are collected. However, to be able to collect this information PDBs must be included with
+the deployed code.</p>
+<h1 id="note-1">Note</h1>
+<p>When running on environments that limit or disable CPU usage for background activities, for instance
+<a href="https://cloud.google.com/run/docs/tips/general#avoiding_background_activities">Google Cloud Run</a>, take care
+not to use the timed buffer options for any of Logging, Tracing or Error Reporting. Take into account
+that the timed buffer is used for all of these components by default so you will need to explicitly
+configure the buffers by using the <code>Google.Cloud.Diagnostics.AspNetCore3.LoggerOptions</code>,
+<code>Google.Cloud.Diagnostics.Common.TraceOptions</code> and <code>Google.Cloud.Diagnostics.Common.ErrorReportingOptions</code> classes.
+Below you&#39;ll find examples of how to configure the buffers.</p>
+<h1 id="getting-started">Getting started</h1>
+<h2 id="initializing-google-diagnostics">Initializing Google Diagnostics</h2>
+<p>The easiest way to initialize Google Diagnostics services is using
+the <code>UseGoogleDiagnostics</code> extentension method on <code>IWebHostBuilder</code>.
+This configures Logging, Tracing and Error Reporting middleware.</p>
+<p>If your application is runnng on Google App Engine, Google
+Kubernetes Engine, Google Cloud Run or Google Compute Engine, you
+don&#39;t need to provide a value for <code>ProjectId</code>, <code>Service</code> and
+<code>Version</code> since they can be automatically obtained by the
+<code>UseGoogleDiagnostics</code> method as far as they make sense for the
+environment. (Not every environment has the concept of a &quot;service&quot;
+or &quot;version&quot;.) The values used will be the ones associated with the running application.</p>
+<p>If your application is running outside of GCP, including when it
+runs locally, then you&#39;ll need to provide the <code>ProjectId</code> of the
+Google Cloud Project in which to store the diagnostic information as
+well as the <code>Service</code> and <code>Version</code> with which to identify your
+application.</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Diagnostics.txt -->
+<p>You can still initialize the separate components using the extension
+methods below. This can be useful if you only need to use some of
+the observability components.</p>
+<p>Optional parameters on <code>UseGoogleDiagnostics</code> are also available to
+specify options for each of the components (logging, tracing and
+error reporting). This is typically useful for diagnosing problems,
+as described below.</p>
+<h1 id="error-reporting">Error Reporting</h1>
+<h2 id="registering-error-reporting">Registering Error Reporting</h2>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.ErrorReporting.txt -->
+<h2 id="log-exceptions">Log Exceptions</h2>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.ErrorReporting.txt -->
+<h1 id="logging">Logging</h1>
+<h2 id="initializing-logging">Initializing Logging</h2>
+<p>When configuring an <code>IHostBuilder</code> Logging can be initialized in
+two different ways:</p>
+<p>Using <code>ConfigureServices</code>:</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Logging.txt -->
+<p>Or using <code>ConfigureLogging</code>:</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Logging.txt -->
+<p>Note that this approach does not support custom services (such as
+log entry label providers) being used as the service provider is
+not available within <code>ConfigureLogging</code>.</p>
+<p>Alternatively, logging can be configured within the application&#39;s
+<code>Startup.Configure</code> method:</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Logging.txt -->
+<h2 id="log">Log</h2>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Logging.txt -->
+<h2 id="troubleshooting-logging">Troubleshooting Logging</h2>
+<p>Sometimes it is neccessary to diagnose log operations. It might be that logging is failing or that
+we simply cannot find where the logs are being stored in GCP. What follows are a couple of code samples
+that can be useful to find out what might be wrong with logging operations.</p>
+<h3 id="propagating-exceptions">Propagating Exceptions</h3>
+<p>By default the Google Logger won&#39;t propagate any exceptions thrown during logging. This is to protect the
+application from crashing if logging is not possible. But logging is an important aspect of most applications
+so at times we need to know if it&#39;s failing and why. The following
+example shows how to configure Google Logger so that it propagates exceptions thrown during logging.</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Logging.txt -->
+<p>The same <code>LoggerOptions</code> can be specified in any of the other ways
+of registering logging.</p>
+<h3 id="finding-out-the-url-where-logs-are-written">Finding out the URL where logs are written</h3>
+<p>Depending on where your code is running and the options you provided
+for creating a Google Logger, it might be hard to find your logs in
+the GCP Console. We have provided a way for you to obtain the URL
+where your logs can be found.</p>
+<p>As the following code sample shows, you only need to pass a
+<code>System.IO.TextWriter</code> (typically <code>Console.Out</code> or <code>Console.Error</code>)
+as part of the options when registering logging. When the
+<code>GoogleLoggerProvider</code> is initialized, the URL where its logs can be
+found will be written to the given text writer.</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Logging.txt -->
+<p>Please note that since this is a Google Logger diagnostics feature,
+we don&#39;t respect settings for exception handling, i.e. we propagate
+any exception thrown while writing the URL to the given text writer
+so you know what might be happening. This feature should only be
+activated as a one off, if you are having trouble trying to find
+your logs in the GCP Console, and not as a permanent feature in
+production code. To deactivate this feature simply stop passing a
+<code>System.IO.TextWriter</code> as part of the options when creating a Google
+Logger.</p>
+<h1 id="tracing">Tracing</h1>
+<h2 id="initializing-tracing">Initializing Tracing</h2>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<h2 id="troubleshooting-tracing">Troubleshooting Tracing</h2>
+<p>Just as with logging, trace is most easily diagnosed by removing
+buffering and propagating exceptions immediately.</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<p>The options can be specified wherever you are configuring tracing.</p>
+<h2 id="tracing-in-controllers">Tracing in Controllers</h2>
+<p>To use the <code>IManagedTracer</code> in controllers you can either inject the singleton instance of 
+<code>IManagedTracer</code> into the controller&#39;s constructor (see <code>TraceSamplesConstructorController</code>) or you
+can inject the <code>IManagedTracer</code> into the action method using the <code>[FromServices]</code> attribute
+(see <code>TraceSamplesMethodController</code>).</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<h2 id="manual-tracing">Manual Tracing</h2>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<h2 id="trace-outgoing-http-requests-recommended">Trace Outgoing HTTP Requests (recommended)</h2>
+<p>The <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1">recommended way of creating HttpClient</a> in ASP.NET Core 2.0 and upwards is to use the
+<code>System.Net.Http.IHttpClientFactory</code> defined in the Microsoft.Extensions.Http package.
+The following example demonstrates how to register and use an HttpClient using Google Trace so that it traces
+outgoing requests.</p>
+<h3 id="configuration">Configuration</h3>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<h3 id="usage">Usage</h3>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+<h2 id="trace-outgoing-http-requests-alternative">Trace Outgoing HTTP Requests (alternative)</h2>
+<p>Alternatively, if you need to construct <code>HttpClient</code> objects manually,
+<code>TraceHeaderPropagatingHandler</code> can be used to propagate trace
+headers:</p>
+<!-- Can not find reference obj/snippets/Google.Cloud.Diagnostics.AspNetCore3.Trace.txt -->
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>
