@@ -73,7 +73,19 @@
   
   <h1 id="Google_Cloud_Dialogflow_V2_Context" data-uid="Google.Cloud.Dialogflow.V2.Context" class="text-break">Class Context
   </h1>
-  <div class="markdown level0 summary"><p>Represents a context.</p>
+  <div class="markdown level0 summary"><p>Dialogflow contexts are similar to natural language context. If a person says
+to you &quot;they are orange&quot;, you need context in order to understand what &quot;they&quot;
+is referring to. Similarly, for Dialogflow to handle an end-user expression
+like that, it needs to be provided with context in order to correctly match
+an intent.</p>
+<p>Using contexts, you can control the flow of a conversation. You can configure
+contexts for an intent by setting input and output contexts, which are
+identified by string names. When an intent is matched, any configured output
+contexts for that intent become active. While any contexts are active,
+Dialogflow is more likely to match intents that are configured with input
+contexts that correspond to the currently active contexts.</p>
+<p>For more information about context, see the
+<a href="https://cloud.google.com/dialogflow/docs/contexts-overview">Contexts guide</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -84,9 +96,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.Context.html">Context</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.Context.html">Context</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Dialogflow.V2.Context.html">Context</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +120,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Dialogflow.V2.dll</h6>
   <h5 id="Google_Cloud_Dialogflow_V2_Context_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Context : IMessage&lt;Context&gt;, IMessage, IEquatable&lt;Context&gt;, IDeepCloneable&lt;Context&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Context : IMessage&lt;Context&gt;, IEquatable&lt;Context&gt;, IDeepCloneable&lt;Context&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -200,8 +213,8 @@ are no matching queries.</p>
   <a id="Google_Cloud_Dialogflow_V2_Context_Name_" data-uid="Google.Cloud.Dialogflow.V2.Context.Name*"></a>
   <h4 id="Google_Cloud_Dialogflow_V2_Context_Name" data-uid="Google.Cloud.Dialogflow.V2.Context.Name">Name</h4>
   <div class="markdown level1 summary"><p>Required. The unique identifier of the context. Format:
-<code>projects/&amp;lt;Project ID&gt;/agent/sessions/&amp;lt;Session ID&gt;/contexts/&amp;lt;Context ID&gt;</code>,
-or <code>projects/&amp;lt;Project ID&gt;/agent/environments/&amp;lt;Environment ID&gt;/users/&amp;lt;User
+<code>projects/{Project ID}/agent/sessions/{Session ID}/contexts/{Context ID}</code>,
+or <code>projects/{Project ID}/agent/environments/{Environment ID}/users/{User
 ID&gt;/sessions/&amp;lt;Session ID&gt;/contexts/&amp;lt;Context ID&gt;</code>.</p>
 <p>The <code>Context ID</code> is always converted to lowercase, may only contain
 characters in a-zA-Z0-9_-% and may be at most 250 bytes long.</p>
