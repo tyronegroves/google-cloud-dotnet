@@ -75,7 +75,7 @@
   </h1>
   <div class="markdown level0 summary"><p>How to sample rows if not all rows are scanned. Meaningful only when used
 in conjunction with either rows_limit or rows_limit_percent. If not
-specified, scanning would start from the top.</p>
+specified, rows are scanned in the order BigQuery reads them.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Dlp.V2.html">Google.Cloud.Dlp.V2</a></h6>
@@ -96,12 +96,14 @@ specified, scanning would start from the top.</p>
     <tbody>
       <tr>
         <td id="Google_Cloud_Dlp_V2_BigQueryOptions_Types_SampleMethod_RandomStart">RandomStart</td>
-        <td><p>Randomly pick the row to start scanning. The scanned rows are contiguous.</p>
+        <td><p>Randomly pick groups of rows to scan.</p>
 </td>
       </tr>
       <tr>
         <td id="Google_Cloud_Dlp_V2_BigQueryOptions_Types_SampleMethod_Top">Top</td>
-        <td><p>Scan from the top (default).</p>
+        <td><p>Scan groups of rows in the order BigQuery provides (default). Multiple
+groups of rows may be scanned in parallel, so results may not appear in
+the same order the rows are read.</p>
 </td>
       </tr>
       <tr>

@@ -85,9 +85,10 @@ Currently only supported when inspecting Google Cloud Storage and BigQuery.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.StorageConfig.Types.TimespanConfig.html">StorageConfig.Types.TimespanConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.StorageConfig.Types.TimespanConfig.html">StorageConfig.Types.TimespanConfig</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.StorageConfig.Types.TimespanConfig.html">StorageConfig.Types.TimespanConfig</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -108,7 +109,7 @@ Currently only supported when inspecting Google Cloud Storage and BigQuery.</p>
   <h6><strong>Assembly</strong>: Google.Cloud.Dlp.V2.dll</h6>
   <h5 id="Google_Cloud_Dlp_V2_StorageConfig_Types_TimespanConfig_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class TimespanConfig : IMessage&lt;StorageConfig.Types.TimespanConfig&gt;, IMessage, IEquatable&lt;StorageConfig.Types.TimespanConfig&gt;, IDeepCloneable&lt;StorageConfig.Types.TimespanConfig&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class TimespanConfig : IMessage&lt;StorageConfig.Types.TimespanConfig&gt;, IEquatable&lt;StorageConfig.Types.TimespanConfig&gt;, IDeepCloneable&lt;StorageConfig.Types.TimespanConfig&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -176,8 +177,8 @@ time of the execution of the last run of the JobTrigger.</p>
   </table>
   <a id="Google_Cloud_Dlp_V2_StorageConfig_Types_TimespanConfig_EndTime_" data-uid="Google.Cloud.Dlp.V2.StorageConfig.Types.TimespanConfig.EndTime*"></a>
   <h4 id="Google_Cloud_Dlp_V2_StorageConfig_Types_TimespanConfig_EndTime" data-uid="Google.Cloud.Dlp.V2.StorageConfig.Types.TimespanConfig.EndTime">EndTime</h4>
-  <div class="markdown level1 summary"><p>Exclude files or rows newer than this value.
-If set to zero, no upper time limit is applied.</p>
+  <div class="markdown level1 summary"><p>Exclude files, tables, or rows newer than this value.
+If not set, no upper time limit is applied.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -201,7 +202,8 @@ If set to zero, no upper time limit is applied.</p>
   </table>
   <a id="Google_Cloud_Dlp_V2_StorageConfig_Types_TimespanConfig_StartTime_" data-uid="Google.Cloud.Dlp.V2.StorageConfig.Types.TimespanConfig.StartTime*"></a>
   <h4 id="Google_Cloud_Dlp_V2_StorageConfig_Types_TimespanConfig_StartTime" data-uid="Google.Cloud.Dlp.V2.StorageConfig.Types.TimespanConfig.StartTime">StartTime</h4>
-  <div class="markdown level1 summary"><p>Exclude files or rows older than this value.</p>
+  <div class="markdown level1 summary"><p>Exclude files, tables, or rows older than this value.
+If not set, no lower time limit is applied.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -228,15 +230,18 @@ If set to zero, no upper time limit is applied.</p>
   <div class="markdown level1 summary"><p>Specification of the field containing the timestamp of scanned items.
 Used for data sources like Datastore and BigQuery.</p>
 <p>For BigQuery:
-Required to filter out rows based on the given start and
-end times. If not specified and the table was modified between the given
-start and end times, the entire table will be scanned.
-The valid data types of the timestamp field are: <code>INTEGER</code>, <code>DATE</code>,
-<code>TIMESTAMP</code>, or <code>DATETIME</code> BigQuery column.</p>
-<p>For Datastore.
-Valid data types of the timestamp field are: <code>TIMESTAMP</code>.
-Datastore entity will be scanned if the timestamp property does not
-exist or its value is empty or invalid.</p>
+If this value is not specified and the table was modified between the
+given start and end times, the entire table will be scanned. If this
+value is specified, then rows are filtered based on the given start and
+end times. Rows with a <code>NULL</code> value in the provided BigQuery column are
+skipped.
+Valid data types of the provided BigQuery column are: <code>INTEGER</code>, <code>DATE</code>,
+<code>TIMESTAMP</code>, and <code>DATETIME</code>.</p>
+<p>For Datastore:
+If this value is specified, then entities are filtered based on the given
+start and end times. If an entity does not contain the provided timestamp
+property or contains empty or invalid values, then it is included.
+Valid data types of the provided timestamp property are: <code>TIMESTAMP</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

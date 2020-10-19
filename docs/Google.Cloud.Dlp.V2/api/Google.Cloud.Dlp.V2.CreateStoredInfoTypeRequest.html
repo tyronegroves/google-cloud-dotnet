@@ -84,9 +84,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.CreateStoredInfoTypeRequest.html">CreateStoredInfoTypeRequest</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.CreateStoredInfoTypeRequest.html">CreateStoredInfoTypeRequest</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.CreateStoredInfoTypeRequest.html">CreateStoredInfoTypeRequest</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Dlp.V2.dll</h6>
   <h5 id="Google_Cloud_Dlp_V2_CreateStoredInfoTypeRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class CreateStoredInfoTypeRequest : IMessage&lt;CreateStoredInfoTypeRequest&gt;, IMessage, IEquatable&lt;CreateStoredInfoTypeRequest&gt;, IDeepCloneable&lt;CreateStoredInfoTypeRequest&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class CreateStoredInfoTypeRequest : IMessage&lt;CreateStoredInfoTypeRequest&gt;, IEquatable&lt;CreateStoredInfoTypeRequest&gt;, IDeepCloneable&lt;CreateStoredInfoTypeRequest&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -196,8 +197,24 @@
   </table>
   <a id="Google_Cloud_Dlp_V2_CreateStoredInfoTypeRequest_Parent_" data-uid="Google.Cloud.Dlp.V2.CreateStoredInfoTypeRequest.Parent*"></a>
   <h4 id="Google_Cloud_Dlp_V2_CreateStoredInfoTypeRequest_Parent" data-uid="Google.Cloud.Dlp.V2.CreateStoredInfoTypeRequest.Parent">Parent</h4>
-  <div class="markdown level1 summary"><p>Required. The parent resource name, for example projects/my-project-id or
-organizations/my-org-id or projects/my-project-id/locations/{location_id}</p>
+  <div class="markdown level1 summary"><p>Required. Parent resource name.</p>
+<p>The format of this value varies depending on the scope of the request
+(project or organization) and whether you have <a href="https://cloud.google.com/dlp/docs/specifying-location">specified a processing
+location</a>:</p>
+<ul>
+<li>Projects scope, location specified:&lt;br/&gt;
+<code>projects/</code>&lt;var&gt;PROJECT_ID&lt;/var&gt;<code>/locations/</code>&lt;var&gt;LOCATION_ID&lt;/var&gt;</li>
+<li>Projects scope, no location specified (defaults to global):&lt;br/&gt;
+<code>projects/</code>&lt;var&gt;PROJECT_ID&lt;/var&gt;</li>
+<li>Organizations scope, location specified:&lt;br/&gt;
+<code>organizations/</code>&lt;var&gt;ORG_ID&lt;/var&gt;<code>/locations/</code>&lt;var&gt;LOCATION_ID&lt;/var&gt;</li>
+<li>Organizations scope, no location specified (defaults to global):&lt;br/&gt;
+<code>organizations/</code>&lt;var&gt;ORG_ID&lt;/var&gt;</li>
+</ul>
+<p>The following example <code>parent</code> string specifies a parent project with the
+identifier <code>example-project</code>, and specifies the <code>europe-west3</code> location
+for processing data:</p>
+<p>parent=projects/example-project/locations/europe-west3</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -343,7 +360,7 @@ organizations/my-org-id or projects/my-project-id/locations/{location_id}</p>
   <h4 id="Google_Cloud_Dlp_V2_CreateStoredInfoTypeRequest_StoredInfoTypeId" data-uid="Google.Cloud.Dlp.V2.CreateStoredInfoTypeRequest.StoredInfoTypeId">StoredInfoTypeId</h4>
   <div class="markdown level1 summary"><p>The storedInfoType ID can contain uppercase and lowercase letters,
 numbers, and hyphens; that is, it must match the regular
-expression: <code>[a-zA-Z\\d-_]+</code>. The maximum length is 100
+expression: <code>[a-zA-Z\d-_]+</code>. The maximum length is 100
 characters. Can be empty to allow the system to generate one.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

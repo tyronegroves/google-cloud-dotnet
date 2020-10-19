@@ -95,9 +95,10 @@ referential integrity.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.CryptoReplaceFfxFpeConfig.html">CryptoReplaceFfxFpeConfig</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.CryptoReplaceFfxFpeConfig.html">CryptoReplaceFfxFpeConfig</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Dlp.V2.CryptoReplaceFfxFpeConfig.html">CryptoReplaceFfxFpeConfig</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -118,7 +119,7 @@ referential integrity.</p>
   <h6><strong>Assembly</strong>: Google.Cloud.Dlp.V2.dll</h6>
   <h5 id="Google_Cloud_Dlp_V2_CryptoReplaceFfxFpeConfig_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class CryptoReplaceFfxFpeConfig : IMessage&lt;CryptoReplaceFfxFpeConfig&gt;, IMessage, IEquatable&lt;CryptoReplaceFfxFpeConfig&gt;, IDeepCloneable&lt;CryptoReplaceFfxFpeConfig&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class CryptoReplaceFfxFpeConfig : IMessage&lt;CryptoReplaceFfxFpeConfig&gt;, IEquatable&lt;CryptoReplaceFfxFpeConfig&gt;, IDeepCloneable&lt;CryptoReplaceFfxFpeConfig&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -277,7 +278,10 @@ encryption/decryption.
 Each character listed must appear only once.
 Number of characters must be in the range [2, 95].
 This must be encoded as ASCII.
-The order of characters does not matter.</p>
+The order of characters does not matter.
+The full list of allowed characters is:
+&lt;code&gt;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+~`!@#$%^&amp;*()_-+={[}]|:;&quot;&apos;&lt;,&gt;.?/&lt;/code&gt;</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -335,7 +339,7 @@ the surrogate is &apos;abc&apos;, the full replacement value
 will be: &apos;MY_TOKEN_INFO_TYPE(3):abc&apos;</p>
 <p>This annotation identifies the surrogate when inspecting content using the
 custom infoType
-<a href="/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype"><code>SurrogateType</code></a>.
+<a href="https://cloud.google.com/dlp/docs/reference/rest/v2/InspectConfig#surrogatetype"><code>SurrogateType</code></a>.
 This facilitates reversal of the surrogate when it occurs in free text.</p>
 <p>In order for inspection to work properly, the name of this infoType must
 not occur naturally anywhere in your data; otherwise, inspection may
