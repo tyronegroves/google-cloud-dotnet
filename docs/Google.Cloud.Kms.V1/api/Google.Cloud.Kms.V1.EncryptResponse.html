@@ -84,9 +84,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Kms.V1.EncryptResponse.html">EncryptResponse</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.EncryptResponse.html">EncryptResponse</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Kms.V1.EncryptResponse.html">EncryptResponse</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Kms.V1.dll</h6>
   <h5 id="Google_Cloud_Kms_V1_EncryptResponse_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class EncryptResponse : IMessage&lt;EncryptResponse&gt;, IMessage, IEquatable&lt;EncryptResponse&gt;, IDeepCloneable&lt;EncryptResponse&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class EncryptResponse : IMessage&lt;EncryptResponse&gt;, IEquatable&lt;EncryptResponse&gt;, IDeepCloneable&lt;EncryptResponse&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -170,6 +171,41 @@
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Kms_V1_EncryptResponse_CiphertextCrc32C_" data-uid="Google.Cloud.Kms.V1.EncryptResponse.CiphertextCrc32C*"></a>
+  <h4 id="Google_Cloud_Kms_V1_EncryptResponse_CiphertextCrc32C" data-uid="Google.Cloud.Kms.V1.EncryptResponse.CiphertextCrc32C">CiphertextCrc32C</h4>
+  <div class="markdown level1 summary"><p>Integrity verification field. A CRC32C checksum of the returned
+[EncryptResponse.ciphertext][google.cloud.kms.v1.EncryptResponse.ciphertext]. An integrity check of
+[EncryptResponse.ciphertext][google.cloud.kms.v1.EncryptResponse.ciphertext] can be performed by computing the CRC32C
+checksum of [EncryptResponse.ciphertext][google.cloud.kms.v1.EncryptResponse.ciphertext] and comparing your results to
+this field. Discard the response in case of non-matching checksum values,
+and perform a limited number of retries. A persistent mismatch may indicate
+an issue in your computation of the CRC32C checksum.
+Note: This field is defined as int64 for reasons of compatibility across
+different languages. However, it is a non-negative integer, which will
+never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+that support this type.</p>
+<p>NOTE: This field is in Beta.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? CiphertextCrc32C { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Kms_V1_EncryptResponse_Name_" data-uid="Google.Cloud.Kms.V1.EncryptResponse.Name*"></a>
   <h4 id="Google_Cloud_Kms_V1_EncryptResponse_Name" data-uid="Google.Cloud.Kms.V1.EncryptResponse.Name">Name</h4>
   <div class="markdown level1 summary"><p>The resource name of the [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] used in encryption. Check
@@ -191,6 +227,71 @@ this field to verify that the intended resource was used for encryption.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_EncryptResponse_VerifiedAdditionalAuthenticatedDataCrc32C_" data-uid="Google.Cloud.Kms.V1.EncryptResponse.VerifiedAdditionalAuthenticatedDataCrc32C*"></a>
+  <h4 id="Google_Cloud_Kms_V1_EncryptResponse_VerifiedAdditionalAuthenticatedDataCrc32C" data-uid="Google.Cloud.Kms.V1.EncryptResponse.VerifiedAdditionalAuthenticatedDataCrc32C">VerifiedAdditionalAuthenticatedDataCrc32C</h4>
+  <div class="markdown level1 summary"><p>Integrity verification field. A flag indicating whether
+[EncryptRequest.additional_authenticated_data_crc32c][google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c] was received by
+[KeyManagementService][google.cloud.kms.v1.KeyManagementService] and used for the integrity verification of the
+[AAD][google.cloud.kms.v1.EncryptRequest.additional_authenticated_data]. A false value of this
+field indicates either that
+[EncryptRequest.additional_authenticated_data_crc32c][google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c] was left unset or
+that it was not delivered to [KeyManagementService][google.cloud.kms.v1.KeyManagementService]. If you&apos;ve set
+[EncryptRequest.additional_authenticated_data_crc32c][google.cloud.kms.v1.EncryptRequest.additional_authenticated_data_crc32c] but this field is
+still false, discard the response and perform a limited number of retries.</p>
+<p>NOTE: This field is in Beta.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool VerifiedAdditionalAuthenticatedDataCrc32C { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_EncryptResponse_VerifiedPlaintextCrc32C_" data-uid="Google.Cloud.Kms.V1.EncryptResponse.VerifiedPlaintextCrc32C*"></a>
+  <h4 id="Google_Cloud_Kms_V1_EncryptResponse_VerifiedPlaintextCrc32C" data-uid="Google.Cloud.Kms.V1.EncryptResponse.VerifiedPlaintextCrc32C">VerifiedPlaintextCrc32C</h4>
+  <div class="markdown level1 summary"><p>Integrity verification field. A flag indicating whether
+[EncryptRequest.plaintext_crc32c][google.cloud.kms.v1.EncryptRequest.plaintext_crc32c] was received by
+[KeyManagementService][google.cloud.kms.v1.KeyManagementService] and used for the integrity verification of the
+[plaintext][google.cloud.kms.v1.EncryptRequest.plaintext]. A false value of this field
+indicates either that [EncryptRequest.plaintext_crc32c][google.cloud.kms.v1.EncryptRequest.plaintext_crc32c] was left unset or
+that it was not delivered to [KeyManagementService][google.cloud.kms.v1.KeyManagementService]. If you&apos;ve set
+[EncryptRequest.plaintext_crc32c][google.cloud.kms.v1.EncryptRequest.plaintext_crc32c] but this field is still false, discard
+the response and perform a limited number of retries.</p>
+<p>NOTE: This field is in Beta.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool VerifiedPlaintextCrc32C { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>

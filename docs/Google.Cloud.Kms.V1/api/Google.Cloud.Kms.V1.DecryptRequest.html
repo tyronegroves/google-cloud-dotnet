@@ -84,9 +84,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Kms.V1.DecryptRequest.html">DecryptRequest</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Kms.V1.DecryptRequest.html">DecryptRequest</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Kms.V1.DecryptRequest.html">DecryptRequest</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Kms.V1.dll</h6>
   <h5 id="Google_Cloud_Kms_V1_DecryptRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class DecryptRequest : IMessage&lt;DecryptRequest&gt;, IMessage, IEquatable&lt;DecryptRequest&gt;, IDeepCloneable&lt;DecryptRequest&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class DecryptRequest : IMessage&lt;DecryptRequest&gt;, IEquatable&lt;DecryptRequest&gt;, IDeepCloneable&lt;DecryptRequest&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -171,6 +172,44 @@
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Kms_V1_DecryptRequest_AdditionalAuthenticatedDataCrc32C_" data-uid="Google.Cloud.Kms.V1.DecryptRequest.AdditionalAuthenticatedDataCrc32C*"></a>
+  <h4 id="Google_Cloud_Kms_V1_DecryptRequest_AdditionalAuthenticatedDataCrc32C" data-uid="Google.Cloud.Kms.V1.DecryptRequest.AdditionalAuthenticatedDataCrc32C">AdditionalAuthenticatedDataCrc32C</h4>
+  <div class="markdown level1 summary"><p>Optional. An optional CRC32C checksum of the
+[DecryptRequest.additional_authenticated_data][google.cloud.kms.v1.DecryptRequest.additional_authenticated_data]. If specified,
+[KeyManagementService][google.cloud.kms.v1.KeyManagementService] will verify the integrity of the received
+[DecryptRequest.additional_authenticated_data][google.cloud.kms.v1.DecryptRequest.additional_authenticated_data] using this checksum.
+[KeyManagementService][google.cloud.kms.v1.KeyManagementService] will report an error if the checksum verification
+fails. If you receive a checksum error, your client should verify that
+CRC32C([DecryptRequest.additional_authenticated_data][google.cloud.kms.v1.DecryptRequest.additional_authenticated_data]) is equal to
+[DecryptRequest.additional_authenticated_data_crc32c][google.cloud.kms.v1.DecryptRequest.additional_authenticated_data_crc32c], and if so, perform
+a limited number of retries. A persistent mismatch may indicate an issue in
+your computation of the CRC32C checksum.
+Note: This field is defined as int64 for reasons of compatibility across
+different languages. However, it is a non-negative integer, which will
+never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+that support this type.</p>
+<p>NOTE: This field is in Beta.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? AdditionalAuthenticatedDataCrc32C { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Kms_V1_DecryptRequest_Ciphertext_" data-uid="Google.Cloud.Kms.V1.DecryptRequest.Ciphertext*"></a>
   <h4 id="Google_Cloud_Kms_V1_DecryptRequest_Ciphertext" data-uid="Google.Cloud.Kms.V1.DecryptRequest.Ciphertext">Ciphertext</h4>
   <div class="markdown level1 summary"><p>Required. The encrypted data originally returned in
@@ -192,6 +231,43 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.ByteString.html">ByteString</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Kms_V1_DecryptRequest_CiphertextCrc32C_" data-uid="Google.Cloud.Kms.V1.DecryptRequest.CiphertextCrc32C*"></a>
+  <h4 id="Google_Cloud_Kms_V1_DecryptRequest_CiphertextCrc32C" data-uid="Google.Cloud.Kms.V1.DecryptRequest.CiphertextCrc32C">CiphertextCrc32C</h4>
+  <div class="markdown level1 summary"><p>Optional. An optional CRC32C checksum of the [DecryptRequest.ciphertext][google.cloud.kms.v1.DecryptRequest.ciphertext]. If
+specified, [KeyManagementService][google.cloud.kms.v1.KeyManagementService] will verify the integrity of the
+received [DecryptRequest.ciphertext][google.cloud.kms.v1.DecryptRequest.ciphertext] using this checksum.
+[KeyManagementService][google.cloud.kms.v1.KeyManagementService] will report an error if the checksum verification
+fails. If you receive a checksum error, your client should verify that
+CRC32C([DecryptRequest.ciphertext][google.cloud.kms.v1.DecryptRequest.ciphertext]) is equal to
+[DecryptRequest.ciphertext_crc32c][google.cloud.kms.v1.DecryptRequest.ciphertext_crc32c], and if so, perform a limited number
+of retries. A persistent mismatch may indicate an issue in your computation
+of the CRC32C checksum.
+Note: This field is defined as int64 for reasons of compatibility across
+different languages. However, it is a non-negative integer, which will
+never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+that support this type.</p>
+<p>NOTE: This field is in Beta.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? CiphertextCrc32C { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
