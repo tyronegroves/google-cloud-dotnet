@@ -88,9 +88,10 @@ folder.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -111,7 +112,7 @@ folder.</p>
   <h6><strong>Assembly</strong>: Google.Cloud.Logging.V2.dll</h6>
   <h5 id="Google_Cloud_Logging_V2_LogSink_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class LogSink : IMessage&lt;LogSink&gt;, IMessage, IEquatable&lt;LogSink&gt;, IDeepCloneable&lt;LogSink&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class LogSink : IMessage&lt;LogSink&gt;, IEquatable&lt;LogSink&gt;, IDeepCloneable&lt;LogSink&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -233,7 +234,8 @@ The maximum length of the description is 8000 characters.</p>
 <p>The sink&apos;s <code>writer_identity</code>, set when the sink is created, must
 have permission to write to the destination or else the log
 entries are not exported. For more information, see
-<a href="/logging/docs/api/tasks/exporting-logs">Exporting Logs with Sinks</a>.</p>
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">Exporting Logs with
+Sinks</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -306,9 +308,10 @@ export any log entries.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogSink_Filter_" data-uid="Google.Cloud.Logging.V2.LogSink.Filter*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogSink_Filter" data-uid="Google.Cloud.Logging.V2.LogSink.Filter">Filter</h4>
-  <div class="markdown level1 summary"><p>Optional. An <a href="/logging/docs/view/advanced-queries">advanced logs filter</a>. The only
-exported log entries are those that are in the resource owning the sink and
-that match the filter. For example:</p>
+  <div class="markdown level1 summary"><p>Optional. An <a href="https://cloud.google.com/logging/docs/view/advanced-queries">advanced logs
+filter</a>. The
+only exported log entries are those that are in the resource owning the
+sink and that match the filter. For example:</p>
 <p>logName=&quot;projects/[PROJECT_ID]/logs/[LOG_ID]&quot; AND severity&gt;=ERROR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -443,8 +446,7 @@ First character has to be alphanumeric.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogSink_OutputVersionFormat_" data-uid="Google.Cloud.Logging.V2.LogSink.OutputVersionFormat*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogSink_OutputVersionFormat" data-uid="Google.Cloud.Logging.V2.LogSink.OutputVersionFormat">OutputVersionFormat</h4>
-  <div class="markdown level1 summary"><p>Deprecated. The log entry format to use for this sink&apos;s exported log
-entries. The v2 format is used by default and cannot be changed.</p>
+  <div class="markdown level1 summary"><p>Deprecated. This field is unused.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -501,7 +503,7 @@ set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
 value of <code>unique_writer_identity</code> in those methods.</p>
 <p>Until you grant this identity write-access to the destination, log entry
 exports from this sink will fail. For more information,
-see <a href="/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource">Granting Access for a
+see <a href="https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource">Granting Access for a
 Resource</a>.
 Consult the destination service&apos;s documentation to determine the
 appropriate IAM roles to assign to the identity.</p>
