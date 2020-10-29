@@ -355,7 +355,16 @@ described above. For example, if the method returns an <code>int</code>, the
 value will be stored as a 64-bit integer in the same way as an <code>int</code>
 property in an attributed type, or an <code>int</code> value within a dictionary.</p>
 <p>The <code>FromFirestore</code> method receives the deserialized value using the
-default mapping, as shown in the earlier table.</p>
+default mapping, as shown in the earlier table. However, if the
+<code>[FirestoreDeserializationConfigurationAttribute]</code> attribute is
+applied to the method, and if the value received is a dictionary
+(such as for the top-level document deserialization) then additional
+keys may be populated in the dictionary, representing the document
+ID or create/update/read timestamps. This attribute provides the
+equivalent functionality to the <code>[FirestoreDocumentId]</code>,
+<code>[FirestoreDocumentCreateTimestamp]</code>,
+<code>[FirestoreDocumentUpdateTimestamp]</code> and <code>[FirestoreDocumentReadTimestamp]</code>
+attributes, but for custom converters.</p>
 <h3 id="applying-a-converter-to-a-type">Applying a converter to a type</h3>
 <p>Once you&#39;ve created a converter, you can either apply it to a type
 or an individual attributed property. In each case, the
