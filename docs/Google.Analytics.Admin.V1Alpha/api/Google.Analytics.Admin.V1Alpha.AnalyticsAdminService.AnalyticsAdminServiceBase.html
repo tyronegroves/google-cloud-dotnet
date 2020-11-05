@@ -558,7 +558,7 @@ the UserLinks will be created.</p>
   </table>
   <a id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_CreateProperty_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.CreateProperty*"></a>
   <h4 id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_CreateProperty_Google_Analytics_Admin_V1Alpha_CreatePropertyRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.CreateProperty(Google.Analytics.Admin.V1Alpha.CreatePropertyRequest,Grpc.Core.ServerCallContext)">CreateProperty(CreatePropertyRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Creates an &quot;App+Web&quot; property with the specified location and attributes.</p>
+  <div class="markdown level1 summary"><p>Creates an &quot;GA4&quot; property with the specified location and attributes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -967,7 +967,7 @@ However, they can be restored using the Trash Can UI.</p>
 and all child resources (eg: GoogleAdsLinks, Streams, UserLinks)
 will be permanently purged.
 <a href="https://support.google.com/analytics/answer/6154772">https://support.google.com/analytics/answer/6154772</a></p>
-<p>Returns an error if the target is not found, or is not an App+Web Property.</p>
+<p>Returns an error if the target is not found, or is not an GA4 Property.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1418,9 +1418,9 @@ caller does not have permissions to access it.</p>
   </table>
   <a id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_GetProperty_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.GetProperty*"></a>
   <h4 id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_GetProperty_Google_Analytics_Admin_V1Alpha_GetPropertyRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.GetProperty(Google.Analytics.Admin.V1Alpha.GetPropertyRequest,Grpc.Core.ServerCallContext)">GetProperty(GetPropertyRequest, ServerCallContext)</h4>
-  <div class="markdown level1 summary"><p>Lookup for a single &quot;App+Web&quot; Property.</p>
+  <div class="markdown level1 summary"><p>Lookup for a single &quot;GA4&quot; Property.</p>
 <p>Throws &quot;Target not found&quot; if no such property found, if property is not
-of the type &quot;App+Web&quot;, or if caller does not have permissions to access it.</p>
+of the type &quot;GA4&quot;, or if caller does not have permissions to access it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1570,7 +1570,7 @@ caller does not have permissions to access it.</p>
   <a id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_ListAccounts_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.ListAccounts*"></a>
   <h4 id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_ListAccounts_Google_Analytics_Admin_V1Alpha_ListAccountsRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.ListAccounts(Google.Analytics.Admin.V1Alpha.ListAccountsRequest,Grpc.Core.ServerCallContext)">ListAccounts(ListAccountsRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Returns all accounts accessible by the caller.</p>
-<p>Note that these accounts might not currently have App+Web properties.
+<p>Note that these accounts might not currently have GA4 properties.
 Soft-deleted (ie: &quot;trashed&quot;) accounts are excluded by default.
 Returns an empty list if no relevant accounts are found.</p>
 </div>
@@ -1614,6 +1614,55 @@ Returns an empty list if no relevant accounts are found.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Analytics.Admin.V1Alpha.ListAccountsResponse.html">ListAccountsResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_ListAccountSummaries_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.ListAccountSummaries*"></a>
+  <h4 id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_ListAccountSummaries_Google_Analytics_Admin_V1Alpha_ListAccountSummariesRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.ListAccountSummaries(Google.Analytics.Admin.V1Alpha.ListAccountSummariesRequest,Grpc.Core.ServerCallContext)">ListAccountSummaries(ListAccountSummariesRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Returns summaries of all accounts accessible by the caller.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListAccountSummariesResponse&gt; ListAccountSummaries(ListAccountSummariesRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Analytics.Admin.V1Alpha.ListAccountSummariesRequest.html">ListAccountSummariesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Analytics.Admin.V1Alpha.ListAccountSummariesResponse.html">ListAccountSummariesResponse</a>&gt;</td>
         <td><p>The response to send back to the client (wrapped by a task).</p>
 </td>
       </tr>
@@ -1823,7 +1872,7 @@ Returns an empty list if no relevant iOS app data streams are found.</p>
   <a id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_ListProperties_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.ListProperties*"></a>
   <h4 id="Google_Analytics_Admin_V1Alpha_AnalyticsAdminService_AnalyticsAdminServiceBase_ListProperties_Google_Analytics_Admin_V1Alpha_ListPropertiesRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Analytics.Admin.V1Alpha.AnalyticsAdminService.AnalyticsAdminServiceBase.ListProperties(Google.Analytics.Admin.V1Alpha.ListPropertiesRequest,Grpc.Core.ServerCallContext)">ListProperties(ListPropertiesRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Returns child Properties under the specified parent Account.</p>
-<p>Only &quot;App+Web&quot; properties will be returned.
+<p>Only &quot;GA4&quot; properties will be returned.
 Properties will be excluded if the caller does not have access.
 Soft-deleted (ie: &quot;trashed&quot;) properties are excluded by default.
 Returns an empty list if no relevant properties are found.</p>
