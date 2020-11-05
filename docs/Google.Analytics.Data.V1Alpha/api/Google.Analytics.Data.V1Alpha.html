@@ -134,9 +134,10 @@ are allowed up to 4 date ranges, and the union of the ranges can cover up to
 1 year.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.Dimension.html">Dimension</a></h4>
-      <section><p>Dimensions are attributes of your data. For example, the dimension City
-indicates the city, for example, &quot;Paris&quot; or &quot;New York&quot;, from which an event
-originates. Requests are allowed up to 8 dimensions.</p>
+      <section><p>Dimensions are attributes of your data. For example, the dimension city
+indicates the city from which an event originates. Dimension values in report
+responses are strings; for example, city could be &quot;Paris&quot; or &quot;New York&quot;.
+Requests are allowed up to 8 dimensions.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.DimensionExpression.html">DimensionExpression</a></h4>
       <section><p>Used to express a dimension which is the result of a formula of multiple
@@ -154,7 +155,13 @@ dimensions. Example usages:
       <section><p>Used to combine dimension values to a single dimension.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.DimensionHeader.html">DimensionHeader</a></h4>
-      <section><p>The header for the dimensions.</p>
+      <section><p>Describes a dimension column in the report. Dimensions requested in a report
+produce column entries within rows and DimensionHeaders. However, dimensions
+used exclusively within filters or expressions do not produce columns in a
+report; correspondingly, those dimensions do not produce headers.</p>
+</section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.DimensionMetadata.html">DimensionMetadata</a></h4>
+      <section><p>Explains a dimension.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.DimensionValue.html">DimensionValue</a></h4>
       <section><p>The value of a dimension.</p>
@@ -194,12 +201,31 @@ all metrics.</p>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.FilterExpressionList.html">FilterExpressionList</a></h4>
       <section><p>A list of filter expressions.</p>
 </section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.GetMetadataRequest.html">GetMetadataRequest</a></h4>
+      <section><p>Request for a property&apos;s dimension and metric metadata.</p>
+</section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.GetUniversalMetadataRequest.html">GetUniversalMetadataRequest</a></h4>
+      <section><p>Request for the universal dimension and metric metadata.</p>
+</section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.Metadata.html">Metadata</a></h4>
+      <section><p>The dimensions and metrics currently accepted in reporting methods.</p>
+</section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetadataName.html">MetadataName</a></h4>
+      <section><p>Resource name for the <code>Metadata</code> resource.</p>
+</section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.Metric.html">Metric</a></h4>
-      <section><p>The quantitative measurements of a report. For example, the metric eventCount
-is the total number of events. Requests are allowed up to 10 metrics.</p>
+      <section><p>The quantitative measurements of a report. For example, the metric
+<code>eventCount</code> is the total number of events. Requests are allowed up to 10
+metrics.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetricHeader.html">MetricHeader</a></h4>
-      <section><p>Describes the metric column in the report.</p>
+      <section><p>Describes a metric column in the report. Visible metrics requested in a
+report produce column entries within rows and MetricHeaders. However,
+metrics used exclusively within filters or expressions do not produce columns
+in a report; correspondingly, those metrics do not produce headers.</p>
+</section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetricMetadata.html">MetricMetadata</a></h4>
+      <section><p>Explains a metric.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetricValue.html">MetricValue</a></h4>
       <section><p>The value of a metric.</p>
@@ -287,8 +313,11 @@ then the rows will be sorted based on Sessions in Chrome.</p>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.Pivot.html">Pivot</a></h4>
       <section><p>Describes the visible dimension columns and rows in the report response.</p>
 </section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.PivotDimensionHeader.html">PivotDimensionHeader</a></h4>
+      <section><p>Summarizes dimension values from a row for this pivot.</p>
+</section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.PivotHeader.html">PivotHeader</a></h4>
-      <section><p>Dimensions&apos; values in a pivot.</p>
+      <section><p>Dimensions&apos; values in a single pivot.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.PropertyQuota.html">PropertyQuota</a></h4>
       <section><p>Current state of all quotas for this Analytics Property. If any quota for a
@@ -304,24 +333,34 @@ Exhausted errors.</p>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.Row.html">Row</a></h4>
       <section><p>Report data for each row.
 For example if RunReportRequest contains:</p>
-<pre><code class="lang-none">dimensions {
-name: &amp;quot;eventName&amp;quot;
+<pre><code class="lang-none">&amp;quot;dimensions&amp;quot;: [
+{
+&amp;quot;name&amp;quot;: &amp;quot;eventName&amp;quot;
+},
+{
+&amp;quot;name&amp;quot;: &amp;quot;countryId&amp;quot;
 }
-dimensions {
-name: &amp;quot;countryId&amp;quot;
+],
+&amp;quot;metrics&amp;quot;: [
+{
+&amp;quot;name&amp;quot;: &amp;quot;eventCount&amp;quot;
 }
-metrics {
-name: &amp;quot;eventCount&amp;quot;
-}
-</code></pre><p>One row with &apos;in_app_purchase&apos; as the eventName, &apos;us&apos; as the countryId, and
+]
+</code></pre><p>One row with &apos;in_app_purchase&apos; as the eventName, &apos;JP&apos; as the countryId, and
 15 as the eventCount, would be:</p>
-<pre><code class="lang-none">dimension_values {
-name: &amp;apos;in_app_purchase&amp;apos;
-name: &amp;apos;us&amp;apos;
+<pre><code class="lang-none">&amp;quot;dimensionValues&amp;quot;: [
+{
+&amp;quot;value&amp;quot;: &amp;quot;in_app_purchase&amp;quot;
+},
+{
+&amp;quot;value&amp;quot;: &amp;quot;JP&amp;quot;
 }
-metric_values {
-int64_value: 15
+],
+&amp;quot;metricValues&amp;quot;: [
+{
+&amp;quot;value&amp;quot;: &amp;quot;15&amp;quot;
 }
+]
 </code></pre></section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.html">RunPivotReportRequest</a></h4>
       <section><p>The request to generate a pivot report.</p>
@@ -329,11 +368,20 @@ int64_value: 15
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.RunPivotReportResponse.html">RunPivotReportResponse</a></h4>
       <section><p>The response pivot report table corresponding to a pivot request.</p>
 </section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.RunRealtimeReportRequest.html">RunRealtimeReportRequest</a></h4>
+      <section><p>The request to generate a realtime report.</p>
+</section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.RunRealtimeReportResponse.html">RunRealtimeReportResponse</a></h4>
+      <section><p>The response realtime report table corresponding to a request.</p>
+</section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.RunReportRequest.html">RunReportRequest</a></h4>
       <section><p>The request to generate a report.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.RunReportResponse.html">RunReportResponse</a></h4>
       <section><p>The response report table corresponding to a request.</p>
+</section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.UniversalMetadata.html">UniversalMetadata</a></h4>
+      <section><p>The dimensions and metrics currently accepted in reporting methods.</p>
 </section>
     <h3 id="enums">Enums
   </h3>
@@ -358,11 +406,14 @@ int64_value: 15
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.FilterExpression.ExprOneofCase.html">FilterExpression.ExprOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;expr&quot; oneof.</p>
 </section>
+      <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetadataName.ResourceNameType.html">MetadataName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Analytics.Data.V1Alpha.MetadataName.html">MetadataName</a>.</p>
+</section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetricAggregation.html">MetricAggregation</a></h4>
       <section><p>Represents aggregation of metrics.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetricType.html">MetricType</a></h4>
-      <section><p>Type of a metric value.</p>
+      <section><p>A metric&apos;s value type.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.MetricValue.OneValueOneofCase.html">MetricValue.OneValueOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;one_value&quot; oneof.</p>

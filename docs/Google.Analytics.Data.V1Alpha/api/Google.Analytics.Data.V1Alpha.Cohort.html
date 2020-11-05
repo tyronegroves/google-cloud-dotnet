@@ -86,9 +86,10 @@ belong to the same cohort.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Alpha.Cohort.html">Cohort</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Alpha.Cohort.html">Cohort</a>&gt;</div>
     <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Alpha.Cohort.html">Cohort</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -109,7 +110,7 @@ belong to the same cohort.</p>
   <h6><strong>Assembly</strong>: Google.Analytics.Data.V1Alpha.dll</h6>
   <h5 id="Google_Analytics_Data_V1Alpha_Cohort_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Cohort : IMessage&lt;Cohort&gt;, IMessage, IEquatable&lt;Cohort&gt;, IDeepCloneable&lt;Cohort&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Cohort : IMessage&lt;Cohort&gt;, IEquatable&lt;Cohort&gt;, IDeepCloneable&lt;Cohort&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -151,12 +152,13 @@ belong to the same cohort.</p>
   <a id="Google_Analytics_Data_V1Alpha_Cohort_DateRange_" data-uid="Google.Analytics.Data.V1Alpha.Cohort.DateRange*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_Cohort_DateRange" data-uid="Google.Analytics.Data.V1Alpha.Cohort.DateRange">DateRange</h4>
   <div class="markdown level1 summary"><p>The cohort selects users whose first visit date is between start date
-and end date defined in the date_range. The date range should be aligned
-with the cohort&apos;s granularity.
-If CohortsRange uses daily granularity, the date range can be aligned to
-any day.
-If CohortsRange uses weekly granularity, the date range should be aligned
-to the week boundary, starting at Sunday and ending Saturday. If
+and end date defined in the <code>dateRange</code>. In a cohort request, this
+<code>dateRange</code> is required and the <code>dateRanges</code> in the <code>RunReportRequest</code> or
+<code>RunPivotReportRequest</code> must be unspecified.</p>
+<p>The date range should be aligned with the cohort&apos;s granularity. If
+CohortsRange uses daily granularity, the date range can be aligned to any
+day. If CohortsRange uses weekly granularity, the date range should be
+aligned to the week boundary, starting at Sunday and ending Saturday. If
 CohortsRange uses monthly granularity, the date range should be aligned to
 the month, starting at the first and ending on the last day of the month.</p>
 </div>
@@ -208,7 +210,9 @@ report.</p>
   <a id="Google_Analytics_Data_V1Alpha_Cohort_Name_" data-uid="Google.Analytics.Data.V1Alpha.Cohort.Name*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_Cohort_Name" data-uid="Google.Analytics.Data.V1Alpha.Cohort.Name">Name</h4>
   <div class="markdown level1 summary"><p>Assigns a name to this cohort. The dimension <code>cohort</code> is valued to this
-name in a report response. If not set, a cohort is named the empty string.</p>
+name in a report response. If set, cannot begin with <code>cohort_</code> or
+<code>RESERVED_</code>. If not set, cohorts are named by their zero based index
+<code>cohort_0</code>, <code>cohort_1</code>, etc.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

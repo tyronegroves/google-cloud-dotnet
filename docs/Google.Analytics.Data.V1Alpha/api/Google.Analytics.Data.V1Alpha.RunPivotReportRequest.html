@@ -84,9 +84,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.html">RunPivotReportRequest</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.html">RunPivotReportRequest</a>&gt;</div>
     <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.html">RunPivotReportRequest</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Analytics.Data.V1Alpha.dll</h6>
   <h5 id="Google_Analytics_Data_V1Alpha_RunPivotReportRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class RunPivotReportRequest : IMessage&lt;RunPivotReportRequest&gt;, IMessage, IEquatable&lt;RunPivotReportRequest&gt;, IDeepCloneable&lt;RunPivotReportRequest&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class RunPivotReportRequest : IMessage&lt;RunPivotReportRequest&gt;, IEquatable&lt;RunPivotReportRequest&gt;, IDeepCloneable&lt;RunPivotReportRequest&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -202,7 +203,7 @@ If the field is empty, the report uses the entity&apos;s default currency.</p>
 ranges are specified, event data from each date range is used in the
 report. A special dimension with field name &quot;dateRange&quot; can be included in
 a Pivot&apos;s field names; if included, the report compares between date
-ranges. This dateRanges field is not used in cohorts reports.</p>
+ranges. In a cohort request, this <code>dateRanges</code> must be unspecified.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -226,9 +227,8 @@ ranges. This dateRanges field is not used in cohorts reports.</p>
   </table>
   <a id="Google_Analytics_Data_V1Alpha_RunPivotReportRequest_DimensionFilter_" data-uid="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.DimensionFilter*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_RunPivotReportRequest_DimensionFilter" data-uid="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.DimensionFilter">DimensionFilter</h4>
-  <div class="markdown level1 summary"><p>The filter clause of dimensions. Requests are validated that all
-field_names in the dimension_filter are dimensions and are defined in
-Dimensions.</p>
+  <div class="markdown level1 summary"><p>The filter clause of dimensions. Dimensions must be requested to be used in
+this filter. Metrics cannot be used in this filter.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -302,7 +302,9 @@ should either be unspecified or consistent with the batch-level entity.</p>
   </table>
   <a id="Google_Analytics_Data_V1Alpha_RunPivotReportRequest_KeepEmptyRows_" data-uid="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.KeepEmptyRows*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_RunPivotReportRequest_KeepEmptyRows" data-uid="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.KeepEmptyRows">KeepEmptyRows</h4>
-  <div class="markdown level1 summary"><p>If false, rows with metrics being 0 will not be returned.</p>
+  <div class="markdown level1 summary"><p>If false or unspecified, each row with all metrics equal to 0 will not be
+returned. If true, these rows will be returned if they are not separately
+removed by a filter.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -327,8 +329,8 @@ should either be unspecified or consistent with the batch-level entity.</p>
   <a id="Google_Analytics_Data_V1Alpha_RunPivotReportRequest_MetricFilter_" data-uid="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.MetricFilter*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_RunPivotReportRequest_MetricFilter" data-uid="Google.Analytics.Data.V1Alpha.RunPivotReportRequest.MetricFilter">MetricFilter</h4>
   <div class="markdown level1 summary"><p>The filter clause of metrics. Applied at post aggregation phase, similar to
-SQL having-clause. Requests are validated that all field_names in the
-metric_filter are metrics and are defined in Metrics.</p>
+SQL having-clause. Metrics must be requested to be used in this filter.
+Dimensions cannot be used in this filter.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
