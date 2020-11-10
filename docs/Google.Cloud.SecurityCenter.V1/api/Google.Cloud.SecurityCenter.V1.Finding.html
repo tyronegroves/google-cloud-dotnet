@@ -73,10 +73,10 @@
   
   <h1 id="Google_Cloud_SecurityCenter_V1_Finding" data-uid="Google.Cloud.SecurityCenter.V1.Finding" class="text-break">Class Finding
   </h1>
-  <div class="markdown level0 summary"><p>Cloud Security Command Center (Cloud SCC) finding.</p>
+  <div class="markdown level0 summary"><p>Security Command Center finding.</p>
 <p>A finding is a record of assessment data like security, risk, health, or
-privacy, that is ingested into Cloud SCC for presentation, notification,
-analysis, policy testing, and enforcement. For example, a
+privacy, that is ingested into Security Command Center for presentation,
+notification, analysis, policy testing, and enforcement. For example, a
 cross-site scripting (XSS) vulnerability in an App Engine application is a
 finding.</p>
 </div>
@@ -89,9 +89,10 @@ finding.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.Finding.html">Finding</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.Finding.html">Finding</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.SecurityCenter.V1.Finding.html">Finding</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -112,7 +113,7 @@ finding.</p>
   <h6><strong>Assembly</strong>: Google.Cloud.SecurityCenter.V1.dll</h6>
   <h5 id="Google_Cloud_SecurityCenter_V1_Finding_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Finding : IMessage&lt;Finding&gt;, IMessage, IEquatable&lt;Finding&gt;, IDeepCloneable&lt;Finding&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Finding : IMessage&lt;Finding&gt;, IEquatable&lt;Finding&gt;, IDeepCloneable&lt;Finding&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -179,7 +180,7 @@ Example: &quot;XSS_FLASH_INJECTION&quot;</p>
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_Finding_CreateTime_" data-uid="Google.Cloud.SecurityCenter.V1.Finding.CreateTime*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_Finding_CreateTime" data-uid="Google.Cloud.SecurityCenter.V1.Finding.CreateTime">CreateTime</h4>
-  <div class="markdown level1 summary"><p>The time at which the finding was created in Cloud SCC.</p>
+  <div class="markdown level1 summary"><p>The time at which the finding was created in Security Command Center.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -203,9 +204,11 @@ Example: &quot;XSS_FLASH_INJECTION&quot;</p>
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_Finding_EventTime_" data-uid="Google.Cloud.SecurityCenter.V1.Finding.EventTime*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_Finding_EventTime" data-uid="Google.Cloud.SecurityCenter.V1.Finding.EventTime">EventTime</h4>
-  <div class="markdown level1 summary"><p>The time at which the event took place. For example, if the finding
-represents an open firewall it would capture the time the detector believes
-the firewall became open. The accuracy is determined by the detector.</p>
+  <div class="markdown level1 summary"><p>The time at which the event took place, or when an update to the finding
+occurred. For example, if the finding represents an open firewall it would
+capture the time the detector believes the firewall became open. The
+accuracy is determined by the detector. If the finding were to be resolved
+afterward, this time would reflect when the finding was resolved.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -229,9 +232,9 @@ the firewall became open. The accuracy is determined by the detector.</p>
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_Finding_ExternalUri_" data-uid="Google.Cloud.SecurityCenter.V1.Finding.ExternalUri*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_Finding_ExternalUri" data-uid="Google.Cloud.SecurityCenter.V1.Finding.ExternalUri">ExternalUri</h4>
-  <div class="markdown level1 summary"><p>The URI that, if available, points to a web page outside of Cloud SCC
-where additional information about the finding can be found. This field is
-guaranteed to be either empty or a well formed URL.</p>
+  <div class="markdown level1 summary"><p>The URI that, if available, points to a web page outside of Security
+Command Center where additional information about the finding can be found.
+This field is guaranteed to be either empty or a well formed URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,12 +337,12 @@ For example:
   </table>
   <a id="Google_Cloud_SecurityCenter_V1_Finding_ResourceName_" data-uid="Google.Cloud.SecurityCenter.V1.Finding.ResourceName*"></a>
   <h4 id="Google_Cloud_SecurityCenter_V1_Finding_ResourceName" data-uid="Google.Cloud.SecurityCenter.V1.Finding.ResourceName">ResourceName</h4>
-  <div class="markdown level1 summary"><p>For findings on Google Cloud Platform (GCP) resources, the full resource
-name of the GCP resource this finding is for. See:
+  <div class="markdown level1 summary"><p>For findings on Google Cloud resources, the full resource
+name of the Google Cloud resource this finding is for. See:
 <a href="https://cloud.google.com/apis/design/resource_names#full_resource_name">https://cloud.google.com/apis/design/resource_names#full_resource_name</a>
-When the finding is for a non-GCP resource, the resourceName can be a
-customer or partner defined string.
-This field is immutable after creation time.</p>
+When the finding is for a non-Google Cloud resource, the resourceName can
+be a customer or partner defined string. This field is immutable after
+creation time.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
