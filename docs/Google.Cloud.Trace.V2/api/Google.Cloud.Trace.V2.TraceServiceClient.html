@@ -103,6 +103,13 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public abstract class TraceServiceClient</code></pre>
   </div>
+  <h5 id="Google_Cloud_Trace_V2_TraceServiceClient_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This file describes an API for collecting and viewing traces and spans
+within a trace.  A Trace is a collection of spans corresponding to a single
+operation or set of operations for an application. A span is an individual
+timed event which forms a node of the trace tree. A single trace may
+contain span(s) from multiple services.</p>
+</div>
   <h3 id="properties">Properties
   </h3>
   <a id="Google_Cloud_Trace_V2_TraceServiceClient_DefaultEndpoint_" data-uid="Google.Cloud.Trace.V2.TraceServiceClient.DefaultEndpoint*"></a>
@@ -219,7 +226,7 @@ spans, or the results are undefined.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -264,7 +271,7 @@ existing spans.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -320,7 +327,7 @@ spans, or the results are undefined.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -373,7 +380,7 @@ spans, or the results are undefined.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -503,7 +510,7 @@ existing spans.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -639,7 +646,7 @@ spans, or the results are undefined.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -838,7 +845,7 @@ settings. To specify custom credentials or other settings, use <a class="xref" h
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -879,8 +886,9 @@ Span request = new Span
     TimeEvents = new Span.Types.TimeEvents(),
     Links = new Span.Types.Links(),
     Status = new Status(),
-    SameProcessAsParentSpan = new bool?(),
-    ChildSpanCount = new int?(),
+    SameProcessAsParentSpan = false,
+    ChildSpanCount = 0,
+    SpanKind = Span.Types.SpanKind.Unspecified,
 };
 // Make the request
 Span response = traceServiceClient.CreateSpan(request);
@@ -912,7 +920,7 @@ Span response = traceServiceClient.CreateSpan(request);
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
         <td><span class="parametername">callSettings</span></td>
         <td><p>If not null, applies overrides to this RPC call.</p>
 </td>
@@ -953,8 +961,9 @@ Span request = new Span
     TimeEvents = new Span.Types.TimeEvents(),
     Links = new Span.Types.Links(),
     Status = new Status(),
-    SameProcessAsParentSpan = new bool?(),
-    ChildSpanCount = new int?(),
+    SameProcessAsParentSpan = false,
+    ChildSpanCount = 0,
+    SpanKind = Span.Types.SpanKind.Unspecified,
 };
 // Make the request
 Span response = await traceServiceClient.CreateSpanAsync(request);
@@ -1027,8 +1036,9 @@ Span request = new Span
     TimeEvents = new Span.Types.TimeEvents(),
     Links = new Span.Types.Links(),
     Status = new Status(),
-    SameProcessAsParentSpan = new bool?(),
-    ChildSpanCount = new int?(),
+    SameProcessAsParentSpan = false,
+    ChildSpanCount = 0,
+    SpanKind = Span.Types.SpanKind.Unspecified,
 };
 // Make the request
 Span response = await traceServiceClient.CreateSpanAsync(request);

@@ -89,9 +89,10 @@ gaps or overlaps between spans in a trace.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Trace.V2.Span.html">Span</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -112,7 +113,7 @@ gaps or overlaps between spans in a trace.</p>
   <h6><strong>Assembly</strong>: Google.Cloud.Trace.V2.dll</h6>
   <h5 id="Google_Cloud_Trace_V2_Span_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Span : IMessage&lt;Span&gt;, IMessage, IEquatable&lt;Span&gt;, IDeepCloneable&lt;Span&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Span : IMessage&lt;Span&gt;, IEquatable&lt;Span&gt;, IDeepCloneable&lt;Span&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -203,7 +204,7 @@ was active. If set, allows implementation to detect missing child spans.</p>
   </table>
   <a id="Google_Cloud_Trace_V2_Span_DisplayName_" data-uid="Google.Cloud.Trace.V2.Span.DisplayName*"></a>
   <h4 id="Google_Cloud_Trace_V2_Span_DisplayName" data-uid="Google.Cloud.Trace.V2.Span.DisplayName">DisplayName</h4>
-  <div class="markdown level1 summary"><p>A description of the span&apos;s operation (up to 128 bytes).
+  <div class="markdown level1 summary"><p>Required. A description of the span&apos;s operation (up to 128 bytes).
 Stackdriver Trace displays the description in the
 Google Cloud Platform Console.
 For example, the display name can be a qualified method name or a file name
@@ -233,7 +234,7 @@ This makes it easier to correlate spans in different traces.</p>
   </table>
   <a id="Google_Cloud_Trace_V2_Span_EndTime_" data-uid="Google.Cloud.Trace.V2.Span.EndTime*"></a>
   <h4 id="Google_Cloud_Trace_V2_Span_EndTime" data-uid="Google.Cloud.Trace.V2.Span.EndTime">EndTime</h4>
-  <div class="markdown level1 summary"><p>The end time of the span. On the client side, this is the time kept by
+  <div class="markdown level1 summary"><p>Required. The end time of the span. On the client side, this is the time kept by
 the local machine where the span execution ends. On the server side, this
 is the time when the server application handler stops running.</p>
 </div>
@@ -283,7 +284,7 @@ is the time when the server application handler stops running.</p>
   </table>
   <a id="Google_Cloud_Trace_V2_Span_Name_" data-uid="Google.Cloud.Trace.V2.Span.Name*"></a>
   <h4 id="Google_Cloud_Trace_V2_Span_Name" data-uid="Google.Cloud.Trace.V2.Span.Name">Name</h4>
-  <div class="markdown level1 summary"><p>The resource name of the span in the following format:</p>
+  <div class="markdown level1 summary"><p>Required. The resource name of the span in the following format:</p>
 <p>projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]</p>
 <p>[TRACE_ID] is a unique identifier for a trace within a project;
 it is a 32-character hexadecimal encoding of a 16-byte array.</p>
@@ -364,7 +365,7 @@ information.</p>
   </table>
   <a id="Google_Cloud_Trace_V2_Span_SpanId_" data-uid="Google.Cloud.Trace.V2.Span.SpanId*"></a>
   <h4 id="Google_Cloud_Trace_V2_Span_SpanId" data-uid="Google.Cloud.Trace.V2.Span.SpanId">SpanId</h4>
-  <div class="markdown level1 summary"><p>The [SPAN_ID] portion of the span&apos;s resource name.</p>
+  <div class="markdown level1 summary"><p>Required. The [SPAN_ID] portion of the span&apos;s resource name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -382,6 +383,32 @@ information.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Trace_V2_Span_SpanKind_" data-uid="Google.Cloud.Trace.V2.Span.SpanKind*"></a>
+  <h4 id="Google_Cloud_Trace_V2_Span_SpanKind" data-uid="Google.Cloud.Trace.V2.Span.SpanKind">SpanKind</h4>
+  <div class="markdown level1 summary"><p>Optional. Distinguishes between spans generated in a particular context. For example,
+two spans with the same name may be distinguished using <code>CLIENT</code> (caller)
+and <code>SERVER</code> (callee) to identify an RPC call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Span.Types.SpanKind SpanKind { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Trace.V2.Span.Types.SpanKind.html">Span.Types.SpanKind</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -436,7 +463,7 @@ information.</p>
   </table>
   <a id="Google_Cloud_Trace_V2_Span_StartTime_" data-uid="Google.Cloud.Trace.V2.Span.StartTime*"></a>
   <h4 id="Google_Cloud_Trace_V2_Span_StartTime" data-uid="Google.Cloud.Trace.V2.Span.StartTime">StartTime</h4>
-  <div class="markdown level1 summary"><p>The start time of the span. On the client side, this is the time kept by
+  <div class="markdown level1 summary"><p>Required. The start time of the span. On the client side, this is the time kept by
 the local machine where the span execution starts. On the server side, this
 is the time when the server&apos;s application handler starts running.</p>
 </div>
