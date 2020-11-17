@@ -85,9 +85,10 @@ and thresholds.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.html">AllUpdatesRule</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.html">AllUpdatesRule</a>&gt;</div>
     <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.html">AllUpdatesRule</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -108,7 +109,7 @@ and thresholds.</p>
   <h6><strong>Assembly</strong>: Google.Cloud.Billing.Budgets.V1Beta1.dll</h6>
   <h5 id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class AllUpdatesRule : IMessage&lt;AllUpdatesRule&gt;, IMessage, IEquatable&lt;AllUpdatesRule&gt;, IDeepCloneable&lt;AllUpdatesRule&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class AllUpdatesRule : IMessage&lt;AllUpdatesRule&gt;, IEquatable&lt;AllUpdatesRule&gt;, IDeepCloneable&lt;AllUpdatesRule&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -147,14 +148,43 @@ and thresholds.</p>
   </table>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_DisableDefaultIamRecipients_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.DisableDefaultIamRecipients*"></a>
+  <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_DisableDefaultIamRecipients" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.DisableDefaultIamRecipients">DisableDefaultIamRecipients</h4>
+  <div class="markdown level1 summary"><p>Optional. When set to true, disables default notifications sent when a
+threshold is exceeded. Default notifications are sent to those with Billing
+Account Administrator and Billing Account User IAM roles for the target
+account.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DisableDefaultIamRecipients { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_MonitoringNotificationChannels_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.MonitoringNotificationChannels*"></a>
   <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_MonitoringNotificationChannels" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.MonitoringNotificationChannels">MonitoringNotificationChannels</h4>
   <div class="markdown level1 summary"><p>Optional. Targets to send notifications to when a threshold is exceeded.
-This is in addition to default recipients who have billing account roles.
-The value is the full REST resource name of a monitoring notification
-channel with the form
+This is in addition to default recipients who have billing account IAM
+roles. The value is the full REST resource name of a monitoring
+notification channel with the form
 <code>projects/{project_id}/notificationChannels/{channel_id}</code>. A maximum of 5
-channels are allowed.</p>
+channels are allowed. See
+<a href="https://cloud.google.com/billing/docs/how-to/budgets-notification-recipients">https://cloud.google.com/billing/docs/how-to/budgets-notification-recipients</a>
+for more details.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -178,8 +208,8 @@ channels are allowed.</p>
   </table>
   <a id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_PubsubTopic_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.PubsubTopic*"></a>
   <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_PubsubTopic" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.PubsubTopic">PubsubTopic</h4>
-  <div class="markdown level1 summary"><p>Required. The name of the Cloud Pub/Sub topic where budget related messages
-will be published, in the form <code>projects/{project_id}/topics/{topic_id}</code>.
+  <div class="markdown level1 summary"><p>Optional. The name of the Pub/Sub topic where budget related messages will
+be published, in the form <code>projects/{project_id}/topics/{topic_id}</code>.
 Updates are sent at regular intervals to the topic. The topic needs to be
 created before the budget is created; see
 <a href="https://cloud.google.com/billing/docs/how-to/budgets#manage-notifications">https://cloud.google.com/billing/docs/how-to/budgets#manage-notifications</a>
@@ -187,8 +217,8 @@ for more details.
 Caller is expected to have
 <code>pubsub.topics.setIamPolicy</code> permission on the topic when it&apos;s set for a
 budget, otherwise, the API call will fail with PERMISSION_DENIED. See
-<a href="https://cloud.google.com/pubsub/docs/access-control">https://cloud.google.com/pubsub/docs/access-control</a> for more details on
-Pub/Sub roles and permissions.</p>
+<a href="https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications">https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications</a>
+for more details on Pub/Sub roles and permissions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -212,9 +242,9 @@ Pub/Sub roles and permissions.</p>
   </table>
   <a id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_SchemaVersion_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.SchemaVersion*"></a>
   <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_AllUpdatesRule_SchemaVersion" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.AllUpdatesRule.SchemaVersion">SchemaVersion</h4>
-  <div class="markdown level1 summary"><p>Required. The schema version of the notification sent to <code>pubsub_topic</code>.
+  <div class="markdown level1 summary"><p>Optional. The schema version of the notification sent to <code>pubsub_topic</code>.
 Only &quot;1.0&quot; is accepted. It represents the JSON schema as defined in
-<a href="https://cloud.google.com/billing/docs/how-to/budgets#notification_format">https://cloud.google.com/billing/docs/how-to/budgets#notification_format</a></p>
+<a href="https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format">https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#notification_format</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

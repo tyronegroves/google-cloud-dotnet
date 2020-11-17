@@ -84,9 +84,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Google.Protobuf.IMessage</span>&lt;<a class="xref" href="Google.Cloud.Billing.Budgets.V1Beta1.Filter.html">Filter</a>&gt;</div>
-    <div><span class="xref">Google.Protobuf.IMessage</span></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Billing.Budgets.V1Beta1.Filter.html">Filter</a>&gt;</div>
     <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Cloud.Billing.Budgets.V1Beta1.Filter.html">Filter</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><span class="xref">Google.Protobuf.IMessage</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Billing.Budgets.V1Beta1.dll</h6>
   <h5 id="Google_Cloud_Billing_Budgets_V1Beta1_Filter_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Filter : IMessage&lt;Filter&gt;, IMessage, IEquatable&lt;Filter&gt;, IDeepCloneable&lt;Filter&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Filter : IMessage&lt;Filter&gt;, IEquatable&lt;Filter&gt;, IDeepCloneable&lt;Filter&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -146,6 +147,39 @@
   </table>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Billing_Budgets_V1Beta1_Filter_CreditTypes_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.Filter.CreditTypes*"></a>
+  <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_Filter_CreditTypes" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.Filter.CreditTypes">CreditTypes</h4>
+  <div class="markdown level1 summary"><p>Optional. If
+[Filter.credit_types_treatment][google.cloud.billing.budgets.v1beta1.Filter.credit_types_treatment]
+is INCLUDE_SPECIFIED_CREDITS, this is a list of credit types to be
+subtracted from gross cost to determine the spend for threshold
+calculations.</p>
+<p>If
+[Filter.credit_types_treatment][google.cloud.billing.budgets.v1beta1.Filter.credit_types_treatment]
+is <strong>not</strong> INCLUDE_SPECIFIED_CREDITS, this field must be empty. See <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type">a list
+of acceptable credit type
+values</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;string&gt; CreditTypes { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Billing_Budgets_V1Beta1_Filter_CreditTypesTreatment_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.Filter.CreditTypesTreatment*"></a>
   <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_Filter_CreditTypesTreatment" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.Filter.CreditTypesTreatment">CreditTypesTreatment</h4>
   <div class="markdown level1 summary"><p>Optional. If not set, default behavior is <code>INCLUDE_ALL_CREDITS</code>.</p>
@@ -258,10 +292,10 @@ The service names are available through the Catalog API:
   <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_Filter_Subaccounts" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.Filter.Subaccounts">Subaccounts</h4>
   <div class="markdown level1 summary"><p>Optional. A set of subaccounts of the form <code>billingAccounts/{account_id}</code>,
 specifying that usage from only this set of subaccounts should be included
-in the budget. If a subaccount is set to the name of the reseller account,
-usage from the reseller account will be included. If omitted, the report
-will include usage from the reseller account and all subaccounts, if they
-exist.</p>
+in the budget. If a subaccount is set to the name of the parent account,
+usage from the parent account will be included. If omitted, the
+report will include usage from the parent account and all
+subaccounts, if they exist.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
