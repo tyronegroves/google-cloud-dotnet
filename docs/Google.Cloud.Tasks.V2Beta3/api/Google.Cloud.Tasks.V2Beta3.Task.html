@@ -84,9 +84,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta3.Task.html">Task</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta3.Task.html">Task</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Tasks.V2Beta3.Task.html">Task</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Tasks.V2Beta3.dll</h6>
   <h5 id="Google_Cloud_Tasks_V2Beta3_Task_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Task : IMessage&lt;Task&gt;, IMessage, IEquatable&lt;Task&gt;, IDeepCloneable&lt;Task&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Task : IMessage&lt;Task&gt;, IEquatable&lt;Task&gt;, IDeepCloneable&lt;Task&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -228,8 +229,8 @@ received a response.</p>
 respond by this deadline then the request is cancelled and the attempt
 is marked as a <code>DEADLINE_EXCEEDED</code> failure. Cloud Tasks will retry the
 task according to the [RetryConfig][google.cloud.tasks.v2beta3.RetryConfig].</p>
-<p>Note that when the request is cancelled, Cloud Tasks will stop listing for
-the response, but whether the worker stops processing depends on the
+<p>Note that when the request is cancelled, Cloud Tasks will stop listening
+for the response, but whether the worker stops processing depends on the
 worker. For example, if the worker is stuck, it may not react to cancelled
 requests.</p>
 <p>The default and maximum values depend on the type of request:</p>
