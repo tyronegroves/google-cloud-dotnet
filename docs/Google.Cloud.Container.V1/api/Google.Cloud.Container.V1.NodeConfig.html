@@ -173,6 +173,35 @@ support for GPUs.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_NodeConfig_BootDiskKmsKey_" data-uid="Google.Cloud.Container.V1.NodeConfig.BootDiskKmsKey*"></a>
+  <h4 id="Google_Cloud_Container_V1_NodeConfig_BootDiskKmsKey" data-uid="Google.Cloud.Container.V1.NodeConfig.BootDiskKmsKey">BootDiskKmsKey</h4>
+  <div class="markdown level1 summary"><p>The Customer Managed Encryption Key used to encrypt the boot disk attached
+to each node in the node pool. This should be of the form
+projects/[KEY_PROJECT_ID]/locations/[LOCATION]/keyRings/[RING_NAME]/cryptoKeys/[KEY_NAME].
+For more information about protecting resources with Cloud KMS Keys please
+see:
+<a href="https://cloud.google.com/compute/docs/disks/customer-managed-encryption">https://cloud.google.com/compute/docs/disks/customer-managed-encryption</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string BootDiskKmsKey { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_NodeConfig_DiskSizeGb_" data-uid="Google.Cloud.Container.V1.NodeConfig.DiskSizeGb*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_DiskSizeGb" data-uid="Google.Cloud.Container.V1.NodeConfig.DiskSizeGb">DiskSizeGb</h4>
   <div class="markdown level1 summary"><p>Size of the disk attached to each node, specified in GB.
@@ -201,7 +230,8 @@ The smallest allowed disk size is 10GB.</p>
   </table>
   <a id="Google_Cloud_Container_V1_NodeConfig_DiskType_" data-uid="Google.Cloud.Container.V1.NodeConfig.DiskType*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_DiskType" data-uid="Google.Cloud.Container.V1.NodeConfig.DiskType">DiskType</h4>
-  <div class="markdown level1 summary"><p>Type of the disk attached to each node (e.g. &apos;pd-standard&apos; or &apos;pd-ssd&apos;)</p>
+  <div class="markdown level1 summary"><p>Type of the disk attached to each node (e.g. &apos;pd-standard&apos;, &apos;pd-ssd&apos; or
+&apos;pd-balanced&apos;)</p>
 <p>If unspecified, the default disk type is &apos;pd-standard&apos;</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -311,10 +341,8 @@ for more information.</p>
   <a id="Google_Cloud_Container_V1_NodeConfig_MachineType_" data-uid="Google.Cloud.Container.V1.NodeConfig.MachineType*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_MachineType" data-uid="Google.Cloud.Container.V1.NodeConfig.MachineType">MachineType</h4>
   <div class="markdown level1 summary"><p>The name of a Google Compute Engine <a href="https://cloud.google.com/compute/docs/machine-types">machine
-type</a> (e.g.
-<code>n1-standard-1</code>).</p>
-<p>If unspecified, the default machine type is
-<code>n1-standard-1</code>.</p>
+type</a></p>
+<p>If unspecified, the default machine type is <code>e2-medium</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -339,29 +367,35 @@ type</a> (e.g.
   <a id="Google_Cloud_Container_V1_NodeConfig_Metadata_" data-uid="Google.Cloud.Container.V1.NodeConfig.Metadata*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_Metadata" data-uid="Google.Cloud.Container.V1.NodeConfig.Metadata">Metadata</h4>
   <div class="markdown level1 summary"><p>The metadata key/value pairs assigned to instances in the cluster.</p>
-<p>Keys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes
+<p>Keys must conform to the regexp <code>[a-zA-Z0-9-_]+</code> and be less than 128 bytes
 in length. These are reflected as part of a URL in the metadata server.
 Additionally, to avoid ambiguity, keys must not conflict with any other
-metadata keys for the project or be one of the reserved keys:
-&quot;cluster-location&quot;
-&quot;cluster-name&quot;
-&quot;cluster-uid&quot;
-&quot;configure-sh&quot;
-&quot;containerd-configure-sh&quot;
-&quot;enable-os-login&quot;
-&quot;gci-update-strategy&quot;
-&quot;gci-ensure-gke-docker&quot;
-&quot;instance-template&quot;
-&quot;kube-env&quot;
-&quot;startup-script&quot;
-&quot;user-data&quot;
-&quot;disable-address-manager&quot;
-&quot;windows-startup-script-ps1&quot;
-&quot;common-psm1&quot;
-&quot;k8s-node-setup-psm1&quot;
-&quot;install-ssh-psm1&quot;
-&quot;user-profile-psm1&quot;
-&quot;serial-port-logging-enable&quot;</p>
+metadata keys for the project or be one of the reserved keys:</p>
+<ul>
+<li>&quot;cluster-location&quot;</li>
+<li>&quot;cluster-name&quot;</li>
+<li>&quot;cluster-uid&quot;</li>
+<li>&quot;configure-sh&quot;</li>
+<li>&quot;containerd-configure-sh&quot;</li>
+<li>&quot;enable-os-login&quot;</li>
+<li>&quot;gci-ensure-gke-docker&quot;</li>
+<li>&quot;gci-metrics-enabled&quot;</li>
+<li>&quot;gci-update-strategy&quot;</li>
+<li>&quot;instance-template&quot;</li>
+<li>&quot;kube-env&quot;</li>
+<li>&quot;startup-script&quot;</li>
+<li>&quot;user-data&quot;</li>
+<li>&quot;disable-address-manager&quot;</li>
+<li>&quot;windows-startup-script-ps1&quot;</li>
+<li>&quot;common-psm1&quot;</li>
+<li>&quot;k8s-node-setup-psm1&quot;</li>
+<li>&quot;install-ssh-psm1&quot;</li>
+<li>&quot;user-profile-psm1&quot;</li>
+</ul>
+<p>The following keys are reserved for Windows nodes:</p>
+<ul>
+<li>&quot;serial-port-logging-enable&quot;</li>
+</ul>
 <p>Values are free-form strings, and only have meaning as interpreted by
 the image running in the instance. The only restriction placed on them is
 that each value&apos;s size must be less than or equal to 32 KB.</p>
@@ -392,8 +426,8 @@ that each value&apos;s size must be less than or equal to 32 KB.</p>
   <div class="markdown level1 summary"><p>Minimum CPU platform to be used by this instance. The instance may be
 scheduled on the specified or newer CPU platform. Applicable values are the
 friendly names of CPU platforms, such as
-&lt;code&gt;minCpuPlatform: &amp;quot;Intel Haswell&amp;quot;&lt;/code&gt; or
-&lt;code&gt;minCpuPlatform: &amp;quot;Intel Sandy Bridge&amp;quot;&lt;/code&gt;. For more
+<code>minCpuPlatform: &amp;quot;Intel Haswell&amp;quot;</code> or
+<code>minCpuPlatform: &amp;quot;Intel Sandy Bridge&amp;quot;</code>. For more
 information, read <a href="https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform">how to specify min CPU
 platform</a></p>
 </div>
@@ -401,6 +435,33 @@ platform</a></p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public string MinCpuPlatform { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Container_V1_NodeConfig_NodeGroup_" data-uid="Google.Cloud.Container.V1.NodeConfig.NodeGroup*"></a>
+  <h4 id="Google_Cloud_Container_V1_NodeConfig_NodeGroup" data-uid="Google.Cloud.Container.V1.NodeConfig.NodeGroup">NodeGroup</h4>
+  <div class="markdown level1 summary"><p>Setting this field will assign instances of this
+pool to run on the specified node group. This is useful for running
+workloads on <a href="https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes">sole tenant
+nodes</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string NodeGroup { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -428,7 +489,8 @@ not included:</p>
 persistent storage on your nodes.</li>
 <li><code>https://www.googleapis.com/auth/devstorage.read_only</code> is required for
 communicating with <strong>gcr.io</strong>
-(the <a href="https://cloud.google.com/container-registry/">Google Container Registry</a>).</li>
+(the <a href="https://cloud.google.com/container-registry/">Google Container
+Registry</a>).</li>
 </ul>
 <p>If unspecified, no scopes are added, unless Cloud Logging or Cloud
 Monitoring are enabled, in which case their required scopes will be added.</p>
@@ -479,10 +541,62 @@ information about preemptible VM instances.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_NodeConfig_ReservationAffinity_" data-uid="Google.Cloud.Container.V1.NodeConfig.ReservationAffinity*"></a>
+  <h4 id="Google_Cloud_Container_V1_NodeConfig_ReservationAffinity" data-uid="Google.Cloud.Container.V1.NodeConfig.ReservationAffinity">ReservationAffinity</h4>
+  <div class="markdown level1 summary"><p>The optional reservation affinity. Setting this field will apply
+the specified <a href="https://cloud.google.com/compute/docs/instances/reserving-zonal-resources">Zonal Compute
+Reservation</a>
+to this node pool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReservationAffinity ReservationAffinity { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.ReservationAffinity.html">ReservationAffinity</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Container_V1_NodeConfig_SandboxConfig_" data-uid="Google.Cloud.Container.V1.NodeConfig.SandboxConfig*"></a>
+  <h4 id="Google_Cloud_Container_V1_NodeConfig_SandboxConfig" data-uid="Google.Cloud.Container.V1.NodeConfig.SandboxConfig">SandboxConfig</h4>
+  <div class="markdown level1 summary"><p>Sandbox configuration for this node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SandboxConfig SandboxConfig { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.SandboxConfig.html">SandboxConfig</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_NodeConfig_ServiceAccount_" data-uid="Google.Cloud.Container.V1.NodeConfig.ServiceAccount*"></a>
   <h4 id="Google_Cloud_Container_V1_NodeConfig_ServiceAccount" data-uid="Google.Cloud.Container.V1.NodeConfig.ServiceAccount">ServiceAccount</h4>
-  <div class="markdown level1 summary"><p>The Google Cloud Platform Service Account to be used by the node VMs. If
-no Service Account is specified, the &quot;default&quot; service account is used.</p>
+  <div class="markdown level1 summary"><p>The Google Cloud Platform Service Account to be used by the node VMs.
+Specify the email address of the Service Account; otherwise, if no Service
+Account is specified, the &quot;default&quot; service account is used.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -577,6 +691,30 @@ must comply with RFC1035.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Container.V1.NodeTaint.html">NodeTaint</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Container_V1_NodeConfig_WorkloadMetadataConfig_" data-uid="Google.Cloud.Container.V1.NodeConfig.WorkloadMetadataConfig*"></a>
+  <h4 id="Google_Cloud_Container_V1_NodeConfig_WorkloadMetadataConfig" data-uid="Google.Cloud.Container.V1.NodeConfig.WorkloadMetadataConfig">WorkloadMetadataConfig</h4>
+  <div class="markdown level1 summary"><p>The workload metadata configuration for this node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WorkloadMetadataConfig WorkloadMetadataConfig { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.WorkloadMetadataConfig.html">WorkloadMetadataConfig</a></td>
         <td></td>
       </tr>
     </tbody>

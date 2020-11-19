@@ -175,12 +175,17 @@ public string ClusterId { get; set; }</code></pre>
   </table>
   <a id="Google_Cloud_Container_V1_SetLoggingServiceRequest_LoggingService_" data-uid="Google.Cloud.Container.V1.SetLoggingServiceRequest.LoggingService*"></a>
   <h4 id="Google_Cloud_Container_V1_SetLoggingServiceRequest_LoggingService" data-uid="Google.Cloud.Container.V1.SetLoggingServiceRequest.LoggingService">LoggingService</h4>
-  <div class="markdown level1 summary"><p>Required. The logging service the cluster should use to write metrics.
+  <div class="markdown level1 summary"><p>Required. The logging service the cluster should use to write logs.
 Currently available options:</p>
 <ul>
-<li>&quot;logging.googleapis.com&quot; - the Google Cloud Logging service</li>
-<li>&quot;none&quot; - no metrics will be exported from the cluster</li>
+<li><code>logging.googleapis.com/kubernetes</code> - The Cloud Logging
+service with a Kubernetes-native resource model</li>
+<li><code>logging.googleapis.com</code> - The legacy Cloud Logging service (no longer
+available as of GKE 1.15).</li>
+<li><code>none</code> - no logs will be exported from the cluster.</li>
 </ul>
+<p>If left as an empty string,<code>logging.googleapis.com/kubernetes</code> will be
+used for GKE 1.14+ or <code>logging.googleapis.com</code> for earlier versions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -257,9 +262,9 @@ public string ProjectId { get; set; }</code></pre>
   <a id="Google_Cloud_Container_V1_SetLoggingServiceRequest_Zone_" data-uid="Google.Cloud.Container.V1.SetLoggingServiceRequest.Zone*"></a>
   <h4 id="Google_Cloud_Container_V1_SetLoggingServiceRequest_Zone" data-uid="Google.Cloud.Container.V1.SetLoggingServiceRequest.Zone">Zone</h4>
   <div class="markdown level1 summary"><p>Deprecated. The name of the Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.
-This field has been deprecated and replaced by the name field.</p>
+<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the
+cluster resides. This field has been deprecated and replaced by the name
+field.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

@@ -107,6 +107,9 @@ the Auto Upgrades will proceed.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.CloudRunConfig.html">CloudRunConfig</a></h4>
       <section><p>Configuration options for the Cloud Run feature.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.CloudRunConfig.Types.html">CloudRunConfig.Types</a></h4>
+      <section><p>Container for nested types declared in the CloudRunConfig message type.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.Cluster.html">Cluster</a></h4>
       <section><p>A Google Kubernetes Engine cluster.</p>
 </section>
@@ -149,6 +152,9 @@ provided.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.CompleteIPRotationRequest.html">CompleteIPRotationRequest</a></h4>
       <section><p>CompleteIPRotationRequest moves the cluster master back into single-IP mode.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ConfigConnectorConfig.html">ConfigConnectorConfig</a></h4>
+      <section><p>Configuration options for the Config Connector add-on.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.CreateClusterRequest.html">CreateClusterRequest</a></h4>
       <section><p>CreateClusterRequest creates a cluster.</p>
 </section>
@@ -164,17 +170,41 @@ provided.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.DatabaseEncryption.Types.html">DatabaseEncryption.Types</a></h4>
       <section><p>Container for nested types declared in the DatabaseEncryption message type.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.DefaultSnatStatus.html">DefaultSnatStatus</a></h4>
+      <section><p>DefaultSnatStatus contains the desired state of whether default sNAT should
+be disabled on the cluster.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.DeleteClusterRequest.html">DeleteClusterRequest</a></h4>
       <section><p>DeleteClusterRequest deletes a cluster.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.DeleteNodePoolRequest.html">DeleteNodePoolRequest</a></h4>
       <section><p>DeleteNodePoolRequest deletes a node pool for a cluster.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.DnsCacheConfig.html">DnsCacheConfig</a></h4>
+      <section><p>Configuration for NodeLocal DNSCache</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.GetClusterRequest.html">GetClusterRequest</a></h4>
       <section><p>GetClusterRequest gets the settings of a cluster.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.GetJSONWebKeysRequest.html">GetJSONWebKeysRequest</a></h4>
+      <section><p>GetJSONWebKeysRequest gets the public component of the keys used by the
+cluster to sign token requests. This will be the jwks_uri for the discover
+document returned by getOpenIDConfig. See the OpenID Connect
+Discovery 1.0 specification for details.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.GetJSONWebKeysResponse.html">GetJSONWebKeysResponse</a></h4>
+      <section><p>GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc 7517</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.GetNodePoolRequest.html">GetNodePoolRequest</a></h4>
       <section><p>GetNodePoolRequest retrieves a node pool for a cluster.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.GetOpenIDConfigRequest.html">GetOpenIDConfigRequest</a></h4>
+      <section><p>GetOpenIDConfigRequest gets the OIDC discovery document for the
+cluster. See the OpenID Connect Discovery 1.0 specification for details.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.GetOpenIDConfigResponse.html">GetOpenIDConfigResponse</a></h4>
+      <section><p>GetOpenIDConfigResponse is an OIDC discovery document for the cluster.
+See the OpenID Connect Discovery 1.0 specification for details.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.GetOperationRequest.html">GetOperationRequest</a></h4>
       <section><p>GetOperationRequest gets a single operation.</p>
@@ -197,6 +227,9 @@ visibility on this cluster.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.IPAllocationPolicy.html">IPAllocationPolicy</a></h4>
       <section><p>Configuration for controlling how IPs are allocated in the cluster.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.Jwk.html">Jwk</a></h4>
+      <section><p>Jwk is a JSON Web Key as specified in RFC 7517</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.KubernetesDashboard.html">KubernetesDashboard</a></h4>
       <section><p>Configuration for the Kubernetes Dashboard.</p>
@@ -290,6 +323,26 @@ the workload.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.NodePool.Types.html">NodePool.Types</a></h4>
       <section><p>Container for nested types declared in the NodePool message type.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.NodePool.Types.UpgradeSettings.html">NodePool.Types.UpgradeSettings</a></h4>
+      <section><p>These upgrade settings control the level of parallelism and the level of
+disruption caused by an upgrade.</p>
+<p>maxUnavailable controls the number of nodes that can be simultaneously
+unavailable.</p>
+<p>maxSurge controls the number of additional nodes that can be added to the
+node pool temporarily for the time of the upgrade to increase the number of
+available nodes.</p>
+<p>(maxUnavailable + maxSurge) determines the level of parallelism (how many
+nodes are being upgraded at the same time).</p>
+<p>Note: upgrades inevitably introduce some disruption since workloads need to
+be moved from old nodes to new, upgraded ones. Even if maxUnavailable=0,
+this holds true. (Disruption stays within the limits of
+PodDisruptionBudget, if it is configured.)</p>
+<p>Consider a hypothetical node pool with 5 nodes having maxSurge=2,
+maxUnavailable=1. This means the upgrade process upgrades 3 nodes
+simultaneously. It creates 2 additional (upgraded) nodes, then it brings
+down 3 old (not yet upgraded) nodes at the same time. This ensures that
+there are always at least 4 nodes available.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.NodePoolAutoscaling.html">NodePoolAutoscaling</a></h4>
       <section><p>NodePoolAutoscaling contains information required by cluster autoscaler to
 adjust the size of the node pool to the current cluster usage.</p>
@@ -297,8 +350,9 @@ adjust the size of the node pool to the current cluster usage.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.NodeTaint.html">NodeTaint</a></h4>
       <section><p>Kubernetes taint is comprised of three fields: key, value, and effect. Effect
 can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.</p>
-<p>For more information, including usage and the valid values, see:
-<a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/</a></p>
+<p>See
+<a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration">here</a>
+for more information, including usage and the valid values.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.NodeTaint.Types.html">NodeTaint.Types</a></h4>
       <section><p>Container for nested types declared in the NodeTaint message type.</p>
@@ -310,11 +364,41 @@ happening on the cluster. All fields are output only.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.Operation.Types.html">Operation.Types</a></h4>
       <section><p>Container for nested types declared in the Operation message type.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.OperationProgress.html">OperationProgress</a></h4>
+      <section><p>Information about operation (or operation stage) progress.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.OperationProgress.Types.html">OperationProgress.Types</a></h4>
+      <section><p>Container for nested types declared in the OperationProgress message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.OperationProgress.Types.Metric.html">OperationProgress.Types.Metric</a></h4>
+      <section><p>Progress metric is (string, int|float|string) pair.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.PrivateClusterConfig.html">PrivateClusterConfig</a></h4>
       <section><p>Configuration options for private clusters.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.PrivateClusterMasterGlobalAccessConfig.html">PrivateClusterMasterGlobalAccessConfig</a></h4>
+      <section><p>Configuration for controlling master global access settings.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.RecurringTimeWindow.html">RecurringTimeWindow</a></h4>
       <section><p>Represents an arbitrary window of time that recurs.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ReleaseChannel.html">ReleaseChannel</a></h4>
+      <section><p>ReleaseChannel indicates which release channel a cluster is
+subscribed to. Release channels are arranged in order of risk.</p>
+<p>When a cluster is subscribed to a release channel, Google maintains
+both the master version and the node version. Node auto-upgrade
+defaults to true and cannot be disabled.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ReleaseChannel.Types.html">ReleaseChannel.Types</a></h4>
+      <section><p>Container for nested types declared in the ReleaseChannel message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ReservationAffinity.html">ReservationAffinity</a></h4>
+      <section><p><a href="https://cloud.google.com/compute/docs/instances/reserving-zonal-resources">ReservationAffinity</a>
+is the configuration of desired reservation which instances could take
+capacity from.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ReservationAffinity.Types.html">ReservationAffinity.Types</a></h4>
+      <section><p>Container for nested types declared in the ReservationAffinity message type.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.ResourceLimit.html">ResourceLimit</a></h4>
       <section><p>Contains information about amount of some resource in the cluster.
@@ -337,8 +421,20 @@ For memory, value should be in GB.</p>
 NodePool upgrade. This will be an no-op if the last upgrade successfully
 completed.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.SandboxConfig.html">SandboxConfig</a></h4>
+      <section><p>SandboxConfig contains configurations of the sandbox to use for the node.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.SandboxConfig.Types.html">SandboxConfig.Types</a></h4>
+      <section><p>Container for nested types declared in the SandboxConfig message type.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.ServerConfig.html">ServerConfig</a></h4>
       <section><p>Kubernetes Engine service configuration.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ServerConfig.Types.html">ServerConfig.Types</a></h4>
+      <section><p>Container for nested types declared in the ServerConfig message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ServerConfig.Types.ReleaseChannelConfig.html">ServerConfig.Types.ReleaseChannelConfig</a></h4>
+      <section><p>ReleaseChannelConfig exposes configuration for a release channel.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.SetAddonsConfigRequest.html">SetAddonsConfigRequest</a></h4>
       <section><p>SetAddonsConfigRequest sets the addons associated with the cluster.</p>
@@ -387,6 +483,9 @@ pool.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.ShieldedInstanceConfig.html">ShieldedInstanceConfig</a></h4>
       <section><p>A set of Shielded Instance options.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ShieldedNodes.html">ShieldedNodes</a></h4>
+      <section><p>Configuration of Shielded Nodes feature.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.StartIPRotationRequest.html">StartIPRotationRequest</a></h4>
       <section><p>StartIPRotationRequest creates a new IP for the cluster and then performs
 a node upgrade on each node pool to point to the new IP.</p>
@@ -425,8 +524,22 @@ and the primary CIDR range.</p>
 required by Vertical Pod Autoscaler to automatically adjust
 the resources of pods controlled by it.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.WorkloadIdentityConfig.html">WorkloadIdentityConfig</a></h4>
+      <section><p>Configuration for the use of Kubernetes Service Accounts in GCP IAM
+policies.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.WorkloadMetadataConfig.html">WorkloadMetadataConfig</a></h4>
+      <section><p>WorkloadMetadataConfig defines the metadata configuration to expose to
+workloads on the node pool.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.WorkloadMetadataConfig.Types.html">WorkloadMetadataConfig.Types</a></h4>
+      <section><p>Container for nested types declared in the WorkloadMetadataConfig message type.</p>
+</section>
     <h3 id="enums">Enums
   </h3>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.CloudRunConfig.Types.LoadBalancerType.html">CloudRunConfig.Types.LoadBalancerType</a></h4>
+      <section><p>Load balancer type of ingress service of Cloud Run.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.Cluster.Types.Status.html">Cluster.Types.Status</a></h4>
       <section><p>The current status of the cluster.</p>
 </section>
@@ -451,6 +564,18 @@ the resources of pods controlled by it.</p>
       <h4><a class="xref" href="Google.Cloud.Container.V1.Operation.Types.Type.html">Operation.Types.Type</a></h4>
       <section><p>Operation type.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.OperationProgress.Types.Metric.ValueOneofCase.html">OperationProgress.Types.Metric.ValueOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;value&quot; oneof.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ReleaseChannel.Types.Channel.html">ReleaseChannel.Types.Channel</a></h4>
+      <section><p>Possible values for &apos;channel&apos;.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.ReservationAffinity.Types.Type.html">ReservationAffinity.Types.Type</a></h4>
+      <section><p>Indicates whether to consume capacity from a reservation or not.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.SandboxConfig.Types.Type.html">SandboxConfig.Types.Type</a></h4>
+      <section><p>Possible types of sandboxes.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.SetMasterAuthRequest.Types.Action.html">SetMasterAuthRequest.Types.Action</a></h4>
       <section><p>Operation type: what type update to perform.</p>
 </section>
@@ -459,6 +584,10 @@ the resources of pods controlled by it.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Container.V1.UsableSubnetworkSecondaryRange.Types.Status.html">UsableSubnetworkSecondaryRange.Types.Status</a></h4>
       <section><p>Status shows the current usage of a secondary IP range.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Container.V1.WorkloadMetadataConfig.Types.Mode.html">WorkloadMetadataConfig.Types.Mode</a></h4>
+      <section><p>Mode is the configuration for how to expose metadata to workloads running
+on the node.</p>
 </section>
 </article>
           </div>

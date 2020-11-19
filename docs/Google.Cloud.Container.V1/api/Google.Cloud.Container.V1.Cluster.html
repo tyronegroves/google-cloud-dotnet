@@ -372,7 +372,7 @@ public int CurrentNodeCount { get; set; }</code></pre>
   <a id="Google_Cloud_Container_V1_Cluster_CurrentNodeVersion_" data-uid="Google.Cloud.Container.V1.Cluster.CurrentNodeVersion*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_CurrentNodeVersion" data-uid="Google.Cloud.Container.V1.Cluster.CurrentNodeVersion">CurrentNodeVersion</h4>
   <div class="markdown level1 summary"><p>[Output only] Deprecated, use
-<a href="https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePools">NodePools.version</a>
+<a href="https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools">NodePools.version</a>
 instead. The current version of the node software components. If they are
 currently at multiple versions because they&apos;re in the process of being
 upgraded, this reflects the minimum version of all nodes.</p>
@@ -747,9 +747,10 @@ public RepeatedField&lt;string&gt; InstanceGroupUrls { get; }</code></pre>
   <a id="Google_Cloud_Container_V1_Cluster_Location_" data-uid="Google.Cloud.Container.V1.Cluster.Location*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_Location" data-uid="Google.Cloud.Container.V1.Cluster.Location">Location</h4>
   <div class="markdown level1 summary"><p>[Output only] The name of the Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a> or
-<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a> in which
-the cluster resides.</p>
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">zone</a>
+or
+<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones#available">region</a>
+in which the cluster resides.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -774,8 +775,14 @@ the cluster resides.</p>
   <a id="Google_Cloud_Container_V1_Cluster_Locations_" data-uid="Google.Cloud.Container.V1.Cluster.Locations*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_Locations" data-uid="Google.Cloud.Container.V1.Cluster.Locations">Locations</h4>
   <div class="markdown level1 summary"><p>The list of Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/zones#available">zones</a> in which the cluster&apos;s nodes
-should be located.</p>
+<a href="https://cloud.google.com/compute/docs/zones#available">zones</a> in which the
+cluster&apos;s nodes should be located.</p>
+<p>This field provides a default value if
+<a href="https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools#NodePool.FIELDS.locations">NodePool.Locations</a>
+are not specified during node pool creation.</p>
+<p>Warning: changing cluster locations will update the
+<a href="https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools#NodePool.FIELDS.locations">NodePool.Locations</a>
+of all node pools and will result in nodes being added and/or removed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -802,12 +809,14 @@ should be located.</p>
   <div class="markdown level1 summary"><p>The logging service the cluster should use to write logs.
 Currently available options:</p>
 <ul>
-<li>&quot;logging.googleapis.com/kubernetes&quot; - the Google Cloud Logging
-service with Kubernetes-native resource model</li>
-<li><code>logging.googleapis.com</code> - the Google Cloud Logging service.</li>
+<li><code>logging.googleapis.com/kubernetes</code> - The Cloud Logging
+service with a Kubernetes-native resource model</li>
+<li><code>logging.googleapis.com</code> - The legacy Cloud Logging service (no longer
+available as of GKE 1.15).</li>
 <li><code>none</code> - no logs will be exported from the cluster.</li>
-<li>if left as an empty string,<code>logging.googleapis.com</code> will be used.</li>
 </ul>
+<p>If left as an empty string,<code>logging.googleapis.com/kubernetes</code> will be
+used for GKE 1.14+ or <code>logging.googleapis.com</code> for earlier versions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -910,10 +919,14 @@ certificate will be issued.</p>
   <div class="markdown level1 summary"><p>The monitoring service the cluster should use to write metrics.
 Currently available options:</p>
 <ul>
-<li><code>monitoring.googleapis.com</code> - the Google Cloud Monitoring service.</li>
-<li><code>none</code> - no metrics will be exported from the cluster.</li>
-<li>if left as an empty string, <code>monitoring.googleapis.com</code> will be used.</li>
+<li>&quot;monitoring.googleapis.com/kubernetes&quot; - The Cloud Monitoring
+service with a Kubernetes-native resource model</li>
+<li><code>monitoring.googleapis.com</code> - The legacy Cloud Monitoring service (no
+longer available as of GKE 1.15).</li>
+<li><code>none</code> - No metrics will be exported from the cluster.</li>
 </ul>
+<p>If left as an empty string,<code>monitoring.googleapis.com/kubernetes</code> will be
+used for GKE 1.14+ or <code>monitoring.googleapis.com</code> for earlier versions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -969,9 +982,9 @@ the following restrictions:</p>
   <a id="Google_Cloud_Container_V1_Cluster_Network_" data-uid="Google.Cloud.Container.V1.Cluster.Network*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_Network" data-uid="Google.Cloud.Container.V1.Cluster.Network">Network</h4>
   <div class="markdown level1 summary"><p>The name of the Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a> to which the
-cluster is connected. If left unspecified, the <code>default</code> network
-will be used.</p>
+<a href="https://cloud.google.com/compute/docs/networks-and-firewalls#networks">network</a>
+to which the cluster is connected. If left unspecified, the <code>default</code>
+network will be used.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1152,6 +1165,30 @@ specified.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_Cluster_ReleaseChannel_" data-uid="Google.Cloud.Container.V1.Cluster.ReleaseChannel*"></a>
+  <h4 id="Google_Cloud_Container_V1_Cluster_ReleaseChannel" data-uid="Google.Cloud.Container.V1.Cluster.ReleaseChannel">ReleaseChannel</h4>
+  <div class="markdown level1 summary"><p>Release channel configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReleaseChannel ReleaseChannel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.ReleaseChannel.html">ReleaseChannel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_Cluster_ResourceLabels_" data-uid="Google.Cloud.Container.V1.Cluster.ResourceLabels*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_ResourceLabels" data-uid="Google.Cloud.Container.V1.Cluster.ResourceLabels">ResourceLabels</h4>
   <div class="markdown level1 summary"><p>The resource labels for the cluster to use to annotate any related
@@ -1254,6 +1291,30 @@ typically put in the last <code>/16</code> from the container CIDR.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_Cluster_ShieldedNodes_" data-uid="Google.Cloud.Container.V1.Cluster.ShieldedNodes*"></a>
+  <h4 id="Google_Cloud_Container_V1_Cluster_ShieldedNodes" data-uid="Google.Cloud.Container.V1.Cluster.ShieldedNodes">ShieldedNodes</h4>
+  <div class="markdown level1 summary"><p>Shielded Nodes configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShieldedNodes ShieldedNodes { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.ShieldedNodes.html">ShieldedNodes</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_Cluster_Status_" data-uid="Google.Cloud.Container.V1.Cluster.Status*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_Status" data-uid="Google.Cloud.Container.V1.Cluster.Status">Status</h4>
   <div class="markdown level1 summary"><p>[Output only] The current status of this cluster.</p>
@@ -1280,13 +1341,15 @@ typically put in the last <code>/16</code> from the container CIDR.</p>
   </table>
   <a id="Google_Cloud_Container_V1_Cluster_StatusMessage_" data-uid="Google.Cloud.Container.V1.Cluster.StatusMessage*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_StatusMessage" data-uid="Google.Cloud.Container.V1.Cluster.StatusMessage">StatusMessage</h4>
-  <div class="markdown level1 summary"><p>[Output only] Additional information about the current status of this
+  <div class="markdown level1 summary"><p>[Output only] Deprecated. Use conditions instead.
+Additional information about the current status of this
 cluster, if available.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string StatusMessage { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete]
+public string StatusMessage { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1306,8 +1369,8 @@ cluster, if available.</p>
   <a id="Google_Cloud_Container_V1_Cluster_Subnetwork_" data-uid="Google.Cloud.Container.V1.Cluster.Subnetwork*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_Subnetwork" data-uid="Google.Cloud.Container.V1.Cluster.Subnetwork">Subnetwork</h4>
   <div class="markdown level1 summary"><p>The name of the Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/subnetworks">subnetwork</a> to which the
-cluster is connected.</p>
+<a href="https://cloud.google.com/compute/docs/subnetworks">subnetwork</a> to which
+the cluster is connected.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1379,12 +1442,36 @@ notation (e.g. <code>1.2.3.4/29</code>).</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Container_V1_Cluster_WorkloadIdentityConfig_" data-uid="Google.Cloud.Container.V1.Cluster.WorkloadIdentityConfig*"></a>
+  <h4 id="Google_Cloud_Container_V1_Cluster_WorkloadIdentityConfig" data-uid="Google.Cloud.Container.V1.Cluster.WorkloadIdentityConfig">WorkloadIdentityConfig</h4>
+  <div class="markdown level1 summary"><p>Configuration for the use of Kubernetes Service Accounts in GCP IAM
+policies.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WorkloadIdentityConfig WorkloadIdentityConfig { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Container.V1.WorkloadIdentityConfig.html">WorkloadIdentityConfig</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Container_V1_Cluster_Zone_" data-uid="Google.Cloud.Container.V1.Cluster.Zone*"></a>
   <h4 id="Google_Cloud_Container_V1_Cluster_Zone" data-uid="Google.Cloud.Container.V1.Cluster.Zone">Zone</h4>
   <div class="markdown level1 summary"><p>[Output only] The name of the Google Compute Engine
-<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the cluster
-resides.
-This field is deprecated, use location instead.</p>
+<a href="https://cloud.google.com/compute/docs/zones#available">zone</a> in which the
+cluster resides. This field is deprecated, use location instead.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
