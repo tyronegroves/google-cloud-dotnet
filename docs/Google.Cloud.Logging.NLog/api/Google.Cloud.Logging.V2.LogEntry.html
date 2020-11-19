@@ -84,9 +84,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html">LogEntry</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html">LogEntry</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html">LogEntry</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Cloud.Logging.V2.dll</h6>
   <h5 id="Google_Cloud_Logging_V2_LogEntry_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class LogEntry : IMessage&lt;LogEntry&gt;, IMessage, IEquatable&lt;LogEntry&gt;, IDeepCloneable&lt;LogEntry&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class LogEntry : IMessage&lt;LogEntry&gt;, IEquatable&lt;LogEntry&gt;, IDeepCloneable&lt;LogEntry&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -166,7 +167,7 @@ applicable.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Cloud.Logging.Type.HttpRequest</span></td>
+        <td><a class="xref" href="Google.Cloud.Logging.Type.HttpRequest.html">HttpRequest</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -465,7 +466,7 @@ the error.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Cloud.Logging.Type.LogSeverity</span></td>
+        <td><a class="xref" href="Google.Cloud.Logging.Type.LogSeverity.html">LogSeverity</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -552,11 +553,11 @@ to compute the log entry&apos;s age and to enforce the logs retention period.
 If this field is omitted in a new log entry, then Logging assigns it the
 current time. Timestamps have nanosecond accuracy, but trailing zeros in
 the fractional seconds might be omitted when the timestamp is displayed.</p>
-<p>Incoming log entries should have timestamps that are no more than the <a href="https://cloud.google.com/logging/quotas">logs
-retention period</a> in the past, and no more than 24 hours
-in the future. Log entries outside those time boundaries will not be
-available when calling <code>entries.list</code>, but those log entries can still be
-<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">exported with LogSinks</a>.</p>
+<p>Incoming log entries must have timestamps that don&apos;t exceed the
+<a href="https://cloud.google.com/logging/quotas#logs_retention_periods">logs retention
+period</a> in
+the past, and that don&apos;t exceed 24 hours in the future. Log entries outside
+those time boundaries aren&apos;t ingested by Logging.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
