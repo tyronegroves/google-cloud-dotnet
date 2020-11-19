@@ -88,9 +88,10 @@ folder.</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Google.Protobuf.IMessage-1.html">IMessage</a>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</div>
-    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
     <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</div>
     <div><a class="xref" href="Google.Protobuf.IDeepCloneable-1.html">IDeepCloneable</a>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogSink.html">LogSink</a>&gt;</div>
+    <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
+    <div><a class="xref" href="Google.Protobuf.IMessage.html">IMessage</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -111,7 +112,7 @@ folder.</p>
   <h6><strong>Assembly</strong>: Google.Cloud.Logging.V2.dll</h6>
   <h5 id="Google_Cloud_Logging_V2_LogSink_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class LogSink : IMessage&lt;LogSink&gt;, IMessage, IEquatable&lt;LogSink&gt;, IDeepCloneable&lt;LogSink&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class LogSink : IMessage&lt;LogSink&gt;, IEquatable&lt;LogSink&gt;, IDeepCloneable&lt;LogSink&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -233,7 +234,8 @@ The maximum length of the description is 8000 characters.</p>
 <p>The sink&apos;s <code>writer_identity</code>, set when the sink is created, must
 have permission to write to the destination or else the log
 entries are not exported. For more information, see
-<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">Exporting Logs with Sinks</a>.</p>
+<a href="https://cloud.google.com/logging/docs/api/tasks/exporting-logs">Exporting Logs with
+Sinks</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -304,11 +306,38 @@ export any log entries.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Logging_V2_LogSink_Exclusions_" data-uid="Google.Cloud.Logging.V2.LogSink.Exclusions*"></a>
+  <h4 id="Google_Cloud_Logging_V2_LogSink_Exclusions" data-uid="Google.Cloud.Logging.V2.LogSink.Exclusions">Exclusions</h4>
+  <div class="markdown level1 summary"><p>Optional. Log entries that match any of the exclusion filters will not be exported.
+If a log entry is matched by both <code>filter</code> and one of <code>exclusion_filters</code>
+it will not be exported.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RepeatedField&lt;LogExclusion&gt; Exclusions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Protobuf.Collections.RepeatedField-1.html">RepeatedField</a>&lt;<a class="xref" href="Google.Cloud.Logging.V2.LogExclusion.html">LogExclusion</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Logging_V2_LogSink_Filter_" data-uid="Google.Cloud.Logging.V2.LogSink.Filter*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogSink_Filter" data-uid="Google.Cloud.Logging.V2.LogSink.Filter">Filter</h4>
-  <div class="markdown level1 summary"><p>Optional. An <a href="https://cloud.google.com/logging/docs/view/advanced-queries">advanced logs filter</a>. The only
-exported log entries are those that are in the resource owning the sink and
-that match the filter. For example:</p>
+  <div class="markdown level1 summary"><p>Optional. An <a href="https://cloud.google.com/logging/docs/view/advanced-queries">advanced logs
+filter</a>. The
+only exported log entries are those that are in the resource owning the
+sink and that match the filter. For example:</p>
 <p>logName=&quot;projects/[PROJECT_ID]/logs/[LOG_ID]&quot; AND severity&gt;=ERROR</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -443,8 +472,7 @@ First character has to be alphanumeric.</p>
   </table>
   <a id="Google_Cloud_Logging_V2_LogSink_OutputVersionFormat_" data-uid="Google.Cloud.Logging.V2.LogSink.OutputVersionFormat*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogSink_OutputVersionFormat" data-uid="Google.Cloud.Logging.V2.LogSink.OutputVersionFormat">OutputVersionFormat</h4>
-  <div class="markdown level1 summary"><p>Deprecated. The log entry format to use for this sink&apos;s exported log
-entries. The v2 format is used by default and cannot be changed.</p>
+  <div class="markdown level1 summary"><p>Deprecated. This field is unused.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -494,7 +522,7 @@ public LogSink.Types.VersionFormat OutputVersionFormat { get; set; }</code></pre
   </table>
   <a id="Google_Cloud_Logging_V2_LogSink_WriterIdentity_" data-uid="Google.Cloud.Logging.V2.LogSink.WriterIdentity*"></a>
   <h4 id="Google_Cloud_Logging_V2_LogSink_WriterIdentity" data-uid="Google.Cloud.Logging.V2.LogSink.WriterIdentity">WriterIdentity</h4>
-  <div class="markdown level1 summary"><p>Output only. An IAM identity–a service account or group&amp;mdash;under which Logging
+  <div class="markdown level1 summary"><p>Output only. An IAM identity&amp;mdash;a service account or group&amp;mdash;under which Logging
 writes the exported log entries to the sink&apos;s destination. This field is
 set by [sinks.create][google.logging.v2.ConfigServiceV2.CreateSink] and
 [sinks.update][google.logging.v2.ConfigServiceV2.UpdateSink] based on the

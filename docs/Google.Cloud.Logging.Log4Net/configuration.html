@@ -121,6 +121,11 @@ for more details):</p>
   &lt;value value=&quot;&lt;your value&gt;&quot; /&gt;
 &lt;/customLabel&gt;
 </code></pre><p>Allows custom labels to be added to the metadata of log entries.</p>
+<h3 id="usepatternwithincustomlabels">UsePatternWithinCustomLabels</h3>
+<pre><code class="lang-xml">&lt;usePatternWithinCustomLabels value=&quot;true&quot;/&gt;
+</code></pre><p>Defaults to <code>false</code>. Setting this to <code>true</code> enables <code>PatternLayout</code> use in custom labels.
+All the standard patterns documented for Log4Net <code>PatternLayout</code> are available.
+Custom pattern conversions are not possible.</p>
 <h3 id="resourcetype">resourceType</h3>
 <pre><code class="lang-xml">&lt;resourceType value=&quot;&lt;your resource type&gt;&quot;/&gt;
 </code></pre><p>Allows the <a href="https://cloud.google.com/logging/docs/reference/v2/rest/v2/MonitoredResource">Monitored resources</a> resource type to be specified; must be set to an entry on the <a href="https://cloud.google.com/logging/docs/api/v2/resource-list">Monitored Resource List</a>.</p>
@@ -154,7 +159,57 @@ for more details):</p>
     &lt;withMetaData value=&quot;ThreadName&quot; /&gt;
   &lt;/appender&gt;
 &lt;/log4net&gt;
-</code></pre><h2 id="local-queuing-configuration">Local queuing configuration</h2>
+</code></pre><h3 id="configuration-example-translating-log4net-properties-to-google-cloud-logging-labels">Configuration example: Translating Log4Net properties to Google Cloud Logging labels</h3>
+<p>If you wanted to transalate Log4Net properties to Google Cloud Logging labels, you can do as follows:</p>
+<p>Create a <code>log4net</code> configuration file (<code>log4net.xml</code>):</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;log4net&gt;
+  &lt;appender name=&quot;CloudLogger&quot; type=&quot;Google.Cloud.Logging.Log4Net.GoogleStackdriverAppender,Google.Cloud.Logging.Log4Net&quot;&gt;
+    &lt;layout type=&quot;log4net.Layout.PatternLayout&quot;&gt;
+      &lt;conversionPattern value=&quot;%-4timestamp [%thread] %-5level %logger %ndc - %message&quot; /&gt;
+    &lt;/layout&gt;
+    &lt;projectId value=&quot;PROJECT_ID&quot; /&gt;
+    &lt;logId value=&quot;LOG_ID&quot; /&gt;
+    &lt;usePatternWithinCustomLabels value=&quot;true&quot;/&gt;
+    &lt;customLabel&gt;
+      &lt;key value=&quot;label_from_property&quot; /&gt;
+      &lt;value value=&quot;%property{property_for_label}&quot; /&gt;
+    &lt;/customLabel&gt;
+  &lt;/appender&gt;
+  &lt;root&gt;
+    &lt;level value=&quot;ALL&quot; /&gt;
+    &lt;appender-ref ref=&quot;CloudLogger&quot; /&gt;
+  &lt;/root&gt;
+&lt;/log4net&gt;
+</code></pre><p>Edit the file replacing <code>PROJECT_ID</code> with your Google Cloud Project
+ID, and <code>LOG_ID</code> with an identifier for your application.</p>
+<p>Use this file to configure <code>log4net</code> and then set Log4Net properties per scopes and log as normal.
+If a property referenced in a custom label doesn&#39;t have a value for a given entry, the value will be
+<code>(null)</code>.</p>
+<pre><code class="lang-cs">// Configure log4net to use Google Cloud Logging from the XML configuration file.
+XmlConfigurator.Configure(LogManager.GetRepository(GetType().Assembly), new FileInfo(&quot;log4net.xml&quot;));
+
+// Retrieve a logger for this context.
+ILog log = LogManager.GetLogger(typeof(Program));
+// Set a property using one of the GlobaContext, ThreadContext or LogicalThreadContext classes.
+LogicalThreadContext.Properties[&quot;property_for_label&quot;] = &quot;my label value&quot;;
+// Log some information. This log entry will be sent to Google Cloud Logging with a label
+// {&quot;label_from_property&quot;, &quot;my label value&quot;}. The label key &quot;label_from_property&quot; is the one
+// specified in configuration for a custom label that gets its value from the &quot;property_for_label&quot;
+// property.
+log.Info(&quot;An exciting log entry!&quot;);
+
+// Flush buffered log entries before program exit.
+// This is required because log entries are buffered locally before being sent to Google Cloud Logging.
+// LogManager.Flush() only works in the full .NET framework (not in .NET Core):
+bool flushCompleted = LogManager.Flush(10_000);
+// On .NET Core, the specific repository needs to be flushed:
+bool repositoryFlushCompleted = ((IFlushable)LogManager.GetRepository(GetType().Assembly)).Flush(10_000);
+</code></pre><p>If executing on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a>,
+<a href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine (GKE)</a>,
+or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>,
+then the <code>&lt;projectId value=&quot;PROJECT_ID&quot; /&gt;</code> configuration setting can be omitted; it will be auto-detected from the platform at run-time.</p>
+<h2 id="local-queuing-configuration">Local queuing configuration</h2>
 <p>All log entries are queued locally before being sent to Google Cloud Logging.
 Only in-memory queuing is currently supported. Persistent on-disk queuing is not currently implemented.</p>
 <p>The following in-memory options are available:</p>

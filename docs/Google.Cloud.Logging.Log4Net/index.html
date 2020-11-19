@@ -62,11 +62,11 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="googlecloudlogginglog4net">Google.Cloud.Logging.Log4Net</h1>
 
-<p><code>Google.Cloud.Logging.Log4Net</code> is a .NET client library to integrate  <a href="https://cloud.google.com/logging/">Google Stackdriver
+<p><code>Google.Cloud.Logging.Log4Net</code> is a .NET client library to integrate  <a href="https://cloud.google.com/logging/">Google Cloud
 Logging</a> with
 <a href="https://logging.apache.org/log4net/">log4net</a>.</p>
 <p>Note:
-This documentation is for version <code>3.1.0</code> of the library.
+This documentation is for version <code>3.2.0</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Logging.Log4Net</code> package from NuGet. Add it to
@@ -112,7 +112,7 @@ Authentication</a> guide for more details.</p>
 </code></pre><p>Edit the file replacing <code>PROJECT_ID</code> with your Google Cloud Project
 ID, and <code>LOG_ID</code> with an identifier for your application.</p>
 <pre><code class="lang-cs">// Load log4net configuration from Web.config
-log4net.Config.XmlConfigurator.Configure(LogManager.GetRepository(GetType().GetTypeInfo().Assembly));
+log4net.Config.XmlConfigurator.Configure(LogManager.GetRepository(GetType().Assembly));
 </code></pre><p>If executing on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a>,
 <a href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine (GKE)</a>,
 or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>,
@@ -136,20 +136,20 @@ then the <code>&lt;projectId value=&quot;PROJECT_ID&quot; /&gt;</code> configura
 </code></pre><p>Edit the file replacing <code>PROJECT_ID</code> with your Google Cloud Project
 ID, and <code>LOG_ID</code> with an identifier for your application.</p>
 <p>Use this file to configure <code>log4net</code> and then log as normal:</p>
-<pre><code class="lang-cs">// Configure log4net to use Google Stackdriver logging from the XML configuration file.
-XmlConfigurator.Configure(LogManager.GetRepository(GetType().GetTypeInfo().Assembly), new FileInfo(&quot;log4net.xml&quot;));
+<pre><code class="lang-cs">// Configure log4net to use Google Cloud Logging from the XML configuration file.
+XmlConfigurator.Configure(LogManager.GetRepository(GetType().Assembly), new FileInfo(&quot;log4net.xml&quot;));
 
 // Retrieve a logger for this context.
 ILog log = LogManager.GetLogger(typeof(Program));
-// Log some information. This log entry will be sent to Google Stackdriver Logging.
+// Log some information. This log entry will be sent to Google Cloud Logging.
 log.Info(&quot;An exciting log entry!&quot;);
 
 // Flush buffered log entries before program exit.
-// This is required because log entries are buffered locally before being sent to StackDriver.
+// This is required because log entries are buffered locally before being sent to Google Cloud Logging.
 // LogManager.Flush() only works in the full .NET framework (not in .NET Core):
 bool flushCompleted = LogManager.Flush(10_000);
 // On .NET Core, the specific repository needs to be flushed:
-bool repositoryFlushCompleted = ((IFlushable)LogManager.GetRepository(GetType().GetTypeInfo().Assembly)).Flush(10_000);
+bool repositoryFlushCompleted = ((IFlushable)LogManager.GetRepository(GetType().Assembly)).Flush(10_000);
 </code></pre><p>If executing on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a>,
 <a href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine (GKE)</a>,
 or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>,
