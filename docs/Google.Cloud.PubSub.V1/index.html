@@ -64,7 +64,7 @@
 
 <p><code>Google.Cloud.PubSub.V1</code> is a.NET client library for the <a href="https://cloud.google.com/pubsub/">Cloud Pub/Sub API</a>.</p>
 <p>Note:
-This documentation is for version <code>2.1.0</code> of the library.
+This documentation is for version <code>2.2.0</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="class-renaming-in-v100-beta16httpswwwnugetorgpackagesgooglecloudpubsubv1100-beta16">Class renaming in <a href="https://www.nuget.org/packages/Google.Cloud.PubSub.V1/1.0.0-beta16">v1.0.0-beta16</a></h1>
 <p>The following classes have been renamed when moving from version 1.0.0-beta15 to 1.0.0-beta16:</p>
@@ -97,6 +97,12 @@ provide a general-purpose abstraction over raw the RPC API, providing
 features such as page streaming to make client code cleaner and
 simpler.</p>
 <p><a href="api/Google.Cloud.PubSub.V1.PublisherClient.html">PublisherClient</a> and <a href="api/Google.Cloud.PubSub.V1.SubscriberClient.html">SubscriberClient</a> provide simpler APIs for message publishing and subscribing. These classes offer considerably higher performance and simplicity, especially when working with higher message throughput.</p>
+<p>Note that both <code>PublisherClient</code> and <code>SubscriberClient</code> expect to
+execute in an environment with continuous processing and continuous
+network access to the Pub/Sub API. In environments such as Cloud Run
+or Cloud Functions, where servers do not use any CPU between requests,
+the <code>PublisherServiceApiClient</code> and <code>SubscriberServiceApiClient</code> classes
+should be used instead.</p>
 <h1 id="sample-code">Sample code</h1>
 <p>Using <a href="api/Google.Cloud.PubSub.V1.PublisherClient.html">PublisherClient</a> and <a href="api/Google.Cloud.PubSub.V1.SubscriberClient.html">SubscriberClient</a> for message publishing and subscribing:</p>
 <pre><code class="lang-cs">// First create a topic.
