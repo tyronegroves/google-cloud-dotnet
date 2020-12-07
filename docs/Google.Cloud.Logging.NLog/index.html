@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.Logging.NLog</code> is a .NET client library to integrate <a href="https://cloud.google.com/logging/">Google Stackdriver
 Logging</a> with <a href="http://nlog-project.org/">NLog</a>.</p>
 <p>Note:
-This documentation is for version <code>3.1.0</code> of the library.
+This documentation is for version <code>3.2.0</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Logging.NLog</code> package from NuGet. Add it to
@@ -89,7 +89,9 @@ Authentication</a> guide for more details.</p>
   &lt;/extensions&gt;
   
   &lt;targets async=&quot;true&quot;&gt;
-    &lt;target name=&quot;stackdriver&quot; xsi:type=&quot;GoogleStackdriver&quot; projectId=&quot;PROJECT_ID&quot; logId=&quot;LOG_ID&quot; /&gt;
+    &lt;target name=&quot;stackdriver&quot; xsi:type=&quot;GoogleStackdriver&quot; projectId=&quot;PROJECT_ID&quot; logId=&quot;LOG_ID&quot;&gt;
+      &lt;!-- Potentially additional configuration --&gt;
+    &lt;/target&gt;
     &lt;target name=&quot;console&quot; xsi:type=&quot;Console&quot; /&gt;
   &lt;/targets&gt;
 
@@ -117,7 +119,67 @@ LogManager.Shutdown();
 <a href="https://cloud.google.com/kubernetes-engine/">Google Kubernetes Engine (GKE)</a>,
 or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a>,
 then the <code>projectId=&quot;PROJECT_ID&quot;</code> configuration setting can be omitted; it will be auto-detected from the platform at run-time.</p>
-</article>
+<h2 id="configuration-options">Configuration options</h2>
+<ul>
+<li><code>ProjectId</code> - Google Cloud project ID where logs will be sent to. Can be omitted if executing on on <a href="https://cloud.google.com/appengine/">Google App Engine (GAE)</a> or <a href="https://cloud.google.com/compute/">Google Compute Engine (GCE)</a></li>
+<li><code>LogId</code> - Name of log under the resource type (Default = &quot;Default&quot;)</li>
+<li><code>DisableResourceTypeDetection</code> - Defaults to false. Setting this to true disables automatic resource type detection based on platform detection.</li>
+<li><code>ResourceType</code> - Resource type for logs. Must be one of the supported types listed in the <a href="https://cloud.google.com/logging/docs/api/v2/resource-list">cloud logging documentation</a>. This is not needed if resource type detection is successful. If resource type detection fails or is disabled, and this is not set, the resource type in log entries is set to &quot;global&quot;.</li>
+<li><code>ResourceLabel</code> - Used to specify extra labels as shown in the <a href="https://cloud.google.com/logging/docs/api/v2/resource-list">Monitoring Resource Types</a> list.</li>
+<li><code>ContextProperty</code> - Allows custom labels to be added to the log entries as extra metadata.</li>
+<li><code>CredentialFile</code> - Credentials using a JSON file, instead of using the application default credentials</li>
+<li><code>CredentialJson</code> - Credentials using raw JSON input, instead of using the application default credentials</li>
+<li><code>IncludeCallSite</code> - Include <code>LogEntrySourceLocation</code> extracted from NLog callsite. (This only includes the function name.)</li>
+<li><code>IncludeCallSiteStackTrace</code> - Include <code>LogEntrySourceLocation</code> extracted from NLog callsite. (This also includes file name and line number.)</li>
+<li><code>IncludeEventProperties</code> - Includes structured logging properties from NLog <code>LogEventInfo.Properties</code>.</li>
+<li><code>IncludeMdlc</code> - Include async thread context properties from NLog MappedDiagnosticsLogicalContext</li>
+<li><code>SendJsonPayload</code> - Use the <code>jsonPayload</code> property in log entries instead of <code>textPayload</code>. When this is enabled, properties are set within the payload instead of as custom labels</li>
+<li><code>ServiceContextName</code> - Configures the &quot;service&quot; in &quot;serviceContext&quot; when sending a JSON payload. (Defaults to the <code>AppDomain.FriendlyName</code> of the running code.)</li>
+<li><code>ServiceContextVersion</code> - Configures the &quot;version&quot; in &quot;serviceContext&quot; when sending a JSON payload. (Defaults to the <code>FileVersion</code> of the entry assembly.)</li>
+<li><code>EnableJsonLayout</code> - Uses NLog&#39;s native JSON layout to format JSON payloads, completely replacing the default layout.</li>
+<li><code>JsonConverter</code> or <code>JsonConverterTypeName</code>/<code>JsonConverterMethodName</code> - Configures a custom conversion for individual values within a JSON payload.</li>
+</ul>
+<p>Many of the options above are used to configure the JSON payload within the emitted log entries. The configuration file below uses a JSON layout via NLog configuration to completely replace the payload.</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+
+  &lt;extensions&gt;
+    &lt;add assembly=&quot;Google.Cloud.Logging.NLog&quot; /&gt;
+  &lt;/extensions&gt;
+  
+  &lt;targets async=&quot;true&quot;&gt;
+    &lt;target type=&quot;GoogleStackdriver&quot; name=&quot;stackdriver&quot;
+            projectId=&quot;PROJECT_ID&quot; logId=&quot;LOG_ID&quot; resourceType=&quot;container&quot;
+            includeCallSite =&quot;true&quot; includeCallSiteStackTrace=&quot;true&quot; includeEventProperties=&quot;false&quot; includeMdlc=&quot;true&quot;
+            sendJsonPayload=&quot;true&quot; enableJsonLayout=&quot;true&quot;&gt;
+      &lt;contextproperty name=&quot;contextProp&quot; layout=&quot;propContextLayout&quot; /&gt;
+      &lt;layout xsi:type=&quot;JsonLayout&quot; includeAllProperties=&quot;true&quot;&gt;
+        &lt;attribute name=&quot;someProp&quot; layout=&quot;prop&quot; /&gt;
+        &lt;attribute name=&quot;nestedProp&quot; encode=&quot;false&quot;&gt;
+          &lt;layout type=&#39;JsonLayout&#39;&gt;
+            &lt;attribute name=&#39;insideNested1&#39; layout=&#39;hello nested1!&#39; /&gt;
+            &lt;attribute name=&#39;insideNested2&#39; layout=&#39;hello nested2!&#39; /&gt;
+            &lt;attribute name=&quot;nestedNestedProp&quot; encode=&quot;false&quot;&gt;
+              &lt;layout type=&#39;JsonLayout&#39;&gt;
+                &lt;attribute name=&#39;insideNestedNested1&#39; layout=&#39;hello NestedNested1!&#39; /&gt;
+                &lt;attribute name=&#39;insideNestedNested2&#39; layout=&#39;hello NestedNested2!&#39; /&gt;
+              &lt;/layout&gt;
+            &lt;/attribute&gt;
+          &lt;/layout&gt;
+        &lt;/attribute&gt;
+      &lt;/layout&gt;
+    &lt;/target&gt;
+    &lt;target name=&quot;console&quot; xsi:type=&quot;Console&quot; /&gt;
+  &lt;/targets&gt;
+
+  &lt;rules&gt;
+    &lt;logger name=&quot;*&quot; minlevel=&quot;Info&quot; writeTo=&quot;stackdriver&quot; /&gt;
+    &lt;logger name=&quot;*&quot; minlevel=&quot;Info&quot; writeTo=&quot;console&quot; /&gt;
+  &lt;/rules&gt;
+  
+&lt;/nlog&gt;
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
