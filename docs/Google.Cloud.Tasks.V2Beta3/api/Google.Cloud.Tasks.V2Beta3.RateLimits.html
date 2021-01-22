@@ -153,7 +153,7 @@ even if the queue has reached its [RateLimits][google.cloud.tasks.v2beta3.RateLi
   </h3>
   <a id="Google_Cloud_Tasks_V2Beta3_RateLimits_MaxBurstSize_" data-uid="Google.Cloud.Tasks.V2Beta3.RateLimits.MaxBurstSize*"></a>
   <h4 id="Google_Cloud_Tasks_V2Beta3_RateLimits_MaxBurstSize" data-uid="Google.Cloud.Tasks.V2Beta3.RateLimits.MaxBurstSize">MaxBurstSize</h4>
-  <div class="markdown level1 summary"><p>Output only. The max burst size.</p>
+  <div class="markdown level1 summary"><p>The max burst size.</p>
 <p>Max burst size limits how fast tasks in queue are processed when
 many tasks are in the queue and the rate is high. This field
 allows the queue to have a high rate so processing starts shortly
@@ -167,20 +167,19 @@ token is removed from the bucket. Tasks will be dispatched until
 the queue&apos;s bucket runs out of tokens. The bucket will be
 continuously refilled with new tokens based on
 [max_dispatches_per_second][google.cloud.tasks.v2beta3.RateLimits.max_dispatches_per_second].</p>
-<p>Cloud Tasks will pick the value of <code>max_burst_size</code> based on the
-value of
+<p>The default value of <code>max_burst_size</code> is picked by Cloud Tasks
+based on the value of
 [max_dispatches_per_second][google.cloud.tasks.v2beta3.RateLimits.max_dispatches_per_second].</p>
+<p>The maximum value of <code>max_burst_size</code> is 500.</p>
 <p>For App Engine queues that were created or updated using
 <code>queue.yaml/xml</code>, <code>max_burst_size</code> is equal to
 <a href="https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size">bucket_size</a>.
-Since <code>max_burst_size</code> is output only, if
-[UpdateQueue][google.cloud.tasks.v2beta3.CloudTasks.UpdateQueue] is called on a queue
-created by <code>queue.yaml/xml</code>, <code>max_burst_size</code> will be reset based
-on the value of
-[max_dispatches_per_second][google.cloud.tasks.v2beta3.RateLimits.max_dispatches_per_second],
-regardless of whether
-[max_dispatches_per_second][google.cloud.tasks.v2beta3.RateLimits.max_dispatches_per_second]
-is updated.</p>
+If
+[UpdateQueue][google.cloud.tasks.v2beta3.CloudTasks.UpdateQueue] is called on a queue without
+explicitly setting a value for <code>max_burst_size</code>,
+<code>max_burst_size</code> value will get updated if
+[UpdateQueue][google.cloud.tasks.v2beta3.CloudTasks.UpdateQueue] is updating
+[max_dispatches_per_second][google.cloud.tasks.v2beta3.RateLimits.max_dispatches_per_second].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
