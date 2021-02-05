@@ -73,7 +73,8 @@
   
   <h1 id="Google_Analytics_Data_V1Alpha_CohortsRange" data-uid="Google.Analytics.Data.V1Alpha.CohortsRange" class="text-break">Class CohortsRange
   </h1>
-  <div class="markdown level0 summary"><p>Describes date range for a cohort report.</p>
+  <div class="markdown level0 summary"><p>Configures the extended reporting date range for a cohort report. Specifies
+an offset duration to follow the cohorts over.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -92,9 +93,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -102,6 +100,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Analytics.Data.V1Alpha.html">Google.Analytics.Data.V1Alpha</a></h6>
@@ -149,8 +150,16 @@
   </h3>
   <a id="Google_Analytics_Data_V1Alpha_CohortsRange_EndOffset_" data-uid="Google.Analytics.Data.V1Alpha.CohortsRange.EndOffset*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_CohortsRange_EndOffset" data-uid="Google.Analytics.Data.V1Alpha.CohortsRange.EndOffset">EndOffset</h4>
-  <div class="markdown level1 summary"><p>For daily cohorts, this will be the end day offset.
-For weekly cohorts, this will be the week offset.</p>
+  <div class="markdown level1 summary"><p><code>endOffset</code> specifies the end date of the extended reporting date range
+for a cohort report. <code>endOffset</code> can be any positive integer but is
+commonly set to 5 to 10 so that reports contain data on the cohort for the
+next several granularity time periods.</p>
+<p>If <code>granularity</code> is <code>DAILY</code>, the <code>endDate</code> of the extended reporting date
+range is <code>endDate</code> of the cohort plus <code>endOffset</code> days.</p>
+<p>If <code>granularity</code> is <code>WEEKLY</code>, the <code>endDate</code> of the extended reporting date
+range is <code>endDate</code> of the cohort plus <code>endOffset * 7</code> days.</p>
+<p>If <code>granularity</code> is <code>MONTHLY</code>, the <code>endDate</code> of the extended reporting date
+range is <code>endDate</code> of the cohort plus <code>endOffset * 30</code> days.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -174,8 +183,8 @@ For weekly cohorts, this will be the week offset.</p>
   </table>
   <a id="Google_Analytics_Data_V1Alpha_CohortsRange_Granularity_" data-uid="Google.Analytics.Data.V1Alpha.CohortsRange.Granularity*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_CohortsRange_Granularity" data-uid="Google.Analytics.Data.V1Alpha.CohortsRange.Granularity">Granularity</h4>
-  <div class="markdown level1 summary"><p>Reporting date range for each cohort is calculated based on these three
-fields.</p>
+  <div class="markdown level1 summary"><p>The granularity used to interpret the <code>startOffset</code> and <code>endOffset</code> for the
+extended reporting date range for a cohort report.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -199,8 +208,15 @@ fields.</p>
   </table>
   <a id="Google_Analytics_Data_V1Alpha_CohortsRange_StartOffset_" data-uid="Google.Analytics.Data.V1Alpha.CohortsRange.StartOffset*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_CohortsRange_StartOffset" data-uid="Google.Analytics.Data.V1Alpha.CohortsRange.StartOffset">StartOffset</h4>
-  <div class="markdown level1 summary"><p>For daily cohorts, this will be the start day offset.
-For weekly cohorts, this will be the week offset.</p>
+  <div class="markdown level1 summary"><p><code>startOffset</code> specifies the start date of the extended reporting date range
+for a cohort report. <code>startOffset</code> is commonly set to 0 so that reports
+contain data from the acquisition of the cohort forward.</p>
+<p>If <code>granularity</code> is <code>DAILY</code>, the <code>startDate</code> of the extended reporting date
+range is <code>startDate</code> of the cohort plus <code>startOffset</code> days.</p>
+<p>If <code>granularity</code> is <code>WEEKLY</code>, the <code>startDate</code> of the extended reporting
+date range is <code>startDate</code> of the cohort plus <code>startOffset * 7</code> days.</p>
+<p>If <code>granularity</code> is <code>MONTHLY</code>, the <code>startDate</code> of the extended reporting
+date range is <code>startDate</code> of the cohort plus <code>startOffset * 30</code> days.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

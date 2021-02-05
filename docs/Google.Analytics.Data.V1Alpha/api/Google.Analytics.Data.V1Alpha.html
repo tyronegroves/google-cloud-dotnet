@@ -112,18 +112,29 @@ endpoint etc.</p>
       <section><p>The batch response containing multiple reports.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.Cohort.html">Cohort</a></h4>
-      <section><p>Defines a cohort. A cohort is a group of users who share a common
-characteristic. For example, all users with the same acquisition date
+      <section><p>Defines a cohort selection criteria. A cohort is a group of users who share
+a common characteristic. For example, users with the same <code>firstTouchDate</code>
 belong to the same cohort.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.CohortReportSettings.html">CohortReportSettings</a></h4>
-      <section><p>Settings of a cohort report.</p>
+      <section><p>Optional settings of a cohort report.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.CohortSpec.html">CohortSpec</a></h4>
-      <section><p>Specification for a cohort report.</p>
+      <section><p>Specification of cohorts for a cohort report.
+Cohort reports can be used for example to create a time series of user
+retention for the cohort. For example, you could select the cohort of users
+that were acquired in the first week of September and follow that cohort for
+the next six weeks. Selecting the users acquired in the first week of
+September cohort is specified in the <code>cohort</code> object. Following that
+cohort for the next six weeks is specified in the <code>cohortsRange</code> object.</p>
+<p>The report response could show a weekly time series where say your app has
+retained 60% of this cohort after three weeks and 25% of this cohort after
+six weeks. These two percentages can be calculated by the metric
+<code>cohortActiveUsers/cohortTotalUsers</code> and will be separate rows in the report.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.CohortsRange.html">CohortsRange</a></h4>
-      <section><p>Describes date range for a cohort report.</p>
+      <section><p>Configures the extended reporting date range for a cohort report. Specifies
+an offset duration to follow the cohorts over.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.CohortsRange.Types.html">CohortsRange.Types</a></h4>
       <section><p>Container for nested types declared in the CohortsRange message type.</p>
@@ -379,7 +390,8 @@ For example if RunReportRequest contains:</p>
     <h3 id="enums">Enums
   </h3>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.CohortsRange.Types.Granularity.html">CohortsRange.Types.Granularity</a></h4>
-      <section><p>Reporting granularity for the cohorts.</p>
+      <section><p>The granularity used to interpret the <code>startOffset</code> and <code>endOffset</code> for the
+extended reporting date range for a cohort report.</p>
 </section>
       <h4><a class="xref" href="Google.Analytics.Data.V1Alpha.DimensionExpression.OneExpressionOneofCase.html">DimensionExpression.OneExpressionOneofCase</a></h4>
       <section><p>Enum of possible cases for the &quot;one_expression&quot; oneof.</p>

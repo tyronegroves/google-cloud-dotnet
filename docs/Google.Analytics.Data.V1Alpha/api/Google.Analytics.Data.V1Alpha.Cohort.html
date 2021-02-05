@@ -73,8 +73,8 @@
   
   <h1 id="Google_Analytics_Data_V1Alpha_Cohort" data-uid="Google.Analytics.Data.V1Alpha.Cohort" class="text-break">Class Cohort
   </h1>
-  <div class="markdown level0 summary"><p>Defines a cohort. A cohort is a group of users who share a common
-characteristic. For example, all users with the same acquisition date
+  <div class="markdown level0 summary"><p>Defines a cohort selection criteria. A cohort is a group of users who share
+a common characteristic. For example, users with the same <code>firstTouchDate</code>
 belong to the same cohort.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -94,9 +94,6 @@ belong to the same cohort.</p>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -104,6 +101,9 @@ belong to the same cohort.</p>
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Analytics.Data.V1Alpha.html">Google.Analytics.Data.V1Alpha</a></h6>
@@ -151,16 +151,20 @@ belong to the same cohort.</p>
   </h3>
   <a id="Google_Analytics_Data_V1Alpha_Cohort_DateRange_" data-uid="Google.Analytics.Data.V1Alpha.Cohort.DateRange*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_Cohort_DateRange" data-uid="Google.Analytics.Data.V1Alpha.Cohort.DateRange">DateRange</h4>
-  <div class="markdown level1 summary"><p>The cohort selects users whose first visit date is between start date
-and end date defined in the <code>dateRange</code>. In a cohort request, this
-<code>dateRange</code> is required and the <code>dateRanges</code> in the <code>RunReportRequest</code> or
-<code>RunPivotReportRequest</code> must be unspecified.</p>
-<p>The date range should be aligned with the cohort&apos;s granularity. If
-CohortsRange uses daily granularity, the date range can be aligned to any
-day. If CohortsRange uses weekly granularity, the date range should be
-aligned to the week boundary, starting at Sunday and ending Saturday. If
-CohortsRange uses monthly granularity, the date range should be aligned to
-the month, starting at the first and ending on the last day of the month.</p>
+  <div class="markdown level1 summary"><p>The cohort selects users whose first touch date is between start date and
+end date defined in the <code>dateRange</code>. This <code>dateRange</code> does not specify the
+full date range of event data that is present in a cohort report. In a
+cohort report, this <code>dateRange</code> is extended by the granularity and offset
+present in the <code>cohortsRange</code>; event data for the extended reporting date
+range is present in a cohort report.</p>
+<p>In a cohort request, this <code>dateRange</code> is required and the <code>dateRanges</code> in
+the <code>RunReportRequest</code> or <code>RunPivotReportRequest</code> must be unspecified.</p>
+<p>This <code>dateRange</code> should generally be aligned with the cohort&apos;s granularity.
+If <code>CohortsRange</code> uses daily granularity, this <code>dateRange</code> can be a single
+day. If <code>CohortsRange</code> uses weekly granularity, this <code>dateRange</code> can be
+aligned to a week boundary, starting at Sunday and ending Saturday. If
+<code>CohortsRange</code> uses monthly granularity, this <code>dateRange</code> can be aligned to
+a month, starting at the first and ending on the last day of the month.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -184,8 +188,7 @@ the month, starting at the first and ending on the last day of the month.</p>
   </table>
   <a id="Google_Analytics_Data_V1Alpha_Cohort_Dimension_" data-uid="Google.Analytics.Data.V1Alpha.Cohort.Dimension*"></a>
   <h4 id="Google_Analytics_Data_V1Alpha_Cohort_Dimension" data-uid="Google.Analytics.Data.V1Alpha.Cohort.Dimension">Dimension</h4>
-  <div class="markdown level1 summary"><p>The dimension used by cohort. Only supports <code>firstTouchDate</code> for retention
-report.</p>
+  <div class="markdown level1 summary"><p>Dimension used by the cohort. Required and only supports <code>firstTouchDate</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
