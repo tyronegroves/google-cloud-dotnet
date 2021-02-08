@@ -84,9 +84,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -94,6 +91,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Spanner.V1.html">Google.Cloud.Spanner.V1</a></h6>
@@ -217,6 +217,11 @@ commonly, the cause is conflicts with concurrent
 transactions. However, it can also happen for a variety of other
 reasons. If <code>Commit</code> returns <code>ABORTED</code>, the caller should re-attempt
 the transaction from the beginning, re-using the same session.</p>
+<p>On very rare occasions, <code>Commit</code> might return <code>UNKNOWN</code>. This can happen,
+for example, if the client job experiences a 1+ hour networking failure.
+At that point, Cloud Spanner has lost track of the transaction outcome and
+we recommend that you perform another read from the database to see the
+state of things as they are now.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
