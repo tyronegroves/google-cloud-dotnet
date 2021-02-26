@@ -1,0 +1,410 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace Google.Cloud.DataQnA.V1Alpha
+   | Google.Cloud.DataQnA.V1Alpha </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace Google.Cloud.DataQnA.V1Alpha
+   | Google.Cloud.DataQnA.V1Alpha ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.DataQnA.V1Alpha">
+  
+  <h1 id="Google_Cloud_DataQnA_V1Alpha" data-uid="Google.Cloud.DataQnA.V1Alpha" class="text-break">Namespace Google.Cloud.DataQnA.V1Alpha
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AnnotatedString.html">AnnotatedString</a></h4>
+      <section><p>Describes string annotation from both semantic and formatting perspectives.
+Example:</p>
+<p>User Query:</p>
+<p>top countries by population in Africa</p>
+<p>0   4         14 17         28 31    37</p>
+<p>Table Data:</p>
+<ul>
+<li>&quot;country&quot; - dimension</li>
+<li>&quot;population&quot; - metric</li>
+<li>&quot;Africa&quot; - value in the &quot;continent&quot; column</li>
+</ul>
+<p>text_formatted = <code>&amp;quot;top countries by population in Africa&amp;quot;</code></p>
+<p>html_formatted =
+<code>&amp;quot;top &amp;lt;b&gt;countries&amp;lt;/b&gt; by &amp;lt;b&gt;population&amp;lt;/b&gt; in &amp;lt;i&gt;Africa&amp;lt;/i&gt;&amp;quot;</code></p>
+<pre><code>markups = [
+{DIMENSION, 4, 12}, // &amp;apos;countries&amp;apos;
+{METRIC, 17, 26}, // &amp;apos;population&amp;apos;
+{FILTER, 31, 36}  // &amp;apos;Africa&amp;apos;
+]
+</code></pre><p>Note that html formattings for &apos;DIMENSION&apos; and &apos;METRIC&apos; are the same, while
+semantic markups are different.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AnnotatedString.Types.html">AnnotatedString.Types</a></h4>
+      <section><p>Container for nested types declared in the AnnotatedString message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AnnotatedString.Types.SemanticMarkup.html">AnnotatedString.Types.SemanticMarkup</a></h4>
+      <section><p>Semantic markup denotes a substring (by index and length) with markup
+information.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.html">AutoSuggestionService</a></h4>
+      <section><p>This stateless API provides automatic suggestions for natural language
+queries for the data sources in the provided project and location.</p>
+<p>The service provides a resourceless operation <code>suggestQueries</code> that can be
+called to get a list of suggestions for a given incomplete query and scope
+(or list of scopes) under which the query is to be interpreted.</p>
+<p>There are two types of suggestions, ENTITY for single entity suggestions
+and TEMPLATE for full sentences. By default, both types are returned.</p>
+<p>Example Request:</p>
+<pre><code>GetSuggestions({
+parent: &amp;quot;locations/us/projects/my-project&amp;quot;
+scopes:
+&amp;quot;//bigquery.googleapis.com/projects/my-project/datasets/my-dataset/tables/my-table&amp;quot;
+query: &amp;quot;top it&amp;quot;
+})
+</code></pre><p>The service will retrieve information based on the given scope(s) and give
+suggestions based on that (e.g. &quot;top item&quot; for &quot;top it&quot; if &quot;item&quot; is a known
+dimension for the provided scope).</p>
+<pre><code>suggestions {
+suggestion_info {
+annotated_suggestion {
+ text_formatted: &amp;quot;top item by sum of usd_revenue_net&amp;quot;
+ markups {
+   type: DIMENSION
+   start_char_index: 4
+   length: 4
+ }
+ markups {
+   type: METRIC
+   start_char_index: 19
+   length: 15
+ }
+}
+query_matches {
+ start_char_index: 0
+ length: 6
+}
+}
+suggestion_type: TEMPLATE
+ranking_score: 0.9
+}
+suggestions {
+suggestion_info {
+annotated_suggestion {
+ text_formatted: &amp;quot;item&amp;quot;
+ markups {
+   type: DIMENSION
+   start_char_index: 4
+   length: 2
+ }
+}
+query_matches {
+ start_char_index: 0
+ length: 6
+}
+}
+suggestion_type: ENTITY
+ranking_score: 0.8
+}
+</code></pre></section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.AutoSuggestionServiceBase.html">AutoSuggestionService.AutoSuggestionServiceBase</a></h4>
+      <section><p>Base class for server-side implementations of AutoSuggestionService</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.AutoSuggestionServiceClient.html">AutoSuggestionService.AutoSuggestionServiceClient</a></h4>
+      <section><p>Client for AutoSuggestionService</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionServiceClient.html">AutoSuggestionServiceClient</a></h4>
+      <section><p>AutoSuggestionService client wrapper, for convenient use.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionServiceClientBuilder.html">AutoSuggestionServiceClientBuilder</a></h4>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionServiceClient.html">AutoSuggestionServiceClient</a> to provide simple configuration of credentials,
+endpoint etc.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionServiceClientImpl.html">AutoSuggestionServiceClientImpl</a></h4>
+      <section><p>AutoSuggestionService client wrapper implementation, for convenient use.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionServiceSettings.html">AutoSuggestionServiceSettings</a></h4>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionServiceClient.html">AutoSuggestionServiceClient</a> instances.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.BigQueryJob.html">BigQueryJob</a></h4>
+      <section><p>BigQuery job information. This can be used to query the BigQuery API and
+retrieve the current job&apos;s status (using
+<a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get">jobs.get</a>).</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.CreateQuestionRequest.html">CreateQuestionRequest</a></h4>
+      <section><p>Request to create a question resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.DataQuery.html">DataQuery</a></h4>
+      <section><p>Representation of the data query for the backend.
+This is provided for informational purposes only. Clients should not use
+it to send it to the backend directly, but rather use the <code>execute</code> RPC
+to trigger the execution. Using the <code>execute</code> RPC is needed in order to
+track the state of a question and report on it correctly to the data
+administrators.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.DebugFlags.html">DebugFlags</a></h4>
+      <section><p>Configuriation of debug flags.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.ExecuteQuestionRequest.html">ExecuteQuestionRequest</a></h4>
+      <section><p>Request to execute an interpretation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.ExecutionInfo.html">ExecutionInfo</a></h4>
+      <section><p>Information about the backend status (such as BigQuery) of the execution.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.ExecutionInfo.Types.html">ExecutionInfo.Types</a></h4>
+      <section><p>Container for nested types declared in the ExecutionInfo message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.GetQuestionRequest.html">GetQuestionRequest</a></h4>
+      <section><p>A request to get a previously created question.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.GetUserFeedbackRequest.html">GetUserFeedbackRequest</a></h4>
+      <section><p>Request to get user feedback.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.HumanReadable.html">HumanReadable</a></h4>
+      <section><p>Human readable interpretation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.Interpretation.html">Interpretation</a></h4>
+      <section><p>An interpretation of a natural language query.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretationStructure.html">InterpretationStructure</a></h4>
+      <section><p>Information about the interpretation structure that helps to understand and
+visualize the response.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretationStructure.Types.html">InterpretationStructure.Types</a></h4>
+      <section><p>Container for nested types declared in the InterpretationStructure message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretationStructure.Types.ColumnInfo.html">InterpretationStructure.Types.ColumnInfo</a></h4>
+      <section><p>Information about a column.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretError.html">InterpretError</a></h4>
+      <section><p>Details on the failure to interpret the question.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretError.Types.html">InterpretError.Types</a></h4>
+      <section><p>Container for nested types declared in the InterpretError message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretError.Types.InterpretAmbiguityDetails.html">InterpretError.Types.InterpretAmbiguityDetails</a></h4>
+      <section><p>Details about a query that was too ambiguous. Currently, the message
+has no fields and its presence signals that there was ambiguity.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretError.Types.InterpretErrorDetails.html">InterpretError.Types.InterpretErrorDetails</a></h4>
+      <section><p>Details on interpretation failure.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretError.Types.InterpretIncompleteQueryDetails.html">InterpretError.Types.InterpretIncompleteQueryDetails</a></h4>
+      <section><p>Details about an incomplete query.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretError.Types.InterpretUnsupportedDetails.html">InterpretError.Types.InterpretUnsupportedDetails</a></h4>
+      <section><p>Details about unsupported parts in a query.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.Question.html">Question</a></h4>
+      <section><p>The question resource represents a natural language query, its settings,
+understanding generated by the system, and answer retrieval status.
+A question cannot be modified.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionName.html">QuestionName</a></h4>
+      <section><p>Resource name for the <code>Question</code> resource.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionService.html">QuestionService</a></h4>
+      <section><p>Service to interpret natural language queries.
+The service allows to create <code>Question</code> resources that are interpreted and
+are filled with one or more interpretations if the question could be
+interpreted. Once a <code>Question</code> resource is created and has at least one
+interpretation, an interpretation can be chosen for execution, which
+triggers a query to the backend (for BigQuery, it will create a job).
+Upon successful execution of that interpretation, backend specific
+information will be returned so that the client can retrieve the results
+from the backend.</p>
+<p>The <code>Question</code> resources are named <code>projects/*/locations/*/questions/*</code>.</p>
+<p>The <code>Question</code> resource has a singletion sub-resource <code>UserFeedback</code> named
+<code>projects/*/locations/*/questions/*/userFeedback</code>, which allows access to
+user feedback.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionService.QuestionServiceBase.html">QuestionService.QuestionServiceBase</a></h4>
+      <section><p>Base class for server-side implementations of QuestionService</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionService.QuestionServiceClient.html">QuestionService.QuestionServiceClient</a></h4>
+      <section><p>Client for QuestionService</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionServiceClient.html">QuestionServiceClient</a></h4>
+      <section><p>QuestionService client wrapper, for convenient use.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionServiceClientBuilder.html">QuestionServiceClientBuilder</a></h4>
+      <section><p>Builder class for <a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionServiceClient.html">QuestionServiceClient</a> to provide simple configuration of credentials, endpoint
+etc.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionServiceClientImpl.html">QuestionServiceClientImpl</a></h4>
+      <section><p>QuestionService client wrapper implementation, for convenient use.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionServiceSettings.html">QuestionServiceSettings</a></h4>
+      <section><p>Settings for <a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionServiceClient.html">QuestionServiceClient</a> instances.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.Suggestion.html">Suggestion</a></h4>
+      <section><p>A suggestion for a query with a ranking score.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.SuggestionInfo.html">SuggestionInfo</a></h4>
+      <section><p>Detailed information about the suggestion.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.SuggestionInfo.Types.html">SuggestionInfo.Types</a></h4>
+      <section><p>Container for nested types declared in the SuggestionInfo message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.SuggestionInfo.Types.MatchInfo.html">SuggestionInfo.Types.MatchInfo</a></h4>
+      <section><p>MatchInfo describes which part of suggestion matched with data in user
+typed query. This can be used to highlight matching parts in the UI. This
+is different from the annotations provided in annotated_suggestion. The
+annotated_suggestion provides information about the semantic meaning, while
+this provides information about how it relates to the input.</p>
+<p>Example:
+user query: <code>top products</code></p>
+<pre><code>annotated_suggestion {
+text_formatted = &amp;quot;top product_group&amp;quot;
+html_formatted = &amp;quot;top &amp;lt;b&gt;product_group&amp;lt;/b&gt;&amp;quot;
+markups {
+{type: TEXT, start_char_index: 0, length: 3}
+{type: DIMENSION, start_char_index: 4, length: 13}
+}
+}
+
+query_matches {
+{ start_char_index: 0, length: 3 }
+{ start_char_index: 4, length: 7}
+}
+</code></pre></section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.SuggestQueriesRequest.html">SuggestQueriesRequest</a></h4>
+      <section><p>Request for query suggestions.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.SuggestQueriesResponse.html">SuggestQueriesResponse</a></h4>
+      <section><p>Response to SuggestQueries.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.UpdateUserFeedbackRequest.html">UpdateUserFeedbackRequest</a></h4>
+      <section><p>Request to updates user feedback.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.UserFeedback.html">UserFeedback</a></h4>
+      <section><p>Feedback provided by a user.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.UserFeedback.Types.html">UserFeedback.Types</a></h4>
+      <section><p>Container for nested types declared in the UserFeedback message type.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.UserFeedbackName.html">UserFeedbackName</a></h4>
+      <section><p>Resource name for the <code>UserFeedback</code> resource.</p>
+</section>
+    <h3 id="enums">Enums
+  </h3>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AnnotatedString.Types.SemanticMarkupType.html">AnnotatedString.Types.SemanticMarkupType</a></h4>
+      <section><p>Semantic markup types.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.ExecutionInfo.Types.JobExecutionState.html">ExecutionInfo.Types.JobExecutionState</a></h4>
+      <section><p>Enum of possible job execution statuses.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretationStructure.Types.VisualizationType.html">InterpretationStructure.Types.VisualizationType</a></h4>
+      <section><p>Enumeration of visualzation types to use for query response data.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretEntity.html">InterpretEntity</a></h4>
+      <section><p>Query entities of an interpretation.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.InterpretError.Types.InterpretErrorCode.html">InterpretError.Types.InterpretErrorCode</a></h4>
+      <section><p>The interpret error code provides an error category why the interpretation
+failed.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionName.ResourceNameType.html">QuestionName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.DataQnA.V1Alpha.QuestionName.html">QuestionName</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.SuggestionType.html">SuggestionType</a></h4>
+      <section><p>The type of suggestion.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.UserFeedback.Types.UserFeedbackRating.html">UserFeedback.Types.UserFeedbackRating</a></h4>
+      <section><p>Enumeration of feedback ratings.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.UserFeedbackName.ResourceNameType.html">UserFeedbackName.ResourceNameType</a></h4>
+      <section><p>The possible contents of <a class="xref" href="Google.Cloud.DataQnA.V1Alpha.UserFeedbackName.html">UserFeedbackName</a>.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

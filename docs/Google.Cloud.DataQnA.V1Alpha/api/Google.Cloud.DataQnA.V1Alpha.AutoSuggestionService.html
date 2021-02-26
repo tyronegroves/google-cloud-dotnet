@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class AutoSuggestionService
+   | Google.Cloud.DataQnA.V1Alpha </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class AutoSuggestionService
+   | Google.Cloud.DataQnA.V1Alpha ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService">
+  
+  
+  <h1 id="Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService" data-uid="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService" class="text-break">Class AutoSuggestionService
+  </h1>
+  <div class="markdown level0 summary"><p>This stateless API provides automatic suggestions for natural language
+queries for the data sources in the provided project and location.</p>
+<p>The service provides a resourceless operation <code>suggestQueries</code> that can be
+called to get a list of suggestions for a given incomplete query and scope
+(or list of scopes) under which the query is to be interpreted.</p>
+<p>There are two types of suggestions, ENTITY for single entity suggestions
+and TEMPLATE for full sentences. By default, both types are returned.</p>
+<p>Example Request:</p>
+<pre><code>GetSuggestions({
+parent: &amp;quot;locations/us/projects/my-project&amp;quot;
+scopes:
+&amp;quot;//bigquery.googleapis.com/projects/my-project/datasets/my-dataset/tables/my-table&amp;quot;
+query: &amp;quot;top it&amp;quot;
+})
+</code></pre><p>The service will retrieve information based on the given scope(s) and give
+suggestions based on that (e.g. &quot;top item&quot; for &quot;top it&quot; if &quot;item&quot; is a known
+dimension for the provided scope).</p>
+<pre><code>suggestions {
+suggestion_info {
+annotated_suggestion {
+ text_formatted: &amp;quot;top item by sum of usd_revenue_net&amp;quot;
+ markups {
+   type: DIMENSION
+   start_char_index: 4
+   length: 4
+ }
+ markups {
+   type: METRIC
+   start_char_index: 19
+   length: 15
+ }
+}
+query_matches {
+ start_char_index: 0
+ length: 6
+}
+}
+suggestion_type: TEMPLATE
+ranking_score: 0.9
+}
+suggestions {
+suggestion_info {
+annotated_suggestion {
+ text_formatted: &amp;quot;item&amp;quot;
+ markups {
+   type: DIMENSION
+   start_char_index: 4
+   length: 2
+ }
+}
+query_matches {
+ start_char_index: 0
+ length: 6
+}
+}
+suggestion_type: ENTITY
+ranking_score: 0.8
+}
+</code></pre></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">AutoSuggestionService</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.DataQnA.V1Alpha.html">Google.Cloud.DataQnA.V1Alpha</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.DataQnA.V1Alpha.dll</h6>
+  <h5 id="Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class AutoSuggestionService</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <a id="Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService_BindService_" data-uid="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.BindService*"></a>
+  <h4 id="Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService_BindService_Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService_AutoSuggestionServiceBase_" data-uid="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.BindService(Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.AutoSuggestionServiceBase)">BindService(AutoSuggestionService.AutoSuggestionServiceBase)</h4>
+  <div class="markdown level1 summary"><p>Creates service definition that can be registered with a server</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ServerServiceDefinition BindService(AutoSuggestionService.AutoSuggestionServiceBase serviceImpl)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.AutoSuggestionServiceBase.html">AutoSuggestionService.AutoSuggestionServiceBase</a></td>
+        <td><span class="parametername">serviceImpl</span></td>
+        <td><p>An object implementing the server-side handling logic.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerServiceDefinition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService_BindService_" data-uid="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.BindService*"></a>
+  <h4 id="Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService_BindService_Grpc_Core_ServiceBinderBase_Google_Cloud_DataQnA_V1Alpha_AutoSuggestionService_AutoSuggestionServiceBase_" data-uid="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.BindService(Grpc.Core.ServiceBinderBase,Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.AutoSuggestionServiceBase)">BindService(ServiceBinderBase, AutoSuggestionService.AutoSuggestionServiceBase)</h4>
+  <div class="markdown level1 summary"><p>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
+Note: this method is part of an experimental API that can change or be removed without any prior notice.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void BindService(ServiceBinderBase serviceBinder, AutoSuggestionService.AutoSuggestionServiceBase serviceImpl)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServiceBinderBase</span></td>
+        <td><span class="parametername">serviceBinder</span></td>
+        <td><p>Service methods will be bound by calling <code>AddMethod</code> on this object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.DataQnA.V1Alpha.AutoSuggestionService.AutoSuggestionServiceBase.html">AutoSuggestionService.AutoSuggestionServiceBase</a></td>
+        <td><span class="parametername">serviceImpl</span></td>
+        <td><p>An object implementing the server-side handling logic.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
