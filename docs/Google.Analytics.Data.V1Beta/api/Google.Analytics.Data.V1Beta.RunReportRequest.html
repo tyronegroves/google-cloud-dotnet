@@ -88,7 +88,6 @@
     <div><span class="xref">Google.Protobuf.IDeepCloneable</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Beta.RunReportRequest.html">RunReportRequest</a>&gt;</div>
     <div><span class="xref">Google.Protobuf.IBufferMessage</span></div>
     <div><span class="xref">Google.Protobuf.IMessage</span></div>
-    <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -109,7 +108,7 @@
   <h6><strong>Assembly</strong>: Google.Analytics.Data.V1Beta.dll</h6>
   <h5 id="Google_Analytics_Data_V1Beta_RunReportRequest_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class RunReportRequest : IMessage&lt;RunReportRequest&gt;, IEquatable&lt;RunReportRequest&gt;, IDeepCloneable&lt;RunReportRequest&gt;, IBufferMessage, IMessage, IPageRequest</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class RunReportRequest : IMessage&lt;RunReportRequest&gt;, IEquatable&lt;RunReportRequest&gt;, IDeepCloneable&lt;RunReportRequest&gt;, IBufferMessage, IMessage</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -301,6 +300,39 @@ removed by a filter.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Analytics_Data_V1Beta_RunReportRequest_Limit_" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.Limit*"></a>
+  <h4 id="Google_Analytics_Data_V1Beta_RunReportRequest_Limit" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.Limit">Limit</h4>
+  <div class="markdown level1 summary"><p>The number of rows to return. If unspecified, 10,000 rows are returned. The
+API returns a maximum of 100,000 rows per request, no matter how many you
+ask for. <code>limit</code> must be positive.</p>
+<p>The API can also return fewer rows than the requested <code>limit</code>, if there
+aren&apos;t as many dimension values as the <code>limit</code>. For instance, there are
+fewer than 300 possible values for the dimension <code>country</code>, so when
+reporting on only <code>country</code>, you can&apos;t get more than 300 rows, even if you
+set <code>limit</code> to a higher value.</p>
+<p>To learn more about this pagination parameter, see
+<a href="https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination">Pagination</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long Limit { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Analytics_Data_V1Beta_RunReportRequest_MetricAggregations_" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.MetricAggregations*"></a>
   <h4 id="Google_Analytics_Data_V1Beta_RunReportRequest_MetricAggregations" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.MetricAggregations">MetricAggregations</h4>
   <div class="markdown level1 summary"><p>Aggregation of metrics. Aggregated metric values will be shown in rows
@@ -376,6 +408,36 @@ Dimensions cannot be used in this filter.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Analytics_Data_V1Beta_RunReportRequest_Offset_" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.Offset*"></a>
+  <h4 id="Google_Analytics_Data_V1Beta_RunReportRequest_Offset" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.Offset">Offset</h4>
+  <div class="markdown level1 summary"><p>The row count of the start row. The first row is counted as row 0.</p>
+<p>When paging, the first request does not specify offset; or equivalently,
+sets offset to 0; the first request returns the first <code>limit</code> of rows. The
+second request sets offset to the <code>limit</code> of the first request; the second
+request returns the second <code>limit</code> of rows.</p>
+<p>To learn more about this pagination parameter, see
+<a href="https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination">Pagination</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long Offset { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Analytics_Data_V1Beta_RunReportRequest_OrderBys_" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.OrderBys*"></a>
   <h4 id="Google_Analytics_Data_V1Beta_RunReportRequest_OrderBys" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.OrderBys">OrderBys</h4>
   <div class="markdown level1 summary"><p>Specifies how rows are ordered in the response.</p>
@@ -400,74 +462,6 @@ Dimensions cannot be used in this filter.</p>
       </tr>
     </tbody>
   </table>
-  <a id="Google_Analytics_Data_V1Beta_RunReportRequest_PageSize_" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.PageSize*"></a>
-  <h4 id="Google_Analytics_Data_V1Beta_RunReportRequest_PageSize" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.PageSize">PageSize</h4>
-  <div class="markdown level1 summary"><p>Page size is for paging and specifies maximum number of rows to return. The
-API returns a maximum of 200,000 rows per request, no matter how many you
-ask for. Page size must be positive.</p>
-<p>The API can also return fewer rows than the requested <code>pageSize</code>, if there
-aren&apos;t as many dimension values as the <code>pageSize</code>. For instance, there are
-fewer than 300 possible values for the dimension <code>country</code>, so when
-reporting on only <code>country</code>, you can&apos;t get more than 300 rows, even if you
-set <code>pageSize</code> to a higher value.</p>
-<p>To learn more about this pagination parameter, see
-<a href="https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination">Pagination</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int PageSize { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageSize</span></div>
-  <a id="Google_Analytics_Data_V1Beta_RunReportRequest_PageToken_" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.PageToken*"></a>
-  <h4 id="Google_Analytics_Data_V1Beta_RunReportRequest_PageToken" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.PageToken">PageToken</h4>
-  <div class="markdown level1 summary"><p>A continuation token to get the next page of the results. Adding this to
-the request will return the next page of rows after the <code>pageToken</code>. The
-<code>pageToken</code> should be the value returned in the <code>nextPageToken</code> parameter
-in the response.</p>
-<p>When paginating, all other parameters specified in <code>RunReportRequest</code> must
-match the call that provided the page token.</p>
-<p>To learn more about this pagination parameter, see
-<a href="https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination">Pagination</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string PageToken { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="implements">Implements</h5>
-      <div><span class="xref">Google.Api.Gax.Grpc.IPageRequest.PageToken</span></div>
   <a id="Google_Analytics_Data_V1Beta_RunReportRequest_Property_" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.Property*"></a>
   <h4 id="Google_Analytics_Data_V1Beta_RunReportRequest_Property" data-uid="Google.Analytics.Data.V1Beta.RunReportRequest.Property">Property</h4>
   <div class="markdown level1 summary"><p>A Google Analytics GA4 property identifier whose events are tracked.

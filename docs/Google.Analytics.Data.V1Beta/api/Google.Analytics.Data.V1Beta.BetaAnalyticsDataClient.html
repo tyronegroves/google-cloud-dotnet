@@ -1610,7 +1610,7 @@ RunRealtimeReportRequest request = new RunRealtimeReportRequest
     Metrics = { new Metric(), },
     DimensionFilter = new FilterExpression(),
     MetricFilter = new FilterExpression(),
-    PageSize = 0,
+    Limit = 0L,
     MetricAggregations =
     {
         MetricAggregation.Unspecified,
@@ -1685,7 +1685,7 @@ RunRealtimeReportRequest request = new RunRealtimeReportRequest
     Metrics = { new Metric(), },
     DimensionFilter = new FilterExpression(),
     MetricFilter = new FilterExpression(),
-    PageSize = 0,
+    Limit = 0L,
     MetricAggregations =
     {
         MetricAggregation.Unspecified,
@@ -1760,7 +1760,7 @@ RunRealtimeReportRequest request = new RunRealtimeReportRequest
     Metrics = { new Metric(), },
     DimensionFilter = new FilterExpression(),
     MetricFilter = new FilterExpression(),
-    PageSize = 0,
+    Limit = 0L,
     MetricAggregations =
     {
         MetricAggregation.Unspecified,
@@ -1785,7 +1785,7 @@ such as country or event name.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;RunReportResponse, DimensionHeader&gt; RunReport(RunReportRequest request, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual RunReportResponse RunReport(RunReportRequest request, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1821,8 +1821,8 @@ such as country or event name.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Beta.RunReportResponse.html">RunReportResponse</a>, <a class="xref" href="Google.Analytics.Data.V1Beta.DimensionHeader.html">DimensionHeader</a>&gt;</td>
-        <td><p>A pageable sequence of <a class="xref" href="Google.Analytics.Data.V1Beta.DimensionHeader.html">DimensionHeader</a> resources.</p>
+        <td><a class="xref" href="Google.Analytics.Data.V1Beta.RunReportResponse.html">RunReportResponse</a></td>
+        <td><p>The RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -1840,6 +1840,8 @@ RunReportRequest request = new RunReportRequest
     DateRanges = { new DateRange(), },
     DimensionFilter = new FilterExpression(),
     MetricFilter = new FilterExpression(),
+    Offset = 0L,
+    Limit = 0L,
     MetricAggregations =
     {
         MetricAggregation.Unspecified,
@@ -1851,39 +1853,7 @@ RunReportRequest request = new RunReportRequest
     ReturnPropertyQuota = false,
 };
 // Make the request
-PagedEnumerable&lt;RunReportResponse, DimensionHeader&gt; response = betaAnalyticsDataClient.RunReport(request);
-
-// Iterate over all response items, lazily performing RPCs as required
-foreach (DimensionHeader item in response)
-{
-    // Do something with each item
-    Console.WriteLine(item);
-}
-
-// Or iterate over pages (of server-defined size), performing one RPC per page
-foreach (RunReportResponse page in response.AsRawResponses())
-{
-    // Do something with each page of items
-    Console.WriteLine(&quot;A page of results:&quot;);
-    foreach (DimensionHeader item in page)
-    {
-        // Do something with each item
-        Console.WriteLine(item);
-    }
-}
-
-// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
-int pageSize = 10;
-Page&lt;DimensionHeader&gt; singlePage = response.ReadPage(pageSize);
-// Do something with the page of items
-Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
-foreach (DimensionHeader item in singlePage)
-{
-    // Do something with each item
-    Console.WriteLine(item);
-}
-// Store the pageToken, for when the next page is required.
-string nextPageToken = singlePage.NextPageToken;
+RunReportResponse response = betaAnalyticsDataClient.RunReport(request);
 </code></pre></div>
   </div>
   <a id="Google_Analytics_Data_V1Beta_BetaAnalyticsDataClient_RunReportAsync_" data-uid="Google.Analytics.Data.V1Beta.BetaAnalyticsDataClient.RunReportAsync*"></a>
@@ -1899,7 +1869,7 @@ such as country or event name.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;RunReportResponse, DimensionHeader&gt; RunReportAsync(RunReportRequest request, CallSettings callSettings = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;RunReportResponse&gt; RunReportAsync(RunReportRequest request, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1935,8 +1905,8 @@ such as country or event name.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Beta.RunReportResponse.html">RunReportResponse</a>, <a class="xref" href="Google.Analytics.Data.V1Beta.DimensionHeader.html">DimensionHeader</a>&gt;</td>
-        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Analytics.Data.V1Beta.DimensionHeader.html">DimensionHeader</a> resources.</p>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Beta.RunReportResponse.html">RunReportResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
 </td>
       </tr>
     </tbody>
@@ -1954,6 +1924,8 @@ RunReportRequest request = new RunReportRequest
     DateRanges = { new DateRange(), },
     DimensionFilter = new FilterExpression(),
     MetricFilter = new FilterExpression(),
+    Offset = 0L,
+    Limit = 0L,
     MetricAggregations =
     {
         MetricAggregation.Unspecified,
@@ -1965,39 +1937,91 @@ RunReportRequest request = new RunReportRequest
     ReturnPropertyQuota = false,
 };
 // Make the request
-PagedAsyncEnumerable&lt;RunReportResponse, DimensionHeader&gt; response = betaAnalyticsDataClient.RunReportAsync(request);
-
-// Iterate over all response items, lazily performing RPCs as required
-await response.ForEachAsync((DimensionHeader item) =&gt;
+RunReportResponse response = await betaAnalyticsDataClient.RunReportAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Analytics_Data_V1Beta_BetaAnalyticsDataClient_RunReportAsync_" data-uid="Google.Analytics.Data.V1Beta.BetaAnalyticsDataClient.RunReportAsync*"></a>
+  <h4 id="Google_Analytics_Data_V1Beta_BetaAnalyticsDataClient_RunReportAsync_Google_Analytics_Data_V1Beta_RunReportRequest_System_Threading_CancellationToken_" data-uid="Google.Analytics.Data.V1Beta.BetaAnalyticsDataClient.RunReportAsync(Google.Analytics.Data.V1Beta.RunReportRequest,System.Threading.CancellationToken)">RunReportAsync(RunReportRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Returns a customized report of your Google Analytics event data. Reports
+contain statistics derived from data collected by the Google Analytics
+tracking code. The data returned from the API is as a table with columns
+for the requested dimensions and metrics. Metrics are individual
+measurements of user activity on your property, such as active users or
+event count. Dimensions break down metrics across some common criteria,
+such as country or event name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;RunReportResponse&gt; RunReportAsync(RunReportRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Analytics.Data.V1Beta.RunReportRequest.html">RunReportRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Analytics.Data.V1Beta.RunReportResponse.html">RunReportResponse</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Analytics_Data_V1Beta_BetaAnalyticsDataClient_RunReportAsync_Google_Analytics_Data_V1Beta_RunReportRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+BetaAnalyticsDataClient betaAnalyticsDataClient = await BetaAnalyticsDataClient.CreateAsync();
+// Initialize request argument(s)
+RunReportRequest request = new RunReportRequest
 {
-    // Do something with each item
-    Console.WriteLine(item);
-});
-
-// Or iterate over pages (of server-defined size), performing one RPC per page
-await response.AsRawResponses().ForEachAsync((RunReportResponse page) =&gt;
-{
-    // Do something with each page of items
-    Console.WriteLine(&quot;A page of results:&quot;);
-    foreach (DimensionHeader item in page)
+    Property = &quot;&quot;,
+    Dimensions = { new Dimension(), },
+    Metrics = { new Metric(), },
+    DateRanges = { new DateRange(), },
+    DimensionFilter = new FilterExpression(),
+    MetricFilter = new FilterExpression(),
+    Offset = 0L,
+    Limit = 0L,
+    MetricAggregations =
     {
-        // Do something with each item
-        Console.WriteLine(item);
-    }
-});
-
-// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
-int pageSize = 10;
-Page&lt;DimensionHeader&gt; singlePage = await response.ReadPageAsync(pageSize);
-// Do something with the page of items
-Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
-foreach (DimensionHeader item in singlePage)
-{
-    // Do something with each item
-    Console.WriteLine(item);
-}
-// Store the pageToken, for when the next page is required.
-string nextPageToken = singlePage.NextPageToken;
+        MetricAggregation.Unspecified,
+    },
+    OrderBys = { new OrderBy(), },
+    CurrencyCode = &quot;&quot;,
+    CohortSpec = new CohortSpec(),
+    KeepEmptyRows = false,
+    ReturnPropertyQuota = false,
+};
+// Make the request
+RunReportResponse response = await betaAnalyticsDataClient.RunReportAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Analytics_Data_V1Beta_BetaAnalyticsDataClient_ShutdownDefaultChannelsAsync_" data-uid="Google.Analytics.Data.V1Beta.BetaAnalyticsDataClient.ShutdownDefaultChannelsAsync*"></a>
