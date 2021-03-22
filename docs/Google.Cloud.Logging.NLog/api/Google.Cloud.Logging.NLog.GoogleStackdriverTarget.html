@@ -661,6 +661,35 @@ or <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SpanId_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.SpanId*"></a>
+  <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SpanId" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.SpanId">SpanId</h4>
+  <div class="markdown level1 summary"><p>The span ID within the trace associated with the log entry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Layout SpanId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NLog.Layouts.Layout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_SpanId_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>See <a href="https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry">https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry</a>
+for more information. Note that the Trace API v2 uses a 16-character hexadecimal
+encoding of an 8-byte array, ex: <code>000000000000004a</code></p>
+</div>
   <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TaskPendingLimit_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.TaskPendingLimit*"></a>
   <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TaskPendingLimit" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.TaskPendingLimit">TaskPendingLimit</h4>
   <div class="markdown level1 summary"><p>Configures how many outstanding write tasks before starting to throttle. Defaults to 5.</p>
@@ -709,6 +738,68 @@ or <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TraceId_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.TraceId*"></a>
+  <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TraceId" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.TraceId">TraceId</h4>
+  <div class="markdown level1 summary"><p>Trace ID of the trace associated to the Log Entry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Layout TraceId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NLog.Layouts.Layout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TraceId_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>See <a href="https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry">https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry</a>
+for more information. Note that this property, when rendered, should only return the
+actual trace ID, not including the resource path, ex: &apos;06796866738c859f2f19b7cfb3214824&apos;.</p>
+</div>
+  <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TraceSampled_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.TraceSampled*"></a>
+  <h4 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TraceSampled" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.TraceSampled">TraceSampled</h4>
+  <div class="markdown level1 summary"><p>The sampling decision of the trace associated with the log entry.
+true means that the trace identified by <a class="xref" href="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.html#Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TraceId">TraceId</a> was sampled for storage in a trace backend.
+false means that the trace was not sampled for storage when this log entry was written,
+or the sampling decision was unknown at the time.
+A non-sampled trace value is still useful as a request correlation identifier. The default is false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Layout TraceSampled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">NLog.Layouts.Layout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_TraceSampled_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>See <a href="https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry">https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#logentry</a>
+for more information. Note that, when rendered, this may return &quot;true&quot; (case insentive) or 1 to
+indicate a true value for <a class="xref" href="Google.Cloud.Logging.V2.LogEntry.html#Google_Cloud_Logging_V2_LogEntry_TraceSampled">TraceSampled</a>. Else, false will be set.</p>
+</div>
   <h3 id="methods">Methods
   </h3>
   <a id="Google_Cloud_Logging_NLog_GoogleStackdriverTarget_CloseTarget_" data-uid="Google.Cloud.Logging.NLog.GoogleStackdriverTarget.CloseTarget*"></a>

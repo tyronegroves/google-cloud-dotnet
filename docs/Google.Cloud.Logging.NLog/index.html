@@ -65,7 +65,7 @@
 <p><code>Google.Cloud.Logging.NLog</code> is a .NET client library to integrate <a href="https://cloud.google.com/logging/">Google Stackdriver
 Logging</a> with <a href="http://nlog-project.org/">NLog</a>.</p>
 <p>Note:
-This documentation is for version <code>3.2.0</code> of the library.
+This documentation is for version <code>3.3.0</code> of the library.
 Some samples may not work with other versions.</p>
 <h1 id="installation">Installation</h1>
 <p>Install the <code>Google.Cloud.Logging.NLog</code> package from NuGet. Add it to
@@ -138,8 +138,35 @@ then the <code>projectId=&quot;PROJECT_ID&quot;</code> configuration setting can
 <li><code>ServiceContextVersion</code> - Configures the &quot;version&quot; in &quot;serviceContext&quot; when sending a JSON payload. (Defaults to the <code>FileVersion</code> of the entry assembly.)</li>
 <li><code>EnableJsonLayout</code> - Uses NLog&#39;s native JSON layout to format JSON payloads, completely replacing the default layout.</li>
 <li><code>JsonConverter</code> or <code>JsonConverterTypeName</code>/<code>JsonConverterMethodName</code> - Configures a custom conversion for individual values within a JSON payload.</li>
+<li><code>TraceId</code> - The trace ID to associate to log entries. Ex: <code>06796866738c859f2f19b7cfb3214824</code>. See <a href="https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#google.logging.v2.LogEntry">Google Logging V2 LogEntry reference docs</a> for more information.</li>
+<li><code>SpanId</code> - The span ID within the trace associated with the log entry. Trace API v2 uses a 16-character hexadecimal encoding of an 8-byte array, ex: <code>000000000000004a</code>.  See <a href="https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#google.logging.v2.LogEntry">Google Logging V2 LogEntry reference docs</a> for more information.</li>
+<li><code>TraceSampled</code> - The sampling decision of the trace associated with the log entry.  See <a href="https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#google.logging.v2.LogEntry">Google Logging V2 LogEntry reference docs</a> for more information.</li>
 </ul>
-<p>Many of the options above are used to configure the JSON payload within the emitted log entries. The configuration file below uses a JSON layout via NLog configuration to completely replace the payload.</p>
+<h2 id="sending-jsonpayload">Sending JsonPayload</h2>
+<p>Enabling <code>SendJsonPayload</code> will capture structured logging properties in JSON format (instead of saving them as resource labels).</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+
+  &lt;extensions&gt;
+    &lt;add assembly=&quot;Google.Cloud.Logging.NLog&quot; /&gt;
+  &lt;/extensions&gt;
+  
+  &lt;targets async=&quot;true&quot;&gt;
+    &lt;target name=&quot;stackdriver&quot; xsi:type=&quot;GoogleStackdriver&quot; projectId=&quot;PROJECT_ID&quot; logId=&quot;LOG_ID&quot; includeEventProperties=&quot;true&quot; sendJsonPayload=&quot;true&quot;&gt;
+      &lt;contextproperty name=&quot;exception&quot; layout=&quot;${exception:format=tostring}&quot; /&gt;  &lt;!-- Optional and repeatable --&gt;
+    &lt;/target&gt;
+    &lt;target name=&quot;console&quot; xsi:type=&quot;Console&quot; /&gt;
+  &lt;/targets&gt;
+
+  &lt;rules&gt;
+    &lt;logger name=&quot;*&quot; minlevel=&quot;Info&quot; writeTo=&quot;stackdriver&quot; /&gt;
+    &lt;logger name=&quot;*&quot; minlevel=&quot;Info&quot; writeTo=&quot;console&quot; /&gt;
+  &lt;/rules&gt;
+  
+&lt;/nlog&gt;
+</code></pre><h2 id="custom-jsonpayload">Custom JsonPayload</h2>
+<p>Enabling <code>EnableJsonLayout</code> will override the standard JSON format, and instead depend on the output from NLog JsonLayout. This will completely replace the JSON payload, but has a performance penalty because of additional parsing.</p>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
 &lt;nlog xmlns=&quot;http://www.nlog-project.org/schemas/NLog.xsd&quot;
       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
@@ -150,10 +177,7 @@ then the <code>projectId=&quot;PROJECT_ID&quot;</code> configuration setting can
   
   &lt;targets async=&quot;true&quot;&gt;
     &lt;target type=&quot;GoogleStackdriver&quot; name=&quot;stackdriver&quot;
-            projectId=&quot;PROJECT_ID&quot; logId=&quot;LOG_ID&quot; resourceType=&quot;container&quot;
-            includeCallSite =&quot;true&quot; includeCallSiteStackTrace=&quot;true&quot; includeEventProperties=&quot;false&quot; includeMdlc=&quot;true&quot;
-            sendJsonPayload=&quot;true&quot; enableJsonLayout=&quot;true&quot;&gt;
-      &lt;contextproperty name=&quot;contextProp&quot; layout=&quot;propContextLayout&quot; /&gt;
+            projectId=&quot;PROJECT_ID&quot; logId=&quot;LOG_ID&quot; resourceType=&quot;container&quot; sendJsonPayload=&quot;true&quot; enableJsonLayout=&quot;true&quot;&gt;
       &lt;layout xsi:type=&quot;JsonLayout&quot; includeAllProperties=&quot;true&quot;&gt;
         &lt;attribute name=&quot;someProp&quot; layout=&quot;prop&quot; /&gt;
         &lt;attribute name=&quot;nestedProp&quot; encode=&quot;false&quot;&gt;
