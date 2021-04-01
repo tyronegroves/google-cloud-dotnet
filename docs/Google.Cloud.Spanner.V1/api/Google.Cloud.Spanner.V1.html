@@ -296,6 +296,12 @@ requested. Instances must be released back to the pool via <a class="xref" href=
       <section><p>Provides streaming access to a Spanner SQL query that automatically retries, handles
 chunking and recoverable errors.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.RequestOptions.html">RequestOptions</a></h4>
+      <section><p>Common request options for various APIs.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.RequestOptions.Types.html">RequestOptions.Types</a></h4>
+      <section><p>Container for nested types declared in the RequestOptions message type.</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResultSet.html">ResultSet</a></h4>
       <section><p>Results from [Read][google.spanner.v1.Spanner.Read] or
 [ExecuteSql][google.spanner.v1.Spanner.ExecuteSql].</p>
@@ -663,6 +669,24 @@ and a fixed scale of 9 decimal places to the right of the decimal point</p>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.PlanNode.Types.Kind.html">PlanNode.Types.Kind</a></h4>
       <section><p>The kind of [PlanNode][google.spanner.v1.PlanNode]. Distinguishes between the two different kinds of
 nodes that can appear in a query plan.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Spanner.V1.RequestOptions.Types.Priority.html">RequestOptions.Types.Priority</a></h4>
+      <section><p>The relative priority for requests. Note that priority is not applicable
+for [BeginTransaction][google.spanner.v1.Spanner.BeginTransaction].</p>
+<p>The priority acts as a hint to the Cloud Spanner scheduler and does not
+guarantee priority or order of execution. For example:</p>
+<ul>
+<li>Some parts of a write operation always execute at <code>PRIORITY_HIGH</code>,
+regardless of the specified priority. This may cause you to see an
+increase in high priority workload even when executing a low priority
+request. This can also potentially cause a priority inversion where a
+lower priority request will be fulfilled ahead of a higher priority
+request.</li>
+<li>If a transaction contains multiple operations with different priorities,
+Cloud Spanner does not guarantee to process the higher priority
+operations first. There may be other constraints to satisfy, such as
+order of operations.</li>
+</ul>
 </section>
       <h4><a class="xref" href="Google.Cloud.Spanner.V1.ResourcesExhaustedBehavior.html">ResourcesExhaustedBehavior</a></h4>
       <section><p>Specifies the behavior when <a class="xref" href="Google.Cloud.Spanner.V1.SessionPoolOptions.html#Google_Cloud_Spanner_V1_SessionPoolOptions_MaximumActiveSessions">MaximumActiveSessions</a>
