@@ -81,8 +81,8 @@
       <section><p>A budget is a plan that describes what you expect to spend on Cloud
 projects, plus the rules to execute as spend is tracked against that plan,
 (for example, send an alert when 90% of the target spend is met).
-Currently all plans are monthly budgets so the usage period(s) tracked are
-implied (calendar months of usage back-to-back).</p>
+The budget time period is configurable, with options such as month (default),
+quarter, year, or custom time period.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.BudgetAmount.html">BudgetAmount</a></h4>
       <section><p>The budgeted amount for each usage period.</p>
@@ -116,6 +116,9 @@ etc.</p>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.CreateBudgetRequest.html">CreateBudgetRequest</a></h4>
       <section><p>Request for CreateBudget</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.CustomPeriod.html">CustomPeriod</a></h4>
+      <section><p>All date times begin at 12 AM US and Canadian Pacific Time (UTC-8).</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.DeleteBudgetRequest.html">DeleteBudgetRequest</a></h4>
       <section><p>Request for DeleteBudget</p>
 </section>
@@ -129,11 +132,15 @@ etc.</p>
       <section><p>Request for GetBudget</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.LastPeriodAmount.html">LastPeriodAmount</a></h4>
-      <section><p>Describes a budget amount targeted to last period&apos;s spend.
-At this time, the amount is automatically 100% of last period&apos;s spend;
-that is, there are no other options yet.
-Future configuration will be described here (for example, configuring a
-percentage of last period&apos;s spend).</p>
+      <section><p>Describes a budget amount targeted to the last
+[Filter.calendar_period][google.cloud.billing.budgets.v1.Filter.calendar_period]
+spend. At this time, the amount is automatically 100% of the last calendar
+period&apos;s spend; that is, there are no other options yet.
+Future configuration options will be described here (for example, configuring
+a percentage of last period&apos;s spend).
+LastPeriodAmount cannot be set for a budget configured with
+a
+[Filter.custom_period][google.cloud.billing.budgets.v1.Filter.custom_period].</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.ListBudgetsRequest.html">ListBudgetsRequest</a></h4>
       <section><p>Request for ListBudgets</p>
@@ -168,9 +175,21 @@ configured under <code>Budget.all_updates_rule</code>.</p>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.BudgetName.ResourceNameType.html">BudgetName.ResourceNameType</a></h4>
       <section><p>The possible contents of <a class="xref" href="Google.Cloud.Billing.Budgets.V1.BudgetName.html">BudgetName</a>.</p>
 </section>
+      <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.CalendarPeriod.html">CalendarPeriod</a></h4>
+      <section><p>A <code>CalendarPeriod</code> represents the abstract concept of a time period that
+has a canonical start. Grammatically, &quot;the start of the current
+<code>CalendarPeriod</code>&quot;. All calendar times begin at 12 AM US and Canadian
+Pacific Time (UTC-8).</p>
+</section>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.Filter.Types.CreditTypesTreatment.html">Filter.Types.CreditTypesTreatment</a></h4>
-      <section><p>Specifies how credits should be treated when determining spend for
-threshold calculations.</p>
+      <section><p>Specifies how credits are applied when determining the spend for
+threshold calculations. Budgets track the total cost minus any applicable
+selected credits.
+<a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type">See the documentation for a list of credit
+types</a>.</p>
+</section>
+      <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.Filter.UsagePeriodOneofCase.html">Filter.UsagePeriodOneofCase</a></h4>
+      <section><p>Enum of possible cases for the &quot;usage_period&quot; oneof.</p>
 </section>
       <h4><a class="xref" href="Google.Cloud.Billing.Budgets.V1.ThresholdRule.Types.Basis.html">ThresholdRule.Types.Basis</a></h4>
       <section><p>The type of basis used to determine if spend has passed the threshold.</p>
