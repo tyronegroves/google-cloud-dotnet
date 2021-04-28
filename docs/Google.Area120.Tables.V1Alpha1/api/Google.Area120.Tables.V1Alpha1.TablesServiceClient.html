@@ -85,9 +85,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -95,6 +92,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Area120.Tables.V1Alpha1.html">Google.Area120.Tables.V1Alpha1</a></h6>
@@ -112,6 +112,10 @@ resources, named <code>tables/*</code></p>
 </li>
 <li><p>Each Table has a collection of [Row][google.area120.tables.v1alpha1.Row]
 resources, named <code>tables/*/rows/*</code></p>
+</li>
+<li><p>The API has a collection of
+[Workspace][google.area120.tables.v1alpha1.Workspace]
+resources, named <code>workspaces/*</code>.</p>
 </li>
 </ul>
 </div>
@@ -168,7 +172,7 @@ port of 443.</p>
   </table>
   <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_DefaultScopes_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The default TablesService scopes are:
-<ul><li><a href="https://www.googleapis.com/auth/drive">https://www.googleapis.com/auth/drive</a></li><li><a href="https://www.googleapis.com/auth/drive.file">https://www.googleapis.com/auth/drive.file</a></li><li><a href="https://www.googleapis.com/auth/drive.readonly">https://www.googleapis.com/auth/drive.readonly</a></li><li><a href="https://www.googleapis.com/auth/spreadsheets">https://www.googleapis.com/auth/spreadsheets</a></li><li><a href="https://www.googleapis.com/auth/spreadsheets.readonly">https://www.googleapis.com/auth/spreadsheets.readonly</a></li></ul></p>
+<ul><li><a href="https://www.googleapis.com/auth/drive">https://www.googleapis.com/auth/drive</a></li><li><a href="https://www.googleapis.com/auth/drive.file">https://www.googleapis.com/auth/drive.file</a></li><li><a href="https://www.googleapis.com/auth/drive.readonly">https://www.googleapis.com/auth/drive.readonly</a></li><li><a href="https://www.googleapis.com/auth/spreadsheets">https://www.googleapis.com/auth/spreadsheets</a></li><li><a href="https://www.googleapis.com/auth/spreadsheets.readonly">https://www.googleapis.com/auth/spreadsheets.readonly</a></li><li><a href="https://www.googleapis.com/auth/tables">https://www.googleapis.com/auth/tables</a></li></ul></p>
 </div>
   <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GrpcClient_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GrpcClient*"></a>
   <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GrpcClient" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GrpcClient">GrpcClient</h4>
@@ -392,6 +396,188 @@ BatchCreateRowsRequest request = new BatchCreateRowsRequest
 };
 // Make the request
 BatchCreateRowsResponse response = await tablesServiceClient.BatchCreateRowsAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRows_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.BatchDeleteRows*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRows_Google_Area120_Tables_V1Alpha1_BatchDeleteRowsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.BatchDeleteRows(Google.Area120.Tables.V1Alpha1.BatchDeleteRowsRequest,Google.Api.Gax.Grpc.CallSettings)">BatchDeleteRows(BatchDeleteRowsRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes multiple rows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void BatchDeleteRows(BatchDeleteRowsRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.BatchDeleteRowsRequest.html">BatchDeleteRowsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRows_Google_Area120_Tables_V1Alpha1_BatchDeleteRowsRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
+// Initialize request argument(s)
+BatchDeleteRowsRequest request = new BatchDeleteRowsRequest
+{
+    ParentAsTableName = TableName.FromTable(&quot;[TABLE]&quot;),
+    RowNames =
+    {
+        RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;),
+    },
+};
+// Make the request
+tablesServiceClient.BatchDeleteRows(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRowsAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.BatchDeleteRowsAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRowsAsync_Google_Area120_Tables_V1Alpha1_BatchDeleteRowsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.BatchDeleteRowsAsync(Google.Area120.Tables.V1Alpha1.BatchDeleteRowsRequest,Google.Api.Gax.Grpc.CallSettings)">BatchDeleteRowsAsync(BatchDeleteRowsRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes multiple rows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task BatchDeleteRowsAsync(BatchDeleteRowsRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.BatchDeleteRowsRequest.html">BatchDeleteRowsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRowsAsync_Google_Area120_Tables_V1Alpha1_BatchDeleteRowsRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+BatchDeleteRowsRequest request = new BatchDeleteRowsRequest
+{
+    ParentAsTableName = TableName.FromTable(&quot;[TABLE]&quot;),
+    RowNames =
+    {
+        RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;),
+    },
+};
+// Make the request
+await tablesServiceClient.BatchDeleteRowsAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRowsAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.BatchDeleteRowsAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRowsAsync_Google_Area120_Tables_V1Alpha1_BatchDeleteRowsRequest_System_Threading_CancellationToken_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.BatchDeleteRowsAsync(Google.Area120.Tables.V1Alpha1.BatchDeleteRowsRequest,System.Threading.CancellationToken)">BatchDeleteRowsAsync(BatchDeleteRowsRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes multiple rows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task BatchDeleteRowsAsync(BatchDeleteRowsRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.BatchDeleteRowsRequest.html">BatchDeleteRowsRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchDeleteRowsAsync_Google_Area120_Tables_V1Alpha1_BatchDeleteRowsRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+BatchDeleteRowsRequest request = new BatchDeleteRowsRequest
+{
+    ParentAsTableName = TableName.FromTable(&quot;[TABLE]&quot;),
+    RowNames =
+    {
+        RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;),
+    },
+};
+// Make the request
+await tablesServiceClient.BatchDeleteRowsAsync(request);
 </code></pre></div>
   </div>
   <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_BatchUpdateRows_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.BatchUpdateRows*"></a>
@@ -1609,11 +1795,71 @@ TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
 // Initialize request argument(s)
 GetRowRequest request = new GetRowRequest
 {
-    Name = &quot;&quot;,
+    RowName = RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;),
     View = View.Unspecified,
 };
 // Make the request
 Row response = tablesServiceClient.GetRow(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRow_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRow*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRow_Google_Area120_Tables_V1Alpha1_RowName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRow(Google.Area120.Tables.V1Alpha1.RowName,Google.Api.Gax.Grpc.CallSettings)">GetRow(RowName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a row. Returns NOT_FOUND if the row does not exist in the table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Row GetRow(RowName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.RowName.html">RowName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the row to retrieve.
+Format: tables/{table}/rows/{row}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.Row.html">Row</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRow_Google_Area120_Tables_V1Alpha1_RowName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
+// Initialize request argument(s)
+RowName name = RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;);
+// Make the request
+Row response = tablesServiceClient.GetRow(name);
 </code></pre></div>
   </div>
   <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRow_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRow*"></a>
@@ -1671,7 +1917,7 @@ Format: tables/{table}/rows/{row}</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;tables/[TABLE]/rows/[ROW]&quot;;
 // Make the request
 Row response = tablesServiceClient.GetRow(name);
 </code></pre></div>
@@ -1732,7 +1978,7 @@ TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync(
 // Initialize request argument(s)
 GetRowRequest request = new GetRowRequest
 {
-    Name = &quot;&quot;,
+    RowName = RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;),
     View = View.Unspecified,
 };
 // Make the request
@@ -1795,11 +2041,131 @@ TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync(
 // Initialize request argument(s)
 GetRowRequest request = new GetRowRequest
 {
-    Name = &quot;&quot;,
+    RowName = RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;),
     View = View.Unspecified,
 };
 // Make the request
 Row response = await tablesServiceClient.GetRowAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRowAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRowAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRowAsync_Google_Area120_Tables_V1Alpha1_RowName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRowAsync(Google.Area120.Tables.V1Alpha1.RowName,Google.Api.Gax.Grpc.CallSettings)">GetRowAsync(RowName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a row. Returns NOT_FOUND if the row does not exist in the table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Row&gt; GetRowAsync(RowName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.RowName.html">RowName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the row to retrieve.
+Format: tables/{table}/rows/{row}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Row.html">Row</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRowAsync_Google_Area120_Tables_V1Alpha1_RowName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+RowName name = RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;);
+// Make the request
+Row response = await tablesServiceClient.GetRowAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRowAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRowAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRowAsync_Google_Area120_Tables_V1Alpha1_RowName_System_Threading_CancellationToken_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRowAsync(Google.Area120.Tables.V1Alpha1.RowName,System.Threading.CancellationToken)">GetRowAsync(RowName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a row. Returns NOT_FOUND if the row does not exist in the table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Row&gt; GetRowAsync(RowName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.RowName.html">RowName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the row to retrieve.
+Format: tables/{table}/rows/{row}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Row.html">Row</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRowAsync_Google_Area120_Tables_V1Alpha1_RowName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+RowName name = RowName.FromTableRow(&quot;[TABLE]&quot;, &quot;[ROW]&quot;);
+// Make the request
+Row response = await tablesServiceClient.GetRowAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetRowAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetRowAsync*"></a>
@@ -1857,7 +2223,7 @@ Format: tables/{table}/rows/{row}</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;tables/[TABLE]/rows/[ROW]&quot;;
 // Make the request
 Row response = await tablesServiceClient.GetRowAsync(name);
 </code></pre></div>
@@ -1917,7 +2283,7 @@ Format: tables/{table}/rows/{row}</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;tables/[TABLE]/rows/[ROW]&quot;;
 // Make the request
 Row response = await tablesServiceClient.GetRowAsync(name);
 </code></pre></div>
@@ -1976,9 +2342,72 @@ Row response = await tablesServiceClient.GetRowAsync(name);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
 // Initialize request argument(s)
-GetTableRequest request = new GetTableRequest { Name = &quot;&quot;, };
+GetTableRequest request = new GetTableRequest
+{
+    TableName = TableName.FromTable(&quot;[TABLE]&quot;),
+};
 // Make the request
 Table response = tablesServiceClient.GetTable(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTable_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTable*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTable_Google_Area120_Tables_V1Alpha1_TableName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTable(Google.Area120.Tables.V1Alpha1.TableName,Google.Api.Gax.Grpc.CallSettings)">GetTable(TableName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a table. Returns NOT_FOUND if the table does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Table GetTable(TableName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.TableName.html">TableName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the table to retrieve.
+Format: tables/{table}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.Table.html">Table</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTable_Google_Area120_Tables_V1Alpha1_TableName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
+// Initialize request argument(s)
+TableName name = TableName.FromTable(&quot;[TABLE]&quot;);
+// Make the request
+Table response = tablesServiceClient.GetTable(name);
 </code></pre></div>
   </div>
   <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTable_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTable*"></a>
@@ -2036,7 +2465,7 @@ Format: tables/{table}</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;tables/[TABLE]&quot;;
 // Make the request
 Table response = tablesServiceClient.GetTable(name);
 </code></pre></div>
@@ -2095,7 +2524,10 @@ Table response = tablesServiceClient.GetTable(name);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
 // Initialize request argument(s)
-GetTableRequest request = new GetTableRequest { Name = &quot;&quot;, };
+GetTableRequest request = new GetTableRequest
+{
+    TableName = TableName.FromTable(&quot;[TABLE]&quot;),
+};
 // Make the request
 Table response = await tablesServiceClient.GetTableAsync(request);
 </code></pre></div>
@@ -2154,9 +2586,132 @@ Table response = await tablesServiceClient.GetTableAsync(request);
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
 // Initialize request argument(s)
-GetTableRequest request = new GetTableRequest { Name = &quot;&quot;, };
+GetTableRequest request = new GetTableRequest
+{
+    TableName = TableName.FromTable(&quot;[TABLE]&quot;),
+};
 // Make the request
 Table response = await tablesServiceClient.GetTableAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTableAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTableAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTableAsync_Google_Area120_Tables_V1Alpha1_TableName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTableAsync(Google.Area120.Tables.V1Alpha1.TableName,Google.Api.Gax.Grpc.CallSettings)">GetTableAsync(TableName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a table. Returns NOT_FOUND if the table does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Table&gt; GetTableAsync(TableName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.TableName.html">TableName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the table to retrieve.
+Format: tables/{table}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Table.html">Table</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTableAsync_Google_Area120_Tables_V1Alpha1_TableName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+TableName name = TableName.FromTable(&quot;[TABLE]&quot;);
+// Make the request
+Table response = await tablesServiceClient.GetTableAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTableAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTableAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTableAsync_Google_Area120_Tables_V1Alpha1_TableName_System_Threading_CancellationToken_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTableAsync(Google.Area120.Tables.V1Alpha1.TableName,System.Threading.CancellationToken)">GetTableAsync(TableName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a table. Returns NOT_FOUND if the table does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Table&gt; GetTableAsync(TableName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.TableName.html">TableName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the table to retrieve.
+Format: tables/{table}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Table.html">Table</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTableAsync_Google_Area120_Tables_V1Alpha1_TableName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+TableName name = TableName.FromTable(&quot;[TABLE]&quot;);
+// Make the request
+Table response = await tablesServiceClient.GetTableAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetTableAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetTableAsync*"></a>
@@ -2214,7 +2769,7 @@ Format: tables/{table}</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;tables/[TABLE]&quot;;
 // Make the request
 Table response = await tablesServiceClient.GetTableAsync(name);
 </code></pre></div>
@@ -2274,9 +2829,555 @@ Format: tables/{table}</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;tables/[TABLE]&quot;;
 // Make the request
 Table response = await tablesServiceClient.GetTableAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspace*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_Google_Area120_Tables_V1Alpha1_GetWorkspaceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspace(Google.Area120.Tables.V1Alpha1.GetWorkspaceRequest,Google.Api.Gax.Grpc.CallSettings)">GetWorkspace(GetWorkspaceRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Workspace GetWorkspace(GetWorkspaceRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.GetWorkspaceRequest.html">GetWorkspaceRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_Google_Area120_Tables_V1Alpha1_GetWorkspaceRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
+// Initialize request argument(s)
+GetWorkspaceRequest request = new GetWorkspaceRequest
+{
+    WorkspaceName = WorkspaceName.FromWorkspace(&quot;[WORKSPACE]&quot;),
+};
+// Make the request
+Workspace response = tablesServiceClient.GetWorkspace(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspace*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_Google_Area120_Tables_V1Alpha1_WorkspaceName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspace(Google.Area120.Tables.V1Alpha1.WorkspaceName,Google.Api.Gax.Grpc.CallSettings)">GetWorkspace(WorkspaceName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Workspace GetWorkspace(WorkspaceName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.WorkspaceName.html">WorkspaceName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the workspace to retrieve.
+Format: workspaces/{workspace}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_Google_Area120_Tables_V1Alpha1_WorkspaceName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
+// Initialize request argument(s)
+WorkspaceName name = WorkspaceName.FromWorkspace(&quot;[WORKSPACE]&quot;);
+// Make the request
+Workspace response = tablesServiceClient.GetWorkspace(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspace*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspace(System.String,Google.Api.Gax.Grpc.CallSettings)">GetWorkspace(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Workspace GetWorkspace(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the workspace to retrieve.
+Format: workspaces/{workspace}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspace_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
+// Initialize request argument(s)
+string name = &quot;workspaces/[WORKSPACE]&quot;;
+// Make the request
+Workspace response = tablesServiceClient.GetWorkspace(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_GetWorkspaceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync(Google.Area120.Tables.V1Alpha1.GetWorkspaceRequest,Google.Api.Gax.Grpc.CallSettings)">GetWorkspaceAsync(GetWorkspaceRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Workspace&gt; GetWorkspaceAsync(GetWorkspaceRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.GetWorkspaceRequest.html">GetWorkspaceRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_GetWorkspaceRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetWorkspaceRequest request = new GetWorkspaceRequest
+{
+    WorkspaceName = WorkspaceName.FromWorkspace(&quot;[WORKSPACE]&quot;),
+};
+// Make the request
+Workspace response = await tablesServiceClient.GetWorkspaceAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_GetWorkspaceRequest_System_Threading_CancellationToken_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync(Google.Area120.Tables.V1Alpha1.GetWorkspaceRequest,System.Threading.CancellationToken)">GetWorkspaceAsync(GetWorkspaceRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Workspace&gt; GetWorkspaceAsync(GetWorkspaceRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.GetWorkspaceRequest.html">GetWorkspaceRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_GetWorkspaceRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+GetWorkspaceRequest request = new GetWorkspaceRequest
+{
+    WorkspaceName = WorkspaceName.FromWorkspace(&quot;[WORKSPACE]&quot;),
+};
+// Make the request
+Workspace response = await tablesServiceClient.GetWorkspaceAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_WorkspaceName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync(Google.Area120.Tables.V1Alpha1.WorkspaceName,Google.Api.Gax.Grpc.CallSettings)">GetWorkspaceAsync(WorkspaceName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Workspace&gt; GetWorkspaceAsync(WorkspaceName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.WorkspaceName.html">WorkspaceName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the workspace to retrieve.
+Format: workspaces/{workspace}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_WorkspaceName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+WorkspaceName name = WorkspaceName.FromWorkspace(&quot;[WORKSPACE]&quot;);
+// Make the request
+Workspace response = await tablesServiceClient.GetWorkspaceAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_WorkspaceName_System_Threading_CancellationToken_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync(Google.Area120.Tables.V1Alpha1.WorkspaceName,System.Threading.CancellationToken)">GetWorkspaceAsync(WorkspaceName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Workspace&gt; GetWorkspaceAsync(WorkspaceName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.WorkspaceName.html">WorkspaceName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the workspace to retrieve.
+Format: workspaces/{workspace}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_Google_Area120_Tables_V1Alpha1_WorkspaceName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+WorkspaceName name = WorkspaceName.FromWorkspace(&quot;[WORKSPACE]&quot;);
+// Make the request
+Workspace response = await tablesServiceClient.GetWorkspaceAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetWorkspaceAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Workspace&gt; GetWorkspaceAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the workspace to retrieve.
+Format: workspaces/{workspace}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;workspaces/[WORKSPACE]&quot;;
+// Make the request
+Workspace response = await tablesServiceClient.GetWorkspaceAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.GetWorkspaceAsync(System.String,System.Threading.CancellationToken)">GetWorkspaceAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a workspace. Returns NOT_FOUND if the workspace does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Workspace&gt; GetWorkspaceAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The name of the workspace to retrieve.
+Format: workspaces/{workspace}</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_GetWorkspaceAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;workspaces/[WORKSPACE]&quot;;
+// Make the request
+Workspace response = await tablesServiceClient.GetWorkspaceAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_ListRows_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.ListRows*"></a>
@@ -2337,6 +3438,7 @@ ListRowsRequest request = new ListRowsRequest
 {
     Parent = &quot;&quot;,
     View = View.Unspecified,
+    Filter = &quot;&quot;,
 };
 // Make the request
 PagedEnumerable&lt;ListRowsResponse, Row&gt; response = tablesServiceClient.ListRows(request);
@@ -2538,6 +3640,7 @@ ListRowsRequest request = new ListRowsRequest
 {
     Parent = &quot;&quot;,
     View = View.Unspecified,
+    Filter = &quot;&quot;,
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListRowsResponse, Row&gt; response = tablesServiceClient.ListRowsAsync(request);
@@ -2855,6 +3958,188 @@ Page&lt;Table&gt; singlePage = await response.ReadPageAsync(pageSize);
 // Do something with the page of items
 Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
 foreach (Table item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_ListWorkspaces_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.ListWorkspaces*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_ListWorkspaces_Google_Area120_Tables_V1Alpha1_ListWorkspacesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.ListWorkspaces(Google.Area120.Tables.V1Alpha1.ListWorkspacesRequest,Google.Api.Gax.Grpc.CallSettings)">ListWorkspaces(ListWorkspacesRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists workspaces for the user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListWorkspacesResponse, Workspace&gt; ListWorkspaces(ListWorkspacesRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.ListWorkspacesRequest.html">ListWorkspacesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.PagedEnumerable</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.ListWorkspacesResponse.html">ListWorkspacesResponse</a>, <a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_ListWorkspaces_Google_Area120_Tables_V1Alpha1_ListWorkspacesRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = TablesServiceClient.Create();
+// Initialize request argument(s)
+ListWorkspacesRequest request = new ListWorkspacesRequest { };
+// Make the request
+PagedEnumerable&lt;ListWorkspacesResponse, Workspace&gt; response = tablesServiceClient.ListWorkspaces(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (Workspace item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListWorkspacesResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Workspace item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Workspace&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Workspace item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_ListWorkspacesAsync_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.ListWorkspacesAsync*"></a>
+  <h4 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_ListWorkspacesAsync_Google_Area120_Tables_V1Alpha1_ListWorkspacesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Area120.Tables.V1Alpha1.TablesServiceClient.ListWorkspacesAsync(Google.Area120.Tables.V1Alpha1.ListWorkspacesRequest,Google.Api.Gax.Grpc.CallSettings)">ListWorkspacesAsync(ListWorkspacesRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists workspaces for the user.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListWorkspacesResponse, Workspace&gt; ListWorkspacesAsync(ListWorkspacesRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Area120.Tables.V1Alpha1.ListWorkspacesRequest.html">ListWorkspacesRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.Grpc.CallSettings</span></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Google.Api.Gax.PagedAsyncEnumerable</span>&lt;<a class="xref" href="Google.Area120.Tables.V1Alpha1.ListWorkspacesResponse.html">ListWorkspacesResponse</a>, <a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Area120.Tables.V1Alpha1.Workspace.html">Workspace</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Area120_Tables_V1Alpha1_TablesServiceClient_ListWorkspacesAsync_Google_Area120_Tables_V1Alpha1_ListWorkspacesRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+TablesServiceClient tablesServiceClient = await TablesServiceClient.CreateAsync();
+// Initialize request argument(s)
+ListWorkspacesRequest request = new ListWorkspacesRequest { };
+// Make the request
+PagedAsyncEnumerable&lt;ListWorkspacesResponse, Workspace&gt; response = tablesServiceClient.ListWorkspacesAsync(request);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((Workspace item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListWorkspacesResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (Workspace item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;Workspace&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (Workspace item in singlePage)
 {
     // Do something with each item
     Console.WriteLine(item);
