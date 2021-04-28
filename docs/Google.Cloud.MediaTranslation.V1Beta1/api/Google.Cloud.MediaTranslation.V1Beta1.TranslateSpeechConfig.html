@@ -93,9 +93,6 @@ the request.</p>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -103,6 +100,9 @@ the request.</p>
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.MediaTranslation.V1Beta1.html">Google.Cloud.MediaTranslation.V1Beta1</a></h6>
@@ -148,35 +148,6 @@ the request.</p>
   </table>
   <h3 id="properties">Properties
   </h3>
-  <a id="Google_Cloud_MediaTranslation_V1Beta1_TranslateSpeechConfig_AlternativeSourceLanguageCodes_" data-uid="Google.Cloud.MediaTranslation.V1Beta1.TranslateSpeechConfig.AlternativeSourceLanguageCodes*"></a>
-  <h4 id="Google_Cloud_MediaTranslation_V1Beta1_TranslateSpeechConfig_AlternativeSourceLanguageCodes" data-uid="Google.Cloud.MediaTranslation.V1Beta1.TranslateSpeechConfig.AlternativeSourceLanguageCodes">AlternativeSourceLanguageCodes</h4>
-  <div class="markdown level1 summary"><p>Optional. A list of up to 3 additional language codes (BCP-47), listing possible
-alternative languages of the supplied audio. If alternative source
-languages are listed, speech translation result will translate in the most
-likely language detected including the main source_language_code. The
-translated result will include the language code of the language detected
-in the audio.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RepeatedField&lt;string&gt; AlternativeSourceLanguageCodes { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Google.Protobuf.Collections.RepeatedField</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <a id="Google_Cloud_MediaTranslation_V1Beta1_TranslateSpeechConfig_AudioEncoding_" data-uid="Google.Cloud.MediaTranslation.V1Beta1.TranslateSpeechConfig.AudioEncoding*"></a>
   <h4 id="Google_Cloud_MediaTranslation_V1Beta1_TranslateSpeechConfig_AudioEncoding" data-uid="Google.Cloud.MediaTranslation.V1Beta1.TranslateSpeechConfig.AudioEncoding">AudioEncoding</h4>
   <div class="markdown level1 summary"><p>Required. Encoding of audio data.
@@ -185,6 +156,36 @@ Supported formats:</p>
 <li><code>linear16</code></li>
 </ul>
 <p>Uncompressed 16-bit signed little-endian samples (Linear PCM).</p>
+<ul>
+<li><code>flac</code></li>
+</ul>
+<p><code>flac</code> (Free Lossless Audio Codec) is the recommended encoding
+because it is lossless--therefore recognition is not compromised--and
+requires only about half the bandwidth of <code>linear16</code>.</p>
+<ul>
+<li><code>mulaw</code></li>
+</ul>
+<p>8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.</p>
+<ul>
+<li><code>amr</code></li>
+</ul>
+<p>Adaptive Multi-Rate Narrowband codec. <code>sample_rate_hertz</code> must be 8000.</p>
+<ul>
+<li><code>amr-wb</code></li>
+</ul>
+<p>Adaptive Multi-Rate Wideband codec. <code>sample_rate_hertz</code> must be 16000.</p>
+<ul>
+<li><code>ogg-opus</code></li>
+</ul>
+<p>Opus encoded audio frames in <a href="https://wikipedia.org/wiki/Ogg">Ogg</a>
+container. <code>sample_rate_hertz</code> must be one of 8000, 12000, 16000, 24000,
+or 48000.</p>
+<ul>
+<li><code>mp3</code></li>
+</ul>
+<p>MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+kbps). When using this encoding, <code>sample_rate_hertz</code> has to match the
+sample rate of the file being used.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -208,7 +209,9 @@ Supported formats:</p>
   </table>
   <a id="Google_Cloud_MediaTranslation_V1Beta1_TranslateSpeechConfig_Model_" data-uid="Google.Cloud.MediaTranslation.V1Beta1.TranslateSpeechConfig.Model*"></a>
   <h4 id="Google_Cloud_MediaTranslation_V1Beta1_TranslateSpeechConfig_Model" data-uid="Google.Cloud.MediaTranslation.V1Beta1.TranslateSpeechConfig.Model">Model</h4>
-  <div class="markdown level1 summary"><p>Optional.</p>
+  <div class="markdown level1 summary"><p>Optional. <code>google-provided-model/video</code> and
+<code>google-provided-model/enhanced-phone-call</code> are premium models.
+<code>google-provided-model/phone-call</code> is not premium model.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -235,8 +238,7 @@ Supported formats:</p>
   <div class="markdown level1 summary"><p>Optional. Sample rate in Hertz of the audio data. Valid values are:
 8000-48000. 16000 is optimal. For best results, set the sampling rate of
 the audio source to 16000 Hz. If that&apos;s not possible, use the native sample
-rate of the audio source (instead of re-sampling). This field can only be
-omitted for <code>FLAC</code> and <code>WAV</code> audio files.</p>
+rate of the audio source (instead of re-sampling).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
