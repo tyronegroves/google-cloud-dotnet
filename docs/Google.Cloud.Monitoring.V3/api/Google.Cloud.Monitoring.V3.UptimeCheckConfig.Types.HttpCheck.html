@@ -92,9 +92,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -102,6 +99,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Monitoring.V3.html">Google.Cloud.Monitoring.V3</a></h6>
@@ -174,11 +174,14 @@ defaults to empty.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Body_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Body*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_Body" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.Body">Body</h4>
-  <div class="markdown level1 summary"><p>The request body associated with the HTTP request. If <code>content_type</code> is
-<code>URL_ENCODED</code>, the body passed in must be URL-encoded. Users can provide
-a <code>Content-Length</code> header via the <code>headers</code> field or the API will do
-so. The maximum byte size is 1 megabyte. Note: As with all <code>bytes</code> fields
-JSON representations are base64 encoded.</p>
+  <div class="markdown level1 summary"><p>The request body associated with the HTTP POST request. If <code>content_type</code>
+is <code>URL_ENCODED</code>, the body passed in must be URL-encoded. Users can
+provide a <code>Content-Length</code> header via the <code>headers</code> field or the API will
+do so. If the <code>request_method</code> is <code>GET</code> and <code>body</code> is not empty, the API
+will return an error. The maximum byte size is 1 megabyte. Note: As with
+all <code>bytes</code> fields, JSON representations are base64 encoded. e.g.:
+&quot;foo=bar&quot; in URL-encoded form is &quot;foo%3Dbar&quot; and in base64 encoding is
+&quot;Zm9vJTI1M0RiYXI=&quot;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -202,7 +205,16 @@ JSON representations are base64 encoded.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_ContentType_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.ContentType*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_ContentType" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.ContentType">ContentType</h4>
-  <div class="markdown level1 summary"><p>The content type to use for the check.</p>
+  <div class="markdown level1 summary"><p>The content type header to use for the check. The following
+configurations result in errors:</p>
+<ol>
+<li>Content type is specified in both the <code>headers</code> field and the
+<code>content_type</code> field.</li>
+<li>Request method is <code>GET</code> and <code>content_type</code> is not <code>TYPE_UNSPECIFIED</code></li>
+<li>Request method is <code>POST</code> and <code>content_type</code> is <code>TYPE_UNSPECIFIED</code>.</li>
+<li>Request method is <code>POST</code> and a &quot;Content-Type&quot; header is provided via
+<code>headers</code> field. The <code>content_type</code> field should be used instead.</li>
+</ol>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -257,7 +269,7 @@ The maximum number of headers allowed is 100.</p>
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_MaskHeaders_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.MaskHeaders*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_MaskHeaders" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.MaskHeaders">MaskHeaders</h4>
-  <div class="markdown level1 summary"><p>Boolean specifiying whether to encrypt the header information.
+  <div class="markdown level1 summary"><p>Boolean specifying whether to encrypt the header information.
 Encryption should be specified for any headers related to authentication
 that you do not wish to be seen when retrieving the configuration. The
 server will be responsible for encrypting the headers.
@@ -341,7 +353,8 @@ run the check. Will be combined with host (specified within the
   </table>
   <a id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_RequestMethod_" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.RequestMethod*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_UptimeCheckConfig_Types_HttpCheck_RequestMethod" data-uid="Google.Cloud.Monitoring.V3.UptimeCheckConfig.Types.HttpCheck.RequestMethod">RequestMethod</h4>
-  <div class="markdown level1 summary"><p>The HTTP request method to use for the check.</p>
+  <div class="markdown level1 summary"><p>The HTTP request method to use for the check. If set to
+<code>METHOD_UNSPECIFIED</code> then <code>request_method</code> defaults to <code>GET</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

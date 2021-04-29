@@ -85,9 +85,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -95,6 +92,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Monitoring.V3.html">Google.Cloud.Monitoring.V3</a></h6>
@@ -6765,6 +6765,280 @@ string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeries*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_Google_Api_Gax_ResourceNames_FolderName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeries(Google.Api.Gax.ResourceNames.FolderName,System.String,Google.Cloud.Monitoring.V3.TimeInterval,Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListTimeSeries(FolderName, String, TimeInterval, ListTimeSeriesRequest.Types.TimeSeriesView, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists time series that match a filter. This method does not require a Workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; ListTimeSeries(FolderName name, string filter, TimeInterval interval, ListTimeSeriesRequest.Types.TimeSeriesView view, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.FolderName.html">FolderName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Required. A <a href="https://cloud.google.com/monitoring/api/v3/filters">monitoring filter</a>
+that specifies which time series should be returned.  The filter must
+specify a single metric type, and can additionally specify metric labels
+and other information. For example:</p>
+<p>metric.type = &quot;compute.googleapis.com/instance/cpu/usage_time&quot; AND
+metric.labels.instance_name = &quot;my-instance-name&quot;</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.TimeInterval.html">TimeInterval</a></td>
+        <td><span class="parametername">interval</span></td>
+        <td><p>Required. The time interval for which results should be returned. Only time series
+that contain data points in the specified interval are included
+in the response.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView.html">ListTimeSeriesRequest.Types.TimeSeriesView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>Required. Specifies which information is returned about the time series.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesResponse.html">ListTimeSeriesResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_Google_Api_Gax_ResourceNames_FolderName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = MetricServiceClient.Create();
+// Initialize request argument(s)
+FolderName name = FolderName.FromFolder(&quot;[FOLDER]&quot;);
+string filter = &quot;&quot;;
+TimeInterval interval = new TimeInterval();
+ListTimeSeriesRequest.Types.TimeSeriesView view = ListTimeSeriesRequest.Types.TimeSeriesView.Full;
+// Make the request
+PagedEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; response = metricServiceClient.ListTimeSeries(name, filter, interval, view);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (TimeSeries item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListTimeSeriesResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (TimeSeries item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;TimeSeries&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (TimeSeries item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeries*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_Google_Api_Gax_ResourceNames_OrganizationName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeries(Google.Api.Gax.ResourceNames.OrganizationName,System.String,Google.Cloud.Monitoring.V3.TimeInterval,Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListTimeSeries(OrganizationName, String, TimeInterval, ListTimeSeriesRequest.Types.TimeSeriesView, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists time series that match a filter. This method does not require a Workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; ListTimeSeries(OrganizationName name, string filter, TimeInterval interval, ListTimeSeriesRequest.Types.TimeSeriesView view, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.OrganizationName.html">OrganizationName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Required. A <a href="https://cloud.google.com/monitoring/api/v3/filters">monitoring filter</a>
+that specifies which time series should be returned.  The filter must
+specify a single metric type, and can additionally specify metric labels
+and other information. For example:</p>
+<p>metric.type = &quot;compute.googleapis.com/instance/cpu/usage_time&quot; AND
+metric.labels.instance_name = &quot;my-instance-name&quot;</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.TimeInterval.html">TimeInterval</a></td>
+        <td><span class="parametername">interval</span></td>
+        <td><p>Required. The time interval for which results should be returned. Only time series
+that contain data points in the specified interval are included
+in the response.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView.html">ListTimeSeriesRequest.Types.TimeSeriesView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>Required. Specifies which information is returned about the time series.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedEnumerable-2.html">PagedEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesResponse.html">ListTimeSeriesResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a>&gt;</td>
+        <td><p>A pageable sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_Google_Api_Gax_ResourceNames_OrganizationName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = MetricServiceClient.Create();
+// Initialize request argument(s)
+OrganizationName name = OrganizationName.FromOrganization(&quot;[ORGANIZATION]&quot;);
+string filter = &quot;&quot;;
+TimeInterval interval = new TimeInterval();
+ListTimeSeriesRequest.Types.TimeSeriesView view = ListTimeSeriesRequest.Types.TimeSeriesView.Full;
+// Make the request
+PagedEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; response = metricServiceClient.ListTimeSeries(name, filter, interval, view);
+
+// Iterate over all response items, lazily performing RPCs as required
+foreach (TimeSeries item in response)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+foreach (ListTimeSeriesResponse page in response.AsRawResponses())
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (TimeSeries item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+}
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;TimeSeries&gt; singlePage = response.ReadPage(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (TimeSeries item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeries*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeries_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeries(Google.Api.Gax.ResourceNames.ProjectName,System.String,Google.Cloud.Monitoring.V3.TimeInterval,Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListTimeSeries(ProjectName, String, TimeInterval, ListTimeSeriesRequest.Types.TimeSeriesView, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists time series that match a filter. This method does not require a Workspace.</p>
 </div>
@@ -6786,8 +7060,11 @@ string nextPageToken = singlePage.NextPageToken;
       <tr>
         <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">name</span></td>
-        <td><p>Required. The project on which to execute the request. The format is:</p>
-<p>projects/[PROJECT_ID_OR_NUMBER]</p>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
 </td>
       </tr>
       <tr>
@@ -6960,6 +7237,7 @@ ListTimeSeriesRequest request = new ListTimeSeriesRequest
     OrderBy = &quot;&quot;,
     View = ListTimeSeriesRequest.Types.TimeSeriesView.Full,
     ProjectName = ProjectName.FromProject(&quot;[PROJECT]&quot;),
+    SecondaryAggregation = new Aggregation(),
 };
 // Make the request
 PagedEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; response = metricServiceClient.ListTimeSeries(request);
@@ -7019,8 +7297,11 @@ string nextPageToken = singlePage.NextPageToken;
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>Required. The project on which to execute the request. The format is:</p>
-<p>projects/[PROJECT_ID_OR_NUMBER]</p>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
 </td>
       </tr>
       <tr>
@@ -7132,6 +7413,280 @@ string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeriesAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_Google_Api_Gax_ResourceNames_FolderName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeriesAsync(Google.Api.Gax.ResourceNames.FolderName,System.String,Google.Cloud.Monitoring.V3.TimeInterval,Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListTimeSeriesAsync(FolderName, String, TimeInterval, ListTimeSeriesRequest.Types.TimeSeriesView, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists time series that match a filter. This method does not require a Workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; ListTimeSeriesAsync(FolderName name, string filter, TimeInterval interval, ListTimeSeriesRequest.Types.TimeSeriesView view, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.FolderName.html">FolderName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Required. A <a href="https://cloud.google.com/monitoring/api/v3/filters">monitoring filter</a>
+that specifies which time series should be returned.  The filter must
+specify a single metric type, and can additionally specify metric labels
+and other information. For example:</p>
+<p>metric.type = &quot;compute.googleapis.com/instance/cpu/usage_time&quot; AND
+metric.labels.instance_name = &quot;my-instance-name&quot;</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.TimeInterval.html">TimeInterval</a></td>
+        <td><span class="parametername">interval</span></td>
+        <td><p>Required. The time interval for which results should be returned. Only time series
+that contain data points in the specified interval are included
+in the response.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView.html">ListTimeSeriesRequest.Types.TimeSeriesView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>Required. Specifies which information is returned about the time series.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesResponse.html">ListTimeSeriesResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_Google_Api_Gax_ResourceNames_FolderName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
+// Initialize request argument(s)
+FolderName name = FolderName.FromFolder(&quot;[FOLDER]&quot;);
+string filter = &quot;&quot;;
+TimeInterval interval = new TimeInterval();
+ListTimeSeriesRequest.Types.TimeSeriesView view = ListTimeSeriesRequest.Types.TimeSeriesView.Full;
+// Make the request
+PagedAsyncEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; response = metricServiceClient.ListTimeSeriesAsync(name, filter, interval, view);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((TimeSeries item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListTimeSeriesResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (TimeSeries item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;TimeSeries&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (TimeSeries item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeriesAsync*"></a>
+  <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_Google_Api_Gax_ResourceNames_OrganizationName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeriesAsync(Google.Api.Gax.ResourceNames.OrganizationName,System.String,Google.Cloud.Monitoring.V3.TimeInterval,Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListTimeSeriesAsync(OrganizationName, String, TimeInterval, ListTimeSeriesRequest.Types.TimeSeriesView, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Lists time series that match a filter. This method does not require a Workspace.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PagedAsyncEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; ListTimeSeriesAsync(OrganizationName name, string filter, TimeInterval interval, ListTimeSeriesRequest.Types.TimeSeriesView view, string pageToken = null, int? pageSize = default(int? ), CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.ResourceNames.OrganizationName.html">OrganizationName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filter</span></td>
+        <td><p>Required. A <a href="https://cloud.google.com/monitoring/api/v3/filters">monitoring filter</a>
+that specifies which time series should be returned.  The filter must
+specify a single metric type, and can additionally specify metric labels
+and other information. For example:</p>
+<p>metric.type = &quot;compute.googleapis.com/instance/cpu/usage_time&quot; AND
+metric.labels.instance_name = &quot;my-instance-name&quot;</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.TimeInterval.html">TimeInterval</a></td>
+        <td><span class="parametername">interval</span></td>
+        <td><p>Required. The time interval for which results should be returned. Only time series
+that contain data points in the specified interval are included
+in the response.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView.html">ListTimeSeriesRequest.Types.TimeSeriesView</a></td>
+        <td><span class="parametername">view</span></td>
+        <td><p>Required. Specifies which information is returned about the time series.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">pageToken</span></td>
+        <td><p>The token returned from the previous request. A value of <code>null</code> or an empty string retrieves the first
+page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">pageSize</span></td>
+        <td><p>The size of page to request. The response will not be larger than this, but may be smaller. A value of
+<code>null</code> or <code>0</code> uses a server-defined page size.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.PagedAsyncEnumerable-2.html">PagedAsyncEnumerable</a>&lt;<a class="xref" href="Google.Cloud.Monitoring.V3.ListTimeSeriesResponse.html">ListTimeSeriesResponse</a>, <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a>&gt;</td>
+        <td><p>A pageable asynchronous sequence of <a class="xref" href="Google.Cloud.Monitoring.V3.TimeSeries.html">TimeSeries</a> resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_Google_Api_Gax_ResourceNames_OrganizationName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+MetricServiceClient metricServiceClient = await MetricServiceClient.CreateAsync();
+// Initialize request argument(s)
+OrganizationName name = OrganizationName.FromOrganization(&quot;[ORGANIZATION]&quot;);
+string filter = &quot;&quot;;
+TimeInterval interval = new TimeInterval();
+ListTimeSeriesRequest.Types.TimeSeriesView view = ListTimeSeriesRequest.Types.TimeSeriesView.Full;
+// Make the request
+PagedAsyncEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; response = metricServiceClient.ListTimeSeriesAsync(name, filter, interval, view);
+
+// Iterate over all response items, lazily performing RPCs as required
+await response.ForEachAsync((TimeSeries item) =&gt;
+{
+    // Do something with each item
+    Console.WriteLine(item);
+});
+
+// Or iterate over pages (of server-defined size), performing one RPC per page
+await response.AsRawResponses().ForEachAsync((ListTimeSeriesResponse page) =&gt;
+{
+    // Do something with each page of items
+    Console.WriteLine(&quot;A page of results:&quot;);
+    foreach (TimeSeries item in page)
+    {
+        // Do something with each item
+        Console.WriteLine(item);
+    }
+});
+
+// Or retrieve a single page of known size (unless it&#39;s the final page), performing as many RPCs as required
+int pageSize = 10;
+Page&lt;TimeSeries&gt; singlePage = await response.ReadPageAsync(pageSize);
+// Do something with the page of items
+Console.WriteLine($&quot;A page of {pageSize} results (unless it&#39;s the final page):&quot;);
+foreach (TimeSeries item in singlePage)
+{
+    // Do something with each item
+    Console.WriteLine(item);
+}
+// Store the pageToken, for when the next page is required.
+string nextPageToken = singlePage.NextPageToken;
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeriesAsync*"></a>
   <h4 id="Google_Cloud_Monitoring_V3_MetricServiceClient_ListTimeSeriesAsync_Google_Api_Gax_ResourceNames_ProjectName_System_String_Google_Cloud_Monitoring_V3_TimeInterval_Google_Cloud_Monitoring_V3_ListTimeSeriesRequest_Types_TimeSeriesView_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Monitoring.V3.MetricServiceClient.ListTimeSeriesAsync(Google.Api.Gax.ResourceNames.ProjectName,System.String,Google.Cloud.Monitoring.V3.TimeInterval,Google.Cloud.Monitoring.V3.ListTimeSeriesRequest.Types.TimeSeriesView,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListTimeSeriesAsync(ProjectName, String, TimeInterval, ListTimeSeriesRequest.Types.TimeSeriesView, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists time series that match a filter. This method does not require a Workspace.</p>
 </div>
@@ -7153,8 +7708,11 @@ string nextPageToken = singlePage.NextPageToken;
       <tr>
         <td><a class="xref" href="Google.Api.Gax.ResourceNames.ProjectName.html">ProjectName</a></td>
         <td><span class="parametername">name</span></td>
-        <td><p>Required. The project on which to execute the request. The format is:</p>
-<p>projects/[PROJECT_ID_OR_NUMBER]</p>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
 </td>
       </tr>
       <tr>
@@ -7327,6 +7885,7 @@ ListTimeSeriesRequest request = new ListTimeSeriesRequest
     OrderBy = &quot;&quot;,
     View = ListTimeSeriesRequest.Types.TimeSeriesView.Full,
     ProjectName = ProjectName.FromProject(&quot;[PROJECT]&quot;),
+    SecondaryAggregation = new Aggregation(),
 };
 // Make the request
 PagedAsyncEnumerable&lt;ListTimeSeriesResponse, TimeSeries&gt; response = metricServiceClient.ListTimeSeriesAsync(request);
@@ -7386,8 +7945,11 @@ string nextPageToken = singlePage.NextPageToken;
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>Required. The project on which to execute the request. The format is:</p>
-<p>projects/[PROJECT_ID_OR_NUMBER]</p>
+        <td><p>Required. The project, organization or folder on which to execute the request. The
+format is:</p>
+<p>projects/[PROJECT_ID_OR_NUMBER]
+organizations/[ORGANIZATION_ID]
+folders/[FOLDER_ID]</p>
 </td>
       </tr>
       <tr>
