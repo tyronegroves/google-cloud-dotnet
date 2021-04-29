@@ -85,9 +85,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -95,6 +92,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.html">Google.Cloud.Dialogflow.Cx.V3</a></h6>
@@ -1452,6 +1452,7 @@ ExportAgentRequest request = new ExportAgentRequest
 {
     AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
     AgentUri = &quot;&quot;,
+    EnvironmentAsEnvironmentName = EnvironmentName.FromProjectLocationAgentEnvironment(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;, &quot;[ENVIRONMENT]&quot;),
 };
 // Make the request
 Operation&lt;ExportAgentResponse, Struct&gt; response = agentsClient.ExportAgent(request);
@@ -1531,6 +1532,7 @@ ExportAgentRequest request = new ExportAgentRequest
 {
     AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
     AgentUri = &quot;&quot;,
+    EnvironmentAsEnvironmentName = EnvironmentName.FromProjectLocationAgentEnvironment(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;, &quot;[ENVIRONMENT]&quot;),
 };
 // Make the request
 Operation&lt;ExportAgentResponse, Struct&gt; response = await agentsClient.ExportAgentAsync(request);
@@ -1610,6 +1612,7 @@ ExportAgentRequest request = new ExportAgentRequest
 {
     AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
     AgentUri = &quot;&quot;,
+    EnvironmentAsEnvironmentName = EnvironmentName.FromProjectLocationAgentEnvironment(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;, &quot;[ENVIRONMENT]&quot;),
 };
 // Make the request
 Operation&lt;ExportAgentResponse, Struct&gt; response = await agentsClient.ExportAgentAsync(request);
@@ -2175,6 +2178,570 @@ AgentsClient agentsClient = await AgentsClient.CreateAsync();
 string name = &quot;projects/[PROJECT]/locations/[LOCATION]/agents/[AGENT]&quot;;
 // Make the request
 Agent response = await agentsClient.GetAgentAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResult*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_Google_Cloud_Dialogflow_Cx_V3_AgentValidationResultName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResult(Google.Cloud.Dialogflow.Cx.V3.AgentValidationResultName,Google.Api.Gax.Grpc.CallSettings)">GetAgentValidationResult(AgentValidationResultName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AgentValidationResult GetAgentValidationResult(AgentValidationResultName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResultName.html">AgentValidationResultName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The agent name.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/locations/&amp;amp;lt;Location ID&amp;amp;gt;/agents/&amp;amp;lt;Agent
+ID&amp;amp;gt;/validationResult</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_Google_Cloud_Dialogflow_Cx_V3_AgentValidationResultName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = AgentsClient.Create();
+// Initialize request argument(s)
+AgentValidationResultName name = AgentValidationResultName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;);
+// Make the request
+AgentValidationResult response = agentsClient.GetAgentValidationResult(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResult*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_Google_Cloud_Dialogflow_Cx_V3_GetAgentValidationResultRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResult(Google.Cloud.Dialogflow.Cx.V3.GetAgentValidationResultRequest,Google.Api.Gax.Grpc.CallSettings)">GetAgentValidationResult(GetAgentValidationResultRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AgentValidationResult GetAgentValidationResult(GetAgentValidationResultRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.GetAgentValidationResultRequest.html">GetAgentValidationResultRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_Google_Cloud_Dialogflow_Cx_V3_GetAgentValidationResultRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = AgentsClient.Create();
+// Initialize request argument(s)
+GetAgentValidationResultRequest request = new GetAgentValidationResultRequest
+{
+    AgentValidationResultName = AgentValidationResultName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
+    LanguageCode = &quot;&quot;,
+};
+// Make the request
+AgentValidationResult response = agentsClient.GetAgentValidationResult(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResult*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResult(System.String,Google.Api.Gax.Grpc.CallSettings)">GetAgentValidationResult(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AgentValidationResult GetAgentValidationResult(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The agent name.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/locations/&amp;amp;lt;Location ID&amp;amp;gt;/agents/&amp;amp;lt;Agent
+ID&amp;amp;gt;/validationResult</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResult_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = AgentsClient.Create();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/agents/[AGENT]/validationResult&quot;;
+// Make the request
+AgentValidationResult response = agentsClient.GetAgentValidationResult(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_AgentValidationResultName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync(Google.Cloud.Dialogflow.Cx.V3.AgentValidationResultName,Google.Api.Gax.Grpc.CallSettings)">GetAgentValidationResultAsync(AgentValidationResultName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; GetAgentValidationResultAsync(AgentValidationResultName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResultName.html">AgentValidationResultName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The agent name.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/locations/&amp;amp;lt;Location ID&amp;amp;gt;/agents/&amp;amp;lt;Agent
+ID&amp;amp;gt;/validationResult</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_AgentValidationResultName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+AgentValidationResultName name = AgentValidationResultName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;);
+// Make the request
+AgentValidationResult response = await agentsClient.GetAgentValidationResultAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_AgentValidationResultName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync(Google.Cloud.Dialogflow.Cx.V3.AgentValidationResultName,System.Threading.CancellationToken)">GetAgentValidationResultAsync(AgentValidationResultName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; GetAgentValidationResultAsync(AgentValidationResultName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResultName.html">AgentValidationResultName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The agent name.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/locations/&amp;amp;lt;Location ID&amp;amp;gt;/agents/&amp;amp;lt;Agent
+ID&amp;amp;gt;/validationResult</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_AgentValidationResultName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+AgentValidationResultName name = AgentValidationResultName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;);
+// Make the request
+AgentValidationResult response = await agentsClient.GetAgentValidationResultAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_GetAgentValidationResultRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync(Google.Cloud.Dialogflow.Cx.V3.GetAgentValidationResultRequest,Google.Api.Gax.Grpc.CallSettings)">GetAgentValidationResultAsync(GetAgentValidationResultRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; GetAgentValidationResultAsync(GetAgentValidationResultRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.GetAgentValidationResultRequest.html">GetAgentValidationResultRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_GetAgentValidationResultRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+GetAgentValidationResultRequest request = new GetAgentValidationResultRequest
+{
+    AgentValidationResultName = AgentValidationResultName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
+    LanguageCode = &quot;&quot;,
+};
+// Make the request
+AgentValidationResult response = await agentsClient.GetAgentValidationResultAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_GetAgentValidationResultRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync(Google.Cloud.Dialogflow.Cx.V3.GetAgentValidationResultRequest,System.Threading.CancellationToken)">GetAgentValidationResultAsync(GetAgentValidationResultRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; GetAgentValidationResultAsync(GetAgentValidationResultRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.GetAgentValidationResultRequest.html">GetAgentValidationResultRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_Google_Cloud_Dialogflow_Cx_V3_GetAgentValidationResultRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+GetAgentValidationResultRequest request = new GetAgentValidationResultRequest
+{
+    AgentValidationResultName = AgentValidationResultName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
+    LanguageCode = &quot;&quot;,
+};
+// Make the request
+AgentValidationResult response = await agentsClient.GetAgentValidationResultAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">GetAgentValidationResultAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; GetAgentValidationResultAsync(string name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The agent name.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/locations/&amp;amp;lt;Location ID&amp;amp;gt;/agents/&amp;amp;lt;Agent
+ID&amp;amp;gt;/validationResult</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_System_String_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/agents/[AGENT]/validationResult&quot;;
+// Make the request
+AgentValidationResult response = await agentsClient.GetAgentValidationResultAsync(name);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_System_String_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.GetAgentValidationResultAsync(System.String,System.Threading.CancellationToken)">GetAgentValidationResultAsync(String, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets the latest agent validation result. Agent validation is performed
+when ValidateAgent is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; GetAgentValidationResultAsync(string name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. The agent name.
+Format: <code>projects/&amp;amp;lt;Project ID&amp;amp;gt;/locations/&amp;amp;lt;Location ID&amp;amp;gt;/agents/&amp;amp;lt;Agent
+ID&amp;amp;gt;/validationResult</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_GetAgentValidationResultAsync_System_String_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/agents/[AGENT]/validationResult&quot;;
+// Make the request
+AgentValidationResult response = await agentsClient.GetAgentValidationResultAsync(name);
 </code></pre></div>
   </div>
   <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ListAgents_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.ListAgents*"></a>
@@ -3047,7 +3614,7 @@ RestoreAgentRequest request = new RestoreAgentRequest
 {
     AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
     AgentUri = &quot;&quot;,
-    AgentContent = ByteString.Empty,
+    RestoreOption = RestoreAgentRequest.Types.RestoreOption.Unspecified,
 };
 // Make the request
 Operation&lt;Empty, Struct&gt; response = agentsClient.RestoreAgent(request);
@@ -3129,7 +3696,7 @@ RestoreAgentRequest request = new RestoreAgentRequest
 {
     AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
     AgentUri = &quot;&quot;,
-    AgentContent = ByteString.Empty,
+    RestoreOption = RestoreAgentRequest.Types.RestoreOption.Unspecified,
 };
 // Make the request
 Operation&lt;Empty, Struct&gt; response = await agentsClient.RestoreAgentAsync(request);
@@ -3211,7 +3778,7 @@ RestoreAgentRequest request = new RestoreAgentRequest
 {
     AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
     AgentUri = &quot;&quot;,
-    AgentContent = ByteString.Empty,
+    RestoreOption = RestoreAgentRequest.Types.RestoreOption.Unspecified,
 };
 // Make the request
 Operation&lt;Empty, Struct&gt; response = await agentsClient.RestoreAgentAsync(request);
@@ -3653,6 +4220,201 @@ UpdateAgentRequest request = new UpdateAgentRequest
 };
 // Make the request
 Agent response = await agentsClient.UpdateAgentAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgent_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.ValidateAgent*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgent_Google_Cloud_Dialogflow_Cx_V3_ValidateAgentRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.ValidateAgent(Google.Cloud.Dialogflow.Cx.V3.ValidateAgentRequest,Google.Api.Gax.Grpc.CallSettings)">ValidateAgent(ValidateAgentRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Validates the specified agent and creates or updates validation results.
+The agent in draft version is validated. Please call this API after the
+training is completed to get the complete validation results.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AgentValidationResult ValidateAgent(ValidateAgentRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.ValidateAgentRequest.html">ValidateAgentRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a></td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgent_Google_Cloud_Dialogflow_Cx_V3_ValidateAgentRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = AgentsClient.Create();
+// Initialize request argument(s)
+ValidateAgentRequest request = new ValidateAgentRequest
+{
+    AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
+    LanguageCode = &quot;&quot;,
+};
+// Make the request
+AgentValidationResult response = agentsClient.ValidateAgent(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgentAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.ValidateAgentAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgentAsync_Google_Cloud_Dialogflow_Cx_V3_ValidateAgentRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.ValidateAgentAsync(Google.Cloud.Dialogflow.Cx.V3.ValidateAgentRequest,Google.Api.Gax.Grpc.CallSettings)">ValidateAgentAsync(ValidateAgentRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Validates the specified agent and creates or updates validation results.
+The agent in draft version is validated. Please call this API after the
+training is completed to get the complete validation results.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; ValidateAgentAsync(ValidateAgentRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.ValidateAgentRequest.html">ValidateAgentRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgentAsync_Google_Cloud_Dialogflow_Cx_V3_ValidateAgentRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+ValidateAgentRequest request = new ValidateAgentRequest
+{
+    AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
+    LanguageCode = &quot;&quot;,
+};
+// Make the request
+AgentValidationResult response = await agentsClient.ValidateAgentAsync(request);
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgentAsync_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.ValidateAgentAsync*"></a>
+  <h4 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgentAsync_Google_Cloud_Dialogflow_Cx_V3_ValidateAgentRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Dialogflow.Cx.V3.AgentsClient.ValidateAgentAsync(Google.Cloud.Dialogflow.Cx.V3.ValidateAgentRequest,System.Threading.CancellationToken)">ValidateAgentAsync(ValidateAgentRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Validates the specified agent and creates or updates validation results.
+The agent in draft version is validated. Please call this API after the
+training is completed to get the complete validation results.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AgentValidationResult&gt; ValidateAgentAsync(ValidateAgentRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.ValidateAgentRequest.html">ValidateAgentRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.AgentValidationResult.html">AgentValidationResult</a>&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Dialogflow_Cx_V3_AgentsClient_ValidateAgentAsync_Google_Cloud_Dialogflow_Cx_V3_ValidateAgentRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+AgentsClient agentsClient = await AgentsClient.CreateAsync();
+// Initialize request argument(s)
+ValidateAgentRequest request = new ValidateAgentRequest
+{
+    AgentName = AgentName.FromProjectLocationAgent(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[AGENT]&quot;),
+    LanguageCode = &quot;&quot;,
+};
+// Make the request
+AgentValidationResult response = await agentsClient.ValidateAgentAsync(request);
 </code></pre></div>
   </div>
 </article>

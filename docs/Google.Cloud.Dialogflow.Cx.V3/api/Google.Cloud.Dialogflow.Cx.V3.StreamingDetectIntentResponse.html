@@ -81,7 +81,12 @@ contain <code>recognition_result</code>. Each <code>recognition_result</code> re
 complete transcript of what the user said. The last <code>recognition_result</code>
 has <code>is_final</code> set to <code>true</code>.</p>
 </li>
-<li><p>The last message contains <code>detect_intent_response</code>.</p>
+<li><p>If <code>enable_partial_response</code> is true, the following N messages
+(currently 1 &lt;= N &lt;= 4) contain <code>detect_intent_response</code>. The first (N-1)
+<code>detect_intent_response</code>s will have <code>response_type</code> set to <code>PARTIAL</code>.
+The last <code>detect_intent_response</code> has <code>response_type</code> set to <code>FINAL</code>.
+If <code>response_type</code> is false, response stream only contains
+the final <code>detect_intent_response</code>.</p>
 </li>
 </ol>
 </div>
@@ -102,9 +107,6 @@ has <code>is_final</code> set to <code>true</code>.</p>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -112,6 +114,9 @@ has <code>is_final</code> set to <code>true</code>.</p>
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Dialogflow.Cx.V3.html">Google.Cloud.Dialogflow.Cx.V3</a></h6>
