@@ -287,28 +287,26 @@
     <pre><code class="lang-csharp hljs">public sealed class CloudChannelServiceClientImpl : CloudChannelServiceClient</code></pre>
   </div>
   <h5 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>CloudChannelService enables Google cloud resellers and distributors to manage
-their customers, channel partners, entitlements and reports.</p>
+  <div class="markdown level0 remarks"><p>CloudChannelService lets Google cloud resellers and distributors manage
+their customers, channel partners, entitlements, and reports.</p>
 <p>Using this service:</p>
 <ol>
-<li>Resellers or distributors can manage a customer entity.</li>
-<li>Distributors can register an authorized reseller in their channel and then
-enable delegated admin access for the reseller.</li>
-<li>Resellers or distributors can manage entitlements for their customers.</li>
+<li>Resellers and distributors can manage a customer entity.</li>
+<li>Distributors can register an authorized reseller in their channel and
+provide them with delegated admin access.</li>
+<li>Resellers and distributors can manage customer entitlements.</li>
 </ol>
-<p>The service primarily exposes the following resources:</p>
+<p>CloudChannelService exposes the following resources:</p>
 <ul>
-<li><p>[Customer][google.cloud.channel.v1.Customer]s: A Customer represents an entity managed by a reseller or
-distributor. A customer typically represents an enterprise. In an n-tier
-resale channel hierarchy, customers are generally represented as leaf nodes.
-Customers primarily have an Entitlement sub-resource discussed below.</p>
+<li><p>[Customer][google.cloud.channel.v1.Customer]s: An entity—usually an enterprise—managed by a reseller or
+distributor.</p>
 </li>
-<li><p>[Entitlement][google.cloud.channel.v1.Entitlement]s: An Entitlement represents an entity which provides a
-customer means to start using a service. Entitlements are created or updated
-as a result of a successful fulfillment.</p>
+<li><p>[Entitlement][google.cloud.channel.v1.Entitlement]s: An entity that provides a customer with the means to use
+a service. Entitlements are created or updated as a result of a successful
+fulfillment.</p>
 </li>
-<li><p>[ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s: A ChannelPartnerLink is an entity that identifies
-links between distributors and their indirect resellers in a channel.</p>
+<li><p>[ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s: An entity that identifies links between
+distributors and their indirect resellers in a channel.</p>
 </li>
 </ul>
 </div>
@@ -666,31 +664,27 @@ settings.</p>
   </h3>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ActivateEntitlement_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ActivateEntitlement*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ActivateEntitlement_Google_Cloud_Channel_V1_ActivateEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ActivateEntitlement(Google.Cloud.Channel.V1.ActivateEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">ActivateEntitlement(ActivateEntitlementRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Activates a previously suspended entitlement. The entitlement must be in a
-suspended state for it to be activated. Entitlements suspended for pending
-ToS acceptance can&apos;t be activated using this method. An entitlement
-activation is a long-running operation and can result in updates to
+  <div class="markdown level1 summary"><p>Activates a previously suspended entitlement. Entitlements suspended for
+pending ToS acceptance can&apos;t be activated using this method.</p>
+<p>An entitlement activation is a long-running operation and it updates
 the state of the customer entitlement.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller or
-if the reseller account making the request and reseller account being
-queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
-<li>SUSPENSION_NOT_RESELLER_INITIATED: Can&apos;t activate an
-entitlement that is pending TOS acceptance. Only reseller initiated
-suspensions can be activated.</li>
-<li>NOT_SUSPENDED: Can&apos;t activate entitlements that are already in ACTIVE
-state. Can only activate suspended entitlements.</li>
-<li>INTERNAL: Any non-user error related to a technical issue
-in the backend. In this case, contact Cloud Channel support.</li>
+<li>SUSPENSION_NOT_RESELLER_INITIATED: Can only activate reseller-initiated
+suspensions and entitlements that have accepted the TOS.</li>
+<li>NOT_SUSPENDED: Can only activate suspended entitlements not in an ACTIVE
+state.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -744,31 +738,27 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ActivateEntitlement_Google_Cloud_Channel_V1_ActivateEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ActivateEntitlement(ActivateEntitlementRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ActivateEntitlementAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ActivateEntitlementAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ActivateEntitlementAsync_Google_Cloud_Channel_V1_ActivateEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ActivateEntitlementAsync(Google.Cloud.Channel.V1.ActivateEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">ActivateEntitlementAsync(ActivateEntitlementRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Activates a previously suspended entitlement. The entitlement must be in a
-suspended state for it to be activated. Entitlements suspended for pending
-ToS acceptance can&apos;t be activated using this method. An entitlement
-activation is a long-running operation and can result in updates to
+  <div class="markdown level1 summary"><p>Activates a previously suspended entitlement. Entitlements suspended for
+pending ToS acceptance can&apos;t be activated using this method.</p>
+<p>An entitlement activation is a long-running operation and it updates
 the state of the customer entitlement.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller or
-if the reseller account making the request and reseller account being
-queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
-<li>SUSPENSION_NOT_RESELLER_INITIATED: Can&apos;t activate an
-entitlement that is pending TOS acceptance. Only reseller initiated
-suspensions can be activated.</li>
-<li>NOT_SUSPENDED: Can&apos;t activate entitlements that are already in ACTIVE
-state. Can only activate suspended entitlements.</li>
-<li>INTERNAL: Any non-user error related to a technical issue
-in the backend. In this case, contact Cloud Channel support.</li>
+<li>SUSPENSION_NOT_RESELLER_INITIATED: Can only activate reseller-initiated
+suspensions and entitlements that have accepted the TOS.</li>
+<li>NOT_SUSPENDED: Can only activate suspended entitlements not in an ACTIVE
+state.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -822,27 +812,25 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ActivateEntitlementAsync_Google_Cloud_Channel_V1_ActivateEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ActivateEntitlementAsync(ActivateEntitlementRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CancelEntitlement_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CancelEntitlement*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CancelEntitlement_Google_Cloud_Channel_V1_CancelEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CancelEntitlement(Google.Cloud.Channel.V1.CancelEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">CancelEntitlement(CancelEntitlementRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Cancels a previously fulfilled entitlement.
-An entitlement cancellation is a long-running operation.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Cancels a previously fulfilled entitlement.</p>
+<p>An entitlement cancellation is a long-running operation.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller or
-if the reseller account making the request and reseller account being
-queried for are different.</li>
-<li>FAILED_PRECONDITION: If there are any Google Cloud projects linked to the
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>FAILED_PRECONDITION: There are Google Cloud projects linked to the
 Google Cloud entitlement&apos;s Cloud Billing subaccount.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>DELETION_TYPE_NOT_ALLOWED: Cancel is only allowed for Google Workspace
-add-ons or entitlements for Google Cloud&apos;s development platform.</li>
+add-ons, or entitlements for Google Cloud&apos;s development platform.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The response will contain
 google.protobuf.Empty on success. The Operation metadata will contain an
@@ -897,27 +885,25 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_CancelEntitlement_Google_Cloud_Channel_V1_CancelEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.CancelEntitlement(CancelEntitlementRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CancelEntitlementAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CancelEntitlementAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CancelEntitlementAsync_Google_Cloud_Channel_V1_CancelEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CancelEntitlementAsync(Google.Cloud.Channel.V1.CancelEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">CancelEntitlementAsync(CancelEntitlementRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Cancels a previously fulfilled entitlement.
-An entitlement cancellation is a long-running operation.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Cancels a previously fulfilled entitlement.</p>
+<p>An entitlement cancellation is a long-running operation.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller or
-if the reseller account making the request and reseller account being
-queried for are different.</li>
-<li>FAILED_PRECONDITION: If there are any Google Cloud projects linked to the
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>FAILED_PRECONDITION: There are Google Cloud projects linked to the
 Google Cloud entitlement&apos;s Cloud Billing subaccount.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>DELETION_TYPE_NOT_ALLOWED: Cancel is only allowed for Google Workspace
-add-ons or entitlements for Google Cloud&apos;s development platform.</li>
+add-ons, or entitlements for Google Cloud&apos;s development platform.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The response will contain
 google.protobuf.Empty on success. The Operation metadata will contain an
@@ -973,21 +959,20 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeOffer_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeOffer*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeOffer_Google_Cloud_Channel_V1_ChangeOfferRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeOffer(Google.Cloud.Channel.V1.ChangeOfferRequest,Google.Api.Gax.Grpc.CallSettings)">ChangeOffer(ChangeOfferRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates the Offer for an existing customer entitlement.</p>
-<p>An entitlement update is a long-running operation and results in updates to
-the entitlement as a result of fulfillment.</p>
-<p>Possible Error Codes:</p>
+<p>An entitlement update is a long-running operation and it updates the
+entitlement as a result of fulfillment.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Offer or Entitlement resource not found.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1042,21 +1027,20 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeOfferAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeOfferAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeOfferAsync_Google_Cloud_Channel_V1_ChangeOfferRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeOfferAsync(Google.Cloud.Channel.V1.ChangeOfferRequest,Google.Api.Gax.Grpc.CallSettings)">ChangeOfferAsync(ChangeOfferRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates the Offer for an existing customer entitlement.</p>
-<p>An entitlement update is a long-running operation and results in updates to
-the entitlement as a result of fulfillment.</p>
-<p>Possible Error Codes:</p>
+<p>An entitlement update is a long-running operation and it updates the
+entitlement as a result of fulfillment.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Offer or Entitlement resource not found.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1110,24 +1094,23 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ChangeOfferAsync_Google_Cloud_Channel_V1_ChangeOfferRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ChangeOfferAsync(ChangeOfferRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeParameters_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeParameters*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeParameters_Google_Cloud_Channel_V1_ChangeParametersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeParameters(Google.Cloud.Channel.V1.ChangeParametersRequest,Google.Api.Gax.Grpc.CallSettings)">ChangeParameters(ChangeParametersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Change parameters of the entitlement</p>
-<p>An entitlement parameters update is a long-running operation and results in
-updates to the entitlement as a result of fulfillment.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Change parameters of the entitlement.</p>
+<p>An entitlement update is a long-running operation and it updates the
+entitlement as a result of fulfillment.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request. For example, if the number of seats being changed to is greater
-than the allowed number of max seats for the resource. Or decreasing seats
-for a commitment based plan.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.
+For example, the number of seats being changed is greater than the allowed
+number of max seats, or decreasing seats for a commitment based plan.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
-<li>INTERNAL: Any non-user error related to a technical issue
-in the backend. In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1181,24 +1164,23 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ChangeParameters_Google_Cloud_Channel_V1_ChangeParametersRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ChangeParameters(ChangeParametersRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeParametersAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeParametersAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeParametersAsync_Google_Cloud_Channel_V1_ChangeParametersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeParametersAsync(Google.Cloud.Channel.V1.ChangeParametersRequest,Google.Api.Gax.Grpc.CallSettings)">ChangeParametersAsync(ChangeParametersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Change parameters of the entitlement</p>
-<p>An entitlement parameters update is a long-running operation and results in
-updates to the entitlement as a result of fulfillment.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Change parameters of the entitlement.</p>
+<p>An entitlement update is a long-running operation and it updates the
+entitlement as a result of fulfillment.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request. For example, if the number of seats being changed to is greater
-than the allowed number of max seats for the resource. Or decreasing seats
-for a commitment based plan.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.
+For example, the number of seats being changed is greater than the allowed
+number of max seats, or decreasing seats for a commitment based plan.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
-<li>INTERNAL: Any non-user error related to a technical issue
-in the backend. In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1253,23 +1235,22 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeRenewalSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeRenewalSettings*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeRenewalSettings_Google_Cloud_Channel_V1_ChangeRenewalSettingsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeRenewalSettings(Google.Cloud.Channel.V1.ChangeRenewalSettingsRequest,Google.Api.Gax.Grpc.CallSettings)">ChangeRenewalSettings(ChangeRenewalSettingsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates the renewal settings for an existing customer entitlement.</p>
-<p>An entitlement update is a long-running operation and results in updates to
-the entitlement as a result of fulfillment.</p>
-<p>Possible Error Codes:</p>
+<p>An entitlement update is a long-running operation and it updates the
+entitlement as a result of fulfillment.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>NOT_COMMITMENT_PLAN: Renewal Settings are only applicable for a
-commitment plan. Can&apos;t enable or disable renewal for non-commitment plans.</li>
-<li>INTERNAL: Any non user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+commitment plan. Can&apos;t enable or disable renewals for non-commitment plans.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1324,23 +1305,22 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeRenewalSettingsAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeRenewalSettingsAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ChangeRenewalSettingsAsync_Google_Cloud_Channel_V1_ChangeRenewalSettingsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ChangeRenewalSettingsAsync(Google.Cloud.Channel.V1.ChangeRenewalSettingsRequest,Google.Api.Gax.Grpc.CallSettings)">ChangeRenewalSettingsAsync(ChangeRenewalSettingsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Updates the renewal settings for an existing customer entitlement.</p>
-<p>An entitlement update is a long-running operation and results in updates to
-the entitlement as a result of fulfillment.</p>
-<p>Possible Error Codes:</p>
+<p>An entitlement update is a long-running operation and it updates the
+entitlement as a result of fulfillment.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>NOT_COMMITMENT_PLAN: Renewal Settings are only applicable for a
-commitment plan. Can&apos;t enable or disable renewal for non-commitment plans.</li>
-<li>INTERNAL: Any non user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+commitment plan. Can&apos;t enable or disable renewals for non-commitment plans.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1394,20 +1374,19 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ChangeRenewalSettingsAsync_Google_Cloud_Channel_V1_ChangeRenewalSettingsRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ChangeRenewalSettingsAsync(ChangeRenewalSettingsRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CheckCloudIdentityAccountsExist_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CheckCloudIdentityAccountsExist*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CheckCloudIdentityAccountsExist_Google_Cloud_Channel_V1_CheckCloudIdentityAccountsExistRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CheckCloudIdentityAccountsExist(Google.Cloud.Channel.V1.CheckCloudIdentityAccountsExistRequest,Google.Api.Gax.Grpc.CallSettings)">CheckCloudIdentityAccountsExist(CheckCloudIdentityAccountsExistRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Confirms the existence of Cloud Identity accounts, based on the domain and
-whether the Cloud Identity accounts are owned by the reseller.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Confirms the existence of Cloud Identity accounts based on the domain and
+if the Cloud Identity accounts are owned by the reseller.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>INVALID_VALUE: Invalid domain value in the request.</li>
 </ul>
-<p>Return Value:
-List of [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources for the domain.
-List may be empty.</p>
-<p>Note: in the v1alpha1 version of the API, a NOT_FOUND error is returned if
+<p>Return value:
+A list of [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources for the domain (may be
+empty)</p>
+<p>Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
 no [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources match the domain.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1459,20 +1438,19 @@ no [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerA
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_CheckCloudIdentityAccountsExist_Google_Cloud_Channel_V1_CheckCloudIdentityAccountsExistRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.CheckCloudIdentityAccountsExist(CheckCloudIdentityAccountsExistRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CheckCloudIdentityAccountsExistAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CheckCloudIdentityAccountsExistAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CheckCloudIdentityAccountsExistAsync_Google_Cloud_Channel_V1_CheckCloudIdentityAccountsExistRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CheckCloudIdentityAccountsExistAsync(Google.Cloud.Channel.V1.CheckCloudIdentityAccountsExistRequest,Google.Api.Gax.Grpc.CallSettings)">CheckCloudIdentityAccountsExistAsync(CheckCloudIdentityAccountsExistRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Confirms the existence of Cloud Identity accounts, based on the domain and
-whether the Cloud Identity accounts are owned by the reseller.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Confirms the existence of Cloud Identity accounts based on the domain and
+if the Cloud Identity accounts are owned by the reseller.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>INVALID_VALUE: Invalid domain value in the request.</li>
 </ul>
-<p>Return Value:
-List of [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources for the domain.
-List may be empty.</p>
-<p>Note: in the v1alpha1 version of the API, a NOT_FOUND error is returned if
+<p>Return value:
+A list of [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources for the domain (may be
+empty)</p>
+<p>Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
 no [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources match the domain.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1524,29 +1502,27 @@ no [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerA
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_CheckCloudIdentityAccountsExistAsync_Google_Cloud_Channel_V1_CheckCloudIdentityAccountsExistRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.CheckCloudIdentityAccountsExistAsync(CheckCloudIdentityAccountsExistRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateChannelPartnerLink_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateChannelPartnerLink*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateChannelPartnerLink_Google_Cloud_Channel_V1_CreateChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateChannelPartnerLink(Google.Cloud.Channel.V1.CreateChannelPartnerLinkRequest,Google.Api.Gax.Grpc.CallSettings)">CreateChannelPartnerLink(CreateChannelPartnerLinkRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Initiates a channel partner link between a distributor and a reseller or
+  <div class="markdown level1 summary"><p>Initiates a channel partner link between a distributor and a reseller, or
 between resellers in an n-tier reseller channel.
-To accept the invite, the invited partner should follow the invite_link_uri
-provided in the response. If the link creation is accepted, a valid link is
-set up between the two involved parties.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+Invited partners need to follow the invite_link_uri provided in the
+response to accept. After accepting the invitation, a link is set up
+between the two parties.
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>ALREADY_EXISTS: If the ChannelPartnerLink sent in the request already
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>ALREADY_EXISTS: The ChannelPartnerLink sent in the request already
 exists.</li>
-<li>NOT_FOUND: If no Cloud Identity customer exists for domain provided.</li>
+<li>NOT_FOUND: No Cloud Identity customer exists for provided domain.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Newly created [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource if successful,
-otherwise error is returned.</p>
+<p>Return value:
+The new [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1597,29 +1573,27 @@ otherwise error is returned.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_CreateChannelPartnerLink_Google_Cloud_Channel_V1_CreateChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.CreateChannelPartnerLink(CreateChannelPartnerLinkRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateChannelPartnerLinkAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateChannelPartnerLinkAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateChannelPartnerLinkAsync_Google_Cloud_Channel_V1_CreateChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateChannelPartnerLinkAsync(Google.Cloud.Channel.V1.CreateChannelPartnerLinkRequest,Google.Api.Gax.Grpc.CallSettings)">CreateChannelPartnerLinkAsync(CreateChannelPartnerLinkRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Initiates a channel partner link between a distributor and a reseller or
+  <div class="markdown level1 summary"><p>Initiates a channel partner link between a distributor and a reseller, or
 between resellers in an n-tier reseller channel.
-To accept the invite, the invited partner should follow the invite_link_uri
-provided in the response. If the link creation is accepted, a valid link is
-set up between the two involved parties.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+Invited partners need to follow the invite_link_uri provided in the
+response to accept. After accepting the invitation, a link is set up
+between the two parties.
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>ALREADY_EXISTS: If the ChannelPartnerLink sent in the request already
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>ALREADY_EXISTS: The ChannelPartnerLink sent in the request already
 exists.</li>
-<li>NOT_FOUND: If no Cloud Identity customer exists for domain provided.</li>
+<li>NOT_FOUND: No Cloud Identity customer exists for provided domain.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Newly created [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource if successful,
-otherwise error is returned.</p>
+<p>Return value:
+The new [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1672,18 +1646,16 @@ otherwise error is returned.</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateCustomer_Google_Cloud_Channel_V1_CreateCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateCustomer(Google.Cloud.Channel.V1.CreateCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">CreateCustomer(CreateCustomerRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new [Customer][google.cloud.channel.v1.Customer] resource under the reseller or distributor
 account.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: It can happen in following scenarios -</li>
-<li>Missing or invalid required parameters in the request.</li>
-<li>Domain field value doesn&apos;t match the domain specified in primary
-email.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT:</li>
+<li>Required request parameters are missing or invalid.</li>
+<li>Domain field value doesn&apos;t match the primary email domain.</li>
 </ul>
-<p>Return Value:
-If successful, the newly created [Customer][google.cloud.channel.v1.Customer] resource, otherwise
-returns an error.</p>
+<p>Return value:
+The newly created [Customer][google.cloud.channel.v1.Customer] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1736,18 +1708,16 @@ returns an error.</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateCustomerAsync_Google_Cloud_Channel_V1_CreateCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateCustomerAsync(Google.Cloud.Channel.V1.CreateCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">CreateCustomerAsync(CreateCustomerRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a new [Customer][google.cloud.channel.v1.Customer] resource under the reseller or distributor
 account.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: It can happen in following scenarios -</li>
-<li>Missing or invalid required parameters in the request.</li>
-<li>Domain field value doesn&apos;t match the domain specified in primary
-email.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT:</li>
+<li>Required request parameters are missing or invalid.</li>
+<li>Domain field value doesn&apos;t match the primary email domain.</li>
 </ul>
-<p>Return Value:
-If successful, the newly created [Customer][google.cloud.channel.v1.Customer] resource, otherwise
-returns an error.</p>
+<p>Return value:
+The newly created [Customer][google.cloud.channel.v1.Customer] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1799,39 +1769,36 @@ returns an error.</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateEntitlement_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateEntitlement*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateEntitlement_Google_Cloud_Channel_V1_CreateEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateEntitlement(Google.Cloud.Channel.V1.CreateEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">CreateEntitlement(CreateEntitlementRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates an entitlement for a customer.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: It can happen in below scenarios -</li>
-<li>Missing or invalid required parameters in the request.</li>
-<li>Cannot purchase an entitlement if there is already an entitlement for
-customer, for a SKU from the same product family.</li>
-<li>INVALID_VALUE: Offer passed in isn&apos;t valid. Make sure OfferId is
-valid. If it is valid, then contact Google Channel support for further
-troubleshooting.</li>
-<li>NOT_FOUND: If the customer or offer resource is not found for the
-reseller.</li>
-<li>ALREADY_EXISTS: This failure can happen in the following cases:</li>
-<li>If the SKU has been already purchased for the customer.</li>
-<li>If the customer&apos;s primary email already exists. In this case retry
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT:</li>
+<li>Required request parameters are missing or invalid.</li>
+<li>There is already a customer entitlement for a SKU from the same
+product family.</li>
+<li>INVALID_VALUE: Make sure the OfferId is valid. If it is, contact
+Google Channel support for further troubleshooting.</li>
+<li>NOT_FOUND: The customer or offer resource was not found.</li>
+<li>ALREADY_EXISTS:</li>
+<li>The SKU was already purchased for the customer.</li>
+<li>The customer&apos;s primary email already exists. Retry
 after changing the customer&apos;s primary contact email.</li>
-<li>CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in the
-following cases:</li>
-<li>Purchasing a SKU that requires domain verification and the domain has
-not been verified.</li>
-<li>Purchasing an Add-On SKU like Vault or Drive without purchasing the
-pre-requisite SKU, such as Google Workspace Business Starter.</li>
-<li>Applicable only for developer accounts: reseller and resold domain.
-Must meet the following domain naming requirements:</li>
+<li>CONDITION_NOT_MET or FAILED_PRECONDITION:</li>
+<li>The domain required for purchasing a SKU has not been verified.</li>
+<li>A pre-requisite SKU required to purchase an Add-On SKU is missing.
+For example, Google Workspace Business Starter is required to purchase
+Vault or Drive.</li>
+<li>(Developer accounts only) Reseller and resold domain must meet the
+following naming requirements:</li>
 <li>Domain names must start with goog-test.</li>
-<li>Resold domain names must include the reseller domain.</li>
+<li>Domain names must include the reseller domain.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. Contact Cloud Channel Support in this case.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in the
-backend. Contact Cloud Channel Support in this case.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1886,39 +1853,36 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateEntitlementAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateEntitlementAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_CreateEntitlementAsync_Google_Cloud_Channel_V1_CreateEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.CreateEntitlementAsync(Google.Cloud.Channel.V1.CreateEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">CreateEntitlementAsync(CreateEntitlementRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates an entitlement for a customer.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: It can happen in below scenarios -</li>
-<li>Missing or invalid required parameters in the request.</li>
-<li>Cannot purchase an entitlement if there is already an entitlement for
-customer, for a SKU from the same product family.</li>
-<li>INVALID_VALUE: Offer passed in isn&apos;t valid. Make sure OfferId is
-valid. If it is valid, then contact Google Channel support for further
-troubleshooting.</li>
-<li>NOT_FOUND: If the customer or offer resource is not found for the
-reseller.</li>
-<li>ALREADY_EXISTS: This failure can happen in the following cases:</li>
-<li>If the SKU has been already purchased for the customer.</li>
-<li>If the customer&apos;s primary email already exists. In this case retry
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT:</li>
+<li>Required request parameters are missing or invalid.</li>
+<li>There is already a customer entitlement for a SKU from the same
+product family.</li>
+<li>INVALID_VALUE: Make sure the OfferId is valid. If it is, contact
+Google Channel support for further troubleshooting.</li>
+<li>NOT_FOUND: The customer or offer resource was not found.</li>
+<li>ALREADY_EXISTS:</li>
+<li>The SKU was already purchased for the customer.</li>
+<li>The customer&apos;s primary email already exists. Retry
 after changing the customer&apos;s primary contact email.</li>
-<li>CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in the
-following cases:</li>
-<li>Purchasing a SKU that requires domain verification and the domain has
-not been verified.</li>
-<li>Purchasing an Add-On SKU like Vault or Drive without purchasing the
-pre-requisite SKU, such as Google Workspace Business Starter.</li>
-<li>Applicable only for developer accounts: reseller and resold domain.
-Must meet the following domain naming requirements:</li>
+<li>CONDITION_NOT_MET or FAILED_PRECONDITION:</li>
+<li>The domain required for purchasing a SKU has not been verified.</li>
+<li>A pre-requisite SKU required to purchase an Add-On SKU is missing.
+For example, Google Workspace Business Starter is required to purchase
+Vault or Drive.</li>
+<li>(Developer accounts only) Reseller and resold domain must meet the
+following naming requirements:</li>
 <li>Domain names must start with goog-test.</li>
-<li>Resold domain names must include the reseller domain.</li>
+<li>Domain names must include the reseller domain.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. Contact Cloud Channel Support in this case.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in the
-backend. Contact Cloud Channel Support in this case.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -1973,15 +1937,13 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_DeleteCustomer_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.DeleteCustomer*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_DeleteCustomer_Google_Cloud_Channel_V1_DeleteCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.DeleteCustomer(Google.Cloud.Channel.V1.DeleteCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteCustomer(DeleteCustomerRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes the given [Customer][google.cloud.channel.v1.Customer] permanently and irreversibly.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the account making the request does not own
+<li>PERMISSION_DENIED: The account making the request does not own
 this customer.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>FAILED_PRECONDITION: If the customer has existing entitlements.</li>
-<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name
-specified in the request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>FAILED_PRECONDITION: The customer has existing entitlements.</li>
+<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2018,15 +1980,13 @@ specified in the request.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_DeleteCustomerAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.DeleteCustomerAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_DeleteCustomerAsync_Google_Cloud_Channel_V1_DeleteCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.DeleteCustomerAsync(Google.Cloud.Channel.V1.DeleteCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteCustomerAsync(DeleteCustomerRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Deletes the given [Customer][google.cloud.channel.v1.Customer] permanently and irreversibly.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the account making the request does not own
+<li>PERMISSION_DENIED: The account making the request does not own
 this customer.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>FAILED_PRECONDITION: If the customer has existing entitlements.</li>
-<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name
-specified in the request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>FAILED_PRECONDITION: The customer has existing entitlements.</li>
+<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2079,18 +2039,17 @@ specified in the request.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetChannelPartnerLink_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetChannelPartnerLink*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetChannelPartnerLink_Google_Cloud_Channel_V1_GetChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetChannelPartnerLink(Google.Cloud.Channel.V1.GetChannelPartnerLinkRequest,Google.Api.Gax.Grpc.CallSettings)">GetChannelPartnerLink(GetChannelPartnerLinkRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns a requested [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: ChannelPartnerLink resource not found. Results
-due invalid channel partner link name.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: ChannelPartnerLink resource not found because of an
+invalid channel partner link name.</li>
 </ul>
-<p>Return Value:
-[ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource if found, otherwise returns an error.</p>
+<p>Return value:
+The [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2142,18 +2101,17 @@ due invalid channel partner link name.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetChannelPartnerLinkAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetChannelPartnerLinkAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetChannelPartnerLinkAsync_Google_Cloud_Channel_V1_GetChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetChannelPartnerLinkAsync(Google.Cloud.Channel.V1.GetChannelPartnerLinkRequest,Google.Api.Gax.Grpc.CallSettings)">GetChannelPartnerLinkAsync(GetChannelPartnerLinkRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns a requested [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: ChannelPartnerLink resource not found. Results
-due invalid channel partner link name.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: ChannelPartnerLink resource not found because of an
+invalid channel partner link name.</li>
 </ul>
-<p>Return Value:
-[ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource if found, otherwise returns an error.</p>
+<p>Return value:
+The [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2205,17 +2163,16 @@ due invalid channel partner link name.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetCustomer_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetCustomer*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetCustomer_Google_Cloud_Channel_V1_GetCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetCustomer(Google.Cloud.Channel.V1.GetCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">GetCustomer(GetCustomerRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns a requested [Customer][google.cloud.channel.v1.Customer] resource.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the customer resource doesn&apos;t exist. Usually
-the result of an invalid name parameter.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer resource doesn&apos;t exist. Usually the result of an
+invalid name parameter.</li>
 </ul>
-<p>Return Value:
-[Customer][google.cloud.channel.v1.Customer] resource if found, error otherwise.</p>
+<p>Return value:
+The [Customer][google.cloud.channel.v1.Customer] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2267,17 +2224,16 @@ the result of an invalid name parameter.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetCustomerAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetCustomerAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetCustomerAsync_Google_Cloud_Channel_V1_GetCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetCustomerAsync(Google.Cloud.Channel.V1.GetCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">GetCustomerAsync(GetCustomerRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns a requested [Customer][google.cloud.channel.v1.Customer] resource.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the customer resource doesn&apos;t exist. Usually
-the result of an invalid name parameter.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer resource doesn&apos;t exist. Usually the result of an
+invalid name parameter.</li>
 </ul>
-<p>Return Value:
-[Customer][google.cloud.channel.v1.Customer] resource if found, error otherwise.</p>
+<p>Return value:
+The [Customer][google.cloud.channel.v1.Customer] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2329,16 +2285,14 @@ the result of an invalid name parameter.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetEntitlement_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetEntitlement*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetEntitlement_Google_Cloud_Channel_V1_GetEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetEntitlement(Google.Cloud.Channel.V1.GetEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">GetEntitlement(GetEntitlementRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns a requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the entitlement is not found for the customer.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer entitlement was not found.</li>
 </ul>
-<p>Return Value:
-If found, the requested [Entitlement][google.cloud.channel.v1.Entitlement] resource, otherwise returns
-an error.</p>
+<p>Return value:
+The requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2390,16 +2344,14 @@ an error.</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetEntitlementAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetEntitlementAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_GetEntitlementAsync_Google_Cloud_Channel_V1_GetEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.GetEntitlementAsync(Google.Cloud.Channel.V1.GetEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">GetEntitlementAsync(GetEntitlementRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Returns a requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the entitlement is not found for the customer.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer entitlement was not found.</li>
 </ul>
-<p>Return Value:
-If found, the requested [Entitlement][google.cloud.channel.v1.Entitlement] resource, otherwise returns
-an error.</p>
+<p>Return value:
+The requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2451,17 +2403,15 @@ an error.</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListChannelPartnerLinks_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListChannelPartnerLinks*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListChannelPartnerLinks_Google_Cloud_Channel_V1_ListChannelPartnerLinksRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListChannelPartnerLinks(Google.Cloud.Channel.V1.ListChannelPartnerLinksRequest,Google.Api.Gax.Grpc.CallSettings)">ListChannelPartnerLinks(ListChannelPartnerLinksRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>List [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s belonging to a distributor.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-If successful, returns the list of [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources
-for the distributor account, otherwise returns an error.</p>
+<p>Return value:
+The list of the distributor account&apos;s [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2513,17 +2463,15 @@ for the distributor account, otherwise returns an error.</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListChannelPartnerLinksAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListChannelPartnerLinksAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListChannelPartnerLinksAsync_Google_Cloud_Channel_V1_ListChannelPartnerLinksRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListChannelPartnerLinksAsync(Google.Cloud.Channel.V1.ListChannelPartnerLinksRequest,Google.Api.Gax.Grpc.CallSettings)">ListChannelPartnerLinksAsync(ListChannelPartnerLinksRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>List [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s belonging to a distributor.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-If successful, returns the list of [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources
-for the distributor account, otherwise returns an error.</p>
+<p>Return value:
+The list of the distributor account&apos;s [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2574,17 +2522,15 @@ for the distributor account, otherwise returns an error.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListChannelPartnerLinksAsync_Google_Cloud_Channel_V1_ListChannelPartnerLinksRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListChannelPartnerLinksAsync(ListChannelPartnerLinksRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListCustomers_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListCustomers*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListCustomers_Google_Cloud_Channel_V1_ListCustomersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListCustomers(Google.Cloud.Channel.V1.ListCustomersRequest,Google.Api.Gax.Grpc.CallSettings)">ListCustomers(ListCustomersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>List downstream [Customer][google.cloud.channel.v1.Customer]s.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>List [Customer][google.cloud.channel.v1.Customer]s.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-List of [Customer][google.cloud.channel.v1.Customer]s pertaining to the reseller or empty list if
-there are none.</p>
+<p>Return value:
+List of [Customer][google.cloud.channel.v1.Customer]s, or an empty list if there are no customers.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2635,17 +2581,15 @@ there are none.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListCustomers_Google_Cloud_Channel_V1_ListCustomersRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListCustomers(ListCustomersRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListCustomersAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListCustomersAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListCustomersAsync_Google_Cloud_Channel_V1_ListCustomersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListCustomersAsync(Google.Cloud.Channel.V1.ListCustomersRequest,Google.Api.Gax.Grpc.CallSettings)">ListCustomersAsync(ListCustomersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>List downstream [Customer][google.cloud.channel.v1.Customer]s.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>List [Customer][google.cloud.channel.v1.Customer]s.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-List of [Customer][google.cloud.channel.v1.Customer]s pertaining to the reseller or empty list if
-there are none.</p>
+<p>Return value:
+List of [Customer][google.cloud.channel.v1.Customer]s, or an empty list if there are no customers.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2696,15 +2640,14 @@ there are none.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListCustomersAsync_Google_Cloud_Channel_V1_ListCustomersRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListCustomersAsync(ListCustomersRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListEntitlements_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListEntitlements*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListEntitlements_Google_Cloud_Channel_V1_ListEntitlementsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListEntitlements(Google.Cloud.Channel.V1.ListEntitlementsRequest,Google.Api.Gax.Grpc.CallSettings)">ListEntitlements(ListEntitlementsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>List [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to a customer.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Lists [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to a customer.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-List of [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to the customer, or empty list if
-there are none.</p>
+<p>Return value:
+A list of the customer&apos;s [Entitlement][google.cloud.channel.v1.Entitlement]s.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2755,15 +2698,14 @@ there are none.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListEntitlements_Google_Cloud_Channel_V1_ListEntitlementsRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListEntitlements(ListEntitlementsRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListEntitlementsAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListEntitlementsAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListEntitlementsAsync_Google_Cloud_Channel_V1_ListEntitlementsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListEntitlementsAsync(Google.Cloud.Channel.V1.ListEntitlementsRequest,Google.Api.Gax.Grpc.CallSettings)">ListEntitlementsAsync(ListEntitlementsRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>List [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to a customer.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Lists [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to a customer.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-List of [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to the customer, or empty list if
-there are none.</p>
+<p>Return value:
+A list of the customer&apos;s [Entitlement][google.cloud.channel.v1.Entitlement]s.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2815,10 +2757,9 @@ there are none.</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListOffers_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListOffers*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListOffers_Google_Cloud_Channel_V1_ListOffersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListOffers(Google.Cloud.Channel.V1.ListOffersRequest,Google.Api.Gax.Grpc.CallSettings)">ListOffers(ListOffersRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the Offers the reseller can sell.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2871,10 +2812,9 @@ request.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListOffersAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListOffersAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListOffersAsync_Google_Cloud_Channel_V1_ListOffersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListOffersAsync(Google.Cloud.Channel.V1.ListOffersRequest,Google.Api.Gax.Grpc.CallSettings)">ListOffersAsync(ListOffersRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the Offers the reseller can sell.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2927,10 +2867,9 @@ request.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListProducts_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListProducts*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListProducts_Google_Cloud_Channel_V1_ListProductsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListProducts(Google.Cloud.Channel.V1.ListProductsRequest,Google.Api.Gax.Grpc.CallSettings)">ListProducts(ListProductsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the Products the reseller is authorized to sell.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2983,10 +2922,9 @@ request.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListProductsAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListProductsAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListProductsAsync_Google_Cloud_Channel_V1_ListProductsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListProductsAsync(Google.Cloud.Channel.V1.ListProductsRequest,Google.Api.Gax.Grpc.CallSettings)">ListProductsAsync(ListProductsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the Products the reseller is authorized to sell.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3038,16 +2976,15 @@ request.</li>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListProductsAsync_Google_Cloud_Channel_V1_ListProductsRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListProductsAsync(ListProductsRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableOffers_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableOffers*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableOffers_Google_Cloud_Channel_V1_ListPurchasableOffersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableOffers(Google.Cloud.Channel.V1.ListPurchasableOffersRequest,Google.Api.Gax.Grpc.CallSettings)">ListPurchasableOffers(ListPurchasableOffersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the Purchasable Offers for the following cases:</p>
+  <div class="markdown level1 summary"><p>Lists the following:</p>
 <ul>
-<li>Offers that can be newly purchased for a customer</li>
-<li>Offers that can be changed to, for an entitlement.</li>
+<li>Offers that you can purchase for a customer.</li>
+<li>Offers that you can change for an entitlement.</li>
 </ul>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3099,16 +3036,15 @@ request.</li>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListPurchasableOffers_Google_Cloud_Channel_V1_ListPurchasableOffersRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListPurchasableOffers(ListPurchasableOffersRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableOffersAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableOffersAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableOffersAsync_Google_Cloud_Channel_V1_ListPurchasableOffersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableOffersAsync(Google.Cloud.Channel.V1.ListPurchasableOffersRequest,Google.Api.Gax.Grpc.CallSettings)">ListPurchasableOffersAsync(ListPurchasableOffersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the Purchasable Offers for the following cases:</p>
+  <div class="markdown level1 summary"><p>Lists the following:</p>
 <ul>
-<li>Offers that can be newly purchased for a customer</li>
-<li>Offers that can be changed to, for an entitlement.</li>
+<li>Offers that you can purchase for a customer.</li>
+<li>Offers that you can change for an entitlement.</li>
 </ul>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3160,16 +3096,15 @@ request.</li>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListPurchasableOffersAsync_Google_Cloud_Channel_V1_ListPurchasableOffersRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListPurchasableOffersAsync(ListPurchasableOffersRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableSkus_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableSkus*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableSkus_Google_Cloud_Channel_V1_ListPurchasableSkusRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableSkus(Google.Cloud.Channel.V1.ListPurchasableSkusRequest,Google.Api.Gax.Grpc.CallSettings)">ListPurchasableSkus(ListPurchasableSkusRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the Purchasable SKUs for following cases:</p>
+  <div class="markdown level1 summary"><p>Lists the following:</p>
 <ul>
-<li>SKUs that can be newly purchased for a customer</li>
-<li>SKUs that can be upgraded/downgraded to, for an entitlement.</li>
+<li>SKUs that you can purchase for a customer</li>
+<li>SKUs that you can upgrade or downgrade for an entitlement.</li>
 </ul>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3221,16 +3156,15 @@ request.</li>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListPurchasableSkus_Google_Cloud_Channel_V1_ListPurchasableSkusRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListPurchasableSkus(ListPurchasableSkusRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableSkusAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableSkusAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListPurchasableSkusAsync_Google_Cloud_Channel_V1_ListPurchasableSkusRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListPurchasableSkusAsync(Google.Cloud.Channel.V1.ListPurchasableSkusRequest,Google.Api.Gax.Grpc.CallSettings)">ListPurchasableSkusAsync(ListPurchasableSkusRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists the Purchasable SKUs for following cases:</p>
+  <div class="markdown level1 summary"><p>Lists the following:</p>
 <ul>
-<li>SKUs that can be newly purchased for a customer</li>
-<li>SKUs that can be upgraded/downgraded to, for an entitlement.</li>
+<li>SKUs that you can purchase for a customer</li>
+<li>SKUs that you can upgrade or downgrade for an entitlement.</li>
 </ul>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3283,10 +3217,9 @@ request.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListSkus_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListSkus*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListSkus_Google_Cloud_Channel_V1_ListSkusRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListSkus(Google.Cloud.Channel.V1.ListSkusRequest,Google.Api.Gax.Grpc.CallSettings)">ListSkus(ListSkusRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the SKUs for a product the reseller is authorized to sell.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3339,10 +3272,9 @@ request.</li>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListSkusAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListSkusAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListSkusAsync_Google_Cloud_Channel_V1_ListSkusRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListSkusAsync(Google.Cloud.Channel.V1.ListSkusRequest,Google.Api.Gax.Grpc.CallSettings)">ListSkusAsync(ListSkusRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists the SKUs for a product the reseller is authorized to sell.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3396,22 +3328,20 @@ request.</li>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListSubscribers_Google_Cloud_Channel_V1_ListSubscribersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListSubscribers(Google.Cloud.Channel.V1.ListSubscribersRequest,Google.Api.Gax.Grpc.CallSettings)">ListSubscribers(ListSubscribersRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists service accounts with subscriber privileges on the Cloud Pub/Sub
 topic created for this Channel Services account.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being provided are different, or if the account is not
-a super admin.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the topic resource doesn&apos;t exist.</li>
+<li>PERMISSION_DENIED: The reseller account making the request and the
+provided reseller account are different, or the impersonated user
+is not a super admin.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The topic resource doesn&apos;t exist.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-List of service email addresses if successful, otherwise error is
-returned.</p>
+<p>Return value:
+A list of service email addresses.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3464,22 +3394,20 @@ returned.</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListSubscribersAsync_Google_Cloud_Channel_V1_ListSubscribersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListSubscribersAsync(Google.Cloud.Channel.V1.ListSubscribersRequest,Google.Api.Gax.Grpc.CallSettings)">ListSubscribersAsync(ListSubscribersRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Lists service accounts with subscriber privileges on the Cloud Pub/Sub
 topic created for this Channel Services account.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being provided are different, or if the account is not
-a super admin.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the topic resource doesn&apos;t exist.</li>
+<li>PERMISSION_DENIED: The reseller account making the request and the
+provided reseller account are different, or the impersonated user
+is not a super admin.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The topic resource doesn&apos;t exist.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-List of service email addresses if successful, otherwise error is
-returned.</p>
+<p>Return value:
+A list of service email addresses.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3532,20 +3460,19 @@ returned.</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListTransferableOffers_Google_Cloud_Channel_V1_ListTransferableOffersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListTransferableOffers(Google.Cloud.Channel.V1.ListTransferableOffersRequest,Google.Api.Gax.Grpc.CallSettings)">ListTransferableOffers(ListTransferableOffersRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a customer based on Cloud Identity ID or
 Customer Name in the request.</p>
-<p>This method is used when a reseller gets the entitlement
-information of a customer that is not owned. The reseller should provide
-the customer&apos;s Cloud Identity ID or Customer Name.</p>
-<p>Possible Error Codes:</p>
+<p>Use this method when a reseller gets the entitlement information of an
+unowned customer. The reseller should provide the customer&apos;s
+Cloud Identity ID or Customer Name.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: Appears because of one of the following:</li>
-<li>If the customer doesn&apos;t belong to the reseller and no auth token or
-invalid auth token is supplied.</li>
-<li>If the reseller account making the request and the reseller account
-being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED:</li>
+<li>The customer doesn&apos;t belong to the reseller and has no auth token.</li>
+<li>The supplied auth token is invalid.</li>
+<li>The reseller account making the request is different
+from the reseller account in the query.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
+<p>Return value:
 List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the given customer and SKU.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3599,20 +3526,19 @@ List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the g
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListTransferableOffersAsync_Google_Cloud_Channel_V1_ListTransferableOffersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListTransferableOffersAsync(Google.Cloud.Channel.V1.ListTransferableOffersRequest,Google.Api.Gax.Grpc.CallSettings)">ListTransferableOffersAsync(ListTransferableOffersRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a customer based on Cloud Identity ID or
 Customer Name in the request.</p>
-<p>This method is used when a reseller gets the entitlement
-information of a customer that is not owned. The reseller should provide
-the customer&apos;s Cloud Identity ID or Customer Name.</p>
-<p>Possible Error Codes:</p>
+<p>Use this method when a reseller gets the entitlement information of an
+unowned customer. The reseller should provide the customer&apos;s
+Cloud Identity ID or Customer Name.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: Appears because of one of the following:</li>
-<li>If the customer doesn&apos;t belong to the reseller and no auth token or
-invalid auth token is supplied.</li>
-<li>If the reseller account making the request and the reseller account
-being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED:</li>
+<li>The customer doesn&apos;t belong to the reseller and has no auth token.</li>
+<li>The supplied auth token is invalid.</li>
+<li>The reseller account making the request is different
+from the reseller account in the query.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
+<p>Return value:
 List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the given customer and SKU.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3664,22 +3590,22 @@ List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the g
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListTransferableOffersAsync_Google_Cloud_Channel_V1_ListTransferableOffersRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListTransferableOffersAsync(ListTransferableOffersRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListTransferableSkus_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListTransferableSkus*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListTransferableSkus_Google_Cloud_Channel_V1_ListTransferableSkusRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListTransferableSkus(Google.Cloud.Channel.V1.ListTransferableSkusRequest,Google.Api.Gax.Grpc.CallSettings)">ListTransferableSkus(ListTransferableSkusRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a customer based on Cloud Identity ID or
+  <div class="markdown level1 summary"><p>List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a customer based on the Cloud Identity ID or
 Customer Name in the request.</p>
-<p>This method is used when a reseller lists the entitlements
-information of a customer that is not owned. The reseller should provide
-the customer&apos;s Cloud Identity ID or Customer Name.</p>
-<p>Possible Error Codes:</p>
+<p>Use this method to list the entitlements information of an
+unowned customer. You should provide the customer&apos;s
+Cloud Identity ID or Customer Name.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: Appears because of one of the following -</li>
-<li>The customer doesn&apos;t belong to the reseller and no auth token.</li>
+<li>PERMISSION_DENIED:</li>
+<li>The customer doesn&apos;t belong to the reseller and has no auth token.</li>
 <li>The supplied auth token is invalid.</li>
-<li>The reseller account making the request and the queries reseller
-account are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
+<li>The reseller account making the request is different
+from the reseller account in the query.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-List of [TransferableSku][google.cloud.channel.v1.TransferableSku] for the given customer.</p>
+<p>Return value:
+A list of the customer&apos;s [TransferableSku][google.cloud.channel.v1.TransferableSku].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3730,22 +3656,22 @@ List of [TransferableSku][google.cloud.channel.v1.TransferableSku] for the given
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_ListTransferableSkus_Google_Cloud_Channel_V1_ListTransferableSkusRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.ListTransferableSkus(ListTransferableSkusRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListTransferableSkusAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListTransferableSkusAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ListTransferableSkusAsync_Google_Cloud_Channel_V1_ListTransferableSkusRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ListTransferableSkusAsync(Google.Cloud.Channel.V1.ListTransferableSkusRequest,Google.Api.Gax.Grpc.CallSettings)">ListTransferableSkusAsync(ListTransferableSkusRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a customer based on Cloud Identity ID or
+  <div class="markdown level1 summary"><p>List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a customer based on the Cloud Identity ID or
 Customer Name in the request.</p>
-<p>This method is used when a reseller lists the entitlements
-information of a customer that is not owned. The reseller should provide
-the customer&apos;s Cloud Identity ID or Customer Name.</p>
-<p>Possible Error Codes:</p>
+<p>Use this method to list the entitlements information of an
+unowned customer. You should provide the customer&apos;s
+Cloud Identity ID or Customer Name.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: Appears because of one of the following -</li>
-<li>The customer doesn&apos;t belong to the reseller and no auth token.</li>
+<li>PERMISSION_DENIED:</li>
+<li>The customer doesn&apos;t belong to the reseller and has no auth token.</li>
 <li>The supplied auth token is invalid.</li>
-<li>The reseller account making the request and the queries reseller
-account are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
+<li>The reseller account making the request is different
+from the reseller account in the query.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 </ul>
-<p>Return Value:
-List of [TransferableSku][google.cloud.channel.v1.TransferableSku] for the given customer.</p>
+<p>Return value:
+A list of the customer&apos;s [TransferableSku][google.cloud.channel.v1.TransferableSku].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3797,23 +3723,23 @@ List of [TransferableSku][google.cloud.channel.v1.TransferableSku] for the given
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ProvisionCloudIdentity_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ProvisionCloudIdentity*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ProvisionCloudIdentity_Google_Cloud_Channel_V1_ProvisionCloudIdentityRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ProvisionCloudIdentity(Google.Cloud.Channel.V1.ProvisionCloudIdentityRequest,Google.Api.Gax.Grpc.CallSettings)">ProvisionCloudIdentity(ProvisionCloudIdentityRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a Cloud Identity for the given customer using the customer&apos;s
-information or the information provided here, if present.</p>
-<p>Possible Error Codes:</p>
+information, or the information provided here.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
-<li>NOT_FOUND: If the customer is not found for the reseller.</li>
-<li>ALREADY_EXISTS: If the customer&apos;s primary email already exists. In this
-case, retry after changing the customer&apos;s primary contact email.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer was not found.</li>
+<li>ALREADY_EXISTS: The customer&apos;s primary email already exists. Retry
+after changing the customer&apos;s primary contact email.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. Contact Cloud Channel support in this case.</li>
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-Contact Cloud Channel support in this case.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
-CloudChannelOperationsService. The Operation metadata will contain an
+CloudChannelOperationsService. The Operation metadata contains an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3866,23 +3792,23 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ProvisionCloudIdentityAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ProvisionCloudIdentityAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_ProvisionCloudIdentityAsync_Google_Cloud_Channel_V1_ProvisionCloudIdentityRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.ProvisionCloudIdentityAsync(Google.Cloud.Channel.V1.ProvisionCloudIdentityRequest,Google.Api.Gax.Grpc.CallSettings)">ProvisionCloudIdentityAsync(ProvisionCloudIdentityRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Creates a Cloud Identity for the given customer using the customer&apos;s
-information or the information provided here, if present.</p>
-<p>Possible Error Codes:</p>
+information, or the information provided here.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
-<li>NOT_FOUND: If the customer is not found for the reseller.</li>
-<li>ALREADY_EXISTS: If the customer&apos;s primary email already exists. In this
-case, retry after changing the customer&apos;s primary contact email.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer was not found.</li>
+<li>ALREADY_EXISTS: The customer&apos;s primary email already exists. Retry
+after changing the customer&apos;s primary contact email.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. Contact Cloud Channel support in this case.</li>
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-Contact Cloud Channel support in this case.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
-CloudChannelOperationsService. The Operation metadata will contain an
+CloudChannelOperationsService. The Operation metadata contains an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -3935,23 +3861,21 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_RegisterSubscriber_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.RegisterSubscriber*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_RegisterSubscriber_Google_Cloud_Channel_V1_RegisterSubscriberRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.RegisterSubscriber(Google.Cloud.Channel.V1.RegisterSubscriberRequest,Google.Api.Gax.Grpc.CallSettings)">RegisterSubscriber(RegisterSubscriberRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Registers a service account with subscriber privileges on the Cloud Pub/Sub
-topic created for this Channel Services account. Once you create a
-subscriber, you will get the events as per [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]</p>
-<p>Possible Error Codes:</p>
+topic for this Channel Services account. After you create a
+subscriber, you get the events through [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being provided are different, or if the impersonated user
+<li>PERMISSION_DENIED: The reseller account making the request and the
+provided reseller account are different, or the impersonated user
 is not a super admin.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Topic name with service email address registered if successful,
-otherwise error is returned.</p>
+<p>Return value:
+The topic name with the registered service email address.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4003,23 +3927,21 @@ otherwise error is returned.</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_RegisterSubscriberAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.RegisterSubscriberAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_RegisterSubscriberAsync_Google_Cloud_Channel_V1_RegisterSubscriberRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.RegisterSubscriberAsync(Google.Cloud.Channel.V1.RegisterSubscriberRequest,Google.Api.Gax.Grpc.CallSettings)">RegisterSubscriberAsync(RegisterSubscriberRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Registers a service account with subscriber privileges on the Cloud Pub/Sub
-topic created for this Channel Services account. Once you create a
-subscriber, you will get the events as per [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]</p>
-<p>Possible Error Codes:</p>
+topic for this Channel Services account. After you create a
+subscriber, you get the events through [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being provided are different, or if the impersonated user
+<li>PERMISSION_DENIED: The reseller account making the request and the
+provided reseller account are different, or the impersonated user
 is not a super admin.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Topic name with service email address registered if successful,
-otherwise error is returned.</p>
+<p>Return value:
+The topic name with the registered service email address.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4072,23 +3994,22 @@ otherwise error is returned.</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_StartPaidService_Google_Cloud_Channel_V1_StartPaidServiceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.StartPaidService(Google.Cloud.Channel.V1.StartPaidServiceRequest,Google.Api.Gax.Grpc.CallSettings)">StartPaidService(StartPaidServiceRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Starts paid service for a trial entitlement.</p>
 <p>Starts paid service for a trial entitlement immediately. This method is
-only applicable if a plan has already been set up for a trial entitlement
-but has some trial days remaining.</p>
-<p>Possible Error Codes:</p>
+only applicable if a plan is set up for a trial entitlement but has some
+trial days remaining.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>FAILED_PRECONDITION/NOT_IN_TRIAL: This method only works for
 entitlement on trial plans.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue
-in the backend. In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -4144,23 +4065,22 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_StartPaidServiceAsync_Google_Cloud_Channel_V1_StartPaidServiceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.StartPaidServiceAsync(Google.Cloud.Channel.V1.StartPaidServiceRequest,Google.Api.Gax.Grpc.CallSettings)">StartPaidServiceAsync(StartPaidServiceRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Starts paid service for a trial entitlement.</p>
 <p>Starts paid service for a trial entitlement immediately. This method is
-only applicable if a plan has already been set up for a trial entitlement
-but has some trial days remaining.</p>
-<p>Possible Error Codes:</p>
+only applicable if a plan is set up for a trial entitlement but has some
+trial days remaining.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>FAILED_PRECONDITION/NOT_IN_TRIAL: This method only works for
 entitlement on trial plans.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue
-in the backend. In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -4214,22 +4134,21 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_StartPaidServiceAsync_Google_Cloud_Channel_V1_StartPaidServiceRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.StartPaidServiceAsync(StartPaidServiceRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_SuspendEntitlement_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.SuspendEntitlement*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_SuspendEntitlement_Google_Cloud_Channel_V1_SuspendEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.SuspendEntitlement(Google.Cloud.Channel.V1.SuspendEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">SuspendEntitlement(SuspendEntitlementRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Suspends a previously fulfilled entitlement.
-An entitlement suspension is a long-running operation.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Suspends a previously fulfilled entitlement.</p>
+<p>An entitlement suspension is a long-running operation.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>NOT_ACTIVE: Entitlement is not active.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -4283,22 +4202,21 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_SuspendEntitlement_Google_Cloud_Channel_V1_SuspendEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.SuspendEntitlement(SuspendEntitlementRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_SuspendEntitlementAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.SuspendEntitlementAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_SuspendEntitlementAsync_Google_Cloud_Channel_V1_SuspendEntitlementRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.SuspendEntitlementAsync(Google.Cloud.Channel.V1.SuspendEntitlementRequest,Google.Api.Gax.Grpc.CallSettings)">SuspendEntitlementAsync(SuspendEntitlementRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Suspends a previously fulfilled entitlement.
-An entitlement suspension is a long-running operation.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Suspends a previously fulfilled entitlement.</p>
+<p>An entitlement suspension is a long-running operation.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
 <li>NOT_FOUND: Entitlement resource not found.</li>
 <li>NOT_ACTIVE: Entitlement is not active.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -4353,31 +4271,29 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlements_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlements*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlements_Google_Cloud_Channel_V1_TransferEntitlementsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlements(Google.Cloud.Channel.V1.TransferEntitlementsRequest,Google.Api.Gax.Grpc.CallSettings)">TransferEntitlements(TransferEntitlementsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Transfers customer entitlements to new reseller.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
-<li>NOT_FOUND: If the customer or offer resource is not found for the
-reseller.</li>
-<li>ALREADY_EXISTS: If the SKU has been already transferred for the customer.</li>
-<li>CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in the
-following cases:</li>
-<li>Transferring a SKU that requires domain verification and the domain
-has not been verified.</li>
-<li>Transferring an Add-On SKU like Vault or Drive without transferring
-the pre-requisite SKU, such as G Suite Basic.</li>
-<li>Applicable only for developer accounts: reseller and resold domain
-must follow the domain naming convention as follows:</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer or offer resource was not found.</li>
+<li>ALREADY_EXISTS: The SKU was already transferred for the customer.</li>
+<li>CONDITION_NOT_MET or FAILED_PRECONDITION:</li>
+<li>The SKU requires domain verification to transfer, but the domain is
+not verified.</li>
+<li>An Add-On SKU (example, Vault or Drive) is missing the
+pre-requisite SKU (example, G Suite Basic).</li>
+<li>(Developer accounts only) Reseller and resold domain must meet the
+following naming requirements:</li>
 <li>Domain names must start with goog-test.</li>
-<li>Resold domain names must include the reseller domain.</li>
-<li>All transferring entitlements must be specified.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+<li>Domain names must include the reseller domain.</li>
+<li>Specify all transferring entitlements.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -4432,31 +4348,29 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlementsAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlementsAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlementsAsync_Google_Cloud_Channel_V1_TransferEntitlementsRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlementsAsync(Google.Cloud.Channel.V1.TransferEntitlementsRequest,Google.Api.Gax.Grpc.CallSettings)">TransferEntitlementsAsync(TransferEntitlementsRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Transfers customer entitlements to new reseller.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
-<li>NOT_FOUND: If the customer or offer resource is not found for the
-reseller.</li>
-<li>ALREADY_EXISTS: If the SKU has been already transferred for the customer.</li>
-<li>CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in the
-following cases:</li>
-<li>Transferring a SKU that requires domain verification and the domain
-has not been verified.</li>
-<li>Transferring an Add-On SKU like Vault or Drive without transferring
-the pre-requisite SKU, such as G Suite Basic.</li>
-<li>Applicable only for developer accounts: reseller and resold domain
-must follow the domain naming convention as follows:</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer or offer resource was not found.</li>
+<li>ALREADY_EXISTS: The SKU was already transferred for the customer.</li>
+<li>CONDITION_NOT_MET or FAILED_PRECONDITION:</li>
+<li>The SKU requires domain verification to transfer, but the domain is
+not verified.</li>
+<li>An Add-On SKU (example, Vault or Drive) is missing the
+pre-requisite SKU (example, G Suite Basic).</li>
+<li>(Developer accounts only) Reseller and resold domain must meet the
+following naming requirements:</li>
 <li>Domain names must start with goog-test.</li>
-<li>Resold domain names must include the reseller domain.</li>
-<li>All transferring entitlements must be specified.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+<li>Domain names must include the reseller domain.</li>
+<li>Specify all transferring entitlements.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The Operation metadata will contain an
 instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
@@ -4510,31 +4424,29 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_TransferEntitlementsAsync_Google_Cloud_Channel_V1_TransferEntitlementsRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.TransferEntitlementsAsync(TransferEntitlementsRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlementsToGoogle_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlementsToGoogle*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlementsToGoogle_Google_Cloud_Channel_V1_TransferEntitlementsToGoogleRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlementsToGoogle(Google.Cloud.Channel.V1.TransferEntitlementsToGoogleRequest,Google.Api.Gax.Grpc.CallSettings)">TransferEntitlementsToGoogle(TransferEntitlementsToGoogleRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Transfers customer entitlements from current reseller to Google.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Transfers customer entitlements from their current reseller to Google.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
-<li>NOT_FOUND: If the customer or offer resource is not found for the
-reseller.</li>
-<li>ALREADY_EXISTS: If the SKU has been already transferred for the customer.</li>
-<li>CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in
-the following cases:</li>
-<li>Transferring a SKU that requires domain verification and the domain
-has not been verified.</li>
-<li>Transferring an Add-On SKU like Vault or Drive without purchasing the
-pre-requisite SKU, such as G Suite Basic.</li>
-<li>Applicable only for developer accounts: reseller and resold domain
-must follow the domain naming convention as follows:</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer or offer resource was not found.</li>
+<li>ALREADY_EXISTS: The SKU was already transferred for the customer.</li>
+<li>CONDITION_NOT_MET or FAILED_PRECONDITION:</li>
+<li>The SKU requires domain verification to transfer, but the domain is
+not verified.</li>
+<li>An Add-On SKU (example, Vault or Drive) is missing the
+pre-requisite SKU (example, G Suite Basic).</li>
+<li>(Developer accounts only) Reseller and resold domain must meet the
+following naming requirements:</li>
 <li>Domain names must start with goog-test.</li>
-<li>Resold domain names must include the reseller domain.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+<li>Domain names must include the reseller domain.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The response will contain
 google.protobuf.Empty on success. The Operation metadata will contain an
@@ -4589,31 +4501,29 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_TransferEntitlementsToGoogle_Google_Cloud_Channel_V1_TransferEntitlementsToGoogleRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.TransferEntitlementsToGoogle(TransferEntitlementsToGoogleRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlementsToGoogleAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlementsToGoogleAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_TransferEntitlementsToGoogleAsync_Google_Cloud_Channel_V1_TransferEntitlementsToGoogleRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.TransferEntitlementsToGoogleAsync(Google.Cloud.Channel.V1.TransferEntitlementsToGoogleRequest,Google.Api.Gax.Grpc.CallSettings)">TransferEntitlementsToGoogleAsync(TransferEntitlementsToGoogleRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Transfers customer entitlements from current reseller to Google.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Transfers customer entitlements from their current reseller to Google.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the customer doesn&apos;t belong to the reseller.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the request.</li>
-<li>NOT_FOUND: If the customer or offer resource is not found for the
-reseller.</li>
-<li>ALREADY_EXISTS: If the SKU has been already transferred for the customer.</li>
-<li>CONDITION_NOT_MET or FAILED_PRECONDITION: This failure can happen in
-the following cases:</li>
-<li>Transferring a SKU that requires domain verification and the domain
-has not been verified.</li>
-<li>Transferring an Add-On SKU like Vault or Drive without purchasing the
-pre-requisite SKU, such as G Suite Basic.</li>
-<li>Applicable only for developer accounts: reseller and resold domain
-must follow the domain naming convention as follows:</li>
+<li>PERMISSION_DENIED: The customer doesn&apos;t belong to the reseller.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The customer or offer resource was not found.</li>
+<li>ALREADY_EXISTS: The SKU was already transferred for the customer.</li>
+<li>CONDITION_NOT_MET or FAILED_PRECONDITION:</li>
+<li>The SKU requires domain verification to transfer, but the domain is
+not verified.</li>
+<li>An Add-On SKU (example, Vault or Drive) is missing the
+pre-requisite SKU (example, G Suite Basic).</li>
+<li>(Developer accounts only) Reseller and resold domain must meet the
+following naming requirements:</li>
 <li>Domain names must start with goog-test.</li>
-<li>Resold domain names must include the reseller domain.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+<li>Domain names must include the reseller domain.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-Please contact Cloud Channel Support in this case.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Long Running Operation ID.</p>
+<p>Return value:
+The ID of a long-running operation.</p>
 <p>To get the results of the operation, call the GetOperation method of
 CloudChannelOperationsService. The response will contain
 google.protobuf.Empty on success. The Operation metadata will contain an
@@ -4670,25 +4580,24 @@ instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UnregisterSubscriber_Google_Cloud_Channel_V1_UnregisterSubscriberRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UnregisterSubscriber(Google.Cloud.Channel.V1.UnregisterSubscriberRequest,Google.Api.Gax.Grpc.CallSettings)">UnregisterSubscriber(UnregisterSubscriberRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Unregisters a service account with subscriber privileges on the Cloud
 Pub/Sub topic created for this Channel Services account. If there are no
-more service account left with sunbscriber privileges, the topic will be
-deleted. You can check this by calling ListSubscribers api.</p>
-<p>Possible Error Codes:</p>
+service accounts left with subscriber privileges, this deletes the topic.
+You can call ListSubscribers to check for these accounts.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being provided are different, or if the impersonated user
+<li>PERMISSION_DENIED: The reseller account making the request and the
+provided reseller account are different, or the impersonated user
 is not a super admin.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the topic resource doesn&apos;t exist.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The topic resource doesn&apos;t exist.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Topic name from which service email address has been unregistered if
-successful, otherwise error is returned. If the service email was already
-not associated with the topic, the success response will be returned.</p>
+<p>Return value:
+The topic name that unregistered the service email address.
+Returns a success response if the service email address wasn&apos;t registered
+with the topic.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4741,25 +4650,24 @@ not associated with the topic, the success response will be returned.</p>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UnregisterSubscriberAsync_Google_Cloud_Channel_V1_UnregisterSubscriberRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UnregisterSubscriberAsync(Google.Cloud.Channel.V1.UnregisterSubscriberRequest,Google.Api.Gax.Grpc.CallSettings)">UnregisterSubscriberAsync(UnregisterSubscriberRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Unregisters a service account with subscriber privileges on the Cloud
 Pub/Sub topic created for this Channel Services account. If there are no
-more service account left with sunbscriber privileges, the topic will be
-deleted. You can check this by calling ListSubscribers api.</p>
-<p>Possible Error Codes:</p>
+service accounts left with subscriber privileges, this deletes the topic.
+You can call ListSubscribers to check for these accounts.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being provided are different, or if the impersonated user
+<li>PERMISSION_DENIED: The reseller account making the request and the
+provided reseller account are different, or the impersonated user
 is not a super admin.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: If the topic resource doesn&apos;t exist.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: The topic resource doesn&apos;t exist.</li>
 <li>INTERNAL: Any non-user error related to a technical issue in the
-backend. In this case, contact Cloud Channel support.</li>
-<li>UNKNOWN: Any non-user error related to a technical issue in
-the backend. In this case, contact Cloud Channel support.</li>
+backend. Contact Cloud Channel support.</li>
+<li>UNKNOWN: Any non-user error related to a technical issue in the backend.
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-Topic name from which service email address has been unregistered if
-successful, otherwise error is returned. If the service email was already
-not associated with the topic, the success response will be returned.</p>
+<p>Return value:
+The topic name that unregistered the service email address.
+Returns a success response if the service email address wasn&apos;t registered
+with the topic.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4810,27 +4718,26 @@ not associated with the topic, the success response will be returned.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_UnregisterSubscriberAsync_Google_Cloud_Channel_V1_UnregisterSubscriberRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.UnregisterSubscriberAsync(UnregisterSubscriberRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateChannelPartnerLink_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateChannelPartnerLink*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateChannelPartnerLink_Google_Cloud_Channel_V1_UpdateChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateChannelPartnerLink(Google.Cloud.Channel.V1.UpdateChannelPartnerLinkRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateChannelPartnerLink(UpdateChannelPartnerLinkRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates a channel partner link. A distributor calls this method to change a
-link&apos;s status. For example, suspend a partner link.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Updates a channel partner link. Distributors call this method to change a
+link&apos;s status. For example, to suspend a partner link.
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: It can happen in following scenarios -</li>
-<li>Missing or invalid required parameters in the request.</li>
-<li>Updating link state from invited to active or suspended.</li>
-<li>Sending reseller_cloud_identity_id, invite_url or name in update
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT:</li>
+<li>Required request parameters are missing or invalid.</li>
+<li>Link state cannot change from invited to active or suspended.</li>
+<li>Cannot send reseller_cloud_identity_id, invite_url, or name in update
 mask.</li>
 <li>NOT_FOUND: ChannelPartnerLink resource not found.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-If successful, the updated [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource, otherwise
-returns an error.</p>
+<p>Return value:
+The updated [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4881,27 +4788,26 @@ returns an error.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_UpdateChannelPartnerLink_Google_Cloud_Channel_V1_UpdateChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.UpdateChannelPartnerLink(UpdateChannelPartnerLinkRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateChannelPartnerLinkAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateChannelPartnerLinkAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateChannelPartnerLinkAsync_Google_Cloud_Channel_V1_UpdateChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateChannelPartnerLinkAsync(Google.Cloud.Channel.V1.UpdateChannelPartnerLinkRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateChannelPartnerLinkAsync(UpdateChannelPartnerLinkRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates a channel partner link. A distributor calls this method to change a
-link&apos;s status. For example, suspend a partner link.
-To call this method, you must be a distributor.</p>
-<p>Possible Error Codes:</p>
+  <div class="markdown level1 summary"><p>Updates a channel partner link. Distributors call this method to change a
+link&apos;s status. For example, to suspend a partner link.
+You must be a distributor to call this method.</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: It can happen in following scenarios -</li>
-<li>Missing or invalid required parameters in the request.</li>
-<li>Updating link state from invited to active or suspended.</li>
-<li>Sending reseller_cloud_identity_id, invite_url or name in update
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT:</li>
+<li>Required request parameters are missing or invalid.</li>
+<li>Link state cannot change from invited to active or suspended.</li>
+<li>Cannot send reseller_cloud_identity_id, invite_url, or name in update
 mask.</li>
 <li>NOT_FOUND: ChannelPartnerLink resource not found.</li>
-<li>INTERNAL: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+<li>INTERNAL: Any non-user error related to a technical issue in the
+backend. Contact Cloud Channel support.</li>
 <li>UNKNOWN: Any non-user error related to a technical issue in the backend.
-In this case, contact Cloud Channel support.</li>
+Contact Cloud Channel support.</li>
 </ul>
-<p>Return Value:
-If successful, the updated [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource, otherwise
-returns an error.</p>
+<p>Return value:
+The updated [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4952,20 +4858,17 @@ returns an error.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_UpdateChannelPartnerLinkAsync_Google_Cloud_Channel_V1_UpdateChannelPartnerLinkRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.UpdateChannelPartnerLinkAsync(UpdateChannelPartnerLinkRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateCustomer_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateCustomer*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateCustomer_Google_Cloud_Channel_V1_UpdateCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateCustomer(Google.Cloud.Channel.V1.UpdateCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateCustomer(UpdateCustomerRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates an existing [Customer][google.cloud.channel.v1.Customer] resource belonging to the reseller or
+  <div class="markdown level1 summary"><p>Updates an existing [Customer][google.cloud.channel.v1.Customer] resource for the reseller or
 distributor.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name
-specified in the request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.</li>
 </ul>
-<p>Return Value:
-If successful, the updated [Customer][google.cloud.channel.v1.Customer] resource, otherwise returns
-an error.</p>
+<p>Return value:
+The updated [Customer][google.cloud.channel.v1.Customer] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5016,20 +4919,17 @@ an error.</p>
   <div><a class="xref" href="Google.Cloud.Channel.V1.CloudChannelServiceClient.html#Google_Cloud_Channel_V1_CloudChannelServiceClient_UpdateCustomer_Google_Cloud_Channel_V1_UpdateCustomerRequest_Google_Api_Gax_Grpc_CallSettings_">CloudChannelServiceClient.UpdateCustomer(UpdateCustomerRequest, CallSettings)</a></div>
   <a id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateCustomerAsync_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateCustomerAsync*"></a>
   <h4 id="Google_Cloud_Channel_V1_CloudChannelServiceClientImpl_UpdateCustomerAsync_Google_Cloud_Channel_V1_UpdateCustomerRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Channel.V1.CloudChannelServiceClientImpl.UpdateCustomerAsync(Google.Cloud.Channel.V1.UpdateCustomerRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateCustomerAsync(UpdateCustomerRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates an existing [Customer][google.cloud.channel.v1.Customer] resource belonging to the reseller or
+  <div class="markdown level1 summary"><p>Updates an existing [Customer][google.cloud.channel.v1.Customer] resource for the reseller or
 distributor.</p>
-<p>Possible Error Codes:</p>
+<p>Possible error codes:</p>
 <ul>
-<li>PERMISSION_DENIED: If the reseller account making the request and the
-reseller account being queried for are different.</li>
-<li>INVALID_ARGUMENT: Missing or invalid required parameters in the
-request.</li>
-<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name
-specified in the request.</li>
+<li>PERMISSION_DENIED: The reseller account making the request is different
+from the reseller account in the API request.</li>
+<li>INVALID_ARGUMENT: Required request parameters are missing or invalid.</li>
+<li>NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.</li>
 </ul>
-<p>Return Value:
-If successful, the updated [Customer][google.cloud.channel.v1.Customer] resource, otherwise returns
-an error.</p>
+<p>Return value:
+The updated [Customer][google.cloud.channel.v1.Customer] resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
