@@ -92,9 +92,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -102,6 +99,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Billing.Budgets.V1Beta1.html">Google.Cloud.Billing.Budgets.V1Beta1</a></h6>
@@ -172,7 +172,11 @@
   </table>
   <a id="Google_Cloud_Billing_Budgets_V1Beta1_BudgetAmount_LastPeriodAmount_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.BudgetAmount.LastPeriodAmount*"></a>
   <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_BudgetAmount_LastPeriodAmount" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.BudgetAmount.LastPeriodAmount">LastPeriodAmount</h4>
-  <div class="markdown level1 summary"><p>Use the last period&apos;s actual spend as the budget for the present period.</p>
+  <div class="markdown level1 summary"><p>Use the last period&apos;s actual spend as the budget for the present period.
+LastPeriodAmount can only be set when the budget&apos;s time period is a
+[Filter.calendar_period][google.cloud.billing.budgets.v1beta1.Filter.calendar_period].
+It cannot be set in combination with
+[Filter.custom_period][google.cloud.billing.budgets.v1beta1.Filter.custom_period].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -197,9 +201,10 @@
   <a id="Google_Cloud_Billing_Budgets_V1Beta1_BudgetAmount_SpecifiedAmount_" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.BudgetAmount.SpecifiedAmount*"></a>
   <h4 id="Google_Cloud_Billing_Budgets_V1Beta1_BudgetAmount_SpecifiedAmount" data-uid="Google.Cloud.Billing.Budgets.V1Beta1.BudgetAmount.SpecifiedAmount">SpecifiedAmount</h4>
   <div class="markdown level1 summary"><p>A specified amount to use as the budget.
-<code>currency_code</code> is optional. If specified, it must match the
-currency of the billing account. The <code>currency_code</code> is provided on
-output.</p>
+<code>currency_code</code> is optional. If specified when creating a budget, it must
+match the currency of the billing account. If specified when updating a
+budget, it must match the currency_code of the existing budget.
+The <code>currency_code</code> is provided on output.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
