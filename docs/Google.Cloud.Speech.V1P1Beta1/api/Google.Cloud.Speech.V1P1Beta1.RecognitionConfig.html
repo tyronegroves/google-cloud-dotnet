@@ -93,9 +93,6 @@ request.</p>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -103,6 +100,9 @@ request.</p>
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Speech.V1P1Beta1.html">Google.Cloud.Speech.V1P1Beta1</a></h6>
@@ -152,7 +152,7 @@ request.</p>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Adaptation" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Adaptation">Adaptation</h4>
   <div class="markdown level1 summary"><p>Speech adaptation configuration improves the accuracy of speech
 recognition. When speech adaptation is set it supersedes the
-<code>speech_contexts</code> field. For more information, see the <a href="https://cloud.google.com/speech-to-text/docs/context-strength">speech
+<code>speech_contexts</code> field. For more information, see the <a href="https://cloud.google.com/speech-to-text/docs/adaptation">speech
 adaptation</a>
 documentation.</p>
 </div>
@@ -385,6 +385,64 @@ public bool EnableSpeakerDiarization { get; set; }</code></pre>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSpokenEmojis_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSpokenEmojis*"></a>
+  <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSpokenEmojis" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSpokenEmojis">EnableSpokenEmojis</h4>
+  <div class="markdown level1 summary"><p>The spoken emoji behavior for the call
+If not set, uses default behavior based on model of choice
+If &apos;true&apos;, adds spoken emoji formatting for the request. This will replace
+spoken emojis with the corresponding Unicode symbols in the final
+transcript. If &apos;false&apos;, spoken emojis are not replaced.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? EnableSpokenEmojis { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSpokenPunctuation_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSpokenPunctuation*"></a>
+  <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableSpokenPunctuation" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableSpokenPunctuation">EnableSpokenPunctuation</h4>
+  <div class="markdown level1 summary"><p>The spoken punctuation behavior for the call
+If not set, uses default behavior based on model of choice
+e.g. command_and_search will enable spoken punctuation by default
+If &apos;true&apos;, replaces spoken punctuation with the corresponding symbols in
+the request. For example, &quot;how are you question mark&quot; becomes &quot;how are
+you?&quot;. See <a href="https://cloud.google.com/speech-to-text/docs/spoken-punctuation">https://cloud.google.com/speech-to-text/docs/spoken-punctuation</a>
+for support. If &apos;false&apos;, spoken punctuation is not replaced.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? EnableSpokenPunctuation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableWordConfidence_" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableWordConfidence*"></a>
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_EnableWordConfidence" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.EnableWordConfidence">EnableWordConfidence</h4>
   <div class="markdown level1 summary"><p>If <code>true</code>, the top result includes a list of words and the
@@ -442,8 +500,7 @@ the start and end time offsets (timestamps) for those words. If
   <h4 id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Encoding" data-uid="Google.Cloud.Speech.V1P1Beta1.RecognitionConfig.Encoding">Encoding</h4>
   <div class="markdown level1 summary"><p>Encoding of audio data sent in all <code>RecognitionAudio</code> messages.
 This field is optional for <code>FLAC</code> and <code>WAV</code> audio files and required
-for all other audio formats. For details, see
-[AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
+for all other audio formats. For details, see [AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -569,7 +626,7 @@ recorded at an 8khz sampling rate).&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;video&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Best for audio that originated from from video or includes multiple
+&lt;td&gt;Best for audio that originated from video or includes multiple
     speakers. Ideally the audio is recorded at a 16khz or greater
     sampling rate. This is a premium model that costs more than the
     standard rate.&lt;/td&gt;
@@ -637,8 +694,7 @@ won&apos;t be filtered out.</p>
 source to 16000 Hz. If that&apos;s not possible, use the native sample rate of
 the audio source (instead of re-sampling).
 This field is optional for FLAC and WAV audio files, but is
-required for all other audio formats. For details, see
-[AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
+required for all other audio formats. For details, see [AudioEncoding][google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding].</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -665,7 +721,7 @@ required for all other audio formats. For details, see
   <div class="markdown level1 summary"><p>Array of [SpeechContext][google.cloud.speech.v1p1beta1.SpeechContext].
 A means to provide context to assist the speech recognition. For more
 information, see
-<a href="https://cloud.google.com/speech-to-text/docs/context-strength">speech
+<a href="https://cloud.google.com/speech-to-text/docs/adaptation">speech
 adaptation</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

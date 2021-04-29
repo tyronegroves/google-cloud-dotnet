@@ -81,7 +81,7 @@ are set.</p>
 a lossless encoding (<code>FLAC</code> or <code>LINEAR16</code>). The accuracy of the speech
 recognition can be reduced if lossy codecs are used to capture or transmit
 audio, particularly if background noise is present. Lossy codecs include
-<code>MULAW</code>, <code>AMR</code>, <code>AMR_WB</code>, <code>OGG_OPUS</code>, <code>SPEEX_WITH_HEADER_BYTE</code>, and <code>MP3</code>.</p>
+<code>MULAW</code>, <code>AMR</code>, <code>AMR_WB</code>, <code>OGG_OPUS</code>, <code>SPEEX_WITH_HEADER_BYTE</code>, <code>MP3</code>.</p>
 <p>The <code>FLAC</code> and <code>WAV</code> audio file formats include a header that describes the
 included audio content. You can request recognition for <code>WAV</code> files that
 contain either <code>LINEAR16</code> or <code>MULAW</code> encoded audio.
@@ -91,8 +91,7 @@ encoding format is determined from the file header. If you specify
 an <code>AudioEncoding</code> when you send  send <code>FLAC</code> or <code>WAV</code> audio, the
 encoding configuration must match the encoding described in the audio
 header; otherwise the request returns an
-[google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error
-code.</p>
+[google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error code.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Speech.V1P1Beta1.html">Google.Cloud.Speech.V1P1Beta1</a></h6>
@@ -143,7 +142,8 @@ encoding supports 16-bit and 24-bit samples, however, not all fields in
       </tr>
       <tr>
         <td id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Types_AudioEncoding_Mp3">Mp3</td>
-        <td><p>MP3 audio. Support all standard MP3 bitrates (which range from 32-320
+        <td><p>MP3 audio. MP3 encoding is a Beta feature and only available in
+v1p1beta1. Support all standard MP3 bitrates (which range from 32-320
 kbps). When using this encoding, <code>sample_rate_hertz</code> has to match the
 sample rate of the file being used.</p>
 </td>
@@ -175,6 +175,14 @@ by one or more frames of Speex data, padded to an integral number of
 bytes (octets) as specified in RFC 5574. In other words, each RTP header
 is replaced with a single byte containing the block length. Only Speex
 wideband is supported. <code>sample_rate_hertz</code> must be 16000.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Google_Cloud_Speech_V1P1Beta1_RecognitionConfig_Types_AudioEncoding_WebmOpus">WebmOpus</td>
+        <td><p>Opus encoded audio frames in WebM container
+(<a href="https://wiki.xiph.org/OggOpus">OggOpus</a>). This is a Beta features and
+only available in v1p1beta1. <code>sample_rate_hertz</code> must be one of 8000,
+12000, 16000, 24000, or 48000.</p>
 </td>
       </tr>
     </tbody>
