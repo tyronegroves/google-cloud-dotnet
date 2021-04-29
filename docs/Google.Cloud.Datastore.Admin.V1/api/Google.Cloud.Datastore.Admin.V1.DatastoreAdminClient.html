@@ -85,9 +85,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -95,6 +92,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Datastore.Admin.V1.html">Google.Cloud.Datastore.Admin.V1</a></h6>
@@ -147,6 +147,30 @@ but are accessed via service google.longrunning.Operations.</p>
 </div>
   <h3 id="properties">Properties
   </h3>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexOperationsClient_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndexOperationsClient*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexOperationsClient" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndexOperationsClient">CreateIndexOperationsClient</h4>
+  <div class="markdown level1 summary"><p>The long-running operations client for <code>CreateIndex</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual OperationsClient CreateIndexOperationsClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DefaultEndpoint_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DefaultEndpoint*"></a>
   <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DefaultEndpoint" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DefaultEndpoint">DefaultEndpoint</h4>
   <div class="markdown level1 summary"><p>The default endpoint for the DatastoreAdmin service, which is a host of &quot;datastore.googleapis.com&quot; and a
@@ -200,6 +224,30 @@ port of 443.</p>
   <div class="markdown level1 remarks"><p>The default DatastoreAdmin scopes are:
 <ul><li><a href="https://www.googleapis.com/auth/cloud-platform">https://www.googleapis.com/auth/cloud-platform</a></li><li><a href="https://www.googleapis.com/auth/datastore">https://www.googleapis.com/auth/datastore</a></li></ul></p>
 </div>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexOperationsClient_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndexOperationsClient*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexOperationsClient" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndexOperationsClient">DeleteIndexOperationsClient</h4>
+  <div class="markdown level1 summary"><p>The long-running operations client for <code>DeleteIndex</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual OperationsClient DeleteIndexOperationsClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_ExportEntitiesOperationsClient_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.ExportEntitiesOperationsClient*"></a>
   <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_ExportEntitiesOperationsClient" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.ExportEntitiesOperationsClient">ExportEntitiesOperationsClient</h4>
   <div class="markdown level1 summary"><p>The long-running operations client for <code>ExportEntities</code>.</p>
@@ -344,6 +392,537 @@ settings. To specify custom credentials or other settings, use <a class="xref" h
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndex_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndex*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndex_Google_Cloud_Datastore_Admin_V1_CreateIndexRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndex(Google.Cloud.Datastore.Admin.V1.CreateIndexRequest,Google.Api.Gax.Grpc.CallSettings)">CreateIndex(CreateIndexRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates the specified index.
+A newly created index&apos;s initial state is <code>CREATING</code>. On completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the state will be <code>READY</code>.
+If the index already exists, the call will return an <code>ALREADY_EXISTS</code>
+status.</p>
+<p>During index creation, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, removing the index with
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex], then
+re-creating the index with [create]
+[google.datastore.admin.v1.DatastoreAdmin.CreateIndex].</p>
+<p>Indexes with a single property cannot be created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Index, IndexOperationMetadata&gt; CreateIndex(CreateIndexRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.CreateIndexRequest.html">CreateIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndex_Google_Cloud_Datastore_Admin_V1_CreateIndexRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DatastoreAdminClient datastoreAdminClient = DatastoreAdminClient.Create();
+// Initialize request argument(s)
+CreateIndexRequest request = new CreateIndexRequest
+{
+    ProjectId = &quot;&quot;,
+    Index = new gcdav::Index(),
+};
+// Make the request
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; response = datastoreAdminClient.CreateIndex(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+gcdav::Index result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; retrievedResponse = datastoreAdminClient.PollOnceCreateIndex(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    gcdav::Index retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexAsync_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndexAsync*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexAsync_Google_Cloud_Datastore_Admin_V1_CreateIndexRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndexAsync(Google.Cloud.Datastore.Admin.V1.CreateIndexRequest,Google.Api.Gax.Grpc.CallSettings)">CreateIndexAsync(CreateIndexRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates the specified index.
+A newly created index&apos;s initial state is <code>CREATING</code>. On completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the state will be <code>READY</code>.
+If the index already exists, the call will return an <code>ALREADY_EXISTS</code>
+status.</p>
+<p>During index creation, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, removing the index with
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex], then
+re-creating the index with [create]
+[google.datastore.admin.v1.DatastoreAdmin.CreateIndex].</p>
+<p>Indexes with a single property cannot be created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Index, IndexOperationMetadata&gt;&gt; CreateIndexAsync(CreateIndexRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.CreateIndexRequest.html">CreateIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexAsync_Google_Cloud_Datastore_Admin_V1_CreateIndexRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DatastoreAdminClient datastoreAdminClient = await DatastoreAdminClient.CreateAsync();
+// Initialize request argument(s)
+CreateIndexRequest request = new CreateIndexRequest
+{
+    ProjectId = &quot;&quot;,
+    Index = new gcdav::Index(),
+};
+// Make the request
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; response = await datastoreAdminClient.CreateIndexAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+gcdav::Index result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; retrievedResponse = await datastoreAdminClient.PollOnceCreateIndexAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    gcdav::Index retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexAsync_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndexAsync*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexAsync_Google_Cloud_Datastore_Admin_V1_CreateIndexRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.CreateIndexAsync(Google.Cloud.Datastore.Admin.V1.CreateIndexRequest,System.Threading.CancellationToken)">CreateIndexAsync(CreateIndexRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Creates the specified index.
+A newly created index&apos;s initial state is <code>CREATING</code>. On completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the state will be <code>READY</code>.
+If the index already exists, the call will return an <code>ALREADY_EXISTS</code>
+status.</p>
+<p>During index creation, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, removing the index with
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex], then
+re-creating the index with [create]
+[google.datastore.admin.v1.DatastoreAdmin.CreateIndex].</p>
+<p>Indexes with a single property cannot be created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Index, IndexOperationMetadata&gt;&gt; CreateIndexAsync(CreateIndexRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.CreateIndexRequest.html">CreateIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_CreateIndexAsync_Google_Cloud_Datastore_Admin_V1_CreateIndexRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DatastoreAdminClient datastoreAdminClient = await DatastoreAdminClient.CreateAsync();
+// Initialize request argument(s)
+CreateIndexRequest request = new CreateIndexRequest
+{
+    ProjectId = &quot;&quot;,
+    Index = new gcdav::Index(),
+};
+// Make the request
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; response = await datastoreAdminClient.CreateIndexAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+gcdav::Index result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; retrievedResponse = await datastoreAdminClient.PollOnceCreateIndexAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    gcdav::Index retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndex_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndex*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndex_Google_Cloud_Datastore_Admin_V1_DeleteIndexRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndex(Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteIndex(DeleteIndexRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes an existing index.
+An index can only be deleted if it is in a <code>READY</code> or <code>ERROR</code> state. On
+successful execution of the request, the index will be in a <code>DELETING</code>
+[state][google.datastore.admin.v1.Index.State]. And on completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the index will be removed.</p>
+<p>During index deletion, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, followed by calling
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex] again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Index, IndexOperationMetadata&gt; DeleteIndex(DeleteIndexRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest.html">DeleteIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndex_Google_Cloud_Datastore_Admin_V1_DeleteIndexRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DatastoreAdminClient datastoreAdminClient = DatastoreAdminClient.Create();
+// Initialize request argument(s)
+DeleteIndexRequest request = new DeleteIndexRequest
+{
+    ProjectId = &quot;&quot;,
+    IndexId = &quot;&quot;,
+};
+// Make the request
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; response = datastoreAdminClient.DeleteIndex(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+gcdav::Index result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; retrievedResponse = datastoreAdminClient.PollOnceDeleteIndex(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    gcdav::Index retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexAsync_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndexAsync*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexAsync_Google_Cloud_Datastore_Admin_V1_DeleteIndexRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndexAsync(Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest,Google.Api.Gax.Grpc.CallSettings)">DeleteIndexAsync(DeleteIndexRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes an existing index.
+An index can only be deleted if it is in a <code>READY</code> or <code>ERROR</code> state. On
+successful execution of the request, the index will be in a <code>DELETING</code>
+[state][google.datastore.admin.v1.Index.State]. And on completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the index will be removed.</p>
+<p>During index deletion, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, followed by calling
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex] again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Index, IndexOperationMetadata&gt;&gt; DeleteIndexAsync(DeleteIndexRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest.html">DeleteIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexAsync_Google_Cloud_Datastore_Admin_V1_DeleteIndexRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DatastoreAdminClient datastoreAdminClient = await DatastoreAdminClient.CreateAsync();
+// Initialize request argument(s)
+DeleteIndexRequest request = new DeleteIndexRequest
+{
+    ProjectId = &quot;&quot;,
+    IndexId = &quot;&quot;,
+};
+// Make the request
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; response = await datastoreAdminClient.DeleteIndexAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+gcdav::Index result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; retrievedResponse = await datastoreAdminClient.PollOnceDeleteIndexAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    gcdav::Index retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexAsync_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndexAsync*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexAsync_Google_Cloud_Datastore_Admin_V1_DeleteIndexRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.DeleteIndexAsync(Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest,System.Threading.CancellationToken)">DeleteIndexAsync(DeleteIndexRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes an existing index.
+An index can only be deleted if it is in a <code>READY</code> or <code>ERROR</code> state. On
+successful execution of the request, the index will be in a <code>DELETING</code>
+[state][google.datastore.admin.v1.Index.State]. And on completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the index will be removed.</p>
+<p>During index deletion, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, followed by calling
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex] again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Index, IndexOperationMetadata&gt;&gt; DeleteIndexAsync(DeleteIndexRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest.html">DeleteIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_DeleteIndexAsync_Google_Cloud_Datastore_Admin_V1_DeleteIndexRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+DatastoreAdminClient datastoreAdminClient = await DatastoreAdminClient.CreateAsync();
+// Initialize request argument(s)
+DeleteIndexRequest request = new DeleteIndexRequest
+{
+    ProjectId = &quot;&quot;,
+    IndexId = &quot;&quot;,
+};
+// Make the request
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; response = await datastoreAdminClient.DeleteIndexAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+gcdav::Index result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;gcdav::Index, IndexOperationMetadata&gt; retrievedResponse = await datastoreAdminClient.PollOnceDeleteIndexAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    gcdav::Index retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
   <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_ExportEntities_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.ExportEntities*"></a>
   <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_ExportEntities_Google_Cloud_Datastore_Admin_V1_ExportEntitiesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.ExportEntities(Google.Cloud.Datastore.Admin.V1.ExportEntitiesRequest,Google.Api.Gax.Grpc.CallSettings)">ExportEntities(ExportEntitiesRequest, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Exports a copy of all or a subset of entities from Google Cloud Datastore
@@ -1939,6 +2518,204 @@ foreach (gcdav::Index item in singlePage)
 string nextPageToken = singlePage.NextPageToken;
 </code></pre></div>
   </div>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceCreateIndex_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceCreateIndex*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceCreateIndex_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceCreateIndex(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceCreateIndex(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>CreateIndex</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Index, IndexOperationMetadata&gt; PollOnceCreateIndex(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;</td>
+        <td><p>The result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceCreateIndexAsync_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceCreateIndexAsync*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceCreateIndexAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceCreateIndexAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceCreateIndexAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of
+<code>CreateIndex</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Index, IndexOperationMetadata&gt;&gt; PollOnceCreateIndexAsync(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;&gt;</td>
+        <td><p>A task representing the result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceDeleteIndex_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceDeleteIndex*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceDeleteIndex_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceDeleteIndex(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceDeleteIndex(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>DeleteIndex</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Index, IndexOperationMetadata&gt; PollOnceDeleteIndex(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;</td>
+        <td><p>The result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceDeleteIndexAsync_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceDeleteIndexAsync*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceDeleteIndexAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceDeleteIndexAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceDeleteIndexAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of
+<code>DeleteIndex</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Index, IndexOperationMetadata&gt;&gt; PollOnceDeleteIndexAsync(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Datastore.Admin.V1.Index.html">Index</a>, <a class="xref" href="Google.Cloud.Datastore.Admin.V1.IndexOperationMetadata.html">IndexOperationMetadata</a>&gt;&gt;</td>
+        <td><p>A task representing the result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceExportEntities_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceExportEntities*"></a>
   <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdminClient_PollOnceExportEntities_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdminClient.PollOnceExportEntities(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceExportEntities(String, CallSettings)</h4>
   <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>ExportEntities</code>.</p>

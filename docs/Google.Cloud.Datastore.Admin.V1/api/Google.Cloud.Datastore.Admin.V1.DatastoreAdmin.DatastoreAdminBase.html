@@ -84,9 +84,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -94,6 +91,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Datastore.Admin.V1.html">Google.Cloud.Datastore.Admin.V1</a></h6>
@@ -105,6 +105,123 @@ public abstract class DatastoreAdminBase</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdmin_DatastoreAdminBase_CreateIndex_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdmin.DatastoreAdminBase.CreateIndex*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdmin_DatastoreAdminBase_CreateIndex_Google_Cloud_Datastore_Admin_V1_CreateIndexRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdmin.DatastoreAdminBase.CreateIndex(Google.Cloud.Datastore.Admin.V1.CreateIndexRequest,Grpc.Core.ServerCallContext)">CreateIndex(CreateIndexRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Creates the specified index.
+A newly created index&apos;s initial state is <code>CREATING</code>. On completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the state will be <code>READY</code>.
+If the index already exists, the call will return an <code>ALREADY_EXISTS</code>
+status.</p>
+<p>During index creation, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, removing the index with
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex], then
+re-creating the index with [create]
+[google.datastore.admin.v1.DatastoreAdmin.CreateIndex].</p>
+<p>Indexes with a single property cannot be created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateIndex(CreateIndexRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.CreateIndexRequest.html">CreateIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdmin_DatastoreAdminBase_DeleteIndex_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdmin.DatastoreAdminBase.DeleteIndex*"></a>
+  <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdmin_DatastoreAdminBase_DeleteIndex_Google_Cloud_Datastore_Admin_V1_DeleteIndexRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdmin.DatastoreAdminBase.DeleteIndex(Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest,Grpc.Core.ServerCallContext)">DeleteIndex(DeleteIndexRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Deletes an existing index.
+An index can only be deleted if it is in a <code>READY</code> or <code>ERROR</code> state. On
+successful execution of the request, the index will be in a <code>DELETING</code>
+[state][google.datastore.admin.v1.Index.State]. And on completion of the
+returned [google.longrunning.Operation][google.longrunning.Operation], the index will be removed.</p>
+<p>During index deletion, the process could result in an error, in which
+case the index will move to the <code>ERROR</code> state. The process can be recovered
+by fixing the data that caused the error, followed by calling
+[delete][google.datastore.admin.v1.DatastoreAdmin.DeleteIndex] again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; DeleteIndex(DeleteIndexRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Datastore.Admin.V1.DeleteIndexRequest.html">DeleteIndexRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Grpc.Core.ServerCallContext.html">ServerCallContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_Datastore_Admin_V1_DatastoreAdmin_DatastoreAdminBase_ExportEntities_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdmin.DatastoreAdminBase.ExportEntities*"></a>
   <h4 id="Google_Cloud_Datastore_Admin_V1_DatastoreAdmin_DatastoreAdminBase_ExportEntities_Google_Cloud_Datastore_Admin_V1_ExportEntitiesRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Datastore.Admin.V1.DatastoreAdmin.DatastoreAdminBase.ExportEntities(Google.Cloud.Datastore.Admin.V1.ExportEntitiesRequest,Grpc.Core.ServerCallContext)">ExportEntities(ExportEntitiesRequest, ServerCallContext)</h4>
   <div class="markdown level1 summary"><p>Exports a copy of all or a subset of entities from Google Cloud Datastore
