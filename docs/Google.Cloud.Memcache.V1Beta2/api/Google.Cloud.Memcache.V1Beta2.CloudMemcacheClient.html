@@ -85,9 +85,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -95,6 +92,9 @@
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Memcache.V1Beta2.html">Google.Cloud.Memcache.V1Beta2</a></h6>
@@ -116,7 +116,7 @@ Memorystore Memcached (also called Memcached below) instances:</p>
 <li>As such, Memcached instances are resources of the form:
 <code>/projects/{project_id}/locations/{location_id}/instances/{instance_id}</code></li>
 </ul>
-<p>Note that location_id must be refering to a GCP <code>region</code>; for example:</p>
+<p>Note that location_id must be a GCP <code>region</code>; for example:</p>
 <ul>
 <li><code>projects/my-memcached-project/locations/us-central1/instances/my-memcached</code></li>
 </ul>
@@ -131,6 +131,30 @@ Memorystore Memcached (also called Memcached below) instances:</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public virtual OperationsClient ApplyParametersOperationsClient { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.OperationsClient.html">OperationsClient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateOperationsClient_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateOperationsClient*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateOperationsClient" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateOperationsClient">ApplySoftwareUpdateOperationsClient</h4>
+  <div class="markdown level1 summary"><p>The long-running operations client for <code>ApplySoftwareUpdate</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual OperationsClient ApplySoftwareUpdateOperationsClient { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -324,8 +348,8 @@ of 443.</p>
   </h3>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParameters_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParameters*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParameters_Google_Cloud_Memcache_V1Beta2_ApplyParametersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParameters(Google.Cloud.Memcache.V1Beta2.ApplyParametersRequest,Google.Api.Gax.Grpc.CallSettings)">ApplyParameters(ApplyParametersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -405,8 +429,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParameters_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParameters*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParameters_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParameters(Google.Cloud.Memcache.V1Beta2.InstanceName,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplyParameters(InstanceName, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -433,15 +457,15 @@ should be applied.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">nodeIds</span></td>
-        <td><p>Nodes to which we should apply the instance-level parameter group.</p>
+        <td><p>Nodes to which the instance-level parameter group is applied.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">applyAll</span></td>
         <td><p>Whether to apply instance-level parameter group to all nodes. If set to
-true, will explicitly restrict users from specifying any nodes, and apply
-parameter group updates to all nodes within the instance.</p>
+true, users are restricted from specifying individual nodes, and
+<code>ApplyParameters</code> updates all nodes within the instance.</p>
 </td>
       </tr>
       <tr>
@@ -498,8 +522,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParameters_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParameters*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParameters_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParameters(System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplyParameters(String, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -526,15 +550,15 @@ should be applied.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">nodeIds</span></td>
-        <td><p>Nodes to which we should apply the instance-level parameter group.</p>
+        <td><p>Nodes to which the instance-level parameter group is applied.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">applyAll</span></td>
         <td><p>Whether to apply instance-level parameter group to all nodes. If set to
-true, will explicitly restrict users from specifying any nodes, and apply
-parameter group updates to all nodes within the instance.</p>
+true, users are restricted from specifying individual nodes, and
+<code>ApplyParameters</code> updates all nodes within the instance.</p>
 </td>
       </tr>
       <tr>
@@ -591,8 +615,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_Google_Cloud_Memcache_V1Beta2_ApplyParametersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync(Google.Cloud.Memcache.V1Beta2.ApplyParametersRequest,Google.Api.Gax.Grpc.CallSettings)">ApplyParametersAsync(ApplyParametersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -672,8 +696,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_Google_Cloud_Memcache_V1Beta2_ApplyParametersRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync(Google.Cloud.Memcache.V1Beta2.ApplyParametersRequest,System.Threading.CancellationToken)">ApplyParametersAsync(ApplyParametersRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -753,8 +777,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplyParametersAsync(InstanceName, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -781,15 +805,15 @@ should be applied.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">nodeIds</span></td>
-        <td><p>Nodes to which we should apply the instance-level parameter group.</p>
+        <td><p>Nodes to which the instance-level parameter group is applied.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">applyAll</span></td>
         <td><p>Whether to apply instance-level parameter group to all nodes. If set to
-true, will explicitly restrict users from specifying any nodes, and apply
-parameter group updates to all nodes within the instance.</p>
+true, users are restricted from specifying individual nodes, and
+<code>ApplyParameters</code> updates all nodes within the instance.</p>
 </td>
       </tr>
       <tr>
@@ -846,8 +870,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">ApplyParametersAsync(InstanceName, IEnumerable&lt;String&gt;, Boolean, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -874,15 +898,15 @@ should be applied.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">nodeIds</span></td>
-        <td><p>Nodes to which we should apply the instance-level parameter group.</p>
+        <td><p>Nodes to which the instance-level parameter group is applied.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">applyAll</span></td>
         <td><p>Whether to apply instance-level parameter group to all nodes. If set to
-true, will explicitly restrict users from specifying any nodes, and apply
-parameter group updates to all nodes within the instance.</p>
+true, users are restricted from specifying individual nodes, and
+<code>ApplyParameters</code> updates all nodes within the instance.</p>
 </td>
       </tr>
       <tr>
@@ -939,8 +963,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplyParametersAsync(String, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -967,15 +991,15 @@ should be applied.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">nodeIds</span></td>
-        <td><p>Nodes to which we should apply the instance-level parameter group.</p>
+        <td><p>Nodes to which the instance-level parameter group is applied.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">applyAll</span></td>
         <td><p>Whether to apply instance-level parameter group to all nodes. If set to
-true, will explicitly restrict users from specifying any nodes, and apply
-parameter group updates to all nodes within the instance.</p>
+true, users are restricted from specifying individual nodes, and
+<code>ApplyParameters</code> updates all nodes within the instance.</p>
 </td>
       </tr>
       <tr>
@@ -1032,8 +1056,8 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplyParametersAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplyParametersAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">ApplyParametersAsync(String, IEnumerable&lt;String&gt;, Boolean, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>ApplyParameters will update current set of Parameters to the set of
-specified nodes of the Memcached Instance.</p>
+  <div class="markdown level1 summary"><p><code>ApplyParameters</code> restarts the set of specified nodes in order to update
+them to the current set of parameters for the Memcached Instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1060,15 +1084,15 @@ should be applied.</p>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">nodeIds</span></td>
-        <td><p>Nodes to which we should apply the instance-level parameter group.</p>
+        <td><p>Nodes to which the instance-level parameter group is applied.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">applyAll</span></td>
         <td><p>Whether to apply instance-level parameter group to all nodes. If set to
-true, will explicitly restrict users from specifying any nodes, and apply
-parameter group updates to all nodes within the instance.</p>
+true, users are restricted from specifying individual nodes, and
+<code>ApplyParameters</code> updates all nodes within the instance.</p>
 </td>
       </tr>
       <tr>
@@ -1115,6 +1139,804 @@ Instance result = completedResponse.Result;
 string operationName = response.Name;
 // This name can be stored, then the long-running operation retrieved later by name
 Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceApplyParametersAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdate*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_Google_Cloud_Memcache_V1Beta2_ApplySoftwareUpdateRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdate(Google.Cloud.Memcache.V1Beta2.ApplySoftwareUpdateRequest,Google.Api.Gax.Grpc.CallSettings)">ApplySoftwareUpdate(ApplySoftwareUpdateRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, OperationMetadata&gt; ApplySoftwareUpdate(ApplySoftwareUpdateRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.ApplySoftwareUpdateRequest.html">ApplySoftwareUpdateRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_Google_Cloud_Memcache_V1Beta2_ApplySoftwareUpdateRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = CloudMemcacheClient.Create();
+// Initialize request argument(s)
+ApplySoftwareUpdateRequest request = new ApplySoftwareUpdateRequest
+{
+    InstanceAsInstanceName = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;),
+    NodeIds = { &quot;&quot;, },
+    ApplyAll = false,
+};
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = cloudMemcacheClient.ApplySoftwareUpdate(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = cloudMemcacheClient.PollOnceApplySoftwareUpdate(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdate*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdate(Google.Cloud.Memcache.V1Beta2.InstanceName,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplySoftwareUpdate(InstanceName, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, OperationMetadata&gt; ApplySoftwareUpdate(InstanceName instance, IEnumerable&lt;string&gt; nodeIds, bool applyAll, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.InstanceName.html">InstanceName</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. Resource name of the Memcached instance for which software update should be
+applied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">nodeIds</span></td>
+        <td><p>Nodes to which we should apply the update to. Note all the selected nodes
+are updated in parallel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">applyAll</span></td>
+        <td><p>Whether to apply the update to all nodes. If set to
+true, will explicitly restrict users from specifying any nodes, and apply
+software update to all nodes (where applicable) within the instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = CloudMemcacheClient.Create();
+// Initialize request argument(s)
+InstanceName instance = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;);
+IEnumerable&lt;string&gt; nodeIds = new string[] { &quot;&quot;, };
+bool applyAll = false;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = cloudMemcacheClient.ApplySoftwareUpdate(instance, nodeIds, applyAll);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = cloudMemcacheClient.PollOnceApplySoftwareUpdate(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdate*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdate(System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplySoftwareUpdate(String, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, OperationMetadata&gt; ApplySoftwareUpdate(string instance, IEnumerable&lt;string&gt; nodeIds, bool applyAll, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. Resource name of the Memcached instance for which software update should be
+applied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">nodeIds</span></td>
+        <td><p>Nodes to which we should apply the update to. Note all the selected nodes
+are updated in parallel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">applyAll</span></td>
+        <td><p>Whether to apply the update to all nodes. If set to
+true, will explicitly restrict users from specifying any nodes, and apply
+software update to all nodes (where applicable) within the instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdate_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = CloudMemcacheClient.Create();
+// Initialize request argument(s)
+string instance = &quot;projects/[PROJECT]/locations/[LOCATION]/instances/[INSTANCE]&quot;;
+IEnumerable&lt;string&gt; nodeIds = new string[] { &quot;&quot;, };
+bool applyAll = false;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = cloudMemcacheClient.ApplySoftwareUpdate(instance, nodeIds, applyAll);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = cloudMemcacheClient.PollOnceApplySoftwareUpdate(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_ApplySoftwareUpdateRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync(Google.Cloud.Memcache.V1Beta2.ApplySoftwareUpdateRequest,Google.Api.Gax.Grpc.CallSettings)">ApplySoftwareUpdateAsync(ApplySoftwareUpdateRequest, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; ApplySoftwareUpdateAsync(ApplySoftwareUpdateRequest request, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.ApplySoftwareUpdateRequest.html">ApplySoftwareUpdateRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_ApplySoftwareUpdateRequest_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+ApplySoftwareUpdateRequest request = new ApplySoftwareUpdateRequest
+{
+    InstanceAsInstanceName = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;),
+    NodeIds = { &quot;&quot;, },
+    ApplyAll = false,
+};
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = await cloudMemcacheClient.ApplySoftwareUpdateAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceApplySoftwareUpdateAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_ApplySoftwareUpdateRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync(Google.Cloud.Memcache.V1Beta2.ApplySoftwareUpdateRequest,System.Threading.CancellationToken)">ApplySoftwareUpdateAsync(ApplySoftwareUpdateRequest, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; ApplySoftwareUpdateAsync(ApplySoftwareUpdateRequest request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.ApplySoftwareUpdateRequest.html">ApplySoftwareUpdateRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request object containing all of the parameters for the API call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_ApplySoftwareUpdateRequest_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+ApplySoftwareUpdateRequest request = new ApplySoftwareUpdateRequest
+{
+    InstanceAsInstanceName = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;),
+    NodeIds = { &quot;&quot;, },
+    ApplyAll = false,
+};
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = await cloudMemcacheClient.ApplySoftwareUpdateAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceApplySoftwareUpdateAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplySoftwareUpdateAsync(InstanceName, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; ApplySoftwareUpdateAsync(InstanceName instance, IEnumerable&lt;string&gt; nodeIds, bool applyAll, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.InstanceName.html">InstanceName</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. Resource name of the Memcached instance for which software update should be
+applied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">nodeIds</span></td>
+        <td><p>Nodes to which we should apply the update to. Note all the selected nodes
+are updated in parallel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">applyAll</span></td>
+        <td><p>Whether to apply the update to all nodes. If set to
+true, will explicitly restrict users from specifying any nodes, and apply
+software update to all nodes (where applicable) within the instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+InstanceName instance = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;);
+IEnumerable&lt;string&gt; nodeIds = new string[] { &quot;&quot;, };
+bool applyAll = false;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = await cloudMemcacheClient.ApplySoftwareUpdateAsync(instance, nodeIds, applyAll);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceApplySoftwareUpdateAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">ApplySoftwareUpdateAsync(InstanceName, IEnumerable&lt;String&gt;, Boolean, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; ApplySoftwareUpdateAsync(InstanceName instance, IEnumerable&lt;string&gt; nodeIds, bool applyAll, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.InstanceName.html">InstanceName</a></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. Resource name of the Memcached instance for which software update should be
+applied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">nodeIds</span></td>
+        <td><p>Nodes to which we should apply the update to. Note all the selected nodes
+are updated in parallel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">applyAll</span></td>
+        <td><p>Whether to apply the update to all nodes. If set to
+true, will explicitly restrict users from specifying any nodes, and apply
+software update to all nodes (where applicable) within the instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Collections_Generic_IEnumerable_System_String__System_Boolean_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+InstanceName instance = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;);
+IEnumerable&lt;string&gt; nodeIds = new string[] { &quot;&quot;, };
+bool applyAll = false;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = await cloudMemcacheClient.ApplySoftwareUpdateAsync(instance, nodeIds, applyAll);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceApplySoftwareUpdateAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,Google.Api.Gax.Grpc.CallSettings)">ApplySoftwareUpdateAsync(String, IEnumerable&lt;String&gt;, Boolean, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; ApplySoftwareUpdateAsync(string instance, IEnumerable&lt;string&gt; nodeIds, bool applyAll, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. Resource name of the Memcached instance for which software update should be
+applied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">nodeIds</span></td>
+        <td><p>Nodes to which we should apply the update to. Note all the selected nodes
+are updated in parallel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">applyAll</span></td>
+        <td><p>Whether to apply the update to all nodes. If set to
+true, will explicitly restrict users from specifying any nodes, and apply
+software update to all nodes (where applicable) within the instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+string instance = &quot;projects/[PROJECT]/locations/[LOCATION]/instances/[INSTANCE]&quot;;
+IEnumerable&lt;string&gt; nodeIds = new string[] { &quot;&quot;, };
+bool applyAll = false;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = await cloudMemcacheClient.ApplySoftwareUpdateAsync(instance, nodeIds, applyAll);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceApplySoftwareUpdateAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Instance retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ApplySoftwareUpdateAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Threading.CancellationToken)">ApplySoftwareUpdateAsync(String, IEnumerable&lt;String&gt;, Boolean, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Updates software on the selected nodes of the Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; ApplySoftwareUpdateAsync(string instance, IEnumerable&lt;string&gt; nodeIds, bool applyAll, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">instance</span></td>
+        <td><p>Required. Resource name of the Memcached instance for which software update should be
+applied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">nodeIds</span></td>
+        <td><p>Nodes to which we should apply the update to. Note all the selected nodes
+are updated in parallel.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">applyAll</span></td>
+        <td><p>Whether to apply the update to all nodes. If set to
+true, will explicitly restrict users from specifying any nodes, and apply
+software update to all nodes (where applicable) within the instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ApplySoftwareUpdateAsync_System_String_System_Collections_Generic_IEnumerable_System_String__System_Boolean_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+string instance = &quot;projects/[PROJECT]/locations/[LOCATION]/instances/[INSTANCE]&quot;;
+IEnumerable&lt;string&gt; nodeIds = new string[] { &quot;&quot;, };
+bool applyAll = false;
+// Make the request
+Operation&lt;Instance, OperationMetadata&gt; response = await cloudMemcacheClient.ApplySoftwareUpdateAsync(instance, nodeIds, applyAll);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Instance, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Instance result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Instance, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceApplySoftwareUpdateAsync(operationName);
 // Check if the retrieved long-running operation has completed
 if (retrievedResponse.IsCompleted)
 {
@@ -1195,7 +2017,7 @@ settings. To specify custom credentials or other settings, use <a class="xref" h
   </table>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstance_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstance*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstance_Google_Api_Gax_ResourceNames_LocationName_System_String_Google_Cloud_Memcache_V1Beta2_Instance_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstance(Google.Api.Gax.ResourceNames.LocationName,System.String,Google.Cloud.Memcache.V1Beta2.Instance,Google.Api.Gax.Grpc.CallSettings)">CreateInstance(LocationName, String, Instance, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1230,8 +2052,9 @@ project with the following restrictions:</p>
 <li>Must start with a letter.</li>
 <li>Must be between 1-40 characters.</li>
 <li>Must end with a number or a letter.</li>
-<li>Must be unique within the user project / location</li>
+<li>Must be unique within the user project / location.</li>
 </ul>
+<p>If any of the above are not met, the API raises an invalid argument error.</p>
 </td>
       </tr>
       <tr>
@@ -1294,7 +2117,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstance_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstance*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstance_Google_Cloud_Memcache_V1Beta2_CreateInstanceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstance(Google.Cloud.Memcache.V1Beta2.CreateInstanceRequest,Google.Api.Gax.Grpc.CallSettings)">CreateInstance(CreateInstanceRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1374,7 +2197,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstance_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstance*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstance_System_String_System_String_Google_Cloud_Memcache_V1Beta2_Instance_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstance(System.String,System.String,Google.Cloud.Memcache.V1Beta2.Instance,Google.Api.Gax.Grpc.CallSettings)">CreateInstance(String, String, Instance, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1409,8 +2232,9 @@ project with the following restrictions:</p>
 <li>Must start with a letter.</li>
 <li>Must be between 1-40 characters.</li>
 <li>Must end with a number or a letter.</li>
-<li>Must be unique within the user project / location</li>
+<li>Must be unique within the user project / location.</li>
 </ul>
+<p>If any of the above are not met, the API raises an invalid argument error.</p>
 </td>
       </tr>
       <tr>
@@ -1473,7 +2297,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_Google_Cloud_Memcache_V1Beta2_Instance_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync(Google.Api.Gax.ResourceNames.LocationName,System.String,Google.Cloud.Memcache.V1Beta2.Instance,Google.Api.Gax.Grpc.CallSettings)">CreateInstanceAsync(LocationName, String, Instance, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1508,8 +2332,9 @@ project with the following restrictions:</p>
 <li>Must start with a letter.</li>
 <li>Must be between 1-40 characters.</li>
 <li>Must end with a number or a letter.</li>
-<li>Must be unique within the user project / location</li>
+<li>Must be unique within the user project / location.</li>
 </ul>
+<p>If any of the above are not met, the API raises an invalid argument error.</p>
 </td>
       </tr>
       <tr>
@@ -1572,7 +2397,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_Google_Cloud_Memcache_V1Beta2_Instance_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync(Google.Api.Gax.ResourceNames.LocationName,System.String,Google.Cloud.Memcache.V1Beta2.Instance,System.Threading.CancellationToken)">CreateInstanceAsync(LocationName, String, Instance, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1607,8 +2432,9 @@ project with the following restrictions:</p>
 <li>Must start with a letter.</li>
 <li>Must be between 1-40 characters.</li>
 <li>Must end with a number or a letter.</li>
-<li>Must be unique within the user project / location</li>
+<li>Must be unique within the user project / location.</li>
 </ul>
+<p>If any of the above are not met, the API raises an invalid argument error.</p>
 </td>
       </tr>
       <tr>
@@ -1671,7 +2497,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_Google_Cloud_Memcache_V1Beta2_CreateInstanceRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync(Google.Cloud.Memcache.V1Beta2.CreateInstanceRequest,Google.Api.Gax.Grpc.CallSettings)">CreateInstanceAsync(CreateInstanceRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1751,7 +2577,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_Google_Cloud_Memcache_V1Beta2_CreateInstanceRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync(Google.Cloud.Memcache.V1Beta2.CreateInstanceRequest,System.Threading.CancellationToken)">CreateInstanceAsync(CreateInstanceRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1831,7 +2657,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_System_String_System_String_Google_Cloud_Memcache_V1Beta2_Instance_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync(System.String,System.String,Google.Cloud.Memcache.V1Beta2.Instance,Google.Api.Gax.Grpc.CallSettings)">CreateInstanceAsync(String, String, Instance, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1866,8 +2692,9 @@ project with the following restrictions:</p>
 <li>Must start with a letter.</li>
 <li>Must be between 1-40 characters.</li>
 <li>Must end with a number or a letter.</li>
-<li>Must be unique within the user project / location</li>
+<li>Must be unique within the user project / location.</li>
 </ul>
+<p>If any of the above are not met, the API raises an invalid argument error.</p>
 </td>
       </tr>
       <tr>
@@ -1930,7 +2757,7 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_CreateInstanceAsync_System_String_System_String_Google_Cloud_Memcache_V1Beta2_Instance_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.CreateInstanceAsync(System.String,System.String,Google.Cloud.Memcache.V1Beta2.Instance,System.Threading.CancellationToken)">CreateInstanceAsync(String, String, Instance, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Creates a new Instance in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Creates a new Instance in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1965,8 +2792,9 @@ project with the following restrictions:</p>
 <li>Must start with a letter.</li>
 <li>Must be between 1-40 characters.</li>
 <li>Must end with a number or a letter.</li>
-<li>Must be unique within the user project / location</li>
+<li>Must be unique within the user project / location.</li>
 </ul>
+<p>If any of the above are not met, the API raises an invalid argument error.</p>
 </td>
       </tr>
       <tr>
@@ -2081,9 +2909,89 @@ if (retrievedResponse.IsCompleted)
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 CloudMemcacheClient cloudMemcacheClient = CloudMemcacheClient.Create();
 // Initialize request argument(s)
-DeleteInstanceRequest request = new DeleteInstanceRequest { Name = &quot;&quot;, };
+DeleteInstanceRequest request = new DeleteInstanceRequest
+{
+    InstanceName = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;),
+};
 // Make the request
 Operation&lt;Empty, OperationMetadata&gt; response = cloudMemcacheClient.DeleteInstance(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Empty, OperationMetadata&gt; completedResponse = response.PollUntilCompleted();
+// Retrieve the operation result
+Empty result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Empty, OperationMetadata&gt; retrievedResponse = cloudMemcacheClient.PollOnceDeleteInstance(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Empty retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstance_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.DeleteInstance*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstance_Google_Cloud_Memcache_V1Beta2_InstanceName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.DeleteInstance(Google.Cloud.Memcache.V1Beta2.InstanceName,Google.Api.Gax.Grpc.CallSettings)">DeleteInstance(InstanceName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes a single Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Empty, OperationMetadata&gt; DeleteInstance(InstanceName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.InstanceName.html">InstanceName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Memcached instance resource name in the format:
+<code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstance_Google_Cloud_Memcache_V1Beta2_InstanceName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = CloudMemcacheClient.Create();
+// Initialize request argument(s)
+InstanceName name = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;);
+// Make the request
+Operation&lt;Empty, OperationMetadata&gt; response = cloudMemcacheClient.DeleteInstance(name);
 
 // Poll until the returned long-running operation is complete
 Operation&lt;Empty, OperationMetadata&gt; completedResponse = response.PollUntilCompleted();
@@ -2124,7 +3032,7 @@ if (retrievedResponse.IsCompleted)
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>Memcached instance resource name in the format:
+        <td><p>Required. Memcached instance resource name in the format:
 <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
 where <code>location_id</code> refers to a GCP region</p>
 </td>
@@ -2158,7 +3066,7 @@ where <code>location_id</code> refers to a GCP region</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 CloudMemcacheClient cloudMemcacheClient = CloudMemcacheClient.Create();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/instances/[INSTANCE]&quot;;
 // Make the request
 Operation&lt;Empty, OperationMetadata&gt; response = cloudMemcacheClient.DeleteInstance(name);
 
@@ -2233,7 +3141,10 @@ if (retrievedResponse.IsCompleted)
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
 // Initialize request argument(s)
-DeleteInstanceRequest request = new DeleteInstanceRequest { Name = &quot;&quot;, };
+DeleteInstanceRequest request = new DeleteInstanceRequest
+{
+    InstanceName = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;),
+};
 // Make the request
 Operation&lt;Empty, OperationMetadata&gt; response = await cloudMemcacheClient.DeleteInstanceAsync(request);
 
@@ -2308,9 +3219,166 @@ if (retrievedResponse.IsCompleted)
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
 // Initialize request argument(s)
-DeleteInstanceRequest request = new DeleteInstanceRequest { Name = &quot;&quot;, };
+DeleteInstanceRequest request = new DeleteInstanceRequest
+{
+    InstanceName = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;),
+};
 // Make the request
 Operation&lt;Empty, OperationMetadata&gt; response = await cloudMemcacheClient.DeleteInstanceAsync(request);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Empty, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Empty result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Empty, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceDeleteInstanceAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Empty retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.DeleteInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstanceAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.DeleteInstanceAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,Google.Api.Gax.Grpc.CallSettings)">DeleteInstanceAsync(InstanceName, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Deletes a single Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Empty, OperationMetadata&gt;&gt; DeleteInstanceAsync(InstanceName name, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.InstanceName.html">InstanceName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Memcached instance resource name in the format:
+<code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstanceAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_Google_Api_Gax_Grpc_CallSettings__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+InstanceName name = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;);
+// Make the request
+Operation&lt;Empty, OperationMetadata&gt; response = await cloudMemcacheClient.DeleteInstanceAsync(name);
+
+// Poll until the returned long-running operation is complete
+Operation&lt;Empty, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
+// Retrieve the operation result
+Empty result = completedResponse.Result;
+
+// Or get the name of the operation
+string operationName = response.Name;
+// This name can be stored, then the long-running operation retrieved later by name
+Operation&lt;Empty, OperationMetadata&gt; retrievedResponse = await cloudMemcacheClient.PollOnceDeleteInstanceAsync(operationName);
+// Check if the retrieved long-running operation has completed
+if (retrievedResponse.IsCompleted)
+{
+    // If it has completed, then access the result
+    Empty retrievedResult = retrievedResponse.Result;
+}
+</code></pre></div>
+  </div>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstanceAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.DeleteInstanceAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstanceAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.DeleteInstanceAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,System.Threading.CancellationToken)">DeleteInstanceAsync(InstanceName, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Deletes a single Instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Empty, OperationMetadata&gt;&gt; DeleteInstanceAsync(InstanceName name, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Memcache.V1Beta2.InstanceName.html">InstanceName</a></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>Required. Memcached instance resource name in the format:
+<code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
+where <code>location_id</code> refers to a GCP region</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>A <span class="xref">System.Threading.CancellationToken</span> to use for this RPC.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Protobuf.WellKnownTypes.Empty.html">Empty</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A Task containing the RPC response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+  <h5 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_DeleteInstanceAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_System_Threading_CancellationToken__snippet">Sample code</h5>
+  <div class="markdown level1"><pre><code class="lang-cs">// Create client
+CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
+// Initialize request argument(s)
+InstanceName name = InstanceName.FromProjectLocationInstance(&quot;[PROJECT]&quot;, &quot;[LOCATION]&quot;, &quot;[INSTANCE]&quot;);
+// Make the request
+Operation&lt;Empty, OperationMetadata&gt; response = await cloudMemcacheClient.DeleteInstanceAsync(name);
 
 // Poll until the returned long-running operation is complete
 Operation&lt;Empty, OperationMetadata&gt; completedResponse = await response.PollUntilCompletedAsync();
@@ -2351,7 +3419,7 @@ if (retrievedResponse.IsCompleted)
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>Memcached instance resource name in the format:
+        <td><p>Required. Memcached instance resource name in the format:
 <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
 where <code>location_id</code> refers to a GCP region</p>
 </td>
@@ -2385,7 +3453,7 @@ where <code>location_id</code> refers to a GCP region</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/instances/[INSTANCE]&quot;;
 // Make the request
 Operation&lt;Empty, OperationMetadata&gt; response = await cloudMemcacheClient.DeleteInstanceAsync(name);
 
@@ -2428,7 +3496,7 @@ if (retrievedResponse.IsCompleted)
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>Memcached instance resource name in the format:
+        <td><p>Required. Memcached instance resource name in the format:
 <code>projects/{project_id}/locations/{location_id}/instances/{instance_id}</code>
 where <code>location_id</code> refers to a GCP region</p>
 </td>
@@ -2462,7 +3530,7 @@ where <code>location_id</code> refers to a GCP region</p>
   <div class="markdown level1"><pre><code class="lang-cs">// Create client
 CloudMemcacheClient cloudMemcacheClient = await CloudMemcacheClient.CreateAsync();
 // Initialize request argument(s)
-string name = &quot;&quot;;
+string name = &quot;projects/[PROJECT]/locations/[LOCATION]/instances/[INSTANCE]&quot;;
 // Make the request
 Operation&lt;Empty, OperationMetadata&gt; response = await cloudMemcacheClient.DeleteInstanceAsync(name);
 
@@ -3037,7 +4105,7 @@ Instance response = await cloudMemcacheClient.GetInstanceAsync(name);
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstances_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstances*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstances_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstances(Google.Api.Gax.ResourceNames.LocationName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstances(LocationName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists Instances in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Lists Instances in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3144,7 +4212,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstances_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstances*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstances_Google_Cloud_Memcache_V1Beta2_ListInstancesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstances(Google.Cloud.Memcache.V1Beta2.ListInstancesRequest,Google.Api.Gax.Grpc.CallSettings)">ListInstances(ListInstancesRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists Instances in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Lists Instances in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3240,7 +4308,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstances_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstances*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstances_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstances(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstances(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists Instances in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Lists Instances in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3347,7 +4415,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstancesAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstancesAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstancesAsync_Google_Api_Gax_ResourceNames_LocationName_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstancesAsync(Google.Api.Gax.ResourceNames.LocationName,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstancesAsync(LocationName, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists Instances in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Lists Instances in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3454,7 +4522,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstancesAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstancesAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstancesAsync_Google_Cloud_Memcache_V1Beta2_ListInstancesRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstancesAsync(Google.Cloud.Memcache.V1Beta2.ListInstancesRequest,Google.Api.Gax.Grpc.CallSettings)">ListInstancesAsync(ListInstancesRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists Instances in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Lists Instances in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3550,7 +4618,7 @@ string nextPageToken = singlePage.NextPageToken;
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstancesAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstancesAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_ListInstancesAsync_System_String_System_String_System_Nullable_System_Int32__Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.ListInstancesAsync(System.String,System.String,System.Nullable{System.Int32},Google.Api.Gax.Grpc.CallSettings)">ListInstancesAsync(String, String, Nullable&lt;Int32&gt;, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Lists Instances in a given project and location.</p>
+  <div class="markdown level1 summary"><p>Lists Instances in a given location.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -3713,6 +4781,106 @@ string nextPageToken = singlePage.NextPageToken;
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; PollOnceApplyParametersAsync(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;&gt;</td>
+        <td><p>A task representing the result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_PollOnceApplySoftwareUpdate_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.PollOnceApplySoftwareUpdate*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_PollOnceApplySoftwareUpdate_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.PollOnceApplySoftwareUpdate(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceApplySoftwareUpdate(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Poll an operation once, using an <code>operationName</code> from a previous invocation of <code>ApplySoftwareUpdate</code>
+.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Operation&lt;Instance, OperationMetadata&gt; PollOnceApplySoftwareUpdate(string operationName, CallSettings callSettings = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">operationName</span></td>
+        <td><p>The name of a previously invoked operation. Must not be <code>null</code> or empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Google.Api.Gax.Grpc.CallSettings.html">CallSettings</a></td>
+        <td><span class="parametername">callSettings</span></td>
+        <td><p>If not null, applies overrides to this RPC call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.LongRunning.Operation-2.html">Operation</a>&lt;<a class="xref" href="Google.Cloud.Memcache.V1Beta2.Instance.html">Instance</a>, <a class="xref" href="Google.Cloud.Memcache.V1Beta2.OperationMetadata.html">OperationMetadata</a>&gt;</td>
+        <td><p>The result of polling the operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_PollOnceApplySoftwareUpdateAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.PollOnceApplySoftwareUpdateAsync*"></a>
+  <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_PollOnceApplySoftwareUpdateAsync_System_String_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.PollOnceApplySoftwareUpdateAsync(System.String,Google.Api.Gax.Grpc.CallSettings)">PollOnceApplySoftwareUpdateAsync(String, CallSettings)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously poll an operation once, using an <code>operationName</code> from a previous invocation of
+<code>ApplySoftwareUpdate</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&lt;Instance, OperationMetadata&gt;&gt; PollOnceApplySoftwareUpdateAsync(string operationName, CallSettings callSettings = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -4679,9 +5847,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParameters_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParameters*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParameters_Google_Cloud_Memcache_V1Beta2_InstanceName_Google_Protobuf_WellKnownTypes_FieldMask_Google_Cloud_Memcache_V1Beta2_MemcacheParameters_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParameters(Google.Cloud.Memcache.V1Beta2.InstanceName,Google.Protobuf.WellKnownTypes.FieldMask,Google.Cloud.Memcache.V1Beta2.MemcacheParameters,Google.Api.Gax.Grpc.CallSettings)">UpdateParameters(InstanceName, FieldMask, MemcacheParameters, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4771,9 +5940,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParameters_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParameters*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParameters_Google_Cloud_Memcache_V1Beta2_UpdateParametersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParameters(Google.Cloud.Memcache.V1Beta2.UpdateParametersRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateParameters(UpdateParametersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4853,9 +6023,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParameters_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParameters*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParameters_System_String_Google_Protobuf_WellKnownTypes_FieldMask_Google_Cloud_Memcache_V1Beta2_MemcacheParameters_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParameters(System.String,Google.Protobuf.WellKnownTypes.FieldMask,Google.Cloud.Memcache.V1Beta2.MemcacheParameters,Google.Api.Gax.Grpc.CallSettings)">UpdateParameters(String, FieldMask, MemcacheParameters, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -4945,9 +6116,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_Google_Protobuf_WellKnownTypes_FieldMask_Google_Cloud_Memcache_V1Beta2_MemcacheParameters_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,Google.Protobuf.WellKnownTypes.FieldMask,Google.Cloud.Memcache.V1Beta2.MemcacheParameters,Google.Api.Gax.Grpc.CallSettings)">UpdateParametersAsync(InstanceName, FieldMask, MemcacheParameters, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5037,9 +6209,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_Google_Cloud_Memcache_V1Beta2_InstanceName_Google_Protobuf_WellKnownTypes_FieldMask_Google_Cloud_Memcache_V1Beta2_MemcacheParameters_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync(Google.Cloud.Memcache.V1Beta2.InstanceName,Google.Protobuf.WellKnownTypes.FieldMask,Google.Cloud.Memcache.V1Beta2.MemcacheParameters,System.Threading.CancellationToken)">UpdateParametersAsync(InstanceName, FieldMask, MemcacheParameters, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5129,9 +6302,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_Google_Cloud_Memcache_V1Beta2_UpdateParametersRequest_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync(Google.Cloud.Memcache.V1Beta2.UpdateParametersRequest,Google.Api.Gax.Grpc.CallSettings)">UpdateParametersAsync(UpdateParametersRequest, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5211,9 +6385,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_Google_Cloud_Memcache_V1Beta2_UpdateParametersRequest_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync(Google.Cloud.Memcache.V1Beta2.UpdateParametersRequest,System.Threading.CancellationToken)">UpdateParametersAsync(UpdateParametersRequest, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5293,9 +6468,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_System_String_Google_Protobuf_WellKnownTypes_FieldMask_Google_Cloud_Memcache_V1Beta2_MemcacheParameters_Google_Api_Gax_Grpc_CallSettings_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync(System.String,Google.Protobuf.WellKnownTypes.FieldMask,Google.Cloud.Memcache.V1Beta2.MemcacheParameters,Google.Api.Gax.Grpc.CallSettings)">UpdateParametersAsync(String, FieldMask, MemcacheParameters, CallSettings)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -5385,9 +6561,10 @@ if (retrievedResponse.IsCompleted)
   </div>
   <a id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync*"></a>
   <h4 id="Google_Cloud_Memcache_V1Beta2_CloudMemcacheClient_UpdateParametersAsync_System_String_Google_Protobuf_WellKnownTypes_FieldMask_Google_Cloud_Memcache_V1Beta2_MemcacheParameters_System_Threading_CancellationToken_" data-uid="Google.Cloud.Memcache.V1Beta2.CloudMemcacheClient.UpdateParametersAsync(System.String,Google.Protobuf.WellKnownTypes.FieldMask,Google.Cloud.Memcache.V1Beta2.MemcacheParameters,System.Threading.CancellationToken)">UpdateParametersAsync(String, FieldMask, MemcacheParameters, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Updates the defined Memcached Parameters for an existing Instance.
+  <div class="markdown level1 summary"><p>Updates the defined Memcached parameters for an existing instance.
 This method only stages the parameters, it must be followed by
-ApplyParameters to apply the parameters to nodes of the Memcached Instance.</p>
+<code>ApplyParameters</code> to apply the parameters to nodes of the Memcached
+instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
