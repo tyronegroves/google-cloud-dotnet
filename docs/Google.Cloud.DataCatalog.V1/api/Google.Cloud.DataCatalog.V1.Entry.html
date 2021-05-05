@@ -100,9 +100,6 @@ also be used to attach flexible metadata, such as a
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
       <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
@@ -110,6 +107,9 @@ also be used to attach flexible metadata, such as a
     </div>
     <div>
       <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.DataCatalog.V1.html">Google.Cloud.DataCatalog.V1</a></h6>
@@ -206,10 +206,64 @@ entries of type <code>TABLE</code>.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_DataCatalog_V1_Entry_DatabaseTableSpec_" data-uid="Google.Cloud.DataCatalog.V1.Entry.DatabaseTableSpec*"></a>
+  <h4 id="Google_Cloud_DataCatalog_V1_Entry_DatabaseTableSpec" data-uid="Google.Cloud.DataCatalog.V1.Entry.DatabaseTableSpec">DatabaseTableSpec</h4>
+  <div class="markdown level1 summary"><p>Specification that applies to a table resource. Only valid
+for entries of <code>TABLE</code> type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DatabaseTableSpec DatabaseTableSpec { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.DataCatalog.V1.DatabaseTableSpec.html">DatabaseTableSpec</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_DataCatalog_V1_Entry_DataSource_" data-uid="Google.Cloud.DataCatalog.V1.Entry.DataSource*"></a>
+  <h4 id="Google_Cloud_DataCatalog_V1_Entry_DataSource" data-uid="Google.Cloud.DataCatalog.V1.Entry.DataSource">DataSource</h4>
+  <div class="markdown level1 summary"><p>Output only. Physical location of the entry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataSource DataSource { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.DataCatalog.V1.DataSource.html">DataSource</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_DataCatalog_V1_Entry_Description_" data-uid="Google.Cloud.DataCatalog.V1.Entry.Description*"></a>
   <h4 id="Google_Cloud_DataCatalog_V1_Entry_Description" data-uid="Google.Cloud.DataCatalog.V1.Entry.Description">Description</h4>
-  <div class="markdown level1 summary"><p>Entry description, which can consist of several sentences or paragraphs
-that describe entry contents. Default value is an empty string.</p>
+  <div class="markdown level1 summary"><p>Entry description that can consist of several sentences or paragraphs
+that describe entry contents.</p>
+<p>The description must not contain Unicode non-characters as well as C0
+and C1 control codes except tabs (HT), new lines (LF), carriage returns
+(CR), and page breaks (FF).
+The maximum size is 2000 bytes when encoded in UTF-8.
+Default value is an empty string.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -233,9 +287,11 @@ that describe entry contents. Default value is an empty string.</p>
   </table>
   <a id="Google_Cloud_DataCatalog_V1_Entry_DisplayName_" data-uid="Google.Cloud.DataCatalog.V1.Entry.DisplayName*"></a>
   <h4 id="Google_Cloud_DataCatalog_V1_Entry_DisplayName" data-uid="Google.Cloud.DataCatalog.V1.Entry.DisplayName">DisplayName</h4>
-  <div class="markdown level1 summary"><p>Display information such as title and description. A short name to identify
-the entry, for example, &quot;Analytics Data - Jan 2011&quot;. Default value is an
-empty string.</p>
+  <div class="markdown level1 summary"><p>Display name of an entry.</p>
+<p>The name must contain only Unicode letters, numbers (0-9), underscores (_),
+dashes (-), spaces ( ), and can&apos;t start or end with spaces.
+The maximum size is 200 bytes when encoded in UTF-8.
+Default value is an empty string.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -304,6 +360,43 @@ empty string.</p>
       </tr>
     </tbody>
   </table>
+  <a id="Google_Cloud_DataCatalog_V1_Entry_FullyQualifiedName_" data-uid="Google.Cloud.DataCatalog.V1.Entry.FullyQualifiedName*"></a>
+  <h4 id="Google_Cloud_DataCatalog_V1_Entry_FullyQualifiedName" data-uid="Google.Cloud.DataCatalog.V1.Entry.FullyQualifiedName">FullyQualifiedName</h4>
+  <div class="markdown level1 summary"><p>Fully qualified name (FQN) of the resource. Set automatically for entries
+representing resources from synced systems. Settable only during creation
+and read-only afterwards. Can be used for search and lookup of the entries.</p>
+<p>FQNs take two forms:</p>
+<ul>
+<li>For non-regionalized resources:</li>
+</ul>
+<p><code>{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}</code></p>
+<ul>
+<li>For regionalized resources:</li>
+</ul>
+<p><code>{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}</code></p>
+<p>Example for a DPMS table:</p>
+<p><code>dataproc_metastore:project_id.location_id.instance_id.database_id.table_id</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string FullyQualifiedName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <a id="Google_Cloud_DataCatalog_V1_Entry_GcsFilesetSpec_" data-uid="Google.Cloud.DataCatalog.V1.Entry.GcsFilesetSpec*"></a>
   <h4 id="Google_Cloud_DataCatalog_V1_Entry_GcsFilesetSpec" data-uid="Google.Cloud.DataCatalog.V1.Entry.GcsFilesetSpec">GcsFilesetSpec</h4>
   <div class="markdown level1 summary"><p>Specification that applies to a Cloud Storage fileset. This is only valid
@@ -331,8 +424,8 @@ on entries of type FILESET.</p>
   </table>
   <a id="Google_Cloud_DataCatalog_V1_Entry_IntegratedSystem_" data-uid="Google.Cloud.DataCatalog.V1.Entry.IntegratedSystem*"></a>
   <h4 id="Google_Cloud_DataCatalog_V1_Entry_IntegratedSystem" data-uid="Google.Cloud.DataCatalog.V1.Entry.IntegratedSystem">IntegratedSystem</h4>
-  <div class="markdown level1 summary"><p>Output only. This field indicates the entry&apos;s source system that Data
-Catalog integrates with, such as BigQuery or Pub/Sub.</p>
+  <div class="markdown level1 summary"><p>Output only. This field indicates the entry&apos;s source system that Data Catalog
+integrates with, such as BigQuery or Pub/Sub.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -361,12 +454,14 @@ Catalog integrates with, such as BigQuery or Pub/Sub.</p>
 the
 resource</a>.
 For example, the <code>linked_resource</code> for a table resource from BigQuery is:</p>
-<ul>
-<li>//bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId</li>
-</ul>
-<p>Output only when Entry is of type in the EntryType enum. For entries with
-user_specified_type, this field is optional and defaults to an empty
-string.</p>
+<p><code>//bigquery.googleapis.com/projects/{projectId}/datasets/{datasetId}/tables/{tableId}</code></p>
+<p>Output only when entry is one of the types in the <code>EntryType</code> enum.</p>
+<p>For entries with a <code>user_specified_type</code>, this field is optional and
+defaults to an empty string.</p>
+<p>The resource string must contain only letters (a-z, A-Z), numbers (0-9),
+underscores (_), periods (.), colons (:), slashes (/), dashes (-),
+and hashes (#).
+The maximum size is 200 bytes when encoded in UTF-8.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -390,12 +485,11 @@ string.</p>
   </table>
   <a id="Google_Cloud_DataCatalog_V1_Entry_Name_" data-uid="Google.Cloud.DataCatalog.V1.Entry.Name*"></a>
   <h4 id="Google_Cloud_DataCatalog_V1_Entry_Name" data-uid="Google.Cloud.DataCatalog.V1.Entry.Name">Name</h4>
-  <div class="markdown level1 summary"><p>The Data Catalog resource name of the entry in URL format. Example:</p>
-<ul>
-<li>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}</li>
-</ul>
-<p>Note that this Entry and its child resources may not actually be stored in
-the location in this name.</p>
+  <div class="markdown level1 summary"><p>Output only. The resource name of an entry in URL format.
+Example:</p>
+<p><code>projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}</code></p>
+<p>Note: The entry itself and its child resources might not be
+stored in the location specified in its name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -464,6 +558,29 @@ timestamp.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="Google.Cloud.DataCatalog.V1.SystemTimestamps.html">SystemTimestamps</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_DataCatalog_V1_Entry_SpecCase_" data-uid="Google.Cloud.DataCatalog.V1.Entry.SpecCase*"></a>
+  <h4 id="Google_Cloud_DataCatalog_V1_Entry_SpecCase" data-uid="Google.Cloud.DataCatalog.V1.Entry.SpecCase">SpecCase</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Entry.SpecOneofCase SpecCase { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.DataCatalog.V1.Entry.SpecOneofCase.html">Entry.SpecOneofCase</a></td>
         <td></td>
       </tr>
     </tbody>
