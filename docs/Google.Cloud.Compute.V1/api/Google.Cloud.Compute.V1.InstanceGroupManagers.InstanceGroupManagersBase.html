@@ -1,0 +1,1132 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class InstanceGroupManagers.InstanceGroupManagersBase
+   | Google.Cloud.Compute.V1 </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class InstanceGroupManagers.InstanceGroupManagersBase
+   | Google.Cloud.Compute.V1 ">
+    <meta name="generator" content="docfx 2.50.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase">
+  
+  
+  <h1 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase" class="text-break">Class InstanceGroupManagers.InstanceGroupManagersBase
+  </h1>
+  <div class="markdown level0 summary"><p>Base class for server-side implementations of InstanceGroupManagers</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">InstanceGroupManagers.InstanceGroupManagersBase</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Google.Cloud.Compute.V1.html">Google.Cloud.Compute.V1</a></h6>
+  <h6><strong>Assembly</strong>: Google.Cloud.Compute.V1.dll</h6>
+  <h5 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[BindServiceMethod(typeof(InstanceGroupManagers), &quot;BindService&quot;)]
+public abstract class InstanceGroupManagersBase</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_AbandonInstances_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.AbandonInstances*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_AbandonInstances_Google_Cloud_Compute_V1_AbandonInstancesInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.AbandonInstances(Google.Cloud.Compute.V1.AbandonInstancesInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">AbandonInstances(AbandonInstancesInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Flags the specified instances to be removed from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.</p>
+<p>If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.</p>
+<p>You can specify a maximum of 1000 instances with this method per request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; AbandonInstances(AbandonInstancesInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.AbandonInstancesInstanceGroupManagerRequest.html">AbandonInstancesInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_AggregatedList_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.AggregatedList*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_AggregatedList_Google_Cloud_Compute_V1_AggregatedListInstanceGroupManagersRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.AggregatedList(Google.Cloud.Compute.V1.AggregatedListInstanceGroupManagersRequest,Grpc.Core.ServerCallContext)">AggregatedList(AggregatedListInstanceGroupManagersRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Retrieves the list of managed instance groups and groups them by zone.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceGroupManagerAggregatedList&gt; AggregatedList(AggregatedListInstanceGroupManagersRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.AggregatedListInstanceGroupManagersRequest.html">AggregatedListInstanceGroupManagersRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.InstanceGroupManagerAggregatedList.html">InstanceGroupManagerAggregatedList</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ApplyUpdatesToInstances_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ApplyUpdatesToInstances*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ApplyUpdatesToInstances_Google_Cloud_Compute_V1_ApplyUpdatesToInstancesInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ApplyUpdatesToInstances(Google.Cloud.Compute.V1.ApplyUpdatesToInstancesInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">ApplyUpdatesToInstances(ApplyUpdatesToInstancesInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Applies changes to selected instances on the managed instance group. This method can be used to apply new overrides and/or new versions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; ApplyUpdatesToInstances(ApplyUpdatesToInstancesInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.ApplyUpdatesToInstancesInstanceGroupManagerRequest.html">ApplyUpdatesToInstancesInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_CreateInstances_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.CreateInstances*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_CreateInstances_Google_Cloud_Compute_V1_CreateInstancesInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.CreateInstances(Google.Cloud.Compute.V1.CreateInstancesInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">CreateInstances(CreateInstancesInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Creates instances with per-instance configs in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; CreateInstances(CreateInstancesInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.CreateInstancesInstanceGroupManagerRequest.html">CreateInstancesInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Delete_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Delete*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Delete_Google_Cloud_Compute_V1_DeleteInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Delete(Google.Cloud.Compute.V1.DeleteInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">Delete(DeleteInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Deletes the specified managed instance group and all of the instances in that group. Note that the instance group must not belong to a backend service. Read  Deleting an instance group for more information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; Delete(DeleteInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.DeleteInstanceGroupManagerRequest.html">DeleteInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_DeleteInstances_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.DeleteInstances*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_DeleteInstances_Google_Cloud_Compute_V1_DeleteInstancesInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.DeleteInstances(Google.Cloud.Compute.V1.DeleteInstancesInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">DeleteInstances(DeleteInstancesInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Flags the specified instances in the managed instance group for immediate deletion. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.</p>
+<p>If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.</p>
+<p>You can specify a maximum of 1000 instances with this method per request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; DeleteInstances(DeleteInstancesInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.DeleteInstancesInstanceGroupManagerRequest.html">DeleteInstancesInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_DeletePerInstanceConfigs_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.DeletePerInstanceConfigs*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_DeletePerInstanceConfigs_Google_Cloud_Compute_V1_DeletePerInstanceConfigsInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.DeletePerInstanceConfigs(Google.Cloud.Compute.V1.DeletePerInstanceConfigsInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">DeletePerInstanceConfigs(DeletePerInstanceConfigsInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Deletes selected per-instance configs for the managed instance group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; DeletePerInstanceConfigs(DeletePerInstanceConfigsInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.DeletePerInstanceConfigsInstanceGroupManagerRequest.html">DeletePerInstanceConfigsInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Get_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Get*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Get_Google_Cloud_Compute_V1_GetInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Get(Google.Cloud.Compute.V1.GetInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">Get(GetInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceGroupManager&gt; Get(GetInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.GetInstanceGroupManagerRequest.html">GetInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.InstanceGroupManager.html">InstanceGroupManager</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Insert_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Insert*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Insert_Google_Cloud_Compute_V1_InsertInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Insert(Google.Cloud.Compute.V1.InsertInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">Insert(InsertInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Creates a managed instance group using the information that you specify in the request. After the group is created, instances in the group are created using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.</p>
+<p>A managed instance group can have up to 1000 VM instances per group. Please contact Cloud Support if you need an increase in this limit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; Insert(InsertInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.InsertInstanceGroupManagerRequest.html">InsertInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_List_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.List*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_List_Google_Cloud_Compute_V1_ListInstanceGroupManagersRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.List(Google.Cloud.Compute.V1.ListInstanceGroupManagersRequest,Grpc.Core.ServerCallContext)">List(ListInstanceGroupManagersRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Retrieves a list of managed instance groups that are contained within the specified project and zone.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceGroupManagerList&gt; List(ListInstanceGroupManagersRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.ListInstanceGroupManagersRequest.html">ListInstanceGroupManagersRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.InstanceGroupManagerList.html">InstanceGroupManagerList</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ListErrors_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ListErrors*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ListErrors_Google_Cloud_Compute_V1_ListErrorsInstanceGroupManagersRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ListErrors(Google.Cloud.Compute.V1.ListErrorsInstanceGroupManagersRequest,Grpc.Core.ServerCallContext)">ListErrors(ListErrorsInstanceGroupManagersRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists all errors thrown by actions on instances for a given managed instance group. The filter and orderBy query parameters are not supported.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceGroupManagersListErrorsResponse&gt; ListErrors(ListErrorsInstanceGroupManagersRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.ListErrorsInstanceGroupManagersRequest.html">ListErrorsInstanceGroupManagersRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.InstanceGroupManagersListErrorsResponse.html">InstanceGroupManagersListErrorsResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ListManagedInstances_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ListManagedInstances*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ListManagedInstances_Google_Cloud_Compute_V1_ListManagedInstancesInstanceGroupManagersRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ListManagedInstances(Google.Cloud.Compute.V1.ListManagedInstancesInstanceGroupManagersRequest,Grpc.Core.ServerCallContext)">ListManagedInstances(ListManagedInstancesInstanceGroupManagersRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceGroupManagersListManagedInstancesResponse&gt; ListManagedInstances(ListManagedInstancesInstanceGroupManagersRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.ListManagedInstancesInstanceGroupManagersRequest.html">ListManagedInstancesInstanceGroupManagersRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.InstanceGroupManagersListManagedInstancesResponse.html">InstanceGroupManagersListManagedInstancesResponse</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ListPerInstanceConfigs_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ListPerInstanceConfigs*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_ListPerInstanceConfigs_Google_Cloud_Compute_V1_ListPerInstanceConfigsInstanceGroupManagersRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.ListPerInstanceConfigs(Google.Cloud.Compute.V1.ListPerInstanceConfigsInstanceGroupManagersRequest,Grpc.Core.ServerCallContext)">ListPerInstanceConfigs(ListPerInstanceConfigsInstanceGroupManagersRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;InstanceGroupManagersListPerInstanceConfigsResp&gt; ListPerInstanceConfigs(ListPerInstanceConfigsInstanceGroupManagersRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.ListPerInstanceConfigsInstanceGroupManagersRequest.html">ListPerInstanceConfigsInstanceGroupManagersRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.InstanceGroupManagersListPerInstanceConfigsResp.html">InstanceGroupManagersListPerInstanceConfigsResp</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Patch_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Patch*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Patch_Google_Cloud_Compute_V1_PatchInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Patch(Google.Cloud.Compute.V1.PatchInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">Patch(PatchInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listManagedInstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; Patch(PatchInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.PatchInstanceGroupManagerRequest.html">PatchInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_PatchPerInstanceConfigs_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.PatchPerInstanceConfigs*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_PatchPerInstanceConfigs_Google_Cloud_Compute_V1_PatchPerInstanceConfigsInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.PatchPerInstanceConfigs(Google.Cloud.Compute.V1.PatchPerInstanceConfigsInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">PatchPerInstanceConfigs(PatchPerInstanceConfigsInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; PatchPerInstanceConfigs(PatchPerInstanceConfigsInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.PatchPerInstanceConfigsInstanceGroupManagerRequest.html">PatchPerInstanceConfigsInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_RecreateInstances_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.RecreateInstances*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_RecreateInstances_Google_Cloud_Compute_V1_RecreateInstancesInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.RecreateInstances(Google.Cloud.Compute.V1.RecreateInstancesInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">RecreateInstances(RecreateInstancesInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Flags the specified instances in the managed instance group to be immediately recreated. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.</p>
+<p>If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.</p>
+<p>You can specify a maximum of 1000 instances with this method per request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; RecreateInstances(RecreateInstancesInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.RecreateInstancesInstanceGroupManagerRequest.html">RecreateInstancesInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Resize_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Resize*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_Resize_Google_Cloud_Compute_V1_ResizeInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.Resize(Google.Cloud.Compute.V1.ResizeInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">Resize(ResizeInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Resizes the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes instances. The resize operation is marked DONE when the resize actions are scheduled even if the group has not yet added or deleted any instances. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.</p>
+<p>When resizing down, the instance group arbitrarily chooses the order in which VMs are deleted. The group takes into account some VM attributes when making the selection including:</p>
+<ul>
+<li>The status of the VM instance. + The health of the VM instance. + The instance template version the VM is based on. + For regional managed instance groups, the location of the VM instance.</li>
+</ul>
+<p>This list is subject to change.</p>
+<p>If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; Resize(ResizeInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.ResizeInstanceGroupManagerRequest.html">ResizeInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_SetInstanceTemplate_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.SetInstanceTemplate*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_SetInstanceTemplate_Google_Cloud_Compute_V1_SetInstanceTemplateInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.SetInstanceTemplate(Google.Cloud.Compute.V1.SetInstanceTemplateInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">SetInstanceTemplate(SetInstanceTemplateInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Specifies the instance template to use when creating new instances in this group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group&apos;s updatePolicy.type to PROACTIVE.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; SetInstanceTemplate(SetInstanceTemplateInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.SetInstanceTemplateInstanceGroupManagerRequest.html">SetInstanceTemplateInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_SetTargetPools_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.SetTargetPools*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_SetTargetPools_Google_Cloud_Compute_V1_SetTargetPoolsInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.SetTargetPools(Google.Cloud.Compute.V1.SetTargetPoolsInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">SetTargetPools(SetTargetPoolsInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Modifies the target pools to which all instances in this managed instance group are assigned. The target pools automatically apply to all of the instances in the managed instance group. This operation is marked DONE when you make the request even if the instances have not yet been added to their target pools. The change might take some time to apply to all of the instances in the group depending on the size of the group.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; SetTargetPools(SetTargetPoolsInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.SetTargetPoolsInstanceGroupManagerRequest.html">SetTargetPoolsInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_UpdatePerInstanceConfigs_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.UpdatePerInstanceConfigs*"></a>
+  <h4 id="Google_Cloud_Compute_V1_InstanceGroupManagers_InstanceGroupManagersBase_UpdatePerInstanceConfigs_Google_Cloud_Compute_V1_UpdatePerInstanceConfigsInstanceGroupManagerRequest_Grpc_Core_ServerCallContext_" data-uid="Google.Cloud.Compute.V1.InstanceGroupManagers.InstanceGroupManagersBase.UpdatePerInstanceConfigs(Google.Cloud.Compute.V1.UpdatePerInstanceConfigsInstanceGroupManagerRequest,Grpc.Core.ServerCallContext)">UpdatePerInstanceConfigs(UpdatePerInstanceConfigsInstanceGroupManagerRequest, ServerCallContext)</h4>
+  <div class="markdown level1 summary"><p>Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;Operation&gt; UpdatePerInstanceConfigs(UpdatePerInstanceConfigsInstanceGroupManagerRequest request, ServerCallContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Google.Cloud.Compute.V1.UpdatePerInstanceConfigsInstanceGroupManagerRequest.html">UpdatePerInstanceConfigsInstanceGroupManagerRequest</a></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request received from the client.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Grpc.Core.ServerCallContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context of the server-side call handler being invoked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Google.Cloud.Compute.V1.Operation.html">Operation</a>&gt;</td>
+        <td><p>The response to send back to the client (wrapped by a task).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+             
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
